@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace devinmajordotcom.Controllers
 {
-    public class PortfolioController : Controller
+    public class MediaDashboardController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title="Media Dashboard";
+            ViewBag.Title="D3V!N M@J0R";
             return View();
         }
     }

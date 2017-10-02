@@ -34,6 +34,13 @@ namespace devinmajordotcom.App_Start
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/mediacss").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme.css",
+                      "~/Content/cover2.css",
+                      "~/Content/font-awesome.css"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/portfoliocss").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.css",
@@ -44,6 +51,15 @@ namespace devinmajordotcom.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/customScripts").Include(
                 "~/Scripts/IndexScripts.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/bundles/portfolioScripts").Include(
+                "~/Scripts/smoothscroll.js",
+                "~/Scripts/jquery.nav.js",
+                "~/Scripts/isotope.js",
+                "~/Scripts/custom.js",
+                "~/Scripts/index.js",
+                "~/Scripts/imagesloaded.min.js"
             ));
 
         }

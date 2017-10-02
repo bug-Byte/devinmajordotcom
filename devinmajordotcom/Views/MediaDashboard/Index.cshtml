@@ -1,0 +1,61 @@
+﻿@{ 
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/mediacss")
+</head>
+
+<body>
+
+        <div class="site-wrapper">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4" style="background-color:red;border-radius:25px;">
+
+                    </div>
+                    <div class="col-sm-8" style="background-color:black;border-radius:25px;">
+
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="site-wrapper-inner">
+
+                <div class="cover-container">
+
+                    <div class="masthead clearfix">
+                        <div class="inner">
+                            <h3 class="masthead-brand">@ViewBag.Title</h3>
+                            <ul class="nav masthead-nav">
+                                <li class="active" data-activediv="#home"><a href="#home">Home & Apps</a></li>
+                                <li data-activediv="#server"><a href="#server">Server Status</a></li>
+                                <li data-activediv="#contact"><a href="#contact">Contact Me</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>*@
+
+        </div>
+
+    
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

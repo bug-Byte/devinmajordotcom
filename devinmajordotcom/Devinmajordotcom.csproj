@@ -175,6 +175,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\ApplicationDataContext.cs" />
+    <Compile Include="Controllers\MediaDashboardController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,6 +188,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\cover2.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -195,6 +197,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cover.css" />
     <Content Include="Content\Images\back1.png" />
+    <Content Include="Content\MediaImages\media4.png" />
+    <Content Include="Content\MediaImages\media1.jpg" />
+    <Content Include="Content\MediaImages\media2.jpg" />
+    <Content Include="Content\MediaImages\media3.png" />
+    <Content Include="Content\MediaImages\media5.jpg" />
+    <Content Include="Content\MediaImages\media6.jpg" />
     <Content Include="Content\PortfolioImages\about-bg.jpg" />
     <Content Include="Content\PortfolioImages\back1.png" />
     <Content Include="Content\PortfolioImages\bag.jpg" />
@@ -278,10 +286,14 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\excanvas.js" />
+    <Content Include="Scripts\imagesloaded.min.js" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\IndexScripts.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\isotope.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -290,6 +302,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.nav.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -297,7 +310,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\smoothscroll.js" />
     <Content Include="Views\Home\_MainApplicationLinkContent.cshtml" />
+    <Content Include="Views\MediaDashboard\Index.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
