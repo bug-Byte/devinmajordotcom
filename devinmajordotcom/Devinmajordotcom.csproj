@@ -124,8 +124,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -203,16 +203,12 @@
     </Compile>
     <Compile Include="Helpers\PartialHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\PerformanceModel.cs" />
-    <Compile Include="PerformanceHub.cs" />
-    <Compile Include="Performance\PerformanceEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\cover2.css" />
-    <Content Include="Content\epoch.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -221,14 +217,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cover.css" />
     <Content Include="Content\Images\back1.png" />
-    <Content Include="Content\kube.min.css" />
     <Content Include="Content\MediaImages\media1.jpg" />
     <Content Include="Content\MediaImages\media2.jpg" />
     <Content Include="Content\MediaImages\media3.png" />
     <Content Include="Content\MediaImages\media5.jpg" />
     <Content Include="Content\MediaImages\media6.jpg" />
     <Content Include="Content\MediaImages\media7.jpg" />
-    <Content Include="Content\pie-chart.css" />
     <Content Include="Content\PortfolioImages\about-bg.jpg" />
     <Content Include="Content\PortfolioImages\back1.png" />
     <Content Include="Content\PortfolioImages\bag.jpg" />
@@ -310,23 +304,11 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\d3\d3.js" />
-    <Content Include="Scripts\d3\d3.min.js" />
-    <Content Include="Scripts\epoch.js" />
-    <Content Include="Scripts\epoch.min.js" />
     <Content Include="Scripts\mediaScripts.js" />
-    <Content Include="Scripts\pie-charts\pie-chart.min.js" />
-    <Content Include="Scripts\pie-charts\pie-chart.spec.js" />
-    <Content Include="Scripts\pie-charts\utils\draw.js" />
-    <Content Include="Scripts\pie-charts\utils\legend.js" />
-    <Content Include="Scripts\pie-charts\utils\misc.js" />
-    <Content Include="Scripts\pie-charts\utils\options.js" />
-    <Content Include="Scripts\servmonapp\app.js" />
     <Content Include="Scripts\base.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\excanvas.js" />
@@ -334,7 +316,6 @@
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\IndexScripts.js" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\d3\LICENSE" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\isotope.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -351,20 +332,13 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\ng-epoch.js" />
-    <Content Include="Scripts\pie-charts\pie-chart.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\servmonapp\controllers.js" />
-    <Content Include="Scripts\servmonapp\directives.js" />
-    <Content Include="Scripts\servmonapp\services.js" />
     <Content Include="Scripts\smoothscroll.js" />
     <Content Include="Views\Home\_MainApplicationLinkContent.cshtml" />
     <Content Include="Views\MediaDashboard\Index.cshtml" />
-    <Content Include="Scripts\pie-charts\utils\utils.footer" />
-    <Content Include="Scripts\pie-charts\utils\utils.header" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

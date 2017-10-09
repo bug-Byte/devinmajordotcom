@@ -53,7 +53,6 @@ C:\Users\Devin Major\documents\devinmajordotcom\devinmajordotcom\bin\System.Web.
 C:\Users\Devin Major\documents\devinmajordotcom\devinmajordotcom\obj\Debug\devinmajordotcom.csprojResolveAssemblyReference.cache
 C:\Users\Devin Major\documents\devinmajordotcom\devinmajordotcom\obj\Debug\devinmajordotcom.dll
 C:\Users\Devin Major\documents\devinmajordotcom\devinmajordotcom\obj\Debug\devinmajordotcom.pdb
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\obj\Debug\Devinmajordotcom.csprojResolveAssemblyReference.cache
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\devinmajordotcom.dll.config
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\devinmajordotcom.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\devinmajordotcom.pdb
@@ -63,6 +62,10 @@ C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Enti
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Client.dll
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Cors.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Security.Cookies.dll
@@ -75,6 +78,7 @@ C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Micr
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Newtonsoft.Json.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Owin.dll
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\System.Web.Cors.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\System.Web.Helpers.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\System.Web.Mvc.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\System.Web.Optimization.dll
@@ -89,7 +93,11 @@ C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Enti
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Client.xml
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.xml
+C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Cors.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Security.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Security.Cookies.xml
@@ -108,12 +116,3 @@ C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Syst
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\System.Web.WebPages.Razor.xml
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\obj\Debug\devinmajordotcom.dll
 C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\obj\Debug\devinmajordotcom.pdb
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Core.dll
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Core.xml
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Client.dll
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.AspNet.SignalR.Client.xml
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Cors.dll
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\System.Web.Cors.dll
-C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\bin\Microsoft.Owin.Cors.xml
