@@ -13,7 +13,7 @@
     //ProviderName = "System.Data.SqlClient";
 
     // Namespace = ""; // Override the default namespace here
-    DbContextName = "MyDbContext"; // Note: If generating separate files, please give the db context a different name from this tt filename.
+    DbContextName = "dbContext"; // Note: If generating separate files, please give the db context a different name from this tt filename.
     //DbContextInterfaceName = "IMyDbContext"; // Defaults to "I" + DbContextName or set string empty to not implement any interface.
     DbContextInterfaceBaseClasses = "System.IDisposable";    // Specify what the base classes are for your database context interface
     DbContextBaseClass = "System.Data.Entity.DbContext";   // Specify what the base class is for your DbContext. For ASP.NET Identity use "IdentityDbContext<ApplicationUser>"
@@ -22,8 +22,8 @@
     ConfigFilenameSearchOrder = new[] { "app.config", "web.config" }; // Add more here if required. The config files are searched for in the local project first, then the whole solution second.
     GenerateSeparateFiles = false;
     MakeClassesInternal = false;
-    MakeClassesPartial = false;
-    MakeDbContextInterfacePartial = false;
+    MakeClassesPartial = true;
+    MakeDbContextInterfacePartial = true;
     UseMappingTables = true; // If true, mapping will be used and no mapping tables will be generated. If false, all tables will be generated.
     UsePascalCase = true;    // This will rename the generated C# tables & properties to use PascalCase. If false table & property names will be left alone.
     UseDataAnnotations = false; // If true, will add data annotations to the poco classes.

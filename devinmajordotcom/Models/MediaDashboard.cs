@@ -34,7 +34,7 @@ namespace devinmajordotcom.Models
 
     #region Unit of work
 
-    public interface IMyDbContext : System.IDisposable
+    public partial interface IdbContext : System.IDisposable
     {
         System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLinks
 
@@ -57,38 +57,43 @@ namespace devinmajordotcom.Models
     #region Database context
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public class MyDbContext : System.Data.Entity.DbContext, IMyDbContext
+    public partial class dbContext : System.Data.Entity.DbContext, IdbContext
     {
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLinks
 
-        static MyDbContext()
+        static dbContext()
         {
-            System.Data.Entity.Database.SetInitializer<MyDbContext>(null);
+            System.Data.Entity.Database.SetInitializer<dbContext>(null);
         }
 
-        public MyDbContext()
+        public dbContext()
             : base("Name=MediaConnection")
         {
+            InitializePartial();
         }
 
-        public MyDbContext(string connectionString)
+        public dbContext(string connectionString)
             : base(connectionString)
         {
+            InitializePartial();
         }
 
-        public MyDbContext(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model)
+        public dbContext(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model)
             : base(connectionString, model)
         {
+            InitializePartial();
         }
 
-        public MyDbContext(System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection)
+        public dbContext(System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
+            InitializePartial();
         }
 
-        public MyDbContext(System.Data.Common.DbConnection existingConnection, System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
+        public dbContext(System.Data.Common.DbConnection existingConnection, System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
+            InitializePartial();
         }
 
         protected override void Dispose(bool disposing)
@@ -110,6 +115,8 @@ namespace devinmajordotcom.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new SiteLinkConfiguration());
+
+            OnModelCreatingPartial(modelBuilder);
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
@@ -117,16 +124,19 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new SiteLinkConfiguration(schema));
             return modelBuilder;
         }
+
+        partial void InitializePartial();
+        partial void OnModelCreatingPartial(System.Data.Entity.DbModelBuilder modelBuilder);
     }
     #endregion
 
     #region Database context factory
 
-    public class MyDbContextFactory : System.Data.Entity.Infrastructure.IDbContextFactory<MyDbContext>
+    public class dbContextFactory : System.Data.Entity.Infrastructure.IDbContextFactory<dbContext>
     {
-        public MyDbContext Create()
+        public dbContext Create()
         {
-            return new MyDbContext();
+            return new dbContext();
         }
     }
 
@@ -135,13 +145,15 @@ namespace devinmajordotcom.Models
     #region Fake Database context
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public class FakeMyDbContext : IMyDbContext
+    public partial class FakedbContext : IdbContext
     {
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; }
 
-        public FakeMyDbContext()
+        public FakedbContext()
         {
             SiteLinks = new FakeDbSet<SiteLink>("Id");
+
+            InitializePartial();
         }
 
         public int SaveChangesCount { get; private set; }
@@ -162,6 +174,8 @@ namespace devinmajordotcom.Models
             ++SaveChangesCount;
             return System.Threading.Tasks.Task<int>.Factory.StartNew(() => 1, cancellationToken);
         }
+
+        partial void InitializePartial();
 
         protected virtual void Dispose(bool disposing)
         {
@@ -223,7 +237,7 @@ namespace devinmajordotcom.Models
     //      }
     //      Read more about it here: https://msdn.microsoft.com/en-us/data/dn314431.aspx
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public class FakeDbSet<TEntity> : System.Data.Entity.DbSet<TEntity>, IQueryable, System.Collections.Generic.IEnumerable<TEntity>, System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TEntity> where TEntity : class
+    public partial class FakeDbSet<TEntity> : System.Data.Entity.DbSet<TEntity>, IQueryable, System.Collections.Generic.IEnumerable<TEntity>, System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TEntity> where TEntity : class
     {
         private readonly System.Reflection.PropertyInfo[] _primaryKeys;
         private readonly System.Collections.ObjectModel.ObservableCollection<TEntity> _data;
@@ -233,6 +247,8 @@ namespace devinmajordotcom.Models
         {
             _data = new System.Collections.ObjectModel.ObservableCollection<TEntity>();
             _query = _data.AsQueryable();
+
+            InitializePartial();
         }
 
         public FakeDbSet(params string[] primaryKeys)
@@ -240,6 +256,8 @@ namespace devinmajordotcom.Models
             _primaryKeys = typeof(TEntity).GetProperties().Where(x => primaryKeys.Contains(x.Name)).ToArray();
             _data = new System.Collections.ObjectModel.ObservableCollection<TEntity>();
             _query = _data.AsQueryable();
+
+            InitializePartial();
         }
 
         public override TEntity Find(params object[] keyValues)
@@ -356,6 +374,8 @@ namespace devinmajordotcom.Models
         {
             return new FakeDbAsyncEnumerator<TEntity>(_data.GetEnumerator());
         }
+
+        partial void InitializePartial();
     }
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
@@ -463,7 +483,7 @@ namespace devinmajordotcom.Models
 
     // SiteLinks
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public class SiteLink
+    public partial class SiteLink
     {
         public int Id { get; set; } // ID (Primary key)
         public string DisplayName { get; set; } // DisplayName (length: 50)
@@ -479,7 +499,10 @@ namespace devinmajordotcom.Models
             IsDefault = false;
             IsEnabled = true;
             IsAdminLink = false;
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     #endregion
@@ -488,7 +511,7 @@ namespace devinmajordotcom.Models
 
     // SiteLinks
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public class SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SiteLink>
+    public partial class SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SiteLink>
     {
         public SiteLinkConfiguration()
             : this("dbo")
@@ -508,7 +531,9 @@ namespace devinmajordotcom.Models
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.IsAdminLink).HasColumnName(@"IsAdminLink").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            InitializePartial();
         }
+        partial void InitializePartial();
     }
 
     #endregion
