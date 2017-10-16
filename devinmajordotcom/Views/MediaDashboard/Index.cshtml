@@ -15,16 +15,30 @@
 
 <body>
 
-    <ul class="menu toggled" id="menu" >
-        <li title="home"><a href="#" class="active home">home</a></li>
-        <li title="search"><a href="#" class="search">search</a></li>
-        <li title="pencil"><a href="#" class="pencil">pencil</a></li>
-        <li title="about"><a href="#" class="about">about</a></li>
-        <li title="archive"><a href="#" class="archive">archive</a></li>
-        <li title="contact"><a href="#" class="contact">contact</a></li>
-    </ul>
+    <div id="nav">
+        <ul class="menu toggled nav" id="menu">
+            
+            <li title="home"><span class="sidebarItem"><a href="#" class="active home">home</a></span></li>
+            <li title="search"><span class="sidebarItem"><a href="#" class="search">search</a></span></li>
+            <li title="pencil"><span class="sidebarItem"><a href="#" class="pencil">pencil</a></span></li>
+            <li title="about"><span class="sidebarItem"><a href="#" class="about">about</a></span></li>
+            <li title="archive"><span class="sidebarItem"><a href="#" class="archive">archive</a></span></li>
+            <li title="contact"><span class="sidebarItem"><a href="#" class="contact">contact</a></span></li>
 
-    <div class="site-wrapper">
+        </ul>
+    </div>
+    <div id="nav1"></div>
+
+    @*<ul class="menu toggled" id="menu" >
+        <li title="home"><span class="sidebarItem"><a href="#" class="active home">home</a></span></li>
+        <li title="search"><span class="sidebarItem"><a href="#" class="search">search</a></span></li>
+        <li title="pencil"><span class="sidebarItem"><a href="#" class="pencil">pencil</a></span></li>
+        <li title="about"><span class="sidebarItem"><a href="#" class="about">about</a></span></li>
+        <li title="archive"><span class="sidebarItem"><a href="#" class="archive">archive</a></span></li>
+        <li title="contact"><span class="sidebarItem"><a href="#" class="contact">contact</a></span></li>
+    </ul>*@
+
+    <div id="site-wrapper" class="site-wrapper">
 
         <iframe style="width:100%;height:100%;position:relative;z-index:-1; border:none;" src="http://70.76.54.169:32400"></iframe>
         @*<iframe src="http://70.76.54.169:3579"></iframe>
