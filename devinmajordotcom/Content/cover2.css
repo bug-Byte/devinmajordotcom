@@ -20,7 +20,10 @@
     overflow:hidden;
     z-index: 1002;
 }
-/*#nav ul{
+
+/*
+
+#nav ul{
     margin:0;
     padding:0;
     width:200px;
@@ -34,7 +37,9 @@
     color:#fff;
     font-size:14px;
     text-decoration:none;
-}*/
+}
+
+*/
 
 .menu {
   position: absolute;
@@ -44,10 +49,14 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background: transparent;
+    background: -moz-linear-gradient(left, rgba(30,87,153,0) 0%, rgba(30,87,153,0.8) 15%, rgba(30,87,153,1) 19%, rgba(30,87,153,1) 20%, rgba(41,137,216,1) 50%, rgba(30,87,153,1) 80%, rgba(30,87,153,1) 81%, rgba(30,87,153,0.8) 85%, rgba(30,87,153,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(30,87,153,0) 0%,rgba(30,87,153,0.8) 15%,rgba(30,87,153,1) 19%,rgba(30,87,153,1) 20%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 80%,rgba(30,87,153,1) 81%,rgba(30,87,153,0.8) 85%,rgba(30,87,153,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(30,87,153,0) 0%,rgba(30,87,153,0.8) 15%,rgba(30,87,153,1) 19%,rgba(30,87,153,1) 20%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 80%,rgba(30,87,153,1) 81%,rgba(30,87,153,0.8) 85%,rgba(30,87,153,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e5799', endColorstr='#001e5799',GradientType=1 ); /* IE6-9 */
+  /*background: transparent;
   -webkit-box-shadow: inset -10px 0px 15px 3px rgba(0,0,0,0.5);
 -moz-box-shadow: inset -10px 0px 15px 3px rgba(0,0,0,0.5);
-box-shadow: inset -10px 0px 15px 3px rgba(0,0,0,0.5);
+box-shadow: inset -10px 0px 15px 3px rgba(0,0,0,0.5);*/
 }
 .menu li a{
     display:block;
@@ -91,8 +100,11 @@ box-shadow: inset -10px 0px 15px 3px rgba(0,0,0,0.5);
   content: "\f015";
 }
 .menu li a:hover{
-  background: white;
+  /*border: 1px solid white;
+    border-radius: 2.5px;*/
   color: black;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
 }
 .menu li.current a {
   background: #ff5e5e;
@@ -101,6 +113,7 @@ box-shadow: inset -10px 0px 15px 3px rgba(0,0,0,0.5);
 .menu li a.active {
   background: black;
   color: white;
+    opacity: 0.8;
 }
 .menu li a.active:after{
     position:absolute;

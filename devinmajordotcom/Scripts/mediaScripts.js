@@ -3,13 +3,16 @@
 $(document).ready(function () {
 
     $(document).on("click", ".menu li a", function () {
+        var id = "#" + $(this).data('framename');
         $(".menu li a").removeClass('active');
         $(this).addClass('active');
+        $('iframe').hide();
+        $(id).fadeIn(500);
     });
 
     $('#nav1').bind("mouseenter", function () {
         $('#site-wrapper').animate({ left: '74.67px', width: newWidth }, 500);
-        $('#nav').animate({ width: '5em' }, 500);
+        $('#nav').animate({ width: '15em' }, 500);
     });
 
     $('#nav').bind("mouseleave", function () {

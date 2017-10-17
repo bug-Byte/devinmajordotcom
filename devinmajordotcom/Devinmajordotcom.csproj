@@ -247,6 +247,7 @@
     <Content Include="Content\MediaImages\media5.jpg" />
     <Content Include="Content\MediaImages\media6.jpg" />
     <Content Include="Content\MediaImages\media7.jpg" />
+    <Content Include="Content\MediaImages\media8.jpg" />
     <Content Include="Content\PortfolioImages\about-bg.jpg" />
     <Content Include="Content\PortfolioImages\back1.png" />
     <Content Include="Content\PortfolioImages\bag.jpg" />
