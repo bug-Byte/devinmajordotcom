@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     $('#nav1').bind("mouseenter", function () {
         $('#site-wrapper').animate({ left: '74.67px', width: newWidth }, 500);
-        $('#nav').animate({ width: '15em' }, 500);
+        $('#nav').animate({ width: '20vw' }, 500);
     });
 
     $('#nav').bind("mouseleave", function () {
