@@ -2,6 +2,19 @@
  * Globals
  */
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+.appContainer {
+    padding: 5px;
+    margin: 5px;
+}
+
+.settingsContainer {
+    text-align: left;
+}
+
 .blueGlyphicon {
     color:#71cef5;
 }
@@ -185,7 +198,9 @@ body {
  */
 
 .cover {
-  padding: 0 20px;
+    padding: 80px 20px;
+    max-height: 100vh;
+    overflow-y: auto;
 }
 .cover .btn-lg {
   padding: 10px 20px;
@@ -233,6 +248,6 @@ body {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 80vw;
   }
 }

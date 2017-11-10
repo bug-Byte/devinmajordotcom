@@ -1,6 +1,8 @@
-﻿<div class="work-wrapper">
-    <i class="glyphicon glyphicon-user" style="font-size: 50px;"></i>
-    <h3 class="text-uppercase tm-work-h3">Professional Portfolio</h3>
+﻿@model devinmajordotcom.ViewModels.SiteLinkViewModel
+
+<div class="work-wrapper">
+    <i class="@Model.DisplayIcon" style="font-size: 50px;"></i>
+    <h3 class="text-uppercase tm-work-h3">@Model.DisplayName</h3>
     <hr>
-    <p>Movies, TV, Music, Photos and More! Click here to be entertained.</p>
+    <p>@Model.Description</p>
 </div>

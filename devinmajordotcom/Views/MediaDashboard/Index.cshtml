@@ -1,47 +1,55 @@
-﻿@{
-    Layout = "";
+﻿@using devinmajordotcom.Helpers;
+@{
+    Layout = "../Shared/_MediaLayout.cshtml";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/mediacss")
-</head>
 
-<body>
+<div id="nav">
+    <ul class="menu toggled nav" id="menu">
+        <li title="Plex">
+            <span class="sidebarItem"><a data-framename="Plex" href="#" class="active home">Plex</a></span>
+        </li>
+        <li title="Requests">
+            <span class="sidebarItem"><a data-framename="Requests" href="#" class="search">Requests</a></span>
+        </li>
+        <li title="CouchPotato">
+            <span class="sidebarItem"><a data-framename="CouchPotato" href="#" class="pencil">CouchPotato</a></span>
+        </li>
+        <li title="Sonarr">
+            <span class="sidebarItem"> <a data-framename="Sonarr" href="#" class="about">Sonarr</a></span>
+        </li>
+        <li title="Headphones">
+            <span class="sidebarItem"><a data-framename="Headphones" href="#" class="archive">Headphones</a></span>
+        </li>
+        <li title="Deluge">
+            <span class="sidebarItem"><a data-framename="Deluge" href="#" class="contact">Deluge</a></span>
+        </li>
+    </ul>
+</div>
 
-    <div id="nav">
-        <ul class="menu toggled nav" id="menu">
-            <li title="Plex"><span class="sidebarItem"><a data-framename="Plex" href="#" class="active home">Plex</a></span></li>
-            <li title="Requests"><span class="sidebarItem"><a data-framename="Requests" href="#" class="search">Requests</a></span></li>
-            <li title="CouchPotato"><span class="sidebarItem"><a data-framename="CouchPotato" href="#" class="pencil">CouchPotato</a></span></li>
-            <li title="Sonarr"><span class="sidebarItem"><a data-framename="Sonarr" href="#" class="about">Sonarr</a></span></li>
-            <li title="Headphones"><span class="sidebarItem"><a data-framename="Headphones" href="#" class="archive">Headphones</a></span></li>
-            <li title="Deluge"><span class="sidebarItem"><a data-framename="Deluge" href="#" class="contact">Deluge</a></span></li>
-        </ul>
-    </div>
+<div id="nav1"></div>
 
-    <div id="nav1"></div>
+<div id="site-wrapper" class="site-wrapper">
 
-    <div id="site-wrapper" class="site-wrapper">
-    <iframe id="Plex" style="width:100%;height:99.5vh;position:relative;z-index:-1; border:none;" src="http://70.76.54.169:32400"></iframe>
-    <iframe id="Requests" style="width:100%;height:99.5vh;position:relative;z-index:-1; border:none; display: none;" src="http://70.76.54.169:3579"></iframe>
-    <iframe id="CouchPotato" style="width:100%;height:99.5vh;position:relative;z-index:-1; border:none; display: none;" src="http://70.76.54.169:5050"></iframe>
-    <iframe id="Sonarr" style="width:100%;height:99.5vh;position:relative;z-index:-1; border:none; display: none;" src="http://70.76.54.169:8989"></iframe>
-    <iframe id="Headphones" style="width:100%;height:99.5vh;position:relative;z-index:-1; border:none; display: none;" src="http://70.76.54.169:7171/home"></iframe>
-    <iframe id="Deluge" style="width:100%;height:99.5vh;position:relative;z-index:-1; border:none; display: none;" src="http://70.76.54.169:8112"></iframe>
-    </div>
+    <iframe src="http://70.76.54.169:32400/web/index.html"
+            style="width: 100%; height: 99.5vh; position: relative; z-index: -1; border: none;"
+            id="Plex"
+            scrolling="auto"
+            sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+            allowfullscreen="true"
+            webkitallowfullscreen="true"
+            class="z-iframe"
+            frameborder="0">
+    </iframe>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/mediaScripts")
+    <iframe src="http://70.76.54.169:8112"
+            style="width: 100%; height: 99.5vh; position: relative; z-index: -1; border: none; display: none;"
+            id="Deluge"
+            scrolling="auto"
+            sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+            allowfullscreen="true"
+            webkitallowfullscreen="true"
+            class="z-iframe"
+            frameborder="0">
+    </iframe>
 
-</body>
-</html>
+</div>

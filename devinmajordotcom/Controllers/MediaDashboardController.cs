@@ -8,10 +8,12 @@ namespace devinmajordotcom.Controllers
 {
     public class MediaDashboardController : Controller
     {
+
         public ActionResult Index()
         {
             ViewBag.Title="D3V!N M@J0R";
             return View();
         }
+
     }
 }

@@ -1,77 +1,9 @@
-﻿@using devinmajordotcom.Helpers;
+﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
 
-<div class="inner cover" id="home">
+@Html.Partial("_Apps", Model, null)
 
-    <h1 class="cover-heading">Welcome, fellow Humans!</h1>
-    <p class="lead" style="color: #71cef5;">You've reached the coolest corner of the Internet!</p>
-    <p>Feel free to click one of the applications below for more fun... you never know what you'll find!</p>
-    <br />
-    <div class="col-md-4 col-sm-4">
-        <div class="work-wrapper">
-            <i class="glyphicon glyphicon-dashboard" style="font-size: 50px;"></i>
-            <h3 class="text-uppercase tm-work-h3">My Custom Homepage</h3>
-            <hr>
-            <p>My user-based, blog style homepage! Click to see my home, or to login to yours.</p>
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4">
-        @Html.Raw(Html.ActionLink("REPLACE", "Index", "Portfolio", null, new { @class = "" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", null)))
-    </div>
-    <div class="col-md-4 col-sm-4">
-        @Html.Raw(Html.ActionLink("REPLACE", "Index", "MediaDashboard", null, new { @class = "" }).ToHtmlString().Replace("REPLACE",PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", null)))
-    </div>
+@Html.Partial("_ServerStatus")
 
-</div>
+@Html.Partial("_ContactContent")
 
-<div style="display:none;" class="inner cover" id="server">
-
-    <h1 class="cover-heading">Welcome, fellow Humans!</h1>
-    <p class="lead" style="color: #71cef5;">Server Status</p>
-
-</div>
-
-<div style="display:none;" class="inner cover" id="contact">
-
-    <h2 class="title" ><strong>Drop me a line</strong></h2>
-    <hr>
-    <p style="color: #71cef5;">If you'd like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I'll take it from there!</p>
-    <hr>
-    <form action="#" method="post">
-
-        <div class="row">
-            <div class="col-sm-6">
-                <input class="form-control" type="text" placeholder="Your Name">
-            </div>
-            <div class="col-sm-6">
-                <input class="form-control" type="email" placeholder="Your Email">
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <div class="col-sm-12">
-                <input class="form-control" type="text" placeholder="Your Subject">
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <div class="col-sm-12">
-                <textarea class="form-control" placeholder="Your Message" rows="6"></textarea>
-            </div>
-        </div>
-        <br />
-
-
-        <div class="row">
-            <div class="col-sm-offset-2 col-sm-8">
-                <input class="form-control" type="submit" value="SHOOT MESSAGE">
-            </div>
-        </div>
-        <br />
-        
-    </form>
-
-
-
-</div>
+@Html.Partial("_ApplicationManager")
