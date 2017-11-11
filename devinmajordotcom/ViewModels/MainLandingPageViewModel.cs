@@ -10,6 +10,8 @@ namespace devinmajordotcom.ViewModels
 
         public List<SiteLinkViewModel> LandingPageApplicationLinks { get; set; }
 
+        public UserStatusViewModel CurrentUserViewModel { get; set; }
+
         public MainLandingPageViewModel()
         {
             

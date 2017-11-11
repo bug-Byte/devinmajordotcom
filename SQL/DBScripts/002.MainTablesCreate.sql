@@ -1,13 +1,20 @@
 use [#dbname]
 
+
+EXEC sp_configure 'show advanced options', 1 ;   
+RECONFIGURE ;   
+GO  
+EXEC sp_configure 'max text repl size', -1 ;   
+GO  
+RECONFIGURE;   
+GO  
+
 BEGIN TRANSACTION
 
 CREATE TABLE [User]
 (
 	ID INT IDENTITY(1,1),
-	FirstName NVARCHAR(200) NOT NULL,
-	LastName NVARCHAR(200) NOT NULL,
-	NetworkID NVARCHAR(500) NOT NULL,
+	ClientName NVARCHAR(500) NOT NULL,
 	IsActive BIT NOT NULL DEFAULT 1,
 	IsAdmin BIT NOT NULL DEFAULT 0,
 	PRIMARY KEY(ID)
@@ -36,10 +43,8 @@ CREATE TABLE SiteLink (
 	[Order] INT NULL,
 	PRIMARY KEY (ID),
 	CONSTRAINT SiteLinks_ApplicationID_Applications_ID
-	FOREIGN KEY(ApplicationID) REFERENCES ApplicationMaster(ID)
+	FOREIGN KEY(ApplicationID) REFERENCES ApplicationMaster(ID) 
 );
 GO
-
-CREATE TABLE UserSiteLinkMapping 
 
 COMMIT

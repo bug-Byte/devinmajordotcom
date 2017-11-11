@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using devinmajordotcom.ViewModels;
+@{
+    var viewModel = ViewBag.CurrentUserViewModel;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,7 +29,10 @@
                             <li class="active" data-activediv="#home"><a>Home & Apps</a></li>
                             <li data-activediv="#server"><a>Server Status</a></li>
                             <li data-activediv="#contact"><a>Contact Me</a></li>
-                            <li data-activediv="#appmanager"><a>App Manager</a></li>
+                            @if (viewModel.UserIsAdmin)
+                            {
+                                <li data-activediv="#appmanager"><a>App Manager</a></li>
+                            }
                         </ul>
                     </div>
                 </div>

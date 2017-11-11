@@ -1,6 +1,20 @@
-use [#dbname]
+use devinmajordotcom;
 
 BEGIN TRANSACTION
+
+INSERT INTO [User]
+(
+	ClientName,
+	IsActive,
+	IsAdmin
+)
+VALUES
+(
+	(SELECT HOST_NAME()),
+	1,
+	1
+);
+GO
 
 INSERT INTO ApplicationMaster([Name])
 VALUES
@@ -10,10 +24,11 @@ VALUES
 ('Professional Portfolio');
 GO
 
-INSERT INTO SiteLinks
+INSERT INTO SiteLink
 (
 	DisplayName,
 	[Description],
+	[Directive],
 	[URL],
 	[Action],
 	[Controller],
@@ -25,8 +40,48 @@ INSERT INTO SiteLinks
 )
 VALUES
 (
+	'Facebook',
+	NULL,
+	'Follow me on',
+	'#',
+	NULL,
+	NULL,
+	'fa fa-facebook',
+	0,
+	1,
+	4,
+	1
+),
+(
+	'Reddit',
+	NULL,
+	'Find me on',
+	'#',
+	NULL,
+	NULL,
+	'fa fa-reddit',
+	0,
+	1,
+	4,
+	2
+),
+(
+	'GitHub',
+	NULL,
+	'Fork me on',
+	'#',
+	NULL,
+	NULL,
+	'fa fa-github',
+	0,
+	1,
+	4,
+	3
+),
+(
 	'My Custom Homepage', 
 	'My user-based, blog style homepage! Click to see my home, or to login to yours.',
+	NULL,
 	NULL,
 	'Index',
 	'MyHome',
@@ -40,6 +95,7 @@ VALUES
 	'Plex Media Dashboard', 
 	'Movies, TV, Music, Photos and More! Click here to be entertained.',
 	NULL,
+	NULL,
 	'Index',
 	'MediaDashboard',
 	'glyphicon glyphicon-film',
@@ -51,6 +107,7 @@ VALUES
 (
 	'Professional Portfolio', 
 	'Gives visitors some insight into who I am, what I do, and some of my past projects.',
+	NULL,
 	NULL,
 	'Index',
 	'Portfolio',

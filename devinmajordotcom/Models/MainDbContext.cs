@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -37,7 +37,14 @@ namespace devinmajordotcom.Models
     public partial interface IdbContext : System.IDisposable
     {
         System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
-        System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLinks
+        System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
+        System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
+        System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
+        System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
+        System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
+        System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
+        System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
+        System.Data.Entity.DbSet<User> Users { get; set; } // User
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -61,7 +68,14 @@ namespace devinmajordotcom.Models
     public partial class dbContext : System.Data.Entity.DbContext, IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
-        public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLinks
+        public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
+        public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
+        public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
+        public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
+        public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
+        public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
+        public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
+        public System.Data.Entity.DbSet<User> Users { get; set; } // User
 
         static dbContext()
         {
@@ -117,7 +131,14 @@ namespace devinmajordotcom.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration());
             modelBuilder.Configurations.Add(new SiteLinkConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }
@@ -125,7 +146,14 @@ namespace devinmajordotcom.Models
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration(schema));
             modelBuilder.Configurations.Add(new SiteLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new UserConfiguration(schema));
             return modelBuilder;
         }
 
@@ -152,12 +180,26 @@ namespace devinmajordotcom.Models
     public partial class FakedbContext : IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; }
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; }
+        public System.Data.Entity.DbSet<User> Users { get; set; }
 
         public FakedbContext()
         {
             ApplicationMasters = new FakeDbSet<ApplicationMaster>("Id");
+            Portfolio_PersonalDescriptions = new FakeDbSet<Portfolio_PersonalDescription>("Id");
+            Portfolio_Profiles = new FakeDbSet<Portfolio_Profile>("Id");
+            Portfolio_Projects = new FakeDbSet<Portfolio_Project>("Id");
+            Portfolio_ProjectTypes = new FakeDbSet<Portfolio_ProjectType>("Id");
+            Portfolio_Skills = new FakeDbSet<Portfolio_Skill>("Id");
+            Portfolio_SkillTypeMasters = new FakeDbSet<Portfolio_SkillTypeMaster>("Id");
             SiteLinks = new FakeDbSet<SiteLink>("Id");
+            Users = new FakeDbSet<User>("Id");
 
             InitializePartial();
         }
@@ -497,9 +539,9 @@ namespace devinmajordotcom.Models
         // Reverse navigation
 
         /// <summary>
-        /// Child SiteLinks where [SiteLinks].[ApplicationID] point to this entity (SiteLinks_ApplicationID_Applications_ID)
+        /// Child SiteLinks where [SiteLink].[ApplicationID] point to this entity (SiteLinks_ApplicationID_Applications_ID)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<SiteLink> SiteLinks { get; set; } // SiteLinks.SiteLinks_ApplicationID_Applications_ID
+        public virtual System.Collections.Generic.ICollection<SiteLink> SiteLinks { get; set; } // SiteLink.SiteLinks_ApplicationID_Applications_ID
 
         public ApplicationMaster()
         {
@@ -510,13 +552,153 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // SiteLinks
+    // PersonalDescription
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_PersonalDescription
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Adjective1 { get; set; } // Adjective1 (length: 100)
+        public string Adjective2 { get; set; } // Adjective2 (length: 100)
+        public string Adjective3 { get; set; } // Adjective3 (length: 100)
+        public string Blurb { get; set; } // Blurb
+
+        public Portfolio_PersonalDescription()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // Profile
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_Profile
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string FirstName { get; set; } // FirstName (length: 100)
+        public string LastName { get; set; } // LastName (length: 100)
+        public System.DateTime DateOfBirth { get; set; } // DateOfBirth
+        public string Address { get; set; } // Address (length: 100)
+        public string PhoneNumber { get; set; } // PhoneNumber (length: 25)
+        public string EmailAddress { get; set; } // EmailAddress (length: 200)
+        public string PositionTitle { get; set; } // PositionTitle (length: 100)
+        public string PersonalDescription { get; set; } // PersonalDescription (length: 500)
+        public string WebsiteText { get; set; } // WebsiteText (length: 100)
+        public string WebsiteUrl { get; set; } // WebsiteURL (length: 200)
+
+        public Portfolio_Profile()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // Project
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_Project
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Name { get; set; } // Name (length: 100)
+        public string Description { get; set; } // Description (length: 500)
+        public byte[] Image { get; set; } // Image
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Portfolio_ProjectTypes (Many-to-Many) mapped by table [ProjectTypeMapping]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // Many to many mapping
+
+        public Portfolio_Project()
+        {
+            Portfolio_ProjectTypes = new System.Collections.Generic.List<Portfolio_ProjectType>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ProjectType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ProjectType
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Type { get; set; } // Type (length: 100)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Portfolio_Projects (Many-to-Many) mapped by table [ProjectTypeMapping]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Portfolio_Project> Portfolio_Projects { get; set; } // Many to many mapping
+
+        public Portfolio_ProjectType()
+        {
+            Portfolio_Projects = new System.Collections.Generic.List<Portfolio_Project>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // Skill
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_Skill
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Description { get; set; } // Description (length: 500)
+        public string DisplayName { get; set; } // DisplayName (length: 100)
+        public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
+        public int SkillTypeId { get; set; } // SkillTypeID
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Portfolio_SkillTypeMaster pointed by [Skill].([SkillTypeId]) (SkillMaster_SkillTypeID_SkillTypeMaster_ID)
+        /// </summary>
+        public virtual Portfolio_SkillTypeMaster Portfolio_SkillTypeMaster { get; set; } // SkillMaster_SkillTypeID_SkillTypeMaster_ID
+
+        public Portfolio_Skill()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // SkillTypeMaster
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_SkillTypeMaster
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string TypeName { get; set; } // TypeName (length: 500)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Portfolio_Skills where [Skill].[SkillTypeID] point to this entity (SkillMaster_SkillTypeID_SkillTypeMaster_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill.SkillMaster_SkillTypeID_SkillTypeMaster_ID
+
+        public Portfolio_SkillTypeMaster()
+        {
+            Portfolio_Skills = new System.Collections.Generic.List<Portfolio_Skill>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // SiteLink
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class SiteLink
     {
         public int Id { get; set; } // ID (Primary key)
         public string DisplayName { get; set; } // DisplayName (length: 50)
         public string Description { get; set; } // Description (length: 500)
+        public string Directive { get; set; } // Directive (length: 100)
         public string Url { get; set; } // URL (length: 500)
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
@@ -529,7 +711,7 @@ namespace devinmajordotcom.Models
         // Foreign keys
 
         /// <summary>
-        /// Parent ApplicationMaster pointed by [SiteLinks].([ApplicationId]) (SiteLinks_ApplicationID_Applications_ID)
+        /// Parent ApplicationMaster pointed by [SiteLink].([ApplicationId]) (SiteLinks_ApplicationID_Applications_ID)
         /// </summary>
         public virtual ApplicationMaster ApplicationMaster { get; set; } // SiteLinks_ApplicationID_Applications_ID
 
@@ -537,6 +719,25 @@ namespace devinmajordotcom.Models
         {
             IsDefault = false;
             IsEnabled = true;
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // User
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class User
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string ClientName { get; set; } // ClientName (length: 500)
+        public bool IsActive { get; set; } // IsActive
+        public bool IsAdmin { get; set; } // IsAdmin
+
+        public User()
+        {
+            IsActive = true;
+            IsAdmin = false;
             InitializePartial();
         }
 
@@ -568,7 +769,160 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // SiteLinks
+    // PersonalDescription
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_PersonalDescriptionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_PersonalDescription>
+    {
+        public Portfolio_PersonalDescriptionConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_PersonalDescriptionConfiguration(string schema)
+        {
+            ToTable("PersonalDescription", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Adjective1).HasColumnName(@"Adjective1").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Adjective2).HasColumnName(@"Adjective2").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Adjective3).HasColumnName(@"Adjective3").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Blurb).HasColumnName(@"Blurb").HasColumnType("nvarchar(max)").IsOptional();
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // Profile
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ProfileConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Profile>
+    {
+        public Portfolio_ProfileConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_ProfileConfiguration(string schema)
+        {
+            ToTable("Profile", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FirstName).HasColumnName(@"FirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.LastName).HasColumnName(@"LastName").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.DateOfBirth).HasColumnName(@"DateOfBirth").HasColumnType("datetime").IsRequired();
+            Property(x => x.Address).HasColumnName(@"Address").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.PhoneNumber).HasColumnName(@"PhoneNumber").HasColumnType("nvarchar").IsRequired().HasMaxLength(25);
+            Property(x => x.EmailAddress).HasColumnName(@"EmailAddress").HasColumnType("nvarchar").IsRequired().HasMaxLength(200);
+            Property(x => x.PositionTitle).HasColumnName(@"PositionTitle").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.PersonalDescription).HasColumnName(@"PersonalDescription").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(500);
+            Property(x => x.WebsiteText).HasColumnName(@"WebsiteText").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.WebsiteUrl).HasColumnName(@"WebsiteURL").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // Project
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ProjectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Project>
+    {
+        public Portfolio_ProjectConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_ProjectConfiguration(string schema)
+        {
+            ToTable("Project", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            HasMany(t => t.Portfolio_ProjectTypes).WithMany(t => t.Portfolio_Projects).Map(m =>
+            {
+                m.ToTable("ProjectTypeMapping", "Portfolio");
+                m.MapLeftKey("ProjectID");
+                m.MapRightKey("ProjectTypeID");
+            });
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // ProjectType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ProjectTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_ProjectType>
+    {
+        public Portfolio_ProjectTypeConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_ProjectTypeConfiguration(string schema)
+        {
+            ToTable("ProjectType", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Type).HasColumnName(@"Type").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // Skill
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_SkillConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Skill>
+    {
+        public Portfolio_SkillConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_SkillConfiguration(string schema)
+        {
+            ToTable("Skill", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.SkillTypeId).HasColumnName(@"SkillTypeID").HasColumnType("int").IsRequired();
+
+            // Foreign keys
+            HasRequired(a => a.Portfolio_SkillTypeMaster).WithMany(b => b.Portfolio_Skills).HasForeignKey(c => c.SkillTypeId).WillCascadeOnDelete(false); // SkillMaster_SkillTypeID_SkillTypeMaster_ID
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // SkillTypeMaster
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_SkillTypeMasterConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_SkillTypeMaster>
+    {
+        public Portfolio_SkillTypeMasterConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_SkillTypeMasterConfiguration(string schema)
+        {
+            ToTable("SkillTypeMaster", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // SiteLink
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SiteLink>
     {
@@ -579,12 +933,13 @@ namespace devinmajordotcom.Models
 
         public SiteLinkConfiguration(string schema)
         {
-            ToTable("SiteLinks", schema);
+            ToTable("SiteLink", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
@@ -596,6 +951,29 @@ namespace devinmajordotcom.Models
 
             // Foreign keys
             HasRequired(a => a.ApplicationMaster).WithMany(b => b.SiteLinks).HasForeignKey(c => c.ApplicationId).WillCascadeOnDelete(false); // SiteLinks_ApplicationID_Applications_ID
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // User
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class UserConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<User>
+    {
+        public UserConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public UserConfiguration(string schema)
+        {
+            ToTable("User", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ClientName).HasColumnName(@"ClientName").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+            Property(x => x.IsAdmin).HasColumnName(@"IsAdmin").HasColumnType("bit").IsRequired();
             InitializePartial();
         }
         partial void InitializePartial();

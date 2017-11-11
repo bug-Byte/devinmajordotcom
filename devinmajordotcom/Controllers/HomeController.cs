@@ -22,11 +22,21 @@ namespace devinmajordotcom.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Title="D3V!N M@J0R";
-
             var viewModel = new MainLandingPageViewModel();
             viewModel = service.GetLandingPageViewModel();
-            return View(viewModel);
+
+            this.ViewData["CurrentUserViewModel"] = viewModel.CurrentUserViewModel;
+            ViewBag.Title = "D3V!N M@J0R";
+            ViewBag.Layout = "../Shared/_Layout.cshtml";
+
+            if (viewModel.CurrentUserViewModel.UserIsActive)
+            {
+                return View(viewModel);
+            }
+            else
+            {
+                return new EmptyResult();
+            }
         }
 
         public ActionResult _ApplicationManager()

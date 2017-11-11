@@ -16,5 +16,7 @@ namespace devinmajordotcom.Services
 
         List<SiteLinkViewModel> GetMediaSiteLinks();
 
+        UserStatusViewModel GetCurrentUserStatus();
+
     }
 }

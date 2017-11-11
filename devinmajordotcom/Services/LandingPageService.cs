@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Devinmajordotcom;
+using System.Security.Principal;
 
 namespace devinmajordotcom.Services
 {
@@ -22,7 +23,35 @@ namespace devinmajordotcom.Services
         {
             return new MainLandingPageViewModel()
             {
+                CurrentUserViewModel = GetCurrentUserStatus(),
                 LandingPageApplicationLinks = GetMainSiteLinks()
+            };
+        }
+
+        public UserStatusViewModel GetCurrentUserStatus()
+        {
+            var isUserAdmin = false;
+            var isUserActive = false;
+            var currentContextUser = WindowsIdentity.GetCurrent().Name.ToString().Split('\\')[0];
+            var currentDbUser = db.Users.FirstOrDefault(x => x.ClientName == currentContextUser);
+            if(currentDbUser != null)
+            {
+                isUserAdmin = currentDbUser.IsAdmin;
+                isUserActive = currentDbUser.IsActive;
+            }
+            else
+            {
+                var user = new User()
+                {
+                    ClientName = currentContextUser,
+                    IsActive = true,
+                    IsAdmin = false
+                };
+            }
+            return new UserStatusViewModel()
+            {
+                UserIsAdmin = isUserAdmin,
+                UserIsActive = isUserActive
             };
         }
 

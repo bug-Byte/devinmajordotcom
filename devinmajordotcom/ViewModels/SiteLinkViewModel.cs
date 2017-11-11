@@ -14,6 +14,8 @@ namespace devinmajordotcom.ViewModels
 
         public string Description { get; set; }
 
+        public string Directive { get; set; }
+
         public string URL { get; set; }
 
         public string Action { get; set; }
