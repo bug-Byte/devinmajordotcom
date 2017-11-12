@@ -1,48 +1,69 @@
-﻿@{
-    Layout = "";
+﻿@using devinmajordotcom.Helpers;
+@model devinmajordotcom.ViewModels.MediaDashboardViewModel
+@{
+    Layout = "../Shared/_MediaLayout.cshtml";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/mediacss")
-</head>
 
-<body>
+<div id="nav">
+    <ul class="menu toggled nav" id="menu">
 
-    <ul class="menu toggled" id="menu" >
-        <li title="home"><a href="#" class="active home">home</a></li>
-        <li title="search"><a href="#" class="search">search</a></li>
-        <li title="pencil"><a href="#" class="pencil">pencil</a></li>
-        <li title="about"><a href="#" class="about">about</a></li>
-        <li title="archive"><a href="#" class="archive">archive</a></li>
-        <li title="contact"><a href="#" class="contact">contact</a></li>
+        @if (Model.SidebarLinks.Count > 0)
+        {
+            foreach (var sidebarLink in Model.SidebarLinks)
+            {
+
+                var cssClassNameList = "";
+
+                if(sidebarLink.IsDefault)
+                {
+                    cssClassNameList += "active ";
+                }
+
+                cssClassNameList += sidebarLink.DisplayIcon;
+
+                <li title="@sidebarLink.DisplayName">
+                    <span class="sidebarItem"><a data-framename="@sidebarLink.ID" href="#" class="@cssClassNameList">@sidebarLink.DisplayName</a></span>
+                </li>
+            }
+        }
+
     </ul>
+</div>
 
-    <div class="site-wrapper">
-
-        <iframe style="width:100%;height:100%;position:relative;z-index:-1; border:none;" src="http://70.76.54.169:32400"></iframe>
-        @*<iframe src="http://70.76.54.169:3579"></iframe>
-        <iframe src="http://70.76.54.169:5050"></iframe>
-        <iframe src="http://70.76.54.169:8989"></iframe>
-        <iframe src="http://70.76.54.169:7171/home"></iframe>
-        <iframe src="http://70.76.54.169:8112"></iframe>*@
-
-    </div>
+@if (Model.SidebarLinks.Count > 0)
+{ 
+    <div id="nav1"></div>
+}
 
 
+<div id="site-wrapper" class="site-wrapper">
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/mediaScripts")
-
-</body>
-</html>
+    @if (Model.SidebarLinks.Count > 0)
+    {
+        foreach (var link in Model.SidebarLinks)
+        {
+            if (link.URL != null)
+            {
+                <iframe 
+                        src="@link.URL"
+                        style="width: 100%; height: 99.5vh; position: relative; z-index: -1; border: none; @if(!link.IsDefault) { <text>display:none;</text> }"
+                        id="@link.ID"
+                        scrolling="auto"
+                        sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+                        allowfullscreen="true"
+                        webkitallowfullscreen="true"
+                        class="z-iframe"
+                        frameborder="0">
+                </iframe>
+            }
+            else
+            {
+                //TODO: Add something here, preferably make use of Controller/Action variables
+            }
+        }
+    }
+    else
+    {
+        @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
+    }
+</div>

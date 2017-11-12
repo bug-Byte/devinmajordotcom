@@ -1,0 +1,37 @@
+﻿@model devinmajordotcom.ViewModels.ApplicationManagementViewModel
+@{ 
+
+}
+<div style="display:none;" class="inner cover" id="appmanager">
+    <h1 class="cover-heading">Application Manager</h1>
+    <p class="lead" style="color: #71cef5;">Manage settings for all existing apps.</p>   
+    @if (Model.LandingPageApplicationLinks.Count > 0)
+    {
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+
+                @foreach (var appDataModel in Model.LandingPageApplicationLinks)
+                {
+
+                    <div class="appContainer work-wrapper" id="@appDataModel.DisplayName">
+                        <h3>@appDataModel.DisplayName</h3>
+                        <hr>
+                        <div class="settingsContainer">
+                            @if (appDataModel.DisplayName == "Plex Media Dashboard")
+                            {
+                                @Html.Partial("../MediaDashboard/_ManageMediaDashboard", Model.CurrentMediaDashboardData)
+                            }
+                            @if (appDataModel.DisplayName == "Professional Portfolio")
+                            {
+                                @Html.Partial("../Portfolio/_ManagePortfolio", Model.CurrentPortfolioData)
+                            }
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    }
+</div>

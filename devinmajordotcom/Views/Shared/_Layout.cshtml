@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using devinmajordotcom.ViewModels;
+@{
+    var viewModel = ViewBag.CurrentUserViewModel;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -18,13 +22,17 @@
 
             <div class="cover-container">
 
-                <div class="masthead clearfix">
+                <div class="masthead clearfix" style="background-color:#0B1C1E; z-index: 2000;min-height: 85px; padding:2px;">
                     <div class="inner">
                         <h3 class="masthead-brand">@ViewBag.Title</h3>
                         <ul class="nav masthead-nav">
-                            <li class="active" data-activediv="#home"><a href="#home">Home & Apps</a></li>
-                            <li data-activediv="#server"><a href="#server">Server Status</a></li>
-                            <li data-activediv="#contact"><a href="#contact">Contact Me</a></li>
+                            <li class="active" data-activediv="#home"><a>Home & Apps</a></li>
+                            <li data-activediv="#server"><a>Server Status</a></li>
+                            <li data-activediv="#contact"><a>Contact Me</a></li>
+                            @if (viewModel.UserIsAdmin)
+                            {
+                                <li data-activediv="#appmanager"><a>App Manager</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -36,6 +44,8 @@
         </div>
 
     </div>
+
+    <div id="bootsnackAlertContainer" class="bootsnack"></div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

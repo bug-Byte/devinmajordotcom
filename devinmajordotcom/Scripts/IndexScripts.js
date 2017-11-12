@@ -18,3 +18,19 @@
     });
 
 });
+
+function MailSuccess(data) {
+    debugger;
+    $("#bootsnackAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your email was successfully sent to the Administrator of this site!'
+    });
+}
+
+function MailFailure(data) {
+    debugger;
+    $("#bootsnackAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your email was not sent! Please try again in about 5 minutes.' + data
+    });
+}

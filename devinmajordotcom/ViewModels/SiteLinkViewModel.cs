@@ -12,7 +12,15 @@ namespace devinmajordotcom.ViewModels
 
         public string DisplayName { get; set; }
 
+        public string Description { get; set; }
+
+        public string Directive { get; set; }
+
         public string URL { get; set; }
+
+        public string Action { get; set; }
+
+        public string Controller { get; set; }
 
         public string DisplayIcon { get; set; }
 
@@ -20,9 +28,16 @@ namespace devinmajordotcom.ViewModels
 
         public bool IsEnabled { get; set; }
 
-        public bool IsAdminLink { get; set; }
+        public int ParentApplicationId { get; set; }
+
+        public string ParentApplicationName { get; set; }
 
         public int? Order { get; set; }
+
+        public SiteLinkViewModel()
+        {
+            
+        }
 
     }
 }

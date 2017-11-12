@@ -45,11 +45,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LinqKit, Version=1.1.9.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
@@ -125,8 +125,20 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ninject, Version=3.3.1.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.1\lib\net45\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenHardwareMonitorLib, Version=0.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenHardwareMonitor.0.7.1\lib\net40\OpenHardwareMonitorLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
@@ -192,6 +204,10 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -205,9 +221,19 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Bindings.cs" />
+    <Compile Include="Constants\SkillTypeMaster.cs">
+      <DependentUpon>SkillTypeMaster.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Constants\ApplicationMaster.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\MediaDashboardController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,18 +242,37 @@
     </Compile>
     <Compile Include="Helpers\PartialHelper.cs" />
     <Compile Include="Models\dbContextExt.cs" />
-    <Compile Include="Models\MediaDashboard.cs">
+    <Compile Include="Models\MainDbContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MediaDashboard.tt</DependentUpon>
+      <DependentUpon>MainDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IMediaDashboardService.cs" />
+    <Compile Include="Services\IPortfolioService.cs" />
+    <Compile Include="Services\ILandingPageService.cs" />
     <Compile Include="Services\MediaDashboardService.cs" />
+    <Compile Include="Services\PortfolioService.cs" />
+    <Compile Include="Services\LandingPageService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ContactEmailViewModel.cs" />
+    <Compile Include="ViewModels\DropDownViewModel.cs" />
+    <Compile Include="ViewModels\MainLandingPageViewModel.cs" />
+    <Compile Include="ViewModels\MediaDashboardViewModel.cs" />
+    <Compile Include="ViewModels\PortfolioViewModel.cs" />
     <Compile Include="ViewModels\SiteLinkViewModel.cs" />
+    <Compile Include="ViewModels\UserStatusViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Constants\SkillTypeMaster.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SkillTypeMaster.cs</LastGenOutput>
+    </Content>
+    <Content Include="Constants\ApplicationMaster.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ApplicationMaster.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\bootsnack.css" />
     <Content Include="Content\cover2.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -243,6 +288,7 @@
     <Content Include="Content\MediaImages\media5.jpg" />
     <Content Include="Content\MediaImages\media6.jpg" />
     <Content Include="Content\MediaImages\media7.jpg" />
+    <Content Include="Content\MediaImages\media8.jpg" />
     <Content Include="Content\PortfolioImages\about-bg.jpg" />
     <Content Include="Content\PortfolioImages\back1.png" />
     <Content Include="Content\PortfolioImages\bag.jpg" />
@@ -321,13 +367,18 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\MediaDashboard.tt">
+    <Content Include="Models\MainDbContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MediaDashboard.cs</LastGenOutput>
+      <LastGenOutput>MainDbContext.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\jquery.bootsnack.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\mediaScripts.js" />
     <Content Include="Scripts\base.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -365,6 +416,11 @@
     <Content Include="Scripts\smoothscroll.js" />
     <Content Include="Views\Home\_MainApplicationLinkContent.cshtml" />
     <Content Include="Views\MediaDashboard\Index.cshtml" />
+    <Content Include="Views\Home\_ApplicationManager.cshtml" />
+    <Content Include="Views\Home\_ContactContent.cshtml" />
+    <Content Include="Views\Home\_ServerStatus.cshtml" />
+    <Content Include="Views\Home\_Apps.cshtml" />
+    <Content Include="Views\MediaDashboard\_ManageMediaDashboard.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -377,10 +433,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_MediaLayout.cshtml" />
+    <Content Include="Views\Shared\_PortfolioLayout.cshtml" />
+    <Content Include="Views\Portfolio\_ManagePortfolio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Context\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

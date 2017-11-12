@@ -4,6 +4,36 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+@if (Model.ControllerName != "Portfolio")
+{
+    <style>
+        .absolute-center {
+            margin: auto;
+            position: absolute;
+            top: 40vh;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 2000;
+        }
+    </style>
+}
+else
+{
+    <style>
+        body {
+            color:white;
+        }
+    </style>
+}
 
+<div class="row absolute-center">
+    <div class="col-md-6 col-md-offset-3">
+        <span class="text-center glyphicon glyphicon-question-sign" style="font-size: 50px;"></span>
+        <hr>
+        <h4 class="text-center">Sorry, there is nothing available here at this time! Please contact us here, and let us know you saw this message.</h4>
+        <h4 class="text-center">Thank you, kind Stranger!</h4>
+        <hr />
+        <h5 class="text-center">Cheers, <br /> Admins at devinmajor.com</h5>
+    </div>
+</div>

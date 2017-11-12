@@ -14,21 +14,34 @@ namespace devinmajordotcom.Services
 
         public MediaDashboardService()
         {
-            this.db = new dbContext();
+            db = new dbContext();
         }
 
-        public List<SiteLinkViewModel> GetMediaSiteLinks()
+        public MediaDashboardViewModel GetMediaDashboardViewModel()
         {
-            return db.SiteLinks.Select(x => new SiteLinkViewModel() {
-                ID = x.Id,
-                DisplayName = x.DisplayName,
-                DisplayIcon = x.DisplayIcon,
-                URL = x.Url, 
-                IsAdminLink = x.IsAdminLink,
-                IsDefault = x.IsDefault,
-                IsEnabled = x.IsEnabled,
-                Order = x.Order
-            }).ToList();
+            return new MediaDashboardViewModel()
+            {
+                SidebarLinks = db.SiteLinks.Where(x => x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select( x => new SiteLinkViewModel()
+                {
+                    DisplayName = x.DisplayName,
+                    DisplayIcon = x.DisplayIcon,
+                    Action = x.Action,
+                    Controller = x.Controller,
+                    Description = x.Description,
+                    IsDefault = x.IsDefault,
+                    IsEnabled = x.IsEnabled,
+                    ID = x.Id,
+                    URL = x.Url,
+                    Order = x.Order,
+                    ParentApplicationId = x.ApplicationId,
+                    ParentApplicationName = x.ApplicationMaster.Name
+                }).ToList()
+            };
+        }
+
+        public string ManageMediaDashboard(MediaDashboardViewModel viewModel)
+        {
+            return "";
         }
 
     }
