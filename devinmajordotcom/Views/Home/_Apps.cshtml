@@ -1,5 +1,5 @@
 ﻿@using devinmajordotcom.Helpers;
-@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@model List<devinmajordotcom.ViewModels.SiteLinkViewModel>
 <div class="inner cover" id="home">
 
     <h1 class="cover-heading">Welcome, fellow Humans!</h1>
@@ -7,11 +7,14 @@
     <p>Feel free to click one of the applications below for more fun... you never know what you'll find!</p>
     <br />
 
-    @foreach (var link in Model.LandingPageApplicationLinks.OrderBy(x => x.Order))
+    @if (Model.Count > 0)
     {
-        <div class="col-md-4 col-sm-4">
-            @Html.Raw(Html.ActionLink("REPLACE", link.Action, link.Controller, null, new { @class = "" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", link)))
-        </div>
+        foreach (var link in Model.OrderBy(x => x.Order))
+        {
+            <div class="col-md-4 col-sm-4">
+                @Html.Raw(Html.ActionLink("REPLACE", link.Action, link.Controller, null, new { @class = "" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", link)))
+            </div>
+        }
     }
 
 </div>

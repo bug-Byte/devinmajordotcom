@@ -13,11 +13,13 @@ namespace devinmajordotcom.App_Start
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-ui-{version}.js"
+                        "~/Scripts/jquery-ui-{version}.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/jquery.validate.unobtrusive.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -35,6 +37,7 @@ namespace devinmajordotcom.App_Start
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.css",
                       "~/Content/cover.css",
+                      "~/Content/bootsnack.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"
                       ));
@@ -57,6 +60,7 @@ namespace devinmajordotcom.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/customScripts").Include(
                 "~/Scripts/IndexScripts.js",
+                "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/jquery.signalR-2.2.2.js",
                 "~/Scripts/angular.js"
                       ));

@@ -18,5 +18,7 @@ namespace devinmajordotcom.Services
 
         UserStatusViewModel GetCurrentUserStatus();
 
+        string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
+
     }
 }

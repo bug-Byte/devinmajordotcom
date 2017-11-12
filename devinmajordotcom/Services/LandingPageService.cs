@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using Devinmajordotcom;
 using System.Security.Principal;
+using System.Net.Mail;
+using System.Net;
 
 namespace devinmajordotcom.Services
 {
@@ -13,18 +15,32 @@ namespace devinmajordotcom.Services
     {
 
         protected dbContext db;
-
-        public LandingPageService()
+        protected IPortfolioService portfolioService;
+        protected IMediaDashboardService mediaDashboardService;
+        public LandingPageService(IPortfolioService PortfolioService, IMediaDashboardService MediaDashboardService)
         {
-            this.db = new dbContext();
+            db = new dbContext();
+            portfolioService = PortfolioService;
+            mediaDashboardService = MediaDashboardService;
         }
 
         public MainLandingPageViewModel GetLandingPageViewModel()
         {
+            var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
             return new MainLandingPageViewModel()
             {
                 CurrentUserViewModel = GetCurrentUserStatus(),
-                LandingPageApplicationLinks = GetMainSiteLinks()
+                LandingPageApplicationLinks = GetMainSiteLinks(),
+                CurrentApplicationData = new ApplicationManagementViewModel()
+                {
+                    CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
+                    CurrentMediaDashboardData = mediaDashboardService.GetMediaDashboardViewModel()
+                },
+                ContactEmailData = new ContactEmailViewModel()
+                {
+                    RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress,
+                    RecipientName = "Website Owner - Devinmajordotcom"
+                }
             };
         }
 
@@ -47,6 +63,8 @@ namespace devinmajordotcom.Services
                     IsActive = true,
                     IsAdmin = false
                 };
+                db.Users.Add(user);
+                db.SaveChanges();
             }
             return new UserStatusViewModel()
             {
@@ -93,5 +111,9 @@ namespace devinmajordotcom.Services
             }).ToList();
         }
 
+        public string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel)
+        {
+            return "";
+        }
     }
 }

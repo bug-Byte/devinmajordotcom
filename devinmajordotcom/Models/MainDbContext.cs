@@ -732,6 +732,7 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public string ClientName { get; set; } // ClientName (length: 500)
         public bool IsActive { get; set; } // IsActive
+        public string EmailAddress { get; set; } // EmailAddress (length: 250)
         public bool IsAdmin { get; set; } // IsAdmin
 
         public User()
@@ -973,6 +974,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.ClientName).HasColumnName(@"ClientName").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
             Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+            Property(x => x.EmailAddress).HasColumnName(@"EmailAddress").HasColumnType("nvarchar").IsOptional().HasMaxLength(250);
             Property(x => x.IsAdmin).HasColumnName(@"IsAdmin").HasColumnType("bit").IsRequired();
             InitializePartial();
         }

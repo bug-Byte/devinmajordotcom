@@ -20,12 +20,19 @@ namespace devinmajordotcom.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Title="Professional Portfolio";
-
+            ViewBag.Title = "D3V!N M@J0R";
             var viewModel = new PortfolioViewModel();
             viewModel = portfolioService.GetPortfolioViewModel();
-
             return View(viewModel);
         }
+
+        [HttpPost]
+        public ActionResult _ManagePortfolio(PortfolioViewModel viewModel)
+        {
+
+            var data = portfolioService.ManagePortfolio(viewModel);
+            return new JsonResult { Data = data };
+        }
+
     }
 }

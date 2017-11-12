@@ -1,9 +1,9 @@
 ﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
 
-@Html.Partial("_Apps", Model, null)
+@Html.Partial("_Apps", Model.LandingPageApplicationLinks)
 
 @Html.Partial("_ServerStatus")
 
-@Html.Partial("_ContactContent")
+@Html.Partial("_ContactContent", Model.ContactEmailData)
 
-@Html.Partial("_ApplicationManager")
+@Html.Partial("_ApplicationManager", Model.CurrentApplicationData)

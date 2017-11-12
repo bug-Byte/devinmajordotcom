@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace devinmajordotcom.Services
 {
-    public interface IPortfolioService
+    public interface IMediaDashboardService
     {
 
-        PortfolioViewModel GetPortfolioViewModel();
+        MediaDashboardViewModel GetMediaDashboardViewModel();
 
-        string ManagePortfolio(PortfolioViewModel viewModel);
+        string ManageMediaDashboard(MediaDashboardViewModel viewModel);
 
     }
 }

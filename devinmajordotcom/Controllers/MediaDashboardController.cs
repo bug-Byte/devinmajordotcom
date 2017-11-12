@@ -1,4 +1,6 @@
-﻿using System;
+﻿using devinmajordotcom.Services;
+using devinmajordotcom.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +11,26 @@ namespace devinmajordotcom.Controllers
     public class MediaDashboardController : Controller
     {
 
+        public IMediaDashboardService service;
+
+        public MediaDashboardController(IMediaDashboardService mediaDashboardService)
+        {
+            service = mediaDashboardService;
+        }
+
         public ActionResult Index()
         {
             ViewBag.Title="D3V!N M@J0R";
-            return View();
+            var viewModel = new MediaDashboardViewModel();
+            viewModel = service.GetMediaDashboardViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult _ManageMediaDashboard(MediaDashboardViewModel viewModel)
+        {
+            var data = service.ManageMediaDashboard(viewModel);
+            return new JsonResult { Data = data };
         }
 
     }

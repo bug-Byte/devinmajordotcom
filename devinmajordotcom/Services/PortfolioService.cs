@@ -62,11 +62,18 @@ namespace devinmajordotcom.Services
 
                 ContactSiteLinks = db.SiteLinks.Where(x => x.IsEnabled && x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio).Select(x => new SiteLinkViewModel()
                 {
-                    ID = x.Id,
-                    Directive = x.Directive,
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
-                    URL = x.Url
+                    Action = x.Action,
+                    Controller = x.Controller,
+                    Description = x.Description,
+                    IsDefault = x.IsDefault,
+                    IsEnabled = x.IsEnabled,
+                    ID = x.Id,
+                    URL = x.Url,
+                    Order = x.Order,
+                    ParentApplicationId = x.ApplicationId,
+                    ParentApplicationName = x.ApplicationMaster.Name
                 }).ToList(),
 
                 LanguageSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.Language).Select(x => new LanguageSkillViewModel()
@@ -103,6 +110,11 @@ namespace devinmajordotcom.Services
                 }).ToList()
 
             };
+        }
+
+        public string ManagePortfolio(PortfolioViewModel viewModel)
+        {
+            return "";
         }
 
     }

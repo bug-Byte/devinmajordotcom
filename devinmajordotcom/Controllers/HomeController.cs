@@ -31,6 +31,7 @@ namespace devinmajordotcom.Controllers
 
             if (viewModel.CurrentUserViewModel.UserIsActive)
             {
+                viewModel.CurrentApplicationData.LandingPageApplicationLinks = viewModel.LandingPageApplicationLinks;
                 return View(viewModel);
             }
             else
@@ -41,8 +42,15 @@ namespace devinmajordotcom.Controllers
 
         public ActionResult _ApplicationManager()
         {
-            ViewBag.Title = "Application Manager";
+            ViewBag.Title = "D3V!N M@J0R";
             return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult DropMeALine(ContactEmailViewModel viewModel)
+        {
+            var emailSuccessful = service.SendContactEmailToSiteAdmin(viewModel);
+            return new JsonResult { Data = emailSuccessful };
         }
 
     }
