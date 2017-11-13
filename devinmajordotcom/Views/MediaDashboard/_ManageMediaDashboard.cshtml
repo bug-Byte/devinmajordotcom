@@ -3,7 +3,7 @@
 
 }
 
-@using (Ajax.BeginForm("../MediaDashboard/_ManageMediaDashboard", new { }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
+@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
 {
     var count = 0;
     foreach (var link in Model.SidebarLinks)
@@ -14,7 +14,7 @@
                 @Html.LabelFor(x => x.SidebarLinks[count].DisplayName)
             </div>
             <div class="col-md-6">
-                @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName)
+                @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new { @class = "form-control" })
             </div>
         </div>
         <div class="row">

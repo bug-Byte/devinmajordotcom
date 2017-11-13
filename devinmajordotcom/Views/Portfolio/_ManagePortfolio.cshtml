@@ -3,7 +3,7 @@
 
 }
 
-@using (Ajax.BeginForm("../Portfolio/_ManagePortfolio", new { }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updatePortfolioForm" }))
+@using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updatePortfolioForm" }))
 {
 
     <div class="row">
@@ -11,7 +11,7 @@
             @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
         </div>
         <div class="col-md-6">
-            @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName)
+            @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class="form-control" })
         </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
             @Html.LabelFor(x => x.SplashScreenDetails.LastName)
         </div>
         <div class="col-md-6">
-            @Html.TextBoxFor(x => x.SplashScreenDetails.LastName)
+            @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
         </div>
     </div>
     <div class="row">
