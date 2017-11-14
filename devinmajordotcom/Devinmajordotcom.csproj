@@ -275,13 +275,13 @@
     <Content Include="Content\bootsnack.css" />
     <Content Include="Content\bootstrap-iconpicker.min.css" />
     <Content Include="Content\cover2.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cover.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\back1.png" />
     <Content Include="Content\MediaImages\media1.jpg" />
     <Content Include="Content\MediaImages\media2.jpg" />
@@ -396,6 +396,11 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Models\EF.Reverse.POCO.Core.ttinclude" />
     <Content Include="Models\EF.Reverse.POCO.ttinclude" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\isotope.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -456,21 +461,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\FontAwesome.otf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.eot" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
