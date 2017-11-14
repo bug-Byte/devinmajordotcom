@@ -17,6 +17,8 @@
         });
     });
 
+    $('button[role="iconpicker"]').iconpicker();
+
 });
 
 function MailSuccess(data) {

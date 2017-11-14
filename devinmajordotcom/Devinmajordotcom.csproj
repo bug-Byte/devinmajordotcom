@@ -273,6 +273,7 @@
       <LastGenOutput>ApplicationMaster.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootsnack.css" />
+    <Content Include="Content\bootstrap-iconpicker.min.css" />
     <Content Include="Content\cover2.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -374,6 +375,8 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap-iconpicker-iconset-all.min.js" />
+    <Content Include="Scripts\bootstrap-iconpicker.min.js" />
     <Content Include="Scripts\jquery.bootsnack.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -439,6 +442,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\iconset\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
