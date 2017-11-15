@@ -9,7 +9,7 @@
 
         @if (Model.SidebarLinks.Count > 0)
         {
-            foreach (var sidebarLink in Model.SidebarLinks)
+            foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled))
             {
 
                 var cssClassNameList = "";
@@ -40,7 +40,7 @@
 
     @if (Model.SidebarLinks.Count > 0)
     {
-        foreach (var link in Model.SidebarLinks)
+        foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled))
         {
             if (link.URL != null)
             {

@@ -28,7 +28,16 @@
 }
 
 input[type=checkbox].css-checkbox {
-    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+    position:absolute; 
+    z-index:-1000; 
+    left:-1000px; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height:1px; 
+    width:1px; 
+    margin:-1px; 
+    padding:0; 
+    border:0;
 }
 
 input[type=checkbox].css-checkbox + label.css-label {
@@ -43,7 +52,7 @@ input[type=checkbox].css-checkbox + label.css-label {
     cursor:pointer;
 }
 
-input[type=checkbox].css-checkbox:checked + label.css-label {
+input[type=checkbox].css-checkbox.checked + label.css-label {
     background-position: 0 -30px;
 }
 label.css-label {

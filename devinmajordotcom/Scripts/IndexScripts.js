@@ -21,6 +21,19 @@
 
     $(".sortable").sortable();
 
+    $(document).on("click", ".css-checkbox", function() {
+        var currentValue = $(this).val();
+        var newValue = "";
+        if (currentValue == "true") {
+            newValue = "false";
+        } else {
+            newValue = "true";
+        }
+        $(this).val(newValue);
+        $(this).data("val", newValue);
+        $(this).toggleClass("checked");
+    });
+
 });
 
 function MailSuccess(data) {

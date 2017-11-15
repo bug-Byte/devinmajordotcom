@@ -13,7 +13,7 @@
             @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId)
             @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName)
 
-            <div class="form-group clearfix ui-sortable-handle mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
+            <div class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
                 
                 <div class="row">
                     <div class="col-sm-2">
@@ -57,12 +57,26 @@
                 
                 <div class="row">
                     <div class="col-sm-6 text-center">
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @checked = "", @type = "checkbox", @class = "css-checkbox" })
-                        @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new { @class = "css-label" })
+                        @{
+                            var classList1 = "css-checkbox ";
+                            if (Model.SidebarLinks[count].IsDefault)
+                            {
+                                classList1 += "checked";
+                            }
+                        }
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @type = "checkbox", @class = classList1, data_val = Model.SidebarLinks[count].IsDefault })
+                        @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new {@class = "css-label"})
                     </div>
                     <div class="col-sm-6 text-center">
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @checked = "", @type = "checkbox", @class = "css-checkbox" })
-                        @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new { @class = "css-label" })
+                        @{
+                            var classList2 = "css-checkbox ";
+                            if (Model.SidebarLinks[count].IsEnabled)
+                            {
+                                classList2 += "checked";
+                            }
+                        }
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @type = "checkbox", @class = classList2, data_val = Model.SidebarLinks[count].IsEnabled })
+                        @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new {@class = "css-label"})
                     </div>
                     @*<div class="col-sm-4">
                         <input type="checkbox" name="guest-1" id="guest-Plex" class="css-checkbox" checked="">
