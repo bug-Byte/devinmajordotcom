@@ -26,12 +26,12 @@
                     <div class="inner">
                         <h3 class="masthead-brand">@ViewBag.Title</h3>
                         <ul class="nav masthead-nav">
-                            <li class="active" data-activediv="#home"><a>Home & Apps</a></li>
-                            <li data-activediv="#server"><a>Server Status</a></li>
-                            <li data-activediv="#contact"><a>Contact Me</a></li>
+                            <li class="landingPageLink active" data-activediv="#home"><a>Home & Apps</a></li>
+                            <li class="landingPageLink" data-activediv="#server"><a>Server Status</a></li>
+                            <li class="landingPageLink" data-activediv="#contact"><a>Contact Me</a></li>
                             @if (viewModel.UserIsAdmin)
                             {
-                                <li data-activediv="#appmanager"><a>App Manager</a></li>
+                                <li class="landingPageLink" data-activediv="#appmanager"><a>App Manager</a></li>
                             }
                         </ul>
                     </div>

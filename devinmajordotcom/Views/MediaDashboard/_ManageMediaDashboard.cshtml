@@ -6,87 +6,80 @@
 @using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
 {
     var count = 0;
-    foreach (var link in Model.SidebarLinks)
-    {
-        @Html.HiddenFor(x => x.SidebarLinks[count].ID)
-        <div class="row">
-            
-            <div class="col-md-12">
+    <div id="tagsForm" class="sortable ui-sortable">
+        @foreach (var link in Model.SidebarLinks)
+        {
+            @Html.HiddenFor(x => x.SidebarLinks[count].ID)
+            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId)
+            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName)
+
+            <div class="form-group clearfix ui-sortable-handle mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
                 
-                <div id="tagsForm" class="sortable ui-sortable">
-
-                    <div class="form-group clearfix ui-sortable-handle mediaDashboardLink" style="padding-top: 10px; margin-bottom: 5px;">
-                        
-                        <div class="row">
-                            <div class="col-md-4">
-                                <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
-                            </div>
-                            <div class="col-md-4">
-                                <span class=""></span>
-                            </div>
-                            <div class="col-md-4">
-                                <button style="float: right;" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            
-                        </div>
-
-                        <div class="row">
-                            
-                        </div>
-
-                        
-                        
-                        
-                        <br/><br/>
-
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+                    </div>
+                    <div class="col-sm-8 text-center">
+                        <h4>
+                            <span class="fa @Model.SidebarLinks[count].DisplayIcon"></span>
+                            &nbsp;&nbsp;
+                            @Model.SidebarLinks[count].DisplayName
+                        </h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <button style="float: right;" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-6 text-center">
                         <div style="margin-bottom: 8px" class="input-group">
-                            <div class="input-group-addon">Name</div>
-                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "Display Name" })
+                            <span class="input-group-btn">
+                                <button data-placement="left"
+                                        class="btn btn-default iconpicker"
+                                        name="@Html.IdFor(x => x.SidebarLinks[count].DisplayIcon)"
+                                        role="iconpicker"
+                                        data-iconset="fontawesome"
+                                        data-icon="@Model.SidebarLinks[count].DisplayIcon"
+                                        type="button">
+                                </button>
+                            </span>
+                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "Display Name"})
                         </div>
-
+                    </div>
+                    <div class="col-sm-6 text-center">
                         <div style="margin-bottom: 8px" class="input-group">
                             <div class="input-group-addon">URL</div>
                             @Html.TextBoxFor(x => x.SidebarLinks[count].URL, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/" })
                         </div>
-
-                        <button data-placement="left"
-                                class="btn btn-default iconpicker"
-                                name="icon-1"
-                                role="iconpicker"
-                                data-iconset="fontawesome"
-                                data-icon="@Model.SidebarLinks[count].DisplayIcon"
-                                type="button">
-                            <i class="@Model.SidebarLinks[count].DisplayIcon"></i>
-                            @Html.HiddenFor(x => x.SidebarLinks[count].DisplayIcon, new { })
-                            <span class="caret"></span>
-                        </button>
-
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @checked = "", @type = "radio" })
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @checked = "", @type = "checkbox", @class = "css-checkbox" })
                         @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new { @class = "css-label" })
-                        
+                    </div>
+                    <div class="col-sm-6 text-center">
                         @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @checked = "", @type = "checkbox", @class = "css-checkbox" })
                         @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new { @class = "css-label" })
-
-                        @*<input type="checkbox" name="guest-1" id="guest-Plex" class="css-checkbox" checked="">
-                        <label for="guest-Plex" class="css-label">Guest</label> &nbsp;&nbsp;*@
-
                     </div>
-
+                    @*<div class="col-sm-4">
+                        <input type="checkbox" name="guest-1" id="guest-Plex" class="css-checkbox" checked="">
+                        <label for="guest-Plex" class="css-label">Guest</label> &nbsp;&nbsp;
+                    </div>*@
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        @Html.ValidationMessageFor(x => x.SidebarLinks[count].DisplayName)
+                    </div>
+                </div>
+
             </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-12">
-                @Html.ValidationMessageFor(x => x.SidebarLinks[count].DisplayName)
-            </div>
-        </div>
-        <br />
-        count++;
-    }
+            count++;
+        }
+    </div>
 
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">

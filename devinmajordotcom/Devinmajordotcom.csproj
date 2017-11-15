@@ -283,6 +283,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\back1.png" />
+    <Content Include="Content\Images\check.png" />
+    <Content Include="Content\Images\check2.png" />
     <Content Include="Content\MediaImages\media1.jpg" />
     <Content Include="Content\MediaImages\media2.jpg" />
     <Content Include="Content\MediaImages\media3.png" />

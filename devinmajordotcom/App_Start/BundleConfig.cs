@@ -35,7 +35,6 @@ namespace devinmajordotcom.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-theme.css",
                       "~/Content/cover.css",
                       "~/Content/bootsnack.css",
                       "~/Content/font-awesome.css",

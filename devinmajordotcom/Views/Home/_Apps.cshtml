@@ -12,7 +12,7 @@
         foreach (var link in Model.OrderBy(x => x.Order))
         {
             <div class="col-md-4 col-sm-4">
-                @Html.Raw(Html.ActionLink("REPLACE", link.Action, link.Controller, null, new { @class = "" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", link)))
+                @Html.Raw(Html.ActionLink("REPLACE", link.Action, link.Controller, null, new { @class = "appLink" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", link)))
             </div>
         }
     }

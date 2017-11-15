@@ -19,6 +19,8 @@
 
     $('button[role="iconpicker"]').iconpicker();
 
+    $(".sortable").sortable();
+
 });
 
 function MailSuccess(data) {
