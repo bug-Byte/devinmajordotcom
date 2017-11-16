@@ -24,13 +24,13 @@
     $(document).on("click", ".css-checkbox", function() {
         var currentValue = $(this).val();
         var newValue = "";
-        if (currentValue == "true") {
-            newValue = "false";
+        if (currentValue == "True") {
+            newValue = "False";
         } else {
-            newValue = "true";
+            newValue = "True";
         }
         $(this).val(newValue);
-        $(this).data("val", newValue);
+        $(this).attr("data-val", newValue.replace("T","t").replace("F","f"));
         $(this).toggleClass("checked");
     });
 
