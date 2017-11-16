@@ -37,14 +37,14 @@
                             <span class="input-group-btn">
                                 <button data-placement="left"
                                         class="btn btn-default iconpicker"
-                                        name="@Html.IdFor(x => x.SidebarLinks[count].DisplayIcon)"
+                                        name="@Html.NameFor(x => x.SidebarLinks[count].DisplayIcon)"
                                         role="iconpicker"
                                         data-iconset="fontawesome"
                                         data-icon="@Model.SidebarLinks[count].DisplayIcon"
                                         type="button">
                                 </button>
                             </span>
-                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "Display Name"})
+                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "Display Name" })
                         </div>
                     </div>
                     <div class="col-sm-6 text-center">
@@ -64,7 +64,7 @@
                                 classList1 += "checked";
                             }
                         }
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @type = "checkbox", @class = classList1, data_val = Model.SidebarLinks[count].IsDefault })
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @type = "checkbox", @class = classList1 })
                         @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new {@class = "css-label"})
                     </div>
                     <div class="col-sm-6 text-center">
@@ -75,7 +75,7 @@
                                 classList2 += "checked";
                             }
                         }
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @type = "checkbox", @class = classList2, data_val = Model.SidebarLinks[count].IsEnabled })
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @type = "checkbox", @class = classList2 })
                         @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new {@class = "css-label"})
                     </div>
                     @*<div class="col-sm-4">
