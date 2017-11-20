@@ -3,32 +3,101 @@
 
 }
 
-@using (Ajax.BeginForm("../MediaDashboard/_ManageMediaDashboard", new { }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
+@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
 {
     var count = 0;
-    foreach (var link in Model.SidebarLinks)
-    {
-        @Html.HiddenFor(x => x.SidebarLinks[count].ID)
-        <div class="row">
-            <div class="col-md-6">
-                @Html.LabelFor(x => x.SidebarLinks[count].DisplayName)
+    <div id="tagsForm" class="sortable ui-sortable">
+        @foreach (var link in Model.SidebarLinks)
+        {
+            @Html.HiddenFor(x => x.SidebarLinks[count].ID)
+            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId)
+            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName)
+
+            <div class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
+                
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+                    </div>
+                    <div class="col-sm-8 text-center">
+                        <h4>
+                            <span class="fa @Model.SidebarLinks[count].DisplayIcon"></span>
+                            &nbsp;&nbsp;
+                            @Model.SidebarLinks[count].DisplayName
+                        </h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <button style="float: right;" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <div style="margin-bottom: 8px" class="input-group">
+                            <span class="input-group-btn">
+                                <button data-placement="left"
+                                        class="btn btn-default iconpicker"
+                                        name="@Html.NameFor(x => x.SidebarLinks[count].DisplayIcon)"
+                                        role="iconpicker"
+                                        data-iconset="fontawesome"
+                                        data-icon="@Model.SidebarLinks[count].DisplayIcon"
+                                        type="button">
+                                </button>
+                            </span>
+                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "Display Name" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <div style="margin-bottom: 8px" class="input-group">
+                            <div class="input-group-addon">URL</div>
+                            @Html.TextBoxFor(x => x.SidebarLinks[count].URL, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        @{
+                            var classList1 = "css-checkbox ";
+                            if (Model.SidebarLinks[count].IsDefault)
+                            {
+                                classList1 += "checked";
+                            }
+                        }
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @type = "checkbox", @class = classList1 })
+                        @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new {@class = "css-label"})
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        @{
+                            var classList2 = "css-checkbox ";
+                            if (Model.SidebarLinks[count].IsEnabled)
+                            {
+                                classList2 += "checked";
+                            }
+                        }
+                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @type = "checkbox", @class = classList2 })
+                        @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new {@class = "css-label"})
+                    </div>
+                    @*<div class="col-sm-4">
+                        <input type="checkbox" name="guest-1" id="guest-Plex" class="css-checkbox" checked="">
+                        <label for="guest-Plex" class="css-label">Guest</label> &nbsp;&nbsp;
+                    </div>*@
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        @Html.ValidationMessageFor(x => x.SidebarLinks[count].DisplayName)
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-6">
-                @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @Html.ValidationMessageFor(x => x.SidebarLinks[count].DisplayName)
-            </div>
-        </div>
-        <br />
-        count++;
-    }
+            count++;
+        }
+    </div>
 
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">
-            <input class="form-control" id="updateMediaDashboard" type="submit" value="Update Professional Portfolio">
+            <input class="form-control" id="updateMediaDashboard" type="submit" value="Update Media Dashboard">
         </div>
     </div>
 

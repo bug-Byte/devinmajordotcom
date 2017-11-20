@@ -35,11 +35,11 @@ namespace devinmajordotcom.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-theme.css",
                       "~/Content/cover.css",
                       "~/Content/bootsnack.css",
                       "~/Content/font-awesome.css",
-                      "~/Content/site.css"
+                      "~/Content/site.css",
+                      "~/Content/bootstrap-iconpicker.min.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/mediacss").Include(
@@ -62,7 +62,9 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/IndexScripts.js",
                 "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/jquery.signalR-2.2.2.js",
-                "~/Scripts/angular.js"
+                "~/Scripts/angular.js",
+                "~/Scripts/bootstrap-iconpicker-iconset-all.min.js",
+                "~/Scripts/bootstrap-iconpicker.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/portfolioScripts").Include(

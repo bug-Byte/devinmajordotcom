@@ -3,37 +3,43 @@
 
 }
 
-@using (Ajax.BeginForm("../Portfolio/_ManagePortfolio", new { }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updatePortfolioForm" }))
+@using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updatePortfolioForm" }))
 {
+    <div class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
 
-    <div class="row">
-        <div class="col-md-6">
-            @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
-        </div>
-        <div class="col-md-6">
-            @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
-        </div>
-    </div>
+        <h4>Splash Screen Details</h4>
+        <hr />
 
-    <br />
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            @Html.LabelFor(x => x.SplashScreenDetails.LastName)
+        <br />
+
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.LabelFor(x => x.SplashScreenDetails.LastName)
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
+            </div>
         </div>
-        <div class="col-md-6">
-            @Html.TextBoxFor(x => x.SplashScreenDetails.LastName)
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
-        </div>
+
     </div>
 
     <br />

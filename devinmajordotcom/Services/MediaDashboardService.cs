@@ -41,7 +41,52 @@ namespace devinmajordotcom.Services
 
         public string ManageMediaDashboard(MediaDashboardViewModel viewModel)
         {
-            return "";
+            try
+            {
+                foreach (var link in viewModel.SidebarLinks)
+                {
+                    var linkRecord = db.SiteLinks.FirstOrDefault(x => x.Id == link.ID);
+                    if (linkRecord != null)
+                    {
+                        linkRecord.DisplayName = link.DisplayName;
+                        linkRecord.Description = link.Description;
+                        linkRecord.Directive = link.Directive;
+                        linkRecord.Url = link.URL;
+                        linkRecord.Action = link.Action;
+                        linkRecord.Controller = link.Controller;
+                        linkRecord.DisplayIcon = link.DisplayIcon;
+                        linkRecord.Order = link.Order;
+                        linkRecord.IsDefault = link.IsDefault;
+                        linkRecord.IsEnabled = link.IsEnabled;
+                        linkRecord.ApplicationId = link.ParentApplicationId;
+                    }
+                    else
+                    {
+                        var newLinkRecord = new SiteLink()
+                        {
+                            DisplayName = link.DisplayName,
+                            Description = link.Description,
+                            Directive = link.Directive,
+                            Url = link.URL,
+                            Action = link.Action,
+                            Controller = link.Controller,
+                            DisplayIcon = link.DisplayIcon,
+                            Order = link.Order,
+                            IsDefault = link.IsDefault,
+                            IsEnabled = link.IsEnabled,
+                            ApplicationId = link.ParentApplicationId
+                        };
+                        db.SiteLinks.Add(newLinkRecord);
+                    }
+                }
+
+                db.SaveChanges();
+                return "success";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
     }

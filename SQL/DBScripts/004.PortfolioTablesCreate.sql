@@ -79,6 +79,7 @@ CREATE TABLE Portfolio.ProjectTypeMapping
 	ID INT IDENTITY(1,1),
 	ProjectID INT NOT NULL,
 	ProjectTypeID INT NOT NULL,
+	PRIMARY KEY(ID),
 	CONSTRAINT ProjectTypeMapping_ProjectID_Project_ID
 	FOREIGN KEY(ProjectID) REFERENCES Portfolio.Project(ID),
 	CONSTRAINT ProjectTypeMapping_ProjectTypeID_ProjectType_ID

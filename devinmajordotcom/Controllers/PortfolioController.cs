@@ -29,7 +29,6 @@ namespace devinmajordotcom.Controllers
         [HttpPost]
         public ActionResult _ManagePortfolio(PortfolioViewModel viewModel)
         {
-
             var data = portfolioService.ManagePortfolio(viewModel);
             return new JsonResult { Data = data };
         }
