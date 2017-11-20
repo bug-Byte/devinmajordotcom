@@ -5,41 +5,51 @@
 
 @using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updatePortfolioForm" }))
 {
-    <div class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
-
-        <h4>Splash Screen Details</h4>
-        <hr />
-
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+    <div class="panel-group">
+        <div class="panel panel-default" style="padding-top: 10px; margin-bottom: 2vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+-moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse1">
+                <span class="glyphicon glyphicon-collapse-up"></span>
+                &nbsp;&nbsp;
+                <h4 class="panel-title" style="display: inline;">
+                    <a>Splash Screen Details</a>
+                </h4>
             </div>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.SplashScreenDetails.LastName)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
-            </div>
-        </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.LabelFor(x => x.SplashScreenDetails.LastName)
-            </div>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
-            </div>
-        </div>
-
     </div>
 
     <br />

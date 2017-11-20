@@ -1,5 +1,18 @@
 ﻿$(document).ready(function () {
 
+    $(document).ready(function () {
+        $(".portfolioPanelHeading").on("hide.bs.collapse", function () {
+            var toggler = $(this).find("glyphicon-collapse-up");
+            toggler.removeClass("glyphicon-collapse-up");
+            toggler.removeClass("glyphicon-collapse-down");
+        });
+        $(".portfolioPanelHeading").on("show.bs.collapse", function () {
+            var toggler = $(this).find("glyphicon-collapse-down");
+            toggler.removeClass("glyphicon-collapse-down");
+            toggler.removeClass("glyphicon-collapse-up");
+        });
+    });
+
     $(".work-wrapper").hover(function () {
         $(this).find('.glyphicon').addClass('blueGlyphicon', 600);
     }, function () {
