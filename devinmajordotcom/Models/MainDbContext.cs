@@ -41,6 +41,7 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
         System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
         System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
+        System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
         System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
         System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
@@ -72,6 +73,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
         public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
+        public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
         public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
@@ -135,6 +137,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration());
             modelBuilder.Configurations.Add(new SiteLinkConfiguration());
@@ -150,6 +153,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration(schema));
             modelBuilder.Configurations.Add(new SiteLinkConfiguration(schema));
@@ -184,6 +188,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; }
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; }
@@ -196,6 +201,7 @@ namespace devinmajordotcom.Models
             Portfolio_Profiles = new FakeDbSet<Portfolio_Profile>("Id");
             Portfolio_Projects = new FakeDbSet<Portfolio_Project>("Id");
             Portfolio_ProjectTypes = new FakeDbSet<Portfolio_ProjectType>("Id");
+            Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
             Portfolio_Skills = new FakeDbSet<Portfolio_Skill>("Id");
             Portfolio_SkillTypeMasters = new FakeDbSet<Portfolio_SkillTypeMaster>("Id");
             SiteLinks = new FakeDbSet<SiteLink>("Id");
@@ -606,13 +612,13 @@ namespace devinmajordotcom.Models
         // Reverse navigation
 
         /// <summary>
-        /// Child Portfolio_ProjectTypes (Many-to-Many) mapped by table [ProjectTypeMapping]
+        /// Child Portfolio_ProjectTypeMappings where [ProjectTypeMapping].[ProjectID] point to this entity (ProjectTypeMapping_ProjectID_Project_ID)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // Many to many mapping
+        public virtual System.Collections.Generic.ICollection<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping.ProjectTypeMapping_ProjectID_Project_ID
 
         public Portfolio_Project()
         {
-            Portfolio_ProjectTypes = new System.Collections.Generic.List<Portfolio_ProjectType>();
+            Portfolio_ProjectTypeMappings = new System.Collections.Generic.List<Portfolio_ProjectTypeMapping>();
             InitializePartial();
         }
 
@@ -629,13 +635,41 @@ namespace devinmajordotcom.Models
         // Reverse navigation
 
         /// <summary>
-        /// Child Portfolio_Projects (Many-to-Many) mapped by table [ProjectTypeMapping]
+        /// Child Portfolio_ProjectTypeMappings where [ProjectTypeMapping].[ProjectTypeID] point to this entity (ProjectTypeMapping_ProjectTypeID_ProjectType_ID)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<Portfolio_Project> Portfolio_Projects { get; set; } // Many to many mapping
+        public virtual System.Collections.Generic.ICollection<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping.ProjectTypeMapping_ProjectTypeID_ProjectType_ID
 
         public Portfolio_ProjectType()
         {
-            Portfolio_Projects = new System.Collections.Generic.List<Portfolio_Project>();
+            Portfolio_ProjectTypeMappings = new System.Collections.Generic.List<Portfolio_ProjectTypeMapping>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ProjectTypeMapping
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ProjectTypeMapping
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int ProjectId { get; set; } // ProjectID
+        public int ProjectTypeId { get; set; } // ProjectTypeID
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Portfolio_Project pointed by [ProjectTypeMapping].([ProjectId]) (ProjectTypeMapping_ProjectID_Project_ID)
+        /// </summary>
+        public virtual Portfolio_Project Portfolio_Project { get; set; } // ProjectTypeMapping_ProjectID_Project_ID
+
+        /// <summary>
+        /// Parent Portfolio_ProjectType pointed by [ProjectTypeMapping].([ProjectTypeId]) (ProjectTypeMapping_ProjectTypeID_ProjectType_ID)
+        /// </summary>
+        public virtual Portfolio_ProjectType Portfolio_ProjectType { get; set; } // ProjectTypeMapping_ProjectTypeID_ProjectType_ID
+
+        public Portfolio_ProjectTypeMapping()
+        {
             InitializePartial();
         }
 
@@ -842,12 +876,6 @@ namespace devinmajordotcom.Models
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
-            HasMany(t => t.Portfolio_ProjectTypes).WithMany(t => t.Portfolio_Projects).Map(m =>
-            {
-                m.ToTable("ProjectTypeMapping", "Portfolio");
-                m.MapLeftKey("ProjectID");
-                m.MapRightKey("ProjectTypeID");
-            });
             InitializePartial();
         }
         partial void InitializePartial();
@@ -869,6 +897,32 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Type).HasColumnName(@"Type").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // ProjectTypeMapping
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ProjectTypeMappingConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_ProjectTypeMapping>
+    {
+        public Portfolio_ProjectTypeMappingConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_ProjectTypeMappingConfiguration(string schema)
+        {
+            ToTable("ProjectTypeMapping", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ProjectId).HasColumnName(@"ProjectID").HasColumnType("int").IsRequired();
+            Property(x => x.ProjectTypeId).HasColumnName(@"ProjectTypeID").HasColumnType("int").IsRequired();
+
+            // Foreign keys
+            HasRequired(a => a.Portfolio_Project).WithMany(b => b.Portfolio_ProjectTypeMappings).HasForeignKey(c => c.ProjectId).WillCascadeOnDelete(false); // ProjectTypeMapping_ProjectID_Project_ID
+            HasRequired(a => a.Portfolio_ProjectType).WithMany(b => b.Portfolio_ProjectTypeMappings).HasForeignKey(c => c.ProjectTypeId).WillCascadeOnDelete(false); // ProjectTypeMapping_ProjectTypeID_ProjectType_ID
             InitializePartial();
         }
         partial void InitializePartial();

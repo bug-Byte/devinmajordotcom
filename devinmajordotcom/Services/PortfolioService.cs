@@ -40,8 +40,6 @@ namespace devinmajordotcom.Services
 
                 ProfileDetails = db.Portfolio_Profiles.Select(x => new ProfileViewModel()
                 {
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
                     DateOfBirth = x.DateOfBirth,
                     Address = x.Address,
                     Email = x.EmailAddress,
@@ -64,6 +62,7 @@ namespace devinmajordotcom.Services
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
+                    Directive = x.Directive,
                     Action = x.Action,
                     Controller = x.Controller,
                     Description = x.Description,
@@ -103,9 +102,9 @@ namespace devinmajordotcom.Services
                     ProjectName = x.Name,
                     ProjectDescription = x.Description,
                     EncodedImage = x.Image,
-                    ProjectFilters = x.Portfolio_ProjectTypes.Select(y => new DropDownViewModel() {
+                    ProjectFilters = x.Portfolio_ProjectTypeMappings.Select(y => new DropDownViewModel() {
                         ID = y.Id,
-                        Name = y.Type
+                        Name = y.Portfolio_ProjectType.Type
                     }).ToList()
                 }).ToList()
 
@@ -114,7 +113,232 @@ namespace devinmajordotcom.Services
 
         public string ManagePortfolio(PortfolioViewModel viewModel)
         {
-            return "";
+            try
+            {
+                UpdateProfileAndPersonalDescription(viewModel);
+                UpdateSkills(viewModel);
+                UpdateProjectsAndFilters(viewModel);
+                UpdateContactLinks(viewModel);
+                db.SaveChanges();
+                return "success";
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public void UpdateProfileAndPersonalDescription(PortfolioViewModel viewModel)
+        {
+            Portfolio_PersonalDescription currentPortfolioPersonalDescription = db.Portfolio_PersonalDescriptions.FirstOrDefault(x => x.Id == viewModel.PersonalDescription.DescriptionID);
+            Portfolio_Profile currentPortfolioProfile = db.Portfolio_Profiles.FirstOrDefault(x => x.Id == viewModel.ProfileDetails.ProfileID);
+
+            if (currentPortfolioPersonalDescription != null)
+            {
+                currentPortfolioPersonalDescription.Blurb = viewModel.PersonalDescription.Blurb;
+                currentPortfolioPersonalDescription.Adjective1 = viewModel.PersonalDescription.Adjective1;
+                currentPortfolioPersonalDescription.Adjective2 = viewModel.PersonalDescription.Adjective2;
+                currentPortfolioPersonalDescription.Adjective3 = viewModel.PersonalDescription.Adjective3;
+            }
+            else
+            {
+                var newPortfolioPersonalDescription = new Portfolio_PersonalDescription()
+                {
+                    Blurb = viewModel.PersonalDescription.Blurb,
+                    Adjective1 = viewModel.PersonalDescription.Adjective1,
+                    Adjective2 = viewModel.PersonalDescription.Adjective2,
+                    Adjective3 = viewModel.PersonalDescription.Adjective3
+                };
+                db.Portfolio_PersonalDescriptions.Add(newPortfolioPersonalDescription);
+            }
+
+            if (currentPortfolioProfile != null)
+            {
+                currentPortfolioProfile.FirstName = viewModel.SplashScreenDetails.FirstName;
+                currentPortfolioProfile.LastName = viewModel.SplashScreenDetails.LastName;
+                currentPortfolioProfile.DateOfBirth = viewModel.ProfileDetails.DateOfBirth;
+                currentPortfolioProfile.Address = viewModel.ProfileDetails.Address;
+                currentPortfolioProfile.PhoneNumber = viewModel.ProfileDetails.PhoneNumber;
+                currentPortfolioProfile.EmailAddress = viewModel.ProfileDetails.Email;
+                currentPortfolioProfile.PositionTitle = viewModel.SplashScreenDetails.PositionTitle;
+                currentPortfolioProfile.PersonalDescription = viewModel.SplashScreenDetails.PersonalDescription;
+                currentPortfolioProfile.WebsiteText = viewModel.ProfileDetails.WebsiteText;
+                currentPortfolioProfile.WebsiteUrl = viewModel.ProfileDetails.WebsiteURL;
+            }
+            else
+            {
+                var newPortfolioProfile = new Portfolio_Profile()
+                {
+                    FirstName = viewModel.SplashScreenDetails.FirstName,
+                    LastName = viewModel.SplashScreenDetails.LastName,
+                    DateOfBirth = viewModel.ProfileDetails.DateOfBirth,
+                    Address = viewModel.ProfileDetails.Address,
+                    PhoneNumber = viewModel.ProfileDetails.PhoneNumber,
+                    EmailAddress = viewModel.ProfileDetails.Email,
+                    PositionTitle = viewModel.SplashScreenDetails.PositionTitle,
+                    PersonalDescription = viewModel.SplashScreenDetails.PersonalDescription,
+                    WebsiteText = viewModel.ProfileDetails.WebsiteText,
+                    WebsiteUrl = viewModel.ProfileDetails.WebsiteURL,
+                };
+                db.Portfolio_Profiles.Add(newPortfolioProfile);
+            }
+        }
+
+        public void UpdateSkills(PortfolioViewModel viewModel)
+        {
+            foreach (var techSkill in viewModel.TechSkills)
+            {
+                var skillRecord = db.Portfolio_Skills.FirstOrDefault(x => x.Id == techSkill.TechSkillID);
+                if (skillRecord != null)
+                {
+                    skillRecord.Description = techSkill.SkillDescription;
+                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical;
+                }
+                else
+                {
+                    var newTechSkill = new Portfolio_Skill()
+                    {
+                        Description = techSkill.SkillDescription,
+                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical
+                    };
+                    db.Portfolio_Skills.Add(newTechSkill);
+                }
+            }
+            foreach (var workSkill in viewModel.HighlightedWorkSkills)
+            {
+                var skillRecord = db.Portfolio_Skills.FirstOrDefault(x => x.Id == workSkill.WorkSkillID);
+                if (skillRecord != null)
+                {
+                    skillRecord.DisplayIcon = workSkill.SkillIcon;
+                    skillRecord.DisplayName = workSkill.SkillTitle;
+                    skillRecord.Description = workSkill.SkillDetails;
+                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical;
+                }
+                else
+                {
+                    var newWorkSkill = new Portfolio_Skill()
+                    {
+                        DisplayName = workSkill.SkillTitle,
+                        DisplayIcon = workSkill.SkillIcon,
+                        Description = workSkill.SkillDetails,
+                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical
+                    };
+                    db.Portfolio_Skills.Add(newWorkSkill);
+                }
+            }
+            foreach (var languageSkill in viewModel.LanguageSkills)
+            {
+                var skillRecord = db.Portfolio_Skills.FirstOrDefault(x => x.Id == languageSkill.LanguageSkillID);
+                if (skillRecord != null)
+                {
+                    skillRecord.Description = languageSkill.LanguageSpecifics;
+                    skillRecord.DisplayName = languageSkill.LanguageName;
+                    skillRecord.ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage;
+                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Language;
+                }
+                else
+                {
+                    var newLanguageSkill = new Portfolio_Skill()
+                    {
+                        DisplayName = languageSkill.LanguageName,
+                        Description = languageSkill.LanguageSpecifics,
+                        ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage,
+                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Language
+                    };
+                    db.Portfolio_Skills.Add(newLanguageSkill);
+                }
+            }
+        }
+
+        public void UpdateProjectsAndFilters(PortfolioViewModel viewModel)
+        {
+            foreach(var project in viewModel.PortfolioProjects)
+            {
+                var projectRecord = db.Portfolio_Projects.FirstOrDefault(x => x.Id == project.ProjectID);
+                int projectID = 0;
+                if(projectRecord != null)
+                {
+                    projectID = projectRecord.Id;
+                    projectRecord.Name = project.ProjectName;
+                    projectRecord.Description = project.ProjectDescription;
+                    projectRecord.Image = project.EncodedImage;
+                }
+                else
+                {
+                    var newProjectRecord = new Portfolio_Project()
+                    {
+                        Name = project.ProjectName,
+                        Description = project.ProjectDescription,
+                        Image = project.EncodedImage,
+                    };
+                    db.Portfolio_Projects.Add(newProjectRecord);
+                    projectID = newProjectRecord.Id;
+                }
+                foreach(var filter in project.ProjectFilters)
+                {
+                    var filterRecord = db.Portfolio_ProjectTypes.FirstOrDefault(x => x.Id == filter.ID);
+                    int filterID = 0;
+                    if(filterRecord != null)
+                    {
+                        filterID = filterRecord.Id;
+                    }
+                    else
+                    {
+                        var newFilter = new Portfolio_ProjectType()
+                        {
+                            Type = filter.Name
+                        };
+                        db.Portfolio_ProjectTypes.Add(newFilter);
+                        filterID = newFilter.Id;
+                    }
+                    var newProjectTypeMapping = new Portfolio_ProjectTypeMapping()
+                    {
+                        ProjectId = projectID,
+                        ProjectTypeId = filterID
+                    };
+                    db.Portfolio_ProjectTypeMappings.Add(newProjectTypeMapping);
+                }
+            }
+        }
+
+        public void UpdateContactLinks(PortfolioViewModel viewModel)
+        {
+            foreach(var contactLink in viewModel.ContactSiteLinks)
+            {
+                var linkRecord = db.SiteLinks.FirstOrDefault(x => x.Id == contactLink.ID);
+                if(linkRecord != null)
+                {
+                    linkRecord.DisplayName = contactLink.DisplayName;
+                    linkRecord.DisplayIcon = contactLink.DisplayIcon;
+                    linkRecord.Action = contactLink.Action;
+                    linkRecord.Controller = contactLink.Controller;
+                    linkRecord.Description = contactLink.Description;
+                    linkRecord.IsDefault = contactLink.IsDefault;
+                    linkRecord.IsEnabled = contactLink.IsEnabled;
+                    linkRecord.Url = contactLink.URL;
+                    linkRecord.Order = contactLink.Order;
+                    linkRecord.Directive = contactLink.Directive;
+                    linkRecord.ApplicationId = (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio;
+                }
+                else
+                {
+                    var newLinkRecord = new SiteLink()
+                    {
+                        DisplayName = contactLink.DisplayName,
+                        DisplayIcon = contactLink.DisplayIcon,
+                        Action = contactLink.Action,
+                        Controller = contactLink.Controller,
+                        Description = contactLink.Description,
+                        IsDefault = contactLink.IsDefault,
+                        IsEnabled = contactLink.IsEnabled,
+                        Url = contactLink.URL,
+                        Order = contactLink.Order,
+                        Directive = contactLink.Directive,
+                        ApplicationId = (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio
+                    };
+                    db.SiteLinks.Add(newLinkRecord);
+                }
+            }
         }
 
     }
