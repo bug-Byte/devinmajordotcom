@@ -32,7 +32,12 @@
 
     $('button[role="iconpicker"]').iconpicker();
 
-    $(".sortable").sortable();
+    $(".mediaSortable").sortable({
+        handle: ".move",
+        stop: function (e, ui) {
+            $('td.drag', ui.item).click();
+        }
+    });
 
     $(document).on("click", ".css-checkbox", function() {
         var currentValue = $(this).val();
@@ -55,6 +60,7 @@ function MailSuccess(data) {
         alertType: 'success',
         message: 'Your email was successfully sent to the Administrator of this site!'
     });
+    alert("success");
 }
 
 function MailFailure(data) {
@@ -63,4 +69,5 @@ function MailFailure(data) {
         alertType: 'error',
         message: 'Your email was not sent! Please try again in about 5 minutes.' + data
     });
+    alert("fail");
 }
