@@ -2,7 +2,11 @@
  * Globals
  */
 
-.appLink:hover {
+.portfolioPanelHeading:hover {
+    cursor:pointer;
+}
+
+.appLink:hover, .portfolioPanelHeading a:hover {
     text-decoration: none;
 }
 
