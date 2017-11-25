@@ -65,7 +65,16 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/angular.js",
                 "~/Scripts/bootstrap-iconpicker-iconset-all.min.js",
                 "~/Scripts/bootstrap-iconpicker.min.js"
+                
                       ));
+
+            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+                "~/Scripts/tinymce/tinymce.min.js",
+                "~/Scripts/tinymce/jquery.tinymce.min.js",
+                "~/Scripts/tinymce/themes/inlite/theme.min.js",
+                "~/Scripts/tinymce/themes/mobile/theme.min.js",
+                "~/Scripts/tinymce/themes/modern/theme.min.js"
+                    ));
 
             bundles.Add(new ScriptBundle("~/bundles/portfolioScripts").Include(
                 "~/Scripts/smoothscroll.js",

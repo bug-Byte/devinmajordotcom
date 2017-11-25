@@ -44,6 +44,11 @@
         $(this).toggleClass("checked");
     });
 
+    tinymce.init({
+        selector: '.tinymce',
+        theme: 'modern'
+    });
+
 });
 
 function MailSuccess(data) {

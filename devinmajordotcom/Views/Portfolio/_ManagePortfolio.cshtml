@@ -277,52 +277,86 @@
 
                     <h5>Highlighted Skills</h5>
 
-                    @{
-                        var count = 0;
-                        var extraDiv = "</div><br/><div class='row'>";
-                        if (Model.HighlightedWorkSkills != null)
-                        {
-                            foreach (var workItem in Model.HighlightedWorkSkills)
-                            {
-                                if (count % 3 == 0)
+                    <div id="skillCarousel" class="carousel slide">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators" style="bottom: -10px;">
+                            @{
+                                var counter = 0;
+                                if (Model.HighlightedWorkSkills != null)
                                 {
-                                    @Html.Raw(extraDiv)
+                                    foreach (var workItem in Model.HighlightedWorkSkills)
+                                    {
+                                        var className = "";
+                                        if(counter == 0)
+                                        {
+                                            className = "active";
+                                        }
+                                        <li data-target="#myCarousel" data-slide-to="@counter" class="@className"></li>
+                                        counter++;
+                                    }
                                 }
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="work-wrapper">
-                                        @*<i class="@workItem.SkillIcon"></i>*@
-                                        <span class="input-group-btn">
-                                            <button data-placement="left"
-                                                    class="btn btn-default iconpicker"
-                                                    name="@Html.NameFor(x => x.HighlightedWorkSkills[count].SkillIcon)"
-                                                    role="iconpicker"
-                                                    data-iconset="fontawesome"
-                                                    data-icon="@Model.HighlightedWorkSkills[count].SkillIcon"
-                                                    type="button"></button>
-                                        </span>
-                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count].SkillTitle, new { @class = "form-control text-uppercase tm-work-h3", @placeholder = "Skill Title (Ex: Paleontology)" })
-                                        <hr>
-                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count].SkillDetails, new { @class = "form-control", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)" })
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <br />
-                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count].SkillIcon)
-                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count].SkillTitle)
-                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count].SkillDetails)
-                                        </div>
-                                    </div>
-                                </div>
-                                count = count + 1;
                             }
-                        }
-                    }
+                        </ol>
 
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" style="width: 80%;left: 10%;">
+                            @{
+
+                                var count = 1;
+                                if (Model.HighlightedWorkSkills != null)
+                                {
+                                    foreach (var workItem in Model.HighlightedWorkSkills)
+                                    {
+                                        var active = "";
+                                        if (count == 1)
+                                        {
+                                            active = "active";
+                                        }
+                                        <div class="item @active">
+                                                    <div class="work-wrapper" style="margin-bottom:-21px;">
+                                                        @*<i class="@workItem.SkillIcon"></i>*@
+                                                        <button data-placement="left"
+                                                                class="btn btn-default iconpicker"
+                                                                name="@Html.NameFor(x => x.HighlightedWorkSkills[count - 1].SkillIcon)"
+                                                                role="iconpicker"
+                                                                data-iconset="fontawesome"
+                                                                data-icon="@Model.HighlightedWorkSkills[count - 1].SkillIcon"
+                                                                type="button"
+                                                                style="font-size: 50px; margin-bottom: 1vh;"></button>
+                                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle, new { @class = "form-control text-center text-uppercase tm-work-h3", @placeholder = "Skill Title (Ex: Paleontology)" })
+                                                        <hr>
+                                                        @Html.TextAreaFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)" })
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <br />
+                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillIcon)
+                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle)
+                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails)
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                        count = count + 1;
+                                    }
+                                }
+
+                            }
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#skillCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#skillCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                
                     <h5>Technical Skills</h5>
 
-
                     <h5>Language Skills</h5>
-
                 </div>
             </div>
         </div>

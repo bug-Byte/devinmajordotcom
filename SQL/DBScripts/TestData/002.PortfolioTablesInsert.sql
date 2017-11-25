@@ -70,42 +70,42 @@ VALUES
 	'Desktop Apps',
 	NULL,
 	1,
-	'fa fa-envelope'
+	'fa-envelope'
 ),
 (
 	'I create beautiful, sleek, well built websites for clients that are a breeze to navigate through, yet complex enough to compete with others in a competitive online market.',
 	'Dynamic Web Design',
 	NULL,
 	1,
-	'fa fa-flash'
+	'fa-flash'
 ),
 (
 	'I have a tonne of experience with database programs and design theory, and I am able to create safe, secure spaces to store and manage confidential information. ',
 	'Database Design',
 	NULL,
 	1,
-	'fa fa-link'
+	'fa-link'
 ),
 (
 	'I design and assemble custom built PCs from scratch. It''s a great way to learn about the inner workings of your machine, and you can tailor to your own needs!',
 	'Custom PC Builds',
 	NULL,
 	1,
-	'fa fa-dashboard'
+	'fa-dashboard'
 ),
 (
 	'Capable of managing a large scale Local Area Network for your business and home, as well as setting up and maintaining server hardware and software. ',
 	'Networking Admin',
 	NULL,
 	1,
-	'fa fa-key'
+	'fa-key'
 ),
 (
 	'I have tested and used a number of Windows and Linux operating systems over the years, and have become something of an expert on installing and using them.',
 	'Operating Systems',
 	NULL,
 	1,
-	'fa fa-github'
+	'fa-github'
 ),
 (
 	'HTML5, CSS, JS',

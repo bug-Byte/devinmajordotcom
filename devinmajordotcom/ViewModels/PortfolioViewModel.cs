@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -34,16 +36,31 @@ namespace devinmajordotcom.ViewModels
 
         public int ProfileID { get; set; }
 
+        [Required]
+        [DataType(DataType.DateTime)]
+        [DisplayName("Birth Date * : ")]
         public DateTime DateOfBirth { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "Address cannot be longer than 100 characters.")]
         public string Address { get; set; }
 
+        [Required]
+        [DisplayName("Phone # * : ")]
+        [StringLength(25, ErrorMessage = "Phone # cannot be longer than 25 characters.")]
         public string PhoneNumber { get; set; }
 
+        [Required]
+        [StringLength(200, ErrorMessage = "Email Address cannot be longer than 100 characters.")]
+        [DisplayName("Email Address * : ")]
         public string Email { get; set; }
 
+        [StringLength(100, ErrorMessage = "Website Name cannot be longer than 100 characters.")]
+        [DisplayName("Website Name * : ")]
         public string WebsiteText { get; set; }
 
+        [StringLength(200, ErrorMessage = "Website URL cannot be longer than 200 characters.")]
+        [DisplayName("Website URL * : ")]
         public string WebsiteURL { get; set; }
 
     }
@@ -51,12 +68,22 @@ namespace devinmajordotcom.ViewModels
     public class SplashScreenViewModel
     {
 
+        [DisplayName("First Name * : ")]
+        [Required]
+        [StringLength(100, ErrorMessage = "First Name cannot be longer than 100 characters.")]
         public string FirstName { get; set; }
 
+        [DisplayName("Last Name * : ")]
+        [Required]
+        [StringLength(100, ErrorMessage = "Last Name cannot be longer than 100 characters.")]
         public string LastName { get; set; }
 
+        [DisplayName("Position Title: ")]
+        [StringLength(100, ErrorMessage = "First Name cannot be longer than 100 characters.")]
         public string PositionTitle { get; set; }
 
+        [DisplayName("Personal Description: ")]
+        [StringLength(500, ErrorMessage = "Personal Description cannot be longer than 500 characters.")]
         public string PersonalDescription { get; set; }
 
     }
@@ -66,8 +93,14 @@ namespace devinmajordotcom.ViewModels
 
         public int LanguageSkillID { get; set; }
 
+        [StringLength(100, ErrorMessage = "Language Name cannot be longer than 100 characters.")]
+        [DisplayName("Language Name * : ")]
+        [Required]
         public string LanguageName { get; set; }
 
+        [StringLength(500, ErrorMessage = "Language Specifics cannot be longer than 500 characters.")]
+        [DisplayName("Language Specifics * : ")]
+        [Required]
         public string LanguageSpecifics { get; set; }
 
         public int LanguageCapabilityPercentage { get; set; }
@@ -78,7 +111,10 @@ namespace devinmajordotcom.ViewModels
     {
 
         public int TechSkillID { get; set; }
-        
+
+        [StringLength(500, ErrorMessage = "Skill Description cannot be longer than 500 characters.")]
+        [DisplayName("Skill Description * : ")]
+        [Required]
         public string SkillDescription { get; set; } 
 
     }
@@ -88,10 +124,18 @@ namespace devinmajordotcom.ViewModels
 
         public int WorkSkillID { get; set; }
 
+        [StringLength(100, ErrorMessage = "Skill Name cannot be longer than 100 characters.")]
+        [DisplayName("Skill Name * : ")]
+        [Required]
         public string SkillTitle { get; set; }
 
+        [StringLength(100, ErrorMessage = "Skill Icon is invalid, cannot be longer than 100 characters.")]
+        [DisplayName("Skill Icon: ")]
         public string SkillIcon { get; set; }
 
+        [StringLength(500, ErrorMessage = "Skill Description cannot be longer than 500 characters.")]
+        [DisplayName("Skill Description * : ")]
+        [Required]
         public string SkillDetails { get; set; }
 
     }
@@ -116,6 +160,9 @@ namespace devinmajordotcom.ViewModels
 
         public int ProjectID { get; set; }
 
+        [StringLength(100, ErrorMessage = "Project Name cannot be longer than 100 characters.")]
+        [DisplayName("Project Name * : ")]
+        [Required]
         public string ProjectName { get; set; }
 
         public byte[] EncodedImage { get; set; }
