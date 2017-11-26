@@ -113,23 +113,23 @@ namespace devinmajordotcom.Services
 
         public string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel)
         {
+            MailMessage message = new MailMessage();
             try
             {
-                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                var message = new MailMessage();
+                var body = "<p>From: </p><p>{0}</p><p>({1})</p><p>Message:</p><p>{2}</p>";
                 message.To.Add(new MailAddress(viewModel.RecipientEmail));
                 message.Subject = "Attn Site Admin: " + viewModel.Subject;
                 message.Body = string.Format(body, viewModel.SenderName, viewModel.SenderEmailAddress, viewModel.Content);
                 message.IsBodyHtml = true;
                 using (var smtp = new SmtpClient())
                 {
-                    smtp.UseDefaultCredentials = true;
                     smtp.Send(message);
                     return "Success";
                 }
             }
             catch(Exception e)
             {
+                message.Dispose();
                 return e.Message;
             }
         }
