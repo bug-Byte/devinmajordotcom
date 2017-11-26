@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    debugger;
+    
+    ConnectToSignalRPerformanceHub();
 
     $(".portfolioPanelHeading").on("click", function () {
         var toggler = $(this).children("span");
@@ -67,4 +70,25 @@ function MailFailure(data) {
         message: 'Your email was not sent! Please try again in about 5 minutes.' + data
     });
     alert("fail");
+}
+
+function ConnectToSignalRPerformanceHub() {
+
+    var performanceHub = $.connection.performanceHub;
+
+    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue) {
+
+        document.getElementById('cpuCounter').innerHTML = nextCpuValue;
+        document.getElementById('ramCounter').innerHTML = nextRamValue;
+
+    };
+
+    $.connection.hub.start().done(function () {
+        alert("started");
+        performanceHub.server.SendPerformanceMonitoring();
+    }).fail(function (reason) {
+        console.log("SignalR connection failed: " + reason);
+        alert("SignalR Failed to Start!");
+    });
+
 }

@@ -59,14 +59,13 @@ namespace devinmajordotcom.App_Start
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/customScripts").Include(
-                "~/Scripts/IndexScripts.js",
                 "~/Scripts/jquery.bootsnack.js",
-                "~/Scripts/jquery.signalR-2.2.2.js",
                 "~/Scripts/angular.js",
                 "~/Scripts/bootstrap-iconpicker-iconset-all.min.js",
-                "~/Scripts/bootstrap-iconpicker.min.js"
-                
-                      ));
+                "~/Scripts/bootstrap-iconpicker.min.js",
+                "~/Scripts/jquery.signalR-2.2.2.min.js",
+                "~/Scripts/IndexScripts.js"
+                    ));
 
             bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
                 "~/Scripts/tinymce/tinymce.min.js",
