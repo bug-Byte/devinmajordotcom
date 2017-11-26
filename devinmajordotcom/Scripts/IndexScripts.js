@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    debugger;
     
     ConnectToSignalRPerformanceHub();
 
@@ -54,22 +53,18 @@
 
 });
 
-function MailSuccess(data) {
-    debugger;
-    $("#bootsnackAlertContainer").bootsnack({
+function AjaxSuccess(data) {
+    $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your email was successfully sent to the Administrator of this site!'
     });
-    alert("success");
 }
 
-function MailFailure(data) {
-    debugger;
-    $("#bootsnackAlertContainer").bootsnack({
+function AjaxFailure(data) {
+    $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Your email was not sent! Please try again in about 5 minutes.' + data
     });
-    alert("fail");
 }
 
 function ConnectToSignalRPerformanceHub() {
@@ -84,7 +79,10 @@ function ConnectToSignalRPerformanceHub() {
     };
 
     $.connection.hub.start().done(function () {
-        alert("started");
+        $("#ajaxAlertContainer").bootsnack({
+            alertType: 'success',
+            message: 'Your email was successfully sent to the Administrator of this site!'
+        });
         performanceHub.server.SendPerformanceMonitoring();
     }).fail(function (reason) {
         console.log("SignalR connection failed: " + reason);

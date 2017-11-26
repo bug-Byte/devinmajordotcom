@@ -21,10 +21,10 @@ namespace devinmajordotcom
             var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             var totalRam = ((computerInfo.TotalPhysicalMemory / 1024) / 1024);
             var availableRamCounter = new PerformanceCounter("Memory", "Available MBytes");
-            var ramCounter = (totalRam - (availableRamCounter.NextValue() / totalRam) / 1024) + " / " + (totalRam / 1024);
             int i = 0;
             while (i != -1)
             {
+                var ramCounter = ((totalRam - availableRamCounter.NextValue()) / 1024) + " / " + Math.Round((decimal)totalRam / 1024);
                 Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter);
                 i++;
                 Thread.Sleep(1000);

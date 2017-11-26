@@ -3,7 +3,7 @@
 
 }
 
-@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
+@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
 {
     var count = 0;
     <div id="tagsForm" class="">

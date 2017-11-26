@@ -6,7 +6,7 @@
     <hr>
     <p style="color: #71cef5;">If you'd like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I'll take it from there!</p>
     <hr>
-    @using (Ajax.BeginForm("DropMeALine", "Home", new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
+    @using (Ajax.BeginForm("DropMeALine", "Home", new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
     {
 
         @Html.AntiForgeryToken() 

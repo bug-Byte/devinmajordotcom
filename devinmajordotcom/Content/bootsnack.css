@@ -5,76 +5,73 @@
 */
 
 .bootsnack {
-    max-width: 25%;
+    max-width: 25vw;
     background-image: none;
 }
 
-#bootsnackAlertContainer {
+#ajaxAlert {
     visibility: hidden; /* Hidden by default. Visible on click */
-    min-width: 25%; /* Set a default minimum width */
+    min-width: 25vw; /* Set a default minimum width */
     margin-left: -125px; /* Divide value of min-width by 2 */
-    position: fixed;
-    z-index: 5;
-    left: 50%;
+    position: fixed; 
+    z-index: 5000;
+    left: 44vw; 
     bottom: 30px;
-    opacity: 0;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#bootsnack.show {
-    opacity: 1;
+#ajaxAlert.show {
     visibility: visible; /* Show the snackbar */
-    animation: bootsnackfadein 0.5s, bootsnackfadeout 0.5s 8s forwards;
 
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 8.5s;
+    animation: fadein 0.5s, fadeout 0.5s 8.5s;
 }
 
 /* Animations to fade the snackbar in and out */
-@-webkit-keyframes bootsnackfadein {
-    0% {
+@-webkit-keyframes fadein {
+    from {
         bottom: 0;
         opacity: 0;
     }
 
-    100% {
+    to {
         bottom: 30px;
         opacity: 1;
     }
 }
 
-@keyframes bootsnackfadein {
-    0% {
+@keyframes fadein {
+    from {
         bottom: 0;
         opacity: 0;
     }
 
-    100% {
+    to {
         bottom: 30px;
         opacity: 1;
     }
 }
 
-@-webkit-keyframes bootsnackfadeout {
-    0% {
+@-webkit-keyframes fadeout {
+    from {
         bottom: 30px;
         opacity: 1;
     }
 
-    100% {
+    to {
         bottom: 0;
         opacity: 0;
-        visibility: hidden;
     }
 }
 
-@keyframes bootsnackfadeout {
-    0% {
+@keyframes fadeout {
+    from {
         bottom: 30px;
         opacity: 1;
     }
 
-    100% {
+    to {
         bottom: 0;
         opacity: 0;
-        visibility: hidden;
     }
 }
