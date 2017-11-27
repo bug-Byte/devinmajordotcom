@@ -71,22 +71,20 @@ function ConnectToSignalRPerformanceHub() {
 
     var performanceHub = $.connection.performanceHub;
 
-    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue) {
+    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp) {
 
         document.getElementById('cpuCounter').innerHTML = nextCpuValue;
         document.getElementById('ramCounter').innerHTML = nextRamValue;
-
+        document.getElementById('tempCounter').innerHTML = temp;
     };
 
     $.connection.hub.start().done(function () {
-        $("#ajaxAlertContainer").bootsnack({
-            alertType: 'success',
-            message: 'Your email was successfully sent to the Administrator of this site!'
-        });
         performanceHub.server.SendPerformanceMonitoring();
     }).fail(function (reason) {
-        console.log("SignalR connection failed: " + reason);
-        alert("SignalR Failed to Start!");
+        $("#ajaxAlertContainer").bootsnack({
+            alertType: 'error',
+            message: 'SignalR is not running.'
+        });
     });
 
 }

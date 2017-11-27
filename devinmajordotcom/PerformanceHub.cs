@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
 using System.Threading;
 using System.Web;
 
@@ -21,11 +22,13 @@ namespace devinmajordotcom
             var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             var totalRam = ((computerInfo.TotalPhysicalMemory / 1024) / 1024);
             var availableRamCounter = new PerformanceCounter("Memory", "Available MBytes");
+            var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
             int i = 0;
             while (i != -1)
             {
                 var ramCounter = ((totalRam - availableRamCounter.NextValue()) / 1024) + " / " + Math.Round((decimal)totalRam / 1024);
-                Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter);
+                var cpuTemp = (cpuTempCounter.NextValue() - 273.15) + "°C";
+                Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp);
                 i++;
                 Thread.Sleep(1000);
             }

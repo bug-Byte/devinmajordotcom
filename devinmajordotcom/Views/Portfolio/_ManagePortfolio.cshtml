@@ -18,43 +18,47 @@
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
+
                     <div class="row">
                         <div class="col-sm-6">
-                            @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @Html.LabelFor(x => x.SplashScreenDetails.LastName)
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
-                        </div>
-                    </div>
+                    </div>                    
 
                     <br />
 
                     <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.SplashScreenDetails.LastName)
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12 text-center">
                             @Html.LabelFor(x => x.SplashScreenDetails.PositionTitle)
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             @Html.TextBoxFor(x => x.SplashScreenDetails.PositionTitle, new { @class = "form-control" })
                         </div>
                     </div>
@@ -67,11 +71,11 @@
                     <br />
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12 text-center">
                             @Html.LabelFor(x => x.SplashScreenDetails.PersonalDescription)
                         </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.SplashScreenDetails.PersonalDescription, new { @class = "form-control" })
+                        <div class="col-sm-12">
+                            @Html.TextAreaFor(x => x.SplashScreenDetails.PersonalDescription, new { @class = "tinymce", @rows = "4", @placeholder = "I am a professional architect, and have designed many buildings all over Eastern Canada." })
                         </div>
                     </div>
                     <div class="row">
@@ -193,67 +197,39 @@
 
                     <br />
 
-                    <h5>General Details</h5>
+                    <h5>Describe Yourself</h5>
 
                     <div class="row">
                         <div class="col-sm-6">
-                            @Html.LabelFor(x => x.PersonalDescription.Adjective1)
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.LabelFor(x => x.PersonalDescription.Adjective1)
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective1, new { @class = "form-control" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective2, new { @class = "form-control" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective3, new { @class = "form-control" })
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.PersonalDescription.Adjective1, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.PersonalDescription.Adjective1)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.PersonalDescription.Adjective2)
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.PersonalDescription.Adjective2, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.PersonalDescription.Adjective2)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.PersonalDescription.Adjective3)
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.PersonalDescription.Adjective3, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.PersonalDescription.Adjective3)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.PersonalDescription.Blurb)
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.PersonalDescription.Blurb, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.PersonalDescription.Blurb)
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.LabelFor(x => x.PersonalDescription.Blurb)
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextAreaFor(x => x.PersonalDescription.Blurb, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I am also 21 years old, I am into running and bike riding, and love long walks on the beach!)" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @Html.ValidationMessageFor(x => x.PersonalDescription.Blurb)
+                                </div>
+                            </div>
                         </div>
                     </div>
 
