@@ -33,24 +33,43 @@
                     <h2 class="title">My <strong>Work</strong></h2>
                 </div>
                 @{
-                    var count = 0;
+
+                    var count = 1;
                     var extraDiv = "</div><br/><div class='row'>";
-                    foreach (var workItem in Model.HighlightedWorkSkills)
+                    var divStart = "<div class = 'row'>";
+                    var divEnd = "</div>";
+                    if (Model.HighlightedWorkSkills != null)
                     {
-                        if (count % 3 == 0)
+                        foreach (var workItem in Model.HighlightedWorkSkills)
                         {
-                            @Html.Raw(extraDiv)
-                        }
-                        <div class="col-md-4 col-sm-4">
-                            <div class="work-wrapper">
-                                <i class="@workItem.SkillIcon"></i>
-                                <h3 class="text-uppercase tm-work-h3">@workItem.SkillTitle</h3>
-                                <hr>
-                                <p>@Html.Raw(workItem.SkillDetails)</p>
+                            if (count == 1)
+                            {
+                                @Html.Raw(divStart)
+                            }
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="work-wrapper">
+                                    <i class="fa @workItem.SkillIcon"></i>
+                                    <h3 class="text-uppercase tm-work-h3">@workItem.SkillTitle</h3>
+                                    <hr>
+                                    <p>@Html.Raw(workItem.SkillDetails)</p>
+                                </div>
                             </div>
-                        </div>
-                        count = count + 1;
+                            if (count % 3 == 0)
+                            {
+                                if (Model.HighlightedWorkSkills.ElementAtOrDefault(count) != null)
+                                {
+                                    @Html.Raw(extraDiv)
+                                }
+                                else
+                                {
+                                    @Html.Raw(divEnd)
+                                }
+                            }
+                            count = count + 1;
+                        }
                     }
+
                 }
             </div>
         </div>

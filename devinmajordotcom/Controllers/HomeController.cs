@@ -47,9 +47,14 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult DropMeALine(ContactEmailViewModel viewModel)
         {
-            var emailSuccessful = service.SendContactEmailToSiteAdmin(viewModel);
+            var emailSuccessful = "";
+            if (ModelState.IsValid)
+            {
+                emailSuccessful = service.SendContactEmailToSiteAdmin(viewModel);
+            }
             return new JsonResult { Data = emailSuccessful };
         }
 

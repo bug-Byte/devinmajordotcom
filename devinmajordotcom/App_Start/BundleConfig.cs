@@ -59,13 +59,21 @@ namespace devinmajordotcom.App_Start
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/customScripts").Include(
-                "~/Scripts/IndexScripts.js",
                 "~/Scripts/jquery.bootsnack.js",
-                "~/Scripts/jquery.signalR-2.2.2.js",
                 "~/Scripts/angular.js",
                 "~/Scripts/bootstrap-iconpicker-iconset-all.min.js",
-                "~/Scripts/bootstrap-iconpicker.min.js"
-                      ));
+                "~/Scripts/bootstrap-iconpicker.min.js",
+                "~/Scripts/jquery.signalR-2.2.2.min.js",
+                "~/Scripts/IndexScripts.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+                "~/Scripts/tinymce/tinymce.min.js",
+                "~/Scripts/tinymce/jquery.tinymce.min.js",
+                "~/Scripts/tinymce/themes/inlite/theme.min.js",
+                "~/Scripts/tinymce/themes/mobile/theme.min.js",
+                "~/Scripts/tinymce/themes/modern/theme.min.js"
+                    ));
 
             bundles.Add(new ScriptBundle("~/bundles/portfolioScripts").Include(
                 "~/Scripts/smoothscroll.js",

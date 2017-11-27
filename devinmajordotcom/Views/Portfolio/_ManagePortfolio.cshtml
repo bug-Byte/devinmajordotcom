@@ -3,43 +3,369 @@
 
 }
 
-@using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "MailSuccess(data)", OnFailure = "MailFailure(data)" }, new { @id = "updatePortfolioForm" }))
+@using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updatePortfolioForm" }))
 {
-    <div class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
-
-        <h4>Splash Screen Details</h4>
-        <hr />
-
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+    <div class="panel-group">
+        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse1">
+                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+                &nbsp;&nbsp;
+                <h4 class="panel-title" style="display: inline;">
+                    <a>Splash Screen</a>
+                </h4>
             </div>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @Html.LabelFor(x => x.SplashScreenDetails.FirstName)
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @Html.LabelFor(x => x.SplashScreenDetails.LastName)
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            @Html.LabelFor(x => x.SplashScreenDetails.PositionTitle)
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.TextBoxFor(x => x.SplashScreenDetails.PositionTitle, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.PositionTitle)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            @Html.LabelFor(x => x.SplashScreenDetails.PersonalDescription)
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.TextAreaFor(x => x.SplashScreenDetails.PersonalDescription, new { @class = "tinymce", @rows = "4", @placeholder = "I am a professional architect, and have designed many buildings all over Eastern Canada." })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.PersonalDescription)
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
+        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse2">
+                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+                &nbsp;&nbsp;
+                <h4 class="panel-title" style="display: inline;">
+                    <a>Personal Profile</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <h5>General Details</h5>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.ProfileDetails.DateOfBirth)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.ProfileDetails.DateOfBirth, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.ProfileDetails.DateOfBirth)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.ProfileDetails.Address)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.ProfileDetails.Address, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.ProfileDetails.Address)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.ProfileDetails.PhoneNumber)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.ProfileDetails.PhoneNumber, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.ProfileDetails.PhoneNumber)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.ProfileDetails.Email)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.ProfileDetails.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.ProfileDetails.Email)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.ProfileDetails.WebsiteText)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.ProfileDetails.WebsiteText, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteText)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.ProfileDetails.WebsiteURL)
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.ProfileDetails.WebsiteURL, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteURL)
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <h5>Describe Yourself</h5>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.LabelFor(x => x.PersonalDescription.Adjective1)
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective1, new { @class = "form-control" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective2, new { @class = "form-control" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective3, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.LabelFor(x => x.PersonalDescription.Blurb)
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextAreaFor(x => x.PersonalDescription.Blurb, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I am also 21 years old, I am into running and bike riding, and love long walks on the beach!)" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @Html.ValidationMessageFor(x => x.PersonalDescription.Blurb)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
             </div>
         </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.LabelFor(x => x.SplashScreenDetails.LastName)
+        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse3">
+                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+                &nbsp;&nbsp;
+                <h4 class="panel-title" style="display: inline;">
+                    <a>Skills</a>
+                </h4>
             </div>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new { @class = "form-control" })
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <h5>Highlighted Skills</h5>
+
+                    <div id="skillCarousel" class="carousel slide">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators" style="bottom: -10px;">
+                            @{
+                                var counter = 0;
+                                if (Model.HighlightedWorkSkills != null)
+                                {
+                                    foreach (var workItem in Model.HighlightedWorkSkills)
+                                    {
+                                        var className = "";
+                                        if(counter == 0)
+                                        {
+                                            className = "active";
+                                        }
+                                        <li data-target="#myCarousel" data-slide-to="@counter" class="@className"></li>
+                                        counter++;
+                                    }
+                                }
+                            }
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" style="width: 80%;left: 10%;">
+                            @{
+
+                                var count = 1;
+                                if (Model.HighlightedWorkSkills != null)
+                                {
+                                    foreach (var workItem in Model.HighlightedWorkSkills)
+                                    {
+                                        var active = "";
+                                        if (count == 1)
+                                        {
+                                            active = "active";
+                                        }
+                                        <div class="item @active">
+                                                    <div class="work-wrapper" style="margin-bottom:-21px;">
+                                                        @*<i class="@workItem.SkillIcon"></i>*@
+                                                        <button data-placement="left"
+                                                                class="btn btn-default iconpicker"
+                                                                name="@Html.NameFor(x => x.HighlightedWorkSkills[count - 1].SkillIcon)"
+                                                                role="iconpicker"
+                                                                data-iconset="fontawesome"
+                                                                data-icon="@Model.HighlightedWorkSkills[count - 1].SkillIcon"
+                                                                type="button"
+                                                                style="font-size: 50px; margin-bottom: 1vh;"></button>
+                                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle, new { @class = "form-control text-center text-uppercase tm-work-h3", @placeholder = "Skill Title (Ex: Paleontology)" })
+                                                        <hr>
+                                                        @Html.TextAreaFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)" })
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <br />
+                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillIcon)
+                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle)
+                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails)
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                        count = count + 1;
+                                    }
+                                }
+
+                            }
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#skillCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#skillCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                
+                    <h5>Technical Skills</h5>
+
+                    <h5>Language Skills</h5>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse4">
+                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+                &nbsp;&nbsp;
+                <h4 class="panel-title" style="display: inline;">
+                    <a>Projects</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                </div>
             </div>
         </div>
-
+        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse5">
+                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+                &nbsp;&nbsp;
+                <h4 class="panel-title" style="display: inline;">
+                    <a>Contact Links</a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+                </div>
+            </div>
+        </div>
     </div>
 
     <br />

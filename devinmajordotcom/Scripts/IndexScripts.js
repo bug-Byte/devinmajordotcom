@@ -1,4 +1,11 @@
 ﻿$(document).ready(function () {
+    
+    ConnectToSignalRPerformanceHub();
+
+    $(".portfolioPanelHeading").on("click", function () {
+        var toggler = $(this).children("span");
+        toggler.toggleClass("glyphicon-collapse-up");
+    });
 
     $(".work-wrapper").hover(function () {
         $(this).find('.glyphicon').addClass('blueGlyphicon', 600);
@@ -19,7 +26,12 @@
 
     $('button[role="iconpicker"]').iconpicker();
 
-    $(".sortable").sortable();
+    $(".mediaSortable").sortable({
+        handle: ".move",
+        stop: function (e, ui) {
+            $('td.drag', ui.item).click();
+        }
+    });
 
     $(document).on("click", ".css-checkbox", function() {
         var currentValue = $(this).val();
@@ -34,20 +46,45 @@
         $(this).toggleClass("checked");
     });
 
+    tinymce.init({
+        selector: '.tinymce',
+        theme: 'modern'
+    });
+
 });
 
-function MailSuccess(data) {
-    debugger;
-    $("#bootsnackAlertContainer").bootsnack({
+function AjaxSuccess(data) {
+    $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your email was successfully sent to the Administrator of this site!'
     });
 }
 
-function MailFailure(data) {
-    debugger;
-    $("#bootsnackAlertContainer").bootsnack({
+function AjaxFailure(data) {
+    $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Your email was not sent! Please try again in about 5 minutes.' + data
     });
+}
+
+function ConnectToSignalRPerformanceHub() {
+
+    var performanceHub = $.connection.performanceHub;
+
+    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp) {
+
+        document.getElementById('cpuCounter').innerHTML = nextCpuValue;
+        document.getElementById('ramCounter').innerHTML = nextRamValue;
+        document.getElementById('tempCounter').innerHTML = temp;
+    };
+
+    $.connection.hub.start().done(function () {
+        performanceHub.server.SendPerformanceMonitoring();
+    }).fail(function (reason) {
+        $("#ajaxAlertContainer").bootsnack({
+            alertType: 'error',
+            message: 'SignalR is not running.'
+        });
+    });
+
 }
