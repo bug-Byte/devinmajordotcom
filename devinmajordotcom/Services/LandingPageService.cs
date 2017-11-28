@@ -38,8 +38,7 @@ namespace devinmajordotcom.Services
                 },
                 ContactEmailData = new ContactEmailViewModel()
                 {
-                    RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress,
-                    RecipientName = "Website Owner - Devinmajordotcom"
+                    RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress
                 }
             };
         }

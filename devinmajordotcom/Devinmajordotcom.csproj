@@ -607,7 +607,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\iconset\" />
-    <Folder Include="SignalR\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
