@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    InitializePieCharts();
     
     ConnectToSignalRPerformanceHub();
 
@@ -72,7 +74,6 @@ function ConnectToSignalRPerformanceHub() {
     var performanceHub = $.connection.performanceHub;
 
     performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp, drives) {
-
         document.getElementById('driveCounters').innerHTML = "";
         var diskCountersHtml = "";
 
@@ -82,12 +83,12 @@ function ConnectToSignalRPerformanceHub() {
             diskCountersHtml += "<div class='row'><div class='col-md-2'>" + driveData[0] + "</div><div class='col-md-2'>" + driveData[1] + "</div><div class='col-md-2'>" + driveData[2] + "</div><div class='col-md-2'>" + driveData[3] + "</div><div class='col-md-2'>" + driveData[4] + "</div><div class='col-md-2'>" + driveData[5] + "</div></div>";
         }
 
-        document.getElementById('cpuCounter').innerHTML = nextCpuValue;
-        document.getElementById('ramCounter').innerHTML = nextRamValue;
-        document.getElementById('tempCounter').innerHTML = temp;
+        //document.getElementById('cpuCounter').getAttribute('data-percent') = nextCpuValue;
+        //document.getElementById('ramCounter').innerHTML = nextRamValue;
+        //document.getElementById('tempCounter').innerHTML = temp;
         document.getElementById('driveCounters').innerHTML = diskCountersHtml;
 
-        
+        $("#cpuCounter").data('easyPieChart').update(nextCpuValue);
 
     };
 
@@ -99,5 +100,26 @@ function ConnectToSignalRPerformanceHub() {
             message: 'SignalR is not running.'
         });
     });
+
+}
+
+function InitializePieCharts() {
+
+    $('.performancePieChart').easyPieChart({
+        animate: 1000,
+        size: 150,
+        lineWidth: 5,
+        scaleColor: '#dfe0e0',
+        trackColor: '#f2f2f2',
+        barColor: function (percent) {
+            percent /= 100;
+            return "rgb(" + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * percent) + ", 0)";
+        },
+        onStep: function (from, to, percent) {
+            $(this.el).find('.percent').text(Math.round(percent));
+        }
+    });
+
+    
 
 }

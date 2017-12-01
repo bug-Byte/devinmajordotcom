@@ -157,9 +157,6 @@
     <Build Include="Security\Portfolio.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MyDatabase.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <PostDeploy Include="Script.001.PostDeployment.AddTestData.sql" />
     <None Include="Script.PostDeployment.Start.sql" />
   </ItemGroup>

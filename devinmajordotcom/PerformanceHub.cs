@@ -24,7 +24,7 @@ namespace devinmajordotcom
             var totalRam = ((computerInfo.TotalPhysicalMemory / 1024) / 1024);
             var availableRamCounter = new PerformanceCounter("Memory", "Available MBytes");
             //var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
-            var diskList = new List<string>();
+            
             var drives = DriveInfo.GetDrives();
             int i = 0;
 
@@ -32,7 +32,7 @@ namespace devinmajordotcom
             {
                 var ramCounter = ((totalRam - availableRamCounter.NextValue()) / 1024) + " / " + Math.Round((decimal)totalRam / 1024);
                 var cpuTemp = /*(cpuTempCounter.NextValue() - 273.15) + */"°C";
-                string[] driveList = diskList.ToArray();
+                var diskList = new List<string>();
                 foreach (DriveInfo drive in drives)
                 {
                     if (drive.IsReady)
@@ -41,7 +41,8 @@ namespace devinmajordotcom
                         diskList.Add(diskInfo);
                     }
                 }
-                Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp, driveList);
+                //string[] driveList = diskList.ToArray();
+                Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp, diskList);
                 i++;
                 Thread.Sleep(1000);
             }
