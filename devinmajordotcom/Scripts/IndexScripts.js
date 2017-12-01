@@ -71,11 +71,24 @@ function ConnectToSignalRPerformanceHub() {
 
     var performanceHub = $.connection.performanceHub;
 
-    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp) {
+    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp, drives) {
+
+        document.getElementById('driveCounters').innerHTML = "";
+        var diskCountersHtml = "";
+
+        for (var x = 0; x < drives.length; x++) {
+            var drive = drives[x];
+            var driveData = drive.split(",");
+            diskCountersHtml += "<div class='row'><div class='col-md-2'>" + driveData[0] + "</div><div class='col-md-2'>" + driveData[1] + "</div><div class='col-md-2'>" + driveData[2] + "</div><div class='col-md-2'>" + driveData[3] + "</div><div class='col-md-2'>" + driveData[4] + "</div><div class='col-md-2'>" + driveData[5] + "</div></div>";
+        }
 
         document.getElementById('cpuCounter').innerHTML = nextCpuValue;
         document.getElementById('ramCounter').innerHTML = nextRamValue;
         document.getElementById('tempCounter').innerHTML = temp;
+        document.getElementById('driveCounters').innerHTML = diskCountersHtml;
+
+        
+
     };
 
     $.connection.hub.start().done(function () {
