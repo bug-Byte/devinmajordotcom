@@ -387,6 +387,8 @@
     <Content Include="Scripts\bootstrap-iconpicker-iconset-all.min.js" />
     <Content Include="Scripts\bootstrap-iconpicker.min.js" />
     <Content Include="Scripts\jquery.bootsnack.js" />
+    <Content Include="Scripts\jquery.easypiechart.js" />
+    <Content Include="Scripts\jquery.easypiechart.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

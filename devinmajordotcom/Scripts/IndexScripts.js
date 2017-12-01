@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var firstRun = true;
+
+$(document).ready(function () {
 
     InitializePieCharts();
     
@@ -75,13 +77,13 @@ function UpdateCpuCounter(value, baseScale) {
 
 }
 
-function updateRamCounter() {
+function UpdateRamCounter(value, baseScale) {
 
     return (value / baseScale) * 100;
 
 }
 
-function updateDriveCounter() {
+function updateDriveCounter(value, baseScale) {
 
     return (value / baseScale) * 100;
 
@@ -92,21 +94,41 @@ function ConnectToSignalRPerformanceHub() {
     var performanceHub = $.connection.performanceHub;
 
     performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp, drives) {
+
         document.getElementById('driveCounters').innerHTML = "";
         var diskCountersHtml = "";
-
-        for (var x = 0; x < drives.length; x++) {
-            var drive = drives[x];
-            var driveData = drive.split(",");
-            diskCountersHtml += "<div class='row'><div class='col-md-2'>" + driveData[0] + "</div><div class='col-md-2'>" + driveData[1] + "</div><div class='col-md-2'>" + driveData[2] + "</div><div class='col-md-2'>" + driveData[3] + "</div><div class='col-md-2'>" + driveData[4] + "</div><div class='col-md-2'>" + driveData[5] + "</div></div>";
+        var ramValues = nextRamValue.split(" / ");
+        if (firstRun) {
+            for (var x = 0; x < drives.length; x++) {
+                var drive = drives[x];
+                if (drive != undefined) {
+                    firstRun = false;
+                }
+                var driveData = drive.split(",");
+                var percentValue = updateDriveCounter(driveData[4], driveData[5]);
+                diskCountersHtml += "<div class='row'><div class='col-md-2'>" + driveData[0] + "</div><div class='col-md-2'>" + driveData[1] + "</div><div class='col-md-2'>" + driveData[2] + "</div><div class='col-md-2'>" + driveData[3] + "</div><div class='col-md-2'>" + driveData[4] + "</div><div class='col-md-2'>" + driveData[5] + "</div></div>";
+                diskCountersHtml += '<div id="disk_' + x + '" class="performancePieChart diskChart" data-percent="' + percentValue + '"><span class="percent">' + percentValue + '</span></div>';
+            }
+            document.getElementById('driveCounters').innerHTML = diskCountersHtml;
+            $(".diskChart").each(function() {
+                $(this).easyPieChart();
+            });
+            
+        } else {
+            debugger;
+            $(".diskChart").each(function () {
+                
+                var id = this.id.split("_")[1];
+                var thisDrive = drives[id];
+                var thisDriveData = thisDrive.split(",");
+                var nextValue = thisDriveData[4];
+                var baseScale = thisDriveData[5];
+                $(this).data('easyPieChart').update(updateDriveCounter(nextValue, baseScale));
+            });
         }
 
-        //document.getElementById('cpuCounter').getAttribute('data-percent') = nextCpuValue;
-        //document.getElementById('ramCounter').innerHTML = nextRamValue;
-        //document.getElementById('tempCounter').innerHTML = temp;
-        document.getElementById('driveCounters').innerHTML = diskCountersHtml;
-
-        $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue,100));
+        $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue, 100));
+        $("#ramCounter").data('easyPieChart').update(UpdateRamCounter(ramValues[0], ramValues[1]));
 
     };
 
