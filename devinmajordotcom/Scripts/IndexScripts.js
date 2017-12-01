@@ -69,6 +69,24 @@ function AjaxFailure(data) {
     });
 }
 
+function UpdateCpuCounter(value, baseScale) {
+
+    return (value / baseScale) * 100;
+
+}
+
+function updateRamCounter() {
+
+    return (value / baseScale) * 100;
+
+}
+
+function updateDriveCounter() {
+
+    return (value / baseScale) * 100;
+
+}
+
 function ConnectToSignalRPerformanceHub() {
 
     var performanceHub = $.connection.performanceHub;
@@ -88,7 +106,7 @@ function ConnectToSignalRPerformanceHub() {
         //document.getElementById('tempCounter').innerHTML = temp;
         document.getElementById('driveCounters').innerHTML = diskCountersHtml;
 
-        $("#cpuCounter").data('easyPieChart').update(nextCpuValue);
+        $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue,100));
 
     };
 
@@ -119,7 +137,5 @@ function InitializePieCharts() {
             $(this.el).find('.percent').text(Math.round(percent));
         }
     });
-
-    
 
 }
