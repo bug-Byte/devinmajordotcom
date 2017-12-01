@@ -81,7 +81,7 @@ var defineGlobal = function (id, ref) {
   define(id, [], function () { return ref; });
 };
 /*jsc
-["tinymce.themes.modern.Theme","global!window","tinymce.core.ThemeManager","tinymce.themes.modern.api.ThemeApi","tinymce.ui.Api","tinymce.ui.FormatControls","global!tinymce.util.Tools.resolve","tinymce.themes.modern.ui.Render","tinymce.themes.modern.ui.Resize","tinymce.ui.NotificationManagerImpl","tinymce.ui.WindowManagerImpl","tinymce.core.ui.Factory","tinymce.core.util.Tools","tinymce.ui.AbsoluteLayout","tinymce.ui.BrowseButton","tinymce.ui.Button","tinymce.ui.ButtonGroup","tinymce.ui.Checkbox","tinymce.ui.Collection","tinymce.ui.ColorBox","tinymce.ui.ColorButton","tinymce.ui.ColorPicker","tinymce.ui.ComboBox","tinymce.ui.Container","tinymce.ui.Control","tinymce.ui.DragHelper","tinymce.ui.DropZone","tinymce.ui.ElementPath","tinymce.ui.FieldSet","tinymce.ui.FilePicker","tinymce.ui.FitLayout","tinymce.ui.FlexLayout","tinymce.ui.FloatPanel","tinymce.ui.FlowLayout","tinymce.ui.Form","ephox.katamari.api.Arr","ephox.katamari.api.Fun","ephox.sugar.api.node.Element","ephox.sugar.api.search.SelectorFind","global!document","tinymce.core.dom.DOMUtils","tinymce.core.EditorManager","tinymce.core.Env","tinymce.ui.editorui.Align","tinymce.ui.editorui.FormatSelect","tinymce.ui.editorui.SimpleFormats","tinymce.ui.fmt.FontInfo","tinymce.ui.Widget","tinymce.ui.FormItem","tinymce.ui.GridLayout","tinymce.ui.Iframe","tinymce.ui.InfoBox","tinymce.ui.KeyboardNavigation","tinymce.ui.Label","tinymce.ui.Layout","tinymce.ui.ListBox","tinymce.ui.Menu","tinymce.ui.MenuBar","tinymce.ui.MenuButton","tinymce.ui.MenuItem","tinymce.ui.MessageBox","tinymce.ui.Movable","tinymce.ui.Notification","tinymce.ui.Panel","tinymce.ui.PanelButton","tinymce.ui.Path","tinymce.ui.Progress","tinymce.ui.Radio","tinymce.ui.ReflowQueue","tinymce.ui.Resizable","tinymce.ui.ResizeHandle","tinymce.ui.Scrollable","tinymce.ui.SelectBox","tinymce.ui.Selector","tinymce.ui.Slider","tinymce.ui.Spacer","tinymce.ui.SplitButton","tinymce.ui.StackLayout","tinymce.ui.TabPanel","tinymce.ui.TextBox","tinymce.ui.Throbber","tinymce.ui.Toolbar","tinymce.ui.Tooltip","tinymce.ui.Window","tinymce.themes.modern.api.Settings","tinymce.themes.modern.modes.Iframe","tinymce.themes.modern.modes.Inline","tinymce.themes.modern.ui.ProgressState","tinymce.themes.modern.api.Events","ephox.katamari.api.Option","global!Array","global!Error","global!String","global!setTimeout","tinymce.ui.DomUtils","tinymce.core.dom.DomQuery","tinymce.core.util.Class","tinymce.core.util.EventDispatcher","tinymce.ui.BoxUtils","tinymce.ui.ClassList","tinymce.ui.data.ObservableObject","tinymce.core.util.Delay","global!RegExp","tinymce.core.util.VK","tinymce.core.util.Color","tinymce.ui.content.LinkTargets","global!console","ephox.sugar.api.search.PredicateFind","ephox.sugar.api.search.Selectors","ephox.sugar.impl.ClosestOrAncestor","tinymce.ui.editorui.FormatUtils","ephox.sugar.api.node.Node","tinymce.themes.modern.ui.A11y","tinymce.themes.modern.ui.ContextToolbars","tinymce.themes.modern.ui.Menubar","tinymce.themes.modern.ui.Sidebar","tinymce.themes.modern.ui.SkinLoaded","tinymce.themes.modern.ui.Toolbar","tinymce.ui.data.Binding","tinymce.core.util.Observable","global!Object","ephox.katamari.api.Id","ephox.sugar.api.search.SelectorFilter","ephox.katamari.api.Type","ephox.sugar.api.node.Body","ephox.sugar.api.dom.Compare","ephox.sugar.api.node.NodeTypes","tinymce.core.geom.Rect","global!Date","global!Math","ephox.sugar.api.search.PredicateFilter","ephox.katamari.api.Thunk","ephox.sand.api.Node","ephox.sand.api.PlatformDetection","ephox.sugar.api.search.Traverse","ephox.sand.util.Global","ephox.sand.core.PlatformDetection","global!navigator","ephox.katamari.api.Struct","ephox.sugar.alien.Recurse","ephox.katamari.api.Resolve","ephox.sand.core.Browser","ephox.sand.core.OperatingSystem","ephox.sand.detect.DeviceType","ephox.sand.detect.UaString","ephox.sand.info.PlatformInfo","ephox.katamari.data.Immutable","ephox.katamari.data.MixedBag","ephox.katamari.api.Global","ephox.sand.detect.Version","ephox.katamari.api.Strings","ephox.katamari.api.Obj","ephox.katamari.util.BagUtils","global!Number","ephox.katamari.str.StrAppend","ephox.katamari.str.StringParts"]
+["tinymce.themes.modern.Theme","global!window","tinymce.core.ThemeManager","tinymce.themes.modern.api.ThemeApi","tinymce.ui.Api","tinymce.ui.FormatControls","global!tinymce.util.Tools.resolve","tinymce.themes.modern.ui.Render","tinymce.themes.modern.ui.Resize","tinymce.ui.NotificationManagerImpl","tinymce.ui.WindowManagerImpl","tinymce.core.ui.Factory","tinymce.core.util.Tools","tinymce.ui.AbsoluteLayout","tinymce.ui.BrowseButton","tinymce.ui.Button","tinymce.ui.ButtonGroup","tinymce.ui.Checkbox","tinymce.ui.Collection","tinymce.ui.ColorBox","tinymce.ui.ColorButton","tinymce.ui.ColorPicker","tinymce.ui.ComboBox","tinymce.ui.Container","tinymce.ui.Control","tinymce.ui.DragHelper","tinymce.ui.DropZone","tinymce.ui.ElementPath","tinymce.ui.FieldSet","tinymce.ui.FilePicker","tinymce.ui.FitLayout","tinymce.ui.FlexLayout","tinymce.ui.FloatPanel","tinymce.ui.FlowLayout","tinymce.ui.Form","ephox.katamari.api.Fun","ephox.sugar.api.node.Element","ephox.sugar.api.search.SelectorFind","global!document","tinymce.core.EditorManager","tinymce.core.Env","tinymce.ui.Widget","tinymce.ui.editorui.Align","tinymce.ui.editorui.FontSelect","tinymce.ui.editorui.FontSizeSelect","tinymce.ui.editorui.FormatSelect","tinymce.ui.editorui.Formats","tinymce.ui.editorui.InsertButton","tinymce.ui.editorui.SimpleControls","tinymce.ui.editorui.UndoRedo","tinymce.ui.editorui.VisualAid","tinymce.ui.FormItem","tinymce.ui.GridLayout","tinymce.ui.Iframe","tinymce.ui.InfoBox","tinymce.ui.KeyboardNavigation","tinymce.ui.Label","tinymce.ui.Layout","tinymce.ui.ListBox","tinymce.ui.Menu","tinymce.ui.MenuBar","tinymce.ui.MenuButton","tinymce.ui.MenuItem","tinymce.ui.MessageBox","tinymce.ui.Movable","tinymce.ui.Notification","tinymce.ui.Panel","tinymce.ui.PanelButton","tinymce.ui.Path","tinymce.ui.Progress","tinymce.ui.Radio","tinymce.ui.ReflowQueue","tinymce.ui.Resizable","tinymce.ui.ResizeHandle","tinymce.ui.Scrollable","tinymce.ui.SelectBox","tinymce.ui.Selector","tinymce.ui.Slider","tinymce.ui.Spacer","tinymce.ui.SplitButton","tinymce.ui.StackLayout","tinymce.ui.TabPanel","tinymce.ui.TextBox","tinymce.ui.Throbber","tinymce.ui.Toolbar","tinymce.ui.Tooltip","tinymce.ui.Window","tinymce.themes.modern.api.Settings","tinymce.themes.modern.modes.Iframe","tinymce.themes.modern.modes.Inline","tinymce.themes.modern.ui.ProgressState","tinymce.core.dom.DOMUtils","tinymce.themes.modern.api.Events","ephox.katamari.api.Arr","global!setTimeout","tinymce.ui.DomUtils","tinymce.core.dom.DomQuery","tinymce.core.util.Class","tinymce.core.util.EventDispatcher","tinymce.ui.BoxUtils","tinymce.ui.ClassList","tinymce.ui.data.ObservableObject","tinymce.core.util.Delay","global!RegExp","tinymce.core.util.VK","tinymce.core.util.Color","global!Array","global!Error","tinymce.ui.content.LinkTargets","global!console","ephox.sugar.api.search.PredicateFind","ephox.sugar.api.search.Selectors","ephox.sugar.impl.ClosestOrAncestor","tinymce.ui.editorui.FormatUtils","tinymce.ui.fmt.FontInfo","tinymce.core.util.I18n","tinymce.themes.modern.ui.A11y","tinymce.themes.modern.ui.ContextToolbars","tinymce.themes.modern.ui.Menubar","tinymce.themes.modern.ui.Sidebar","tinymce.themes.modern.ui.SkinLoaded","tinymce.themes.modern.ui.Toolbar","tinymce.ui.data.Binding","tinymce.core.util.Observable","ephox.katamari.api.Option","global!String","ephox.katamari.api.Id","ephox.sugar.api.search.SelectorFilter","ephox.katamari.api.Type","ephox.sugar.api.node.Body","ephox.sugar.api.dom.Compare","ephox.sugar.api.node.NodeTypes","ephox.sugar.api.node.Node","tinymce.core.geom.Rect","tinymce.themes.modern.alien.UiContainer","global!Object","global!Date","global!Math","ephox.sugar.api.search.PredicateFilter","ephox.katamari.api.Thunk","ephox.sand.api.Node","ephox.sand.api.PlatformDetection","ephox.sugar.api.search.Traverse","ephox.sand.util.Global","ephox.sand.core.PlatformDetection","global!navigator","ephox.katamari.api.Struct","ephox.sugar.alien.Recurse","ephox.katamari.api.Resolve","ephox.sand.core.Browser","ephox.sand.core.OperatingSystem","ephox.sand.detect.DeviceType","ephox.sand.detect.UaString","ephox.sand.info.PlatformInfo","ephox.katamari.data.Immutable","ephox.katamari.data.MixedBag","ephox.katamari.api.Global","ephox.sand.detect.Version","ephox.katamari.api.Strings","ephox.katamari.api.Obj","ephox.katamari.util.BagUtils","global!Number","ephox.katamari.str.StrAppend","ephox.katamari.str.StringParts"]
 jsc*/
 defineGlobal("global!window", window);
 defineGlobal("global!tinymce.util.Tools.resolve", tinymce.util.Tools.resolve);
@@ -247,6 +247,10 @@ define(
       return skinUrl;
     };
 
+    var isSkinDisabled = function (editor) {
+      return editor.settings.skin === false;
+    };
+
     var isInline = function (editor) {
       return editor.getParam('inline', false);
     };
@@ -300,6 +304,7 @@ define(
       getMaxWidth: getMaxWidth,
       getMaxHeight: getMaxHeight,
       getSkinUrl: getSkinUrl,
+      isSkinDisabled: isSkinDisabled,
       isInline: isInline,
       getToolbars: getToolbars
     };
@@ -343,6 +348,26 @@ define(
   ],
   function (resolve) {
     return resolve('tinymce.ui.Factory');
+  }
+);
+
+/**
+ * ResolveGlobal.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.core.util.I18n',
+  [
+    'global!tinymce.util.Tools.resolve'
+  ],
+  function (resolve) {
+    return resolve('tinymce.util.I18n');
   }
 );
 
@@ -421,7 +446,26 @@ define(
   }
 );
 
-defineGlobal("global!document", document);
+/**
+ * ResolveGlobal.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.core.Env',
+  [
+    'global!tinymce.util.Tools.resolve'
+  ],
+  function (resolve) {
+    return resolve('tinymce.Env');
+  }
+);
+
 /**
  * ResolveGlobal.js
  *
@@ -459,456 +503,6 @@ define(
   ],
   function (resolve) {
     return resolve('tinymce.util.Delay');
-  }
-);
-
-/**
- * Toolbar.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-define(
-  'tinymce.themes.modern.ui.Toolbar',
-  [
-    'tinymce.core.ui.Factory',
-    'tinymce.core.util.Tools',
-    'tinymce.themes.modern.api.Settings'
-  ],
-  function (Factory, Tools, Settings) {
-    var createToolbar = function (editor, items, size) {
-      var toolbarItems = [], buttonGroup;
-
-      if (!items) {
-        return;
-      }
-
-      Tools.each(items.split(/[ ,]/), function (item) {
-        var itemName;
-
-        var bindSelectorChanged = function () {
-          var selection = editor.selection;
-
-          if (item.settings.stateSelector) {
-            selection.selectorChanged(item.settings.stateSelector, function (state) {
-              item.active(state);
-            }, true);
-          }
-
-          if (item.settings.disabledStateSelector) {
-            selection.selectorChanged(item.settings.disabledStateSelector, function (state) {
-              item.disabled(state);
-            });
-          }
-        };
-
-        if (item === "|") {
-          buttonGroup = null;
-        } else {
-          if (!buttonGroup) {
-            buttonGroup = { type: 'buttongroup', items: [] };
-            toolbarItems.push(buttonGroup);
-          }
-
-          if (editor.buttons[item]) {
-            // TODO: Move control creation to some UI class
-            itemName = item;
-            item = editor.buttons[itemName];
-
-            if (typeof item === "function") {
-              item = item();
-            }
-
-            item.type = item.type || 'button';
-            item.size = size;
-
-            item = Factory.create(item);
-            buttonGroup.items.push(item);
-
-            if (editor.initialized) {
-              bindSelectorChanged();
-            } else {
-              editor.on('init', bindSelectorChanged);
-            }
-          }
-        }
-      });
-
-      return {
-        type: 'toolbar',
-        layout: 'flow',
-        items: toolbarItems
-      };
-    };
-
-    /**
-     * Creates the toolbars from config and returns a toolbar array.
-     *
-     * @param {String} size Optional toolbar item size.
-     * @return {Array} Array with toolbars.
-     */
-    var createToolbars = function (editor, size) {
-      var toolbars = [];
-
-      var addToolbar = function (items) {
-        if (items) {
-          toolbars.push(createToolbar(editor, items, size));
-        }
-      };
-
-      Tools.each(Settings.getToolbars(editor), function (toolbar) {
-        addToolbar(toolbar);
-      });
-
-      if (toolbars.length) {
-        return {
-          type: 'panel',
-          layout: 'stack',
-          classes: "toolbar-grp",
-          ariaRoot: true,
-          ariaRemember: true,
-          items: toolbars
-        };
-      }
-    };
-
-    return {
-      createToolbar: createToolbar,
-      createToolbars: createToolbars
-    };
-  }
-);
-
-/**
- * ContextToolbars.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-define(
-  'tinymce.themes.modern.ui.ContextToolbars',
-  [
-    'global!document',
-    'tinymce.core.dom.DOMUtils',
-    'tinymce.core.geom.Rect',
-    'tinymce.core.ui.Factory',
-    'tinymce.core.util.Delay',
-    'tinymce.core.util.Tools',
-    'tinymce.themes.modern.api.Settings',
-    'tinymce.themes.modern.ui.Toolbar'
-  ],
-  function (document, DOMUtils, Rect, Factory, Delay, Tools, Settings, Toolbar) {
-    var DOM = DOMUtils.DOM;
-
-    var toClientRect = function (geomRect) {
-      return {
-        left: geomRect.x,
-        top: geomRect.y,
-        width: geomRect.w,
-        height: geomRect.h,
-        right: geomRect.x + geomRect.w,
-        bottom: geomRect.y + geomRect.h
-      };
-    };
-
-    var hideAllFloatingPanels = function (editor) {
-      Tools.each(editor.contextToolbars, function (toolbar) {
-        if (toolbar.panel) {
-          toolbar.panel.hide();
-        }
-      });
-    };
-
-    var movePanelTo = function (panel, pos) {
-      panel.moveTo(pos.left, pos.top);
-    };
-
-    var togglePositionClass = function (panel, relPos, predicate) {
-      relPos = relPos ? relPos.substr(0, 2) : '';
-
-      Tools.each({
-        t: 'down',
-        b: 'up'
-      }, function (cls, pos) {
-        panel.classes.toggle('arrow-' + cls, predicate(pos, relPos.substr(0, 1)));
-      });
-
-      Tools.each({
-        l: 'left',
-        r: 'right'
-      }, function (cls, pos) {
-        panel.classes.toggle('arrow-' + cls, predicate(pos, relPos.substr(1, 1)));
-      });
-    };
-
-    var userConstrain = function (handler, x, y, elementRect, contentAreaRect, panelRect) {
-      panelRect = toClientRect({ x: x, y: y, w: panelRect.w, h: panelRect.h });
-
-      if (handler) {
-        panelRect = handler({
-          elementRect: toClientRect(elementRect),
-          contentAreaRect: toClientRect(contentAreaRect),
-          panelRect: panelRect
-        });
-      }
-
-      return panelRect;
-    };
-
-    var addContextualToolbars = function (editor) {
-      var scrollContainer;
-
-      var getContextToolbars = function () {
-        return editor.contextToolbars || [];
-      };
-
-      var getElementRect = function (elm) {
-        var pos, targetRect, root;
-
-        pos = DOM.getPos(editor.getContentAreaContainer());
-        targetRect = editor.dom.getRect(elm);
-        root = editor.dom.getRoot();
-
-        // Adjust targetPos for scrolling in the editor
-        if (root.nodeName === 'BODY') {
-          targetRect.x -= root.ownerDocument.documentElement.scrollLeft || root.scrollLeft;
-          targetRect.y -= root.ownerDocument.documentElement.scrollTop || root.scrollTop;
-        }
-
-        targetRect.x += pos.x;
-        targetRect.y += pos.y;
-
-        return targetRect;
-      };
-
-      var reposition = function (match, shouldShow) {
-        var relPos, panelRect, elementRect, contentAreaRect, panel, relRect, testPositions, smallElementWidthThreshold;
-        var handler = Settings.getInlineToolbarPositionHandler(editor);
-
-        if (editor.removed) {
-          return;
-        }
-
-        if (!match || !match.toolbar.panel) {
-          hideAllFloatingPanels(editor);
-          return;
-        }
-
-        testPositions = [
-          'bc-tc', 'tc-bc',
-          'tl-bl', 'bl-tl',
-          'tr-br', 'br-tr'
-        ];
-
-        panel = match.toolbar.panel;
-
-        // Only show the panel on some events not for example nodeChange since that fires when context menu is opened
-        if (shouldShow) {
-          panel.show();
-        }
-
-        elementRect = getElementRect(match.element);
-        panelRect = DOM.getRect(panel.getEl());
-        contentAreaRect = DOM.getRect(editor.getContentAreaContainer() || editor.getBody());
-        smallElementWidthThreshold = 25;
-
-        if (DOM.getStyle(match.element, 'display', true) !== 'inline') {
-          // We need to use these instead of the rect values since the style
-          // size properites might not be the same as the real size for a table
-          elementRect.w = match.element.clientWidth;
-          elementRect.h = match.element.clientHeight;
-        }
-
-        if (!editor.inline) {
-          contentAreaRect.w = editor.getDoc().documentElement.offsetWidth;
-        }
-
-        // Inflate the elementRect so it doesn't get placed above resize handles
-        if (editor.selection.controlSelection.isResizable(match.element) && elementRect.w < smallElementWidthThreshold) {
-          elementRect = Rect.inflate(elementRect, 0, 8);
-        }
-
-        relPos = Rect.findBestRelativePosition(panelRect, elementRect, contentAreaRect, testPositions);
-        elementRect = Rect.clamp(elementRect, contentAreaRect);
-
-        if (relPos) {
-          relRect = Rect.relativePosition(panelRect, elementRect, relPos);
-          movePanelTo(panel, userConstrain(handler, relRect.x, relRect.y, elementRect, contentAreaRect, panelRect));
-        } else {
-          // Allow overflow below the editor to avoid placing toolbars ontop of tables
-          contentAreaRect.h += panelRect.h;
-
-          elementRect = Rect.intersect(contentAreaRect, elementRect);
-          if (elementRect) {
-            relPos = Rect.findBestRelativePosition(panelRect, elementRect, contentAreaRect, [
-              'bc-tc', 'bl-tl', 'br-tr'
-            ]);
-
-            if (relPos) {
-              relRect = Rect.relativePosition(panelRect, elementRect, relPos);
-              movePanelTo(panel, userConstrain(handler, relRect.x, relRect.y, elementRect, contentAreaRect, panelRect));
-            } else {
-              movePanelTo(panel, userConstrain(handler, elementRect.x, elementRect.y, elementRect, contentAreaRect, panelRect));
-            }
-          } else {
-            panel.hide();
-          }
-        }
-
-        togglePositionClass(panel, relPos, function (pos1, pos2) {
-          return pos1 === pos2;
-        });
-
-        //drawRect(contentAreaRect, 'blue');
-        //drawRect(elementRect, 'red');
-        //drawRect(panelRect, 'green');
-      };
-
-      var repositionHandler = function (show) {
-        return function () {
-          var execute = function () {
-            if (editor.selection) {
-              reposition(findFrontMostMatch(editor.selection.getNode()), show);
-            }
-          };
-
-          Delay.requestAnimationFrame(execute);
-        };
-      };
-
-      var bindScrollEvent = function () {
-        if (!scrollContainer) {
-          scrollContainer = editor.selection.getScrollContainer() || editor.getWin();
-          DOM.bind(scrollContainer, 'scroll', repositionHandler(true));
-
-          editor.on('remove', function () {
-            DOM.unbind(scrollContainer, 'scroll');
-          });
-        }
-      };
-
-      var showContextToolbar = function (match) {
-        var panel;
-
-        if (match.toolbar.panel) {
-          match.toolbar.panel.show();
-          reposition(match);
-          return;
-        }
-
-        bindScrollEvent();
-
-        panel = Factory.create({
-          type: 'floatpanel',
-          role: 'dialog',
-          classes: 'tinymce tinymce-inline arrow',
-          ariaLabel: 'Inline toolbar',
-          layout: 'flex',
-          direction: 'column',
-          align: 'stretch',
-          autohide: false,
-          autofix: true,
-          fixed: true,
-          border: 1,
-          items: Toolbar.createToolbar(editor, match.toolbar.items),
-          oncancel: function () {
-            editor.focus();
-          }
-        });
-
-        match.toolbar.panel = panel;
-        panel.renderTo(document.body).reflow();
-        reposition(match);
-      };
-
-      var hideAllContextToolbars = function () {
-        Tools.each(getContextToolbars(), function (toolbar) {
-          if (toolbar.panel) {
-            toolbar.panel.hide();
-          }
-        });
-      };
-
-      var findFrontMostMatch = function (targetElm) {
-        var i, y, parentsAndSelf, toolbars = getContextToolbars();
-
-        parentsAndSelf = editor.$(targetElm).parents().add(targetElm);
-        for (i = parentsAndSelf.length - 1; i >= 0; i--) {
-          for (y = toolbars.length - 1; y >= 0; y--) {
-            if (toolbars[y].predicate(parentsAndSelf[i])) {
-              return {
-                toolbar: toolbars[y],
-                element: parentsAndSelf[i]
-              };
-            }
-          }
-        }
-
-        return null;
-      };
-
-      editor.on('click keyup setContent ObjectResized', function (e) {
-        // Only act on partial inserts
-        if (e.type === 'setcontent' && !e.selection) {
-          return;
-        }
-
-        // Needs to be delayed to avoid Chrome img focus out bug
-        Delay.setEditorTimeout(editor, function () {
-          var match;
-
-          match = findFrontMostMatch(editor.selection.getNode());
-          if (match) {
-            hideAllContextToolbars();
-            showContextToolbar(match);
-          } else {
-            hideAllContextToolbars();
-          }
-        });
-      });
-
-      editor.on('blur hide contextmenu', hideAllContextToolbars);
-
-      editor.on('ObjectResizeStart', function () {
-        var match = findFrontMostMatch(editor.selection.getNode());
-
-        if (match && match.toolbar.panel) {
-          match.toolbar.panel.hide();
-        }
-      });
-
-      editor.on('ResizeEditor ResizeWindow', repositionHandler(true));
-      editor.on('nodeChange', repositionHandler(false));
-
-      editor.on('remove', function () {
-        Tools.each(getContextToolbars(), function (toolbar) {
-          if (toolbar.panel) {
-            toolbar.panel.remove();
-          }
-        });
-
-        editor.contextToolbars = {};
-      });
-
-      editor.shortcuts.add('ctrl+shift+e > ctrl+shift+p', '', function () {
-        var match = findFrontMostMatch(editor.selection.getNode());
-        if (match && match.toolbar.panel) {
-          match.toolbar.panel.items()[0].focus();
-        }
-      });
-    };
-
-    return {
-      addContextualToolbars: addContextualToolbars
-    };
   }
 );
 
@@ -1190,6 +784,510 @@ define(
       some: some,
       none: none,
       from: from
+    };
+  }
+);
+
+/**
+ * UiContainer.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.themes.modern.alien.UiContainer',
+  [
+    'ephox.katamari.api.Option',
+    'tinymce.core.Env',
+    'tinymce.core.dom.DOMUtils'
+  ],
+  function (Option, Env, DOMUtils) {
+    var getUiContainerDelta = function () {
+      var uiContainer = Env.container;
+      if (uiContainer && DOMUtils.DOM.getStyle(uiContainer, 'position', true) !== 'static') {
+        var containerPos = DOMUtils.DOM.getPos(uiContainer);
+        var dx = uiContainer.scrollLeft - containerPos.x;
+        var dy = uiContainer.scrollTop - containerPos.y;
+        return Option.some({
+          x: dx,
+          y: dy
+        });
+      } else {
+        return Option.none();
+      }
+    };
+
+    return {
+      getUiContainerDelta: getUiContainerDelta
+    };
+  }
+);
+
+/**
+ * Toolbar.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.themes.modern.ui.Toolbar',
+  [
+    'tinymce.core.ui.Factory',
+    'tinymce.core.util.Tools',
+    'tinymce.themes.modern.api.Settings'
+  ],
+  function (Factory, Tools, Settings) {
+    var createToolbar = function (editor, items, size) {
+      var toolbarItems = [], buttonGroup;
+
+      if (!items) {
+        return;
+      }
+
+      Tools.each(items.split(/[ ,]/), function (item) {
+        var itemName;
+
+        var bindSelectorChanged = function () {
+          var selection = editor.selection;
+
+          if (item.settings.stateSelector) {
+            selection.selectorChanged(item.settings.stateSelector, function (state) {
+              item.active(state);
+            }, true);
+          }
+
+          if (item.settings.disabledStateSelector) {
+            selection.selectorChanged(item.settings.disabledStateSelector, function (state) {
+              item.disabled(state);
+            });
+          }
+        };
+
+        if (item === "|") {
+          buttonGroup = null;
+        } else {
+          if (!buttonGroup) {
+            buttonGroup = { type: 'buttongroup', items: [] };
+            toolbarItems.push(buttonGroup);
+          }
+
+          if (editor.buttons[item]) {
+            // TODO: Move control creation to some UI class
+            itemName = item;
+            item = editor.buttons[itemName];
+
+            if (typeof item === "function") {
+              item = item();
+            }
+
+            item.type = item.type || 'button';
+            item.size = size;
+
+            item = Factory.create(item);
+            buttonGroup.items.push(item);
+
+            if (editor.initialized) {
+              bindSelectorChanged();
+            } else {
+              editor.on('init', bindSelectorChanged);
+            }
+          }
+        }
+      });
+
+      return {
+        type: 'toolbar',
+        layout: 'flow',
+        items: toolbarItems
+      };
+    };
+
+    /**
+     * Creates the toolbars from config and returns a toolbar array.
+     *
+     * @param {String} size Optional toolbar item size.
+     * @return {Array} Array with toolbars.
+     */
+    var createToolbars = function (editor, size) {
+      var toolbars = [];
+
+      var addToolbar = function (items) {
+        if (items) {
+          toolbars.push(createToolbar(editor, items, size));
+        }
+      };
+
+      Tools.each(Settings.getToolbars(editor), function (toolbar) {
+        addToolbar(toolbar);
+      });
+
+      if (toolbars.length) {
+        return {
+          type: 'panel',
+          layout: 'stack',
+          classes: "toolbar-grp",
+          ariaRoot: true,
+          ariaRemember: true,
+          items: toolbars
+        };
+      }
+    };
+
+    return {
+      createToolbar: createToolbar,
+      createToolbars: createToolbars
+    };
+  }
+);
+
+/**
+ * ContextToolbars.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.themes.modern.ui.ContextToolbars',
+  [
+    'tinymce.core.Env',
+    'tinymce.core.dom.DOMUtils',
+    'tinymce.core.geom.Rect',
+    'tinymce.core.ui.Factory',
+    'tinymce.core.util.Delay',
+    'tinymce.core.util.Tools',
+    'tinymce.themes.modern.alien.UiContainer',
+    'tinymce.themes.modern.api.Settings',
+    'tinymce.themes.modern.ui.Toolbar'
+  ],
+  function (Env, DOMUtils, Rect, Factory, Delay, Tools, UiContainer, Settings, Toolbar) {
+    var DOM = DOMUtils.DOM;
+
+    var toClientRect = function (geomRect) {
+      return {
+        left: geomRect.x,
+        top: geomRect.y,
+        width: geomRect.w,
+        height: geomRect.h,
+        right: geomRect.x + geomRect.w,
+        bottom: geomRect.y + geomRect.h
+      };
+    };
+
+    var hideAllFloatingPanels = function (editor) {
+      Tools.each(editor.contextToolbars, function (toolbar) {
+        if (toolbar.panel) {
+          toolbar.panel.hide();
+        }
+      });
+    };
+
+    var movePanelTo = function (panel, pos) {
+      panel.moveTo(pos.left, pos.top);
+    };
+
+    var togglePositionClass = function (panel, relPos, predicate) {
+      relPos = relPos ? relPos.substr(0, 2) : '';
+
+      Tools.each({
+        t: 'down',
+        b: 'up'
+      }, function (cls, pos) {
+        panel.classes.toggle('arrow-' + cls, predicate(pos, relPos.substr(0, 1)));
+      });
+
+      Tools.each({
+        l: 'left',
+        r: 'right'
+      }, function (cls, pos) {
+        panel.classes.toggle('arrow-' + cls, predicate(pos, relPos.substr(1, 1)));
+      });
+    };
+
+    var userConstrain = function (handler, x, y, elementRect, contentAreaRect, panelRect) {
+      panelRect = toClientRect({ x: x, y: y, w: panelRect.w, h: panelRect.h });
+
+      if (handler) {
+        panelRect = handler({
+          elementRect: toClientRect(elementRect),
+          contentAreaRect: toClientRect(contentAreaRect),
+          panelRect: panelRect
+        });
+      }
+
+      return panelRect;
+    };
+
+    var addContextualToolbars = function (editor) {
+      var scrollContainer;
+
+      var getContextToolbars = function () {
+        return editor.contextToolbars || [];
+      };
+
+      var getElementRect = function (elm) {
+        var pos, targetRect, root;
+
+        pos = DOM.getPos(editor.getContentAreaContainer());
+        targetRect = editor.dom.getRect(elm);
+        root = editor.dom.getRoot();
+
+        // Adjust targetPos for scrolling in the editor
+        if (root.nodeName === 'BODY') {
+          targetRect.x -= root.ownerDocument.documentElement.scrollLeft || root.scrollLeft;
+          targetRect.y -= root.ownerDocument.documentElement.scrollTop || root.scrollTop;
+        }
+
+        targetRect.x += pos.x;
+        targetRect.y += pos.y;
+
+        return targetRect;
+      };
+
+      var reposition = function (match, shouldShow) {
+        var relPos, panelRect, elementRect, contentAreaRect, panel, relRect, testPositions, smallElementWidthThreshold;
+        var handler = Settings.getInlineToolbarPositionHandler(editor);
+
+        if (editor.removed) {
+          return;
+        }
+
+        if (!match || !match.toolbar.panel) {
+          hideAllFloatingPanels(editor);
+          return;
+        }
+
+        testPositions = [
+          'bc-tc', 'tc-bc',
+          'tl-bl', 'bl-tl',
+          'tr-br', 'br-tr'
+        ];
+
+        panel = match.toolbar.panel;
+
+        // Only show the panel on some events not for example nodeChange since that fires when context menu is opened
+        if (shouldShow) {
+          panel.show();
+        }
+
+        elementRect = getElementRect(match.element);
+        panelRect = DOM.getRect(panel.getEl());
+        contentAreaRect = DOM.getRect(editor.getContentAreaContainer() || editor.getBody());
+
+        var delta = UiContainer.getUiContainerDelta().getOr({ x: 0, y: 0 });
+        elementRect.x += delta.x;
+        elementRect.y += delta.y;
+        panelRect.x += delta.x;
+        panelRect.y += delta.y;
+        contentAreaRect.x += delta.x;
+        contentAreaRect.y += delta.y;
+
+        smallElementWidthThreshold = 25;
+
+        if (DOM.getStyle(match.element, 'display', true) !== 'inline') {
+          // We need to use these instead of the rect values since the style
+          // size properites might not be the same as the real size for a table if it has a caption
+          var clientRect = match.element.getBoundingClientRect();
+          elementRect.w = clientRect.width;
+          elementRect.h = clientRect.height;
+        }
+
+        if (!editor.inline) {
+          contentAreaRect.w = editor.getDoc().documentElement.offsetWidth;
+        }
+
+        // Inflate the elementRect so it doesn't get placed above resize handles
+        if (editor.selection.controlSelection.isResizable(match.element) && elementRect.w < smallElementWidthThreshold) {
+          elementRect = Rect.inflate(elementRect, 0, 8);
+        }
+
+        relPos = Rect.findBestRelativePosition(panelRect, elementRect, contentAreaRect, testPositions);
+        elementRect = Rect.clamp(elementRect, contentAreaRect);
+
+        if (relPos) {
+          relRect = Rect.relativePosition(panelRect, elementRect, relPos);
+          movePanelTo(panel, userConstrain(handler, relRect.x, relRect.y, elementRect, contentAreaRect, panelRect));
+        } else {
+          // Allow overflow below the editor to avoid placing toolbars ontop of tables
+          contentAreaRect.h += panelRect.h;
+
+          elementRect = Rect.intersect(contentAreaRect, elementRect);
+          if (elementRect) {
+            relPos = Rect.findBestRelativePosition(panelRect, elementRect, contentAreaRect, [
+              'bc-tc', 'bl-tl', 'br-tr'
+            ]);
+
+            if (relPos) {
+              relRect = Rect.relativePosition(panelRect, elementRect, relPos);
+              movePanelTo(panel, userConstrain(handler, relRect.x, relRect.y, elementRect, contentAreaRect, panelRect));
+            } else {
+              movePanelTo(panel, userConstrain(handler, elementRect.x, elementRect.y, elementRect, contentAreaRect, panelRect));
+            }
+          } else {
+            panel.hide();
+          }
+        }
+
+        togglePositionClass(panel, relPos, function (pos1, pos2) {
+          return pos1 === pos2;
+        });
+
+        //drawRect(contentAreaRect, 'blue');
+        //drawRect(elementRect, 'red');
+        //drawRect(panelRect, 'green');
+      };
+
+      var repositionHandler = function (show) {
+        return function () {
+          var execute = function () {
+            if (editor.selection) {
+              reposition(findFrontMostMatch(editor.selection.getNode()), show);
+            }
+          };
+
+          Delay.requestAnimationFrame(execute);
+        };
+      };
+
+      var bindScrollEvent = function () {
+        if (!scrollContainer) {
+          var reposition = repositionHandler(true);
+
+          scrollContainer = editor.selection.getScrollContainer() || editor.getWin();
+          DOM.bind(scrollContainer, 'scroll', reposition);
+          DOM.bind(Env.container, 'scroll', reposition);
+
+          editor.on('remove', function () {
+            DOM.unbind(scrollContainer, 'scroll', reposition);
+            DOM.unbind(Env.container, 'scroll', reposition);
+          });
+        }
+      };
+
+      var showContextToolbar = function (match) {
+        var panel;
+
+        if (match.toolbar.panel) {
+          match.toolbar.panel.show();
+          reposition(match);
+          return;
+        }
+
+        bindScrollEvent();
+
+        panel = Factory.create({
+          type: 'floatpanel',
+          role: 'dialog',
+          classes: 'tinymce tinymce-inline arrow',
+          ariaLabel: 'Inline toolbar',
+          layout: 'flex',
+          direction: 'column',
+          align: 'stretch',
+          autohide: false,
+          autofix: true,
+          fixed: true,
+          border: 1,
+          items: Toolbar.createToolbar(editor, match.toolbar.items),
+          oncancel: function () {
+            editor.focus();
+          }
+        });
+
+        match.toolbar.panel = panel;
+        panel.renderTo().reflow();
+        reposition(match);
+      };
+
+      var hideAllContextToolbars = function () {
+        Tools.each(getContextToolbars(), function (toolbar) {
+          if (toolbar.panel) {
+            toolbar.panel.hide();
+          }
+        });
+      };
+
+      var findFrontMostMatch = function (targetElm) {
+        var i, y, parentsAndSelf, toolbars = getContextToolbars();
+
+        parentsAndSelf = editor.$(targetElm).parents().add(targetElm);
+        for (i = parentsAndSelf.length - 1; i >= 0; i--) {
+          for (y = toolbars.length - 1; y >= 0; y--) {
+            if (toolbars[y].predicate(parentsAndSelf[i])) {
+              return {
+                toolbar: toolbars[y],
+                element: parentsAndSelf[i]
+              };
+            }
+          }
+        }
+
+        return null;
+      };
+
+      editor.on('click keyup setContent ObjectResized', function (e) {
+        // Only act on partial inserts
+        if (e.type === 'setcontent' && !e.selection) {
+          return;
+        }
+
+        // Needs to be delayed to avoid Chrome img focus out bug
+        Delay.setEditorTimeout(editor, function () {
+          var match;
+
+          match = findFrontMostMatch(editor.selection.getNode());
+          if (match) {
+            hideAllContextToolbars();
+            showContextToolbar(match);
+          } else {
+            hideAllContextToolbars();
+          }
+        });
+      });
+
+      editor.on('blur hide contextmenu', hideAllContextToolbars);
+
+      editor.on('ObjectResizeStart', function () {
+        var match = findFrontMostMatch(editor.selection.getNode());
+
+        if (match && match.toolbar.panel) {
+          match.toolbar.panel.hide();
+        }
+      });
+
+      editor.on('ResizeEditor ResizeWindow', repositionHandler(true));
+      editor.on('nodeChange', repositionHandler(false));
+
+      editor.on('remove', function () {
+        Tools.each(getContextToolbars(), function (toolbar) {
+          if (toolbar.panel) {
+            toolbar.panel.remove();
+          }
+        });
+
+        editor.contextToolbars = {};
+      });
+
+      editor.shortcuts.add('ctrl+shift+e > ctrl+shift+p', '', function () {
+        var match = findFrontMostMatch(editor.selection.getNode());
+        if (match && match.toolbar.panel) {
+          match.toolbar.panel.items()[0].focus();
+        }
+      });
+    };
+
+    return {
+      addContextualToolbars: addContextualToolbars
     };
   }
 );
@@ -1509,11 +1607,10 @@ define(
   'tinymce.themes.modern.ui.Menubar',
   [
     'ephox.katamari.api.Arr',
-    'ephox.katamari.api.Fun',
     'tinymce.core.util.Tools',
     'tinymce.themes.modern.api.Settings'
   ],
-  function (Arr, Fun, Tools, Settings) {
+  function (Arr, Tools, Settings) {
     var defaultMenus = {
       file: { title: 'File', items: 'newdocument restoredraft | preview | print' },
       edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall' },
@@ -1525,7 +1622,9 @@ define(
       help: { title: 'Help' }
     };
 
-    var delimiterMenuNamePair = Fun.constant({ name: '|', item: { text: '|' } });
+    var delimiterMenuNamePair = function () {
+      return { name: '|', item: { text: '|' } };
+    };
 
     var createMenuNameItemPair = function (name, item) {
       var menuItem = item ? { name: name, item: item } : null;
@@ -1542,13 +1641,17 @@ define(
       return namedMenuItem && namedMenuItem.item.text === '|';
     };
 
-    var cleanupMenu = function (namedMenuItems) {
-      return Arr.filter(namedMenuItems, function (namedMenuItem, i, namedMenuItems) {
-        if (isSeparator(namedMenuItem)) {
-          return i > 0 && i < namedMenuItems.length - 1 && !isSeparator(namedMenuItems[i - 1]);
-        } else {
-          return true;
-        }
+    var cleanupMenu = function (namedMenuItems, removedMenuItems) {
+      var menuItemsPass1 = Arr.filter(namedMenuItems, function (namedMenuItem) {
+        return removedMenuItems.hasOwnProperty(namedMenuItem.name) === false;
+      });
+
+      var menuItemsPass2 = Arr.filter(menuItemsPass1, function (namedMenuItem, i, namedMenuItems) {
+        return !isSeparator(namedMenuItem) || !isSeparator(namedMenuItems[i - 1]);
+      });
+
+      return Arr.filter(menuItemsPass2, function (namedMenuItem, i, namedMenuItems) {
+        return !isSeparator(namedMenuItem) || i > 0 && i < namedMenuItems.length - 1;
       });
     };
 
@@ -1571,7 +1674,7 @@ define(
         Tools.each((menu.items || '').split(/[ ,]/), function (name) {
           var namedMenuItem = createMenuNameItemPair(name, editorMenuItems[name]);
 
-          if (namedMenuItem && !removedMenuItems[name]) {
+          if (namedMenuItem) {
             namedMenuItems.push(namedMenuItem);
           }
         });
@@ -1597,7 +1700,7 @@ define(
           });
         }
 
-        menuButton.menu = Arr.map(cleanupMenu(namedMenuItems), function (menuItem) {
+        menuButton.menu = Arr.map(cleanupMenu(namedMenuItems, removedMenuItems), function (menuItem) {
           return menuItem.item;
         });
 
@@ -1708,26 +1811,6 @@ define(
       resizeTo: resizeTo,
       resizeBy: resizeBy
     };
-  }
-);
-
-/**
- * ResolveGlobal.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-define(
-  'tinymce.core.Env',
-  [
-    'global!tinymce.util.Tools.resolve'
-  ],
-  function (resolve) {
-    return resolve('tinymce.Env');
   }
 );
 
@@ -1921,6 +2004,7 @@ define(
   [
     'tinymce.core.dom.DOMUtils',
     'tinymce.core.ui.Factory',
+    'tinymce.core.util.I18n',
     'tinymce.core.util.Tools',
     'tinymce.themes.modern.api.Events',
     'tinymce.themes.modern.api.Settings',
@@ -1932,7 +2016,7 @@ define(
     'tinymce.themes.modern.ui.SkinLoaded',
     'tinymce.themes.modern.ui.Toolbar'
   ],
-  function (DOMUtils, Factory, Tools, Events, Settings, A11y, ContextToolbars, Menubar, Resize, Sidebar, SkinLoaded, Toolbar) {
+  function (DOMUtils, Factory, I18n, Tools, Events, Settings, A11y, ContextToolbars, Menubar, Resize, Sidebar, SkinLoaded, Toolbar) {
     var DOM = DOMUtils.DOM;
 
     var switchMode = function (panel) {
@@ -1968,8 +2052,10 @@ define(
     var render = function (editor, theme, args) {
       var panel, resizeHandleCtrl, startSize;
 
-      if (args.skinUiCss) {
+      if (Settings.isSkinDisabled(editor) === false && args.skinUiCss) {
         DOM.styleSheetLoader.load(args.skinUiCss, SkinLoaded.fireSkinLoaded(editor));
+      } else {
+        SkinLoaded.fireSkinLoaded(editor)();
       }
 
       panel = theme.panel = Factory.create({
@@ -2017,7 +2103,9 @@ define(
       }
 
       if (Settings.hasStatusbar(editor)) {
-        var brandingLabel = Settings.isBrandingEnabled(editor) ? { type: 'label', classes: 'branding', html: ' powered by <a href="https://www.tinymce.com/?utm_campaign=editor_referral&utm_medium=poweredby&utm_source=tinymce" rel="noopener" target="_blank">tinymce</a>' } : null;
+        var linkHtml = '<a href="https://www.tinymce.com/?utm_campaign=editor_referral&utm_medium=poweredby&utm_source=tinymce" rel="noopener" target="_blank">tinymce</a>';
+        var html = I18n.translate(['Powered by {0}', linkHtml]);
+        var brandingLabel = Settings.isBrandingEnabled(editor) ? { type: 'label', classes: 'branding', html: ' ' + html } : null;
 
         panel.add({
           type: 'panel', name: 'statusbar', classes: 'statusbar', layout: 'flow', border: '1 0 0 0', ariaRoot: true, items: [
@@ -2062,6 +2150,7 @@ define(
   }
 );
 
+defineGlobal("global!document", document);
 /**
  * ResolveGlobal.js
  *
@@ -3420,12 +3509,11 @@ define(
        * Binds a callback to the specified event. This event can both be
        * native browser events like "click" or custom ones like PostRender.
        *
-       * The callback function will have two parameters the first one being the control that received the event
-       * the second one will be the event object either the browsers native event object or a custom JS object.
+       * The callback function gets one parameter: either the browser's native event object or a custom JS object.
        *
        * @method on
        * @param {String} name Name of the event to bind. For example "click".
-       * @param {String/function} callback Callback function to execute ones the event occurs.
+       * @param {String/function} callback Callback function to execute once the event occurs.
        * @return {tinymce.ui.Collection} Current collection instance.
        */
       // on: function(name, callback) {}, -- Generated by code below
@@ -3538,6 +3626,7 @@ define(
     return Collection;
   }
 );
+
 /**
  * Binding.js
  *
@@ -7037,6 +7126,7 @@ define(
   'tinymce.themes.modern.modes.Inline',
   [
     'global!document',
+    'tinymce.core.Env',
     'tinymce.core.dom.DOMUtils',
     'tinymce.core.ui.Factory',
     'tinymce.themes.modern.api.Events',
@@ -7048,7 +7138,11 @@ define(
     'tinymce.themes.modern.ui.Toolbar',
     'tinymce.ui.FloatPanel'
   ],
-  function (document, DOMUtils, Factory, Events, Settings, A11y, ContextToolbars, Menubar, SkinLoaded, Toolbar, FloatPanel) {
+  function (document, Env, DOMUtils, Factory, Events, Settings, A11y, ContextToolbars, Menubar, SkinLoaded, Toolbar, FloatPanel) {
+    var isFixed = function (inlineToolbarContainer) {
+      return !!(inlineToolbarContainer && !Env.container);
+    };
+
     var render = function (editor, theme, args) {
       var panel, inlineToolbarContainer;
       var DOM = DOMUtils.DOM;
@@ -7113,8 +7207,8 @@ define(
           direction: 'column',
           align: 'stretch',
           autohide: false,
-          autofix: true,
-          fixed: !!inlineToolbarContainer,
+          autofix: isFixed(inlineToolbarContainer),
+          fixed: isFixed(inlineToolbarContainer),
           border: 1,
           items: [
             Settings.hasMenubar(editor) === false ? null : { type: 'menubar', border: '0 0 1 0', items: Menubar.createMenuButtons(editor) },
@@ -7130,7 +7224,12 @@ define(
         }*/
 
         Events.fireBeforeRenderUI(editor);
-        panel.renderTo(inlineToolbarContainer || document.body).reflow();
+
+        if (inlineToolbarContainer) {
+          panel.renderTo(inlineToolbarContainer).reflow();
+        } else {
+          panel.renderTo().reflow();
+        }
 
         A11y.addKeys(editor, panel);
         show();
@@ -7147,7 +7246,7 @@ define(
 
       editor.on('focus', function () {
         // Render only when the CSS file has been loaded
-        if (args.skinUiCss) {
+        if (Settings.isSkinDisabled(editor) === false && args.skinUiCss) {
           DOM.styleSheetLoader.load(args.skinUiCss, render, render);
         } else {
           render();
@@ -7165,8 +7264,10 @@ define(
       });
 
       // Preload skin css
-      if (args.skinUiCss) {
+      if (Settings.isSkinDisabled(editor) === false && args.skinUiCss) {
         DOM.styleSheetLoader.load(args.skinUiCss, SkinLoaded.fireSkinLoaded(editor));
+      } else {
+        SkinLoaded.fireSkinLoaded(editor)();
       }
 
       return {};
@@ -7320,13 +7421,12 @@ define(
 define(
   'tinymce.themes.modern.ui.Render',
   [
-    'tinymce.core.EditorManager',
     'tinymce.themes.modern.api.Settings',
     'tinymce.themes.modern.modes.Iframe',
     'tinymce.themes.modern.modes.Inline',
     'tinymce.themes.modern.ui.ProgressState'
   ],
-  function (EditorManager, Settings, Iframe, Inline, ProgressState) {
+  function (Settings, Iframe, Inline, ProgressState) {
     var renderUI = function (editor, theme, args) {
       var skinUrl = Settings.getSkinUrl(editor);
 
@@ -9134,8 +9234,9 @@ define(
       renderHtml: function () {
         var self = this, id = self._id, prefix = self.classPrefix;
         var icon = self.state.get('icon'), image, text = self.state.get('text'), textHtml = '';
+        var ariaPressed, settings = self.settings;
 
-        image = self.settings.image;
+        image = settings.image;
         if (image) {
           icon = 'none';
 
@@ -9155,9 +9256,10 @@ define(
         }
 
         icon = icon ? prefix + 'ico ' + prefix + 'i-' + icon : '';
+        ariaPressed = typeof settings.active === 'boolean' ? ' aria-pressed="' + settings.active + '"' : '';
 
         return (
-          '<div id="' + id + '" class="' + self.classes + '" tabindex="-1">' +
+          '<div id="' + id + '" class="' + self.classes + '" tabindex="-1"' + ariaPressed + '>' +
           '<button id="' + id + '-button" role="presentation" type="button" tabindex="-1">' +
           (icon ? '<i class="' + icon + '"' + image + '></i>' : '') +
           textHtml +
@@ -12605,27 +12707,6 @@ define(
   ],
 
   function (Arr, Option, Element, NodeTypes, Error, document) {
-    /*
-     * There's a lot of code here; the aim is to allow the browser to optimise constant comparisons,
-     * instead of doing object lookup feature detection on every call
-     */
-    var STANDARD = 0;
-    var MSSTANDARD = 1;
-    var WEBKITSTANDARD = 2;
-    var FIREFOXSTANDARD = 3;
-
-    var selectorType = (function () {
-      var test = document.createElement('span');
-      // As of Chrome 34 / Safari 7.1 / FireFox 34, everyone except IE has the unprefixed function.
-      // Still check for the others, but do it last.
-      return test.matches !== undefined ? STANDARD :
-             test.msMatchesSelector !== undefined ? MSSTANDARD :
-             test.webkitMatchesSelector !== undefined ? WEBKITSTANDARD :
-             test.mozMatchesSelector !== undefined ? FIREFOXSTANDARD :
-             -1;
-    })();
-
-
     var ELEMENT = NodeTypes.ELEMENT;
     var DOCUMENT = NodeTypes.DOCUMENT;
 
@@ -12635,10 +12716,10 @@ define(
 
       // As of Chrome 34 / Safari 7.1 / FireFox 34, everyone except IE has the unprefixed function.
       // Still check for the others, but do it last.
-      else if (selectorType === STANDARD) return elem.matches(selector);
-      else if (selectorType === MSSTANDARD) return elem.msMatchesSelector(selector);
-      else if (selectorType === WEBKITSTANDARD) return elem.webkitMatchesSelector(selector);
-      else if (selectorType === FIREFOXSTANDARD) return elem.mozMatchesSelector(selector);
+      else if (elem.matches !== undefined) return elem.matches(selector);
+      else if (elem.msMatchesSelector !== undefined) return elem.msMatchesSelector(selector);
+      else if (elem.webkitMatchesSelector !== undefined) return elem.webkitMatchesSelector(selector);
+      else if (elem.mozMatchesSelector !== undefined) return elem.mozMatchesSelector(selector);
       else throw new Error('Browser lacks native selectors'); // unfortunately we can't throw this on startup :(
     };
 
@@ -14052,11 +14133,324 @@ define(
         alignnone: ['No alignment', 'JustifyNone']
       }, function (item, name) {
         editor.addButton(name, {
+          active: false,
           tooltip: item[0],
           cmd: item[1],
           onPostRender: FormatUtils.postRenderFormat(editor, name)
         });
       });
+    };
+
+    return {
+      register: register
+    };
+  }
+);
+
+/**
+ * FontInfo.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/**
+ * Internal class for computing font size for elements.
+ *
+ * @private
+ * @class tinymce.fmt.FontInfo
+ */
+define(
+  'tinymce.ui.fmt.FontInfo',
+  [
+    'ephox.katamari.api.Fun',
+    'ephox.katamari.api.Option',
+    'ephox.sugar.api.node.Element',
+    'ephox.sugar.api.node.Node',
+    'tinymce.core.dom.DOMUtils'
+  ],
+  function (Fun, Option, Element, Node, DOMUtils) {
+    var getSpecifiedFontProp = function (propName, rootElm, elm) {
+      while (elm !== rootElm) {
+        if (elm.style[propName]) {
+          var foundStyle = elm.style[propName];
+          return foundStyle !== '' ? Option.some(foundStyle) : Option.none();
+        }
+        elm = elm.parentNode;
+      }
+      return Option.none();
+    };
+
+    var round = function (number, precision) {
+      var factor = Math.pow(10, precision);
+      return Math.round(number * factor) / factor;
+    };
+
+    var toPt = function (fontSize, precision) {
+      if (/[0-9.]+px$/.test(fontSize)) {
+        // Round to the nearest 0.5
+        return round(parseInt(fontSize, 10) * 72 / 96, precision || 0) + 'pt';
+      }
+      return fontSize;
+    };
+
+    var normalizeFontFamily = function (fontFamily) {
+      // 'Font name', Font -> Font name,Font
+      return fontFamily.replace(/[\'\"]/g, '').replace(/,\s+/g, ',');
+    };
+
+    var getComputedFontProp = function (propName, elm) {
+      return Option.from(DOMUtils.DOM.getStyle(elm, propName, true));
+    };
+
+    var getFontProp = function (propName) {
+      return function (rootElm, elm) {
+        return Option.from(elm)
+          .map(Element.fromDom)
+          .filter(Node.isElement)
+          .bind(function (element) {
+            return getSpecifiedFontProp(propName, rootElm, element.dom())
+              .or(getComputedFontProp(propName, element.dom()));
+          })
+          .getOr('');
+      };
+    };
+
+    return {
+      getFontSize: getFontProp('fontSize'),
+      getFontFamily: Fun.compose(normalizeFontFamily, getFontProp('fontFamily')),
+      toPt: toPt
+    };
+  }
+);
+
+/**
+ * FontSelect.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.ui.editorui.FontSelect',
+  [
+    'tinymce.core.util.Tools',
+    'tinymce.ui.fmt.FontInfo'
+  ],
+  function (Tools, FontInfo) {
+    var getFirstFont = function (fontFamily) {
+      return fontFamily ? fontFamily.split(',')[0] : '';
+    };
+
+    var findMatchingValue = function (items, fontFamily) {
+      var value;
+
+      Tools.each(items, function (item) {
+        if (item.value.toLowerCase() === fontFamily.toLowerCase()) {
+          value = item.value;
+        }
+      });
+
+      Tools.each(items, function (item) {
+        if (!value && getFirstFont(item.value).toLowerCase() === getFirstFont(fontFamily).toLowerCase()) {
+          value = item.value;
+        }
+      });
+
+      return value;
+    };
+
+    var createFontNameListBoxChangeHandler = function (editor, items) {
+      return function () {
+        var self = this;
+
+        editor.on('init nodeChange', function (e) {
+          var fontFamily = FontInfo.getFontFamily(editor.getBody(), e.element);
+          var match = findMatchingValue(items, fontFamily);
+
+          self.value(match ? match : null);
+
+          if (!match && fontFamily) {
+            self.text(getFirstFont(fontFamily));
+          }
+        });
+      };
+    };
+
+    var createFormats = function (formats) {
+      formats = formats.replace(/;$/, '').split(';');
+
+      var i = formats.length;
+      while (i--) {
+        formats[i] = formats[i].split('=');
+      }
+
+      return formats;
+    };
+
+    var getFontItems = function (editor) {
+      var defaultFontsFormats = (
+        'Andale Mono=andale mono,monospace;' +
+        'Arial=arial,helvetica,sans-serif;' +
+        'Arial Black=arial black,sans-serif;' +
+        'Book Antiqua=book antiqua,palatino,serif;' +
+        'Comic Sans MS=comic sans ms,sans-serif;' +
+        'Courier New=courier new,courier,monospace;' +
+        'Georgia=georgia,palatino,serif;' +
+        'Helvetica=helvetica,arial,sans-serif;' +
+        'Impact=impact,sans-serif;' +
+        'Symbol=symbol;' +
+        'Tahoma=tahoma,arial,helvetica,sans-serif;' +
+        'Terminal=terminal,monaco,monospace;' +
+        'Times New Roman=times new roman,times,serif;' +
+        'Trebuchet MS=trebuchet ms,geneva,sans-serif;' +
+        'Verdana=verdana,geneva,sans-serif;' +
+        'Webdings=webdings;' +
+        'Wingdings=wingdings,zapf dingbats'
+      );
+
+      var fonts = createFormats(editor.settings.font_formats || defaultFontsFormats);
+
+      return Tools.map(fonts, function (font) {
+        return {
+          text: { raw: font[0] },
+          value: font[1],
+          textStyle: font[1].indexOf('dings') === -1 ? 'font-family:' + font[1] : ''
+        };
+      });
+    };
+
+    var registerButtons = function (editor) {
+      editor.addButton('fontselect', function () {
+        var items = getFontItems(editor);
+
+        return {
+          type: 'listbox',
+          text: 'Font Family',
+          tooltip: 'Font Family',
+          values: items,
+          fixedWidth: true,
+          onPostRender: createFontNameListBoxChangeHandler(editor, items),
+          onselect: function (e) {
+            if (e.control.settings.value) {
+              editor.execCommand('FontName', false, e.control.settings.value);
+            }
+          }
+        };
+      });
+    };
+
+    var register = function (editor) {
+      registerButtons(editor);
+    };
+
+    return {
+      register: register
+    };
+  }
+);
+
+/**
+ * FontSizeSelect.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.ui.editorui.FontSizeSelect',
+  [
+    'tinymce.core.util.Tools',
+    'tinymce.ui.fmt.FontInfo'
+  ],
+  function (Tools, FontInfo) {
+    var findMatchingValue = function (items, pt, px) {
+      var value;
+
+      Tools.each(items, function (item) {
+        if (item.value === px) {
+          value = px;
+        } else if (item.value === pt) {
+          value = pt;
+        }
+      });
+
+      return value;
+    };
+
+    var createFontSizeListBoxChangeHandler = function (editor, items) {
+      return function () {
+        var self = this;
+
+        editor.on('init nodeChange', function (e) {
+          var px, pt, precision, match;
+
+          px = FontInfo.getFontSize(editor.getBody(), e.element);
+          if (px) {
+            // checking for three digits after decimal point, should be precise enough
+            for (precision = 3; !match && precision >= 0; precision--) {
+              pt = FontInfo.toPt(px, precision);
+              match = findMatchingValue(items, pt, px);
+            }
+          }
+
+          self.value(match ? match : null);
+
+          if (!match) {
+            self.text(pt);
+          }
+        });
+      };
+    };
+
+    var getFontSizeItems = function (editor) {
+      var defaultFontsizeFormats = '8pt 10pt 12pt 14pt 18pt 24pt 36pt';
+      var fontsizeFormats = editor.settings.fontsize_formats || defaultFontsizeFormats;
+
+      return Tools.map(fontsizeFormats.split(' '), function (item) {
+        var text = item, value = item;
+        // Allow text=value font sizes.
+        var values = item.split('=');
+        if (values.length > 1) {
+          text = values[0];
+          value = values[1];
+        }
+
+        return { text: text, value: value };
+      });
+    };
+
+    var registerButtons = function (editor) {
+      editor.addButton('fontsizeselect', function () {
+        var items = getFontSizeItems(editor);
+
+        return {
+          type: 'listbox',
+          text: 'Font Sizes',
+          tooltip: 'Font Sizes',
+          values: items,
+          fixedWidth: true,
+          onPostRender: createFontSizeListBoxChangeHandler(editor, items),
+          onclick: function (e) {
+            if (e.control.settings.value) {
+              editor.execCommand('FontSize', false, e.control.settings.value);
+            }
+          }
+        };
+      });
+    };
+
+    var register = function (editor) {
+      registerButtons(editor);
     };
 
     return {
@@ -14200,7 +14594,7 @@ define(
 
 
 /**
- * SimpleFormats.js
+ * Formats.js
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
@@ -14210,13 +14604,365 @@ define(
  */
 
 define(
-  'tinymce.ui.editorui.SimpleFormats',
+  'tinymce.ui.editorui.Formats',
   [
     'tinymce.core.util.Tools',
     'tinymce.ui.editorui.FormatUtils'
   ],
   function (Tools, FormatUtils) {
+    var hideMenuObjects = function (editor, menu) {
+      var count = menu.length;
+
+      Tools.each(menu, function (item) {
+        if (item.menu) {
+          item.hidden = hideMenuObjects(editor, item.menu) === 0;
+        }
+
+        var formatName = item.format;
+        if (formatName) {
+          item.hidden = !editor.formatter.canApply(formatName);
+        }
+
+        if (item.hidden) {
+          count--;
+        }
+      });
+
+      return count;
+    };
+
+    var hideFormatMenuItems = function (editor, menu) {
+      var count = menu.items().length;
+
+      menu.items().each(function (item) {
+        if (item.menu) {
+          item.visible(hideFormatMenuItems(editor, item.menu) > 0);
+        }
+
+        if (!item.menu && item.settings.menu) {
+          item.visible(hideMenuObjects(editor, item.settings.menu) > 0);
+        }
+
+        var formatName = item.settings.format;
+        if (formatName) {
+          item.visible(editor.formatter.canApply(formatName));
+        }
+
+        if (!item.visible()) {
+          count--;
+        }
+      });
+
+      return count;
+    };
+
+    var createFormatMenu = function (editor) {
+      var count = 0, newFormats = [];
+
+      var defaultStyleFormats = [
+        {
+          title: 'Headings', items: [
+            { title: 'Heading 1', format: 'h1' },
+            { title: 'Heading 2', format: 'h2' },
+            { title: 'Heading 3', format: 'h3' },
+            { title: 'Heading 4', format: 'h4' },
+            { title: 'Heading 5', format: 'h5' },
+            { title: 'Heading 6', format: 'h6' }
+          ]
+        },
+
+        {
+          title: 'Inline', items: [
+            { title: 'Bold', icon: 'bold', format: 'bold' },
+            { title: 'Italic', icon: 'italic', format: 'italic' },
+            { title: 'Underline', icon: 'underline', format: 'underline' },
+            { title: 'Strikethrough', icon: 'strikethrough', format: 'strikethrough' },
+            { title: 'Superscript', icon: 'superscript', format: 'superscript' },
+            { title: 'Subscript', icon: 'subscript', format: 'subscript' },
+            { title: 'Code', icon: 'code', format: 'code' }
+          ]
+        },
+
+        {
+          title: 'Blocks', items: [
+            { title: 'Paragraph', format: 'p' },
+            { title: 'Blockquote', format: 'blockquote' },
+            { title: 'Div', format: 'div' },
+            { title: 'Pre', format: 'pre' }
+          ]
+        },
+
+        {
+          title: 'Alignment', items: [
+            { title: 'Left', icon: 'alignleft', format: 'alignleft' },
+            { title: 'Center', icon: 'aligncenter', format: 'aligncenter' },
+            { title: 'Right', icon: 'alignright', format: 'alignright' },
+            { title: 'Justify', icon: 'alignjustify', format: 'alignjustify' }
+          ]
+        }
+      ];
+
+      var createMenu = function (formats) {
+        var menu = [];
+
+        if (!formats) {
+          return;
+        }
+
+        Tools.each(formats, function (format) {
+          var menuItem = {
+            text: format.title,
+            icon: format.icon
+          };
+
+          if (format.items) {
+            menuItem.menu = createMenu(format.items);
+          } else {
+            var formatName = format.format || "custom" + count++;
+
+            if (!format.format) {
+              format.name = formatName;
+              newFormats.push(format);
+            }
+
+            menuItem.format = formatName;
+            menuItem.cmd = format.cmd;
+          }
+
+          menu.push(menuItem);
+        });
+
+        return menu;
+      };
+
+      var createStylesMenu = function () {
+        var menu;
+
+        if (editor.settings.style_formats_merge) {
+          if (editor.settings.style_formats) {
+            menu = createMenu(defaultStyleFormats.concat(editor.settings.style_formats));
+          } else {
+            menu = createMenu(defaultStyleFormats);
+          }
+        } else {
+          menu = createMenu(editor.settings.style_formats || defaultStyleFormats);
+        }
+
+        return menu;
+      };
+
+      editor.on('init', function () {
+        Tools.each(newFormats, function (format) {
+          editor.formatter.register(format.name, format);
+        });
+      });
+
+      return {
+        type: 'menu',
+        items: createStylesMenu(),
+        onPostRender: function (e) {
+          editor.fire('renderFormatsMenu', { control: e.control });
+        },
+        itemDefaults: {
+          preview: true,
+
+          textStyle: function () {
+            if (this.settings.format) {
+              return editor.formatter.getCssText(this.settings.format);
+            }
+          },
+
+          onPostRender: function () {
+            var self = this;
+
+            self.parent().on('show', function () {
+              var formatName, command;
+
+              formatName = self.settings.format;
+              if (formatName) {
+                self.disabled(!editor.formatter.canApply(formatName));
+                self.active(editor.formatter.match(formatName));
+              }
+
+              command = self.settings.cmd;
+              if (command) {
+                self.active(editor.queryCommandState(command));
+              }
+            });
+          },
+
+          onclick: function () {
+            if (this.settings.format) {
+              FormatUtils.toggleFormat(editor, this.settings.format)();
+            }
+
+            if (this.settings.cmd) {
+              editor.execCommand(this.settings.cmd);
+            }
+          }
+        }
+      };
+    };
+
+    var registerMenuItems = function (editor, formatMenu) {
+      editor.addMenuItem('formats', {
+        text: 'Formats',
+        menu: formatMenu
+      });
+    };
+
+    var registerButtons = function (editor, formatMenu) {
+      editor.addButton('styleselect', {
+        type: 'menubutton',
+        text: 'Formats',
+        menu: formatMenu,
+        onShowMenu: function () {
+          if (editor.settings.style_formats_autohide) {
+            hideFormatMenuItems(editor, this.menu);
+          }
+        }
+      });
+    };
+
+    var register = function (editor) {
+      var formatMenu = createFormatMenu(editor);
+
+      registerMenuItems(editor, formatMenu);
+      registerButtons(editor, formatMenu);
+    };
+
+    return {
+      register: register
+    };
+  }
+);
+
+/**
+ * InsertButton.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.ui.editorui.InsertButton',
+  [
+    'ephox.katamari.api.Arr',
+    'tinymce.core.util.Tools'
+  ],
+  function (Arr, Tools) {
+    var createCustomMenuItems = function (editor, names) {
+      var items, nameList;
+
+      if (typeof names === 'string') {
+        nameList = names.split(' ');
+      } else if (Tools.isArray(names)) {
+        return Arr.flatten(Tools.map(names, function (names) {
+          return createCustomMenuItems(editor, names);
+        }));
+      }
+
+      items = Tools.grep(nameList, function (name) {
+        return name === '|' || name in editor.menuItems;
+      });
+
+      return Tools.map(items, function (name) {
+        return name === '|' ? { text: '-' } : editor.menuItems[name];
+      });
+    };
+
+    var isSeparator = function (menuItem) {
+      return menuItem && menuItem.text === '-';
+    };
+
+    var trimMenuItems = function (menuItems) {
+      var menuItems2 = Arr.filter(menuItems, function (menuItem, i, menuItems) {
+        return !isSeparator(menuItem) || !isSeparator(menuItems[i - 1]);
+      });
+
+      return Arr.filter(menuItems2, function (menuItem, i, menuItems) {
+        return !isSeparator(menuItem) || i > 0 && i < menuItems.length - 1;
+      });
+    };
+
+    var createContextMenuItems = function (editor, context) {
+      var outputMenuItems = [{ text: '-' }];
+      var menuItems = Tools.grep(editor.menuItems, function (menuItem) {
+        return menuItem.context === context;
+      });
+
+      Tools.each(menuItems, function (menuItem) {
+        if (menuItem.separator === 'before') {
+          outputMenuItems.push({ text: '|' });
+        }
+
+        if (menuItem.prependToContext) {
+          outputMenuItems.unshift(menuItem);
+        } else {
+          outputMenuItems.push(menuItem);
+        }
+
+        if (menuItem.separator === 'after') {
+          outputMenuItems.push({ text: '|' });
+        }
+      });
+
+      return outputMenuItems;
+    };
+
+    var createInsertMenu = function (editor) {
+      var insertButtonItems = editor.settings.insert_button_items;
+
+      if (insertButtonItems) {
+        return trimMenuItems(createCustomMenuItems(editor, insertButtonItems));
+      } else {
+        return trimMenuItems(createContextMenuItems(editor, 'insert'));
+      }
+    };
+
     var registerButtons = function (editor) {
+      editor.addButton('insert', {
+        type: 'menubutton',
+        icon: 'insert',
+        menu: [],
+        oncreatemenu: function () {
+          this.menu.add(createInsertMenu(editor));
+          this.menu.renderNew();
+        }
+      });
+    };
+
+    var register = function (editor) {
+      registerButtons(editor);
+    };
+
+    return {
+      register: register
+    };
+  }
+);
+
+/**
+ * SimpleControls.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.ui.editorui.SimpleControls',
+  [
+    'tinymce.core.util.Tools',
+    'tinymce.ui.editorui.FormatUtils'
+  ],
+  function (Tools, FormatUtils) {
+    var registerFormatButtons = function (editor) {
       Tools.each({
         bold: 'Bold',
         italic: 'Italic',
@@ -14226,16 +14972,54 @@ define(
         superscript: 'Superscript'
       }, function (text, name) {
         editor.addButton(name, {
+          active: false,
           tooltip: text,
           onPostRender: FormatUtils.postRenderFormat(editor, name),
           onclick: FormatUtils.toggleFormat(editor, name)
         });
       });
+    };
 
-      editor.addButton('removeformat', {
-        title: 'Clear formatting',
-        cmd: 'RemoveFormat'
+    var registerCommandButtons = function (editor) {
+      Tools.each({
+        outdent: ['Decrease indent', 'Outdent'],
+        indent: ['Increase indent', 'Indent'],
+        cut: ['Cut', 'Cut'],
+        copy: ['Copy', 'Copy'],
+        paste: ['Paste', 'Paste'],
+        help: ['Help', 'mceHelp'],
+        selectall: ['Select all', 'SelectAll'],
+        visualaid: ['Visual aids', 'mceToggleVisualAid'],
+        newdocument: ['New document', 'mceNewDocument'],
+        removeformat: ['Clear formatting', 'RemoveFormat'],
+        remove: ['Remove', 'Delete']
+      }, function (item, name) {
+        editor.addButton(name, {
+          tooltip: item[0],
+          cmd: item[1]
+        });
       });
+    };
+
+    var registerCommandToggleButtons = function (editor) {
+      Tools.each({
+        blockquote: ['Blockquote', 'mceBlockQuote'],
+        subscript: ['Subscript', 'Subscript'],
+        superscript: ['Superscript', 'Superscript']
+      }, function (item, name) {
+        editor.addButton(name, {
+          active: false,
+          tooltip: item[0],
+          cmd: item[1],
+          onPostRender: FormatUtils.postRenderFormat(editor, name)
+        });
+      });
+    };
+
+    var registerButtons = function (editor) {
+      registerFormatButtons(editor);
+      registerCommandButtons(editor);
+      registerCommandToggleButtons(editor);
     };
 
     var registerMenuItems = function (editor) {
@@ -14246,7 +15030,12 @@ define(
         strikethrough: ['Strikethrough', 'Strikethrough'],
         subscript: ['Subscript', 'Subscript'],
         superscript: ['Superscript', 'Superscript'],
-        removeformat: ['Clear formatting', 'RemoveFormat']
+        removeformat: ['Clear formatting', 'RemoveFormat'],
+        newdocument: ['New document', 'mceNewDocument'],
+        cut: ['Cut', 'Cut', 'Meta+X'],
+        copy: ['Copy', 'Copy', 'Meta+C'],
+        paste: ['Paste', 'Paste', 'Meta+V'],
+        selectall: ['Select all', 'SelectAll', 'Meta+A']
       }, function (item, name) {
         editor.addMenuItem(name, {
           text: item[0],
@@ -14275,7 +15064,7 @@ define(
 );
 
 /**
- * FontInfo.js
+ * UndoRedo.js
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
@@ -14284,67 +15073,112 @@ define(
  * Contributing: http://www.tinymce.com/contributing
  */
 
-/**
- * Internal class for computing font size for elements.
- *
- * @private
- * @class tinymce.fmt.FontInfo
- */
 define(
-  'tinymce.ui.fmt.FontInfo',
+  'tinymce.ui.editorui.UndoRedo',
   [
-    'ephox.katamari.api.Fun',
-    'ephox.katamari.api.Option',
-    'ephox.sugar.api.node.Element',
-    'ephox.sugar.api.node.Node',
-    'tinymce.core.dom.DOMUtils'
   ],
-  function (Fun, Option, Element, Node, DOMUtils) {
-    var getSpecifiedFontProp = function (propName, rootElm, elm) {
-      while (elm !== rootElm) {
-        if (elm.style[propName]) {
-          var foundStyle = elm.style[propName];
-          return foundStyle !== '' ? Option.some(foundStyle) : Option.none();
-        }
-        elm = elm.parentNode;
-      }
-      return Option.none();
-    };
+  function () {
+    var toggleUndoRedoState = function (editor, type) {
+      return function () {
+        var self = this;
 
-    var toPt = function (fontSize) {
-      if (/[0-9.]+px$/.test(fontSize)) {
-        return Math.round(parseInt(fontSize, 10) * 72 / 96) + 'pt';
-      }
+        var checkState = function () {
+          var typeFn = type === 'redo' ? 'hasRedo' : 'hasUndo';
+          return editor.undoManager ? editor.undoManager[typeFn]() : false;
+        };
 
-      return fontSize;
-    };
-
-    var normalizeFontFamily = function (fontFamily) {
-      // 'Font name', Font -> Font name,Font
-      return fontFamily.replace(/[\'\"]/g, '').replace(/,\s+/g, ',');
-    };
-
-    var getComputedFontProp = function (propName, elm) {
-      return Option.from(DOMUtils.DOM.getStyle(elm, propName, true));
-    };
-
-    var getFontProp = function (propName) {
-      return function (rootElm, elm) {
-        return Option.from(elm)
-          .map(Element.fromDom)
-          .filter(Node.isElement)
-          .bind(function (element) {
-            return getSpecifiedFontProp(propName, rootElm, element.dom())
-              .or(getComputedFontProp(propName, element.dom()));
-          })
-          .getOr('');
+        self.disabled(!checkState());
+        editor.on('Undo Redo AddUndo TypingUndo ClearUndos SwitchMode', function () {
+          self.disabled(editor.readonly || !checkState());
+        });
       };
     };
 
+    var registerMenuItems = function (editor) {
+      editor.addMenuItem('undo', {
+        text: 'Undo',
+        icon: 'undo',
+        shortcut: 'Meta+Z',
+        onPostRender: toggleUndoRedoState(editor, 'undo'),
+        cmd: 'undo'
+      });
+
+      editor.addMenuItem('redo', {
+        text: 'Redo',
+        icon: 'redo',
+        shortcut: 'Meta+Y',
+        onPostRender: toggleUndoRedoState(editor, 'redo'),
+        cmd: 'redo'
+      });
+    };
+
+    var registerButtons = function (editor) {
+      editor.addButton('undo', {
+        tooltip: 'Undo',
+        onPostRender: toggleUndoRedoState(editor, 'undo'),
+        cmd: 'undo'
+      });
+
+      editor.addButton('redo', {
+        tooltip: 'Redo',
+        onPostRender: toggleUndoRedoState(editor, 'redo'),
+        cmd: 'redo'
+      });
+    };
+
+    var register = function (editor) {
+      registerMenuItems(editor);
+      registerButtons(editor);
+    };
+
     return {
-      getFontSize: getFontProp('fontSize'),
-      getFontFamily: Fun.compose(normalizeFontFamily, getFontProp('fontFamily')),
-      toPt: toPt
+      register: register
+    };
+  }
+);
+
+/**
+ * VisualAid.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+define(
+  'tinymce.ui.editorui.VisualAid',
+  [
+  ],
+  function () {
+    var toggleVisualAidState = function (editor) {
+      return function () {
+        var self = this;
+
+        editor.on('VisualAid', function (e) {
+          self.active(e.hasVisual);
+        });
+
+        self.active(editor.hasVisual);
+      };
+    };
+
+    var registerMenuItems = function (editor) {
+      editor.addMenuItem('visualaid', {
+        text: 'Visual aids',
+        selectable: true,
+        onPostRender: toggleVisualAidState(editor),
+        cmd: 'mceToggleVisualAid'
+      });
+    };
+
+    var register = function (editor) {
+      registerMenuItems(editor);
+    };
+
+    return {
+      register: register
     };
   }
 );
@@ -14359,657 +15193,75 @@ define(
  * Contributing: http://www.tinymce.com/contributing
  */
 
-/**
- * Internal class containing all TinyMCE specific control types such as
- * format listboxes, fontlist boxes, toolbar buttons etc.
- *
- * @class tinymce.ui.FormatControls
- */
 define(
   'tinymce.ui.FormatControls',
   [
-    'ephox.katamari.api.Arr',
     'ephox.katamari.api.Fun',
     'ephox.sugar.api.node.Element',
     'ephox.sugar.api.search.SelectorFind',
     'global!document',
-    'tinymce.core.dom.DOMUtils',
     'tinymce.core.EditorManager',
     'tinymce.core.Env',
-    'tinymce.core.util.Tools',
     'tinymce.ui.Control',
-    'tinymce.ui.editorui.Align',
-    'tinymce.ui.editorui.FormatSelect',
-    'tinymce.ui.editorui.SimpleFormats',
     'tinymce.ui.FloatPanel',
-    'tinymce.ui.fmt.FontInfo',
-    'tinymce.ui.Widget'
+    'tinymce.ui.Widget',
+    'tinymce.ui.editorui.Align',
+    'tinymce.ui.editorui.FontSelect',
+    'tinymce.ui.editorui.FontSizeSelect',
+    'tinymce.ui.editorui.FormatSelect',
+    'tinymce.ui.editorui.Formats',
+    'tinymce.ui.editorui.InsertButton',
+    'tinymce.ui.editorui.SimpleControls',
+    'tinymce.ui.editorui.UndoRedo',
+    'tinymce.ui.editorui.VisualAid'
   ],
-  function (Arr, Fun, Element, SelectorFind, document, DOMUtils, EditorManager, Env, Tools, Control, Align, FormatSelect, SimpleFormats, FloatPanel, FontInfo, Widget) {
-    var each = Tools.each;
+  function (
+    Fun, Element, SelectorFind, document, EditorManager, Env, Control, FloatPanel, Widget, Align, FontSelect, FontSizeSelect, FormatSelect, Formats, InsertButton,
+    SimpleControls, UndoRedo, VisualAid
+  ) {
+    var setupEnvironment = function () {
+      Widget.tooltips = !Env.iOS;
 
-    var flatten = function (ar) {
-      return Arr.foldl(ar, function (result, item) {
-        return result.concat(item);
-      }, []);
+      Control.translate = function (text) {
+        return EditorManager.translate(text);
+      };
     };
 
-    Control.translate = function (text) {
-      return EditorManager.translate(text);
-    };
-
-    Widget.tooltips = !Env.iOS;
-
-    function setupContainer(editor) {
+    var setupUiContainer = function (editor) {
       if (editor.settings.ui_container) {
         Env.container = SelectorFind.descendant(Element.fromDom(document.body), editor.settings.ui_container).fold(Fun.constant(null), function (elm) {
           return elm.dom();
         });
       }
-    }
+    };
 
-    function setupRtlMode(editor) {
+    var setupRtlMode = function (editor) {
       if (editor.rtl) {
         Control.rtl = true;
       }
-    }
+    };
 
-    function registerControls(editor) {
-      var formatMenu;
-
-      function createFontNameListBoxChangeHandler(items) {
-        return function () {
-          var self = this;
-
-          var getFirstFont = function (fontFamily) {
-            return fontFamily ? fontFamily.split(',')[0] : '';
-          };
-
-          editor.on('init nodeChange', function (e) {
-            var fontFamily, value = null;
-
-            fontFamily = FontInfo.getFontFamily(editor.getBody(), e.element);
-
-            each(items, function (item) {
-              if (item.value.toLowerCase() === fontFamily.toLowerCase()) {
-                value = item.value;
-              }
-            });
-
-            each(items, function (item) {
-              if (!value && getFirstFont(item.value).toLowerCase() === getFirstFont(fontFamily).toLowerCase()) {
-                value = item.value;
-              }
-            });
-
-            self.value(value);
-
-            if (!value && fontFamily) {
-              self.text(getFirstFont(fontFamily));
-            }
-          });
-        };
-      }
-
-      function createFontSizeListBoxChangeHandler(items) {
-        return function () {
-          var self = this;
-
-          editor.on('init nodeChange', function (e) {
-            var px, pt, value = null;
-
-            px = FontInfo.getFontSize(editor.getBody(), e.element);
-            pt = FontInfo.toPt(px);
-
-            each(items, function (item) {
-              if (item.value === px) {
-                value = px;
-              } else if (item.value === pt) {
-                value = pt;
-              }
-            });
-
-            self.value(value);
-
-            if (!value) {
-              self.text(pt);
-            }
-          });
-        };
-      }
-
-      function createFormats(formats) {
-        formats = formats.replace(/;$/, '').split(';');
-
-        var i = formats.length;
-        while (i--) {
-          formats[i] = formats[i].split('=');
-        }
-
-        return formats;
-      }
-
-      function createFormatMenu() {
-        var count = 0, newFormats = [];
-
-        var defaultStyleFormats = [
-          {
-            title: 'Headings', items: [
-              { title: 'Heading 1', format: 'h1' },
-              { title: 'Heading 2', format: 'h2' },
-              { title: 'Heading 3', format: 'h3' },
-              { title: 'Heading 4', format: 'h4' },
-              { title: 'Heading 5', format: 'h5' },
-              { title: 'Heading 6', format: 'h6' }
-            ]
-          },
-
-          {
-            title: 'Inline', items: [
-              { title: 'Bold', icon: 'bold', format: 'bold' },
-              { title: 'Italic', icon: 'italic', format: 'italic' },
-              { title: 'Underline', icon: 'underline', format: 'underline' },
-              { title: 'Strikethrough', icon: 'strikethrough', format: 'strikethrough' },
-              { title: 'Superscript', icon: 'superscript', format: 'superscript' },
-              { title: 'Subscript', icon: 'subscript', format: 'subscript' },
-              { title: 'Code', icon: 'code', format: 'code' }
-            ]
-          },
-
-          {
-            title: 'Blocks', items: [
-              { title: 'Paragraph', format: 'p' },
-              { title: 'Blockquote', format: 'blockquote' },
-              { title: 'Div', format: 'div' },
-              { title: 'Pre', format: 'pre' }
-            ]
-          },
-
-          {
-            title: 'Alignment', items: [
-              { title: 'Left', icon: 'alignleft', format: 'alignleft' },
-              { title: 'Center', icon: 'aligncenter', format: 'aligncenter' },
-              { title: 'Right', icon: 'alignright', format: 'alignright' },
-              { title: 'Justify', icon: 'alignjustify', format: 'alignjustify' }
-            ]
-          }
-        ];
-
-        function createMenu(formats) {
-          var menu = [];
-
-          if (!formats) {
-            return;
-          }
-
-          each(formats, function (format) {
-            var menuItem = {
-              text: format.title,
-              icon: format.icon
-            };
-
-            if (format.items) {
-              menuItem.menu = createMenu(format.items);
-            } else {
-              var formatName = format.format || "custom" + count++;
-
-              if (!format.format) {
-                format.name = formatName;
-                newFormats.push(format);
-              }
-
-              menuItem.format = formatName;
-              menuItem.cmd = format.cmd;
-            }
-
-            menu.push(menuItem);
-          });
-
-          return menu;
-        }
-
-        function createStylesMenu() {
-          var menu;
-
-          if (editor.settings.style_formats_merge) {
-            if (editor.settings.style_formats) {
-              menu = createMenu(defaultStyleFormats.concat(editor.settings.style_formats));
-            } else {
-              menu = createMenu(defaultStyleFormats);
-            }
-          } else {
-            menu = createMenu(editor.settings.style_formats || defaultStyleFormats);
-          }
-
-          return menu;
-        }
-
-        editor.on('init', function () {
-          each(newFormats, function (format) {
-            editor.formatter.register(format.name, format);
-          });
-        });
-
-        return {
-          type: 'menu',
-          items: createStylesMenu(),
-          onPostRender: function (e) {
-            editor.fire('renderFormatsMenu', { control: e.control });
-          },
-          itemDefaults: {
-            preview: true,
-
-            textStyle: function () {
-              if (this.settings.format) {
-                return editor.formatter.getCssText(this.settings.format);
-              }
-            },
-
-            onPostRender: function () {
-              var self = this;
-
-              self.parent().on('show', function () {
-                var formatName, command;
-
-                formatName = self.settings.format;
-                if (formatName) {
-                  self.disabled(!editor.formatter.canApply(formatName));
-                  self.active(editor.formatter.match(formatName));
-                }
-
-                command = self.settings.cmd;
-                if (command) {
-                  self.active(editor.queryCommandState(command));
-                }
-              });
-            },
-
-            onclick: function () {
-              if (this.settings.format) {
-                toggleFormat(this.settings.format);
-              }
-
-              if (this.settings.cmd) {
-                editor.execCommand(this.settings.cmd);
-              }
-            }
-          }
-        };
-      }
-
-      formatMenu = createFormatMenu();
-
-      function initOnPostRender(name) {
-        return function () {
-          var self = this;
-
-          // TODO: Fix this
-          if (editor.formatter) {
-            editor.formatter.formatChanged(name, function (state) {
-              self.active(state);
-            });
-          } else {
-            editor.on('init', function () {
-              editor.formatter.formatChanged(name, function (state) {
-                self.active(state);
-              });
-            });
-          }
-        };
-      }
-
-      // Simple command controls <control>:[<UI text>,<Command>]
-      each({
-        outdent: ['Decrease indent', 'Outdent'],
-        indent: ['Increase indent', 'Indent'],
-        cut: ['Cut', 'Cut'],
-        copy: ['Copy', 'Copy'],
-        paste: ['Paste', 'Paste'],
-        help: ['Help', 'mceHelp'],
-        selectall: ['Select all', 'SelectAll'],
-        visualaid: ['Visual aids', 'mceToggleVisualAid'],
-        newdocument: ['New document', 'mceNewDocument']
-      }, function (item, name) {
-        editor.addButton(name, {
-          tooltip: item[0],
-          cmd: item[1]
-        });
-      });
-
-      // Simple command controls with format state
-      each({
-        blockquote: ['Blockquote', 'mceBlockQuote'],
-        subscript: ['Subscript', 'Subscript'],
-        superscript: ['Superscript', 'Superscript']
-      }, function (item, name) {
-        editor.addButton(name, {
-          tooltip: item[0],
-          cmd: item[1],
-          onPostRender: initOnPostRender(name)
-        });
-      });
-
-      function toggleUndoRedoState(type) {
-        return function () {
-          var self = this;
-
-          function checkState() {
-            var typeFn = type == 'redo' ? 'hasRedo' : 'hasUndo';
-            return editor.undoManager ? editor.undoManager[typeFn]() : false;
-          }
-
-          self.disabled(!checkState());
-          editor.on('Undo Redo AddUndo TypingUndo ClearUndos SwitchMode', function () {
-            self.disabled(editor.readonly || !checkState());
-          });
-        };
-      }
-
-      function toggleVisualAidState() {
-        var self = this;
-
-        editor.on('VisualAid', function (e) {
-          self.active(e.hasVisual);
-        });
-
-        self.active(editor.hasVisual);
-      }
-
-      var trimMenuItems = function (menuItems) {
-        var outputMenuItems = menuItems;
-
-        if (outputMenuItems.length > 0 && outputMenuItems[0].text === '-') {
-          outputMenuItems = outputMenuItems.slice(1);
-        }
-
-        if (outputMenuItems.length > 0 && outputMenuItems[outputMenuItems.length - 1].text === '-') {
-          outputMenuItems = outputMenuItems.slice(0, outputMenuItems.length - 1);
-        }
-
-        return outputMenuItems;
-      };
-
-      var createCustomMenuItems = function (names) {
-        var items, nameList;
-
-        if (typeof names === 'string') {
-          nameList = names.split(' ');
-        } else if (Tools.isArray(names)) {
-          return flatten(Tools.map(names, createCustomMenuItems));
-        }
-
-        items = Tools.grep(nameList, function (name) {
-          return name === '|' || name in editor.menuItems;
-        });
-
-        return Tools.map(items, function (name) {
-          return name === '|' ? { text: '-' } : editor.menuItems[name];
-        });
-      };
-
-      var createContextMenuItems = function (context) {
-        var outputMenuItems = [{ text: '-' }];
-        var menuItems = Tools.grep(editor.menuItems, function (menuItem) {
-          return menuItem.context === context;
-        });
-
-        Tools.each(menuItems, function (menuItem) {
-          if (menuItem.separator == 'before') {
-            outputMenuItems.push({ text: '|' });
-          }
-
-          if (menuItem.prependToContext) {
-            outputMenuItems.unshift(menuItem);
-          } else {
-            outputMenuItems.push(menuItem);
-          }
-
-          if (menuItem.separator == 'after') {
-            outputMenuItems.push({ text: '|' });
-          }
-        });
-
-        return outputMenuItems;
-      };
-
-      var createInsertMenu = function (editorSettings) {
-        if (editorSettings.insert_button_items) {
-          return trimMenuItems(createCustomMenuItems(editorSettings.insert_button_items));
-        } else {
-          return trimMenuItems(createContextMenuItems('insert'));
-        }
-      };
-
-      editor.addButton('undo', {
-        tooltip: 'Undo',
-        onPostRender: toggleUndoRedoState('undo'),
-        cmd: 'undo'
-      });
-
-      editor.addButton('redo', {
-        tooltip: 'Redo',
-        onPostRender: toggleUndoRedoState('redo'),
-        cmd: 'redo'
-      });
-
-      editor.addMenuItem('newdocument', {
-        text: 'New document',
-        icon: 'newdocument',
-        cmd: 'mceNewDocument'
-      });
-
-      editor.addMenuItem('undo', {
-        text: 'Undo',
-        icon: 'undo',
-        shortcut: 'Meta+Z',
-        onPostRender: toggleUndoRedoState('undo'),
-        cmd: 'undo'
-      });
-
-      editor.addMenuItem('redo', {
-        text: 'Redo',
-        icon: 'redo',
-        shortcut: 'Meta+Y',
-        onPostRender: toggleUndoRedoState('redo'),
-        cmd: 'redo'
-      });
-
-      editor.addMenuItem('visualaid', {
-        text: 'Visual aids',
-        selectable: true,
-        onPostRender: toggleVisualAidState,
-        cmd: 'mceToggleVisualAid'
-      });
-
-      editor.addButton('remove', {
-        tooltip: 'Remove',
-        icon: 'remove',
-        cmd: 'Delete'
-      });
-
-      editor.addButton('insert', {
-        type: 'menubutton',
-        icon: 'insert',
-        menu: [],
-        oncreatemenu: function () {
-          this.menu.add(createInsertMenu(editor.settings));
-          this.menu.renderNew();
-        }
-      });
-
-      each({
-        cut: ['Cut', 'Cut', 'Meta+X'],
-        copy: ['Copy', 'Copy', 'Meta+C'],
-        paste: ['Paste', 'Paste', 'Meta+V'],
-        selectall: ['Select all', 'SelectAll', 'Meta+A']
-      }, function (item, name) {
-        editor.addMenuItem(name, {
-          text: item[0],
-          icon: name,
-          shortcut: item[2],
-          cmd: item[1]
-        });
-      });
-
+    var setupHideFloatPanels = function (editor) {
       editor.on('mousedown', function () {
         FloatPanel.hideAll();
       });
-
-      function toggleFormat(fmt) {
-        if (fmt.control) {
-          fmt = fmt.control.value();
-        }
-
-        if (fmt) {
-          editor.execCommand('mceToggleFormat', false, fmt);
-        }
-      }
-
-      function hideMenuObjects(menu) {
-        var count = menu.length;
-
-        Tools.each(menu, function (item) {
-          if (item.menu) {
-            item.hidden = hideMenuObjects(item.menu) === 0;
-          }
-
-          var formatName = item.format;
-          if (formatName) {
-            item.hidden = !editor.formatter.canApply(formatName);
-          }
-
-          if (item.hidden) {
-            count--;
-          }
-        });
-
-        return count;
-      }
-
-      function hideFormatMenuItems(menu) {
-        var count = menu.items().length;
-
-        menu.items().each(function (item) {
-          if (item.menu) {
-            item.visible(hideFormatMenuItems(item.menu) > 0);
-          }
-
-          if (!item.menu && item.settings.menu) {
-            item.visible(hideMenuObjects(item.settings.menu) > 0);
-          }
-
-          var formatName = item.settings.format;
-          if (formatName) {
-            item.visible(editor.formatter.canApply(formatName));
-          }
-
-          if (!item.visible()) {
-            count--;
-          }
-        });
-
-        return count;
-      }
-
-      editor.addButton('styleselect', {
-        type: 'menubutton',
-        text: 'Formats',
-        menu: formatMenu,
-        onShowMenu: function () {
-          if (editor.settings.style_formats_autohide) {
-            hideFormatMenuItems(this.menu);
-          }
-        }
-      });
-
-      editor.addButton('fontselect', function () {
-        var defaultFontsFormats =
-          'Andale Mono=andale mono,monospace;' +
-          'Arial=arial,helvetica,sans-serif;' +
-          'Arial Black=arial black,sans-serif;' +
-          'Book Antiqua=book antiqua,palatino,serif;' +
-          'Comic Sans MS=comic sans ms,sans-serif;' +
-          'Courier New=courier new,courier,monospace;' +
-          'Georgia=georgia,palatino,serif;' +
-          'Helvetica=helvetica,arial,sans-serif;' +
-          'Impact=impact,sans-serif;' +
-          'Symbol=symbol;' +
-          'Tahoma=tahoma,arial,helvetica,sans-serif;' +
-          'Terminal=terminal,monaco,monospace;' +
-          'Times New Roman=times new roman,times,serif;' +
-          'Trebuchet MS=trebuchet ms,geneva,sans-serif;' +
-          'Verdana=verdana,geneva,sans-serif;' +
-          'Webdings=webdings;' +
-          'Wingdings=wingdings,zapf dingbats';
-
-        var items = [], fonts = createFormats(editor.settings.font_formats || defaultFontsFormats);
-
-        each(fonts, function (font) {
-          items.push({
-            text: { raw: font[0] },
-            value: font[1],
-            textStyle: font[1].indexOf('dings') == -1 ? 'font-family:' + font[1] : ''
-          });
-        });
-
-        return {
-          type: 'listbox',
-          text: 'Font Family',
-          tooltip: 'Font Family',
-          values: items,
-          fixedWidth: true,
-          onPostRender: createFontNameListBoxChangeHandler(items),
-          onselect: function (e) {
-            if (e.control.settings.value) {
-              editor.execCommand('FontName', false, e.control.settings.value);
-            }
-          }
-        };
-      });
-
-      editor.addButton('fontsizeselect', function () {
-        var items = [], defaultFontsizeFormats = '8pt 10pt 12pt 14pt 18pt 24pt 36pt';
-        var fontsizeFormats = editor.settings.fontsize_formats || defaultFontsizeFormats;
-
-        each(fontsizeFormats.split(' '), function (item) {
-          var text = item, value = item;
-          // Allow text=value font sizes.
-          var values = item.split('=');
-          if (values.length > 1) {
-            text = values[0];
-            value = values[1];
-          }
-          items.push({ text: text, value: value });
-        });
-
-        return {
-          type: 'listbox',
-          text: 'Font Sizes',
-          tooltip: 'Font Sizes',
-          values: items,
-          fixedWidth: true,
-          onPostRender: createFontSizeListBoxChangeHandler(items),
-          onclick: function (e) {
-            if (e.control.settings.value) {
-              editor.execCommand('FontSize', false, e.control.settings.value);
-            }
-          }
-        };
-      });
-
-      editor.addMenuItem('formats', {
-        text: 'Formats',
-        menu: formatMenu
-      });
-    }
+    };
 
     var setup = function (editor) {
       setupRtlMode(editor);
-      registerControls(editor);
-      setupContainer(editor);
+      setupHideFloatPanels(editor);
+      setupUiContainer(editor);
+      setupEnvironment(editor);
+
       FormatSelect.register(editor);
       Align.register(editor);
-      SimpleFormats.register(editor);
+      SimpleControls.register(editor);
+      UndoRedo.register(editor);
+      FontSizeSelect.register(editor);
+      FontSelect.register(editor);
+      Formats.register(editor);
+      VisualAid.register(editor);
+      InsertButton.register(editor);
     };
 
     return {
@@ -15999,6 +16251,19 @@ define(
   function (Widget, Factory, Env, Delay) {
     "use strict";
 
+    var toggleTextStyle = function (ctrl, state) {
+      var textStyle = ctrl._textStyle;
+      if (textStyle) {
+        var textElm = ctrl.getEl('text');
+        textElm.setAttribute('style', textStyle);
+
+        if (state) {
+          textElm.style.color = '';
+          textElm.style.backgroundColor = '';
+        }
+      }
+    };
+
     return Widget.extend({
       Defaults: {
         border: 0,
@@ -16269,7 +16534,7 @@ define(
         var self = this, settings = self.settings;
 
         var textStyle = settings.textStyle;
-        if (typeof textStyle == "function") {
+        if (typeof textStyle === "function") {
           textStyle = textStyle.call(this);
         }
 
@@ -16277,6 +16542,7 @@ define(
           var textElm = self.getEl('text');
           if (textElm) {
             textElm.setAttribute('style', textStyle);
+            self._textStyle = textStyle;
           }
         }
 
@@ -16317,6 +16583,8 @@ define(
       },
 
       active: function (state) {
+        toggleTextStyle(this, state);
+
         if (typeof state != "undefined") {
           this.aria('checked', state);
         }
@@ -17305,10 +17573,10 @@ define(
        */
       renderHtml: function () {
         var self = this, id = self._id, prefix = self.classPrefix, image;
-        var icon = self.state.get('icon'), text = self.state.get('text'),
-          textHtml = '';
+        var icon = self.state.get('icon'), text = self.state.get('text');
+        var settings = self.settings, textHtml = '', ariaPressed;
 
-        image = self.settings.image;
+        image = settings.image;
         if (image) {
           icon = 'none';
 
@@ -17322,15 +17590,17 @@ define(
           image = '';
         }
 
-        icon = self.settings.icon ? prefix + 'ico ' + prefix + 'i-' + icon : '';
+        icon = settings.icon ? prefix + 'ico ' + prefix + 'i-' + icon : '';
 
         if (text) {
           self.classes.add('btn-has-text');
           textHtml = '<span class="' + prefix + 'txt">' + self.encode(text) + '</span>';
         }
 
+        ariaPressed = typeof settings.active === 'boolean' ? ' aria-pressed="' + settings.active + '"' : '';
+
         return (
-          '<div id="' + id + '" class="' + self.classes + '" role="button" tabindex="-1">' +
+          '<div id="' + id + '" class="' + self.classes + '" role="button"' + ariaPressed + ' tabindex="-1">' +
           '<button type="button" hidefocus="1" tabindex="-1">' +
           (icon ? '<i class="' + icon + '"' + image + '></i>' : '') +
           textHtml +

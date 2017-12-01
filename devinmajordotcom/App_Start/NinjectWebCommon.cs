@@ -12,6 +12,7 @@ namespace devinmajordotcom.App_Start
     using Ninject.Web.Common;
     using Ninject.Web.Mvc;
     using Services;
+    using Ninject.Web.Common.WebHost;
 
     public static class NinjectWebCommon 
     {

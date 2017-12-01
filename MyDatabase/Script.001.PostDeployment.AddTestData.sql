@@ -431,42 +431,42 @@ VALUES
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\winIOT.jpg', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\winIOT.jpg', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\boggle.jpg', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\boggle.jpg', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\spwha.png', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\spwha.png', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\hangman.jpg', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\hangman.jpg', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\bugbyte.png', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\bugbyte.png', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\bag.jpg', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\bag.jpg', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\portfolio-img7.jpg', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\portfolio-img7.jpg', SINGLE_BLOB) AS [Image])
 ),
 (
 'UX Design',
 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'C:\Users\dmajor\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\portfolio-img8.jpg', SINGLE_BLOB) AS [Image])
+(SELECT * FROM OPENROWSET(BULK N'C:\Users\Devin Major\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\portfolio-img8.jpg', SINGLE_BLOB) AS [Image])
 );
 GO
 
