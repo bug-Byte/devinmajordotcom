@@ -83,9 +83,9 @@ function UpdateRamCounter(value, baseScale) {
 
 }
 
-function updateDriveCounter(value, baseScale) {
+function updateDriveCounterUsedSpace(value, baseScale) {
 
-    return (value / baseScale) * 100;
+    return ((baseScale - value) / baseScale) * 100;
 
 }
 
@@ -94,42 +94,49 @@ function ConnectToSignalRPerformanceHub() {
     var performanceHub = $.connection.performanceHub;
 
     performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp, drives) {
-
-        document.getElementById('driveCounters').innerHTML = "";
-        var diskCountersHtml = "";
-        var ramValues = nextRamValue.split(" / ");
+        
         if (firstRun) {
+            var diskCountersHtml = "<div class='row'>";
             for (var x = 0; x < drives.length; x++) {
                 var drive = drives[x];
-                if (drive != undefined) {
-                    firstRun = false;
-                }
                 var driveData = drive.split(",");
-                var percentValue = updateDriveCounter(driveData[4], driveData[5]);
-                diskCountersHtml += "<div class='row'><div class='col-md-2'>" + driveData[0] + "</div><div class='col-md-2'>" + driveData[1] + "</div><div class='col-md-2'>" + driveData[2] + "</div><div class='col-md-2'>" + driveData[3] + "</div><div class='col-md-2'>" + driveData[4] + "</div><div class='col-md-2'>" + driveData[5] + "</div></div>";
-                diskCountersHtml += '<div id="disk_' + x + '" class="performancePieChart diskChart" data-percent="' + percentValue + '"><span class="percent">' + percentValue + '</span></div>';
+                var percentValue = updateDriveCounterUsedSpace(driveData[4], driveData[5]);
+                diskCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="disk_' + x + '" class="diskChart" data-percent="' + percentValue + '"><div class="percent">' + percentValue + '</div></div><br/><div class="chartlabel">' + driveData[1] + ' (' + driveData[0] + ')</div><div class="chartlabel">' + driveData[2] + ', ' + driveData[3] + '</div></div></div>';
+                
             }
+            diskCountersHtml += "</div>";
             document.getElementById('driveCounters').innerHTML = diskCountersHtml;
-            $(".diskChart").each(function() {
-                $(this).easyPieChart();
+            $('.diskChart').easyPieChart({
+                animate: 1000,
+                size: 150,
+                lineWidth: 25,
+                lineCap: 'butt',
+                scaleColor: false,
+                trackColor: 'rgba(250,250,250,0.65)',
+                barColor: function (percent) {
+                    percent /= 100;
+                    return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
+                },
+                onStep: function (from, to, percent) {
+                    $(this.el).find('.percent').text(Math.round(percent) + "% Used");
+                }
             });
             
         } else {
-            debugger;
             $(".diskChart").each(function () {
-                
                 var id = this.id.split("_")[1];
                 var thisDrive = drives[id];
                 var thisDriveData = thisDrive.split(",");
                 var nextValue = thisDriveData[4];
                 var baseScale = thisDriveData[5];
-                $(this).data('easyPieChart').update(updateDriveCounter(nextValue, baseScale));
+                $(this).data('easyPieChart').update(updateDriveCounterUsedSpace(nextValue, baseScale));
             });
         }
 
+        var ramValues = nextRamValue.split(" / ");
         $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue, 100));
         $("#ramCounter").data('easyPieChart').update(UpdateRamCounter(ramValues[0], ramValues[1]));
-
+        firstRun = false;
     };
 
     $.connection.hub.start().done(function () {
@@ -148,15 +155,16 @@ function InitializePieCharts() {
     $('.performancePieChart').easyPieChart({
         animate: 1000,
         size: 150,
-        lineWidth: 5,
-        scaleColor: '#dfe0e0',
-        trackColor: '#f2f2f2',
+        lineWidth: 25,
+        lineCap: 'butt',
+        scaleColor: false,
+        trackColor: 'rgba(250,250,250,0.65)',
         barColor: function (percent) {
             percent /= 100;
-            return "rgb(" + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * percent) + ", 0)";
+            return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
         },
         onStep: function (from, to, percent) {
-            $(this.el).find('.percent').text(Math.round(percent));
+            $(this.el).find('.percent').text(Math.round(percent) + "%");
         }
     });
 

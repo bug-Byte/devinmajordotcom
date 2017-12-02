@@ -2,6 +2,20 @@
  * Globals
  */
 
+
+.percent {
+    position: relative;
+    top: 85px;
+}
+
+.chartlabel {
+    text-align: center;
+    font-weight: 100;
+    font-size: 1.2em;
+    margin-bottom: 0.3em;
+    position:relative;
+}
+
 .portfolioPanelHeading:hover {
     cursor:pointer;
 }
@@ -227,8 +241,6 @@ body {
 .cover-container {
   margin-right: auto;
   margin-left: auto;
-  
-  background-color:#0B1C1E;
 }
 
 /* Padding for spacing */

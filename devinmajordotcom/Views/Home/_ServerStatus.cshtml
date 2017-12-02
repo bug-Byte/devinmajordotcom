@@ -9,12 +9,17 @@
     <hr>
 
     <div class="row">
-        <div class="col-sm-12">
-            <div id="cpuCounter" class="performancePieChart" data-percent=""><span class="percent"></span></div>
-            <div id="ramCounter" class="performancePieChart" data-percent=""><span class="percent"></span></div>
+        <div class="col-sm-4">
+            <div class="chart"><div id="cpuCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Usage</div></div>
+        </div>
+        <div class="col-sm-4">
+            <div class="chart"><div id="ramCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">RAM Usage</div></div>
+        </div>
+        <div class="col-sm-4">
             @*<div id="tempCounter" class="performancePieChart" data-percent="0">0%</div>*@
-            <div id="driveCounters">0%</div>
         </div>
     </div>
+
+    <div id="driveCounters"></div>
 
 </div>
