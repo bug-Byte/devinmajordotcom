@@ -21,7 +21,7 @@ namespace devinmajordotcom.Services
         {
             return new MediaDashboardViewModel()
             {
-                SidebarLinks = db.SiteLinks.Where(x => x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select( x => new SiteLinkViewModel()
+                SidebarLinks = db.SiteLinks.Where(x => x.ApplicationId == (int)ApplicationMasterEnum.ApplicationMasters.PlexMediaDashboard).Select( x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,

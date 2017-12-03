@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Devinmajordotcom;
 using System.Security.Principal;
 using System.Net.Mail;
 using System.Net;
@@ -74,7 +73,7 @@ namespace devinmajordotcom.Services
 
         public List<SiteLinkViewModel> GetMainSiteLinks()
         {
-            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.MainLandingPage).Select(x => new SiteLinkViewModel()
+            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)ApplicationMasterEnum.ApplicationMasters.MainLandingPage).Select(x => new SiteLinkViewModel()
             {
                 ID = x.Id,
                 DisplayName = x.DisplayName,
@@ -93,7 +92,7 @@ namespace devinmajordotcom.Services
 
         public List<SiteLinkViewModel> GetMediaSiteLinks()
         {
-            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select(x => new SiteLinkViewModel()
+            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)ApplicationMasterEnum.ApplicationMasters.PlexMediaDashboard).Select(x => new SiteLinkViewModel()
             {
                 ID = x.Id,
                 DisplayName = x.DisplayName,
@@ -132,5 +131,16 @@ namespace devinmajordotcom.Services
                 return e.Message;
             }
         }
+
+        public void UpdateCPUUsage(int nextValue)
+        {
+            var newHardwareDataRecord = new HardwarePerformance()
+            {
+                HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUUsage,
+                PercentageValue = nextValue
+            };
+            db.HardwarePerformances.Add(newHardwareDataRecord);
+        }
+
     }
 }

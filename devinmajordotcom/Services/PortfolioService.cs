@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Devinmajordotcom;
 using System.Security.Principal;
 
 namespace devinmajordotcom.Services
@@ -58,7 +57,7 @@ namespace devinmajordotcom.Services
                     Blurb = x.Blurb
                 }).FirstOrDefault(),
 
-                ContactSiteLinks = db.SiteLinks.Where(x => x.IsEnabled && x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio).Select(x => new SiteLinkViewModel()
+                ContactSiteLinks = db.SiteLinks.Where(x => x.IsEnabled && x.ApplicationId == (int)ApplicationMasterEnum.ApplicationMasters.ProfessionalPortfolio).Select(x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
@@ -75,7 +74,7 @@ namespace devinmajordotcom.Services
                     ParentApplicationName = x.ApplicationMaster.Name
                 }).ToList(),
 
-                LanguageSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.Language).Select(x => new LanguageSkillViewModel()
+                LanguageSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)SkillTypeMasterEnum.SkillTypeMasters.Language).Select(x => new LanguageSkillViewModel()
                 {
                     LanguageSkillID = x.Id,
                     LanguageName = x.DisplayName,
@@ -83,13 +82,13 @@ namespace devinmajordotcom.Services
                     LanguageCapabilityPercentage = x.ProficiencyPercentage.Value
                 }).ToList(),
 
-                TechSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.Technical).Select(x => new TechSkillViewModel()
+                TechSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)SkillTypeMasterEnum.SkillTypeMasters.Technical).Select(x => new TechSkillViewModel()
                 {
                     TechSkillID = x.Id,
                     SkillDescription = x.Description
                 }).ToList(),
 
-                HighlightedWorkSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.WorkHighlighted).Select(x => new WorkSkillViewModel()
+                HighlightedWorkSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)SkillTypeMasterEnum.SkillTypeMasters.WorkHighlighted).Select(x => new WorkSkillViewModel()
                 {
                     WorkSkillID = x.Id,
                     SkillIcon = x.DisplayIcon,
@@ -192,14 +191,14 @@ namespace devinmajordotcom.Services
                 if (skillRecord != null)
                 {
                     skillRecord.Description = techSkill.SkillDescription;
-                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical;
+                    skillRecord.SkillTypeId = (int)SkillTypeMasterEnum.SkillTypeMasters.Technical;
                 }
                 else
                 {
                     var newTechSkill = new Portfolio_Skill()
                     {
                         Description = techSkill.SkillDescription,
-                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical
+                        SkillTypeId = (int)SkillTypeMasterEnum.SkillTypeMasters.Technical
                     };
                     db.Portfolio_Skills.Add(newTechSkill);
                 }
@@ -212,7 +211,7 @@ namespace devinmajordotcom.Services
                     skillRecord.DisplayIcon = workSkill.SkillIcon;
                     skillRecord.DisplayName = workSkill.SkillTitle;
                     skillRecord.Description = workSkill.SkillDetails;
-                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical;
+                    skillRecord.SkillTypeId = (int)SkillTypeMasterEnum.SkillTypeMasters.Technical;
                 }
                 else
                 {
@@ -221,7 +220,7 @@ namespace devinmajordotcom.Services
                         DisplayName = workSkill.SkillTitle,
                         DisplayIcon = workSkill.SkillIcon,
                         Description = workSkill.SkillDetails,
-                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical
+                        SkillTypeId = (int)SkillTypeMasterEnum.SkillTypeMasters.Technical
                     };
                     db.Portfolio_Skills.Add(newWorkSkill);
                 }
@@ -234,7 +233,7 @@ namespace devinmajordotcom.Services
                     skillRecord.Description = languageSkill.LanguageSpecifics;
                     skillRecord.DisplayName = languageSkill.LanguageName;
                     skillRecord.ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage;
-                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Language;
+                    skillRecord.SkillTypeId = (int)SkillTypeMasterEnum.SkillTypeMasters.Language;
                 }
                 else
                 {
@@ -243,7 +242,7 @@ namespace devinmajordotcom.Services
                         DisplayName = languageSkill.LanguageName,
                         Description = languageSkill.LanguageSpecifics,
                         ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage,
-                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Language
+                        SkillTypeId = (int)SkillTypeMasterEnum.SkillTypeMasters.Language
                     };
                     db.Portfolio_Skills.Add(newLanguageSkill);
                 }
@@ -318,7 +317,7 @@ namespace devinmajordotcom.Services
                     linkRecord.Url = contactLink.URL;
                     linkRecord.Order = contactLink.Order;
                     linkRecord.Directive = contactLink.Directive;
-                    linkRecord.ApplicationId = (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio;
+                    linkRecord.ApplicationId = (int)ApplicationMasterEnum.ApplicationMasters.ProfessionalPortfolio;
                 }
                 else
                 {
@@ -334,7 +333,7 @@ namespace devinmajordotcom.Services
                         Url = contactLink.URL,
                         Order = contactLink.Order,
                         Directive = contactLink.Directive,
-                        ApplicationId = (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio
+                        ApplicationId = (int)ApplicationMasterEnum.ApplicationMasters.ProfessionalPortfolio
                     };
                     db.SiteLinks.Add(newLinkRecord);
                 }

@@ -491,4 +491,14 @@ VALUES
 (8,3);
 GO
 
+INSERT INTO [dbo].[HardwareType]
+(
+	Name
+)
+VALUES
+('CPU Usage'),
+('RAM Usage'),
+('CPU Temperature');
+GO
+
 COMMIT

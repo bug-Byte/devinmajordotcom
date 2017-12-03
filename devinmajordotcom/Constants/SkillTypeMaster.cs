@@ -12,12 +12,12 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Devinmajordotcom
+namespace devinmajordotcom
 {
     /// <summary>
     /// We need the ability to check for new SkillTypes
     /// </summary>
-	public static class SkillTypeMaster
+	public static class SkillTypeMasterEnum
 	{
 
 		public enum SkillTypeMasters

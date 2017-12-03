@@ -230,6 +230,11 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Constants\HardwareType.cs">
+      <DependentUpon>HardwareType.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Constants\SkillTypeMaster.cs">
       <DependentUpon>SkillTypeMaster.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -254,9 +259,11 @@
       <DependentUpon>MainDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IHardwareMonitorService.cs" />
     <Compile Include="Services\IMediaDashboardService.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\ILandingPageService.cs" />
+    <Compile Include="Services\HardwareMonitorService.cs" />
     <Compile Include="Services\MediaDashboardService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
     <Compile Include="Services\LandingPageService.cs" />
@@ -271,6 +278,10 @@
     <Compile Include="ViewModels\UserStatusViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Constants\HardwareType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HardwareType.cs</LastGenOutput>
+    </Content>
     <Content Include="Constants\SkillTypeMaster.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SkillTypeMaster.cs</LastGenOutput>

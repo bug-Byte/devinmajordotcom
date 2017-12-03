@@ -20,5 +20,7 @@ namespace devinmajordotcom.Services
 
         string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
 
+        void UpdateCPUUsage(int nextValue);
+
     }
 }
