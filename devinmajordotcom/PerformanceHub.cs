@@ -46,10 +46,10 @@ namespace devinmajordotcom
                 }
 
                 var ramValue = (((totalRam - availableRamCounter.NextValue()) / 1024) / Math.Round((float)totalRam / 1024)) * 100;
-
-                //service.UpdateCPUUsage(cpuCounter.NextValue());
-                service.UpdateRAMUsage(ramValue);
+                
                 Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp, diskList);
+                service.UpdateCPUUsage(cpuCounter.NextValue());
+                service.UpdateRAMUsage(ramValue);
                 i++;
                 Thread.Sleep(1000);
             }

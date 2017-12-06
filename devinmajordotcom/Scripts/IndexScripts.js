@@ -46,7 +46,6 @@ $(document).ready(function () {
             newValue = "True";
         }
         $(this).val(newValue);
-        $(this).attr("data-val", newValue.replace("T","t").replace("F","f"));
         $(this).toggleClass("checked");
     });
 
@@ -134,6 +133,7 @@ function ConnectToSignalRPerformanceHub() {
         }
 
         var ramValues = nextRamValue.split(" / ");
+        debugger;
         $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue, 100));
         $("#ramCounter").data('easyPieChart').update(UpdateRamCounter(ramValues[0], ramValues[1]));
         firstRun = false;
