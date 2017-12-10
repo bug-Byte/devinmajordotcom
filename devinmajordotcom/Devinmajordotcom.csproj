@@ -245,6 +245,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\MediaDashboardController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -605,6 +606,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Error\Error.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -615,7 +617,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_MediaLayout.cshtml" />
     <Content Include="Views\Shared\_PortfolioLayout.cshtml" />

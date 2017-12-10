@@ -4,7 +4,7 @@
     ViewBag.Title = "Error";
 }
 
-@if (Model.ControllerName != "Portfolio")
+@if (Model != null && Model.ControllerName != "Portfolio")
 {
     <style>
         .absolute-center {
@@ -18,7 +18,7 @@
         }
     </style>
 }
-else
+else if (Model != null)
 {
     <style>
         body {

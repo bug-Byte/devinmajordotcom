@@ -38,15 +38,15 @@
 
 <div id="site-wrapper" class="site-wrapper">
 
-    @if (Model.SidebarLinks.Count > 0)
+    @if (Model.SidebarLinks.Where(x => x.IsEnabled).ToList().Count > 0)
     {
-        foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled))
+        foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled && (x.URL != null || x.Controller != null)))
         {
             if (link.URL != null)
             {
                 <iframe 
                         src="@link.URL"
-                        style="width: 100%; height: 99.5vh; position: relative; z-index: -1; border: none; @if(!link.IsDefault) { <text>display:none;</text> }"
+                        style="width: 100%; height: 99.5vh; position: relative; z-index: -1; border: none; @if (!link.IsDefault) { <text>display:none;</text> }"
                         id="@link.ID"
                         scrolling="auto"
                         sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
@@ -64,6 +64,6 @@
     }
     else
     {
-        @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
+        @Html.Partial("../Error/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
     }
 </div>

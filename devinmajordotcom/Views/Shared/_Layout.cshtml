@@ -26,15 +26,18 @@
                 <div class="masthead clearfix" style="background-color:#0B1C1E; z-index: 2000;min-height: 85px; padding:2px;">
                     <div class="inner">
                         <h3 class="masthead-brand text-center">@ViewBag.Title</h3>
-                        <ul class="nav masthead-nav">
-                            <li class="landingPageLink active" data-activediv="#home"><a>Home & Apps</a></li>
-                            <li class="landingPageLink" data-activediv="#server"><a>Server Status</a></li>
-                            <li class="landingPageLink" data-activediv="#contact"><a>Contact Me</a></li>
-                            @if (viewModel.UserIsAdmin)
-                            {
-                                <li class="landingPageLink" data-activediv="#appmanager"><a>App Manager</a></li>
-                            }
-                        </ul>
+                        @if (viewModel != null)
+                        {
+                            <ul class="nav masthead-nav">
+                                <li class="landingPageLink active" data-activediv="#home"><a>Home & Apps</a></li>
+                                <li class="landingPageLink" data-activediv="#server"><a>Server Status</a></li>
+                                <li class="landingPageLink" data-activediv="#contact"><a>Contact Me</a></li>
+                                @if (viewModel.UserIsAdmin)
+                                {
+                                    <li class="landingPageLink" data-activediv="#appmanager"><a>App Manager</a></li>
+                                }
+                            </ul>
+                        }
                     </div>
                 </div>
 
