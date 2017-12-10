@@ -65,6 +65,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/bootstrap-iconpicker.min.js",
                 "~/Scripts/jquery.signalR-2.2.2.min.js",
                 "~/Scripts/jquery.easypiechart.min.js",
+                "~/Scripts/handlebars.min.js",
                 "~/Scripts/IndexScripts.js"
                     ));
 

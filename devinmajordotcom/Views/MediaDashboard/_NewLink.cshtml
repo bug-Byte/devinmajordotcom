@@ -1,0 +1,58 @@
+﻿<script type="text/x-handlebars-template" id="mediaDashboardLinkTemplateScript">
+
+    <input data-val="false" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="SidebarLinks_{{newLinkCounter}}__ID" name="SidebarLinks[{{newLinkCounter}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+    <input data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="SidebarLinks_{{newLinkCounter}}__ParentApplicationId" name="SidebarLinks[{{newLinkCounter}}].ParentApplicationId" type="hidden" value="3" style="">
+    <input id="SidebarLinks_{{newLinkCounter}}__ParentApplicationName" name="SidebarLinks[{{newLinkCounter}}].ParentApplicationName" type="hidden" value="Plex Media Dashboard" style="">
+
+    <li class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
+        <div class="row">
+            <div class="col-sm-2">
+                <span class="btn btn-primary move ui-sortable-handle" type="button"><span class="fa fa-arrows"></span></span>
+            </div>
+            <div class="col-sm-8 text-center">
+                <h4>
+                    <span class="fa "></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <button style="float: right;" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <span class="input-group-btn">
+                        <button data-placement="left" class="btn btn-default iconpicker" name="SidebarLinks[{{newLinkCounter}}].DisplayIcon" role="iconpicker" data-iconset="fontawesome" data-icon="" type="button"><i class="fa "></i><input type="hidden" name="SidebarLinks[{{newLinkCounter}}].DisplayIcon" value=""><span class="caret"></span></button>
+                    </span>
+                    <input class="form-control" id="SidebarLinks_{{newLinkCounter}}__DisplayName" name="SidebarLinks[{{newLinkCounter}}].DisplayName" placeholder="Display Name" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">URL</div>
+                    <input class="form-control" id="SidebarLinks_{{newLinkCounter}}__URL" name="SidebarLinks[{{newLinkCounter}}].URL" placeholder="http://www.google.ca/" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <input class="css-checkbox" data-val="false" data-val-required="The IsDefault field is required." id="SidebarLinks_{{newLinkCounter}}__IsDefault" name="SidebarLinks[{{newLinkCounter}}].IsDefault" type="checkbox" value="False">
+                <label class="css-label" for="SidebarLinks_{{newLinkCounter}}__IsDefault">IsDefault</label>
+            </div>
+            <div class="col-sm-6 text-center">
+                <input class="css-checkbox checked" data-val="true" data-val-required="The IsEnabled field is required." id="SidebarLinks_{{newLinkCounter}}__IsEnabled" name="SidebarLinks[{{newLinkCounter}}].IsEnabled" type="checkbox" value="True">
+                <label class="css-label" for="SidebarLinks_{{newLinkCounter}}__IsEnabled">IsEnabled</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="SidebarLinks[{{newLinkCounter}}].DisplayName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </li>
+
+</script>

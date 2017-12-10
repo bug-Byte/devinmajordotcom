@@ -6,6 +6,8 @@ $(document).ready(function () {
     
     ConnectToSignalRPerformanceHub();
 
+    setTimeout(setupHandlebarsHelpers, 50);
+
     $(".portfolioPanelHeading").on("click", function () {
         var toggler = $(this).children("span");
         toggler.toggleClass("glyphicon-collapse-up");
@@ -69,6 +71,24 @@ function AjaxFailure(data) {
         alertType: 'error',
         message: 'Your email was not sent! Please try again in about 5 minutes.' + data
     });
+}
+
+function setupHandlebarsHelpers() {
+
+    var mediaDashboardLinkTemplateSource = $("#mediaDashboardLinkTemplateScript").html();
+    var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
+    $(document).on('click', '#addNewMediaDashboardLink', function () {
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".mediaDashboardLink").length + 1;
+        var context = { newLinkCounter: linkCount };
+        renderMediaDashboardLinkTemplate(template, context);
+    });
+
+}
+
+function renderMediaDashboardLinkTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("mediaDashboardLinksList").innerHTML += html;
 }
 
 function UpdateCpuCounter(value, baseScale) {
