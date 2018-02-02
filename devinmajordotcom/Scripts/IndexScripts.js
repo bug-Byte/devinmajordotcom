@@ -40,16 +40,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".css-checkbox", function() {
-        var currentValue = $(this).val();
-        var newValue = "";
-        if (currentValue == "True") {
-            newValue = "False";
-        } else {
-            newValue = "True";
-        }
-        $(this).val(newValue);
-        $(this).attr("data-val", newValue.replace("T","t").replace("F","f"));
-        $(this).toggleClass("checked");
+        $(this).attr("value", $(this).val());
     });
 
     tinymce.init({
@@ -79,7 +70,7 @@ function setupHandlebarsHelpers() {
     var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
     $(document).on('click', '#addNewMediaDashboardLink', function () {
         //renderTemplate(template, $(this).data('viewmodel'));
-        var linkCount = $(".mediaDashboardLink").length + 1;
+        var linkCount = $(".mediaDashboardLink").length;
         var context = { newLinkCounter: linkCount };
         renderMediaDashboardLinkTemplate(template, context);
     });
@@ -89,6 +80,11 @@ function setupHandlebarsHelpers() {
 function renderMediaDashboardLinkTemplate(template, data) {
     var html = template(data);
     document.getElementById("mediaDashboardLinksList").innerHTML += html;
+    $('button[role="iconpicker"]').iconpicker();
+    $(".form-control, .css-checkbox").on("change", function () {
+        debugger;
+        $(this).attr("value", $(this).val());
+    });
 }
 
 function UpdateCpuCounter(value, baseScale) {

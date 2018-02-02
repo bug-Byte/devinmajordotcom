@@ -332,7 +332,33 @@
                 
                     <h5>Technical Skills</h5>
 
+                    @if (Model.TechSkills != null && Model.TechSkills.Count > 0)
+                    {
+                        for (var i = 0; i < Model.TechSkills.Count; i++)
+                        {
+                            @Html.HiddenFor(x => x.TechSkills[i].TechSkillID)
+                            @Html.TextAreaFor(x => x.TechSkills[i].SkillDescription, new { @class = "form-control" })
+                            <hr />
+                        }
+                    }
+
                     <h5>Language Skills</h5>
+
+                    @if (Model.LanguageSkills != null && Model.LanguageSkills.Count > 0)
+                    {
+                        for (var i = 0; i < Model.LanguageSkills.Count; i++)
+                        {
+                            @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID)
+                            <div class="well well-sm text-left">
+                                <h5>Language Name</h5>
+                                @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
+                                <h5>Language Specifics (if programming language or applicable)</h5>
+                                @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
+                            </div>
+                            <hr />
+                        }
+                    }
+
                 </div>
             </div>
         </div>
