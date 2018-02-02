@@ -4,7 +4,79 @@
     Layout = "../Shared/_MediaLayout.cshtml";
 }
 
-<div id="nav">
+<div class="wrapper">
+
+    <nav id="sidebar">
+
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+            <h3>Collapsible Sidebar</h3>
+            <strong>BS</strong>
+        </div>
+
+        <!-- Sidebar Links -->
+        <ul class="list-unstyled components">
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-home"></i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-briefcase"></i>
+                    About
+                </a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-duplicate"></i>
+                    Pages
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li><a href="#">Page 1</a></li>
+                    <li><a href="#">Page 2</a></li>
+                    <li><a href="#">Page 3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-link"></i>
+                    Portfolio
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-send"></i>
+                    Contact
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div id="content">
+        <div >
+            &nbsp;&nbsp;
+            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" style="display:inline;">
+                <span class="glyphicon glyphicon-th-list"></span>
+            </button>
+            &nbsp;&nbsp;
+            <h4 style="display:inline;">dfsdfsdfsdfsdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</h4>
+        </div>
+        <br/>
+        <iframe src="@Model.SidebarLinks[0].URL"
+                style="width: 100%; height: 99.5vh; z-index: -1; border: none; "
+                id="@Model.SidebarLinks[0].ID"
+                scrolling="auto"
+                sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+                allowfullscreen="true"
+                webkitallowfullscreen="true"
+                class="z-iframe"
+                frameborder="0">
+        </iframe>
+    </div>
+</div>
+
+@*<div id="nav">
     <ul class="menu toggled nav" id="menu">
 
         @if (Model.SidebarLinks.Count > 0)
@@ -34,9 +106,9 @@
 { 
     <div id="nav1"></div>
 }
-
-
+        
 <div id="site-wrapper" class="site-wrapper">
+    <h4>Welcome to <b>Devin Major's Media Server!</b> Touch or hover over the left of the browser for the menu.</h4>
 
     @if (Model.SidebarLinks.Count > 0)
     {
@@ -46,7 +118,7 @@
             {
                 <iframe 
                         src="@link.URL"
-                        style="width: 100%; height: 99.5vh; position: relative; z-index: -1; border: none; @if(!link.IsDefault) { <text>display:none;</text> }"
+                        style="width: 100%; height: 95vh; position: relative; z-index: -1; border: none; @if(!link.IsDefault) { <text>display:none;</text> }"
                         id="@link.ID"
                         scrolling="auto"
                         sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
@@ -66,4 +138,4 @@
     {
         @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
     }
-</div>
+</div>*@
