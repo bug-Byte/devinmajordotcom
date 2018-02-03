@@ -66,13 +66,36 @@ function AjaxFailure(data) {
 
 function setupHandlebarsHelpers() {
 
-    var mediaDashboardLinkTemplateSource = $("#mediaDashboardLinkTemplateScript").html();
-    var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
+    
+
     $(document).on('click', '#addNewMediaDashboardLink', function () {
+        var mediaDashboardLinkTemplateSource = $("#mediaDashboardLinkTemplateScript").html();
+        var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
         var linkCount = $(".mediaDashboardLink").length;
         var context = { newLinkCounter: linkCount };
         renderMediaDashboardLinkTemplate(template, context);
+    });
+
+    $(document).on('click', '#addNewTechSkillLink', function () {
+        debugger;
+        var techSkillTemplateSource = $("#techSkillTemplateScript").html();
+        var template = Handlebars.compile(techSkillTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var newId = $(".techSkill_" + ($(".techSkill").length - 1)).closest("hiddenSkillId");
+        var linkCount = $(".techSkill").length;
+        var context = { newLinkCounter: linkCount, newID: newId };
+        renderTechSkillTemplate(template, context);
+    });
+
+    $(document).on('click', '#addNewLanguageSkillLink', function () {
+        var languageSkillTemplateSource = $("#languageSkillTemplateScript").html();
+        var template = Handlebars.compile(languageSkillTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var newId = $(".languageSkill_" + ($(".languageSkill").length - 1)).closest("hiddenSkillId");
+        var linkCount = $(".languageSkill").length;
+        var context = { newLinkCounter: linkCount, newID: newId };
+        renderLanguageSkillTemplate(template, context);
     });
 
 }
@@ -82,7 +105,22 @@ function renderMediaDashboardLinkTemplate(template, data) {
     document.getElementById("mediaDashboardLinksList").innerHTML += html;
     $('button[role="iconpicker"]').iconpicker();
     $(".form-control, .css-checkbox").on("change", function () {
-        debugger;
+        $(this).attr("value", $(this).val());
+    });
+}
+
+function renderTechSkillTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("techSkillContainer").innerHTML += html;
+    $(".form-control, .css-checkbox").on("change", function () {
+        $(this).attr("value", $(this).val());
+    });
+}
+
+function renderLanguageSkillTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("languageSkillContainer").innerHTML += html;
+    $(".form-control, .css-checkbox").on("change", function () {
         $(this).attr("value", $(this).val());
     });
 }

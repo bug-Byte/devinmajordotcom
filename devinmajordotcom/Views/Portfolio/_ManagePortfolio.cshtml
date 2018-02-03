@@ -251,7 +251,11 @@
             <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body">
 
-                    <h5>Highlighted Skills</h5>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <h3>Highlighted Skills</h3>
+                        </div>
+                    </div>
 
                     <div id="skillCarousel" class="carousel slide">
                         <!-- Indicators -->
@@ -329,35 +333,73 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+
+                    <br />
                 
-                    <h5>Technical Skills</h5>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <h3>Technical Skills</h3>
+                        </div>
+                    </div>
 
-                    @if (Model.TechSkills != null && Model.TechSkills.Count > 0)
-                    {
-                        for (var i = 0; i < Model.TechSkills.Count; i++)
+                    <div id="techSkillContainer">
+                        @if (Model.TechSkills != null && Model.TechSkills.Count > 0)
                         {
-                            @Html.HiddenFor(x => x.TechSkills[i].TechSkillID)
-                            @Html.TextAreaFor(x => x.TechSkills[i].SkillDescription, new { @class = "form-control" })
-                            <hr />
+                            for (var i = 0; i < Model.TechSkills.Count; i++)
+                            {
+                                <div class="techSkill techSkill_@i">
+                                    <div class="row">
+                                        <div class="col-sm-12 text-left">
+                                            @Html.HiddenFor(x => x.TechSkills[i].TechSkillID, new { @class = "hiddenSkillId", data_skillid = Model.TechSkills[i].TechSkillID })
+                                            @Html.TextAreaFor(x => x.TechSkills[i].SkillDescription, new { @class = "form-control techskill" })
+                                        </div>
+                                        <div class="col-sm-12 text-right">
+                                            <button type="button" class="btn btn-danger techSkillRemover" data-skillid="@i"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Skill</button>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            }
                         }
-                    }
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <button type="button" id="addNewTechSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Technical Skill</button>
+                        </div>
+                    </div>
 
-                    <h5>Language Skills</h5>
+                    <br/>
 
-                    @if (Model.LanguageSkills != null && Model.LanguageSkills.Count > 0)
-                    {
-                        for (var i = 0; i < Model.LanguageSkills.Count; i++)
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <h3>Language Skills</h3>
+                        </div>
+                    </div>
+
+                    <div id="languageSkillContainer">
+                        @if (Model.LanguageSkills != null && Model.LanguageSkills.Count > 0)
                         {
-                            @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID)
-                            <div class="well well-sm text-left">
-                                <h5>Language Name</h5>
-                                @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
-                                <h5>Language Specifics (if programming language or applicable)</h5>
-                                @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
-                            </div>
-                            <hr />
+                            for (var i = 0; i < Model.LanguageSkills.Count; i++)
+                            {
+                                <div class="languageSkill languageSkill_@i">
+                                    @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID, new { @class="hiddenSkillId", data_skillid=Model.LanguageSkills[i].LanguageSkillID })
+                                    <div class="well well-sm text-left">
+                                        <h5>Language Name</h5>
+                                        @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
+                                        <h5>Language Specifics (if programming language or applicable)</h5>
+                                        @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
+                                        <button type="button" class="btn btn-danger languageSkillRemover" data-skillid="@i"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Language</button>
+                                    </div>
+                                    <hr />
+                                </div>
+                            }
                         }
-                    }
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <button type="button" id="addNewLanguageSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Language</button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -402,4 +444,6 @@
         </div>
     </div>
 
+    @Html.Partial("../Portfolio/_AddNewTechSkill")
+    @Html.Partial("../Portfolio/_AddNewLanguageSkill")
 }

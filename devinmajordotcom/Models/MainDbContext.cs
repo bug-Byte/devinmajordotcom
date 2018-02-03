@@ -37,13 +37,14 @@ namespace devinmajordotcom.Models
     public partial interface IdbContext : System.IDisposable
     {
         System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
+        System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
         System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
         System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
         System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
         System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
-        System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
-        System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
+        System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
         System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<User> Users { get; set; } // User
 
@@ -69,13 +70,14 @@ namespace devinmajordotcom.Models
     public partial class dbContext : System.Data.Entity.DbContext, IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
+        public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
         public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
-        public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
-        public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
+        public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<User> Users { get; set; } // User
 
@@ -133,13 +135,14 @@ namespace devinmajordotcom.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
-            modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration());
-            modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration());
             modelBuilder.Configurations.Add(new SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
 
@@ -149,13 +152,14 @@ namespace devinmajordotcom.Models
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
-            modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration(schema));
-            modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new UserConfiguration(schema));
             return modelBuilder;
@@ -184,26 +188,28 @@ namespace devinmajordotcom.Models
     public partial class FakedbContext : IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
-        public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; }
-        public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; }
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; }
         public System.Data.Entity.DbSet<User> Users { get; set; }
 
         public FakedbContext()
         {
             ApplicationMasters = new FakeDbSet<ApplicationMaster>("Id");
+            Portfolio_HighlightedSkills = new FakeDbSet<Portfolio_HighlightedSkill>("Id");
+            Portfolio_LanguageSkills = new FakeDbSet<Portfolio_LanguageSkill>("Id");
             Portfolio_PersonalDescriptions = new FakeDbSet<Portfolio_PersonalDescription>("Id");
             Portfolio_Profiles = new FakeDbSet<Portfolio_Profile>("Id");
             Portfolio_Projects = new FakeDbSet<Portfolio_Project>("Id");
             Portfolio_ProjectTypes = new FakeDbSet<Portfolio_ProjectType>("Id");
             Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
-            Portfolio_Skills = new FakeDbSet<Portfolio_Skill>("Id");
-            Portfolio_SkillTypeMasters = new FakeDbSet<Portfolio_SkillTypeMaster>("Id");
+            Portfolio_TechSkills = new FakeDbSet<Portfolio_TechSkill>("Id");
             SiteLinks = new FakeDbSet<SiteLink>("Id");
             Users = new FakeDbSet<User>("Id");
 
@@ -558,6 +564,42 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // HighlightedSkill
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_HighlightedSkill
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Description { get; set; } // Description (length: 500)
+        public string DisplayName { get; set; } // DisplayName (length: 100)
+        public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
+
+        public Portfolio_HighlightedSkill()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // LanguageSkill
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_LanguageSkill
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Description { get; set; } // Description (length: 500)
+        public string DisplayName { get; set; } // DisplayName (length: 100)
+        public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
+
+        public Portfolio_LanguageSkill()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // PersonalDescription
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Portfolio_PersonalDescription
@@ -676,49 +718,18 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // Skill
+    // TechSkill
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class Portfolio_Skill
+    public partial class Portfolio_TechSkill
     {
         public int Id { get; set; } // ID (Primary key)
         public string Description { get; set; } // Description (length: 500)
         public string DisplayName { get; set; } // DisplayName (length: 100)
         public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
         public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
-        public int SkillTypeId { get; set; } // SkillTypeID
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Portfolio_SkillTypeMaster pointed by [Skill].([SkillTypeId]) (SkillMaster_SkillTypeID_SkillTypeMaster_ID)
-        /// </summary>
-        public virtual Portfolio_SkillTypeMaster Portfolio_SkillTypeMaster { get; set; } // SkillMaster_SkillTypeID_SkillTypeMaster_ID
-
-        public Portfolio_Skill()
+        public Portfolio_TechSkill()
         {
-            InitializePartial();
-        }
-
-        partial void InitializePartial();
-    }
-
-    // SkillTypeMaster
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class Portfolio_SkillTypeMaster
-    {
-        public int Id { get; set; } // ID (Primary key)
-        public string TypeName { get; set; } // TypeName (length: 500)
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child Portfolio_Skills where [Skill].[SkillTypeID] point to this entity (SkillMaster_SkillTypeID_SkillTypeMaster_ID)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill.SkillMaster_SkillTypeID_SkillTypeMaster_ID
-
-        public Portfolio_SkillTypeMaster()
-        {
-            Portfolio_Skills = new System.Collections.Generic.List<Portfolio_Skill>();
             InitializePartial();
         }
 
@@ -799,6 +810,54 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // HighlightedSkill
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_HighlightedSkillConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_HighlightedSkill>
+    {
+        public Portfolio_HighlightedSkillConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_HighlightedSkillConfiguration(string schema)
+        {
+            ToTable("HighlightedSkill", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // LanguageSkill
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_LanguageSkillConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_LanguageSkill>
+    {
+        public Portfolio_LanguageSkillConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_LanguageSkillConfiguration(string schema)
+        {
+            ToTable("LanguageSkill", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -928,18 +987,18 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // Skill
+    // TechSkill
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class Portfolio_SkillConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Skill>
+    public partial class Portfolio_TechSkillConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_TechSkill>
     {
-        public Portfolio_SkillConfiguration()
+        public Portfolio_TechSkillConfiguration()
             : this("Portfolio")
         {
         }
 
-        public Portfolio_SkillConfiguration(string schema)
+        public Portfolio_TechSkillConfiguration(string schema)
         {
-            ToTable("Skill", schema);
+            ToTable("TechSkill", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
@@ -947,31 +1006,6 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
-            Property(x => x.SkillTypeId).HasColumnName(@"SkillTypeID").HasColumnType("int").IsRequired();
-
-            // Foreign keys
-            HasRequired(a => a.Portfolio_SkillTypeMaster).WithMany(b => b.Portfolio_Skills).HasForeignKey(c => c.SkillTypeId).WillCascadeOnDelete(false); // SkillMaster_SkillTypeID_SkillTypeMaster_ID
-            InitializePartial();
-        }
-        partial void InitializePartial();
-    }
-
-    // SkillTypeMaster
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class Portfolio_SkillTypeMasterConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_SkillTypeMaster>
-    {
-        public Portfolio_SkillTypeMasterConfiguration()
-            : this("Portfolio")
-        {
-        }
-
-        public Portfolio_SkillTypeMasterConfiguration(string schema)
-        {
-            ToTable("SkillTypeMaster", schema);
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
             InitializePartial();
         }
         partial void InitializePartial();

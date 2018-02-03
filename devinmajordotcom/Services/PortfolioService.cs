@@ -75,7 +75,7 @@ namespace devinmajordotcom.Services
                     ParentApplicationName = x.ApplicationMaster.Name
                 }).ToList(),
 
-                LanguageSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.Language).Select(x => new LanguageSkillViewModel()
+                LanguageSkills = db.Portfolio_LanguageSkills.Select(x => new LanguageSkillViewModel()
                 {
                     LanguageSkillID = x.Id,
                     LanguageName = x.DisplayName,
@@ -83,13 +83,13 @@ namespace devinmajordotcom.Services
                     LanguageCapabilityPercentage = x.ProficiencyPercentage.Value
                 }).ToList(),
 
-                TechSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.Technical).Select(x => new TechSkillViewModel()
+                TechSkills = db.Portfolio_TechSkills.Select(x => new TechSkillViewModel()
                 {
                     TechSkillID = x.Id,
                     SkillDescription = x.Description
                 }).ToList(),
 
-                HighlightedWorkSkills = db.Portfolio_Skills.Where(x => x.SkillTypeId == (int)Devinmajordotcom.SkillTypeMaster.SkillTypeMasters.WorkHighlighted).Select(x => new WorkSkillViewModel()
+                HighlightedWorkSkills = db.Portfolio_HighlightedSkills.Select(x => new WorkSkillViewModel()
                 {
                     WorkSkillID = x.Id,
                     SkillIcon = x.DisplayIcon,
@@ -188,64 +188,58 @@ namespace devinmajordotcom.Services
         {
             foreach (var techSkill in viewModel.TechSkills)
             {
-                var skillRecord = db.Portfolio_Skills.FirstOrDefault(x => x.Id == techSkill.TechSkillID);
+                var skillRecord = db.Portfolio_TechSkills.FirstOrDefault(x => x.Id == techSkill.TechSkillID);
                 if (skillRecord != null)
                 {
                     skillRecord.Description = techSkill.SkillDescription;
-                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical;
                 }
                 else
                 {
-                    var newTechSkill = new Portfolio_Skill()
+                    var newTechSkill = new Portfolio_TechSkill()
                     {
                         Description = techSkill.SkillDescription,
-                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical
                     };
-                    db.Portfolio_Skills.Add(newTechSkill);
+                    db.Portfolio_TechSkills.Add(newTechSkill);
                 }
             }
             foreach (var workSkill in viewModel.HighlightedWorkSkills)
             {
-                var skillRecord = db.Portfolio_Skills.FirstOrDefault(x => x.Id == workSkill.WorkSkillID);
+                var skillRecord = db.Portfolio_HighlightedSkills.FirstOrDefault(x => x.Id == workSkill.WorkSkillID);
                 if (skillRecord != null)
                 {
                     skillRecord.DisplayIcon = workSkill.SkillIcon;
                     skillRecord.DisplayName = workSkill.SkillTitle;
                     skillRecord.Description = workSkill.SkillDetails;
-                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical;
                 }
                 else
                 {
-                    var newWorkSkill = new Portfolio_Skill()
+                    var newWorkSkill = new Portfolio_HighlightedSkill()
                     {
                         DisplayName = workSkill.SkillTitle,
                         DisplayIcon = workSkill.SkillIcon,
-                        Description = workSkill.SkillDetails,
-                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Technical
+                        Description = workSkill.SkillDetails
                     };
-                    db.Portfolio_Skills.Add(newWorkSkill);
+                    db.Portfolio_HighlightedSkills.Add(newWorkSkill);
                 }
             }
             foreach (var languageSkill in viewModel.LanguageSkills)
             {
-                var skillRecord = db.Portfolio_Skills.FirstOrDefault(x => x.Id == languageSkill.LanguageSkillID);
+                var skillRecord = db.Portfolio_LanguageSkills.FirstOrDefault(x => x.Id == languageSkill.LanguageSkillID);
                 if (skillRecord != null)
                 {
                     skillRecord.Description = languageSkill.LanguageSpecifics;
                     skillRecord.DisplayName = languageSkill.LanguageName;
                     skillRecord.ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage;
-                    skillRecord.SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Language;
                 }
                 else
                 {
-                    var newLanguageSkill = new Portfolio_Skill()
+                    var newLanguageSkill = new Portfolio_LanguageSkill()
                     {
                         DisplayName = languageSkill.LanguageName,
                         Description = languageSkill.LanguageSpecifics,
-                        ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage,
-                        SkillTypeId = (int)SkillTypeMaster.SkillTypeMasters.Language
+                        ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage
                     };
-                    db.Portfolio_Skills.Add(newLanguageSkill);
+                    db.Portfolio_LanguageSkills.Add(newLanguageSkill);
                 }
             }
         }

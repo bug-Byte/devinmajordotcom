@@ -1,0 +1,14 @@
+﻿<script type="text/x-handlebars-template" id="techSkillTemplateScript">
+    <div class="techSkill techSkill_{{newLinkCounter}}">
+        <div class="row">
+            <div class="col-sm-12 text-left">
+                <input class="hiddenSkillId" data-skillid="1" data-val="true" data-val-number="The field TechSkillID must be a number." data-val-required="The TechSkillID field is required." id="TechSkills_{{newLinkCounter}}__TechSkillID" name="TechSkills[{{newLinkCounter}}]].TechSkillID" type="hidden" value="{{newID}}">
+                <textarea class="form-control techskill" cols="20" data-val="true" data-val-length="Skill Description cannot be longer than 500 characters." data-val-length-max="500" data-val-required="The Skill Description * :  field is required." id="TechSkills_{{newLinkCounter}}__SkillDescription" name="TechSkills[{{newLinkCounter}}].SkillDescription" rows="2" placeholder="I am a professional networker with many connections..."></textarea>
+            </div>
+            <div class="col-sm-12 text-right">
+                <button type="button" class="btn btn-danger techSkillRemover" data-skillid="{{newLinkCounter}}"><span class="glyphicon glyphicon-remove" style=""></span>&nbsp;Remove Skill</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+</script>

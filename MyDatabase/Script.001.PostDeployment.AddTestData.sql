@@ -216,10 +216,6 @@ VALUES
 );
 GO
 
-INSERT INTO [Portfolio].[SkillTypeMaster] ([TypeName])
-VALUES('Work/Highlighted'),('Technical'),('Language');
-GO
-
 INSERT INTO Portfolio.ProjectType([Type])
 VALUES
 ('Web'),('Desktop'),('Personal'),('Mobile'),('Raspberry Pi');
@@ -270,12 +266,11 @@ VALUES
 );
 GO
 
-INSERT INTO [Portfolio].[Skill]
+INSERT INTO [Portfolio].[HighlightedSkill]
 (
 	[Description],
 	[DisplayName],
 	[ProficiencyPercentage],
-	SkillTypeID,
 	[DisplayIcon]
 )
 VALUES
@@ -283,140 +278,140 @@ VALUES
 	'I create all kinds of programs for businesses and personal use, and I am very particular about my code structure, and user interface design. <br /><b><a href="#portfolio" class="smoothScroll">Want some examples?</a></b>',
 	'Desktop Apps',
 	NULL,
-	1,
 	'fa-envelope'
 ),
 (
 	'I create beautiful, sleek, well built websites for clients that are a breeze to navigate through, yet complex enough to compete with others in a competitive online market.',
 	'Dynamic Web Design',
 	NULL,
-	1,
 	'fa-flash'
 ),
 (
 	'I have a tonne of experience with database programs and design theory, and I am able to create safe, secure spaces to store and manage confidential information. ',
 	'Database Design',
 	NULL,
-	1,
 	'fa-link'
 ),
 (
 	'I design and assemble custom built PCs from scratch. It''s a great way to learn about the inner workings of your machine, and you can tailor to your own needs!',
 	'Custom PC Builds',
 	NULL,
-	1,
 	'fa-dashboard'
 ),
 (
 	'Capable of managing a large scale Local Area Network for your business and home, as well as setting up and maintaining server hardware and software. ',
 	'Networking Admin',
 	NULL,
-	1,
 	'fa-key'
 ),
 (
 	'I have tested and used a number of Windows and Linux operating systems over the years, and have become something of an expert on installing and using them.',
 	'Operating Systems',
 	NULL,
-	1,
 	'fa-github'
-),
+);
+GO
+
+INSERT INTO [Portfolio].[LanguageSkill]
+(
+	[Description],
+	[DisplayName],
+	[ProficiencyPercentage],
+	[DisplayIcon]
+)
+VALUES
 (
 	'HTML5, CSS, JS',
 	'Web',
 	85,
-	3,
 	NULL
 ),
 (
 	'Java, Android/iOS, C++',
 	'Object Oriented, Cross Platform',
 	75,
-	3,
 	NULL
 ),
 (
 	'SQL, MySql, PHP',
 	'Databases & Scripting',
 	90,
-	3,
 	NULL
 ),
 (
 	'Visual Basic, C#, F#',
 	'.NET',
 	100,
-	3,
 	NULL
 ),
 (
 	'Scripts',
 	'Python',
 	80,
-	3,
 	NULL
-),
+);
+GO
+
+INSERT INTO [Portfolio].[TechSkill]
+(
+	[Description],
+	[DisplayName],
+	[ProficiencyPercentage],
+	[DisplayIcon]
+)
+VALUES
 (
 	'Can propose and justify the design and development of an integrated software solution based on an analysis of the business environment',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Very familiar with Version Control Systems such as CVS, Git, and Mercurial',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Knowledge of security issues in the analysis, design, and implementation of software',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Knowledge of the design, modeling, implementation, and maintenance of a database',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Can design, test, document, and deploy programs based on specifications',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Excellent at developing and maintaining effective working relationships with clients',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Knowledge of networking concepts to develop, deploy, and maintain a working LAN based on users needs',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Extremely proficient in Microsoft Office Programs and troubleshooting hardware/software',
 	NULL,
 	NULL,
-	2,
 	NULL
 ),
 (
 	'Can analyze and define the specifications of a system based on requirements.',
 	NULL,
 	NULL,
-	2,
 	NULL
 );
 GO
