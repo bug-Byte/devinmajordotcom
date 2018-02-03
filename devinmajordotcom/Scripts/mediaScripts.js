@@ -4,13 +4,13 @@ $(document).ready(function () {
 
     $(document).on("click", ".menu li a", function () {
         var id = "#" + $(this).data('framename');
-        $(".menu li a").removeClass('active');
-        $(this).addClass('active');
+        $(".menu li").removeClass('active');
+        $(this).parent().addClass('active');
         $('iframe').hide();
         $(id).fadeIn(500);
     });
 
-    $('#sidebarCollapse').on('click', function () {
+    $('.sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
 
