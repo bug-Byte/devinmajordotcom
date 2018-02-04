@@ -164,4 +164,7 @@
     <PostDeploy Include="Script.001.PostDeployment.AddTestData.sql" />
     <None Include="Script.PostDeployment.Start.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="MyDatabase.publish.xml" />
+  </ItemGroup>
 </Project>
