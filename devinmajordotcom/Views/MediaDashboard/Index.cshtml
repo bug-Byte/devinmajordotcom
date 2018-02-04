@@ -6,13 +6,12 @@
 
 <div class="wrapper">
 
-    <nav id="sidebar" class="active">
+    <nav id="sidebar" class="active text-center">
 
         <!-- Sidebar Header -->
         <div class="sidebar-header">
             <h3>
                 My Media Dashboard
-                
             </h3>
             <strong>
                 M D
@@ -21,7 +20,6 @@
 
         <!-- Sidebar Links -->
         <ul class="list-unstyled components menu">
-
             @if (Model.SidebarLinks.Count > 0)
             {
                 foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled))
@@ -34,44 +32,10 @@
                     </li>
                 }
             }
-            @*<li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-home"></i>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-briefcase"></i>
-                    About
-                </a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-duplicate"></i>
-                    Pages
-                </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-link"></i>
-                    Portfolio
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-send"></i>
-                    Contact
-                </a>
-            </li>*@
         </ul>
-        <button type="button" class="btn btn-info navbar-btn sidebarCollapse" style="display:inline;">
+        <button type="button" class="btn btn-info navbar-btn sidebarCollapse" >
             <span class="glyphicon glyphicon-resize-full"></span>
         </button>
-
     </nav>
 
     <div id="content">
@@ -83,7 +47,7 @@
                 if (link.URL != null)
                 {
                     <iframe src="@Model.SidebarLinks[count].URL"
-                            style="width: 100%; height: 99.4vh; z-index: -1; border: none; @if(!Model.SidebarLinks[count].IsDefault) { <text>display:none;</text> }"
+                            style="width: 100%; min-height: 100%; z-index: -1; border: none; @if (!Model.SidebarLinks[count].IsDefault) { <text>display:none;</text> }"
                             id="@Model.SidebarLinks[count].ID"
                             scrolling="auto"
                             sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
@@ -106,29 +70,3 @@
 
     </div>
 </div>
-
-@*<div id="nav">
-    <ul class="menu toggled nav" id="menu">
-
-        @if (Model.SidebarLinks.Count > 0)
-        {
-            foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled))
-            {
-
-                var cssClassNameList = "";
-
-                if(sidebarLink.IsDefault)
-                {
-                    cssClassNameList += "active ";
-                }
-
-                cssClassNameList += sidebarLink.DisplayIcon;
-
-                <li title="@sidebarLink.DisplayName">
-                    <span class="sidebarItem"><a data-framename="@sidebarLink.ID" href="#" class="@cssClassNameList">@sidebarLink.DisplayName</a></span>
-                </li>
-            }
-        }
-
-    </ul>
-</div>*@
