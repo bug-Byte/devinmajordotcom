@@ -11,15 +11,11 @@
         <!-- Sidebar Header -->
         <div class="sidebar-header">
             <h3>
-                Collapsible Sidebar
-                <button type="button" class="btn btn-info navbar-btn sidebarCollapse" style="display:inline;">
-                    <span class="glyphicon glyphicon-fullscreen"></span>
-                </button>
+                My Media Dashboard
+                
             </h3>
             <strong>
-                <button type="button" class="btn btn-info navbar-btn sidebarCollapse" style="display:inline;">
-                    <span class="glyphicon glyphicon-fullscreen"></span>
-                </button>
+                M D
             </strong>
         </div>
 
@@ -30,10 +26,10 @@
             {
                 foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled))
                 {
-                    <li @if(sidebarLink.IsDefault) {<text>class="active"</text>}>
+                    <li data-newtitle="@sidebarLink.DisplayName" @if(sidebarLink.IsDefault) {<text>class="active"</text>}>
                         <a href="#" data-framename="@sidebarLink.ID">
                             <i class="fa @sidebarLink.DisplayIcon"></i>
-                            @sidebarLink.DisplayName
+                            <span class="displayName">@sidebarLink.DisplayName</span>
                         </a>
                     </li>
                 }
@@ -72,6 +68,9 @@
                 </a>
             </li>*@
         </ul>
+        <button type="button" class="btn btn-info navbar-btn sidebarCollapse" style="display:inline;">
+            <span class="glyphicon glyphicon-resize-full"></span>
+        </button>
 
     </nav>
 

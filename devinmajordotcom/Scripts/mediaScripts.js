@@ -10,8 +10,26 @@ $(document).ready(function () {
         $(id).fadeIn(500);
     });
 
+    $('ul li').hover(
+	function () {
+	    title = $(this).attr('title');
+	    $(this).attr({ 'title': '' });
+	},
+	function () {
+	    $(this).attr({ 'title': title });
+	}
+);
+
     $('.sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
+        if($("#sidebar").hasClass("active")) {
+            $(this).children(":first").removeClass("glyphicon-resize-small");
+            $(this).children(":first").addClass("glyphicon-resize-full");
+        }
+        else {
+            $(this).children(":first").removeClass("glyphicon-resize-full");
+            $(this).children(":first").addClass("glyphicon-resize-small");
+        }
     });
 
     //$('#nav1').bind("mouseenter", function () {
