@@ -64,6 +64,27 @@ function AjaxFailure(data) {
     });
 }
 
+function RemoveMediaLink(id) {
+    debugger;
+    $(id).parent().parent().parent().remove();
+
+    ManageMediaAjaxSuccess();
+}
+
+function ManageMediaAjaxSuccess(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your media dashboard links have been updated!'
+    });
+}
+
+function ManageMediaAjaxFailure(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Something went wrong! Your media dashboard links have not been updated.'
+    });
+}
+
 function setupHandlebarsHelpers() {
 
     

@@ -14,5 +14,7 @@ namespace devinmajordotcom.Services
 
         string ManageMediaDashboard(MediaDashboardViewModel viewModel);
 
+        void RemoveLink(int ID);
+
     }
 }

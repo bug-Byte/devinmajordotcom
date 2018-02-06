@@ -2,6 +2,61 @@
  * Globals
  */
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    top: 10px;
+}
+
+.switch input {display:none;}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input[type="checkbox"]:checked + input[type="hidden"] + .slider,
+input[type="checkbox"]:checked + .slider {
+    background-color: #6fc067 !important;
+}
+
+input[type="checkbox"]:focus + input[type="hidden"] + .slider,
+input[type="checkbox"]:focus + .slider {
+    box-shadow: 0 0 1px #6fc067;
+}
+
+input[type="checkbox"]:checked + input[type="hidden"] + .slider:before,
+input[type="checkbox"]:checked + .slider:before {
+    transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
 
 .percent {
     position: relative;
@@ -43,44 +98,6 @@
 
 .form-group {
     width: 100%;
-}
-
-input[type=checkbox].css-checkbox {
-    position:absolute; 
-    z-index:-1000; 
-    left:-1000px; 
-    overflow: hidden; 
-    clip: rect(0 0 0 0); 
-    height:1px; 
-    width:1px; 
-    margin:-1px; 
-    padding:0; 
-    border:0;
-}
-
-input[type=checkbox].css-checkbox + label.css-label {
-    padding-left:55px;
-    height:30px; 
-    display:inline-block;
-    line-height:30px;
-    background-repeat:no-repeat;
-    background-position: 0 0;
-    font-size:14px;
-    vertical-align:middle;
-    cursor:pointer;
-}
-
-input[type=checkbox].css-checkbox.checked + label.css-label {
-    background-position: 0 -30px;
-}
-label.css-label {
-    background-image:url(Images/check2.png);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .mediaDashboardLink {

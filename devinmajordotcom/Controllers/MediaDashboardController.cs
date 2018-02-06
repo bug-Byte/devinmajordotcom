@@ -33,5 +33,10 @@ namespace devinmajordotcom.Controllers
             return new JsonResult { Data = data };
         }
 
+        public void RemoveMediaDashboardLink(int ID)
+        {
+            service.RemoveLink(ID);
+        }
+
     }
 }

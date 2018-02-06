@@ -89,5 +89,15 @@ namespace devinmajordotcom.Services
             }
         }
 
+        public void RemoveLink(int ID)
+        {
+            var link = db.SiteLinks.FirstOrDefault(x => x.Id == ID);
+            if (link != null)
+            {
+                db.SiteLinks.Remove(link);
+            }
+            db.SaveChanges();
+        }
+
     }
 }

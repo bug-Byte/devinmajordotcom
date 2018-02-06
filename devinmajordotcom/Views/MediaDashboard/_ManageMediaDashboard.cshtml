@@ -26,7 +26,11 @@
                         </h4>
                     </div>
                     <div class="col-sm-2">
-                        <button style="float: right;" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
+                        @{
+                            var linkText = "<span class='fa fa-trash'></span>";
+                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveMediaDashboardLink", "MediaDashboard", new {ID = Model.SidebarLinks[count].ID}, new AjaxOptions() {HttpMethod = "GET", OnSuccess = "RemoveMediaLink('#deleteLink_" + Model.SidebarLinks[count].ID + "')", OnFailure = "ManageMediaAjaxFailure"}, new {data_content = linkText, @id="deleteLink_" + Model.SidebarLinks[count].ID, @class = "btn btn-danger deleteGroup deleteMediaLink", @style = "float:right;"});
+                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE",linkText))
+                        }
                     </div>
                 </div>
                 <br />
@@ -55,33 +59,28 @@
 
                 <div class="row">
                     <div class="col-sm-6 text-center">
-                        @{
-                            var classList1 = "css-checkbox ";
-                            if (Model.SidebarLinks[count].IsDefault)
-                            {
-                                classList1 += "checked";
-                            }
-                        }
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @type = "checkbox", @class = classList1 })
-                        @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new { @class = "css-label" })
+                        <div class="form-group">
+                            <div class="checkbox-inline">
+                                <label class="switch">
+                                    @Html.EditorFor(o => o.SidebarLinks[count].IsDefault, new {@class = "trendClick"})
+                                    <div class="slider round"></div>
+                                </label>
+                                @Html.LabelFor(o => o.SidebarLinks[count].IsDefault, "Is Default Link?", new {@style = "font-weight: normal; margin-bottom: 0px;"})
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-6 text-center">
-                        @{
-                            var classList2 = "css-checkbox ";
-                            if (Model.SidebarLinks[count].IsEnabled)
-                            {
-                                classList2 += "checked";
-                            }
-                        }
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @type = "checkbox", @class = classList2 })
-                        @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new { @class = "css-label" })
+                        <div class="form-group">
+                            <div class="checkbox-inline">
+                                <label class="switch">
+                                    @Html.EditorFor(o => o.SidebarLinks[count].IsEnabled, new {@class = "trendClick"})
+                                    <div class="slider round"></div>
+                                </label>
+                                @Html.LabelFor(o => o.SidebarLinks[count].IsEnabled, "Is Link Enabled?", new {@style = "font-weight: normal; margin-bottom: 0px;"})
+                            </div>
+                        </div>
                     </div>
-                    @*<div class="col-sm-4">
-                        <input type="checkbox" name="guest-1" id="guest-Plex" class="css-checkbox" checked="">
-                        <label for="guest-Plex" class="css-label">Guest</label> &nbsp;&nbsp;
-                    </div>*@
                 </div>
-
                 <div class="row">
                     <div class="col-sm-12 text-center">
                         @Html.ValidationMessageFor(x => x.SidebarLinks[count].DisplayName)
