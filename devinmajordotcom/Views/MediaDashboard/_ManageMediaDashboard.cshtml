@@ -10,9 +10,9 @@
         <ul id="mediaDashboardLinksList" class="mediaSortable">
         @foreach (var link in Model.SidebarLinks)
         {
-            @Html.HiddenFor(x => x.SidebarLinks[count].ID)
-            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId)
-            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName)
+            @Html.HiddenFor(x => x.SidebarLinks[count].ID, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
+            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
+            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
             <li class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
                 <div class="row">
                     <div class="col-sm-2">

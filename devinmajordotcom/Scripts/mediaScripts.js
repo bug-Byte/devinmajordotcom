@@ -11,14 +11,14 @@ $(document).ready(function () {
     });
 
     $('ul li').hover(
-	function () {
-	    title = $(this).attr('title');
-	    $(this).attr({ 'title': '' });
-	},
-	function () {
-	    $(this).attr({ 'title': title });
-	}
-);
+	    function () {
+	        title = $(this).attr('title');
+	        $(this).attr({ 'title': '' });
+	    },
+	    function () {
+	        $(this).attr({ 'title': title });
+	    }
+    );
 
     $('.sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');

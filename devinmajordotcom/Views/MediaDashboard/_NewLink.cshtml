@@ -38,12 +38,26 @@
 
         <div class="row">
             <div class="col-sm-6 text-center">
-                <input class="css-checkbox" data-val="false" data-val-required="The IsDefault field is required." id="SidebarLinks_{{newLinkCounter}}__IsDefault" name="SidebarLinks[{{newLinkCounter}}].IsDefault" type="checkbox" value="False">
-                <label class="css-label" for="SidebarLinks_{{newLinkCounter}}__IsDefault">IsDefault</label>
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input class="check-box" data-val="true" data-val-required="The IsDefault field is required." id="SidebarLinks_{{newLinkCounter}}__IsDefault" name="SidebarLinks[{{newLinkCounter}}].IsDefault" type="checkbox" value="True"><input name="SidebarLinks[{{newLinkCounter}}].IsDefault" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="SidebarLinks_{{newLinkCounter}}__IsDefault" style="font-weight: normal; margin-bottom: 0px;">Is Default Link?</label>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-6 text-center">
-                <input class="css-checkbox checked" data-val="true" data-val-required="The IsEnabled field is required." id="SidebarLinks_{{newLinkCounter}}__IsEnabled" name="SidebarLinks[{{newLinkCounter}}].IsEnabled" type="checkbox" value="True">
-                <label class="css-label" for="SidebarLinks_{{newLinkCounter}}__IsEnabled">IsEnabled</label>
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input checked="checked" class="check-box" data-val="true" data-val-required="The IsEnabled field is required." id="SidebarLinks_{{newLinkCounter}}__IsEnabled" name="SidebarLinks[{{newLinkCounter}}].IsEnabled" type="checkbox" value="true"><input name="SidebarLinks[{{newLinkCounter}}].IsEnabled" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="SidebarLinks_{{newLinkCounter}}__IsEnabled" style="font-weight: normal; margin-bottom: 0px;">Is Link Enabled?</label>
+                    </div>
+                </div>
             </div>
 
         </div>

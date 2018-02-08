@@ -30,18 +30,7 @@ $(document).ready(function () {
         });
     });
 
-    $('button[role="iconpicker"]').iconpicker();
-
-    $(".mediaSortable").sortable({
-        handle: ".move",
-        stop: function (e, ui) {
-            $('td.drag', ui.item).click();
-        }
-    });
-
-    $(document).on("click", ".css-checkbox", function() {
-        $(this).attr("value", $(this).val());
-    });
+    InitializeMediaDashboardEventHandlers();
 
     tinymce.init({
         selector: '.tinymce',
@@ -49,6 +38,21 @@ $(document).ready(function () {
     });
 
 });
+
+function InitializeMediaDashboardEventHandlers() {
+    $('button[role="iconpicker"]').iconpicker().change(function () {
+        $(this).attr("data-icon", $(this).children("input:first").val());
+    });
+    $(".mediaSortable").sortable({
+        handle: ".move",
+        stop: function (e, ui) {
+            $('td.drag', ui.item).click();
+        }
+    });
+    $(".form-control").on("change", function () {
+        $(this).attr("value", $(this).val());
+    });
+}
 
 function AjaxSuccess(data) {
     $("#ajaxAlertContainer").bootsnack({
@@ -65,9 +69,9 @@ function AjaxFailure(data) {
 }
 
 function RemoveMediaLink(id) {
-    debugger;
+    var number = id.split("_")[1];
     $(id).parent().parent().parent().remove();
-
+    $(".hiddenInput_" + number).remove();
     ManageMediaAjaxSuccess();
 }
 
@@ -87,8 +91,6 @@ function ManageMediaAjaxFailure(data) {
 
 function setupHandlebarsHelpers() {
 
-    
-
     $(document).on('click', '#addNewMediaDashboardLink', function () {
         var mediaDashboardLinkTemplateSource = $("#mediaDashboardLinkTemplateScript").html();
         var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
@@ -99,7 +101,6 @@ function setupHandlebarsHelpers() {
     });
 
     $(document).on('click', '#addNewTechSkillLink', function () {
-        debugger;
         var techSkillTemplateSource = $("#techSkillTemplateScript").html();
         var template = Handlebars.compile(techSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
@@ -124,10 +125,7 @@ function setupHandlebarsHelpers() {
 function renderMediaDashboardLinkTemplate(template, data) {
     var html = template(data);
     document.getElementById("mediaDashboardLinksList").innerHTML += html;
-    $('button[role="iconpicker"]').iconpicker();
-    $(".form-control, .css-checkbox").on("change", function () {
-        $(this).attr("value", $(this).val());
-    });
+    InitializeMediaDashboardEventHandlers();
 }
 
 function renderTechSkillTemplate(template, data) {

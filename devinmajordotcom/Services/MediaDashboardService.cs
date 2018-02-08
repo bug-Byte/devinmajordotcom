@@ -21,7 +21,7 @@ namespace devinmajordotcom.Services
         {
             return new MediaDashboardViewModel()
             {
-                SidebarLinks = db.SiteLinks.Where(x => x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select( x => new SiteLinkViewModel()
+                SidebarLinks = db.MediaDashboard_SiteLinks.Where(x => x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select( x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
@@ -45,7 +45,7 @@ namespace devinmajordotcom.Services
             {
                 foreach (var link in viewModel.SidebarLinks)
                 {
-                    var linkRecord = db.SiteLinks.FirstOrDefault(x => x.Id == link.ID);
+                    var linkRecord = db.MediaDashboard_SiteLinks.FirstOrDefault(x => x.Id == link.ID);
                     if (linkRecord != null)
                     {
                         linkRecord.DisplayName = link.DisplayName;
@@ -62,7 +62,7 @@ namespace devinmajordotcom.Services
                     }
                     else
                     {
-                        var newLinkRecord = new SiteLink()
+                        var newLinkRecord = new MediaDashboard_SiteLink()
                         {
                             DisplayName = link.DisplayName,
                             Description = link.Description,
@@ -76,7 +76,7 @@ namespace devinmajordotcom.Services
                             IsEnabled = link.IsEnabled,
                             ApplicationId = link.ParentApplicationId
                         };
-                        db.SiteLinks.Add(newLinkRecord);
+                        db.MediaDashboard_SiteLinks.Add(newLinkRecord);
                     }
                 }
 
@@ -91,10 +91,10 @@ namespace devinmajordotcom.Services
 
         public void RemoveLink(int ID)
         {
-            var link = db.SiteLinks.FirstOrDefault(x => x.Id == ID);
+            var link = db.MediaDashboard_SiteLinks.FirstOrDefault(x => x.Id == ID);
             if (link != null)
             {
-                db.SiteLinks.Remove(link);
+                db.MediaDashboard_SiteLinks.Remove(link);
             }
             db.SaveChanges();
         }

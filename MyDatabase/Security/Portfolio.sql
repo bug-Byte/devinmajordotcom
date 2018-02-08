@@ -1,3 +1,3 @@
-﻿CREATE SCHEMA [Portfolio]
+﻿CREATE SCHEMA [MediaDashboard]
     AUTHORIZATION [dbo];
 

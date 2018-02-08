@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=MyDatabase;Integrated Security=True"
+//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -37,6 +37,7 @@ namespace devinmajordotcom.Models
     public partial interface IdbContext : System.IDisposable
     {
         System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
         System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
@@ -70,6 +71,7 @@ namespace devinmajordotcom.Models
     public partial class dbContext : System.Data.Entity.DbContext, IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
@@ -135,6 +137,7 @@ namespace devinmajordotcom.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration());
+            modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration());
@@ -152,6 +155,7 @@ namespace devinmajordotcom.Models
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration(schema));
@@ -188,6 +192,7 @@ namespace devinmajordotcom.Models
     public partial class FakedbContext : IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; }
+        public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; }
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; }
@@ -202,6 +207,7 @@ namespace devinmajordotcom.Models
         public FakedbContext()
         {
             ApplicationMasters = new FakeDbSet<ApplicationMaster>("Id");
+            MediaDashboard_SiteLinks = new FakeDbSet<MediaDashboard_SiteLink>("Id");
             Portfolio_HighlightedSkills = new FakeDbSet<Portfolio_HighlightedSkill>("Id");
             Portfolio_LanguageSkills = new FakeDbSet<Portfolio_LanguageSkill>("Id");
             Portfolio_PersonalDescriptions = new FakeDbSet<Portfolio_PersonalDescription>("Id");
@@ -551,13 +557,52 @@ namespace devinmajordotcom.Models
         // Reverse navigation
 
         /// <summary>
+        /// Child MediaDashboard_SiteLinks where [SiteLink].[ApplicationID] point to this entity (SiteLinks_ApplicationID_Applications_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink.SiteLinks_ApplicationID_Applications_ID
+        /// <summary>
         /// Child SiteLinks where [SiteLink].[ApplicationID] point to this entity (SiteLinks_ApplicationID_Applications_ID)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<SiteLink> SiteLinks { get; set; } // SiteLink.SiteLinks_ApplicationID_Applications_ID
 
         public ApplicationMaster()
         {
+            MediaDashboard_SiteLinks = new System.Collections.Generic.List<MediaDashboard_SiteLink>();
             SiteLinks = new System.Collections.Generic.List<SiteLink>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // SiteLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MediaDashboard_SiteLink
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string DisplayName { get; set; } // DisplayName (length: 50)
+        public string Description { get; set; } // Description (length: 500)
+        public string Directive { get; set; } // Directive (length: 100)
+        public string Url { get; set; } // URL (length: 500)
+        public string Action { get; set; } // Action (length: 500)
+        public string Controller { get; set; } // Controller (length: 500)
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
+        public bool IsDefault { get; set; } // IsDefault
+        public bool IsEnabled { get; set; } // IsEnabled
+        public int ApplicationId { get; set; } // ApplicationID
+        public int? Order { get; set; } // Order
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ApplicationMaster pointed by [SiteLink].([ApplicationId]) (SiteLinks_ApplicationID_Applications_ID)
+        /// </summary>
+        public virtual ApplicationMaster ApplicationMaster { get; set; } // SiteLinks_ApplicationID_Applications_ID
+
+        public MediaDashboard_SiteLink()
+        {
+            IsDefault = false;
+            IsEnabled = true;
             InitializePartial();
         }
 
@@ -810,6 +855,40 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // SiteLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MediaDashboard_SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MediaDashboard_SiteLink>
+    {
+        public MediaDashboard_SiteLinkConfiguration()
+            : this("MediaDashboard")
+        {
+        }
+
+        public MediaDashboard_SiteLinkConfiguration(string schema)
+        {
+            ToTable("SiteLink", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.ApplicationId).HasColumnName(@"ApplicationID").HasColumnType("int").IsRequired();
+            Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.ApplicationMaster).WithMany(b => b.MediaDashboard_SiteLinks).HasForeignKey(c => c.ApplicationId).WillCascadeOnDelete(false); // SiteLinks_ApplicationID_Applications_ID
             InitializePartial();
         }
         partial void InitializePartial();

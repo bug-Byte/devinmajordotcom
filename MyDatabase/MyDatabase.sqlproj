@@ -112,6 +112,8 @@
     <Folder Include="Portfolio\" />
     <Folder Include="Portfolio\Tables\" />
     <Folder Include="Security\" />
+    <Folder Include="MediaDashboard" />
+    <Folder Include="MediaDashboard\Tables" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql">
@@ -156,6 +158,11 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="Portfolio\Tables\TechSkill.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Security\MediaDashboard.sql" />
+    <Build Include="MediaDashboard\Tables\SiteLink.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
