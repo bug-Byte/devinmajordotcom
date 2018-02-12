@@ -43,7 +43,7 @@ namespace devinmajordotcom.Services
         {
             try
             {
-                foreach (var link in viewModel.SidebarLinks)
+                foreach (var link in viewModel.SidebarLinks.Where(x => x.DisplayName != null && x.URL != null))
                 {
                     var linkRecord = db.MediaDashboard_SiteLinks.FirstOrDefault(x => x.Id == link.ID);
                     if (linkRecord != null)

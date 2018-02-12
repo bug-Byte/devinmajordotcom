@@ -1,4 +1,5 @@
 ﻿var firstRun = true;
+var saveButtonPressed = false;
 
 $(document).ready(function () {
 
@@ -54,6 +55,16 @@ function InitializeMediaDashboardEventHandlers() {
     });
 }
 
+function updateLinks() {
+    if (saveButtonPressed == true) {
+        $(".newLinkInput").removeClass(".newLinkInput");
+        saveButtonPressed = false;
+    }
+    else {
+        saveButtonPressed = true;
+    }
+}
+
 function AjaxSuccess(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
@@ -69,13 +80,18 @@ function AjaxFailure(data) {
 }
 
 function RemoveMediaLink(id) {
-    var number = id.split("_")[1];
+    var number = id.split("_")[1]; 
+    if(!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
     $(id).parent().parent().parent().remove();
-    $(".hiddenInput_" + number).remove();
+    //$(".hiddenInput_" + number).remove();
     ManageMediaAjaxSuccess();
 }
 
 function ManageMediaAjaxSuccess(data) {
+    saveButtonPressed = true;
+    updateLinks();
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your media dashboard links have been updated!'
@@ -95,8 +111,8 @@ function setupHandlebarsHelpers() {
         var mediaDashboardLinkTemplateSource = $("#mediaDashboardLinkTemplateScript").html();
         var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
-        var linkCount = $(".mediaDashboardLink").length;
-        var context = { newLinkCounter: linkCount };
+        var linkCount = $(".hiddenID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
         renderMediaDashboardLinkTemplate(template, context);
     });
 
@@ -105,7 +121,7 @@ function setupHandlebarsHelpers() {
         var template = Handlebars.compile(techSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
         var newId = $(".techSkill_" + ($(".techSkill").length - 1)).closest("hiddenSkillId");
-        var linkCount = $(".techSkill").length;
+        var linkCount = $(".techSkill").length + 1;
         var context = { newLinkCounter: linkCount, newID: newId };
         renderTechSkillTemplate(template, context);
     });
@@ -115,7 +131,7 @@ function setupHandlebarsHelpers() {
         var template = Handlebars.compile(languageSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
         var newId = $(".languageSkill_" + ($(".languageSkill").length - 1)).closest("hiddenSkillId");
-        var linkCount = $(".languageSkill").length;
+        var linkCount = $(".languageSkill").length + 1;
         var context = { newLinkCounter: linkCount, newID: newId };
         renderLanguageSkillTemplate(template, context);
     });

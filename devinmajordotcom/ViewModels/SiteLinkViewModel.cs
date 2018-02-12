@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,12 +11,14 @@ namespace devinmajordotcom.ViewModels
 
         public int ID { get; set; }
 
+        [Required]
         public string DisplayName { get; set; }
 
         public string Description { get; set; }
 
         public string Directive { get; set; }
 
+        [Required]
         public string URL { get; set; }
 
         public string Action { get; set; }
