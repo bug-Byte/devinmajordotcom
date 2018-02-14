@@ -31,6 +31,12 @@ $(document).ready(function () {
         });
     });
 
+    $(".date").datetimepicker({
+        format: "L",
+        allowInputToggle: true,
+        locale: moment.locale("en-ca")
+    });
+
     InitializeMediaDashboardEventHandlers();
 
     tinymce.init({

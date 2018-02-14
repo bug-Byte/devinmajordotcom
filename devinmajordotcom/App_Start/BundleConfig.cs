@@ -66,6 +66,8 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/jquery.signalR-2.2.2.min.js",
                 "~/Scripts/jquery.easypiechart.min.js",
                 "~/Scripts/handlebars.min.js",
+                "~/Scripts/moment.js",
+                "~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/IndexScripts.js"
                     ));
 
