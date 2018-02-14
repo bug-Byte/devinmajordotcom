@@ -43,15 +43,25 @@ $(document).ready(function () {
 function InitializeMediaDashboardEventHandlers() {
     $('button[role="iconpicker"]').iconpicker().change(function () {
         $(this).attr("data-icon", $(this).children("input:first").val());
+        $(this).closest(".mediaDashboardLink").find('.iconContainer').html("<span class='fa " + $(this).children("input:first").val() + "'></span>");
     });
     $(".mediaSortable").sortable({
         handle: ".move",
         stop: function (e, ui) {
+            debugger;
             $('td.drag', ui.item).click();
+            var orderCount = 1;
+            $('.hiddenOrder').each(function() {
+                $(this).val(orderCount);
+                orderCount++;
+            });
         }
     });
     $(".form-control").on("change", function () {
         $(this).attr("value", $(this).val());
+        if ($(this).hasClass('namer')) {
+            $(this).closest(".mediaDashboardLink").find('.titleContainer').html($(this).val());
+        }
     });
 }
 

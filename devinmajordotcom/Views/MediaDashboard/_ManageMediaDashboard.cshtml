@@ -1,6 +1,6 @@
 ﻿@model devinmajordotcom.ViewModels.MediaDashboardViewModel
 @{
-
+    Model.SidebarLinks = Model.SidebarLinks.OrderBy(x => x.Order).ToList();
 }
 
 @using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
@@ -11,29 +11,30 @@
         @foreach (var link in Model.SidebarLinks)
         {
             @Html.HiddenFor(x => x.SidebarLinks[count].ID, new { @class = "hiddenID hiddenInput_" + Model.SidebarLinks[count].ID })
-            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
-            @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
-            <li class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
+            <li class="mediaDashboardLink" data-hiddeninputid="@Html.IdFor(x => x.SidebarLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">               
+                @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
+                @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
+                @Html.HiddenFor(x => x.SidebarLinks[count].Order, new { @class = "hiddenOrder hiddenInput_" + Model.SidebarLinks[count].ID })
                 <div class="row">
                     <div class="col-sm-2">
                         <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
                     </div>
                     <div class="col-sm-8 text-center">
                         <h4>
-                            <span class="fa @Model.SidebarLinks[count].DisplayIcon"></span>
+                            <span class="iconContainer"><span class="fa @Model.SidebarLinks[count].DisplayIcon"></span></span>
                             &nbsp;&nbsp;
-                            @Model.SidebarLinks[count].DisplayName
+                            <span class="titleContainer">@Model.SidebarLinks[count].DisplayName</span>
                         </h4>
                     </div>
                     <div class="col-sm-2">
                         @{
                             var linkText = "<span class='fa fa-trash'></span>";
-                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveMediaDashboardLink", "MediaDashboard", new {ID = Model.SidebarLinks[count].ID}, new AjaxOptions() {HttpMethod = "GET", OnSuccess = "RemoveMediaLink('#deleteLink_" + Model.SidebarLinks[count].ID + "')", OnFailure = "ManageMediaAjaxFailure"}, new {data_content = linkText, @id="deleteLink_" + Model.SidebarLinks[count].ID, @class = "btn btn-danger deleteGroup deleteMediaLink", @style = "float:right;"});
-                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE",linkText))
+                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveMediaDashboardLink", "MediaDashboard", new {ID = Model.SidebarLinks[count].ID}, new AjaxOptions() {HttpMethod = "GET", OnSuccess = "RemoveMediaLink('#deleteLink_" + Model.SidebarLinks[count].ID + "')", OnFailure = "ManageMediaAjaxFailure"}, new {data_content = linkText, @id = "deleteLink_" + Model.SidebarLinks[count].ID, @class = "btn btn-danger deleteGroup deleteMediaLink", @style = "float:right;"});
+                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
                         }
                     </div>
                 </div>
-                <br />
+                <br/>
                 <div class="row">
                     <div class="col-sm-6 text-center">
                         <div style="margin-bottom: 8px" class="input-group">
@@ -46,13 +47,13 @@
                                         data-icon="@Model.SidebarLinks[count].DisplayIcon"
                                         type="button"></button>
                             </span>
-                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new { @class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Display Name" })
+                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new {@class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Display Name"})
                         </div>
                     </div>
                     <div class="col-sm-6 text-center">
                         <div style="margin-bottom: 8px" class="input-group">
                             <div class="input-group-addon">URL</div>
-                            @Html.TextBoxFor(x => x.SidebarLinks[count].URL, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/" })
+                            @Html.TextBoxFor(x => x.SidebarLinks[count].URL, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/"})
                         </div>
                     </div>
                 </div>

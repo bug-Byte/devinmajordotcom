@@ -1,16 +1,20 @@
 ﻿<script type="text/x-handlebars-template" id="mediaDashboardLinkTemplateScript">
 
     <input class="newLinkInput hiddenID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="SidebarLinks_{{newID}}__ID" name="SidebarLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
-    <input class="newLinkInput hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="SidebarLinks_{{newID}}__ParentApplicationId" name="SidebarLinks[{{newID}}].ParentApplicationId" type="hidden" value="3" style="">
-    <input class="newLinkInput hiddenInput_{{newLinkCounter}}" id="SidebarLinks_{{newID}}__ParentApplicationName" name="SidebarLinks[{{newID}}].ParentApplicationName" type="hidden" value="Plex Media Dashboard" style="">
 
-    <li class="mediaDashboardLink" style="padding-top: 10px; margin-bottom: 2vh;">
+    <li class="mediaDashboardLink" data-hiddeninputid="SidebarLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh;">
+        <input class="newLinkInput hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="SidebarLinks_{{newID}}__ParentApplicationId" name="SidebarLinks[{{newID}}].ParentApplicationId" type="hidden" value="3" style="">
+        <input class="newLinkInput hiddenInput_{{newLinkCounter}}" id="SidebarLinks_{{newID}}__ParentApplicationName" name="SidebarLinks[{{newID}}].ParentApplicationName" type="hidden" value="Plex Media Dashboard" style="">
+        <input class="newLinkInput hiddenOrder hiddenInput_{{newLinkCounter}}" id="SidebarLinks_{{newID}}__Order" name="SidebarLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}" style="">
         <div class="row">
             <div class="col-sm-2">
                 <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
             </div>
             <div class="col-sm-8 text-center">
                 <h4>
+                    <span class="iconContainer"></span>
+                    &nbsp;&nbsp;
+                    <span class="titleContainer"></span>
                 </h4>
             </div>
             <div class="col-sm-2">
