@@ -54,7 +54,6 @@ function InitializeMediaDashboardEventHandlers() {
     $(".mediaSortable").sortable({
         handle: ".move",
         stop: function (e, ui) {
-            debugger;
             $('td.drag', ui.item).click();
             var orderCount = 1;
             $('.hiddenOrder').each(function() {
