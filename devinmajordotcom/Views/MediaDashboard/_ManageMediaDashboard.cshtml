@@ -57,23 +57,27 @@
                     <div class="col-sm-6 text-center">
                         @{
                             var classList1 = "css-checkbox ";
+                            var ischecked1 = "";
                             if (Model.SidebarLinks[count].IsDefault)
                             {
                                 classList1 += "checked";
+                                ischecked1 = "checked";
                             }
                         }
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsDefault, new { @type = "checkbox", @class = classList1 })
+                        @Html.CheckBoxFor(x => x.SidebarLinks[count].IsDefault, new { @checked = ischecked1, @class = classList1 })
                         @Html.LabelFor(x => x.SidebarLinks[count].IsDefault, new { @class = "css-label" })
                     </div>
                     <div class="col-sm-6 text-center">
                         @{
                             var classList2 = "css-checkbox ";
+                            var ischecked2 = "";
                             if (Model.SidebarLinks[count].IsEnabled)
                             {
                                 classList2 += "checked";
+                                ischecked2 = "checked";
                             }
                         }
-                        @Html.TextBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @type = "checkbox", @class = classList2 })
+                        @Html.CheckBoxFor(x => x.SidebarLinks[count].IsEnabled, new { @checked = ischecked2, @class = classList2 })
                         @Html.LabelFor(x => x.SidebarLinks[count].IsEnabled, new { @class = "css-label" })
                     </div>
                     @*<div class="col-sm-4">

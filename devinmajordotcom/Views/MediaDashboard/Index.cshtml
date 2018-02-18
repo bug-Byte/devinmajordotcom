@@ -38,6 +38,7 @@
         </button>
     </nav>
 
+
     <div id="content">
         @if (Model.SidebarLinks.Count > 0)
         {
@@ -65,8 +66,7 @@
         }
         else
         {
-            @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
+            @Html.Partial("../Error/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
         }
-
     </div>
 </div>

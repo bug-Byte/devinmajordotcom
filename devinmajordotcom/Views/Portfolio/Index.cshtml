@@ -255,7 +255,7 @@
     <!-- END SOCIAL -->
 }
 
-@if(
+@if (
     Model.ContactSiteLinks.Count == 0
     && Model.HighlightedWorkSkills.Count == 0
     && Model.LanguageSkills.Count == 0
@@ -271,7 +271,7 @@
             <div class="row">
                 <div class="col-md-2 col-sm-1"></div>
                 <div class="col-md-8 col-sm-10">
-                    @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "Portfolio", "Index"))
+                    @Html.Partial("../Error/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
                 </div>
                 <div class="col-md-2 col-sm-1"></div>
             </div>

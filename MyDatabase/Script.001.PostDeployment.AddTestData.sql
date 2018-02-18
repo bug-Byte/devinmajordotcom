@@ -12,21 +12,21 @@ Post-Deployment Script Template
 
 BEGIN TRANSACTION
 
-INSERT INTO [dbo].[User]
-(
-	ClientName,
-	IsActive,
-	EmailAddress,
-	IsAdmin
-)
-VALUES
-(
-	(SELECT HOST_NAME()),
-	1,
-	'devinmajor@hotmail.com',
-	1
-);
-GO
+--INSERT INTO [dbo].[User]
+--(
+--	ClientName,
+--	IsActive,
+--	EmailAddress,
+--	IsAdmin
+--)
+--VALUES
+--(
+--	(SELECT HOST_NAME()),
+--	1,
+--	'devinmajor@hotmail.com',
+--	1
+--);
+--GO
 
 INSERT INTO [dbo].[ApplicationMaster]
 (
@@ -489,6 +489,16 @@ VALUES
 (6,2),
 (7,2),
 (8,3);
+GO
+
+INSERT INTO [dbo].[HardwareType]
+(
+	Name
+)
+VALUES
+('CPU Usage'),
+('RAM Usage'),
+('CPU Temperature');
 GO
 
 COMMIT

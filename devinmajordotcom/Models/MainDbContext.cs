@@ -37,6 +37,8 @@ namespace devinmajordotcom.Models
     public partial interface IdbContext : System.IDisposable
     {
         System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        System.Data.Entity.DbSet<HardwarePerformance> HardwarePerformances { get; set; } // HardwarePerformance
+        System.Data.Entity.DbSet<HardwareType> HardwareTypes { get; set; } // HardwareType
         System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
         System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
         System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
@@ -69,6 +71,8 @@ namespace devinmajordotcom.Models
     public partial class dbContext : System.Data.Entity.DbContext, IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        public System.Data.Entity.DbSet<HardwarePerformance> HardwarePerformances { get; set; } // HardwarePerformance
+        public System.Data.Entity.DbSet<HardwareType> HardwareTypes { get; set; } // HardwareType
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
         public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; } // Project
@@ -133,6 +137,8 @@ namespace devinmajordotcom.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration());
+            modelBuilder.Configurations.Add(new HardwarePerformanceConfiguration());
+            modelBuilder.Configurations.Add(new HardwareTypeConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration());
@@ -149,6 +155,8 @@ namespace devinmajordotcom.Models
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
             modelBuilder.Configurations.Add(new ApplicationMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new HardwarePerformanceConfiguration(schema));
+            modelBuilder.Configurations.Add(new HardwareTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectConfiguration(schema));
@@ -184,6 +192,8 @@ namespace devinmajordotcom.Models
     public partial class FakedbContext : IdbContext
     {
         public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; }
+        public System.Data.Entity.DbSet<HardwarePerformance> HardwarePerformances { get; set; }
+        public System.Data.Entity.DbSet<HardwareType> HardwareTypes { get; set; }
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Project> Portfolio_Projects { get; set; }
@@ -197,6 +207,8 @@ namespace devinmajordotcom.Models
         public FakedbContext()
         {
             ApplicationMasters = new FakeDbSet<ApplicationMaster>("Id");
+            HardwarePerformances = new FakeDbSet<HardwarePerformance>("Id");
+            HardwareTypes = new FakeDbSet<HardwareType>("Id");
             Portfolio_PersonalDescriptions = new FakeDbSet<Portfolio_PersonalDescription>("Id");
             Portfolio_Profiles = new FakeDbSet<Portfolio_Profile>("Id");
             Portfolio_Projects = new FakeDbSet<Portfolio_Project>("Id");
@@ -558,6 +570,52 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // HardwarePerformance
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class HardwarePerformance
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int HardwareTypeId { get; set; } // HardwareTypeID
+        public double PercentageValue { get; set; } // PercentageValue
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent HardwareType pointed by [HardwarePerformance].([HardwareTypeId]) (HardwarePerformance_HardwareTypeID_HardwareType_ID)
+        /// </summary>
+        public virtual HardwareType HardwareType { get; set; } // HardwarePerformance_HardwareTypeID_HardwareType_ID
+
+        public HardwarePerformance()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // HardwareType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class HardwareType
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Name { get; set; } // Name (length: 50)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child HardwarePerformances where [HardwarePerformance].[HardwareTypeID] point to this entity (HardwarePerformance_HardwareTypeID_HardwareType_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<HardwarePerformance> HardwarePerformances { get; set; } // HardwarePerformance.HardwarePerformance_HardwareTypeID_HardwareType_ID
+
+        public HardwareType()
+        {
+            HardwarePerformances = new System.Collections.Generic.List<HardwarePerformance>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // PersonalDescription
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Portfolio_PersonalDescription
@@ -795,6 +853,52 @@ namespace devinmajordotcom.Models
         public ApplicationMasterConfiguration(string schema)
         {
             ToTable("ApplicationMaster", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // HardwarePerformance
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class HardwarePerformanceConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<HardwarePerformance>
+    {
+        public HardwarePerformanceConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public HardwarePerformanceConfiguration(string schema)
+        {
+            ToTable("HardwarePerformance", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.HardwareTypeId).HasColumnName(@"HardwareTypeID").HasColumnType("int").IsRequired();
+            Property(x => x.PercentageValue).HasColumnName(@"PercentageValue").HasColumnType("float").IsRequired();
+
+            // Foreign keys
+            HasRequired(a => a.HardwareType).WithMany(b => b.HardwarePerformances).HasForeignKey(c => c.HardwareTypeId).WillCascadeOnDelete(false); // HardwarePerformance_HardwareTypeID_HardwareType_ID
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // HardwareType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class HardwareTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<HardwareType>
+    {
+        public HardwareTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public HardwareTypeConfiguration(string schema)
+        {
+            ToTable("HardwareType", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);

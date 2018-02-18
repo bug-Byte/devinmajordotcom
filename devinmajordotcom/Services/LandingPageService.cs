@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Devinmajordotcom;
 using System.Security.Principal;
 using System.Net.Mail;
 using System.Net;
@@ -27,6 +26,10 @@ namespace devinmajordotcom.Services
         public MainLandingPageViewModel GetLandingPageViewModel()
         {
             var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            if(siteAdminUser == null)
+            {
+                siteAdminUser = AddNewUser(true);
+            }
             return new MainLandingPageViewModel()
             {
                 CurrentUserViewModel = GetCurrentUserStatus(),
@@ -38,43 +41,65 @@ namespace devinmajordotcom.Services
                 },
                 ContactEmailData = new ContactEmailViewModel()
                 {
-                    RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress
+                    RecipientEmail = siteAdminUser.EmailAddress
                 }
             };
         }
 
+        public User AddNewUser(bool IsUserToAddAnAdmin = false)
+        {
+            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+
+            var newUser = new User()
+            {
+                ClientName = ip,
+                EmailAddress = "",
+                IsActive = true,
+                IsAdmin = IsUserToAddAnAdmin
+            };
+
+            db.Users.Add(newUser);
+            db.SaveChanges();
+
+            return newUser;
+
+        }
+
         public UserStatusViewModel GetCurrentUserStatus()
         {
-            var isUserAdmin = false;
-            var isUserActive = false;
-            var currentContextUser = WindowsIdentity.GetCurrent().Name.ToString().Split('\\')[0];
-            var currentDbUser = db.Users.FirstOrDefault(x => x.ClientName == currentContextUser);
-            if(currentDbUser != null)
+
+            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(ip))
             {
-                isUserAdmin = currentDbUser.IsAdmin;
-                isUserActive = currentDbUser.IsActive;
+                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
-            else
+            var currentDbUser = db.Users.FirstOrDefault(x => x.ClientName == ip);
+
+            if (currentDbUser == null)
             {
-                var user = new User()
+                var newUser = AddNewUser();
+                return new UserStatusViewModel()
                 {
-                    ClientName = currentContextUser,
-                    IsActive = true,
-                    IsAdmin = false
+                    UserIsAdmin = newUser.IsAdmin,
+                    UserIsActive = newUser.IsActive
                 };
-                db.Users.Add(user);
-                db.SaveChanges();
             }
             return new UserStatusViewModel()
             {
-                UserIsAdmin = isUserAdmin,
-                UserIsActive = isUserActive
+                UserIsAdmin = currentDbUser.IsAdmin,
+                UserIsActive = currentDbUser.IsActive
             };
+
         }
 
         public List<SiteLinkViewModel> GetMainSiteLinks()
         {
-            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.MainLandingPage).Select(x => new SiteLinkViewModel()
+            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)ApplicationMasterEnum.ApplicationMasters.MainLandingPage).Select(x => new SiteLinkViewModel()
             {
                 ID = x.Id,
                 DisplayName = x.DisplayName,
@@ -93,7 +118,7 @@ namespace devinmajordotcom.Services
 
         public List<SiteLinkViewModel> GetMediaSiteLinks()
         {
-            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select(x => new SiteLinkViewModel()
+            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)ApplicationMasterEnum.ApplicationMasters.PlexMediaDashboard).Select(x => new SiteLinkViewModel()
             {
                 ID = x.Id,
                 DisplayName = x.DisplayName,
@@ -132,5 +157,16 @@ namespace devinmajordotcom.Services
                 return e.Message;
             }
         }
+
+        public void UpdateCPUUsage(int nextValue)
+        {
+            var newHardwareDataRecord = new HardwarePerformance()
+            {
+                HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUUsage,
+                PercentageValue = nextValue
+            };
+            db.HardwarePerformances.Add(newHardwareDataRecord);
+        }
+
     }
 }

@@ -36,7 +36,7 @@ namespace devinmajordotcom.Controllers
             }
             else
             {
-                return new EmptyResult();
+                throw new Exception("Unauthorized", new UnauthorizedAccessException());
             }
         }
 
