@@ -4,20 +4,32 @@ $(document).ready(function () {
 
     $(document).on("click", ".menu li a", function () {
         var id = "#" + $(this).data('framename');
-        $(".menu li a").removeClass('active');
-        $(this).addClass('active');
+        $(".menu li").removeClass('active');
+        $(this).parent().addClass('active');
         $('iframe').hide();
         $(id).fadeIn(500);
     });
 
-    $('#nav1').bind("mouseenter", function () {
-        $('#site-wrapper').animate({ left: '74.67px', width: newWidth }, 500);
-        $('#nav').animate({ width: '20vw' }, 500);
-    });
+    $('ul li').hover(
+	function () {
+	    title = $(this).attr('title');
+	    $(this).attr({ 'title': '' });
+	},
+	function () {
+	    $(this).attr({ 'title': title });
+	}
+);
 
-    $('#nav').bind("mouseleave", function () {
-        $('#site-wrapper').animate({ left: '0px', width: '100%' }, 500);
-        $('#nav').animate({ width: '0px' }, 500);
+    $('.sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        if($("#sidebar").hasClass("active")) {
+            $(this).children(":first").removeClass("glyphicon-resize-small");
+            $(this).children(":first").addClass("glyphicon-resize-full");
+        }
+        else {
+            $(this).children(":first").removeClass("glyphicon-resize-full");
+            $(this).children(":first").addClass("glyphicon-resize-small");
+        }
     });
 
 });

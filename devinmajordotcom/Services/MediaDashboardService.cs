@@ -35,7 +35,7 @@ namespace devinmajordotcom.Services
                     Order = x.Order,
                     ParentApplicationId = x.ApplicationId,
                     ParentApplicationName = x.ApplicationMaster.Name
-                }).ToList()
+                }).OrderByDescending(x => x.IsDefault).ToList()
             };
         }
 
