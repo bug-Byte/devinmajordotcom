@@ -3,7 +3,7 @@
     Model.SidebarLinks = Model.SidebarLinks.OrderBy(x => x.Order).ToList();
 }
 
-@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
+@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "ManageMediaAjaxSuccess(data);", OnFailure = "AjaxFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
 {
     var count = 0;
     <div id="tagsForm" class="">

@@ -39,7 +39,8 @@ namespace devinmajordotcom.App_Start
                       "~/Content/bootsnack.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css",
-                      "~/Content/bootstrap-iconpicker.min.css"
+                      "~/Content/bootstrap-iconpicker.min.css",
+                      "~/Content/bootstrap-datetimepicker.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/mediacss").Include(

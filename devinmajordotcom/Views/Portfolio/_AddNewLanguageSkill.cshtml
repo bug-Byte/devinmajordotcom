@@ -1,12 +1,13 @@
 ﻿<script type="text/x-handlebars-template" id="languageSkillTemplateScript">
+    <input class="language hiddenSkillId" data-skillid="{{newLinkCounter}}" data-val="true" data-val-number="The field LanguageSkillID must be a number." data-val-required="The LanguageSkillID field is required." id="LanguageSkills_{{newID}}__LanguageSkillID" name="LanguageSkills[{{newID}}].LanguageSkillID" type="hidden" value="{{newLinkCounter}}">
     <div class="languageSkill languageSkill_{{newLinkCounter}}">
-        <input class="hiddenSkillId" data-skillid="{{newID}}" data-val="true" data-val-number="The field LanguageSkillID must be a number." data-val-required="The LanguageSkillID field is required." id="LanguageSkills_{{newLinkCounter}}__LanguageSkillID" name="LanguageSkills[{{newLinkCounter}}].LanguageSkillID" type="hidden" value="{{newID}}">
         <div class="well well-sm text-left">
             <h5>Language Name</h5>
-            <input class="form-control" data-val="true" data-val-length="Language Name cannot be longer than 100 characters." data-val-length-max="100" data-val-required="The Language Name * :  field is required." id="LanguageSkills_{{newLinkCounter}}__LanguageName" name="LanguageSkills[{{newLinkCounter}}].LanguageName" type="text" value="" placeholder="Web based languages">
+            <input class="form-control" data-val="true" data-val-length="Language Name cannot be longer than 100 characters." data-val-length-max="100" data-val-required="The Language Name * :  field is required." id="LanguageSkills_{{newID}}__LanguageName" name="LanguageSkills[{{newID}}].LanguageName" type="text" value="" placeholder="Web based languages">
             <h5>Language Specifics (if programming language or applicable)</h5>
-            <textarea class="form-control" cols="20" data-val="true" data-val-length="Language Specifics cannot be longer than 500 characters." data-val-length-max="500" data-val-required="The Language Specifics * :  field is required." id="LanguageSkills_{{newLinkCounter}}__LanguageSpecifics" name="LanguageSkills[{{newLinkCounter}}].LanguageSpecifics" rows="2" placeholder="HTML5, CSS, JS"></textarea>
-            <button type="button" class="btn btn-danger languageSkillRemover" data-skillid="{{newLinkCounter}}"><span class="glyphicon glyphicon-remove" style=""></span>&nbsp;Remove Language</button>
+            <textarea class="form-control" cols="20" data-val="true" data-val-length="Language Specifics cannot be longer than 500 characters." data-val-length-max="500" data-val-required="The Language Specifics * :  field is required." id="LanguageSkills_{{newID}}__LanguageSpecifics" name="LanguageSkills[{{newID}}].LanguageSpecifics" rows="2" placeholder="HTML5, CSS, JS"></textarea>
+            <br/>
+            <a class="btn btn-danger deleteSkillGroup deleteSkillLink" data-ajax="true" data-ajax-failure="ManageMediaAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveSkill('.languageSkill_{{newID}}', 'languageSkill')" data-content="<span class='fa fa-trash'></span>&amp;nbsp;Remove Language" href="/Portfolio/RemoveLanguageSkill/{{newLinkCounter}}" id="deleteLangugeSkillLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span>&nbsp;Remove Language</a>
         </div>
         <hr>
     </div>

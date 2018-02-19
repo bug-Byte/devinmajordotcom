@@ -332,6 +332,7 @@
     <Content Include="Content\PortfolioImages\winIOT.jpg" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\templatemo-style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

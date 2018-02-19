@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace devinmajordotcom.ViewModels
 {
@@ -84,6 +85,7 @@ namespace devinmajordotcom.ViewModels
 
         [DisplayName("Personal Description: ")]
         [StringLength(500, ErrorMessage = "Personal Description cannot be longer than 500 characters.")]
+        [AllowHtml]
         public string PersonalDescription { get; set; }
 
     }
@@ -100,7 +102,6 @@ namespace devinmajordotcom.ViewModels
 
         [StringLength(500, ErrorMessage = "Language Specifics cannot be longer than 500 characters.")]
         [DisplayName("Language Specifics * : ")]
-        [Required]
         public string LanguageSpecifics { get; set; }
 
         public int LanguageCapabilityPercentage { get; set; }
@@ -135,7 +136,7 @@ namespace devinmajordotcom.ViewModels
 
         [StringLength(500, ErrorMessage = "Skill Description cannot be longer than 500 characters.")]
         [DisplayName("Skill Description * : ")]
-        [Required]
+        [AllowHtml]
         public string SkillDetails { get; set; }
 
     }

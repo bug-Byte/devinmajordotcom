@@ -27,10 +27,26 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult _ManagePortfolio(PortfolioViewModel viewModel)
         {
             var data = portfolioService.ManagePortfolio(viewModel);
             return new JsonResult { Data = data };
+        }
+
+        public void RemoveHighlightedSkill(int ID)
+        {
+            portfolioService.RemoveHighlightedSkill(ID);
+        }
+
+        public void RemoveTechSkill(int ID)
+        {
+            portfolioService.RemoveTechSkill(ID);
+        }
+
+        public void RemoveLanguageSkill(int ID)
+        {
+            portfolioService.RemoveLanguageSkill(ID);
         }
 
     }

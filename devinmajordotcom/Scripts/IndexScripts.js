@@ -120,6 +120,29 @@ function ManageMediaAjaxFailure(data) {
     });
 }
 
+function ManagePortfolioSkillsAjaxSuccess(data) {
+    saveButtonPressed = true;
+    updateLinks();
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your portfolio skills have been updated!'
+    });
+}
+
+function ManagePortfolioSkillsAjaxFailure(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Something went wrong! Your portfolio skills have not been updated.'
+    });
+}
+
+function RemoveSkill(id, type) {
+    if (type == "languageSkill") {
+        $(id).remove();
+    }
+    ManagePortfolioSkillsAjaxSuccess();
+}
+
 function setupHandlebarsHelpers() {
 
     $(document).on('click', '#addNewMediaDashboardLink', function () {
@@ -135,9 +158,8 @@ function setupHandlebarsHelpers() {
         var techSkillTemplateSource = $("#techSkillTemplateScript").html();
         var template = Handlebars.compile(techSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
-        var newId = $(".techSkill_" + ($(".techSkill").length - 1)).closest("hiddenSkillId");
-        var linkCount = $(".techSkill").length + 1;
-        var context = { newLinkCounter: linkCount, newID: newId };
+        var linkCount = $(".language.hiddenSkillId").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
         renderTechSkillTemplate(template, context);
     });
 
@@ -145,9 +167,8 @@ function setupHandlebarsHelpers() {
         var languageSkillTemplateSource = $("#languageSkillTemplateScript").html();
         var template = Handlebars.compile(languageSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
-        var newId = $(".languageSkill_" + ($(".languageSkill").length - 1)).closest("hiddenSkillId");
-        var linkCount = $(".languageSkill").length + 1;
-        var context = { newLinkCounter: linkCount, newID: newId };
+        var linkCount = $(".language.hiddenSkillId").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
         renderLanguageSkillTemplate(template, context);
     });
 

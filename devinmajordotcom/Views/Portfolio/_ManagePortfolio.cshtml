@@ -106,7 +106,15 @@
                             @Html.LabelFor(x => x.ProfileDetails.DateOfBirth)
                         </div>
                         <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.ProfileDetails.DateOfBirth, new { @class = "form-control date" })
+                            <div class="form-group">
+                                <div class='input-group date' id='date'>
+                                    @Html.TextBoxFor(x => x.ProfileDetails.DateOfBirth, new { @class = "form-control" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="row">
@@ -381,14 +389,19 @@
                         {
                             for (var i = 0; i < Model.LanguageSkills.Count; i++)
                             {
+                                @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID, new { @class = "language hiddenSkillId", data_skillid = Model.LanguageSkills[i].LanguageSkillID })
                                 <div class="languageSkill languageSkill_@i">
-                                    @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID, new { @class="hiddenSkillId", data_skillid=Model.LanguageSkills[i].LanguageSkillID })
                                     <div class="well well-sm text-left">
                                         <h5>Language Name</h5>
                                         @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
                                         <h5>Language Specifics (if programming language or applicable)</h5>
                                         @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
-                                        <button type="button" class="btn btn-danger languageSkillRemover" data-skillid="@i"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Language</button>
+                                        @{
+                                            var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Language";
+                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveLanguageSkill", "Portfolio", new { ID = Model.LanguageSkills[i].LanguageSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.languageSkill_" + i + "', 'languageSkill')", OnFailure = "ManageMediaAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.LanguageSkills[i].LanguageSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
+                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                        }
+                                        <br/>
                                     </div>
                                     <hr />
                                 </div>

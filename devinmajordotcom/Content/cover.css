@@ -2,6 +2,28 @@
  * Globals
  */
 
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  background-color: #30363b;
+  border-color: #2b3135;
+  width: 100%;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu:after,
+.bootstrap-datetimepicker-widget.dropdown-menu:before {
+  display: none !important;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .arrow {
+  display: none !important;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .arrow:after,
+.bootstrap-datetimepicker-widget.dropdown-menu .arrow:before {
+  display: none !important;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu a span:hover,
+.bootstrap-datetimepicker-widget.dropdown-menu a span:focus {
+  background-color: #32aa62 !important;
+  color: #fff !important;
+}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -361,6 +383,7 @@ body {
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
   }
+
 }
 
 /*@media (min-width: 992px) {

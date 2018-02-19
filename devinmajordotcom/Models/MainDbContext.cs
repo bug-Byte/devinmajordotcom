@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -933,8 +933,8 @@ namespace devinmajordotcom.Models
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
-            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             InitializePartial();

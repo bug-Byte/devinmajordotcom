@@ -186,7 +186,7 @@ namespace devinmajordotcom.Services
 
         public void UpdateSkills(PortfolioViewModel viewModel)
         {
-            foreach (var techSkill in viewModel.TechSkills)
+            foreach (var techSkill in viewModel.TechSkills.Where(x => x.SkillDescription != null))
             {
                 var skillRecord = db.Portfolio_TechSkills.FirstOrDefault(x => x.Id == techSkill.TechSkillID);
                 if (skillRecord != null)
@@ -200,9 +200,10 @@ namespace devinmajordotcom.Services
                         Description = techSkill.SkillDescription,
                     };
                     db.Portfolio_TechSkills.Add(newTechSkill);
+                    db.SaveChanges();
                 }
             }
-            foreach (var workSkill in viewModel.HighlightedWorkSkills)
+            foreach (var workSkill in viewModel.HighlightedWorkSkills.Where(x => x.SkillTitle != null))
             {
                 var skillRecord = db.Portfolio_HighlightedSkills.FirstOrDefault(x => x.Id == workSkill.WorkSkillID);
                 if (skillRecord != null)
@@ -220,9 +221,10 @@ namespace devinmajordotcom.Services
                         Description = workSkill.SkillDetails
                     };
                     db.Portfolio_HighlightedSkills.Add(newWorkSkill);
+                    db.SaveChanges();
                 }
             }
-            foreach (var languageSkill in viewModel.LanguageSkills)
+            foreach (var languageSkill in viewModel.LanguageSkills.Where(x => x.LanguageName != null))
             {
                 var skillRecord = db.Portfolio_LanguageSkills.FirstOrDefault(x => x.Id == languageSkill.LanguageSkillID);
                 if (skillRecord != null)
@@ -240,8 +242,10 @@ namespace devinmajordotcom.Services
                         ProficiencyPercentage = languageSkill.LanguageCapabilityPercentage
                     };
                     db.Portfolio_LanguageSkills.Add(newLanguageSkill);
+                    db.SaveChanges();
                 }
             }
+            db.SaveChanges();
         }
 
         public void UpdateProjectsAndFilters(PortfolioViewModel viewModel)
@@ -332,6 +336,36 @@ namespace devinmajordotcom.Services
                     };
                     db.SiteLinks.Add(newLinkRecord);
                 }
+            }
+        }
+
+        public void RemoveHighlightedSkill(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_HighlightedSkills.FirstOrDefault(x => x.Id == IdToRemove);
+            if(recordToRemove != null)
+            {
+                db.Portfolio_HighlightedSkills.Remove(recordToRemove);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveTechSkill(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_TechSkills.FirstOrDefault(x => x.Id == IdToRemove);
+            if (recordToRemove != null)
+            {
+                db.Portfolio_TechSkills.Remove(recordToRemove);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveLanguageSkill(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_LanguageSkills.FirstOrDefault(x => x.Id == IdToRemove);
+            if (recordToRemove != null)
+            {
+                db.Portfolio_LanguageSkills.Remove(recordToRemove);
+                db.SaveChanges();
             }
         }
 
