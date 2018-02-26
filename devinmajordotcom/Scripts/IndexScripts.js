@@ -158,7 +158,7 @@ function setupHandlebarsHelpers() {
         var techSkillTemplateSource = $("#techSkillTemplateScript").html();
         var template = Handlebars.compile(techSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
-        var linkCount = $(".language.hiddenSkillId").length + 1;
+        var linkCount = $(".tech.hiddenSkillId").length + 1;
         var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
         renderTechSkillTemplate(template, context);
     });

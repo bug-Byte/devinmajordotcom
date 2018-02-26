@@ -355,14 +355,18 @@
                         {
                             for (var i = 0; i < Model.TechSkills.Count; i++)
                             {
+                                @Html.HiddenFor(x => x.TechSkills[i].TechSkillID, new { @class = "tech hiddenSkillId", data_skillid = Model.TechSkills[i].TechSkillID })
                                 <div class="techSkill techSkill_@i">
                                     <div class="row">
-                                        <div class="col-sm-12 text-left">
-                                            @Html.HiddenFor(x => x.TechSkills[i].TechSkillID, new { @class = "hiddenSkillId", data_skillid = Model.TechSkills[i].TechSkillID })
+                                        <div class="col-sm-11 text-left">
                                             @Html.TextAreaFor(x => x.TechSkills[i].SkillDescription, new { @class = "form-control techskill" })
                                         </div>
-                                        <div class="col-sm-12 text-right">
-                                            <button type="button" class="btn btn-danger techSkillRemover" data-skillid="@i"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Skill</button>
+                                        <div class="col-sm-1 text-right">
+                                            @{
+                                                var linkText = "<span class='fa fa-trash'></span>";
+                                                var actionLink = Ajax.ActionLink("REPLACE", "RemoveTechSkill", "Portfolio", new { ID = Model.TechSkills[i].TechSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.techSkill_" + i + "', 'techSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.TechSkills[i].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
+                                                @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                            }
                                         </div>
                                     </div>
                                     <hr />
@@ -398,7 +402,7 @@
                                         @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
                                         @{
                                             var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Language";
-                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveLanguageSkill", "Portfolio", new { ID = Model.LanguageSkills[i].LanguageSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.languageSkill_" + i + "', 'languageSkill')", OnFailure = "ManageMediaAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.LanguageSkills[i].LanguageSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
+                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveLanguageSkill", "Portfolio", new { ID = Model.LanguageSkills[i].LanguageSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.languageSkill_" + i + "', 'languageSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.LanguageSkills[i].LanguageSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
                                             @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
                                         }
                                         <br/>
