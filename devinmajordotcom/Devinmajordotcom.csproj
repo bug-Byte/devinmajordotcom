@@ -310,6 +310,10 @@
     <Content Include="Content\HomeImages\blog-image3.jpg" />
     <Content Include="Content\HomeImages\blog-image4.jpg" />
     <Content Include="Content\HomeImages\home-bg.jpg" />
+    <Content Include="Content\HomeImages\home-bg2.jpg" />
+    <Content Include="Content\HomeImages\home-bg3.jpg" />
+    <Content Include="Content\HomeImages\home-bg4.jpg" />
+    <Content Include="Content\HomeImages\home-bg5.jpg" />
     <Content Include="Content\HomeImages\work-image1.jpg" />
     <Content Include="Content\HomeImages\work-image2.jpg" />
     <Content Include="Content\HomeImages\work-image3.jpg" />
