@@ -32,7 +32,7 @@ namespace devinmajordotcom.Services
             }
             return new MainLandingPageViewModel()
             {
-                CurrentUserViewModel = GetCurrentUserStatus(),
+                CurrentUserViewModel = GetCurrentUser(),
                 LandingPageApplicationLinks = GetMainSiteLinks(),
                 CurrentApplicationData = new ApplicationManagementViewModel()
                 {
@@ -46,9 +46,23 @@ namespace devinmajordotcom.Services
             };
         }
 
+        public void UpdateCurrentUser(UserViewModel viewModel)
+        {
+            var user = db.Users.FirstOrDefault(x => x.Id == viewModel.UserID);
+            if(user != null)
+            {
+                
+            }
+            else
+            {
+                throw new Exception("NULL User ID", new NullReferenceException());
+            }
+        }
+
         public User AddNewUser(bool IsUserToAddAnAdmin = false)
         {
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            var userGuid = Guid.NewGuid();
 
             if (string.IsNullOrEmpty(ip))
             {
@@ -59,6 +73,7 @@ namespace devinmajordotcom.Services
             {
                 ClientName = ip,
                 EmailAddress = "",
+                Guid = userGuid,
                 IsActive = true,
                 IsAdmin = IsUserToAddAnAdmin
             };
@@ -70,7 +85,7 @@ namespace devinmajordotcom.Services
 
         }
 
-        public UserStatusViewModel GetCurrentUserStatus()
+        public UserViewModel GetCurrentUser()
         {
 
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
@@ -83,13 +98,18 @@ namespace devinmajordotcom.Services
             if (currentDbUser == null)
             {
                 var newUser = AddNewUser();
-                return new UserStatusViewModel()
+                return new UserViewModel()
                 {
+                    UserID = newUser.Id,
+                    EmailAddress = newUser.EmailAddress,
+                    GUID = newUser.Guid,
+                    UserName = newUser.UserName,
+                    Password = newUser.Password,
                     UserIsAdmin = newUser.IsAdmin,
                     UserIsActive = newUser.IsActive
                 };
             }
-            return new UserStatusViewModel()
+            return new UserViewModel()
             {
                 UserIsAdmin = currentDbUser.IsAdmin,
                 UserIsActive = currentDbUser.IsActive

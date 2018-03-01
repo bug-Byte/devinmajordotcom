@@ -277,7 +277,7 @@
     <Compile Include="ViewModels\MediaDashboardViewModel.cs" />
     <Compile Include="ViewModels\PortfolioViewModel.cs" />
     <Compile Include="ViewModels\SiteLinkViewModel.cs" />
-    <Compile Include="ViewModels\UserStatusViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Constants\HardwareType.tt">
@@ -631,6 +631,7 @@
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\MyHome\blog-detail.cshtml" />
     <Content Include="Views\MyHome\Index.cshtml" />
+    <Content Include="Views\Home\_AdminFirstRunModal.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

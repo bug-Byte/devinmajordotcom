@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=MyDatabase;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -46,6 +46,7 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
         System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
+        System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
         System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<User> Users { get; set; } // User
 
@@ -80,6 +81,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; } // Skill
         public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; } // SkillTypeMaster
+        public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<User> Users { get; set; } // User
 
@@ -146,6 +148,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration());
+            modelBuilder.Configurations.Add(new RefactorLogConfiguration());
             modelBuilder.Configurations.Add(new SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
 
@@ -164,6 +167,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_SkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_SkillTypeMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new RefactorLogConfiguration(schema));
             modelBuilder.Configurations.Add(new SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new UserConfiguration(schema));
             return modelBuilder;
@@ -201,6 +205,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Skill> Portfolio_Skills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_SkillTypeMaster> Portfolio_SkillTypeMasters { get; set; }
+        public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; }
         public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; }
         public System.Data.Entity.DbSet<User> Users { get; set; }
 
@@ -216,6 +221,7 @@ namespace devinmajordotcom.Models
             Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
             Portfolio_Skills = new FakeDbSet<Portfolio_Skill>("Id");
             Portfolio_SkillTypeMasters = new FakeDbSet<Portfolio_SkillTypeMaster>("Id");
+            RefactorLogs = new FakeDbSet<RefactorLog>("OperationKey");
             SiteLinks = new FakeDbSet<SiteLink>("Id");
             Users = new FakeDbSet<User>("Id");
 
@@ -783,6 +789,23 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // __RefactorLog
+    ///<summary>
+    /// refactoring log
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class RefactorLog
+    {
+        public System.Guid OperationKey { get; set; } // OperationKey (Primary key)
+
+        public RefactorLog()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // SiteLink
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class SiteLink
@@ -826,6 +849,9 @@ namespace devinmajordotcom.Models
         public bool IsActive { get; set; } // IsActive
         public string EmailAddress { get; set; } // EmailAddress (length: 250)
         public bool IsAdmin { get; set; } // IsAdmin
+        public string UserName { get; set; } // UserName
+        public string Password { get; set; } // Password
+        public System.Guid Guid { get; set; } // GUID
 
         public User()
         {
@@ -1081,6 +1107,26 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // __RefactorLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class RefactorLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RefactorLog>
+    {
+        public RefactorLogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RefactorLogConfiguration(string schema)
+        {
+            ToTable("__RefactorLog", schema);
+            HasKey(x => x.OperationKey);
+
+            Property(x => x.OperationKey).HasColumnName(@"OperationKey").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
     // SiteLink
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SiteLink>
@@ -1134,6 +1180,9 @@ namespace devinmajordotcom.Models
             Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
             Property(x => x.EmailAddress).HasColumnName(@"EmailAddress").HasColumnType("nvarchar").IsOptional().HasMaxLength(250);
             Property(x => x.IsAdmin).HasColumnName(@"IsAdmin").HasColumnType("bit").IsRequired();
+            Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.Password).HasColumnName(@"Password").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.Guid).HasColumnName(@"GUID").HasColumnType("uniqueidentifier").IsRequired();
             InitializePartial();
         }
         partial void InitializePartial();
