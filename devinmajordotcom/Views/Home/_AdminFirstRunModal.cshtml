@@ -28,7 +28,7 @@
                             <!-- TAB PANES -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
-                                    @using (Ajax.BeginForm("UpdateCurrentUser", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "", OnFailure = "" }))
+                                    @using (Ajax.BeginForm("UpdateCurrentUser", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideAdminFirstRunModal", OnFailure = "" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(x => x.UserIsActive)
@@ -68,7 +68,7 @@
                                                 <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.Password)
                                             </div>
                                             <div class="col-sm-6 text-center">
-                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @required = "required", placeholder = "********" })
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @required = "required", placeholder = "********", type="password" })
                                             </div>
                                         </div>
                                         <div class="row">

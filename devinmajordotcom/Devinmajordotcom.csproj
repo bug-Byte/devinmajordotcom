@@ -253,6 +253,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Helpers\PartialHelper.cs" />
     <Compile Include="Models\dbContextExt.cs" />
     <Compile Include="Models\MainDbContext.cs">

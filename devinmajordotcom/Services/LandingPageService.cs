@@ -7,6 +7,7 @@ using System.Web;
 using System.Security.Principal;
 using System.Net.Mail;
 using System.Net;
+using devinmajordotcom.Helpers;
 
 namespace devinmajordotcom.Services
 {
@@ -48,10 +49,15 @@ namespace devinmajordotcom.Services
 
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
-            var user = db.Users.FirstOrDefault(x => x.Id == viewModel.UserID);
+            var user = db.Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
             if(user != null)
             {
-                
+                user.EmailAddress = viewModel.EmailAddress;
+                user.IsActive = viewModel.UserIsActive;
+                user.IsAdmin = viewModel.UserIsAdmin;
+                user.UserName = viewModel.UserName;
+                user.Password = SecurityHelper.HashSHA1(viewModel.Password);
+                db.SaveChanges();
             }
             else
             {
@@ -111,6 +117,11 @@ namespace devinmajordotcom.Services
             }
             return new UserViewModel()
             {
+                EmailAddress = currentDbUser.EmailAddress,
+                GUID = currentDbUser.Guid,
+                UserID = currentDbUser.Id,
+                Password = currentDbUser.Password,
+                UserName = currentDbUser.UserName,
                 UserIsAdmin = currentDbUser.IsAdmin,
                 UserIsActive = currentDbUser.IsActive
             };
