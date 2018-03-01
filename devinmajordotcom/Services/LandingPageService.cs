@@ -90,38 +90,37 @@ namespace devinmajordotcom.Services
 
         public UserViewModel GetCurrentUser()
         {
-            var isUserAdmin = false;
-            var isUserActive = false;
-            var currentContextUser = WindowsIdentity.GetCurrent().Name.ToString().Split('\\')[0];
-            var currentDbUser = db.Users.FirstOrDefault(x => x.ClientName == currentContextUser);
-            if(currentDbUser != null)
+            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (string.IsNullOrEmpty(ip))
             {
-                isUserAdmin = currentDbUser.IsAdmin;
-                isUserActive = currentDbUser.IsActive;
+                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
-            else
+            var currentUser = new UserViewModel();
+
+            currentUser = db.Users.Where(x => x.ClientName == ip).Select(x => new UserViewModel()
             {
-                var newUser = AddNewUser();
-                return new UserViewModel()
-                {
-                    UserID = newUser.Id,
-                    EmailAddress = newUser.EmailAddress,
-                    GUID = newUser.Guid,
-                    UserName = newUser.UserName,
-                    Password = newUser.Password,
-                    UserIsAdmin = newUser.IsAdmin,
-                    UserIsActive = newUser.IsActive
-                };
-            }
+                EmailAddress = x.EmailAddress,
+                GUID = x.Guid,
+                UserID = x.Id,
+                Password = x.Password,
+                UserName = x.UserName,
+                UserIsAdmin = x.IsAdmin,
+                UserIsActive = x.IsActive
+            }).FirstOrDefault();
+
+            if (currentUser != null && currentUser.UserID != 0) return currentUser;
+
+            var newUser = AddNewUser();
             return new UserViewModel()
             {
-                EmailAddress = currentDbUser.EmailAddress,
-                GUID = currentDbUser.Guid,
-                UserID = currentDbUser.Id,
-                Password = currentDbUser.Password,
-                UserName = currentDbUser.UserName,
-                UserIsAdmin = currentDbUser.IsAdmin,
-                UserIsActive = currentDbUser.IsActive
+                UserID = newUser.Id,
+                EmailAddress = newUser.EmailAddress,
+                GUID = newUser.Guid,
+                UserName = newUser.UserName,
+                Password = newUser.Password,
+                UserIsAdmin = newUser.IsAdmin,
+                UserIsActive = newUser.IsActive
             };
         }
 
