@@ -28,6 +28,10 @@ namespace devinmajordotcom.Services
         public MainLandingPageViewModel GetLandingPageViewModel()
         {
             var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            if (siteAdminUser == null)
+            {
+                AddNewUser(true);
+            }
             return new MainLandingPageViewModel()
             {
                 CurrentUserViewModel = GetCurrentUser(),
@@ -85,18 +89,17 @@ namespace devinmajordotcom.Services
             db.SaveChanges();
 
             return newUser;
-
         }
 
         public UserViewModel GetCurrentUser()
         {
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            var currentUser = new UserViewModel();
 
             if (string.IsNullOrEmpty(ip))
             {
                 ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
-            var currentUser = new UserViewModel();
 
             currentUser = db.Users.Where(x => x.ClientName == ip).Select(x => new UserViewModel()
             {
