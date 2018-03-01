@@ -122,7 +122,18 @@ namespace devinmajordotcom.Services
                     UserIsActive = x.IsActive
                 }).FirstOrDefault();
             }
-            return new UserViewModel();
+
+            var newUser = AddNewUser();
+            return new UserViewModel()
+            {
+                UserID = newUser.Id,
+                EmailAddress = newUser.EmailAddress,
+                GUID = newUser.Guid,
+                UserName = newUser.UserName,
+                Password = newUser.Password,
+                UserIsAdmin = newUser.IsAdmin,
+                UserIsActive = newUser.IsActive
+            };
         }
 
     }
