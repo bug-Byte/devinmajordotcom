@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace devinmajordotcom.Services
 {
-    public interface ILandingPageService
+    public interface ILandingPageService : IBaseDataService
     {
 
         MainLandingPageViewModel GetLandingPageViewModel();
@@ -15,10 +15,6 @@ namespace devinmajordotcom.Services
         List<SiteLinkViewModel> GetMainSiteLinks();
 
         List<SiteLinkViewModel> GetMediaSiteLinks();
-
-        UserViewModel GetCurrentUser();
-
-        void UpdateCurrentUser(UserViewModel viewModel);
 
         string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
 

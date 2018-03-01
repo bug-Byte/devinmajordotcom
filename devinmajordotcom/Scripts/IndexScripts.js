@@ -14,6 +14,10 @@ $(document).ready(function () {
         toggler.toggleClass("glyphicon-collapse-up");
     });
 
+    $(document).on("click", "#mainLogin", function () {
+        $("#LoginModal").modal();
+    });
+
     $(".work-wrapper").hover(function () {
         $(this).find('.glyphicon').addClass('blueGlyphicon', 600);
     }, function () {

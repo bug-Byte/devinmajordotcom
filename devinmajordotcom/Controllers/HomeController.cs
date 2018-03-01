@@ -36,8 +36,15 @@ namespace devinmajordotcom.Controllers
             }
             else
             {
-                return new EmptyResult();
+                throw new Exception("Unauthorized User", new UnauthorizedAccessException());
             }
+        }
+
+        [HttpPost]
+        public ActionResult AdminLogin(UserViewModel viewModel)
+        {
+            var validatedUser = service.Login(viewModel, true);
+            return RedirectToAction("Index");
         }
 
         public void UpdateCurrentUser(UserViewModel viewModel)

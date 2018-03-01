@@ -38,4 +38,14 @@ namespace devinmajordotcom.ViewModels
         }
 
     }
+
+    public class UserValidationViewModel
+    {
+        
+        public UserViewModel User { get; set; }
+
+        public string LoginAttemptStatus { get; set; }
+
+    }
+
 }

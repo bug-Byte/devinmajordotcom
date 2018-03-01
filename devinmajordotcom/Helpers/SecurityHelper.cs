@@ -17,9 +17,9 @@ namespace devinmajordotcom.Helpers
             var hash = sha1.ComputeHash(inputBytes);
 
             var sb = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
+            foreach (byte t in hash)
             {
-                sb.Append(hash[i].ToString("X2"));
+                sb.Append(t.ToString("X2"));
             }
             return sb.ToString();
         }

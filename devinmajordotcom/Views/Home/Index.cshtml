@@ -10,14 +10,26 @@
 
 @Html.Partial("_ContactContent", Model.ContactEmailData)
 
-@Html.Partial("_ApplicationManager", Model.CurrentApplicationData)
+@if (Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
+{
+    @Html.Partial("_ApplicationManager", Model.CurrentApplicationData)
+}
+else
+{
+    @section scripts {
+        <script>
+            var html = '@Html.Raw(@Html.Partial("_LoginModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+            $('body').append(html);
+        </script>
+    }
+}
 
 @if(String.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive) {
     @section scripts {
         <script>
-                var html = '@Html.Raw(@Html.Partial("_AdminFirstRunModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
-                $('body').append(html);
-                $("#adminFirstRunFormModal").modal();
+            var html = '@Html.Raw(@Html.Partial("_AdminFirstRunModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+            $('body').append(html);
+            $("#adminFirstRunFormModal").modal();
         </script>
     }
 }

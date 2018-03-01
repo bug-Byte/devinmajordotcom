@@ -64,6 +64,7 @@ namespace devinmajordotcom.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IBaseDataService>().To<BaseDataService>();
             kernel.Bind<ILandingPageService>().To<LandingPageService>();
             kernel.Bind<IPortfolioService>().To<PortfolioService>();
             kernel.Bind<IMediaDashboardService>().To<MediaDashboardService>();

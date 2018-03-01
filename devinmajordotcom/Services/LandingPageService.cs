@@ -8,30 +8,26 @@ using Devinmajordotcom;
 using System.Security.Principal;
 using System.Net.Mail;
 using System.Net;
+using System.Web.Mvc;
 using devinmajordotcom.Helpers;
 
 namespace devinmajordotcom.Services
 {
-    public class LandingPageService : ILandingPageService
+    public class LandingPageService : BaseDataService, ILandingPageService
     {
-
-        protected dbContext db;
+        
         protected IPortfolioService portfolioService;
         protected IMediaDashboardService mediaDashboardService;
         public LandingPageService(IPortfolioService PortfolioService, IMediaDashboardService MediaDashboardService)
         {
-            db = new dbContext();
             portfolioService = PortfolioService;
             mediaDashboardService = MediaDashboardService;
         }
 
         public MainLandingPageViewModel GetLandingPageViewModel()
         {
-            var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
-            if (siteAdminUser == null)
-            {
-                AddNewUser(true);
-            }
+            var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin) ?? AddNewUser(true);
+
             return new MainLandingPageViewModel()
             {
                 CurrentUserViewModel = GetCurrentUser(),
@@ -45,85 +41,6 @@ namespace devinmajordotcom.Services
                 {
                     RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress
                 }
-            };
-        }
-        
-        public void UpdateCurrentUser(UserViewModel viewModel)
-        {
-            var user = db.Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
-            if(user != null)
-            {
-                user.EmailAddress = viewModel.EmailAddress;
-                user.IsActive = viewModel.UserIsActive;
-                user.IsAdmin = viewModel.UserIsAdmin;
-                user.UserName = viewModel.UserName;
-                user.Password = SecurityHelper.HashSHA1(viewModel.Password);
-                db.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("NULL User ID", new NullReferenceException());
-            }
-        }
-
-        public User AddNewUser(bool IsUserToAddAnAdmin = false)
-        {
-            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            var userGuid = Guid.NewGuid();
-
-            if (string.IsNullOrEmpty(ip))
-            {
-                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            }
-
-            var newUser = new User()
-            {
-                ClientName = ip,
-                EmailAddress = "",
-                Guid = userGuid,
-                IsActive = true,
-                IsAdmin = IsUserToAddAnAdmin
-            };
-
-            db.Users.Add(newUser);
-            db.SaveChanges();
-
-            return newUser;
-        }
-
-        public UserViewModel GetCurrentUser()
-        {
-            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            var currentUser = new UserViewModel();
-
-            if (string.IsNullOrEmpty(ip))
-            {
-                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            }
-
-            currentUser = db.Users.Where(x => x.ClientName == ip).Select(x => new UserViewModel()
-            {
-                EmailAddress = x.EmailAddress,
-                GUID = x.Guid,
-                UserID = x.Id,
-                Password = x.Password,
-                UserName = x.UserName,
-                UserIsAdmin = x.IsAdmin,
-                UserIsActive = x.IsActive
-            }).FirstOrDefault();
-
-            if (currentUser != null && currentUser.UserID != 0) return currentUser;
-
-            var newUser = AddNewUser();
-            return new UserViewModel()
-            {
-                UserID = newUser.Id,
-                EmailAddress = newUser.EmailAddress,
-                GUID = newUser.Guid,
-                UserName = newUser.UserName,
-                Password = newUser.Password,
-                UserIsAdmin = newUser.IsAdmin,
-                UserIsActive = newUser.IsActive
             };
         }
 
