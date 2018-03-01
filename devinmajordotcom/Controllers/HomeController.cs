@@ -40,6 +40,11 @@ namespace devinmajordotcom.Controllers
             }
         }
 
+        public void UpdateCurrentUser(UserViewModel viewModel)
+        {
+            service.UpdateCurrentUser(viewModel);
+        }
+
         public ActionResult _ApplicationManager()
         {
             ViewBag.Title = "D3V!N M@J0R";

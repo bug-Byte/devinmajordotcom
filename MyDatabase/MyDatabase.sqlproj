@@ -172,6 +172,9 @@
     <None Include="Script.PostDeployment.Start.sql" />
   </ItemGroup>
   <ItemGroup>
+    <RefactorLog Include="MyDatabase.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="MyDatabase.publish.xml" />
   </ItemGroup>
 </Project>

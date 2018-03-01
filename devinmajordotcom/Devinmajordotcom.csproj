@@ -241,11 +241,13 @@
       <DependentUpon>ApplicationMaster.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\MediaDashboardController.cs" />
+    <Compile Include="Controllers\MyHomeController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Helpers\PartialHelper.cs" />
     <Compile Include="Models\dbContextExt.cs" />
     <Compile Include="Models\MainDbContext.cs">
@@ -268,7 +270,7 @@
     <Compile Include="ViewModels\MediaDashboardViewModel.cs" />
     <Compile Include="ViewModels\PortfolioViewModel.cs" />
     <Compile Include="ViewModels\SiteLinkViewModel.cs" />
-    <Compile Include="ViewModels\UserStatusViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Constants\SkillTypeMaster.tt">
@@ -290,9 +292,26 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\HomeImages\about-image.jpg" />
+    <Content Include="Content\HomeImages\blog-detail-image.jpg" />
+    <Content Include="Content\HomeImages\blog-header-bg.jpg" />
+    <Content Include="Content\HomeImages\blog-image1.jpg" />
+    <Content Include="Content\HomeImages\blog-image2.jpg" />
+    <Content Include="Content\HomeImages\blog-image3.jpg" />
+    <Content Include="Content\HomeImages\blog-image4.jpg" />
+    <Content Include="Content\HomeImages\home-bg.jpg" />
+    <Content Include="Content\HomeImages\home-bg2.jpg" />
+    <Content Include="Content\HomeImages\home-bg3.jpg" />
+    <Content Include="Content\HomeImages\home-bg4.jpg" />
+    <Content Include="Content\HomeImages\home-bg5.jpg" />
+    <Content Include="Content\HomeImages\work-image1.jpg" />
+    <Content Include="Content\HomeImages\work-image2.jpg" />
+    <Content Include="Content\HomeImages\work-image3.jpg" />
+    <Content Include="Content\HomeImages\work-image4.jpg" />
     <Content Include="Content\Images\back1.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\check2.png" />
+    <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\MediaImages\media1.jpg" />
     <Content Include="Content\MediaImages\media2.jpg" />
     <Content Include="Content\MediaImages\media3.png" />
@@ -334,6 +353,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\templatemo-style.css" />
+    <Content Include="Content\templatemo-style2.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -398,9 +418,12 @@
     <Content Include="Scripts\handlebars.runtime.amd.min.js" />
     <Content Include="Scripts\handlebars.runtime.js" />
     <Content Include="Scripts\handlebars.runtime.min.js" />
+    <Content Include="Scripts\homeScripts.js" />
     <Content Include="Scripts\jquery.bootsnack.js" />
     <Content Include="Scripts\jquery.easypiechart.js" />
     <Content Include="Scripts\jquery.easypiechart.min.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\jquery.stellar.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -686,6 +709,10 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\MediaDashboard\_NewLink.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\MyHome\blog-detail.cshtml" />
+    <Content Include="Views\MyHome\Index.cshtml" />
+    <Content Include="Views\Home\_AdminFirstRunModal.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -703,6 +730,7 @@
     <Content Include="Views\Portfolio\_ManagePortfolio.cshtml" />
     <Content Include="Views\Portfolio\_AddNewTechSkill.cshtml" />
     <Content Include="Views\Portfolio\_AddNewLanguageSkill.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

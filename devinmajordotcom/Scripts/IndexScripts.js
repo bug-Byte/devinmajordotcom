@@ -80,6 +80,10 @@ function updateLinks() {
     }
 }
 
+function HideAdminFirstRunModal() {
+    $('#adminFirstRunFormModal').modal('hide');
+}
+
 function AjaxSuccess(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',

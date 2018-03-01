@@ -1,0 +1,95 @@
+﻿@model devinmajordotcom.ViewModels.UserViewModel
+
+<div class="modal fade" id="adminFirstRunFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-popup">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+
+                            <div class="modal-title">
+                                <h2>Website Setup</h2>
+                            </div>
+
+                            <!-- NAV TABS -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an Admin Account</a></li>
+                            </ul>
+
+                            <!-- TAB PANES -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
+                                    @using (Ajax.BeginForm("UpdateCurrentUser", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideAdminFirstRunModal", OnFailure = "" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.UserIsActive)
+                                        @Html.HiddenFor(x => x.UserIsAdmin)
+                                        @Html.HiddenFor(x => x.UserID)
+                                        @Html.HiddenFor(x => x.GUID)
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center">
+                                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.EmailAddress)
+                                            </div>
+                                            <div class="col-sm-6 text-center">
+                                                @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control", @required = "required", placeholder = "someone@domain.com" })
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.EmailAddress)
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center">
+                                                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.UserName)
+                                            </div>
+                                            <div class="col-sm-6 text-center">
+                                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control"})
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.UserName)
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center">
+                                                <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.Password)
+                                            </div>
+                                            <div class="col-sm-6 text-center">
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @required = "required", placeholder = "********", type="password" })
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.Password)
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Get Started!</button>
+
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

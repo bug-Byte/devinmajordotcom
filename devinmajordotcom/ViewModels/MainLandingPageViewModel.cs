@@ -13,7 +13,7 @@ namespace devinmajordotcom.ViewModels
 
         public ApplicationManagementViewModel CurrentApplicationData { get; set; }
 
-        public UserStatusViewModel CurrentUserViewModel { get; set; }
+        public UserViewModel CurrentUserViewModel { get; set; }
 
         public ContactEmailViewModel ContactEmailData { get; set; }
 

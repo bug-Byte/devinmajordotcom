@@ -1,4 +1,8 @@
-﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+﻿@using Newtonsoft.Json
+@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @Html.Partial("_Apps", Model.LandingPageApplicationLinks)
 
@@ -7,3 +11,13 @@
 @Html.Partial("_ContactContent", Model.ContactEmailData)
 
 @Html.Partial("_ApplicationManager", Model.CurrentApplicationData)
+
+@if(String.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive) {
+    @section scripts {
+        <script>
+                var html = '@Html.Raw(@Html.Partial("_AdminFirstRunModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+                $('body').append(html);
+                $("#adminFirstRunFormModal").modal();
+        </script>
+    }
+}

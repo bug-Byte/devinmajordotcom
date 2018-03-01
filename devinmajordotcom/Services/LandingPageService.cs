@@ -8,6 +8,7 @@ using Devinmajordotcom;
 using System.Security.Principal;
 using System.Net.Mail;
 using System.Net;
+using devinmajordotcom.Helpers;
 
 namespace devinmajordotcom.Services
 {
@@ -29,7 +30,7 @@ namespace devinmajordotcom.Services
             var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
             return new MainLandingPageViewModel()
             {
-                CurrentUserViewModel = GetCurrentUserStatus(),
+                CurrentUserViewModel = GetCurrentUser(),
                 LandingPageApplicationLinks = GetMainSiteLinks(),
                 CurrentApplicationData = new ApplicationManagementViewModel()
                 {
@@ -42,8 +43,52 @@ namespace devinmajordotcom.Services
                 }
             };
         }
+        
+        public void UpdateCurrentUser(UserViewModel viewModel)
+        {
+            var user = db.Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
+            if(user != null)
+            {
+                user.EmailAddress = viewModel.EmailAddress;
+                user.IsActive = viewModel.UserIsActive;
+                user.IsAdmin = viewModel.UserIsAdmin;
+                user.UserName = viewModel.UserName;
+                user.Password = SecurityHelper.HashSHA1(viewModel.Password);
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("NULL User ID", new NullReferenceException());
+            }
+        }
 
-        public UserStatusViewModel GetCurrentUserStatus()
+        public User AddNewUser(bool IsUserToAddAnAdmin = false)
+        {
+            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            var userGuid = Guid.NewGuid();
+
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+
+            var newUser = new User()
+            {
+                ClientName = ip,
+                EmailAddress = "",
+                Guid = userGuid,
+                IsActive = true,
+                IsAdmin = IsUserToAddAnAdmin
+            };
+
+            db.Users.Add(newUser);
+            db.SaveChanges();
+
+            return newUser;
+
+        }
+
+        public UserViewModel GetCurrentUser()
         {
             var isUserAdmin = false;
             var isUserActive = false;
@@ -56,19 +101,27 @@ namespace devinmajordotcom.Services
             }
             else
             {
-                var user = new User()
+                var newUser = AddNewUser();
+                return new UserViewModel()
                 {
-                    ClientName = currentContextUser,
-                    IsActive = true,
-                    IsAdmin = false
+                    UserID = newUser.Id,
+                    EmailAddress = newUser.EmailAddress,
+                    GUID = newUser.Guid,
+                    UserName = newUser.UserName,
+                    Password = newUser.Password,
+                    UserIsAdmin = newUser.IsAdmin,
+                    UserIsActive = newUser.IsActive
                 };
-                db.Users.Add(user);
-                db.SaveChanges();
             }
-            return new UserStatusViewModel()
+            return new UserViewModel()
             {
-                UserIsAdmin = isUserAdmin,
-                UserIsActive = isUserActive
+                EmailAddress = currentDbUser.EmailAddress,
+                GUID = currentDbUser.Guid,
+                UserID = currentDbUser.Id,
+                Password = currentDbUser.Password,
+                UserName = currentDbUser.UserName,
+                UserIsAdmin = currentDbUser.IsAdmin,
+                UserIsActive = currentDbUser.IsActive
             };
         }
 
@@ -112,7 +165,7 @@ namespace devinmajordotcom.Services
 
         public string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel)
         {
-            MailMessage message = new MailMessage();
+            var message = new MailMessage();
             try
             {
                 var body = "<p>From: </p><p>{0}</p><p>({1})</p><p>Message:</p><p>{2}</p>";

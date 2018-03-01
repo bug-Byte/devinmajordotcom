@@ -16,7 +16,9 @@ namespace devinmajordotcom.Services
 
         List<SiteLinkViewModel> GetMediaSiteLinks();
 
-        UserStatusViewModel GetCurrentUserStatus();
+        UserViewModel GetCurrentUser();
+
+        void UpdateCurrentUser(UserViewModel viewModel);
 
         string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
 
