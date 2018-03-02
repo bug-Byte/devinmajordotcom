@@ -10,11 +10,9 @@
 
 @Html.Partial("_ContactContent", Model.ContactEmailData)
 
-@if (Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
-{
-    @Html.Partial("_ApplicationManager", Model.CurrentApplicationData)
-}
-else
+@Html.Partial("_ApplicationManager", Model.CurrentApplicationData)
+
+@if (!Model.CurrentUserViewModel.UserIsAdmin || !Model.CurrentUserViewModel.UserIsActive)
 {
     @section scripts {
         <script>

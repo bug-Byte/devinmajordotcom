@@ -26,11 +26,19 @@ namespace devinmajordotcom.Services
 
         public MainLandingPageViewModel GetLandingPageViewModel()
         {
-            var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin) ?? AddNewUser(true);
-
+            var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            var guid = HttpContext.Current.Session["MainPageUserAuthID"];
+            if(siteAdminUser == null)
+            {
+                guid = AddNewUser(true).Guid;
+            }
+            if(guid == null)
+            {
+                guid = AddNewUser().Guid;
+            }
             return new MainLandingPageViewModel()
             {
-                CurrentUserViewModel = GetCurrentUser(),
+                CurrentUserViewModel = GetCurrentUser((Guid)guid),
                 LandingPageApplicationLinks = GetMainSiteLinks(),
                 CurrentApplicationData = new ApplicationManagementViewModel()
                 {

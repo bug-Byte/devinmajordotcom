@@ -28,7 +28,7 @@
                             <!-- TAB PANES -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="sign_in">
-                                    @using (Ajax.BeginForm("AdminLogin", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideAdminFirstRunModal", OnFailure = "" }))
+                                    @using (Ajax.BeginForm("AdminLogin", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal", OnFailure = "" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         <div class="row">

@@ -88,6 +88,12 @@ function HideAdminFirstRunModal() {
     $('#adminFirstRunFormModal').modal('hide');
 }
 
+function HideLoginModal() {
+    $('#LoginModal').modal('hide');
+    $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a>App Manager</a></li>');
+    $('#appmanager').fadeIn(500);
+}
+
 function AjaxSuccess(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',

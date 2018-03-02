@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Ninject;
 using devinmajordotcom.Services;
 using devinmajordotcom.ViewModels;
+using System.Text;
 
 namespace devinmajordotcom.Controllers
 {
@@ -31,8 +32,21 @@ namespace devinmajordotcom.Controllers
 
             if (viewModel.CurrentUserViewModel.UserIsActive)
             {
-                viewModel.CurrentApplicationData.LandingPageApplicationLinks = viewModel.LandingPageApplicationLinks;
+
+                if (Session["MainPageUserAuthID"] == null || (Guid)Session["MainPageUserAuthID"] != viewModel.CurrentUserViewModel.GUID)
+                {
+                    Session["MainPageUserAuthID"] = viewModel.CurrentUserViewModel.GUID;
+                    Session["MainPageUserName"] = viewModel.CurrentUserViewModel.UserName;
+                    //var cookie = new HttpCookie("UserData");
+                    //cookie.Values["UserName"] = viewModel.CurrentUserViewModel.UserName;
+                    //cookie.Values["UserEmail"] = viewModel.CurrentUserViewModel.EmailAddress;
+                    //cookie.Expires = DateTime.Now.AddMinutes(2);
+                    //Response.Cookies.Add(cookie);
+                }
+
+                viewModel.CurrentApplicationData.LandingPageApplicationLinks = viewModel.LandingPageApplicationLinks;      
                 return View(viewModel);
+
             }
             else
             {

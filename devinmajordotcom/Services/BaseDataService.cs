@@ -9,11 +9,12 @@ using System.Web.Script.Serialization;
 using devinmajordotcom.Helpers;
 using devinmajordotcom.Models;
 using devinmajordotcom.ViewModels;
+using System.Web.SessionState;
 using Newtonsoft.Json;
 
 namespace devinmajordotcom.Services
 {
-    public class BaseDataService : IBaseDataService
+    public class BaseDataService : IBaseDataService, IRequiresSessionState
     {
 
         protected dbContext db;
@@ -32,6 +33,7 @@ namespace devinmajordotcom.Services
                 throw new Exception("Unauthorized User", new UnauthorizedAccessException());
             }
 
+            HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;
             return results.User;
         }
 
@@ -57,7 +59,7 @@ namespace devinmajordotcom.Services
             }).FirstOrDefault();
 
             if (user == null) return results;
-            var reHashedPassword = SecurityHelper.HashSHA1(password + user.GUID);
+            var reHashedPassword = SecurityHelper.HashSHA1(password + user.GUID.ToString());
             if (reHashedPassword != user.Password) return results;
             results.LoginAttemptStatus = "Success";
             results.User = user;
@@ -73,7 +75,7 @@ namespace devinmajordotcom.Services
                 user.IsActive = viewModel.UserIsActive;
                 user.IsAdmin = viewModel.UserIsAdmin;
                 user.UserName = viewModel.UserName;
-                user.Password = SecurityHelper.HashSHA1(viewModel.Password);
+                user.Password = SecurityHelper.HashSHA1(viewModel.Password + user.Guid.ToString());
                 db.SaveChanges();
             }
             else
@@ -85,8 +87,11 @@ namespace devinmajordotcom.Services
         public User AddNewUser(bool IsUserToAddAnAdmin = false)
         {
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            var userGuid = Guid.NewGuid();
-
+            var userGuid = HttpContext.Current.Session["MainPageUserAuthID"];
+            if(userGuid == null)
+            {
+                userGuid = Guid.NewGuid();
+            }
             if (string.IsNullOrEmpty(ip))
             {
                 ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -96,7 +101,7 @@ namespace devinmajordotcom.Services
             {
                 ClientName = ip,
                 EmailAddress = "",
-                Guid = userGuid,
+                Guid = (Guid)userGuid,
                 IsActive = true,
                 IsAdmin = IsUserToAddAnAdmin
             };
@@ -109,31 +114,16 @@ namespace devinmajordotcom.Services
 
         public UserViewModel GetCurrentUser(Guid? GUID = null)
         {
-            if (GUID != null)
+            return db.Users.Where(x => x.Guid == GUID).Select(x => new UserViewModel()
             {
-                return db.Users.Where(x => x.Guid == GUID).Select(x => new UserViewModel()
-                {
-                    EmailAddress = x.EmailAddress,
-                    GUID = x.Guid,
-                    UserID = x.Id,
-                    Password = x.Password,
-                    UserName = x.UserName,
-                    UserIsAdmin = x.IsAdmin,
-                    UserIsActive = x.IsActive
-                }).FirstOrDefault();
-            }
-
-            var newUser = AddNewUser();
-            return new UserViewModel()
-            {
-                UserID = newUser.Id,
-                EmailAddress = newUser.EmailAddress,
-                GUID = newUser.Guid,
-                UserName = newUser.UserName,
-                Password = newUser.Password,
-                UserIsAdmin = newUser.IsAdmin,
-                UserIsActive = newUser.IsActive
-            };
+                EmailAddress = x.EmailAddress,
+                GUID = x.Guid,
+                UserID = x.Id,
+                Password = x.Password,
+                UserName = x.UserName,
+                UserIsAdmin = x.IsAdmin,
+                UserIsActive = x.IsActive
+            }).FirstOrDefault();
         }
 
     }
