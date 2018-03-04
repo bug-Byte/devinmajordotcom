@@ -11,59 +11,37 @@ using System.Text;
 
 namespace devinmajordotcom.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-
-        public ILandingPageService service;
-
-        public HomeController(ILandingPageService landingPageService)
-        {
-            service = landingPageService;
-        }
 
         public ActionResult Index()
         {
             var viewModel = new MainLandingPageViewModel();
-            viewModel = service.GetLandingPageViewModel();
+            viewModel = landingPageService.GetLandingPageViewModel();
 
             this.ViewData["CurrentUserViewModel"] = viewModel.CurrentUserViewModel;
+            this.ViewData["BannerLinks"] = viewModel.LandingPageBannerLinks;
             ViewBag.Title = "D3V!N M@J0R";
-            ViewBag.Layout = "../Shared/_Layout.cshtml";
+            ViewBag.ControllerName = "Home";
 
             if (viewModel.CurrentUserViewModel.UserIsActive)
             {
-
-                if (Session["MainPageUserAuthID"] == null || (Guid)Session["MainPageUserAuthID"] != viewModel.CurrentUserViewModel.GUID)
-                {
-                    Session["MainPageUserAuthID"] = viewModel.CurrentUserViewModel.GUID;
-                    Session["MainPageUserName"] = viewModel.CurrentUserViewModel.UserName;
-                    //var cookie = new HttpCookie("UserData");
-                    //cookie.Values["UserName"] = viewModel.CurrentUserViewModel.UserName;
-                    //cookie.Values["UserEmail"] = viewModel.CurrentUserViewModel.EmailAddress;
-                    //cookie.Expires = DateTime.Now.AddMinutes(2);
-                    //Response.Cookies.Add(cookie);
-                }
-
-                viewModel.CurrentApplicationData.LandingPageApplicationLinks = viewModel.LandingPageApplicationLinks;      
                 return View(viewModel);
-
             }
             else
             {
                 throw new Exception("Unauthorized User", new UnauthorizedAccessException());
             }
         }
-
-        [HttpPost]
-        public ActionResult AdminLogin(UserViewModel viewModel)
+       
+        public void ManageLandingPage(MainLandingPageViewModel viewModel)
         {
-            var validatedUser = service.Login(viewModel, true);
-            return RedirectToAction("Index");
+            landingPageService.ManageLandingPage(viewModel);
         }
 
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
-            service.UpdateCurrentUser(viewModel);
+            landingPageService.UpdateCurrentUser(viewModel);
         }
 
         public ActionResult _ApplicationManager()
@@ -79,7 +57,7 @@ namespace devinmajordotcom.Controllers
             var emailSuccessful = "";
             if (ModelState.IsValid)
             {
-                emailSuccessful = service.SendContactEmailToSiteAdmin(viewModel);
+                emailSuccessful = landingPageService.SendContactEmailToSiteAdmin(viewModel);
             }
             return new JsonResult { Data = emailSuccessful };
         }

@@ -1,15 +1,25 @@
-﻿@model devinmajordotcom.ViewModels.ApplicationManagementViewModel
+﻿@model devinmajordotcom.ViewModels.ApplicationConfigViewModel
 @{ 
 
 }
 <div style="display:none;" class="inner cover" id="appmanager">
     <h1 class="cover-heading">Application Manager</h1>
     <p class="lead" style="color: #71cef5;">Manage settings for all existing apps.</p>   
-    @if (Model.LandingPageApplicationLinks.Count > 0)
+
+    @{ 
+        var link = Html.ActionLink("REPLACE", "AdminLogout", null, new { @class="btn btn-primary" }).ToHtmlString();
+        var cleanLink = link.Replace("REPLACE", "<span class='glyphicon glyphicon-log-out'></span>&nbsp;Log Out");
+    }
+
+    @Html.Raw(cleanLink)
+
+    @if (Model.LandingPageApplicationLinks != null && Model.LandingPageApplicationLinks.Count > 0)
     {
         <br />
         <div class="row">
             <div class="col-sm-12">
+
+                @Html.Partial("_ManageLandingPage", Model)
 
                 @foreach (var appDataModel in Model.LandingPageApplicationLinks)
                 {

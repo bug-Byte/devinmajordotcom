@@ -339,6 +339,21 @@ a:hover {
 .work-wrapper .fa {
   color: white;
 }
+
+.appContainer {
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  background-color:#0B1C1E;
+  padding: 0px 0px 0px 0px;
+  -webkit-transition: all 0.6s ease-in;
+          transition: all 0.6s ease-in;
+}
+.appContainer:hover { border-color: #71cef5; }
+.appContainer .fa {
+  color: white;
+}
+
 /* END WORK */
 
 /*
@@ -383,6 +398,28 @@ body {
   vertical-align: top;
 
 }
+
+.panel, .panel-heading, .panel-body {
+    background-color:transparent;
+}
+
+.well {
+    border-color:transparent;
+    background-color:transparent;
+}
+
+.btn-default {
+    background-color:transparent;
+}
+
+.btn-default:hover * {
+    color:black;
+}
+
+.popover, .popover-title, .popover-content {
+    background-color: #30363b;
+}
+
 .cover-container {
   margin-right: auto;
   margin-left: auto;

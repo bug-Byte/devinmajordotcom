@@ -1,0 +1,31 @@
+﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@{
+
+}
+
+@using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "" }))
+{
+    <div class="appContainer work-wrapper" id="mainSettingsContainer">
+        <h3>Landing Page Settings</h3>
+        <hr>
+        <div class="settingsContainer">
+
+            <div class="material-panel">
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                        </div>
+                        <div class="col-sm-6">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+}

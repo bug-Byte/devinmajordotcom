@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace devinmajordotcom.Controllers
 {
-    public class MyHomeController : Controller
+    public class MyHomeController : BaseController
     {
         // GET: MyHome
         public ActionResult Index()

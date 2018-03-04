@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[User] (
+﻿CREATE TABLE [Security].[User] (
     [ID]           INT            IDENTITY (1, 1) NOT NULL,
     [ClientName]   NVARCHAR (500) NOT NULL,
     [IsActive]     BIT            DEFAULT ((1)) NOT NULL,

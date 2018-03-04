@@ -1,4 +1,4 @@
-﻿CREATE TABLE [MediaDashboard].[SiteLink] (
+﻿CREATE TABLE [LandingPage].[SiteLink] (
     [ID]            INT            IDENTITY (1, 1) NOT NULL,
     [DisplayName]   NVARCHAR (50)  NOT NULL,
     [Description]   NVARCHAR (500) NULL,
@@ -9,7 +9,6 @@
     [DisplayIcon]   NVARCHAR (500) NULL,
     [IsDefault]     BIT            DEFAULT ((0)) NOT NULL,
     [IsEnabled]     BIT            DEFAULT ((1)) NOT NULL,
-	[IsPublic]     BIT            DEFAULT ((0)) NOT NULL,
     [Order]         INT            NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC)
 );

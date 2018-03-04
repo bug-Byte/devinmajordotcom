@@ -8,6 +8,8 @@ namespace devinmajordotcom.ViewModels
     public class MediaDashboardViewModel
     {
 
+        public UserViewModel CurrentUserViewModel { get; set; }
+
         public List<SiteLinkViewModel> SidebarLinks { get; set; }
 
     }

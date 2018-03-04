@@ -26,7 +26,7 @@ namespace devinmajordotcom.Services
 
         public MainLandingPageViewModel GetLandingPageViewModel()
         {
-            var siteAdminUser = db.Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            var siteAdminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
             var guid = HttpContext.Current.Session["MainPageUserAuthID"];
             if(siteAdminUser == null)
             {
@@ -36,15 +36,16 @@ namespace devinmajordotcom.Services
             {
                 guid = AddNewUser().Guid;
             }
+            var user = GetCurrentUser((Guid)guid);
             return new MainLandingPageViewModel()
             {
-                CurrentUserViewModel = GetCurrentUser((Guid)guid),
+                Config = GetLandingPageConfig(),
+                CurrentUserViewModel = user,
                 LandingPageApplicationLinks = GetMainSiteLinks(),
-                CurrentApplicationData = new ApplicationManagementViewModel()
-                {
-                    CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
-                    CurrentMediaDashboardData = mediaDashboardService.GetMediaDashboardViewModel()
-                },
+                LandingPageBannerLinks = GetMainBannerLinks(),
+                CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
+                CurrentMediaDashboardData = mediaDashboardService.GetMediaDashboardViewModel(),
+                CurrentApplicationConfig = /*user.UserIsAdmin ? */GetAppConfigData(siteAdminUser)/* : null*/,
                 ContactEmailData = new ContactEmailViewModel()
                 {
                     RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress
@@ -52,28 +53,93 @@ namespace devinmajordotcom.Services
             };
         }
 
-        public List<SiteLinkViewModel> GetMainSiteLinks()
+        public ApplicationConfigViewModel GetAppConfigData(Security_User admin = null)
         {
-            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.MainLandingPage).Select(x => new SiteLinkViewModel()
+            var results = new ApplicationConfigViewModel()
             {
-                ID = x.Id,
-                DisplayName = x.DisplayName,
-                Description = x.Description,
-                DisplayIcon = x.DisplayIcon,
-                URL = x.Url,
-                Action = x.Action,
-                Controller = x.Controller,
-                ParentApplicationId = x.ApplicationId,
-                ParentApplicationName = x.ApplicationMaster.Name,
-                IsDefault = x.IsDefault,
-                IsEnabled = x.IsEnabled,
-                Order = x.Order
-            }).ToList();
+                Config = GetLandingPageConfig(),
+                LandingPageApplicationLinks = GetMainSiteLinks(true),
+                LandingPageBannerLinks = GetMainBannerLinks(true),
+                CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
+                CurrentMediaDashboardData = mediaDashboardService.GetMediaDashboardViewModel(),
+                ContactEmailData = new ContactEmailViewModel()
+                {
+                    RecipientEmail = admin == null ? "" : admin.EmailAddress
+                }
+            };
+            results.CurrentMediaDashboardData.SidebarLinks = GetMediaSiteLinks(true);
+            return results;
         }
 
-        public List<SiteLinkViewModel> GetMediaSiteLinks()
+        public void ManageLandingPage(MainLandingPageViewModel viewModel)
         {
-            return db.SiteLinks.Where(y => y.IsEnabled && y.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select(x => new SiteLinkViewModel()
+            var configRecord = db.LandingPage_Configs.FirstOrDefault();
+            if(configRecord != null)
+            {
+                configRecord.AppsDescription = viewModel.Config.AppsDescription;
+                configRecord.AppsIntro = viewModel.Config.AppsIntro;
+                configRecord.AppsTitle = viewModel.Config.AppsTitle;
+                configRecord.ContactInstructions = viewModel.Config.ContactInstructions;
+                configRecord.ContactTitle = viewModel.Config.ContactTitle;
+                configRecord.ServerStatusDescription = viewModel.Config.ServerStatusDescription;
+                configRecord.ServerStatusTitle = viewModel.Config.ServerStatusTitle;
+            }
+            else
+            {
+                var newRecord = new LandingPage_Config()
+                {
+                    AppsDescription = viewModel.Config.AppsDescription,
+                    AppsIntro = viewModel.Config.AppsIntro,
+                    AppsTitle = viewModel.Config.AppsTitle,
+                    ContactInstructions = viewModel.Config.ContactInstructions,
+                    ContactTitle = viewModel.Config.ContactTitle,
+                    ServerStatusDescription = viewModel.Config.ServerStatusDescription,
+                    ServerStatusTitle = viewModel.Config.ServerStatusTitle
+                };
+                db.LandingPage_Configs.Add(newRecord);
+                db.SaveChanges();
+            }
+            foreach (var link in viewModel.LandingPageBannerLinks)
+            {
+                var linkRecord = db.LandingPage_BannerLinks.First();
+                linkRecord.IsDefault = link.IsDefault;
+                linkRecord.IsEnabled = link.IsEnabled;
+                linkRecord.Url = link.URL;
+            }
+            foreach (var link in viewModel.LandingPageApplicationLinks)
+            {
+                var linkRecord = db.LandingPage_SiteLinks.First();
+                linkRecord.IsDefault = link.IsDefault;
+                linkRecord.IsEnabled = link.IsEnabled;
+                linkRecord.Action = link.Action;
+                linkRecord.Controller = link.Controller;
+                linkRecord.Url = link.URL;
+                linkRecord.Description = link.Description;
+                linkRecord.Directive = link.Directive;
+                linkRecord.DisplayIcon = link.DisplayIcon;
+                linkRecord.Order = link.Order;
+                linkRecord.DisplayName = link.DisplayName;
+            }
+            db.SaveChanges();
+        }
+
+        public LandingPageConfigViewModel GetLandingPageConfig()
+        {
+            return db.LandingPage_Configs.Select(x => new LandingPageConfigViewModel() {
+                AppsDescription = x.AppsDescription,
+                AppsIntro = x.AppsIntro,
+                AppsTitle = x.AppsTitle,
+                ContactInstructions = x.ContactInstructions,
+                ContactTitle = x.ContactTitle,
+                ID = x.Id,
+                ServerStatusDescription = x.ServerStatusDescription,
+                ServerStatusTitle = x.ServerStatusTitle
+            }).FirstOrDefault();
+        }
+
+        public List<SiteLinkViewModel> GetMainSiteLinks(bool isRetrievingSettings = false)
+        {
+            return db.LandingPage_SiteLinks.Where(y => isRetrievingSettings == true ? (y.IsEnabled == false || y.IsEnabled == true) : y.IsEnabled).Select(x => new SiteLinkViewModel()
             {
                 ID = x.Id,
                 DisplayName = x.DisplayName,
@@ -82,12 +148,44 @@ namespace devinmajordotcom.Services
                 URL = x.Url,
                 Action = x.Action,
                 Controller = x.Controller,
-                ParentApplicationId = x.ApplicationId,
-                ParentApplicationName = x.ApplicationMaster.Name,
                 IsDefault = x.IsDefault,
                 IsEnabled = x.IsEnabled,
                 Order = x.Order
-            }).ToList();
+            }).OrderBy(x => x.Order).ToList();
+        }
+
+        public List<SiteLinkViewModel> GetMainBannerLinks(bool isRetrievingSettings = false)
+        {
+            return db.LandingPage_BannerLinks.Where(y => isRetrievingSettings == true ? (y.IsEnabled == false || y.IsEnabled == true) : y.IsEnabled).Select(x => new SiteLinkViewModel()
+            {
+                ID = x.Id,
+                DisplayName = x.DisplayName,
+                Description = x.Description,
+                DisplayIcon = x.DisplayIcon,
+                URL = x.Url,
+                Action = x.Action,
+                Controller = x.Controller,
+                IsDefault = x.IsDefault,
+                IsEnabled = x.IsEnabled,
+                Order = x.Order
+            }).OrderBy(x => x.Order).ToList();
+        }
+
+        public List<SiteLinkViewModel> GetMediaSiteLinks(bool isRetrievingSettings = false)
+        {
+            return db.MediaDashboard_SiteLinks.Where(y => isRetrievingSettings == true ? (y.IsEnabled == false || y.IsEnabled == true) : y.IsEnabled).Select(x => new SiteLinkViewModel()
+            {
+                ID = x.Id,
+                DisplayName = x.DisplayName,
+                Description = x.Description,
+                DisplayIcon = x.DisplayIcon,
+                URL = x.Url,
+                Action = x.Action,
+                Controller = x.Controller,
+                IsDefault = x.IsDefault,
+                IsEnabled = x.IsEnabled,
+                Order = x.Order
+            }).OrderBy(x => x.Order).ToList();
         }
 
         public string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel)

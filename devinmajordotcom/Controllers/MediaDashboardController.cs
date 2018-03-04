@@ -8,34 +8,29 @@ using System.Web.Mvc;
 
 namespace devinmajordotcom.Controllers
 {
-    public class MediaDashboardController : Controller
+    public class MediaDashboardController : BaseController
     {
-
-        public IMediaDashboardService service;
-
-        public MediaDashboardController(IMediaDashboardService mediaDashboardService)
-        {
-            service = mediaDashboardService;
-        }
 
         public ActionResult Index()
         {
-            ViewBag.Title="D3V!N M@J0R";
+            ViewBag.Title = "D3V!N M@J0R";
+            ViewBag.ControllerName = "MediaDashboard";
+            ViewBag.Layout = "../Shared/_MediaLayout.cshtml";
             var viewModel = new MediaDashboardViewModel();
-            viewModel = service.GetMediaDashboardViewModel();
+            viewModel = mediaDashboardService.GetMediaDashboardViewModel();
             return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult _ManageMediaDashboard(MediaDashboardViewModel viewModel)
         {
-            var data = service.ManageMediaDashboard(viewModel);
+            var data = mediaDashboardService.ManageMediaDashboard(viewModel);
             return new JsonResult { Data = data };
         }
 
         public void RemoveMediaDashboardLink(int ID)
         {
-            service.RemoveLink(ID);
+            mediaDashboardService.RemoveLink(ID);
         }
 
     }

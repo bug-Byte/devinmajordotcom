@@ -59,18 +59,29 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-4 text-center">
                         <div class="form-group">
                             <div class="checkbox-inline">
                                 <label class="switch">
-                                    @Html.EditorFor(o => o.SidebarLinks[count].IsDefault, new {@class = "trendClick"})
+                                    @Html.EditorFor(o => o.SidebarLinks[count].IsDefault, new { @class = "trendClick" })
                                     <div class="slider round"></div>
                                 </label>
-                                @Html.LabelFor(o => o.SidebarLinks[count].IsDefault, "Is Default Link?", new {@style = "font-weight: normal; margin-bottom: 0px;"})
+                                @Html.LabelFor(o => o.SidebarLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-4 text-center">
+                        <div class="form-group">
+                            <div class="checkbox-inline">
+                                <label class="switch">
+                                    @Html.EditorFor(o => o.SidebarLinks[count].IsPublic, new { @class = "trendClick" })
+                                    <div class="slider round"></div>
+                                </label>
+                                @Html.LabelFor(o => o.SidebarLinks[count].IsPublic, "Is Link Public?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 text-center">
                         <div class="form-group">
                             <div class="checkbox-inline">
                                 <label class="switch">

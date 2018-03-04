@@ -1,6 +1,7 @@
 ﻿@using devinmajordotcom.ViewModels;
 @{
-    var viewModel = (UserViewModel)ViewBag.CurrentUserViewModel;
+    var userViewModel = (UserViewModel)ViewBag.CurrentUserViewModel;
+    var bannerLinks = (List<SiteLinkViewModel>)ViewBag.BannerLinks;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +28,13 @@
                     <div class="inner">
                         <h3 class="masthead-brand text-center">@ViewBag.Title</h3>
                         <ul class="nav masthead-nav">
-                            <li class="landingPageLink active" data-activediv="#home"><a>Home & Apps</a></li>
-                            <li class="landingPageLink" data-activediv="#server"><a>Server Status</a></li>
-                            <li class="landingPageLink" data-activediv="#contact"><a>Contact Me</a></li>
-                            @if (viewModel.UserIsAdmin)
+                            @foreach (var link in bannerLinks)
                             {
-                                <li class="landingPageLink" data-activediv="#appmanager"><a>App Manager</a></li>
+                                <li class="landingPageLink @if(link.IsDefault){<text>active</text>}" data-activediv="@link.URL"><a>@link.DisplayName</a></li>
+                            }
+                            @if (userViewModel.UserIsAdmin)
+                            {
+                                <li class="landingPageLink" data-activediv="#appmanager"><a>Settings</a></li>
                             }
                             else
                             {

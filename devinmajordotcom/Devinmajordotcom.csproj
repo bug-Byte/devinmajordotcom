@@ -129,6 +129,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.Mvc, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.Futures.5.0.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -246,6 +250,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MediaDashboardController.cs" />
     <Compile Include="Controllers\MyHomeController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -253,6 +258,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RedirectionHelper.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Helpers\UserAuthorizationHelper.cs" />
     <Compile Include="Helpers\PartialHelper.cs" />
@@ -737,7 +743,7 @@
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\MyHome\blog-detail.cshtml" />
     <Content Include="Views\MyHome\Index.cshtml" />
-    <Content Include="Views\Home\_AdminFirstRunModal.cshtml" />
+    <Content Include="Views\Shared\_AdminFirstRunModal.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -755,7 +761,9 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Home\_LoginModal.cshtml" />
+    <Content Include="Views\Shared\_LoginModal.cshtml" />
+    <Content Include="Views\Home\_ContactEmailForm.cshtml" />
+    <Content Include="Views\Home\_ManageLandingPage.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

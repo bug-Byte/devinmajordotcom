@@ -2,12 +2,16 @@
 
 $(document).ready(function () {
 
-    $(document).on("click", ".menu li a", function () {
+    $(document).on("click", ".menu li[data-type='link'] a", function () {
         var id = "#" + $(this).data('framename');
         $(".menu li").removeClass('active');
         $(this).parent().addClass('active');
         $('iframe').hide();
         $(id).fadeIn(500);
+    });
+
+    $(document).on("click", "#mainLogin", function () {
+        $("#LoginModal").modal();
     });
 
     $('ul li').hover(
@@ -34,6 +38,12 @@ $(document).ready(function () {
 
 });
 
+function HideLoginModal(data) {
+    debugger;
+    $('#LoginModal').modal('hide');
+    $("#wrapper").replaceWith(data);
+}
+
 $(window).on("resize", function () {
-    newWidth = $('.site-wrapper').width() - 74.67;
+    newWidth = $('.site-wrapper').width();
 });

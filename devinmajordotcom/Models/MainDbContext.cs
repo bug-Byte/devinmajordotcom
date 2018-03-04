@@ -36,8 +36,11 @@ namespace devinmajordotcom.Models
 
     public partial interface IdbContext : System.IDisposable
     {
-        System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        System.Data.Entity.DbSet<LandingPage_BannerLink> LandingPage_BannerLinks { get; set; } // BannerLink
+        System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; } // Config
+        System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
+        System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; } // ContactLink
         System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
         System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
@@ -47,8 +50,7 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
         System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
-        System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
-        System.Data.Entity.DbSet<User> Users { get; set; } // User
+        System.Data.Entity.DbSet<Security_User> Security_Users { get; set; } // User
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -71,8 +73,11 @@ namespace devinmajordotcom.Models
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class dbContext : System.Data.Entity.DbContext, IdbContext
     {
-        public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; } // ApplicationMaster
+        public System.Data.Entity.DbSet<LandingPage_BannerLink> LandingPage_BannerLinks { get; set; } // BannerLink
+        public System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; } // Config
+        public System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
+        public System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; } // ContactLink
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
@@ -82,8 +87,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
         public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
-        public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; } // SiteLink
-        public System.Data.Entity.DbSet<User> Users { get; set; } // User
+        public System.Data.Entity.DbSet<Security_User> Security_Users { get; set; } // User
 
         static dbContext()
         {
@@ -138,8 +142,11 @@ namespace devinmajordotcom.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new ApplicationMasterConfiguration());
+            modelBuilder.Configurations.Add(new LandingPage_BannerLinkConfiguration());
+            modelBuilder.Configurations.Add(new LandingPage_ConfigConfiguration());
+            modelBuilder.Configurations.Add(new LandingPage_SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_ContactLinkConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration());
@@ -149,16 +156,18 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration());
             modelBuilder.Configurations.Add(new RefactorLogConfiguration());
-            modelBuilder.Configurations.Add(new SiteLinkConfiguration());
-            modelBuilder.Configurations.Add(new UserConfiguration());
+            modelBuilder.Configurations.Add(new Security_UserConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
-            modelBuilder.Configurations.Add(new ApplicationMasterConfiguration(schema));
+            modelBuilder.Configurations.Add(new LandingPage_BannerLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new LandingPage_ConfigConfiguration(schema));
+            modelBuilder.Configurations.Add(new LandingPage_SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_ContactLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration(schema));
@@ -168,8 +177,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new RefactorLogConfiguration(schema));
-            modelBuilder.Configurations.Add(new SiteLinkConfiguration(schema));
-            modelBuilder.Configurations.Add(new UserConfiguration(schema));
+            modelBuilder.Configurations.Add(new Security_UserConfiguration(schema));
             return modelBuilder;
         }
 
@@ -195,8 +203,11 @@ namespace devinmajordotcom.Models
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class FakedbContext : IdbContext
     {
-        public System.Data.Entity.DbSet<ApplicationMaster> ApplicationMasters { get; set; }
+        public System.Data.Entity.DbSet<LandingPage_BannerLink> LandingPage_BannerLinks { get; set; }
+        public System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; }
+        public System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; }
         public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; }
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; }
@@ -206,13 +217,15 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; }
         public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; }
-        public System.Data.Entity.DbSet<SiteLink> SiteLinks { get; set; }
-        public System.Data.Entity.DbSet<User> Users { get; set; }
+        public System.Data.Entity.DbSet<Security_User> Security_Users { get; set; }
 
         public FakedbContext()
         {
-            ApplicationMasters = new FakeDbSet<ApplicationMaster>("Id");
+            LandingPage_BannerLinks = new FakeDbSet<LandingPage_BannerLink>("Id");
+            LandingPage_Configs = new FakeDbSet<LandingPage_Config>("Id");
+            LandingPage_SiteLinks = new FakeDbSet<LandingPage_SiteLink>("Id");
             MediaDashboard_SiteLinks = new FakeDbSet<MediaDashboard_SiteLink>("Id");
+            Portfolio_ContactLinks = new FakeDbSet<Portfolio_ContactLink>("Id");
             Portfolio_HighlightedSkills = new FakeDbSet<Portfolio_HighlightedSkill>("Id");
             Portfolio_LanguageSkills = new FakeDbSet<Portfolio_LanguageSkill>("Id");
             Portfolio_PersonalDescriptions = new FakeDbSet<Portfolio_PersonalDescription>("Id");
@@ -222,8 +235,7 @@ namespace devinmajordotcom.Models
             Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
             Portfolio_TechSkills = new FakeDbSet<Portfolio_TechSkill>("Id");
             RefactorLogs = new FakeDbSet<RefactorLog>("OperationKey");
-            SiteLinks = new FakeDbSet<SiteLink>("Id");
-            Users = new FakeDbSet<User>("Id");
+            Security_Users = new FakeDbSet<Security_User>("Id");
 
             InitializePartial();
         }
@@ -553,28 +565,73 @@ namespace devinmajordotcom.Models
 
     #region POCO classes
 
-    // ApplicationMaster
+    // BannerLink
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class ApplicationMaster
+    public partial class LandingPage_BannerLink
     {
         public int Id { get; set; } // ID (Primary key)
-        public string Name { get; set; } // Name (length: 50)
+        public string DisplayName { get; set; } // DisplayName (length: 50)
+        public string Description { get; set; } // Description (length: 500)
+        public string Directive { get; set; } // Directive (length: 100)
+        public string Url { get; set; } // URL (length: 500)
+        public string Action { get; set; } // Action (length: 500)
+        public string Controller { get; set; } // Controller (length: 500)
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
+        public bool IsDefault { get; set; } // IsDefault
+        public bool IsEnabled { get; set; } // IsEnabled
+        public int? Order { get; set; } // Order
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child MediaDashboard_SiteLinks where [SiteLink].[ApplicationID] point to this entity (SiteLinks_ApplicationID_Applications_ID)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink.SiteLinks_ApplicationID_Applications_ID
-        /// <summary>
-        /// Child SiteLinks where [SiteLink].[ApplicationID] point to this entity (SiteLinks_ApplicationID_Applications_ID)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<SiteLink> SiteLinks { get; set; } // SiteLink.SiteLinks_ApplicationID_Applications_ID
-
-        public ApplicationMaster()
+        public LandingPage_BannerLink()
         {
-            MediaDashboard_SiteLinks = new System.Collections.Generic.List<MediaDashboard_SiteLink>();
-            SiteLinks = new System.Collections.Generic.List<SiteLink>();
+            IsDefault = false;
+            IsEnabled = true;
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // Config
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class LandingPage_Config
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string AppsTitle { get; set; } // AppsTitle
+        public string AppsIntro { get; set; } // AppsIntro
+        public string AppsDescription { get; set; } // AppsDescription
+        public string ContactTitle { get; set; } // ContactTitle
+        public string ContactInstructions { get; set; } // ContactInstructions
+        public string ServerStatusTitle { get; set; } // ServerStatusTitle
+        public string ServerStatusDescription { get; set; } // ServerStatusDescription
+
+        public LandingPage_Config()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // SiteLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class LandingPage_SiteLink
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string DisplayName { get; set; } // DisplayName (length: 50)
+        public string Description { get; set; } // Description (length: 500)
+        public string Directive { get; set; } // Directive (length: 100)
+        public string Url { get; set; } // URL (length: 500)
+        public string Action { get; set; } // Action (length: 500)
+        public string Controller { get; set; } // Controller (length: 500)
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
+        public bool IsDefault { get; set; } // IsDefault
+        public bool IsEnabled { get; set; } // IsEnabled
+        public int? Order { get; set; } // Order
+
+        public LandingPage_SiteLink()
+        {
+            IsDefault = false;
+            IsEnabled = true;
             InitializePartial();
         }
 
@@ -595,17 +652,37 @@ namespace devinmajordotcom.Models
         public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
-        public int ApplicationId { get; set; } // ApplicationID
+        public bool IsPublic { get; set; } // IsPublic
         public int? Order { get; set; } // Order
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ApplicationMaster pointed by [SiteLink].([ApplicationId]) (SiteLinks_ApplicationID_Applications_ID)
-        /// </summary>
-        public virtual ApplicationMaster ApplicationMaster { get; set; } // SiteLinks_ApplicationID_Applications_ID
-
         public MediaDashboard_SiteLink()
+        {
+            IsDefault = false;
+            IsEnabled = true;
+            IsPublic = false;
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ContactLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ContactLink
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string DisplayName { get; set; } // DisplayName (length: 50)
+        public string Description { get; set; } // Description (length: 500)
+        public string Directive { get; set; } // Directive (length: 100)
+        public string Url { get; set; } // URL (length: 500)
+        public string Action { get; set; } // Action (length: 500)
+        public string Controller { get; set; } // Controller (length: 500)
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
+        public bool IsDefault { get; set; } // IsDefault
+        public bool IsEnabled { get; set; } // IsEnabled
+        public int? Order { get; set; } // Order
+
+        public Portfolio_ContactLink()
         {
             IsDefault = false;
             IsEnabled = true;
@@ -804,43 +881,9 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // SiteLink
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class SiteLink
-    {
-        public int Id { get; set; } // ID (Primary key)
-        public string DisplayName { get; set; } // DisplayName (length: 50)
-        public string Description { get; set; } // Description (length: 500)
-        public string Directive { get; set; } // Directive (length: 100)
-        public string Url { get; set; } // URL (length: 500)
-        public string Action { get; set; } // Action (length: 500)
-        public string Controller { get; set; } // Controller (length: 500)
-        public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
-        public bool IsDefault { get; set; } // IsDefault
-        public bool IsEnabled { get; set; } // IsEnabled
-        public int ApplicationId { get; set; } // ApplicationID
-        public int? Order { get; set; } // Order
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ApplicationMaster pointed by [SiteLink].([ApplicationId]) (SiteLinks_ApplicationID_Applications_ID)
-        /// </summary>
-        public virtual ApplicationMaster ApplicationMaster { get; set; } // SiteLinks_ApplicationID_Applications_ID
-
-        public SiteLink()
-        {
-            IsDefault = false;
-            IsEnabled = true;
-            InitializePartial();
-        }
-
-        partial void InitializePartial();
-    }
-
     // User
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class User
+    public partial class Security_User
     {
         public int Id { get; set; } // ID (Primary key)
         public string ClientName { get; set; } // ClientName (length: 500)
@@ -851,7 +894,7 @@ namespace devinmajordotcom.Models
         public string Password { get; set; } // Password
         public System.Guid Guid { get; set; } // GUID
 
-        public User()
+        public Security_User()
         {
             IsActive = true;
             IsAdmin = false;
@@ -865,22 +908,88 @@ namespace devinmajordotcom.Models
 
     #region POCO Configuration
 
-    // ApplicationMaster
+    // BannerLink
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class ApplicationMasterConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ApplicationMaster>
+    public partial class LandingPage_BannerLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LandingPage_BannerLink>
     {
-        public ApplicationMasterConfiguration()
-            : this("dbo")
+        public LandingPage_BannerLinkConfiguration()
+            : this("LandingPage")
         {
         }
 
-        public ApplicationMasterConfiguration(string schema)
+        public LandingPage_BannerLinkConfiguration(string schema)
         {
-            ToTable("ApplicationMaster", schema);
+            ToTable("BannerLink", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // Config
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class LandingPage_ConfigConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LandingPage_Config>
+    {
+        public LandingPage_ConfigConfiguration()
+            : this("LandingPage")
+        {
+        }
+
+        public LandingPage_ConfigConfiguration(string schema)
+        {
+            ToTable("Config", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.AppsTitle).HasColumnName(@"AppsTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.AppsIntro).HasColumnName(@"AppsIntro").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.AppsDescription).HasColumnName(@"AppsDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ContactTitle).HasColumnName(@"ContactTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ContactInstructions).HasColumnName(@"ContactInstructions").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ServerStatusTitle).HasColumnName(@"ServerStatusTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ServerStatusDescription).HasColumnName(@"ServerStatusDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // SiteLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class LandingPage_SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LandingPage_SiteLink>
+    {
+        public LandingPage_SiteLinkConfiguration()
+            : this("LandingPage")
+        {
+        }
+
+        public LandingPage_SiteLinkConfiguration(string schema)
+        {
+            ToTable("SiteLink", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
             InitializePartial();
         }
         partial void InitializePartial();
@@ -910,11 +1019,38 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
-            Property(x => x.ApplicationId).HasColumnName(@"ApplicationID").HasColumnType("int").IsRequired();
+            Property(x => x.IsPublic).HasColumnName(@"IsPublic").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
 
-            // Foreign keys
-            HasRequired(a => a.ApplicationMaster).WithMany(b => b.MediaDashboard_SiteLinks).HasForeignKey(c => c.ApplicationId).WillCascadeOnDelete(false); // SiteLinks_ApplicationID_Applications_ID
+    // ContactLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_ContactLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_ContactLink>
+    {
+        public Portfolio_ContactLinkConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_ContactLinkConfiguration(string schema)
+        {
+            ToTable("ContactLink", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1136,50 +1272,16 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // SiteLink
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SiteLink>
-    {
-        public SiteLinkConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public SiteLinkConfiguration(string schema)
-        {
-            ToTable("SiteLink", schema);
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
-            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
-            Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
-            Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
-            Property(x => x.ApplicationId).HasColumnName(@"ApplicationID").HasColumnType("int").IsRequired();
-            Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
-
-            // Foreign keys
-            HasRequired(a => a.ApplicationMaster).WithMany(b => b.SiteLinks).HasForeignKey(c => c.ApplicationId).WillCascadeOnDelete(false); // SiteLinks_ApplicationID_Applications_ID
-            InitializePartial();
-        }
-        partial void InitializePartial();
-    }
-
     // User
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class UserConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<User>
+    public partial class Security_UserConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_User>
     {
-        public UserConfiguration()
-            : this("dbo")
+        public Security_UserConfiguration()
+            : this("Security")
         {
         }
 
-        public UserConfiguration(string schema)
+        public Security_UserConfiguration(string schema)
         {
             ToTable("User", schema);
             HasKey(x => x.Id);

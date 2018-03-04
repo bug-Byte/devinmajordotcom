@@ -58,7 +58,7 @@ namespace devinmajordotcom.Services
                     Blurb = x.Blurb
                 }).FirstOrDefault(),
 
-                ContactSiteLinks = db.SiteLinks.Where(x => x.IsEnabled && x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio).Select(x => new SiteLinkViewModel()
+                ContactSiteLinks = db.Portfolio_ContactLinks.Where(x => x.IsEnabled).Select(x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
@@ -70,9 +70,7 @@ namespace devinmajordotcom.Services
                     IsEnabled = x.IsEnabled,
                     ID = x.Id,
                     URL = x.Url,
-                    Order = x.Order,
-                    ParentApplicationId = x.ApplicationId,
-                    ParentApplicationName = x.ApplicationMaster.Name
+                    Order = x.Order
                 }).ToList(),
 
                 LanguageSkills = db.Portfolio_LanguageSkills.Select(x => new LanguageSkillViewModel()
@@ -303,7 +301,7 @@ namespace devinmajordotcom.Services
         {
             foreach(var contactLink in viewModel.ContactSiteLinks)
             {
-                var linkRecord = db.SiteLinks.FirstOrDefault(x => x.Id == contactLink.ID);
+                var linkRecord = db.Portfolio_ContactLinks.FirstOrDefault(x => x.Id == contactLink.ID);
                 if(linkRecord != null)
                 {
                     linkRecord.DisplayName = contactLink.DisplayName;
@@ -316,11 +314,10 @@ namespace devinmajordotcom.Services
                     linkRecord.Url = contactLink.URL;
                     linkRecord.Order = contactLink.Order;
                     linkRecord.Directive = contactLink.Directive;
-                    linkRecord.ApplicationId = (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio;
                 }
                 else
                 {
-                    var newLinkRecord = new SiteLink()
+                    var newLinkRecord = new Portfolio_ContactLink()
                     {
                         DisplayName = contactLink.DisplayName,
                         DisplayIcon = contactLink.DisplayIcon,
@@ -331,10 +328,9 @@ namespace devinmajordotcom.Services
                         IsEnabled = contactLink.IsEnabled,
                         Url = contactLink.URL,
                         Order = contactLink.Order,
-                        Directive = contactLink.Directive,
-                        ApplicationId = (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.ProfessionalPortfolio
+                        Directive = contactLink.Directive
                     };
-                    db.SiteLinks.Add(newLinkRecord);
+                    db.Portfolio_ContactLinks.Add(newLinkRecord);
                 }
             }
         }

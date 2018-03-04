@@ -40,18 +40,29 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-6 text-center">
+            <div class="col-sm-4 text-center">
                 <div class="form-group">
                     <div class="checkbox-inline">
                         <label class="switch">
                             <input class="newLinkInput check-box" data-val="true" data-val-required="The IsDefault field is required." id="SidebarLinks_{{newID}}__IsDefault" name="SidebarLinks[{{newID}}].IsDefault" type="checkbox" value="true"><input class="newLinkInput" name="SidebarLinks[{{newID}}].IsDefault" type="hidden" value="false">
                             <div class="slider round"></div>
                         </label>
-                        <label class="newLinkInput" for="SidebarLinks_{{newID}}__IsDefault" style="font-weight: normal; margin-bottom: 0px;">Is Default Link?</label>
+                        <label class="newLinkInput" for="SidebarLinks_{{newID}}__IsDefault" style="font-weight: normal; margin-bottom: 0px;">Is the Default Link?</label>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 text-center">
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input class="newLinkInput check-box" data-val="true" data-val-required="The IsPublic field is required." id="SidebarLinks_{{newID}}__IsPublic" name="SidebarLinks[{{newID}}].IsPublic" type="checkbox" value="true"><input class="newLinkInput" name="SidebarLinks[{{newID}}].IsPublic" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label class="newLinkInput" for="SidebarLinks_{{newID}}__IsPublic" style="font-weight: normal; margin-bottom: 0px;">Is Link Public?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
                 <div class="form-group">
                     <div class="checkbox-inline">
                         <label class="switch">

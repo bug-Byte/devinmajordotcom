@@ -1,0 +1,41 @@
+﻿@model devinmajordotcom.ViewModels.ContactEmailViewModel
+@using (Ajax.BeginForm("DropMeALine", "Home", new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.RecipientEmail)
+    @Html.HiddenFor(x => x.RecipientName)
+
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.TextBoxFor(x => x.SenderName, new { @class = "form-control", @placeholder = "Your Name" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(x => x.SenderEmailAddress, new { @class = "form-control", @placeholder = "Your Email" })
+        </div>
+    </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", @placeholder = "Your Subject" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.TextAreaFor(x => x.Content, new { @class = "form-control", @placeholder = "Your Very Important Message", @rows = "6" })
+            </div>
+        </div>
+        <br />
+
+
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <input class="form-control" id="sendEmail" type="submit" value="SHOOT ME AN EMAIL">
+            </div>
+        </div>
+        <br />
+}

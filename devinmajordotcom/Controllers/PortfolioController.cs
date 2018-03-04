@@ -8,15 +8,8 @@ using System.Web.Mvc;
 
 namespace devinmajordotcom.Controllers
 {
-    public class PortfolioController : Controller
+    public class PortfolioController : BaseController
     {
-
-        public IPortfolioService portfolioService;
-
-        public PortfolioController(IPortfolioService PortfolioService)
-        {
-            portfolioService = PortfolioService;
-        }
 
         public ActionResult Index()
         {

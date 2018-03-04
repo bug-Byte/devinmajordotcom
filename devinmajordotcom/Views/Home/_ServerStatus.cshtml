@@ -1,11 +1,12 @@
-﻿<div style="display:none;" class="inner cover" id="server">
+﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+<div style="display:none;" class="inner cover" id="server">
 
     @*<h1 class="cover-heading">This is My Server...</h1>
     <p class="lead" style="color: #71cef5;">Watch the live feed of statistics below, and marvel at the beauty of my server.</p>*@
 
-    <h2 class="title"><strong>This Website is Brought To You By...</strong></h2>
+    <h2 class="title"><strong>@Model.Config.ServerStatusTitle</strong></h2>
     <hr>
-    <p style="color: #71cef5;">Watch the live feed of statistics below, and marvel at the beauty of my server.</p>
+    <p style="color: #71cef5;">@Model.Config.ServerStatusDescription</p>
     <hr>
 
     <div class="row">

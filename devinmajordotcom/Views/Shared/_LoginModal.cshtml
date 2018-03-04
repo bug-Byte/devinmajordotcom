@@ -1,5 +1,7 @@
 ﻿@model devinmajordotcom.ViewModels.UserViewModel
-
+@{ 
+    var controllerName = (string)ViewBag.ControllerName;
+}
 <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content modal-popup">
@@ -28,7 +30,7 @@
                             <!-- TAB PANES -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="sign_in">
-                                    @using (Ajax.BeginForm("AdminLogin", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal", OnFailure = "" }))
+                                    @using (Ajax.BeginForm("AdminLogin", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         <div class="row">

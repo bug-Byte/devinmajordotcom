@@ -90,7 +90,7 @@ function HideAdminFirstRunModal() {
 
 function HideLoginModal() {
     $('#LoginModal').modal('hide');
-    $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a>App Manager</a></li>');
+    $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a>Settings</a></li>');
     $('#appmanager').fadeIn(500);
 }
 

@@ -1,33 +1,41 @@
 ﻿@using Newtonsoft.Json
+@using devinmajordotcom.ViewModels
 @model devinmajordotcom.ViewModels.MainLandingPageViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ControllerName = ViewBag.ControllerName;
 }
 
-@Html.Partial("_Apps", Model.LandingPageApplicationLinks)
+<div id="mainContainer">
 
-@Html.Partial("_ServerStatus")
+    @Html.Partial("_Apps", Model)
 
-@Html.Partial("_ContactContent", Model.ContactEmailData)
+    @Html.Partial("_ServerStatus", Model)
 
-@Html.Partial("_ApplicationManager", Model.CurrentApplicationData)
+    @Html.Partial("_ContactContent", Model)
 
-@if (!Model.CurrentUserViewModel.UserIsAdmin || !Model.CurrentUserViewModel.UserIsActive)
-{
-    @section scripts {
-        <script>
+    @Html.Partial("_ApplicationManager", Model.CurrentApplicationConfig)
+
+
+    @if (!Model.CurrentUserViewModel.UserIsAdmin || !Model.CurrentUserViewModel.UserIsActive)
+    {
+        @section scripts {
+            <script>
             var html = '@Html.Raw(@Html.Partial("_LoginModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
             $('body').append(html);
-        </script>
+            </script>
+        }
     }
-}
 
-@if(String.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive) {
-    @section scripts {
-        <script>
+    @if (String.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
+    {
+        @section scripts {
+            <script>
             var html = '@Html.Raw(@Html.Partial("_AdminFirstRunModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
             $('body').append(html);
             $("#adminFirstRunFormModal").modal();
-        </script>
+            </script>
+        }
     }
-}
+
+</div>

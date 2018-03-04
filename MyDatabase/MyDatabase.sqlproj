@@ -108,26 +108,16 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
     <Folder Include="Portfolio\" />
     <Folder Include="Portfolio\Tables\" />
-    <Folder Include="Security\" />
     <Folder Include="MediaDashboard" />
     <Folder Include="MediaDashboard\Tables" />
+    <Folder Include="LandingPage" />
+    <Folder Include="LandingPage\Tables" />
+    <Folder Include="Security" />
+    <Folder Include="Security\Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\User.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\ApplicationMaster.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\SiteLink.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="Portfolio\Tables\Profile.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -152,7 +142,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\Portfolio.sql" />
     <Build Include="Portfolio\Tables\LanguageSkill.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -161,11 +150,19 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\MediaDashboard.sql" />
     <Build Include="MediaDashboard\Tables\SiteLink.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="LandingPage\Tables\SiteLink.sql" />
+    <Build Include="Security\Tables\User.sql" />
+    <Build Include="LandingPage\Tables\BannerLink.sql" />
+    <Build Include="dbo\LandingPage.sql" />
+    <Build Include="dbo\MediaDashboard.sql" />
+    <Build Include="dbo\Portfolio.sql" />
+    <Build Include="dbo\Security.sql" />
+    <Build Include="Portfolio\Tables\ContactLink.sql" />
+    <Build Include="LandingPage\Tables\Config.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.001.PostDeployment.AddTestData.sql" />

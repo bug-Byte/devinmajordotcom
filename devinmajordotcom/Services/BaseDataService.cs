@@ -33,8 +33,19 @@ namespace devinmajordotcom.Services
                 throw new Exception("Unauthorized User", new UnauthorizedAccessException());
             }
 
-            HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;
+            if (HttpContext.Current.Session["MainPageUserAuthID"] == null || (Guid)HttpContext.Current.Session["MainPageUserAuthID"] != results.User.GUID)
+            {
+                HttpContext.Current.Session.Timeout = 86400;
+                HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;
+                HttpContext.Current.Session["MainPageUserName"] = results.User.UserName;
+            }
             return results.User;
+        }
+
+        public void Logout()
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
         }
 
         public UserValidationViewModel ValidateCredentials(string emailAddress, string password , string userName = null)
@@ -45,7 +56,7 @@ namespace devinmajordotcom.Services
                 User = new UserViewModel()
             };
 
-            var user = db.Users.Where(x => string.IsNullOrEmpty(userName)
+            var user = db.Security_Users.Where(x => string.IsNullOrEmpty(userName)
                 ? x.EmailAddress == emailAddress
                 : x.UserName == userName).Select(x => new UserViewModel()
             {
@@ -68,7 +79,7 @@ namespace devinmajordotcom.Services
 
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
-            var user = db.Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
+            var user = db.Security_Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
             if (user != null)
             {
                 user.EmailAddress = viewModel.EmailAddress;
@@ -84,7 +95,7 @@ namespace devinmajordotcom.Services
             }
         }
 
-        public User AddNewUser(bool IsUserToAddAnAdmin = false)
+        public Security_User AddNewUser(bool IsUserToAddAnAdmin = false)
         {
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             var userGuid = HttpContext.Current.Session["MainPageUserAuthID"];
@@ -97,7 +108,7 @@ namespace devinmajordotcom.Services
                 ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
 
-            var newUser = new User()
+            var newUser = new Security_User()
             {
                 ClientName = ip,
                 EmailAddress = "",
@@ -106,7 +117,7 @@ namespace devinmajordotcom.Services
                 IsAdmin = IsUserToAddAnAdmin
             };
 
-            db.Users.Add(newUser);
+            db.Security_Users.Add(newUser);
             db.SaveChanges();
 
             return newUser;
@@ -114,7 +125,7 @@ namespace devinmajordotcom.Services
 
         public UserViewModel GetCurrentUser(Guid? GUID = null)
         {
-            return db.Users.Where(x => x.Guid == GUID).Select(x => new UserViewModel()
+            return db.Security_Users.Where(x => x.Guid == GUID).Select(x => new UserViewModel()
             {
                 EmailAddress = x.EmailAddress,
                 GUID = x.Guid,

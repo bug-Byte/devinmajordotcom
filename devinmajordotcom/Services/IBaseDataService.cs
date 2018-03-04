@@ -14,11 +14,13 @@ namespace devinmajordotcom.Services
 
         UserViewModel Login(UserViewModel viewModel, bool IsAdmin = false);
 
+        void Logout();
+
         UserValidationViewModel ValidateCredentials(string emailAddress, string password, string userName = null);
 
         void UpdateCurrentUser(UserViewModel viewModel);
 
-        User AddNewUser(bool IsUserToAddAnAdmin = false);
+        Security_User AddNewUser(bool IsUserToAddAnAdmin = false);
 
         UserViewModel GetCurrentUser(Guid? GUID = null);
 

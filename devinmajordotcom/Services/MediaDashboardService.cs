@@ -7,7 +7,7 @@ using System.Web;
 
 namespace devinmajordotcom.Services
 {
-    public class MediaDashboardService : IMediaDashboardService
+    public class MediaDashboardService : BaseDataService, IMediaDashboardService
     {
 
         protected dbContext db;
@@ -19,23 +19,30 @@ namespace devinmajordotcom.Services
 
         public MediaDashboardViewModel GetMediaDashboardViewModel()
         {
+            var guid = HttpContext.Current.Session["MainPageUserAuthID"];
+
+            if (guid == null)
+            {
+                guid = AddNewUser().Guid;
+            }
+
             return new MediaDashboardViewModel()
             {
-                SidebarLinks = db.MediaDashboard_SiteLinks.Where(x => x.ApplicationId == (int)Devinmajordotcom.ApplicationMaster.ApplicationMasters.PlexMediaDashboard).Select( x => new SiteLinkViewModel()
+                CurrentUserViewModel = GetCurrentUser((Guid)guid),
+                SidebarLinks = db.MediaDashboard_SiteLinks.Select( x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
                     Action = x.Action,
                     Controller = x.Controller,
                     Description = x.Description,
+                    IsPublic = x.IsPublic,
                     IsDefault = x.IsDefault,
                     IsEnabled = x.IsEnabled,
                     ID = x.Id,
                     URL = x.Url,
-                    Order = x.Order,
-                    ParentApplicationId = x.ApplicationId,
-                    ParentApplicationName = x.ApplicationMaster.Name
-                }).OrderByDescending(x => x.IsDefault).ToList()
+                    Order = x.Order
+                }).OrderBy(x => x.Order).ToList()
             };
         }
 
@@ -56,9 +63,9 @@ namespace devinmajordotcom.Services
                         linkRecord.Controller = link.Controller;
                         linkRecord.DisplayIcon = link.DisplayIcon;
                         linkRecord.Order = link.Order;
+                        linkRecord.IsPublic = link.IsPublic;
                         linkRecord.IsDefault = link.IsDefault;
                         linkRecord.IsEnabled = link.IsEnabled;
-                        linkRecord.ApplicationId = link.ParentApplicationId;
                     }
                     else
                     {
@@ -73,8 +80,8 @@ namespace devinmajordotcom.Services
                             DisplayIcon = link.DisplayIcon,
                             Order = link.Order,
                             IsDefault = link.IsDefault,
-                            IsEnabled = link.IsEnabled,
-                            ApplicationId = link.ParentApplicationId
+                            IsPublic = link.IsPublic,
+                            IsEnabled = link.IsEnabled
                         };
                         db.MediaDashboard_SiteLinks.Add(newLinkRecord);
                     }

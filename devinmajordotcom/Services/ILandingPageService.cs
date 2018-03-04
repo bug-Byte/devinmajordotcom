@@ -1,4 +1,5 @@
-﻿using devinmajordotcom.ViewModels;
+﻿using devinmajordotcom.Models;
+using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,15 @@ namespace devinmajordotcom.Services
 
         MainLandingPageViewModel GetLandingPageViewModel();
 
-        List<SiteLinkViewModel> GetMainSiteLinks();
+        ApplicationConfigViewModel GetAppConfigData(Security_User admin = null);
 
-        List<SiteLinkViewModel> GetMediaSiteLinks();
+        void ManageLandingPage(MainLandingPageViewModel viewModel);
+
+        List<SiteLinkViewModel> GetMainSiteLinks(bool isRetrievingSettings = false);
+
+        List<SiteLinkViewModel> GetMediaSiteLinks(bool isRetrievingSettings = false);
+
+        List<SiteLinkViewModel> GetMainBannerLinks(bool isRetrievingSettings = false);
 
         string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
 

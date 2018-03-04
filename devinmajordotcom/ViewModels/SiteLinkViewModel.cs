@@ -29,6 +29,8 @@ namespace devinmajordotcom.ViewModels
 
         public bool IsDefault { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public bool IsEnabled { get; set; }
 
         public int ParentApplicationId { get; set; }

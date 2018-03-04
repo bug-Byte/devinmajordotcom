@@ -12,17 +12,6 @@ Post-Deployment Script Template
 
 BEGIN TRANSACTION
 
-INSERT INTO [dbo].[ApplicationMaster]
-(
-	[Name]
-)
-VALUES
-	('Main Landing Page'),
-	('My Custom Homepage'),
-	('Plex Media Dashboard'),
-	('Professional Portfolio');
-GO
-
 --TODO: REPLACE ALL LINKS BELOW WITH BETTER TEST DATA
 
 INSERT INTO [MediaDashboard].[SiteLink]
@@ -36,7 +25,7 @@ INSERT INTO [MediaDashboard].[SiteLink]
 	DisplayIcon,
 	IsDefault,
 	IsEnabled,
-	ApplicationID,
+	IsPublic,
 	[Order]
 )
 VALUES
@@ -44,83 +33,144 @@ VALUES
 	'Plex',
 	NULL,
 	NULL,
-	'http://70.76.54.169:32400/web/index.html',
+	'http://www.plex.tv/',
 	NULL,
 	NULL,
 	'fa-dashboard',
 	1,
 	1,
-	3,
+	1,
 	1
 ),
 (
 	'Requests',
 	NULL,
 	NULL,
-	'http://70.76.54.169:3579',
+	'https://github.com/tidusjar/Ombi',
 	NULL,
 	NULL,
 	'fa-search',
 	0,
 	1,
-	3,
+	1,
 	2
 ),
 (
 	'CouchPotato',
 	NULL,
 	NULL,
-	'http://70.76.54.169:5050',
+	'https://couchpota.to/',
 	NULL,
 	NULL,
 	'fa-film',
 	0,
 	1,
-	3,
+	0,
 	3
 ),
 (
 	'Sonarr',
 	NULL,
 	NULL,
-	'http://70.76.54.169:8989',
+	'https://sonarr.tv/',
 	NULL,
 	NULL,
 	'fa-desktop',
 	0,
 	1,
-	3,
+	0,
 	4
 ),
 (
 	'Headphones',
 	NULL,
 	NULL,
-	'http://70.76.54.169:7171/home',
+	'https://github.com/rembo10/headphones',
 	NULL,
 	NULL,
 	'fa-headphones',
 	0,
 	1,
-	3,
+	0,
 	5
 ),
 (
 	'Deluge',
 	NULL,
 	NULL,
-	'http://70.76.54.169:8112',
+	'http://deluge-torrent.org/',
 	NULL,
 	NULL,
 	'fa-database',
 	0,
 	1,
-	3,
+	0,
 	6
+),
+(
+	'Tautulli',
+	NULL,
+	NULL,
+	'https://github.com/Tautulli/Tautulli',
+	NULL,
+	NULL,
+	'fa-play',
+	0,
+	1,
+	0,
+	7
+),
+(
+	'Jackett',
+	NULL,
+	NULL,
+	'https://github.com/Jackett/Jackett',
+	NULL,
+	NULL,
+	'fa-bullhorn',
+	0,
+	1,
+	0,
+	8
+),
+(
+	'KodExplorer',
+	NULL,
+	NULL,
+	'https://github.com/kalcaddle/KodExplorer',
+	NULL,
+	NULL,
+	'fa-hdd-o',
+	0,
+	1,
+	0,
+	9
 );
 GO
 
-INSERT INTO [dbo].[SiteLink]
+INSERT INTO [LandingPage].[Config]
+(
+	AppsTitle,
+	AppsIntro,
+	AppsDescription,
+	ContactTitle,
+	ContactInstructions,
+	ServerStatusTitle,
+	ServerStatusDescription
+)
+VALUES
+(
+	'Welcome, Fellow Humans!',
+	'You''ve reached the coolest corner of the Internet!',
+	'Feel free to click one of the applications below for more fun... you never know what you''ll find!',
+	'Drop Me a Line',
+	'If you''d like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I''ll take it from there!',
+	'This Website is Brought To You By...',
+	'Watch the live feed of statistics below, and marvel at the beauty of my server.'
+);
+GO
+
+INSERT INTO [LandingPage].[SiteLink]
 (
 	DisplayName,
 	[Description],
@@ -131,7 +181,6 @@ INSERT INTO [dbo].[SiteLink]
 	DisplayIcon,
 	IsDefault,
 	IsEnabled,
-	ApplicationID,
 	[Order]
 )
 VALUES
@@ -145,7 +194,6 @@ VALUES
 	'glyphicon glyphicon-dashboard',
 	0,
 	1,
-	1,
 	1
 ),
 (
@@ -157,7 +205,6 @@ VALUES
 	'MediaDashboard',
 	'glyphicon glyphicon-film',
 	0,
-	1,
 	1,
 	2
 ),
@@ -171,9 +218,74 @@ VALUES
 	'glyphicon glyphicon-user',
 	0,
 	1,
+	3
+);
+
+INSERT INTO [LandingPage].[BannerLink]
+(
+	DisplayName,
+	[Description],
+	[Directive],
+	[URL],
+	[Action],
+	[Controller],
+	DisplayIcon,
+	IsDefault,
+	IsEnabled,
+	[Order]
+)
+VALUES
+(
+	'Home & Apps', 
+	NULL,
+	NULL,
+	'#home',
+	'Index',
+	'MyHome',
+	NULL,
+	1,
+	1,
+	1
+),
+(
+	'Server Status', 
+	NULL,
+	NULL,
+	'#server',
+	'Index',
+	'MediaDashboard',
+	NULL,
+	0,
+	1,
+	2
+),
+(
+	'Contact Me', 
+	NULL,
+	NULL,
+	'#contact',
+	'Index',
+	'Portfolio',
+	NULL,
+	0,
 	1,
 	3
-),
+);
+
+INSERT INTO [Portfolio].[ContactLink]
+(
+	DisplayName,
+	[Description],
+	[Directive],
+	[URL],
+	[Action],
+	[Controller],
+	DisplayIcon,
+	IsDefault,
+	IsEnabled,
+	[Order]
+)
+VALUES
 (
 	'Facebook',
 	NULL,
@@ -184,7 +296,6 @@ VALUES
 	'fa fa-facebook',
 	0,
 	1,
-	4,
 	1
 ),
 (
@@ -197,7 +308,6 @@ VALUES
 	'fa fa-reddit',
 	0,
 	1,
-	4,
 	2
 ),
 (
@@ -210,7 +320,6 @@ VALUES
 	'fa fa-github',
 	0,
 	1,
-	4,
 	3
 );
 GO
