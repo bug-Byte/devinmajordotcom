@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -42,18 +43,25 @@ namespace devinmajordotcom.ViewModels
 
         public int ID { get; set; }
 
+        [DisplayName("Link Title : ")]
         public string AppsTitle { get; set; }
 
+        [DisplayName("Link Introduction : ")]
         public string AppsIntro { get; set; }
 
+        [DisplayName("Link Description : ")]
         public string AppsDescription { get; set; }
 
+        [DisplayName("Link Title : ")]
         public string ContactTitle { get; set; }
 
+        [DisplayName("Link Instructions : ")]
         public string ContactInstructions { get; set; }
 
+        [DisplayName("Link Title : ")]
         public string ServerStatusTitle { get; set; }
 
+        [DisplayName("Link Description : ")]
         public string ServerStatusDescription { get; set; }
 
     }

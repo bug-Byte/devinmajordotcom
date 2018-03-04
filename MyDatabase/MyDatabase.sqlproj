@@ -116,6 +116,7 @@
     <Folder Include="LandingPage\Tables" />
     <Folder Include="Security" />
     <Folder Include="Security\Tables" />
+    <Folder Include="MyHome" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Portfolio\Tables\Profile.sql">
@@ -163,10 +164,16 @@
     <Build Include="dbo\Security.sql" />
     <Build Include="Portfolio\Tables\ContactLink.sql" />
     <Build Include="LandingPage\Tables\Config.sql" />
+    <Build Include="MyHome\UserConfig.sql" />
+    <Build Include="dbo\MyHome.sql" />
+    <Build Include="MyHome\SiteLink.sql" />
+    <Build Include="MyHome\BlogPost.sql" />
+    <Build Include="MyHome\BlogPostComment.sql" />
+    <None Include="Script.002.PostDeployment.AddAuditingStuff.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Script.001.PostDeployment.AddTestData.sql" />
-    <None Include="Script.PostDeployment.Start.sql" />
+    <None Include="Script.001.PostDeployment.AddTestData.sql" />
+    <PostDeploy Include="Script.PostDeployment.Start.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MyDatabase.refactorlog" />

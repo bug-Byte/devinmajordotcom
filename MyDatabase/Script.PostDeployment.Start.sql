@@ -11,3 +11,4 @@ Post-Deployment Script Template
 */
 --start the process for the other tables
 :r .\Script.001.PostDeployment.AddTestData.sql
+:r .\Script.002.PostDeployment.AddAuditingStuff.sql

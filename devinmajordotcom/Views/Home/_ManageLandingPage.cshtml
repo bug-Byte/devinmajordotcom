@@ -1,6 +1,6 @@
 ﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
 @{
-
+    var count = 0;
 }
 
 @using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "" }))
@@ -10,7 +10,9 @@
         <hr>
         <div class="settingsContainer">
 
-            <div class="material-panel">
+            @*<div class="card card-2">
+                <h4 class="card-title text-center">Manage Application Links</h4>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
 
@@ -25,6 +27,133 @@
                         </div>
                     </div>
                 </div>
+            </div>*@
+
+            @foreach(var link in Model.LandingPageBannerLinks)
+            {
+                <div class="card card-2">
+                    @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].DisplayName, new { @class = "form-control card-title text-center", @style= "font-weight:bold;font-size: 16px;" })
+                    <div class="card-body">
+
+                        <hr/>
+
+                        <div class="row">
+                            <div class="col-sm-12 text-left">
+                                <div class="form-group">
+                                    <div class="checkbox-inline">
+                                        <label class="switch">
+                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsDefault, new { @class = "trendClick" })
+                                            <div class="slider round"></div>
+                                        </label>
+                                        @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-left">
+                                <div class="form-group">
+                                    <div class="checkbox-inline">
+                                        <label class="switch">
+                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsEnabled, new { @class = "trendClick" })
+                                            <div class="slider round"></div>
+                                        </label>
+                                        @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        @if (link.DisplayName == "Home & Apps")
+                        {
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.AppsTitle, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.AppsTitle, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.AppsIntro, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.AppsIntro, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.AppsDescription, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.AppsDescription, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
+                        else if (link.DisplayName == "Server Status")
+                        {
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-dashboard"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.ServerStatusTitle, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.ServerStatusTitle, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-dashboard"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.ServerStatusDescription, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.ServerStatusDescription, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
+                        else if (link.DisplayName == "Contact Me")
+                        {
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.ContactTitle, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.ContactTitle, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                    &nbsp;
+                                    @Html.LabelFor(x => x.Config.ContactInstructions, new { @style = "font-weight:normal;" })
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(x => x.Config.ContactInstructions, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                count++;
+            }
 
         </div>
     </div>

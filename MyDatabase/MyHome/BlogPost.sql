@@ -1,0 +1,11 @@
+﻿CREATE TABLE [MyHome].[BlogPost]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL,
+	UserID INT NOT NULL,
+	[Image] VARBINARY(MAX) NULL,
+	Title VARCHAR(MAX) NULL,
+	Body VARCHAR(MAX) NULL,
+	PRIMARY KEY(Id),
+	CONSTRAINT MyHome_BlogPost_UserID_Security_User_Id
+	FOREIGN KEY(UserID) REFERENCES [Security].[User](ID)
+)
