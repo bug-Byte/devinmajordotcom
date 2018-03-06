@@ -5,7 +5,7 @@
 
 @using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "" }))
 {
-    <div class="appContainer work-wrapper" id="mainSettingsContainer">
+    <div class="appContainer work-wrapper" style="background:transparent;" id="mainSettingsContainer">
         <h3>Landing Page Settings</h3>
         <hr>
         <div class="settingsContainer">
