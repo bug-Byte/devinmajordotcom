@@ -452,7 +452,8 @@ body {
 .site-wrapper-inner {
   display: table-cell;
   vertical-align: top;
-
+  z-index: 200;
+  position: relative;
 }
 
 .panel, .panel-body {
@@ -485,6 +486,7 @@ body {
 .cover-container {
   margin-right: auto;
   margin-left: auto;
+    z-index: 201;
 }
 
 /* Padding for spacing */
