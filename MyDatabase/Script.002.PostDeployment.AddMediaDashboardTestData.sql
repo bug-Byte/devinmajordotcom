@@ -1,0 +1,151 @@
+﻿/*
+Post-Deployment Script Template							
+--------------------------------------------------------------------------------------
+ This file contains SQL statements that will be appended to the build script.		
+ Use SQLCMD syntax to include a file in the post-deployment script.			
+ Example:      :r .\myfile.sql								
+ Use SQLCMD syntax to reference a variable in the post-deployment script.		
+ Example:      :setvar TableName MyTable							
+               SELECT * FROM [$(TableName)]					
+--------------------------------------------------------------------------------------
+*/
+
+BEGIN TRANSACTION
+
+--TODO: REPLACE ALL LINKS BELOW WITH BETTER TEST DATA
+
+INSERT INTO [MediaDashboard].[SiteLink]
+(
+	DisplayName,
+	[Description],
+	[Directive],
+	[URL],
+	[Action],
+	[Controller],
+	DisplayIcon,
+	IsDefault,
+	IsEnabled,
+	IsPublic,
+	[Order]
+)
+VALUES
+(
+	'Plex',
+	NULL,
+	NULL,
+	'http://www.plex.tv/',
+	NULL,
+	NULL,
+	'fa-dashboard',
+	1,
+	1,
+	1,
+	1
+),
+(
+	'Requests',
+	NULL,
+	NULL,
+	'https://github.com/tidusjar/Ombi',
+	NULL,
+	NULL,
+	'fa-search',
+	0,
+	1,
+	1,
+	2
+),
+(
+	'CouchPotato',
+	NULL,
+	NULL,
+	'https://couchpota.to/',
+	NULL,
+	NULL,
+	'fa-film',
+	0,
+	1,
+	0,
+	3
+),
+(
+	'Sonarr',
+	NULL,
+	NULL,
+	'https://sonarr.tv/',
+	NULL,
+	NULL,
+	'fa-desktop',
+	0,
+	1,
+	0,
+	4
+),
+(
+	'Headphones',
+	NULL,
+	NULL,
+	'https://github.com/rembo10/headphones',
+	NULL,
+	NULL,
+	'fa-headphones',
+	0,
+	1,
+	0,
+	5
+),
+(
+	'Deluge',
+	NULL,
+	NULL,
+	'http://deluge-torrent.org/',
+	NULL,
+	NULL,
+	'fa-database',
+	0,
+	1,
+	0,
+	6
+),
+(
+	'Tautulli',
+	NULL,
+	NULL,
+	'https://github.com/Tautulli/Tautulli',
+	NULL,
+	NULL,
+	'fa-play',
+	0,
+	1,
+	0,
+	7
+),
+(
+	'Jackett',
+	NULL,
+	NULL,
+	'https://github.com/Jackett/Jackett',
+	NULL,
+	NULL,
+	'fa-bullhorn',
+	0,
+	1,
+	0,
+	8
+),
+(
+	'KodExplorer',
+	NULL,
+	NULL,
+	'https://github.com/kalcaddle/KodExplorer',
+	NULL,
+	NULL,
+	'fa-hdd-o',
+	0,
+	1,
+	0,
+	9
+);
+GO
+
+COMMIT

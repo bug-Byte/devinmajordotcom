@@ -10,6 +10,7 @@
     [DisplayIcon]   NVARCHAR (500) NULL,
     [IsDefault]     BIT            DEFAULT ((0)) NOT NULL,
     [IsEnabled]     BIT            DEFAULT ((1)) NOT NULL,
+	[Image] VARBINARY(MAX) NULL,
     [Order]         INT            NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT MyHome_SiteLink_UserID_Security_User_Id

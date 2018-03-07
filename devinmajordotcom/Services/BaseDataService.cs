@@ -120,6 +120,11 @@ namespace devinmajordotcom.Services
             db.Security_Users.Add(newUser);
             db.SaveChanges();
 
+            if(IsUserToAddAnAdmin)
+            {
+                var testMyHomeLinks = db.My
+            }
+
             return newUser;
         }
 

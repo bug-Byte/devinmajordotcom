@@ -169,10 +169,12 @@
     <Build Include="MyHome\SiteLink.sql" />
     <Build Include="MyHome\BlogPost.sql" />
     <Build Include="MyHome\BlogPostComment.sql" />
-    <None Include="Script.002.PostDeployment.AddAuditingStuff.sql" />
+    <None Include="Script.099.PostDeployment.AddAuditingStuff.sql" />
+    <None Include="Script.002.PostDeployment.AddMediaDashboardTestData.sql" />
+    <None Include="Script.004.PostDeployment.AddMyHomeTestData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Script.001.PostDeployment.AddTestData.sql" />
+    <None Include="Script.001.PostDeployment.AddMainTestData.sql" />
     <PostDeploy Include="Script.PostDeployment.Start.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -180,5 +182,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MyDatabase.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Script.003.PostDeployment.AddPortfolioTestData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="ProjectLocation">
+      <DefaultValue>A:\Documents\GitHub\devinmajordotcom</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

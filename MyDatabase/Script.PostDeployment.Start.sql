@@ -10,5 +10,8 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 --start the process for the other tables
-:r .\Script.001.PostDeployment.AddTestData.sql
-:r .\Script.002.PostDeployment.AddAuditingStuff.sql
+:r .\Script.001.PostDeployment.AddMainTestData.sql
+:r .\Script.002.PostDeployment.AddMediaDashboardTestData.sql
+:r .\Script.003.PostDeployment.AddPortfolioTestData.sql
+:r .\Script.004.PostDeployment.AddMyHomeTestData.sql
+:r .\Script.099.PostDeployment.AddAuditingStuff.sql
