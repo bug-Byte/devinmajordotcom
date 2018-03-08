@@ -34,44 +34,31 @@ VALUES
 );
 GO
 
-DECLARE @Path VARCHAR(MAX) = [$(ProjectLocation)];
-DECLARE @GuestUserID INT = (SELECT ID FROM [Security].[User] WHERE UserName='Guest' AND ClientName='::1' AND IsActive=0);
+DECLARE @Path VARCHAR(MAX) = 'C:\Users\dmajor\Documents\GitHub\devinmajordotcom';
+DECLARE @Links TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [URL] VARCHAR(MAX) NOT NULL);
+DECLARE @Counter1 INT = 1;
 
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\facebook.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
+INSERT INTO @Links([Name], [ImgPathName], [URL]) 
+VALUES 
+('Facebook', 'facebook.png', 'https://www.facebook.com'), 
+('Reddit', 'reddit.png', 'https://www.reddit.com/'), 
+('YouTube', 'youtube.png', 'https://www.youtube.com/'), 
+('Slack', 'slack.png', 'https://slack.com/'), 
+('GitHub', 'github.png', 'https://github.com/'), 
+('Plex Media Dashboard', 'plex.jpg', 'http://www.devinmajor.com/MediaDashboard'), 
+('Outlook', 'outlook.jpg', 'https://outlook.live.com/owa/'), 
+('Newegg', 'newegg.jpg', 'https://www.newegg.ca/'), 
+('Amazon', 'amazon2.png', 'https://www.amazon.ca/');
 
-DECLARE @RedditImageQuery NVARCHAR(MAX) = CONCAT('SELECT @redImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @RedditImage VARBINARY(MAX);
-exec sp_executesql @RedditImageQuery, N'@redImage VARBINARY(MAX) OUTPUT', @redImage=@RedditImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @slackImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\slack.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@slackImage VARBINARY(MAX) OUTPUT', @slackImage=@FacebookImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
-
-DECLARE @FacebookImageQuery NVARCHAR(MAX) = CONCAT('SELECT @FbImage = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\reddit.png'', SINGLE_BLOB) AS [Image])');
-DECLARE @FacebookImage VARBINARY(MAX);
-exec sp_executesql @FacebookImageQuery, N'@FbImage VARBINARY(MAX) OUTPUT', @FbImage=@FacebookImage OUTPUT;
+WHILE(@Counter1 <= (SELECT MAX(ID) FROM @Links))
+BEGIN	
+	DECLARE @ImageName VARCHAR(MAX) = (SELECT [ImgPathName] FROM @Links WHERE ID = @Counter1);
+	DECLARE @ImageQuery NVARCHAR(MAX) = CONCAT('SELECT @img = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\', @ImageName, ''', SINGLE_BLOB) AS [Image])');
+	DECLARE @Image VARBINARY(MAX);	
+	EXEC sp_executesql @ImageQuery, N'@img VARBINARY(MAX) OUTPUT', @img=@Image OUTPUT;
+	UPDATE @Links SET [Img] = @Image WHERE ID = @Counter1;
+	SET @Counter1 = @Counter1 + 1;
+END
 
 INSERT INTO [MyHome].[SiteLink]
 (
@@ -88,132 +75,21 @@ INSERT INTO [MyHome].[SiteLink]
 	,[Image]
     ,[Order]
 )
-VALUES
 (
-	@GuestUserID,
-	'Facebook',
-	NULL,
-	NULL,
-	'https://www.facebook.com/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT @FacebookImage),
-	1
-),
-(
-	@GuestUserID,
-	'Reddit',
-	NULL,
-	NULL,
-	'https://www.reddit.com/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\reddit.png', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'YouTube',
-	NULL,
-	NULL,
-	'https://www.youtube.com/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\youtube.png', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'Plex Media Dashboard',
-	NULL,
-	NULL,
-	'http://www.devinmajor.com/MediaDashboard',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\plex.jpg', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'Slack',
-	NULL,
-	NULL,
-	'https://slack.com/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\slack.png', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'GitHub',
-	NULL,
-	NULL,
-	'https://github.com/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\github.png', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'Newegg',
-	NULL,
-	NULL,
-	'https://www.newegg.ca/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\newegg.jpg', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'Amazon',
-	NULL,
-	NULL,
-	'https://www.amazon.ca/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\amazon2.png', SINGLE_BLOB) AS [Image]),
-	1
-),
-(
-	@GuestUserID,
-	'Outlook',
-	NULL,
-	NULL,
-	'https://outlook.live.com/owa/',
-	NULL,
-	NULL,
-	NULL,
-	0,
-	1,
-	(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\HomeImages\outlook.jpg', SINGLE_BLOB) AS [Image]),
-	1
+	SELECT 
+		@GuestUserID,
+		t.Name,
+		NULL,
+		NULL,
+		t.[URL],
+		NULL,
+		NULL,
+		NULL,
+		0,
+		1,
+		t.[Img],
+		1
+	FROM @Links t
 );
 GO
 
