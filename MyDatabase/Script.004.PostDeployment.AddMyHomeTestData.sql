@@ -34,7 +34,8 @@ VALUES
 );
 GO
 
-DECLARE @Path VARCHAR(MAX) = 'C:\Users\dmajor\Documents\GitHub\devinmajordotcom';
+DECLARE @GuestUserID INT = (SELECT ID FROM [Security].[User] WHERE UserName='Guest' AND ClientName='::1' AND IsActive=0);
+
 DECLARE @Links TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [URL] VARCHAR(MAX) NOT NULL);
 DECLARE @Counter1 INT = 1;
 
@@ -53,7 +54,7 @@ VALUES
 WHILE(@Counter1 <= (SELECT MAX(ID) FROM @Links))
 BEGIN	
 	DECLARE @ImageName VARCHAR(MAX) = (SELECT [ImgPathName] FROM @Links WHERE ID = @Counter1);
-	DECLARE @ImageQuery NVARCHAR(MAX) = CONCAT('SELECT @img = (SELECT * FROM OPENROWSET(BULK ''', @Path, '\devinmajordotcom\Content\HomeImages\', @ImageName, ''', SINGLE_BLOB) AS [Image])');
+	DECLARE @ImageQuery NVARCHAR(MAX) = 'SELECT @img = (SELECT * FROM OPENROWSET(BULK ''$(ProjectLocation)\devinmajordotcom\Content\HomeImages\' + @ImageName + ''', SINGLE_BLOB) AS [Image])';
 	DECLARE @Image VARBINARY(MAX);	
 	EXEC sp_executesql @ImageQuery, N'@img VARBINARY(MAX) OUTPUT', @img=@Image OUTPUT;
 	UPDATE @Links SET [Img] = @Image WHERE ID = @Counter1;

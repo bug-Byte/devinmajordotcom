@@ -40,6 +40,10 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; } // Config
         System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
+        System.Data.Entity.DbSet<MyHome_BlogPost> MyHome_BlogPosts { get; set; } // BlogPost
+        System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment
+        System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink
+        System.Data.Entity.DbSet<MyHome_UserConfig> MyHome_UserConfigs { get; set; } // UserConfig
         System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; } // ContactLink
         System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
         System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
@@ -77,6 +81,10 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; } // Config
         public System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
+        public System.Data.Entity.DbSet<MyHome_BlogPost> MyHome_BlogPosts { get; set; } // BlogPost
+        public System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment
+        public System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink
+        public System.Data.Entity.DbSet<MyHome_UserConfig> MyHome_UserConfigs { get; set; } // UserConfig
         public System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; } // ContactLink
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
@@ -146,6 +154,10 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new LandingPage_ConfigConfiguration());
             modelBuilder.Configurations.Add(new LandingPage_SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration());
+            modelBuilder.Configurations.Add(new MyHome_BlogPostConfiguration());
+            modelBuilder.Configurations.Add(new MyHome_BlogPostCommentConfiguration());
+            modelBuilder.Configurations.Add(new MyHome_SiteLinkConfiguration());
+            modelBuilder.Configurations.Add(new MyHome_UserConfigConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ContactLinkConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration());
@@ -167,6 +179,10 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new LandingPage_ConfigConfiguration(schema));
             modelBuilder.Configurations.Add(new LandingPage_SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new MyHome_BlogPostConfiguration(schema));
+            modelBuilder.Configurations.Add(new MyHome_BlogPostCommentConfiguration(schema));
+            modelBuilder.Configurations.Add(new MyHome_SiteLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new MyHome_UserConfigConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ContactLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration(schema));
@@ -207,6 +223,10 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; }
         public System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; }
         public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; }
+        public System.Data.Entity.DbSet<MyHome_BlogPost> MyHome_BlogPosts { get; set; }
+        public System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; }
+        public System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; }
+        public System.Data.Entity.DbSet<MyHome_UserConfig> MyHome_UserConfigs { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; }
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; }
@@ -225,6 +245,10 @@ namespace devinmajordotcom.Models
             LandingPage_Configs = new FakeDbSet<LandingPage_Config>("Id");
             LandingPage_SiteLinks = new FakeDbSet<LandingPage_SiteLink>("Id");
             MediaDashboard_SiteLinks = new FakeDbSet<MediaDashboard_SiteLink>("Id");
+            MyHome_BlogPosts = new FakeDbSet<MyHome_BlogPost>("Id");
+            MyHome_BlogPostComments = new FakeDbSet<MyHome_BlogPostComment>("Id");
+            MyHome_SiteLinks = new FakeDbSet<MyHome_SiteLink>("Id");
+            MyHome_UserConfigs = new FakeDbSet<MyHome_UserConfig>("Id");
             Portfolio_ContactLinks = new FakeDbSet<Portfolio_ContactLink>("Id");
             Portfolio_HighlightedSkills = new FakeDbSet<Portfolio_HighlightedSkill>("Id");
             Portfolio_LanguageSkills = new FakeDbSet<Portfolio_LanguageSkill>("Id");
@@ -580,6 +604,10 @@ namespace devinmajordotcom.Models
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
         public int? Order { get; set; } // Order
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public LandingPage_BannerLink()
         {
@@ -603,6 +631,10 @@ namespace devinmajordotcom.Models
         public string ContactInstructions { get; set; } // ContactInstructions
         public string ServerStatusTitle { get; set; } // ServerStatusTitle
         public string ServerStatusDescription { get; set; } // ServerStatusDescription
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public LandingPage_Config()
         {
@@ -627,6 +659,10 @@ namespace devinmajordotcom.Models
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
         public int? Order { get; set; } // Order
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public LandingPage_SiteLink()
         {
@@ -654,12 +690,146 @@ namespace devinmajordotcom.Models
         public bool IsEnabled { get; set; } // IsEnabled
         public bool IsPublic { get; set; } // IsPublic
         public int? Order { get; set; } // Order
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public MediaDashboard_SiteLink()
         {
             IsDefault = false;
             IsEnabled = true;
             IsPublic = false;
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // BlogPost
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_BlogPost
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int UserId { get; set; } // UserID
+        public byte[] Image { get; set; } // Image
+        public string Title { get; set; } // Title
+        public string Body { get; set; } // Body
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Security_User pointed by [BlogPost].([UserId]) (MyHome_BlogPost_UserID_Security_User_Id)
+        /// </summary>
+        public virtual Security_User Security_User { get; set; } // MyHome_BlogPost_UserID_Security_User_Id
+
+        public MyHome_BlogPost()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // BlogPostComment
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_BlogPostComment
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int UserId { get; set; } // UserID
+        public string CommentBody { get; set; } // CommentBody
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Security_User pointed by [BlogPostComment].([UserId]) (MyHome_BlogPostComment_UserID_Security_User_Id)
+        /// </summary>
+        public virtual Security_User Security_User { get; set; } // MyHome_BlogPostComment_UserID_Security_User_Id
+
+        public MyHome_BlogPostComment()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // SiteLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_SiteLink
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int UserId { get; set; } // UserID
+        public string DisplayName { get; set; } // DisplayName (length: 50)
+        public string Description { get; set; } // Description (length: 500)
+        public string Directive { get; set; } // Directive (length: 100)
+        public string Url { get; set; } // URL (length: 500)
+        public string Action { get; set; } // Action (length: 500)
+        public string Controller { get; set; } // Controller (length: 500)
+        public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
+        public bool IsDefault { get; set; } // IsDefault
+        public bool IsEnabled { get; set; } // IsEnabled
+        public byte[] Image { get; set; } // Image
+        public int? Order { get; set; } // Order
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Security_User pointed by [SiteLink].([UserId]) (MyHome_SiteLink_UserID_Security_User_Id)
+        /// </summary>
+        public virtual Security_User Security_User { get; set; } // MyHome_SiteLink_UserID_Security_User_Id
+
+        public MyHome_SiteLink()
+        {
+            IsDefault = false;
+            IsEnabled = true;
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // UserConfig
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_UserConfig
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int UserId { get; set; } // UserID
+        public bool ShowDateAndTime { get; set; } // ShowDateAndTime
+        public bool ShowWeather { get; set; } // ShowWeather
+        public bool ShowBanner { get; set; } // ShowBanner
+        public bool ShowBookmarks { get; set; } // ShowBookmarks
+        public bool ShowBlog { get; set; } // ShowBlog
+        public string BookmarksTitle { get; set; } // BookmarksTitle
+        public string Greeting { get; set; } // Greeting
+        public string BlogTitle { get; set; } // BlogTitle
+        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Security_User pointed by [UserConfig].([UserId]) (MyHome_UserHomeConfig_UserId_Security_User_ID)
+        /// </summary>
+        public virtual Security_User Security_User { get; set; } // MyHome_UserHomeConfig_UserId_Security_User_ID
+
+        public MyHome_UserConfig()
+        {
             InitializePartial();
         }
 
@@ -681,6 +851,10 @@ namespace devinmajordotcom.Models
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
         public int? Order { get; set; } // Order
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_ContactLink()
         {
@@ -701,6 +875,10 @@ namespace devinmajordotcom.Models
         public string DisplayName { get; set; } // DisplayName (length: 100)
         public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
         public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_HighlightedSkill()
         {
@@ -719,6 +897,10 @@ namespace devinmajordotcom.Models
         public string DisplayName { get; set; } // DisplayName (length: 100)
         public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
         public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_LanguageSkill()
         {
@@ -737,6 +919,10 @@ namespace devinmajordotcom.Models
         public string Adjective2 { get; set; } // Adjective2 (length: 100)
         public string Adjective3 { get; set; } // Adjective3 (length: 100)
         public string Blurb { get; set; } // Blurb
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_PersonalDescription()
         {
@@ -761,6 +947,10 @@ namespace devinmajordotcom.Models
         public string PersonalDescription { get; set; } // PersonalDescription (length: 500)
         public string WebsiteText { get; set; } // WebsiteText (length: 100)
         public string WebsiteUrl { get; set; } // WebsiteURL (length: 200)
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_Profile()
         {
@@ -778,6 +968,10 @@ namespace devinmajordotcom.Models
         public string Name { get; set; } // Name (length: 100)
         public string Description { get; set; } // Description (length: 500)
         public byte[] Image { get; set; } // Image
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         // Reverse navigation
 
@@ -801,6 +995,10 @@ namespace devinmajordotcom.Models
     {
         public int Id { get; set; } // ID (Primary key)
         public string Type { get; set; } // Type (length: 100)
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         // Reverse navigation
 
@@ -825,6 +1023,10 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public int ProjectId { get; set; } // ProjectID
         public int ProjectTypeId { get; set; } // ProjectTypeID
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         // Foreign keys
 
@@ -855,6 +1057,10 @@ namespace devinmajordotcom.Models
         public string DisplayName { get; set; } // DisplayName (length: 100)
         public int? ProficiencyPercentage { get; set; } // ProficiencyPercentage
         public string DisplayIcon { get; set; } // DisplayIcon (length: 100)
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_TechSkill()
         {
@@ -872,6 +1078,10 @@ namespace devinmajordotcom.Models
     public partial class RefactorLog
     {
         public System.Guid OperationKey { get; set; } // OperationKey (Primary key)
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
 
         public RefactorLog()
         {
@@ -893,11 +1103,38 @@ namespace devinmajordotcom.Models
         public string UserName { get; set; } // UserName
         public string Password { get; set; } // Password
         public System.Guid Guid { get; set; } // GUID
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child MyHome_BlogPosts where [BlogPost].[UserID] point to this entity (MyHome_BlogPost_UserID_Security_User_Id)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MyHome_BlogPost> MyHome_BlogPosts { get; set; } // BlogPost.MyHome_BlogPost_UserID_Security_User_Id
+        /// <summary>
+        /// Child MyHome_BlogPostComments where [BlogPostComment].[UserID] point to this entity (MyHome_BlogPostComment_UserID_Security_User_Id)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment.MyHome_BlogPostComment_UserID_Security_User_Id
+        /// <summary>
+        /// Child MyHome_SiteLinks where [SiteLink].[UserID] point to this entity (MyHome_SiteLink_UserID_Security_User_Id)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink.MyHome_SiteLink_UserID_Security_User_Id
+        /// <summary>
+        /// Child MyHome_UserConfigs where [UserConfig].[UserID] point to this entity (MyHome_UserHomeConfig_UserId_Security_User_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MyHome_UserConfig> MyHome_UserConfigs { get; set; } // UserConfig.MyHome_UserHomeConfig_UserId_Security_User_ID
 
         public Security_User()
         {
             IsActive = true;
             IsAdmin = false;
+            MyHome_BlogPosts = new System.Collections.Generic.List<MyHome_BlogPost>();
+            MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
+            MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
+            MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
             InitializePartial();
         }
 
@@ -933,6 +1170,10 @@ namespace devinmajordotcom.Models
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -960,6 +1201,10 @@ namespace devinmajordotcom.Models
             Property(x => x.ContactInstructions).HasColumnName(@"ContactInstructions").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ServerStatusTitle).HasColumnName(@"ServerStatusTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ServerStatusDescription).HasColumnName(@"ServerStatusDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -990,6 +1235,10 @@ namespace devinmajordotcom.Models
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1021,6 +1270,146 @@ namespace devinmajordotcom.Models
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.IsPublic).HasColumnName(@"IsPublic").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // BlogPost
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_BlogPostConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MyHome_BlogPost>
+    {
+        public MyHome_BlogPostConfiguration()
+            : this("MyHome")
+        {
+        }
+
+        public MyHome_BlogPostConfiguration(string schema)
+        {
+            ToTable("BlogPost", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Title).HasColumnName(@"Title").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.Body).HasColumnName(@"Body").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+
+            // Foreign keys
+            HasRequired(a => a.Security_User).WithMany(b => b.MyHome_BlogPosts).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false); // MyHome_BlogPost_UserID_Security_User_Id
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // BlogPostComment
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_BlogPostCommentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MyHome_BlogPostComment>
+    {
+        public MyHome_BlogPostCommentConfiguration()
+            : this("MyHome")
+        {
+        }
+
+        public MyHome_BlogPostCommentConfiguration(string schema)
+        {
+            ToTable("BlogPostComment", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
+            Property(x => x.CommentBody).HasColumnName(@"CommentBody").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+
+            // Foreign keys
+            HasRequired(a => a.Security_User).WithMany(b => b.MyHome_BlogPostComments).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false); // MyHome_BlogPostComment_UserID_Security_User_Id
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // SiteLink
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_SiteLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MyHome_SiteLink>
+    {
+        public MyHome_SiteLinkConfiguration()
+            : this("MyHome")
+        {
+        }
+
+        public MyHome_SiteLinkConfiguration(string schema)
+        {
+            ToTable("SiteLink", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
+            Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+
+            // Foreign keys
+            HasRequired(a => a.Security_User).WithMany(b => b.MyHome_SiteLinks).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false); // MyHome_SiteLink_UserID_Security_User_Id
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // UserConfig
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MyHome_UserConfigConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MyHome_UserConfig>
+    {
+        public MyHome_UserConfigConfiguration()
+            : this("MyHome")
+        {
+        }
+
+        public MyHome_UserConfigConfiguration(string schema)
+        {
+            ToTable("UserConfig", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
+            Property(x => x.ShowDateAndTime).HasColumnName(@"ShowDateAndTime").HasColumnType("bit").IsRequired();
+            Property(x => x.ShowWeather).HasColumnName(@"ShowWeather").HasColumnType("bit").IsRequired();
+            Property(x => x.ShowBanner).HasColumnName(@"ShowBanner").HasColumnType("bit").IsRequired();
+            Property(x => x.ShowBookmarks).HasColumnName(@"ShowBookmarks").HasColumnType("bit").IsRequired();
+            Property(x => x.ShowBlog).HasColumnName(@"ShowBlog").HasColumnType("bit").IsRequired();
+            Property(x => x.BookmarksTitle).HasColumnName(@"BookmarksTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.Greeting).HasColumnName(@"Greeting").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.BlogTitle).HasColumnName(@"BlogTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+
+            // Foreign keys
+            HasRequired(a => a.Security_User).WithMany(b => b.MyHome_UserConfigs).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false); // MyHome_UserHomeConfig_UserId_Security_User_ID
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1051,6 +1440,10 @@ namespace devinmajordotcom.Models
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1075,6 +1468,10 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1099,6 +1496,10 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1123,6 +1524,10 @@ namespace devinmajordotcom.Models
             Property(x => x.Adjective2).HasColumnName(@"Adjective2").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.Adjective3).HasColumnName(@"Adjective3").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.Blurb).HasColumnName(@"Blurb").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1153,6 +1558,10 @@ namespace devinmajordotcom.Models
             Property(x => x.PersonalDescription).HasColumnName(@"PersonalDescription").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(500);
             Property(x => x.WebsiteText).HasColumnName(@"WebsiteText").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.WebsiteUrl).HasColumnName(@"WebsiteURL").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1176,6 +1585,10 @@ namespace devinmajordotcom.Models
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1197,6 +1610,10 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Type).HasColumnName(@"Type").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1219,6 +1636,10 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.ProjectId).HasColumnName(@"ProjectID").HasColumnType("int").IsRequired();
             Property(x => x.ProjectTypeId).HasColumnName(@"ProjectTypeID").HasColumnType("int").IsRequired();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
 
             // Foreign keys
             HasRequired(a => a.Portfolio_Project).WithMany(b => b.Portfolio_ProjectTypeMappings).HasForeignKey(c => c.ProjectId).WillCascadeOnDelete(false); // ProjectTypeMapping_ProjectID_Project_ID
@@ -1247,6 +1668,10 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1267,6 +1692,10 @@ namespace devinmajordotcom.Models
             HasKey(x => x.OperationKey);
 
             Property(x => x.OperationKey).HasColumnName(@"OperationKey").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();
@@ -1294,6 +1723,10 @@ namespace devinmajordotcom.Models
             Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Password).HasColumnName(@"Password").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Guid).HasColumnName(@"GUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             InitializePartial();
         }
         partial void InitializePartial();

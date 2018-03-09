@@ -122,7 +122,30 @@ namespace devinmajordotcom.Services
 
             if(IsUserToAddAnAdmin)
             {
-                var testMyHomeLinks = db.My
+                var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == db.Security_Users.Where(y => y.ClientName == "::1" && y.UserName == "Guest").Select(y => y.Id).FirstOrDefault()).ToList();
+                if(guestMyHomeLinks != null && guestMyHomeLinks.Count > 0)
+                {
+                    foreach(var link in guestMyHomeLinks)
+                    {
+                        var newLinkRecord = new MyHome_SiteLink()
+                        {
+                            Action = null,
+                            Controller = null,
+                            DisplayIcon = null,
+                            Description = null,
+                            Directive = null,
+                            UserId = newUser.Id,
+                            DisplayName = link.DisplayName,
+                            Url = link.Url,
+                            IsDefault = link.IsDefault,
+                            IsEnabled = link.IsEnabled,
+                            Image = link.Image,
+                            Order = link.Order
+                        };
+                        db.MyHome_SiteLinks.Add(newLinkRecord);
+                    }
+                    db.SaveChanges();
+                }
             }
 
             return newUser;

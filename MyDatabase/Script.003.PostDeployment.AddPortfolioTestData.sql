@@ -264,52 +264,41 @@ VALUES
 );
 GO
 
+DECLARE @Projects TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [Description] VARCHAR(MAX) NOT NULL);
+DECLARE @Counter1 INT = 1;
+
+INSERT INTO @Projects([Name], [ImgPathName], [Description]) 
+VALUES 
+('UX Design', 'winIOT.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'boggle.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'spwha.png', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'hangman.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'bugbyte.png', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'bag.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'portfolio-img7.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
+('UX Design', 'portfolio-img8.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.');
+WHILE(@Counter1 <= (SELECT MAX(ID) FROM @Projects))
+BEGIN	
+	DECLARE @ImageName VARCHAR(MAX) = (SELECT [ImgPathName] FROM @Projects WHERE ID = @Counter1);
+	DECLARE @ImageQuery NVARCHAR(MAX) = 'SELECT @img = (SELECT * FROM OPENROWSET(BULK ''$(ProjectLocation)\devinmajordotcom\Content\PortfolioImages\' + @ImageName + ''', SINGLE_BLOB) AS [Image])';
+	DECLARE @Image VARBINARY(MAX);	
+	EXEC sp_executesql @ImageQuery, N'@img VARBINARY(MAX) OUTPUT', @img=@Image OUTPUT;
+	UPDATE @Projects SET [Img] = @Image WHERE ID = @Counter1;
+	SET @Counter1 = @Counter1 + 1;
+END
+
 INSERT INTO Portfolio.Project
 (
-[Name],
-[Description],
-[Image]
+	[Name],
+	[Description],
+	[Image]
 )
-VALUES
 (
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\winIOT.jpg', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\boggle.jpg', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\spwha.png', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\hangman.jpg', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\bugbyte.png', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\bag.jpg', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\portfolio-img7.jpg', SINGLE_BLOB) AS [Image])
-),
-(
-'UX Design',
-'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.',
-(SELECT * FROM OPENROWSET(BULK N'A:\Documents\GitHub\devinmajordotcom\devinmajordotcom\Content\PortfolioImages\portfolio-img8.jpg', SINGLE_BLOB) AS [Image])
+	SELECT 
+		t.Name,
+		t.[Description],
+		t.[Img]
+	FROM @Projects t
 );
 GO
 
