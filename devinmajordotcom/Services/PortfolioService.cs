@@ -9,7 +9,7 @@ using System.Security.Principal;
 
 namespace devinmajordotcom.Services
 {
-    public class PortfolioService : IPortfolioService
+    public class PortfolioService : BaseDataService, IPortfolioService
     {
 
         protected dbContext db;

@@ -272,9 +272,11 @@
     <Compile Include="Services\BaseDataService.cs" />
     <Compile Include="Services\IBaseDataService.cs" />
     <Compile Include="Services\IMediaDashboardService.cs" />
+    <Compile Include="Services\IMyHomeService.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\ILandingPageService.cs" />
     <Compile Include="Services\MediaDashboardService.cs" />
+    <Compile Include="Services\MyHomeService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
     <Compile Include="Services\LandingPageService.cs" />
     <Compile Include="PerformanceHub.cs" />
@@ -283,6 +285,7 @@
     <Compile Include="ViewModels\DropDownViewModel.cs" />
     <Compile Include="ViewModels\MainLandingPageViewModel.cs" />
     <Compile Include="ViewModels\MediaDashboardViewModel.cs" />
+    <Compile Include="ViewModels\MyHomeViewModel.cs" />
     <Compile Include="ViewModels\PortfolioViewModel.cs" />
     <Compile Include="ViewModels\SiteLinkViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />

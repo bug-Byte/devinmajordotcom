@@ -39,6 +39,8 @@ namespace devinmajordotcom.ViewModels
 
         public int? Order { get; set; }
 
+        public byte[] EncodedImage { get; set; }
+
         public SiteLinkViewModel()
         {
             

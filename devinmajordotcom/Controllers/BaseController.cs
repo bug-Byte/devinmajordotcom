@@ -17,6 +17,7 @@ namespace devinmajordotcom.Controllers
         public ILandingPageService landingPageService;
         public IPortfolioService portfolioService;
         public IMediaDashboardService mediaDashboardService;
+        public IMyHomeService myHomeService;
 
         protected RedirectResult RedirectToAction<T>(Expression<Action<T>> action, RouteValueDictionary values = null) where T : Controller
         {
@@ -28,6 +29,7 @@ namespace devinmajordotcom.Controllers
             landingPageService = DependencyResolver.Current.GetService<ILandingPageService>();
             portfolioService = DependencyResolver.Current.GetService<IPortfolioService>();
             mediaDashboardService = DependencyResolver.Current.GetService<IMediaDashboardService>();
+            myHomeService = DependencyResolver.Current.GetService<IMyHomeService>();
         }
 
         [HttpPost]

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model devinmajordotcom.ViewModels.MyHomeViewModel
+@{
     Layout = "../Shared/_HomeLayout.cshtml";
 }
 
@@ -39,62 +40,21 @@
                     <span class="line-bar">...</span>
                 </div>
             </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="@Url.Content("~/Content/HomeImages/work-image1.jpg")" class="image-popup">
-                        <img src="@Url.Content("~/Content/HomeImages/work-image1.jpg")" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Clean &amp; Minimal</h3>
-                            <small>Product Design</small>
-                        </div>
-                    </a>
+            
+            @foreach (var link in Model.FavoritesAndBookmarks)
+            {
+                <div class="col-md-3 col-sm-6">
+                    <div class="work-thumb">
+                        <a href="@link.URL" class="image-popup">
+                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(link.EncodedImage))" class="img-responsive" alt="Work">
+                            <div class="work-info">
+                                <h3>@link.DisplayName</h3>
+                                <small>@link.Description</small>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="@Url.Content("~/Content/HomeImages/work-image2.jpg")" class="image-popup">
-                        <img src="@Url.Content("~/Content/HomeImages/work-image2.jpg")" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Studio Bag</h3>
-                            <small>Branding</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="@Url.Content("~/Content/HomeImages/work-image3.jpg")" class="image-popup">
-                        <img src="@Url.Content("~/Content/HomeImages/work-image3.jpg")" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Frame Design</h3>
-                            <small>Photography</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="@Url.Content("~/Content/HomeImages/work-image4.jpg")" class="image-popup">
-                        <img src="@Url.Content("~/Content/HomeImages/work-image4.jpg")" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Paint Work</h3>
-                            <small>Art, Design</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            }
 
         </div>
     </div>
