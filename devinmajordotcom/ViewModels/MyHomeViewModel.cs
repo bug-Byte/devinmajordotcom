@@ -8,7 +8,41 @@ namespace devinmajordotcom.ViewModels
 
     public class MyHomeViewModel
     {
+
+        public UserConfigViewModel UserConfig { get; set; }
+
         public List<SiteLinkViewModel> FavoritesAndBookmarks { get; set; }
+
+        public bool CanEdit { get; set; }
+
+    }
+
+    public class UserConfigViewModel
+    {
+        public int UserID { get; set; }
+
+        public bool ShowDateAndTime { get; set; }
+
+        public bool ShowWeather { get; set; }
+
+        public bool ShowBanner { get; set; }
+
+        public bool ShowBookmarks { get; set; }
+
+        public bool ShowBlog { get; set; }
+
+        public string BookmarksTitle { get; set; }
+
+        public string Greeting { get; set; }
+
+        public string BlogTitle { get; set; }
+
+        public byte[] BackgroundImage { get; set; }
+
+        public bool? ShowVisitorsAdminHome { get; set; }
+
+        public bool IsEditable { get; set; }
+
     }
 
 }

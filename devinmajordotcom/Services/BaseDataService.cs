@@ -112,6 +112,7 @@ namespace devinmajordotcom.Services
             {
                 ClientName = ip,
                 EmailAddress = "",
+                UserName = "Anonymous",
                 Guid = (Guid)userGuid,
                 IsActive = true,
                 IsAdmin = IsUserToAddAnAdmin
@@ -122,10 +123,56 @@ namespace devinmajordotcom.Services
 
             if(IsUserToAddAnAdmin)
             {
-                var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == db.Security_Users.Where(y => y.ClientName == "::1" && y.UserName == "Guest").Select(y => y.Id).FirstOrDefault()).ToList();
-                if(guestMyHomeLinks != null && guestMyHomeLinks.Count > 0)
+                GiveAdminTestData(newUser);
+            }
+
+            return newUser;
+        }
+
+        public UserViewModel GetCurrentUser(Guid? GUID = null)
+        {
+            return db.Security_Users.Where(x => x.Guid == GUID).Select(x => new UserViewModel()
+            {
+                EmailAddress = x.EmailAddress,
+                GUID = x.Guid,
+                UserID = x.Id,
+                Password = x.Password,
+                UserName = x.UserName,
+                UserIsAdmin = x.IsAdmin,
+                UserIsActive = x.IsActive
+            }).FirstOrDefault();
+        }
+
+        public void GiveAdminTestData(Security_User newUser)
+        {
+            var guestUserId = db.Security_Users.Where(y => y.ClientName == "::1" && y.UserName == "Guest").Select(y => y.Id).FirstOrDefault();
+            if (guestUserId != 0)
+            {
+                var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == guestUserId).ToList();
+                var guestConfig = db.MyHome_UserConfigs.Where(x => x.UserId == guestUserId).FirstOrDefault();
+                if (guestConfig != null)
                 {
-                    foreach(var link in guestMyHomeLinks)
+                    var newConfigRecord = new MyHome_UserConfig()
+                    {
+                        BackgroundImage = guestConfig.BackgroundImage,
+                        BlogTitle = guestConfig.BlogTitle,
+                        BookmarksTitle = guestConfig.BookmarksTitle,
+                        ShowBanner = guestConfig.ShowBanner,
+                        ShowBlog = guestConfig.ShowBlog,
+                        ShowDateAndTime = guestConfig.ShowDateAndTime,
+                        ShowVisitorsAdminHome = guestConfig.ShowVisitorsAdminHome,
+                        ShowBookmarks = guestConfig.ShowBookmarks,
+                        ShowWeather = guestConfig.ShowWeather,
+                        Greeting = guestConfig.Greeting,
+                        UserId = newUser.Id,
+                        IsEditable = true
+                    };
+                    db.MyHome_UserConfigs.Add(newConfigRecord);
+                    db.SaveChanges();
+                }
+                if (guestMyHomeLinks != null && guestMyHomeLinks.Count > 0)
+                {
+                    foreach (var link in guestMyHomeLinks)
                     {
                         var newLinkRecord = new MyHome_SiteLink()
                         {
@@ -147,22 +194,6 @@ namespace devinmajordotcom.Services
                     db.SaveChanges();
                 }
             }
-
-            return newUser;
-        }
-
-        public UserViewModel GetCurrentUser(Guid? GUID = null)
-        {
-            return db.Security_Users.Where(x => x.Guid == GUID).Select(x => new UserViewModel()
-            {
-                EmailAddress = x.EmailAddress,
-                GUID = x.Guid,
-                UserID = x.Id,
-                Password = x.Password,
-                UserName = x.UserName,
-                UserIsAdmin = x.IsAdmin,
-                UserIsActive = x.IsActive
-            }).FirstOrDefault();
         }
 
     }

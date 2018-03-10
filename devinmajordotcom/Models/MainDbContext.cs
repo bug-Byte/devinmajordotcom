@@ -816,6 +816,8 @@ namespace devinmajordotcom.Models
         public string Greeting { get; set; } // Greeting
         public string BlogTitle { get; set; } // BlogTitle
         public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public bool IsEditable { get; set; } // IsEditable
+        public bool? ShowVisitorsAdminHome { get; set; } // ShowVisitorsAdminHome
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -830,6 +832,7 @@ namespace devinmajordotcom.Models
 
         public MyHome_UserConfig()
         {
+            IsEditable = true;
             InitializePartial();
         }
 
@@ -1403,6 +1406,8 @@ namespace devinmajordotcom.Models
             Property(x => x.Greeting).HasColumnName(@"Greeting").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.BlogTitle).HasColumnName(@"BlogTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.IsEditable).HasColumnName(@"IsEditable").HasColumnType("bit").IsRequired();
+            Property(x => x.ShowVisitorsAdminHome).HasColumnName(@"ShowVisitorsAdminHome").HasColumnType("bit").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

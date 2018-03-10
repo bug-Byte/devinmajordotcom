@@ -36,20 +36,52 @@ GO
 
 DECLARE @GuestUserID INT = (SELECT ID FROM [Security].[User] WHERE UserName='Guest' AND ClientName='::1' AND IsActive=0);
 
+
+INSERT INTO [MyHome].[UserConfig]
+(
+	[UserID]
+	,[ShowDateAndTime]
+	,[ShowWeather]
+	,[ShowBanner]
+	,[ShowBookmarks]
+	,[ShowBlog]
+	,[BookmarksTitle]
+	,[Greeting]
+	,[BlogTitle]
+	,[BackgroundImage]
+	,[ShowVisitorsAdminHome]
+	,[IsEditable]
+)
+VALUES
+(
+	@GuestUserID,
+	1,
+	1,
+	1,
+	1,
+	1,
+	'My Favorites & Bookmarks',
+	'Welcome Home, Devin!',
+	'My Blog & Notes',
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\HomeImages\home-bg4.jpg', SINGLE_BLOB) AS [BackgroundImage]),
+	0,
+	0
+);
+
 DECLARE @Links TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [URL] VARCHAR(MAX) NOT NULL);
 DECLARE @Counter1 INT = 1;
 
 INSERT INTO @Links([Name], [ImgPathName], [URL]) 
 VALUES 
 ('Facebook', 'facebook.png', 'https://www.facebook.com'), 
-('Reddit', 'reddit.png', 'https://www.reddit.com/'), 
+('Reddit', 'reddit.jpg', 'https://www.reddit.com/'), 
 ('YouTube', 'youtube.png', 'https://www.youtube.com/'), 
-('Slack', 'slack.png', 'https://slack.com/'), 
-('GitHub', 'github.png', 'https://github.com/'), 
 ('Plex Media Dashboard', 'plex.jpg', 'http://www.devinmajor.com/MediaDashboard'), 
-('Outlook', 'outlook.jpg', 'https://outlook.live.com/owa/'), 
+('GitHub', 'github.png', 'https://github.com/'), 
+('Slack', 'slack.jpg', 'https://slack.com/'), 
+('Amazon', 'amazon1.jpg', 'https://www.amazon.ca/'),
 ('Newegg', 'newegg.jpg', 'https://www.newegg.ca/'), 
-('Amazon', 'amazon2.png', 'https://www.amazon.ca/');
+('Outlook', 'outlook.jpg', 'https://outlook.live.com/owa/');
 
 WHILE(@Counter1 <= (SELECT MAX(ID) FROM @Links))
 BEGIN	

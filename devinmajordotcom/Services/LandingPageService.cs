@@ -45,7 +45,7 @@ namespace devinmajordotcom.Services
                 LandingPageBannerLinks = GetMainBannerLinks(),
                 CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
                 CurrentMediaDashboardData = mediaDashboardService.GetMediaDashboardViewModel(),
-                CurrentApplicationConfig = /*user.UserIsAdmin ? */GetAppConfigData(siteAdminUser)/* : null*/,
+                CurrentApplicationConfig = GetAppConfigData(siteAdminUser),
                 ContactEmailData = new ContactEmailViewModel()
                 {
                     RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress

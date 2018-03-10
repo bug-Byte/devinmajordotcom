@@ -24,5 +24,7 @@ namespace devinmajordotcom.Services
 
         UserViewModel GetCurrentUser(Guid? GUID = null);
 
+        void GiveAdminTestData(Security_User newUser);
+
     }
 }

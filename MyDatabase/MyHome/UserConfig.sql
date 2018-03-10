@@ -11,6 +11,8 @@
 	Greeting VARCHAR(MAX) NOT NULL,
 	BlogTitle VARCHAR(MAX) NULL,
 	BackgroundImage VARBINARY (MAX) NULL,
+	IsEditable BIT NOT NULL DEFAULT 1,
+	ShowVisitorsAdminHome BIT NULL,
 	PRIMARY KEY(Id),
 	CONSTRAINT MyHome_UserHomeConfig_UserId_Security_User_ID
 	FOREIGN KEY(UserID) REFERENCES [Security].[User](ID)
