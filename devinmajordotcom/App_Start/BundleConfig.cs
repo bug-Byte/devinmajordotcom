@@ -109,6 +109,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/jquery.stellar.min.js",
                 "~/Scripts/jquery.magnific-popup.min.js",
                 "~/Scripts/smoothscroll.js",
+                "~/Scripts/moment.js",
                 "~/Scripts/homeScripts.js"
             ));
 

@@ -720,6 +720,13 @@ namespace devinmajordotcom.Models
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
         public string ModifiedBy { get; set; } // ModifiedBy
 
+        // Reverse navigation
+
+        /// <summary>
+        /// Child MyHome_BlogPostComments where [BlogPostComment].[BlogPostID] point to this entity (MyHome_BlogPostComment_BlogPostID_MyHome_BlogPost)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment.MyHome_BlogPostComment_BlogPostID_MyHome_BlogPost
+
         // Foreign keys
 
         /// <summary>
@@ -729,6 +736,7 @@ namespace devinmajordotcom.Models
 
         public MyHome_BlogPost()
         {
+            MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
             InitializePartial();
         }
 
@@ -741,13 +749,20 @@ namespace devinmajordotcom.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public int UserId { get; set; } // UserID
+        public int BlogPostId { get; set; } // BlogPostID
         public string CommentBody { get; set; } // CommentBody
+        public byte[] Image { get; set; } // Image
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
         public string ModifiedBy { get; set; } // ModifiedBy
 
         // Foreign keys
+
+        /// <summary>
+        /// Parent MyHome_BlogPost pointed by [BlogPostComment].([BlogPostId]) (MyHome_BlogPostComment_BlogPostID_MyHome_BlogPost)
+        /// </summary>
+        public virtual MyHome_BlogPost MyHome_BlogPost { get; set; } // MyHome_BlogPostComment_BlogPostID_MyHome_BlogPost
 
         /// <summary>
         /// Parent Security_User pointed by [BlogPostComment].([UserId]) (MyHome_BlogPostComment_UserID_Security_User_Id)
@@ -1329,13 +1344,16 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
+            Property(x => x.BlogPostId).HasColumnName(@"BlogPostID").HasColumnType("int").IsRequired();
             Property(x => x.CommentBody).HasColumnName(@"CommentBody").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
 
             // Foreign keys
+            HasRequired(a => a.MyHome_BlogPost).WithMany(b => b.MyHome_BlogPostComments).HasForeignKey(c => c.BlogPostId).WillCascadeOnDelete(false); // MyHome_BlogPostComment_BlogPostID_MyHome_BlogPost
             HasRequired(a => a.Security_User).WithMany(b => b.MyHome_BlogPostComments).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false); // MyHome_BlogPostComment_UserID_Security_User_Id
             InitializePartial();
         }

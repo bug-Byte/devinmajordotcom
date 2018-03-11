@@ -148,8 +148,10 @@ namespace devinmajordotcom.Services
             var guestUserId = db.Security_Users.Where(y => y.ClientName == "::1" && y.UserName == "Guest").Select(y => y.Id).FirstOrDefault();
             if (guestUserId != 0)
             {
-                var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == guestUserId).ToList();
                 var guestConfig = db.MyHome_UserConfigs.Where(x => x.UserId == guestUserId).FirstOrDefault();
+                var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == guestUserId).ToList();
+                var guestMyHomeBlogPosts = db.MyHome_BlogPosts.Where(x => x.UserId == guestUserId).ToList();
+
                 if (guestConfig != null)
                 {
                     var newConfigRecord = new MyHome_UserConfig()
@@ -168,6 +170,21 @@ namespace devinmajordotcom.Services
                         IsEditable = true
                     };
                     db.MyHome_UserConfigs.Add(newConfigRecord);
+                    db.SaveChanges();
+                }
+                if(guestMyHomeBlogPosts != null && guestMyHomeBlogPosts.Count > 0)
+                {
+                    foreach(var post in guestMyHomeBlogPosts)
+                    {
+                        var newPostRecord = new MyHome_BlogPost()
+                        {
+                            UserId = newUser.Id,
+                            Image = post.Image,
+                            Body = post.Body,
+                            Title = post.Title
+                        };
+                        db.MyHome_BlogPosts.Add(newPostRecord);
+                    }
                     db.SaveChanges();
                 }
                 if (guestMyHomeLinks != null && guestMyHomeLinks.Count > 0)

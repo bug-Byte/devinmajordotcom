@@ -13,6 +13,8 @@ namespace devinmajordotcom.ViewModels
 
         public List<SiteLinkViewModel> FavoritesAndBookmarks { get; set; }
 
+        public List<BlogPostViewModel> BlogPosts { get; set; }
+
         public bool CanEdit { get; set; }
 
     }
@@ -42,6 +44,36 @@ namespace devinmajordotcom.ViewModels
         public bool? ShowVisitorsAdminHome { get; set; }
 
         public bool IsEditable { get; set; }
+
+    }
+
+    public class BlogPostViewModel : CommentViewModel
+    {
+
+        public int BlogPostID { get; set; }
+
+        public string PostTitle { get; set; }
+
+        public List<CommentViewModel> PostComments { get; set; }
+
+    }
+
+    public class CommentViewModel
+    {
+
+        public int AuthorUserID { get; set; }
+
+        public string Body { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public string ModifiedBy { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
 
     }
 

@@ -33,7 +33,7 @@ http://www.templatemo.com/tm-509-hydro
   }
 
   h1 {
-    color: #292929;
+    color: white;
     font-size: 3em;
     margin-bottom: 30px;
   }
@@ -44,20 +44,19 @@ http://www.templatemo.com/tm-509-hydro
   }
 
   h3 {
-    color: #505050;
+    color: white;
     font-size: 1.5em;
     font-weight: 500;
     margin-bottom: 0;
   }
 
   h4 {
-    color: #696969;
+    color: white;
     font-size: 18px;
     line-height: normal;
   }
 
   p {
-    color: #757575;
     font-size: 14px;
     font-weight: normal;
     line-height: 25px;

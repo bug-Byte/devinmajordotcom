@@ -329,7 +329,9 @@
     <Content Include="Content\HomeImages\newegg.jpg" />
     <Content Include="Content\HomeImages\outlook.jpg" />
     <Content Include="Content\HomeImages\plex.jpg" />
+    <Content Include="Content\HomeImages\reddit.jpg" />
     <Content Include="Content\HomeImages\reddit.png" />
+    <Content Include="Content\HomeImages\slack.jpg" />
     <Content Include="Content\HomeImages\slack.png" />
     <Content Include="Content\HomeImages\work-image1.jpg" />
     <Content Include="Content\HomeImages\work-image2.jpg" />

@@ -25,6 +25,7 @@ namespace devinmajordotcom.Services
                     {
                         UserConfig = adminUserConfig,
                         FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(siteAdminUser.Id),
+                        BlogPosts = GetBlogPostsByUserId(siteAdminUser.Id),
                         CanEdit = false,
                     };
                 }
@@ -34,6 +35,7 @@ namespace devinmajordotcom.Services
                     {
                         UserConfig = GuestUserConfig,
                         FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(siteGuestUser.Id),
+                        BlogPosts = GetBlogPostsByUserId(siteGuestUser.Id),
                         CanEdit = false,
                     };
                 }
@@ -44,6 +46,7 @@ namespace devinmajordotcom.Services
             {
                 UserConfig = GetUserConfigViewModelByUserId(user.UserID),
                 FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(user.UserID),
+                BlogPosts = GetBlogPostsByUserId(user.UserID),
                 CanEdit = true
             };
         }
@@ -84,6 +87,32 @@ namespace devinmajordotcom.Services
                 URL = x.Url,
                 EncodedImage = x.Image
             }).ToList();
+        }
+
+        public List<BlogPostViewModel> GetBlogPostsByUserId(int userId)
+        {
+            return db.MyHome_BlogPosts.Where(x => x.UserId == userId).Select(x => new BlogPostViewModel()
+            {
+                BlogPostID = x.Id,
+                AuthorUserID = x.UserId,
+                PostTitle = x.Title,
+                Image = x.Image,
+                Body = x.Body,
+                CreatedBy = x.CreatedBy,
+                CreatedOn = x.CreatedOn,
+                ModifiedBy = x.ModifiedBy,
+                ModifiedOn = x.ModifiedOn,
+                PostComments = x.MyHome_BlogPostComments.Select(y => new CommentViewModel()
+                {
+                    AuthorUserID = y.UserId,
+                    Body = y.CommentBody,
+                    Image = y.Image,
+                    CreatedOn = y.CreatedOn,
+                    CreatedBy = y.CreatedBy,
+                    ModifiedOn = y.ModifiedOn,
+                    ModifiedBy = y.ModifiedBy
+                }).OrderBy(y => y.CreatedOn).ToList()
+            }).OrderBy(y => y.CreatedOn).ToList();
         }
 
     }

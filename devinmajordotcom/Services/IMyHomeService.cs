@@ -16,5 +16,7 @@ namespace devinmajordotcom.Services
 
         List<SiteLinkViewModel> GetFavoritesAndBookmarksByUserId(int userId);
 
+        List<BlogPostViewModel> GetBlogPostsByUserId(int userId);
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿@model devinmajordotcom.ViewModels.MyHomeViewModel
 @{
+    ViewBag.CurrentUserConfig = Model.UserConfig;
     Layout = "../Shared/_HomeLayout.cshtml";
     var linkCount = 1;
     var newRowHtml = "</div><br/><div class='row'>";
@@ -12,146 +13,119 @@
         <div class="row">
             
             <div class="col-sm-12 text-center">
-                <h2>Welcome Home, Devin!</h2>
+                <h2>@Model.UserConfig.Greeting</h2>
             </div>
-            <div class="col-sm-12 text-center">
-                It is currently 2:40PM, on Saturday December 12th, 2017.
-            </div>
+            @if (Model.UserConfig.ShowDateAndTime)
+            {
+                <div class="col-sm-12 text-center">
+                    <span style="color:white;" id="currentDateAndTime"></span>
+                </div>
+            }
 
         </div>
 
         <div id="spacerDiv" style="min-height: 65vh;"></div>
 
         <div class="row" style="">
-            <div class="col-sm-12 text-center">
-                <p>Weather widget thing will go here</p>
-            </div>
+            @if (Model.UserConfig.ShowWeather)
+            {
+                <div class="col-sm-12 text-center">
+                    <textarea id="weather" class="form-control"></textarea>
+                    <button type="button" class="btn btn-success" id="get-weather-btn">Get Weather</button>
+                </div>
+            }
+            
         </div>
 
     </div>
 </section>
 
-<!-- WORK -->
-<section id="work" data-stellar-background-ratio="0.5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="section-title">
-                    <h2>My Favorites & Bookmarks</h2>
-                    <span class="line-bar">...</span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+@if (Model.UserConfig.ShowBookmarks)
+{
 
-            @foreach (var link in Model.FavoritesAndBookmarks)
-            {
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="work-thumb">
-                        <a href="@link.URL" target="_blank" class="">
-                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(link.EncodedImage))" class="img-responsive" alt="Work">
-                            <div class="work-info">
-                                <h3>@link.DisplayName</h3>
-                                <small>@link.Description</small>
-                            </div>
-                        </a>
+    <!-- FAVORITES -->
+    <section id="work" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="section-title">
+                        <h2>@Model.UserConfig.BookmarksTitle</h2>
+                        <span class="line-bar">...</span>
                     </div>
                 </div>
+            </div>
+            <div class="row">
 
-                if (linkCount % 4 == 0)
+                @foreach (var link in Model.FavoritesAndBookmarks)
                 {
-                    @Html.Raw(newRowHtml)
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="work-thumb">
+                            <a href="@link.URL" target="_blank" class="">
+                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(link.EncodedImage))" class="img-responsive" alt="Work">
+                                <div class="work-info">
+                                    <h3>@link.DisplayName</h3>
+                                    <small>@link.Description</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    if (linkCount % 4 == 0)
+                    {
+                        @Html.Raw(newRowHtml)
+                    }
+
+                    linkCount++;
+
                 }
 
-                linkCount++;
-
-            }
-
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- BLOG -->
-<section id="blog" data-stellar-background-ratio="0.5">
-    <div class="container">
-        <div class="row">
+}
 
-            <div class="col-md-12 col-sm-12">
-                <div class="section-title">
-                    <h2>My Blog & Notes</h2>
-                    <span class="line-bar">...</span>
-                </div>
-            </div>
+@if (Model.UserConfig.ShowBlog)
+{
 
-            <div class="col-md-6 col-sm-6">
-                <!-- BLOG THUMB -->
-                <div class="media blog-thumb">
-                    <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="@Url.Content("~/Content/HomeImages/blog-image1.jpg")" class="img-responsive" alt=""></a>
-                    </div>
-                    <div class="media-body blog-info">
-                        <small><i class="fa fa-clock-o"></i> December 22, 2017</small>
-                        <h3><a href="blog-detail.html">How To Find Out Beautiful Workspace.</a>
-                        </h3>
-                        <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
-                        <a href="blog-detail.html" class="btn section-btn">Read article</a>
+    <!-- BLOG -->
+    <section id="blog" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="section-title">
+                        <h2>@Model.UserConfig.BlogTitle</h2>
+                        <span class="line-bar">...</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 col-sm-6">
-                <!-- BLOG THUMB -->
-                <div class="media blog-thumb">
-                    <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="@Url.Content("~/Content/HomeImages/blog-image2.jpg")" class="img-responsive" alt=""></a>
+                @foreach (var post in Model.BlogPosts)
+                {
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.Image))" class="img-responsive" alt=""></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o"></i>@post.CreatedOn</small>
+                                <h3>
+                                    <a href="blog-detail.html">@post.PostTitle</a>
+                                </h3>
+                                <p>@post.Body</p>
+                                <a href="blog-detail.html" class="btn section-btn">Read article</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="media-body blog-info">
-                        <small><i class="fa fa-clock-o"></i> December 18, 2017</small>
-                        <h3><a href="blog-detail.html">woman sportwear.</a>
-                        </h3>
-                        <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
-                        <a href="blog-detail.html" class="btn section-btn">Read more</a>
-                    </div>
-                </div>
-            </div>
+                }
 
-            <div class="col-md-6 col-sm-6">
-                <!-- BLOG THUMB -->
-                <div class="media blog-thumb">
-                    <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="@Url.Content("~/Content/HomeImages/blog-image3.jpg")" class="img-responsive" alt=""></a>
-                    </div>
-                    <div class="media-body blog-info">
-                        <small><i class="fa fa-clock-o"></i> December 14, 2017</small>
-                        <h3><a href="blog-detail.html">new creative fashion.</a>
-                        </h3>
-                        <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
-                        <a href="blog-detail.html" class="btn section-btn">Read article</a>
-                    </div>
-                </div>
             </div>
-
-            <div class="col-md-6 col-sm-6">
-                <!-- BLOG THUMB -->
-                <div class="media blog-thumb">
-                    <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="@Url.Content("~/Content/HomeImages/blog-image4.jpg")" class="img-responsive" alt=""></a>
-                    </div>
-                    <div class="media-body blog-info">
-                        <small><i class="fa fa-clock-o"></i> December 10, 2017</small>
-                        <h3><a href="blog-detail.html">minimalist design trend in 2018.</a>
-                        </h3>
-                        <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
-                        <a href="blog-detail.html" class="btn section-btn">View Detail</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
+}
 
 <!-- MODAL -->
 <section class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
