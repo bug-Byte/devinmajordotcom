@@ -163,7 +163,10 @@
                                 {
                                     @languageSkill.LanguageSpecifics
                                 }
-                                <small class="progress-percent-small">@languageSkill.LanguageCapabilityPercentage%</small>
+                                @if (languageSkill.LanguageCapabilityPercentage != null)
+                                {
+                                    <small class="progress-percent-small">@languageSkill.LanguageCapabilityPercentage%</small>
+                                }
                             </h4>
                             <div class="progress tm-progress">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="@languageSkill.LanguageCapabilityPercentage" aria-valuemin="0" aria-valuemax="100" style="width: @languageSkill.LanguageCapabilityPercentage%;"></div>

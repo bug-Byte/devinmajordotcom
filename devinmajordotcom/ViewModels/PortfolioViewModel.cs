@@ -104,7 +104,7 @@ namespace devinmajordotcom.ViewModels
         [DisplayName("Language Specifics * : ")]
         public string LanguageSpecifics { get; set; }
 
-        public int LanguageCapabilityPercentage { get; set; }
+        public int? LanguageCapabilityPercentage { get; set; }
 
     }
 
