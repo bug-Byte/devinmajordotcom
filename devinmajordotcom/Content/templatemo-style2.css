@@ -542,7 +542,7 @@ http://www.templatemo.com/tm-509-hydro
     border-radius: 3px;
     text-align: left;
     margin-bottom: 30px;
-    height: 350px;
+    height: 275px;
   }
 
   .media.blog-thumb .media-left {
@@ -569,7 +569,7 @@ http://www.templatemo.com/tm-509-hydro
   }
 
   .blog-info {
-      padding: 75px 25px;
+      padding: 15px 25px;
   }
 
   .blog-info h3 {
@@ -949,7 +949,7 @@ http://www.templatemo.com/tm-509-hydro
     }
 
     .blog-info {
-      padding: 45px 25px;
+      padding: 15px 25px;
     }
 
     .media.blog-thumb .media-left {
@@ -965,7 +965,7 @@ http://www.templatemo.com/tm-509-hydro
 
     .media.blog-thumb .media-left img {
       position: relative;
-      bottom: 10em;
+      /*bottom: 10em;*/
     }
 
     #work .work-thumb,
@@ -1070,7 +1070,7 @@ http://www.templatemo.com/tm-509-hydro
 
     .media.blog-thumb .media-left img {
       position: relative;
-      bottom: 6em;
+      /*bottom: 6em;*/
     }
     
   }

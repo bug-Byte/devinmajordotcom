@@ -9,7 +9,9 @@ namespace devinmajordotcom.ViewModels
     public class MyHomeViewModel
     {
 
-        public UserConfigViewModel UserConfig { get; set; }
+        public UserViewModel CurrentUserViewModel { get; set; }
+
+        public MyHomeUserConfigViewModel UserConfig { get; set; }
 
         public List<SiteLinkViewModel> FavoritesAndBookmarks { get; set; }
 
@@ -19,7 +21,7 @@ namespace devinmajordotcom.ViewModels
 
     }
 
-    public class UserConfigViewModel
+    public class MyHomeUserConfigViewModel
     {
         public int UserID { get; set; }
 

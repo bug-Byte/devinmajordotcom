@@ -14,5 +14,12 @@ namespace devinmajordotcom.Controllers
             var viewModel = myHomeService.GetMyHomeViewModel();
             return View(viewModel);
         }
+
+        public ActionResult BlogPost(int ID)
+        {
+            var viewModel = myHomeService.GetBlogPostById(ID);
+            return View(viewModel);
+        }
+
     }
 }

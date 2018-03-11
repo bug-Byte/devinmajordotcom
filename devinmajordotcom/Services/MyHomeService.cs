@@ -19,10 +19,12 @@ namespace devinmajordotcom.Services
             var guid = HttpContext.Current.Session["MainPageUserAuthID"];
             if (guid == null)
             {
-                if(adminUserConfig.ShowVisitorsAdminHome.GetValueOrDefault())
+                guid = AddNewUser().Guid;
+                if (adminUserConfig.ShowVisitorsAdminHome.GetValueOrDefault())
                 {
                     return new MyHomeViewModel()
                     {
+                        CurrentUserViewModel = GetCurrentUser((Guid)guid),
                         UserConfig = adminUserConfig,
                         FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(siteAdminUser.Id),
                         BlogPosts = GetBlogPostsByUserId(siteAdminUser.Id),
@@ -33,6 +35,7 @@ namespace devinmajordotcom.Services
                 {
                     return new MyHomeViewModel()
                     {
+                        CurrentUserViewModel = GetCurrentUser((Guid)guid),
                         UserConfig = GuestUserConfig,
                         FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(siteGuestUser.Id),
                         BlogPosts = GetBlogPostsByUserId(siteGuestUser.Id),
@@ -51,9 +54,9 @@ namespace devinmajordotcom.Services
             };
         }
 
-        public UserConfigViewModel GetUserConfigViewModelByUserId(int userId)
+        public MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId)
         {
-            return db.MyHome_UserConfigs.Where(x => x.UserId == userId).Select(x => new UserConfigViewModel()
+            return db.MyHome_UserConfigs.Where(x => x.UserId == userId).Select(x => new MyHomeUserConfigViewModel()
             {
                 BackgroundImage = x.BackgroundImage,
                 BlogTitle = x.BlogTitle,
@@ -89,9 +92,9 @@ namespace devinmajordotcom.Services
             }).ToList();
         }
 
-        public List<BlogPostViewModel> GetBlogPostsByUserId(int userId)
+        public BlogPostViewModel GetBlogPostById(int ID)
         {
-            return db.MyHome_BlogPosts.Where(x => x.UserId == userId).Select(x => new BlogPostViewModel()
+            return db.MyHome_BlogPosts.Where(x => x.Id == ID).Select(x => new BlogPostViewModel()
             {
                 BlogPostID = x.Id,
                 AuthorUserID = x.UserId,
@@ -112,6 +115,22 @@ namespace devinmajordotcom.Services
                     ModifiedOn = y.ModifiedOn,
                     ModifiedBy = y.ModifiedBy
                 }).OrderBy(y => y.CreatedOn).ToList()
+            }).FirstOrDefault();
+        }
+
+        public List<BlogPostViewModel> GetBlogPostsByUserId(int userId)
+        {
+            return db.MyHome_BlogPosts.Where(x => x.UserId == userId).Select(x => new BlogPostViewModel()
+            {
+                BlogPostID = x.Id,
+                AuthorUserID = x.UserId,
+                PostTitle = x.Title,
+                Image = x.Image,
+                Body = x.Body,
+                CreatedBy = x.CreatedBy,
+                CreatedOn = x.CreatedOn,
+                ModifiedBy = x.ModifiedBy,
+                ModifiedOn = x.ModifiedOn
             }).OrderBy(y => y.CreatedOn).ToList();
         }
 

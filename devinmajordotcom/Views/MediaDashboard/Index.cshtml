@@ -5,6 +5,9 @@
     ViewBag.ControllerName = ViewBag.ControllerName;
 }
 
+    
+@Html.Partial("_DashboardCSS", Model.UserConfig)
+
 <div id="wrapper" class="wrapper">
 
     <nav id="sidebar" class="active text-center">
@@ -12,10 +15,10 @@
         <!-- Sidebar Header -->
         <div class="sidebar-header">
             <h3>
-                My Media Dashboard
+                @Model.UserConfig.SidebarFullTitle
             </h3>
             <strong>
-                M D
+                @Model.UserConfig.SidebarCollapsedTitle
             </strong>
         </div>
 
@@ -31,7 +34,7 @@
                         <li data-type="link" data-newtitle="@sidebarLink.DisplayName" @if (sidebarLink.IsDefault) { <text> class="active" </text> }>
                             <a href="#" data-framename="@sidebarLink.ID">
                                 <i class="fa @sidebarLink.DisplayIcon"></i>
-                                <span class="displayName">@sidebarLink.DisplayName</span>
+                                <span class="displayName">&nbsp;&nbsp;@sidebarLink.DisplayName</span>
                             </a>
                         </li>
                     }
@@ -43,7 +46,7 @@
                         <li data-type="link" data-newtitle="@sidebarLink.DisplayName" @if (sidebarLink.IsDefault) { <text> class="active" </text> }>
                             <a href="#" data-framename="@sidebarLink.ID">
                                 <i class="fa @sidebarLink.DisplayIcon"></i>
-                                <span class="displayName">@sidebarLink.DisplayName</span>
+                                <span class="displayName">&nbsp;&nbsp;@sidebarLink.DisplayName</span>
                             </a>
                         </li>
                     }
@@ -53,7 +56,7 @@
             @if (Model.CurrentUserViewModel.UserIsAdmin)
             {
                 var link = Html.ActionLink("REPLACE", "AdminLogout", "MediaDashboard").ToHtmlString();
-                var cleanLink = link.Replace("REPLACE", "<i class='glyphicon glyphicon-log-out'></i><span class='displayName'>Log Out</span>");
+                var cleanLink = link.Replace("REPLACE", "<i class='glyphicon glyphicon-log-out'></i><span class='displayName'>&nbsp;&nbsp;Log Out</span>");
                 <li data-newtitle="Log Out">
                     @Html.Raw(cleanLink)
                 </li>
@@ -64,7 +67,7 @@
                 <li id="mainLogin" data-newtitle="Log In">                  
                     <a>
                         <i class="glyphicon glyphicon-log-in"></i>
-                        <span class="displayName">Log In</span>
+                        <span class="displayName">&nbsp;&nbsp;Log In</span>
                     </a>
                 </li>
             }

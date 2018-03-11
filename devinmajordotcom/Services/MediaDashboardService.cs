@@ -26,9 +26,13 @@ namespace devinmajordotcom.Services
                 guid = AddNewUser().Guid;
             }
 
+            var user = GetCurrentUser((Guid)guid);
+            var siteAdminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+
             return new MediaDashboardViewModel()
             {
-                CurrentUserViewModel = GetCurrentUser((Guid)guid),
+                CurrentUserViewModel = user,
+                UserConfig = GetUserConfigByUserId(siteAdminUser.Id),
                 SidebarLinks = db.MediaDashboard_SiteLinks.Select( x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
@@ -46,10 +50,40 @@ namespace devinmajordotcom.Services
             };
         }
 
+        public MediaDashboardUserConfigViewModel GetUserConfigByUserId(int userID)
+        {
+            return db.MediaDashboard_UserConfigs.Where(x => x.UserId == userID).Select(x => new MediaDashboardUserConfigViewModel()
+            {
+                UserID = x.UserId,
+                BackgroundImage = x.BackgroundImage,
+                SidebarCollapsedTitle = x.SidebarCollapsedTitle,
+                SidebarColor = x.SidebarColor,
+                SidebarFullTitle = x.SidebarFullTitle,
+                SidebarAccentColor = x.SidebarAccentColor
+            }).FirstOrDefault();
+        }
+
         public string ManageMediaDashboard(MediaDashboardViewModel viewModel)
         {
             try
             {
+
+                var adminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+
+                if(adminUser != null)
+                {
+                    var adminUserConfig = db.MediaDashboard_UserConfigs.FirstOrDefault(x => x.UserId == adminUser.Id);
+                    if (adminUserConfig != null)
+                    {
+                        adminUserConfig.BackgroundImage = viewModel.UserConfig.BackgroundImage;
+                        adminUserConfig.SidebarFullTitle = viewModel.UserConfig.SidebarFullTitle;
+                        adminUserConfig.SidebarColor = viewModel.UserConfig.SidebarColor;
+                        adminUserConfig.SidebarCollapsedTitle = viewModel.UserConfig.SidebarCollapsedTitle;
+                        adminUserConfig.SidebarAccentColor = viewModel.UserConfig.SidebarAccentColor;
+                        db.SaveChanges();
+                    }
+                }
+
                 foreach (var link in viewModel.SidebarLinks.Where(x => x.DisplayName != null && x.URL != null))
                 {
                     var linkRecord = db.MediaDashboard_SiteLinks.FirstOrDefault(x => x.Id == link.ID);

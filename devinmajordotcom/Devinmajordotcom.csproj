@@ -756,7 +756,7 @@
     <Content Include="Views\MediaDashboard\_ManageMediaDashboard.cshtml" />
     <Content Include="Views\MediaDashboard\_NewLink.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
-    <Content Include="Views\MyHome\blog-detail.cshtml" />
+    <Content Include="Views\MyHome\BlogPost.cshtml" />
     <Content Include="Views\MyHome\Index.cshtml" />
     <Content Include="Views\Shared\_AdminFirstRunModal.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -779,6 +779,7 @@
     <Content Include="Views\Shared\_LoginModal.cshtml" />
     <Content Include="Views\Home\_ContactEmailForm.cshtml" />
     <Content Include="Views\Home\_ManageLandingPage.cshtml" />
+    <Content Include="Views\MediaDashboard\_DashboardCSS.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -173,6 +173,7 @@
     <None Include="Script.099.PostDeployment.AddAuditingStuff.sql" />
     <None Include="Script.002.PostDeployment.AddMediaDashboardTestData.sql" />
     <None Include="Script.004.PostDeployment.AddMyHomeTestData.sql" />
+    <Build Include="MediaDashboard\Tables\UserConfig.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.001.PostDeployment.AddMainTestData.sql" />

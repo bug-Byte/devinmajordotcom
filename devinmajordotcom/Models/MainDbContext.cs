@@ -40,6 +40,7 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; } // Config
         System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
+        System.Data.Entity.DbSet<MediaDashboard_UserConfig> MediaDashboard_UserConfigs { get; set; } // UserConfig
         System.Data.Entity.DbSet<MyHome_BlogPost> MyHome_BlogPosts { get; set; } // BlogPost
         System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment
         System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink
@@ -81,6 +82,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; } // Config
         public System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; } // SiteLink
+        public System.Data.Entity.DbSet<MediaDashboard_UserConfig> MediaDashboard_UserConfigs { get; set; } // UserConfig
         public System.Data.Entity.DbSet<MyHome_BlogPost> MyHome_BlogPosts { get; set; } // BlogPost
         public System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment
         public System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink
@@ -154,6 +156,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new LandingPage_ConfigConfiguration());
             modelBuilder.Configurations.Add(new LandingPage_SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration());
+            modelBuilder.Configurations.Add(new MediaDashboard_UserConfigConfiguration());
             modelBuilder.Configurations.Add(new MyHome_BlogPostConfiguration());
             modelBuilder.Configurations.Add(new MyHome_BlogPostCommentConfiguration());
             modelBuilder.Configurations.Add(new MyHome_SiteLinkConfiguration());
@@ -179,6 +182,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new LandingPage_ConfigConfiguration(schema));
             modelBuilder.Configurations.Add(new LandingPage_SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new MediaDashboard_SiteLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new MediaDashboard_UserConfigConfiguration(schema));
             modelBuilder.Configurations.Add(new MyHome_BlogPostConfiguration(schema));
             modelBuilder.Configurations.Add(new MyHome_BlogPostCommentConfiguration(schema));
             modelBuilder.Configurations.Add(new MyHome_SiteLinkConfiguration(schema));
@@ -223,6 +227,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<LandingPage_Config> LandingPage_Configs { get; set; }
         public System.Data.Entity.DbSet<LandingPage_SiteLink> LandingPage_SiteLinks { get; set; }
         public System.Data.Entity.DbSet<MediaDashboard_SiteLink> MediaDashboard_SiteLinks { get; set; }
+        public System.Data.Entity.DbSet<MediaDashboard_UserConfig> MediaDashboard_UserConfigs { get; set; }
         public System.Data.Entity.DbSet<MyHome_BlogPost> MyHome_BlogPosts { get; set; }
         public System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; }
         public System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; }
@@ -245,6 +250,7 @@ namespace devinmajordotcom.Models
             LandingPage_Configs = new FakeDbSet<LandingPage_Config>("Id");
             LandingPage_SiteLinks = new FakeDbSet<LandingPage_SiteLink>("Id");
             MediaDashboard_SiteLinks = new FakeDbSet<MediaDashboard_SiteLink>("Id");
+            MediaDashboard_UserConfigs = new FakeDbSet<MediaDashboard_UserConfig>("Id");
             MyHome_BlogPosts = new FakeDbSet<MyHome_BlogPost>("Id");
             MyHome_BlogPostComments = new FakeDbSet<MyHome_BlogPostComment>("Id");
             MyHome_SiteLinks = new FakeDbSet<MyHome_SiteLink>("Id");
@@ -706,6 +712,37 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // UserConfig
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MediaDashboard_UserConfig
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int UserId { get; set; } // UserID
+        public string SidebarFullTitle { get; set; } // SidebarFullTitle
+        public string SidebarCollapsedTitle { get; set; } // SidebarCollapsedTitle
+        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public string SidebarColor { get; set; } // SidebarColor
+        public string SidebarAccentColor { get; set; } // SidebarAccentColor
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Security_User pointed by [UserConfig].([UserId]) (MediaDashboard_UserConfig_UserID_Security_User_ID)
+        /// </summary>
+        public virtual Security_User Security_User { get; set; } // MediaDashboard_UserConfig_UserID_Security_User_ID
+
+        public MediaDashboard_UserConfig()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // BlogPost
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class MyHome_BlogPost
@@ -1129,6 +1166,10 @@ namespace devinmajordotcom.Models
         // Reverse navigation
 
         /// <summary>
+        /// Child MediaDashboard_UserConfigs where [UserConfig].[UserID] point to this entity (MediaDashboard_UserConfig_UserID_Security_User_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<MediaDashboard_UserConfig> MediaDashboard_UserConfigs { get; set; } // UserConfig.MediaDashboard_UserConfig_UserID_Security_User_ID
+        /// <summary>
         /// Child MyHome_BlogPosts where [BlogPost].[UserID] point to this entity (MyHome_BlogPost_UserID_Security_User_Id)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<MyHome_BlogPost> MyHome_BlogPosts { get; set; } // BlogPost.MyHome_BlogPost_UserID_Security_User_Id
@@ -1153,6 +1194,7 @@ namespace devinmajordotcom.Models
             MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
             MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
             MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
+            MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
             InitializePartial();
         }
 
@@ -1292,6 +1334,39 @@ namespace devinmajordotcom.Models
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // UserConfig
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class MediaDashboard_UserConfigConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MediaDashboard_UserConfig>
+    {
+        public MediaDashboard_UserConfigConfiguration()
+            : this("MediaDashboard")
+        {
+        }
+
+        public MediaDashboard_UserConfigConfiguration(string schema)
+        {
+            ToTable("UserConfig", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
+            Property(x => x.SidebarFullTitle).HasColumnName(@"SidebarFullTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.SidebarCollapsedTitle).HasColumnName(@"SidebarCollapsedTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.SidebarColor).HasColumnName(@"SidebarColor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.SidebarAccentColor).HasColumnName(@"SidebarAccentColor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+
+            // Foreign keys
+            HasRequired(a => a.Security_User).WithMany(b => b.MediaDashboard_UserConfigs).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false); // MediaDashboard_UserConfig_UserID_Security_User_ID
             InitializePartial();
         }
         partial void InitializePartial();

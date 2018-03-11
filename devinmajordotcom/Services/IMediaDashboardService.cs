@@ -14,6 +14,8 @@ namespace devinmajordotcom.Services
 
         string ManageMediaDashboard(MediaDashboardViewModel viewModel);
 
+        MediaDashboardUserConfigViewModel GetUserConfigByUserId(int userID);
+
         void RemoveLink(int ID);
 
     }

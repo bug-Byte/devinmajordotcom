@@ -12,6 +12,29 @@ Post-Deployment Script Template
 
 BEGIN TRANSACTION
 
+
+INSERT INTO [Security].[User]
+(
+	[ClientName]
+	,[IsActive]
+	,[EmailAddress]
+	,[IsAdmin]
+	,[UserName]
+	,[Password]
+	,[GUID]
+)
+VALUES
+(
+	'::1',
+	0,
+	NULL,
+	0,
+	'Guest',
+	NULL,
+	NEWID()
+);
+GO
+
 INSERT INTO [LandingPage].[Config]
 (
 	AppsTitle,

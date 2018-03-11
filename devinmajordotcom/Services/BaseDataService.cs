@@ -148,28 +148,44 @@ namespace devinmajordotcom.Services
             var guestUserId = db.Security_Users.Where(y => y.ClientName == "::1" && y.UserName == "Guest").Select(y => y.Id).FirstOrDefault();
             if (guestUserId != 0)
             {
-                var guestConfig = db.MyHome_UserConfigs.Where(x => x.UserId == guestUserId).FirstOrDefault();
+                var guestMyHomeConfig = db.MyHome_UserConfigs.Where(x => x.UserId == guestUserId).FirstOrDefault();
+                var guestMediaDashboardConfig = db.MediaDashboard_UserConfigs.Where(x => x.UserId == guestUserId).FirstOrDefault();
                 var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == guestUserId).ToList();
                 var guestMyHomeBlogPosts = db.MyHome_BlogPosts.Where(x => x.UserId == guestUserId).ToList();
 
-                if (guestConfig != null)
+                if(guestMediaDashboardConfig != null)
                 {
-                    var newConfigRecord = new MyHome_UserConfig()
+                    var newMediaDashboardConfigRecord = new MediaDashboard_UserConfig()
                     {
-                        BackgroundImage = guestConfig.BackgroundImage,
-                        BlogTitle = guestConfig.BlogTitle,
-                        BookmarksTitle = guestConfig.BookmarksTitle,
-                        ShowBanner = guestConfig.ShowBanner,
-                        ShowBlog = guestConfig.ShowBlog,
-                        ShowDateAndTime = guestConfig.ShowDateAndTime,
-                        ShowVisitorsAdminHome = guestConfig.ShowVisitorsAdminHome,
-                        ShowBookmarks = guestConfig.ShowBookmarks,
-                        ShowWeather = guestConfig.ShowWeather,
-                        Greeting = guestConfig.Greeting,
+                        SidebarCollapsedTitle = guestMediaDashboardConfig.SidebarCollapsedTitle,
+                        SidebarColor = guestMediaDashboardConfig.SidebarColor,
+                        UserId = newUser.Id,
+                        SidebarFullTitle = guestMediaDashboardConfig.SidebarFullTitle,
+                        BackgroundImage = guestMediaDashboardConfig.BackgroundImage,
+                        SidebarAccentColor = guestMediaDashboardConfig.SidebarAccentColor
+                    };
+                    db.MediaDashboard_UserConfigs.Add(newMediaDashboardConfigRecord);
+                    db.SaveChanges();
+                }
+
+                if (guestMyHomeConfig != null)
+                {
+                    var newHomeConfigRecord = new MyHome_UserConfig()
+                    {
+                        BackgroundImage = guestMyHomeConfig.BackgroundImage,
+                        BlogTitle = guestMyHomeConfig.BlogTitle,
+                        BookmarksTitle = guestMyHomeConfig.BookmarksTitle,
+                        ShowBanner = guestMyHomeConfig.ShowBanner,
+                        ShowBlog = guestMyHomeConfig.ShowBlog,
+                        ShowDateAndTime = guestMyHomeConfig.ShowDateAndTime,
+                        ShowVisitorsAdminHome = guestMyHomeConfig.ShowVisitorsAdminHome,
+                        ShowBookmarks = guestMyHomeConfig.ShowBookmarks,
+                        ShowWeather = guestMyHomeConfig.ShowWeather,
+                        Greeting = guestMyHomeConfig.Greeting,
                         UserId = newUser.Id,
                         IsEditable = true
                     };
-                    db.MyHome_UserConfigs.Add(newConfigRecord);
+                    db.MyHome_UserConfigs.Add(newHomeConfigRecord);
                     db.SaveChanges();
                 }
                 if(guestMyHomeBlogPosts != null && guestMyHomeBlogPosts.Count > 0)

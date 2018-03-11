@@ -1,6 +1,6 @@
 ﻿@using devinmajordotcom.ViewModels;
 @{
-    var userConfigViewModel = (UserConfigViewModel)ViewBag.CurrentUserConfig;
+    var userConfigViewModel = (MyHomeUserConfigViewModel)ViewBag.CurrentUserConfig;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,7 @@
     </div>
 </section>
 
-@if (userConfigViewModel.ShowBanner)
+@if (userConfigViewModel != null && userConfigViewModel.ShowBanner)
 {
     <!-- MENU -->
     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
