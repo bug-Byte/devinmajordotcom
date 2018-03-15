@@ -30,8 +30,8 @@
             @if (Model.UserConfig.ShowWeather)
             {
                 <div class="col-sm-12 text-center">
-                    <textarea id="weather" class="form-control"></textarea>
-                    <button type="button" class="btn btn-success" id="get-weather-btn">Get Weather</button>
+                    @*<textarea id="weather" class="form-control"></textarea>*@
+                    <div id="weather"></div>
                 </div>
             }
             
@@ -107,7 +107,7 @@
                         <!-- BLOG THUMB -->
                         <div class="media blog-thumb">
                             <div class="media-object media-left">
-                                <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })"><img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.Image))" class="img-responsive" alt=""></a>
+                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.Image))" class="img-responsive image-popup" alt="">
                             </div>
                             <div class="media-body blog-info">
                                 <small><i class="fa fa-clock-o"></i>@post.CreatedOn</small>

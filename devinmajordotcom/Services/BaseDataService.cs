@@ -98,11 +98,7 @@ namespace devinmajordotcom.Services
         public Security_User AddNewUser(bool IsUserToAddAnAdmin = false)
         {
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            var userGuid = HttpContext.Current.Session["MainPageUserAuthID"];
-            if(userGuid == null)
-            {
-                userGuid = Guid.NewGuid();
-            }
+            var userGuid = HttpContext.Current.Session["MainPageUserAuthID"] ?? Guid.NewGuid();
             if (string.IsNullOrEmpty(ip))
             {
                 ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -121,11 +117,14 @@ namespace devinmajordotcom.Services
             db.Security_Users.Add(newUser);
             db.SaveChanges();
 
-            if(IsUserToAddAnAdmin)
+            if (IsUserToAddAnAdmin)
             {
                 GiveAdminTestData(newUser);
             }
-
+            else
+            {
+                GiveUserTestData(newUser);
+            }
             return newUser;
         }
 
@@ -141,6 +140,72 @@ namespace devinmajordotcom.Services
                 UserIsAdmin = x.IsAdmin,
                 UserIsActive = x.IsActive
             }).FirstOrDefault();
+        }
+
+        public void GiveUserTestData(Security_User newUser)
+        {
+            var guestUserId = db.Security_Users.Where(y => y.ClientName == "::1" && y.UserName == "Guest").Select(y => y.Id).FirstOrDefault();
+            if (guestUserId == 0) return;
+            var guestMyHomeConfig = db.MyHome_UserConfigs.FirstOrDefault(x => x.UserId == guestUserId);
+            var guestMyHomeLinks = db.MyHome_SiteLinks.Where(x => x.UserId == guestUserId).ToList();
+            var guestMyHomeBlogPosts = db.MyHome_BlogPosts.Where(x => x.UserId == guestUserId).ToList();
+
+            if (guestMyHomeConfig != null)
+            {
+                var newHomeConfigRecord = new MyHome_UserConfig()
+                {
+                    BackgroundImage = guestMyHomeConfig.BackgroundImage,
+                    BlogTitle = guestMyHomeConfig.BlogTitle,
+                    BookmarksTitle = guestMyHomeConfig.BookmarksTitle,
+                    ShowBanner = guestMyHomeConfig.ShowBanner,
+                    ShowBlog = guestMyHomeConfig.ShowBlog,
+                    ShowDateAndTime = guestMyHomeConfig.ShowDateAndTime,
+                    ShowVisitorsAdminHome = guestMyHomeConfig.ShowVisitorsAdminHome,
+                    ShowBookmarks = guestMyHomeConfig.ShowBookmarks,
+                    ShowWeather = guestMyHomeConfig.ShowWeather,
+                    Greeting = guestMyHomeConfig.Greeting,
+                    UserId = newUser.Id,
+                    IsEditable = true
+                };
+                db.MyHome_UserConfigs.Add(newHomeConfigRecord);
+                db.SaveChanges();
+            }
+            if (guestMyHomeBlogPosts.Count > 0)
+            {
+                foreach (var post in guestMyHomeBlogPosts)
+                {
+                    var newPostRecord = new MyHome_BlogPost()
+                    {
+                        UserId = newUser.Id,
+                        Image = post.Image,
+                        Body = post.Body,
+                        Title = post.Title
+                    };
+                    db.MyHome_BlogPosts.Add(newPostRecord);
+                }
+                db.SaveChanges();
+            }
+            if (guestMyHomeLinks.Count <= 0) return;
+            foreach (var link in guestMyHomeLinks)
+            {
+                var newLinkRecord = new MyHome_SiteLink()
+                {
+                    Action = null,
+                    Controller = null,
+                    DisplayIcon = null,
+                    Description = null,
+                    Directive = null,
+                    UserId = newUser.Id,
+                    DisplayName = link.DisplayName,
+                    Url = link.Url,
+                    IsDefault = link.IsDefault,
+                    IsEnabled = link.IsEnabled,
+                    Image = link.Image,
+                    Order = link.Order
+                };
+                db.MyHome_SiteLinks.Add(newLinkRecord);
+            }
+            db.SaveChanges();
         }
 
         public void GiveAdminTestData(Security_User newUser)
