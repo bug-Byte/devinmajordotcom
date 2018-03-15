@@ -73,7 +73,7 @@ namespace devinmajordotcom.Services
                 if(adminUser != null)
                 {
                     var adminUserConfig = db.MediaDashboard_UserConfigs.FirstOrDefault(x => x.UserId == adminUser.Id);
-                    if (adminUserConfig != null)
+                    if (adminUserConfig != null && viewModel.UserConfig != null)
                     {
                         adminUserConfig.BackgroundImage = viewModel.UserConfig.BackgroundImage;
                         adminUserConfig.SidebarFullTitle = viewModel.UserConfig.SidebarFullTitle;

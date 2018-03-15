@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <div class="checkbox-inline">
                                         <label class="switch">
-                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsDefault, new { @class = "trendClick" })
+                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsDefault, new { htmlAttributes = new { @class = "toggler" } })
                                             <div class="slider round"></div>
                                         </label>
                                         @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <div class="checkbox-inline">
                                         <label class="switch">
-                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsEnabled, new { @class = "trendClick" })
+                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
                                             <div class="slider round"></div>
                                         </label>
                                         @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })

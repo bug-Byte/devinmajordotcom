@@ -184,6 +184,7 @@ namespace devinmajordotcom.Services
                 Controller = x.Controller,
                 IsDefault = x.IsDefault,
                 IsEnabled = x.IsEnabled,
+                IsPublic = x.IsPublic,
                 Order = x.Order
             }).OrderBy(x => x.Order).ToList();
         }

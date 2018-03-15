@@ -9,6 +9,15 @@ $(document).ready(function () {
 
     setTimeout(setupHandlebarsHelpers, 50);
 
+    $(".toggler").change(function () {
+        var id = $(this).attr("id");
+        if (document.getElementById(id).hasAttribute("checked")) {
+            $(this).removeAttr("checked");
+        } else {
+            $(this).attr("checked", "true");
+        }
+    });
+
     $(".portfolioPanelHeading").on("click", function () {
         var toggler = $(this).children("span");
         toggler.toggleClass("glyphicon-collapse-up");
