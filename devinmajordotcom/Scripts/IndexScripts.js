@@ -81,6 +81,14 @@ function InitializeMediaDashboardEventHandlers() {
             $(this).closest(".mediaDashboardLink").find('.titleContainer').html($(this).val());
         }
     });
+    $(".toggler").change(function () {
+        var id = $(this).attr("id");
+        if (document.getElementById(id).hasAttribute("checked")) {
+            $(this).removeAttr("checked");
+        } else {
+            $(this).attr("checked", "true");
+        }
+    });
 }
 
 function updateLinks() {
