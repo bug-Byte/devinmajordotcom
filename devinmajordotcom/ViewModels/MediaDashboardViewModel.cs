@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -21,14 +22,19 @@ namespace devinmajordotcom.ViewModels
 
         public int UserID { get; set; }
 
+        [DisplayName("Expanded Sidebar Title: ")]
         public string SidebarFullTitle { get; set; }
 
+        [DisplayName("Sidebar Color: ")]
         public string SidebarColor { get; set; }
 
+        [DisplayName("Sidebar Accent Color: ")]
         public string SidebarAccentColor { get; set; }
 
+        [DisplayName("Collapsed Sidebar Title: ")]
         public string SidebarCollapsedTitle { get; set; }
 
+        [DisplayName("Background Image: ")]
         public byte[] BackgroundImage { get; set; }
 
     }

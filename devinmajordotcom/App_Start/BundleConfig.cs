@@ -35,12 +35,12 @@ namespace devinmajordotcom.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      
                       "~/Content/bootsnack.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css",
                       "~/Content/bootstrap-iconpicker.min.css",
                       "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/bootstrap-colorpicker/css/bootstrap-colorpicker.css",
                       "~/Content/cover.css"
             ));
 
@@ -78,6 +78,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/handlebars.min.js",
                 "~/Scripts/moment.js",
                 "~/Scripts/bootstrap-datetimepicker.js",
+                "~/Scripts/bootstrap-colorpicker.js",
                 "~/Scripts/IndexScripts.js"
             ));
 

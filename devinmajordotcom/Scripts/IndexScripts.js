@@ -9,14 +9,13 @@ $(document).ready(function () {
 
     setTimeout(setupHandlebarsHelpers, 50);
 
-    $(".toggler").change(function () {
-        var id = $(this).attr("id");
-        if (document.getElementById(id).hasAttribute("checked")) {
-            $(this).removeAttr("checked");
-        } else {
-            $(this).attr("checked", "true");
-        }
+    $(document).find(".customColorPicker").each(function () {
+        $(this).colorpicker({
+            inline: false,
+            format: false
+        })
     });
+      
 
     $(".portfolioPanelHeading").on("click", function () {
         var toggler = $(this).children("span");
@@ -65,6 +64,7 @@ function InitializeMediaDashboardEventHandlers() {
         $(this).closest(".mediaDashboardLink").find('.iconContainer').html("<span class='fa " + $(this).children("input:first").val() + "'></span>");
     });
     $(".mediaSortable").sortable({
+        connectWith: '.viewport',
         handle: ".move",
         stop: function (e, ui) {
             $('td.drag', ui.item).click();

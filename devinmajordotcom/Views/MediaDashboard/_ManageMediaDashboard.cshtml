@@ -6,7 +6,91 @@
 @using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "ManageMediaAjaxSuccess(data);", OnFailure = "AjaxFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
 {
     var count = 0;
-    <div id="tagsForm" class="">
+
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseMedia">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Main Settings</a>
+            </h4>
+        </div>
+        <div id="collapseMedia" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarFullTitle)
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.UserConfig.SidebarFullTitle, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarFullTitle)
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarColor)
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="customColorPicker input-group colorpicker-component" data-color="@Model.UserConfig.SidebarColor">
+                                    @Html.TextBoxFor(x => x.UserConfig.SidebarColor, new { @class = "form-control", @placeholder = "Pick a color, any color!" })
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarColor)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarCollapsedTitle)
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.UserConfig.SidebarCollapsedTitle, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarCollapsedTitle)
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarAccentColor)
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="customColorPicker input-group colorpicker-component" data-color="@Model.UserConfig.SidebarAccentColor">
+                                    @Html.TextBoxFor(x => x.UserConfig.SidebarAccentColor, new { @class = "form-control", @placeholder = "Pick a color, any color!" })
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarAccentColor)
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div id="mediaDashboardLinksContainer" style="overflow:scroll !important;" class="">
         <ul id="mediaDashboardLinksList" class="mediaSortable">
         @foreach (var link in Model.SidebarLinks)
         {
