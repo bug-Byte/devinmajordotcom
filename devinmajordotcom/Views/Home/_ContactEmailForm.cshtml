@@ -7,14 +7,16 @@
     @Html.HiddenFor(x => x.RecipientEmail)
     @Html.HiddenFor(x => x.RecipientName)
 
-    <div class="row">
-        <div class="col-sm-6">
-            @Html.TextBoxFor(x => x.SenderName, new { @class = "form-control", @placeholder = "Your Name" })
+    <div id="container" style="background-color: #0B1C1E;">
+        
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.SenderName, new { @class = "form-control", @placeholder = "Your Name" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.SenderEmailAddress, new { @class = "form-control", @placeholder = "Your Email" })
+            </div>
         </div>
-        <div class="col-sm-6">
-            @Html.TextBoxFor(x => x.SenderEmailAddress, new { @class = "form-control", @placeholder = "Your Email" })
-        </div>
-    </div>
         <br />
 
         <div class="row">
@@ -38,4 +40,7 @@
             </div>
         </div>
         <br />
+
+    </div>
+
 }
