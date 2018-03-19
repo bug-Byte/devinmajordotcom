@@ -94,9 +94,9 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/smoothscroll.js",
                 "~/Scripts/jquery.nav.js",
                 "~/Scripts/isotope.js",
+                "~/Scripts/imagesloaded.min.js",
                 "~/Scripts/custom.js",
-                "~/Scripts/index.js",
-                "~/Scripts/imagesloaded.min.js"
+                "~/Scripts/index.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/mediaScripts").Include(

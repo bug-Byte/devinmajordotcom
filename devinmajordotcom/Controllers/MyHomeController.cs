@@ -11,6 +11,7 @@ namespace devinmajordotcom.Controllers
         // GET: MyHome
         public ActionResult Index()
         {
+            ViewBag.Title = "D3V!N M@J0R";
             var viewModel = myHomeService.GetMyHomeViewModel();
             return View(viewModel);
         }

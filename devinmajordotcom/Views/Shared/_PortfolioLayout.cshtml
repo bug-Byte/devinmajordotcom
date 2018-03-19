@@ -10,12 +10,20 @@
     <title>D3V!N M@J0R</title>
 
     <!-- FAVICON -->
-    <link rel="SHORTCUT ICON" href="images/favicon.ico" type="image/x-icon" />
+    @*<link rel="SHORTCUT ICON" href="images/favicon.ico" type="image/x-icon" />*@
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Action("../Content/Images/favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Action("../Content/Images/favicon/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Action("../Content/Images/favicon/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Action("../Content/Images/favicon/site.webmanifest")">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
-    <link rel="stylesheet" href="~/Content/templatemo-style.css">
+    <link rel="stylesheet" href="~/Content/templatemo-style.css">*@
+    @Styles.Render("~/Content/portfoliocss")
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
 
 </head>
@@ -50,13 +58,16 @@
 
     @RenderBody()
 
-    <script src="~/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/smoothscroll.js"></script>
+    @*<script src="~/Scripts/jquery-3.2.1.js"></script>*@
+@*<script src="~/Scripts/bootstrap.min.js"></script>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/portfolioScripts")
+    @*<script src="~/Scripts/smoothscroll.js"></script>
     <script src="~/Scripts/jquery.nav.js"></script>
     <script src="~/Scripts/isotope.js"></script>
     <script src="~/Scripts/imagesloaded.min.js"></script>
-    <script src="~/Scripts/custom.js"></script>
+    <script src="~/Scripts/custom.js"></script>*@
 
 </body>
 </html>

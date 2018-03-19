@@ -348,6 +348,14 @@
     <Content Include="Content\Images\back1.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\check2.png" />
+    <Content Include="Content\Images\favicon\android-chrome-192x192.png" />
+    <Content Include="Content\Images\favicon\android-chrome-512x512.png" />
+    <Content Include="Content\Images\favicon\apple-touch-icon.png" />
+    <Content Include="Content\Images\favicon\browserconfig.xml" />
+    <Content Include="Content\Images\favicon\favicon-16x16.png" />
+    <Content Include="Content\Images\favicon\favicon-32x32.png" />
+    <Content Include="Content\Images\favicon\favicon.ico" />
+    <Content Include="Content\Images\favicon\mstile-150x150.png" />
     <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\MediaImages\media1.jpg" />
     <Content Include="Content\MediaImages\media2.jpg" />
@@ -546,6 +554,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\Images\favicon\site.webmanifest" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
