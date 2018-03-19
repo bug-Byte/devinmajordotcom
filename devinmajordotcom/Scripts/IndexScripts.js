@@ -403,6 +403,7 @@ function ConnectToSignalRPerformanceHub() {
         }
 
         var ramValues = nextRamValue.split(" / ");
+        $("#tempCounter").html(temp);
         $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue, 100));
         $("#ramCounter").data('easyPieChart').update(UpdateRamCounter(ramValues[0], ramValues[1]));
         firstRun = false;
