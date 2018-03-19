@@ -275,7 +275,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseDataService.cs" />
+    <Compile Include="Services\HardwareMonitorService.cs" />
     <Compile Include="Services\IBaseDataService.cs" />
+    <Compile Include="Services\IHardwareMonitorService.cs" />
     <Compile Include="Services\IMediaDashboardService.cs" />
     <Compile Include="Services\IMyHomeService.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
