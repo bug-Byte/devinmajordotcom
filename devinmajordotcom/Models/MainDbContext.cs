@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -55,6 +55,8 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
         System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
+        System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance
+        System.Data.Entity.DbSet<Security_HardwareType> Security_HardwareTypes { get; set; } // HardwareType
         System.Data.Entity.DbSet<Security_User> Security_Users { get; set; } // User
 
         int SaveChanges();
@@ -97,6 +99,8 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
         public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
+        public System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance
+        public System.Data.Entity.DbSet<Security_HardwareType> Security_HardwareTypes { get; set; } // HardwareType
         public System.Data.Entity.DbSet<Security_User> Security_Users { get; set; } // User
 
         static dbContext()
@@ -171,6 +175,8 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration());
             modelBuilder.Configurations.Add(new RefactorLogConfiguration());
+            modelBuilder.Configurations.Add(new Security_HardwarePerformanceConfiguration());
+            modelBuilder.Configurations.Add(new Security_HardwareTypeConfiguration());
             modelBuilder.Configurations.Add(new Security_UserConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
@@ -197,6 +203,8 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new RefactorLogConfiguration(schema));
+            modelBuilder.Configurations.Add(new Security_HardwarePerformanceConfiguration(schema));
+            modelBuilder.Configurations.Add(new Security_HardwareTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_UserConfiguration(schema));
             return modelBuilder;
         }
@@ -242,6 +250,8 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; }
         public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; }
+        public System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; }
+        public System.Data.Entity.DbSet<Security_HardwareType> Security_HardwareTypes { get; set; }
         public System.Data.Entity.DbSet<Security_User> Security_Users { get; set; }
 
         public FakedbContext()
@@ -265,6 +275,8 @@ namespace devinmajordotcom.Models
             Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
             Portfolio_TechSkills = new FakeDbSet<Portfolio_TechSkill>("Id");
             RefactorLogs = new FakeDbSet<RefactorLog>("OperationKey");
+            Security_HardwarePerformances = new FakeDbSet<Security_HardwarePerformance>("Id");
+            Security_HardwareTypes = new FakeDbSet<Security_HardwareType>("Id");
             Security_Users = new FakeDbSet<Security_User>("Id");
 
             InitializePartial();
@@ -1146,6 +1158,60 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // HardwarePerformance
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_HardwarePerformance
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int HardwareTypeId { get; set; } // HardwareTypeID
+        public double PercentageValue { get; set; } // PercentageValue
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Security_HardwareType pointed by [HardwarePerformance].([HardwareTypeId]) (HardwarePerformance_HardwareTypeID_HardwareType_ID)
+        /// </summary>
+        public virtual Security_HardwareType Security_HardwareType { get; set; } // HardwarePerformance_HardwareTypeID_HardwareType_ID
+
+        public Security_HardwarePerformance()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // HardwareType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_HardwareType
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Name { get; set; } // Name
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Security_HardwarePerformances where [HardwarePerformance].[HardwareTypeID] point to this entity (HardwarePerformance_HardwareTypeID_HardwareType_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance.HardwarePerformance_HardwareTypeID_HardwareType_ID
+
+        public Security_HardwareType()
+        {
+            Security_HardwarePerformances = new System.Collections.Generic.List<Security_HardwarePerformance>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // User
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Security_User
@@ -1790,6 +1856,60 @@ namespace devinmajordotcom.Models
             HasKey(x => x.OperationKey);
 
             Property(x => x.OperationKey).HasColumnName(@"OperationKey").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // HardwarePerformance
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_HardwarePerformanceConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_HardwarePerformance>
+    {
+        public Security_HardwarePerformanceConfiguration()
+            : this("Security")
+        {
+        }
+
+        public Security_HardwarePerformanceConfiguration(string schema)
+        {
+            ToTable("HardwarePerformance", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.HardwareTypeId).HasColumnName(@"HardwareTypeID").HasColumnType("int").IsRequired();
+            Property(x => x.PercentageValue).HasColumnName(@"PercentageValue").HasColumnType("float").IsRequired();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+
+            // Foreign keys
+            HasRequired(a => a.Security_HardwareType).WithMany(b => b.Security_HardwarePerformances).HasForeignKey(c => c.HardwareTypeId).WillCascadeOnDelete(false); // HardwarePerformance_HardwareTypeID_HardwareType_ID
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // HardwareType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_HardwareTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_HardwareType>
+    {
+        public Security_HardwareTypeConfiguration()
+            : this("Security")
+        {
+        }
+
+        public Security_HardwareTypeConfiguration(string schema)
+        {
+            ToTable("HardwareType", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

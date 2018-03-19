@@ -12,6 +12,9 @@ Post-Deployment Script Template
 
 BEGIN TRANSACTION
 
+INSERT INTO [Security].[HardwareType](Name)
+VALUES('CPU Usage'),('RAM Usage'),('CPU Temp');
+
 
 INSERT INTO [Security].[User]
 (

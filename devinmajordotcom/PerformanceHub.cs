@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using devinmajordotcom.Services;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,20 @@ namespace devinmajordotcom
 {
     public class PerformanceHub : Hub
     {
-        //private static readonly IHubContext HubContext = GlobalHost.ConnectionManager.GetHubContext<PerformanceHub>();
+
         [HubMethodName("SendPerformanceMonitoring")]
         public void SendPerformanceMonitoring()
         {
 
+            HardwareMonitorService service = new HardwareMonitorService();
+
             var computerInfo = new Microsoft.VisualBasic.Devices.ComputerInfo();
             //var networkCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", "Realtek RTL8174C[P]_8111C Family PCI-E Gigabit Ethernet NIC");
+            //var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
             var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             var totalRam = ((computerInfo.TotalPhysicalMemory / 1024) / 1024);
             var availableRamCounter = new PerformanceCounter("Memory", "Available MBytes");
-            //var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
-            
+
             var drives = DriveInfo.GetDrives();
             int i = 0;
 
@@ -41,8 +44,12 @@ namespace devinmajordotcom
                         diskList.Add(diskInfo);
                     }
                 }
-                //string[] driveList = diskList.ToArray();
+
+                var ramValue = (((totalRam - availableRamCounter.NextValue()) / 1024) / Math.Round((float)totalRam / 1024)) * 100;
+
                 Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp, diskList);
+                service.UpdateCPUUsage(cpuCounter.NextValue());
+                service.UpdateRAMUsage(ramValue);
                 i++;
                 Thread.Sleep(1000);
             }
