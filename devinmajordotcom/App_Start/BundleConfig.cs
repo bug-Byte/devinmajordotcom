@@ -29,6 +29,7 @@ namespace devinmajordotcom.App_Start
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/popper.min.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"
             ));
@@ -54,6 +55,7 @@ namespace devinmajordotcom.App_Start
             bundles.Add(new StyleBundle("~/Content/homecss").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/bootstrap-theme.css",
+                "~/Content/themes/jquery-ui.css",
                 "~/Content/magnific-popup.css",
                 "~/Content/font-awesome.css",
                 "~/Content/templatemo-style2.css"

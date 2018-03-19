@@ -11,6 +11,21 @@ $(document).ready(function () {
         DisplayDateTime();
     }
 
+    $("#settingsWindowButton").draggable().popover({
+        html: 'true',
+        container: 'body'
+    }).click(function () {
+        //$("#settingsWindow").toggle(500);
+        var icon = $(this).find("i");
+        if ($(icon).hasClass("glyphicon-cog")) {
+            $(icon).removeClass("glyphicon-cog");
+            $(icon).addClass("glyphicon-resize-small");
+        } else {
+            $(icon).removeClass("glyphicon-resize-small");
+            $(icon).addClass("glyphicon-cog");
+        }
+    });
+
     // MENU
     $('.navbar-collapse a').on('click',function(){
       $(".navbar-collapse").collapse('hide');
@@ -104,7 +119,7 @@ $(document).ready(function () {
                 currWeather['windDirection'] = windNames[currWeather['windCompass']];	// convert degrees and find wind direction name
 
 
-                var response = "<h3 style='color:white;'><img src='" + currWeather['icon'] + "'>" + currWeather['currTemp'] + " &deg;C</h3><div class=''><ul><li>" + currWeather['city'] + "</li><li>" + currWeather['description'] + "</li></ul></div>";
+                var response = "<h3 style='color:white;'><img src='" + currWeather['icon'] + "'>" + currWeather['currTemp'] + " &deg;C</h3><div class=''><ul><li>" + currWeather['city'] + "</li><li>" + currWeather['description'] + "</li><li>High: " + currWeather['highTemp'] + " &deg;C, Low: " + currWeather['lowTemp'] + " &deg;C</li></ul></div>";
 
                 //var response = "Current Weather: " + currWeather['currTemp'] + "\xB0 and " + currWeather['description'];
                 //var spokenResponse = "It is currently " + currWeather['currTemp'] + " degrees and " + currWeather['description'];

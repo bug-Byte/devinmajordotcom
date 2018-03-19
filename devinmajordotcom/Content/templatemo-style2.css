@@ -7,6 +7,11 @@ http://www.templatemo.com/tm-509-hydro
 */  
   @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600');
 
+  #settingsWindowButton {
+      z-index: 10000;
+      border-radius: 50%;
+  }
+
   body {
     background: #ffffff;
     font-family: 'Poppins', sans-serif;
