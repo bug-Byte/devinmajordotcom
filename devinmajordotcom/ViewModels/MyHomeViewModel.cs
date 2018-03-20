@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -25,22 +26,31 @@ namespace devinmajordotcom.ViewModels
     {
         public int UserID { get; set; }
 
+        [DisplayName("Show Date & Time: ")]
         public bool ShowDateAndTime { get; set; }
 
+        [DisplayName("Show Weather: ")]
         public bool ShowWeather { get; set; }
 
+        [DisplayName("Show Banner: ")]
         public bool ShowBanner { get; set; }
 
+        [DisplayName("Show Bookmarks: ")]
         public bool ShowBookmarks { get; set; }
 
+        [DisplayName("Show Blog: ")]
         public bool ShowBlog { get; set; }
 
+        [DisplayName("Bookmarks Title: ")]
         public string BookmarksTitle { get; set; }
 
+        [DisplayName("Greeting: ")]
         public string Greeting { get; set; }
 
+        [DisplayName("Blog Title: ")]
         public string BlogTitle { get; set; }
 
+        [DisplayName("Background Image: ")]
         public byte[] BackgroundImage { get; set; }
 
         public bool? ShowVisitorsAdminHome { get; set; }

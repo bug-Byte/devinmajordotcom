@@ -6,15 +6,144 @@
 
     <div class="row">
         <div class="col-sm-6">
-            @Html.LabelFor(x => x.)
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.Greeting, new { style = "font-weight:normal;" })
         </div>
         <div class="col-sm-6">
-
+            @Html.TextBoxFor(x => x.Greeting, new { @class = "form-control" })
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.Greeting)
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.BookmarksTitle, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(x => x.BookmarksTitle, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.BookmarksTitle)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.BlogTitle, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.BlogTitle)
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.ShowBanner, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="checkbox-inline">
+                    <label class="switch">
+                        @Html.EditorFor(x => x.ShowBanner, new { htmlAttributes = new { @class = "toggler" } })
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.ShowBanner)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.ShowDateAndTime, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="checkbox-inline">
+                    <label class="switch">
+                        @Html.EditorFor(x => x.ShowDateAndTime, new { htmlAttributes = new { @class = "toggler" } })
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.ShowDateAndTime)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.ShowWeather, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="checkbox-inline">
+                    <label class="switch">
+                        @Html.EditorFor(x => x.ShowDateAndTime, new { htmlAttributes = new { @class = "toggler" } })
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.ShowWeather)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.ShowBookmarks, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(x => x.ShowBookmarks, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.ShowBookmarks)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.ShowBlog, new { style = "font-weight:normal;" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(x => x.ShowBlog, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.ShowBlog)
         </div>
     </div>
 
