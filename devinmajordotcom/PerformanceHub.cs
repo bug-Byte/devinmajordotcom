@@ -51,11 +51,13 @@ namespace devinmajordotcom
                 MainboardEnabled = true,
                 RAMEnabled = true
             };
-            computer.Open();
-            computer.Accept(updateVisitor);
+            
 
             while (i != -1)
             {
+
+                computer.Open();
+                computer.Accept(updateVisitor);
 
                 var ramLoad = (float)0.0;
                 var cpuTemp = (float)0.0;
@@ -103,6 +105,7 @@ namespace devinmajordotcom
                 service.UpdateCPUUsage(cpuLoad);
                 service.UpdateRAMUsage(ramLoad);
                 service.UpdateCPUTemp(cpuTemp);
+                computer.Close();
 
                 i++;
                 Thread.Sleep(1000);
