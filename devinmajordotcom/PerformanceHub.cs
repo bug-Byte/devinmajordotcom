@@ -38,16 +38,10 @@ namespace devinmajordotcom
         {
 
             HardwareMonitorService service = new HardwareMonitorService();
-
-            var computerInfo = new Microsoft.VisualBasic.Devices.ComputerInfo();
-            //var networkCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", "Realtek RTL8174C[P]_8111C Family PCI-E Gigabit Ethernet NIC");
-            //var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
-            var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            var totalRam = ((computerInfo.TotalPhysicalMemory / 1024) / 1024);
-            var availableRamCounter = new PerformanceCounter("Memory", "Available MBytes");
-            //var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
-
             UpdateVisitor updateVisitor = new UpdateVisitor();
+            var drives = DriveInfo.GetDrives();
+            int i = 0;
+
             Computer computer = new Computer()
             {
                 CPUEnabled = true,
@@ -57,17 +51,15 @@ namespace devinmajordotcom
                 MainboardEnabled = true,
                 RAMEnabled = true
             };
-
-            var drives = DriveInfo.GetDrives();
-            int i = 0;            
+            computer.Open();
+            computer.Accept(updateVisitor);
 
             while (i != -1)
             {
-                computer.Open();
-                computer.Accept(updateVisitor);
 
-                var ramCounter = ((totalRam - availableRamCounter.NextValue()) / 1024) + " / " + Math.Round((decimal)totalRam / 1024);
-                var cpuTemp = "°C";
+                var ramLoad = (float)0.0;
+                var cpuTemp = (float)0.0;
+                var cpuLoad = (float)0.0;
                 var diskList = new List<string>();
 
                 foreach (DriveInfo drive in drives)
@@ -77,30 +69,48 @@ namespace devinmajordotcom
                         var diskInfo = drive.Name + "," + drive.VolumeLabel + "," + drive.DriveType + "," + drive.DriveFormat + "," + drive.TotalFreeSpace + "," + drive.TotalSize;
                         diskList.Add(diskInfo);
                     }
-                }
-
-                var ramValue = (((totalRam - availableRamCounter.NextValue()) / 1024) / Math.Round((float)totalRam / 1024)) * 100;             
+                }           
                 
-                for (int t = 0; t < computer.Hardware.Length; t++)
+                foreach (IHardware t2 in computer.Hardware)
                 {
-                    if (computer.Hardware[t].HardwareType == HardwareType.CPU)
+                    if (t2.HardwareType == HardwareType.CPU)
                     {
-                        for (int j = 0; j < computer.Hardware[t].Sensors.Length; j++)
+                        foreach (ISensor t1 in t2.Sensors)
                         {
-                            if (computer.Hardware[t].Sensors[j].SensorType == SensorType.Temperature)
-                                cpuTemp = computer.Hardware[t].Sensors[j].Value.ToString() + "°C";
+                            if (t1.SensorType == SensorType.Temperature)
+                            {
+                                cpuTemp = t1.Value.GetValueOrDefault();
+                            }
+                            if (t1.SensorType == SensorType.Load)
+                            {
+                                cpuLoad = t1.Value.GetValueOrDefault();
+                            }
+                        }
+                    }
+                    if (t2.HardwareType == HardwareType.RAM)
+                    {
+                        foreach (ISensor t1 in t2.Sensors)
+                        {
+                            if (t1.SensorType == SensorType.Load)
+                            {
+                                ramLoad = t1.Value.GetValueOrDefault();
+                            }
                         }
                     }
                 }
-                computer.Close();               
                 
-                Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp, diskList);
-                service.UpdateCPUUsage(cpuCounter.NextValue());
-                service.UpdateRAMUsage(ramValue);
+                Clients.All.updatePerformanceCounters(cpuLoad, ramLoad, cpuTemp, diskList);
+                service.UpdateCPUUsage(cpuLoad);
+                service.UpdateRAMUsage(ramLoad);
+                service.UpdateCPUTemp(cpuTemp);
+
                 i++;
                 Thread.Sleep(1000);
+
             }
+
         }
 
     }
+
 }

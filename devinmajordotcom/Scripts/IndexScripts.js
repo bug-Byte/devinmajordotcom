@@ -402,14 +402,13 @@ function ConnectToSignalRPerformanceHub() {
             });
         }
 
-        var ramValues = nextRamValue.split(" / ");
-        $("#tempCounter").html(temp);
-        $("#cpuCounter").data('easyPieChart').update(UpdateCpuCounter(nextCpuValue, 100));
-        $("#tempCounter").html(temp);
-
-        $("#ramCounter").data('easyPieChart').update(UpdateRamCounter(ramValues[0], ramValues[1]));
+        $("#cpuCounter").data('easyPieChart').update(nextCpuValue);
+        $("#ramCounter").data('easyPieChart').update(nextRamValue);
+        $("#tempCounter").data('easyPieChart').update(temp);
         firstRun = false;
     };
+
+    
 
     $.connection.hub.start().done(function () {
         performanceHub.server.SendPerformanceMonitoring();
@@ -436,7 +435,12 @@ function InitializePieCharts() {
             return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
         },
         onStep: function (from, to, percent) {
-            $(this.el).find('.percent').text(Math.round(percent) + "%");
+            if ($(this.el).hasClass("temperature")) {
+                $(this.el).find('.percent').text(Math.round(percent) + "°C");
+            } else {
+                $(this.el).find('.percent').text(Math.round(percent) + "%");
+            }
+            
         }
     });
 

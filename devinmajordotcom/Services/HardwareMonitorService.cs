@@ -11,7 +11,7 @@ namespace devinmajordotcom.Services
             db = new dbContext();
         }
 
-        public void UpdateCPUUsage(float nextValue)
+        public void UpdateCPUUsage(double nextValue)
         {
             var newHardwareDataRecord = new Security_HardwarePerformance()
             {
@@ -27,6 +27,17 @@ namespace devinmajordotcom.Services
             var newHardwareDataRecord = new Security_HardwarePerformance()
             {
                 HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.RAMUsage,
+                PercentageValue = nextValue
+            };
+            db.Security_HardwarePerformances.Add(newHardwareDataRecord);
+            db.SaveChanges();
+        }
+
+        public void UpdateCPUTemp(double nextValue)
+        {
+            var newHardwareDataRecord = new Security_HardwarePerformance()
+            {
+                HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUTemp,
                 PercentageValue = nextValue
             };
             db.Security_HardwarePerformances.Add(newHardwareDataRecord);
