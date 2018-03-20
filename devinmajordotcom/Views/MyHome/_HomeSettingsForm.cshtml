@@ -2,7 +2,7 @@
 @{
 
 }
-@using (Ajax.BeginForm("_HomeSettingsForm", "MyHome", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "SettingsUpdate(data)", OnFailure = "SettingsUpdateFailure" }))
+@using (Html.BeginForm("_HomeSettingsForm", "MyHome"))
 {
 
     @Html.HiddenFor(x => x.UserID)
@@ -109,7 +109,7 @@
                 <div class="form-group">
                     <div class="checkbox-inline">
                         <label class="switch">
-                            @Html.EditorFor(x => x.ShowDateAndTime, new { htmlAttributes = new { @class = "toggler" } })
+                            @Html.EditorFor(x => x.ShowWeather, new { htmlAttributes = new { @class = "toggler" } })
                             <div class="slider round"></div>
                         </label>
                     </div>
