@@ -1,6 +1,7 @@
 ﻿using devinmajordotcom.Services;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -47,18 +48,26 @@ namespace devinmajordotcom
             //var cpuTempCounter = new PerformanceCounter("Thermal Zone Information", "Temperature", @"\_TZ.TZ01");
 
             UpdateVisitor updateVisitor = new UpdateVisitor();
-            Computer computer = new Computer();
-            computer.Open();
-            computer.CPUEnabled = true;
-            computer.Accept(updateVisitor);
+            Computer computer = new Computer()
+            {
+                CPUEnabled = true,
+                FanControllerEnabled = true,
+                GPUEnabled = true,
+                HDDEnabled = true,
+                MainboardEnabled = true,
+                RAMEnabled = true
+            };
 
             var drives = DriveInfo.GetDrives();
-            int i = 0;
+            int i = 0;            
 
             while (i != -1)
             {
+                computer.Open();
+                computer.Accept(updateVisitor);
+
                 var ramCounter = ((totalRam - availableRamCounter.NextValue()) / 1024) + " / " + Math.Round((decimal)totalRam / 1024);
-                var cpuTemp = /*(cpuTempCounter.NextValue() - 273.15) + */"°C";
+                var cpuTemp = "°C";
                 var diskList = new List<string>();
 
                 foreach (DriveInfo drive in drives)
@@ -70,22 +79,21 @@ namespace devinmajordotcom
                     }
                 }
 
-                var ramValue = (((totalRam - availableRamCounter.NextValue()) / 1024) / Math.Round((float)totalRam / 1024)) * 100;
-            
-                foreach (IHardware t1 in computer.Hardware)
+                var ramValue = (((totalRam - availableRamCounter.NextValue()) / 1024) / Math.Round((float)totalRam / 1024)) * 100;             
+                
+                for (int t = 0; t < computer.Hardware.Length; t++)
                 {
-                    if (t1.HardwareType == HardwareType.CPU)
+                    if (computer.Hardware[t].HardwareType == HardwareType.CPU)
                     {
-                        foreach (ISensor t in t1.Sensors)
+                        for (int j = 0; j < computer.Hardware[t].Sensors.Length; j++)
                         {
-                            if (t.SensorType == SensorType.Temperature)
-                                cpuTemp = t.Value + "°C";
-                                break;
+                            if (computer.Hardware[t].Sensors[j].SensorType == SensorType.Temperature)
+                                cpuTemp = computer.Hardware[t].Sensors[j].Value.ToString() + "°C";
                         }
                     }
                 }
-
-                //string[] driveList = diskList.ToArray();
+                computer.Close();               
+                
                 Clients.All.updatePerformanceCounters(cpuCounter.NextValue(), ramCounter, cpuTemp, diskList);
                 service.UpdateCPUUsage(cpuCounter.NextValue());
                 service.UpdateRAMUsage(ramValue);
