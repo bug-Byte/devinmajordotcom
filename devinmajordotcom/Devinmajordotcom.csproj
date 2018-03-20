@@ -798,6 +798,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\MyHome\_HomeSettingsForm.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

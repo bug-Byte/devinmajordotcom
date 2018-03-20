@@ -239,13 +239,23 @@ function AjaxFailure(data) {
 }
 
 function RemoveMediaLink(id) {
-    var number = id.split("_")[1]; 
-    if(!$(this).hasClass("newLinkInput")) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
         var linksToChange = $(".newLinkInput");
     }
     $(id).parent().parent().parent().remove();
     //$(".hiddenInput_" + number).remove();
     ManageMediaAjaxSuccess();
+}
+
+function RemoveContactLink(id) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
+    $(id).parent().parent().parent().remove();
+    //$(".hiddenInput_" + number).remove();
+    ManagePortfolioAjaxSuccess()
 }
 
 function ManageMediaAjaxSuccess(data) {
@@ -254,6 +264,16 @@ function ManageMediaAjaxSuccess(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your media dashboard links have been updated!'
+    });
+}
+
+
+function ManagePortfolioAjaxSuccess(data) {
+    saveButtonPressed = true;
+    updateLinks();
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your portfolio has been updated!'
     });
 }
 
@@ -276,7 +296,7 @@ function ManagePortfolioSkillsAjaxSuccess(data) {
 function ManagePortfolioSkillsAjaxFailure(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
-        message: 'Something went wrong! Your portfolio skills have not been updated.'
+        message: 'Something went wrong! Your portfolio has not been updated.'
     });
 }
 

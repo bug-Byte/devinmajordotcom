@@ -13,6 +13,9 @@ $(document).ready(function () {
 
     $("#settingsWindowButton").draggable().popover({
         html: 'true',
+        animation: true,
+        trigger: "click",
+        placement: 'auto bottom',
         container: 'body'
     }).click(function () {
         //$("#settingsWindow").toggle(500);

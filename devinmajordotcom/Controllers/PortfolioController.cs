@@ -42,5 +42,10 @@ namespace devinmajordotcom.Controllers
             portfolioService.RemoveLanguageSkill(ID);
         }
 
+        public void RemoveContactLink(int ID)
+        {
+            portfolioService.RemoveContactLink(ID);
+        }
+
     }
 }

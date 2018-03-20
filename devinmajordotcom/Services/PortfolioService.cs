@@ -68,6 +68,7 @@ namespace devinmajordotcom.Services
                     Description = x.Description,
                     IsDefault = x.IsDefault,
                     IsEnabled = x.IsEnabled,
+                    Color = x.Color,
                     ID = x.Id,
                     URL = x.Url,
                     Order = x.Order
@@ -311,6 +312,7 @@ namespace devinmajordotcom.Services
                     linkRecord.Description = contactLink.Description;
                     linkRecord.IsDefault = contactLink.IsDefault;
                     linkRecord.IsEnabled = contactLink.IsEnabled;
+                    linkRecord.Color = contactLink.Color;
                     linkRecord.Url = contactLink.URL;
                     linkRecord.Order = contactLink.Order;
                     linkRecord.Directive = contactLink.Directive;
@@ -327,6 +329,7 @@ namespace devinmajordotcom.Services
                         IsDefault = contactLink.IsDefault,
                         IsEnabled = contactLink.IsEnabled,
                         Url = contactLink.URL,
+                        Color = contactLink.Color,
                         Order = contactLink.Order,
                         Directive = contactLink.Directive
                     };
@@ -361,6 +364,16 @@ namespace devinmajordotcom.Services
             if (recordToRemove != null)
             {
                 db.Portfolio_LanguageSkills.Remove(recordToRemove);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveContactLink(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_ContactLinks.FirstOrDefault(x => x.Id == IdToRemove);
+            if (recordToRemove != null)
+            {
+                db.Portfolio_ContactLinks.Remove(recordToRemove);
                 db.SaveChanges();
             }
         }

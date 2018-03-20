@@ -14,6 +14,8 @@ namespace devinmajordotcom.ViewModels
         [Required]
         public string DisplayName { get; set; }
 
+        public string Color { get; set; }
+
         public string Description { get; set; }
 
         public string Directive { get; set; }
