@@ -24,9 +24,10 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
-        public void _HomeSettingsForm(MyHomeUserConfigViewModel viewModel)
+        public ActionResult _HomeSettingsForm(MyHomeUserConfigViewModel viewModel)
         {
             myHomeService.SetUserConfigViewModel(viewModel);
+            return RedirectToAction("Index");
         }
 
     }
