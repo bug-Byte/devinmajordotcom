@@ -1,6 +1,20 @@
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
 
+function SettingsUpdate() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your settings were successfully updated!'
+    });
+}
+
+function SettingsUpdateFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your settings were not successfully updated! Please try again.'
+    });
+}
+
 $(document).ready(function () {
 
     "use strict";

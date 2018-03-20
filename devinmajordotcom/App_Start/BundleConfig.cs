@@ -58,6 +58,7 @@ namespace devinmajordotcom.App_Start
                 "~/Content/themes/jquery-ui.css",
                 "~/Content/magnific-popup.css",
                 "~/Content/font-awesome.css",
+                "~/Content/bootsnack.css",
                 "~/Content/templatemo-style2.css"
             ));
 
@@ -113,6 +114,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/jquery.magnific-popup.min.js",
                 "~/Scripts/smoothscroll.js",
                 "~/Scripts/moment.js",
+                "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/homeScripts.js"
             ));
 
