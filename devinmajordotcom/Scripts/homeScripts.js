@@ -108,13 +108,13 @@ $(document).ready(function () {
       }
     });
 
-    $('.custom-navbar a, #home a').on('click', function(event) {
-    var $anchor = $(this);
-        $('html, body').stop().animate({
-        scrollTop: $($anchor.attr('href')).offset().top - 49
-        }, 1000);
-        event.preventDefault();
-    });
+    //$('.custom-navbar a, #home a').on('click', function(event) {
+    //var $anchor = $(this);
+    //    $('html, body').stop().animate({
+    //    scrollTop: $($anchor.attr('href')).offset().top - 49
+    //    }, 1000);
+    //    event.preventDefault();
+    //});
 
     // function to get lat/long and plot on a google map
     function success(position) {

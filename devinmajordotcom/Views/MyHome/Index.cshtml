@@ -136,5 +136,27 @@
 
 }
 
-<!-- MODAL -->
 @Html.Partial("MyHomeLoginSignupModal", Model.CurrentUserViewModel)
+
+@section scripts {
+<script>
+    @if(Model.CurrentUserViewModel.UserIsLoggedIn)
+    {
+        <text>
+    debugger;
+            var string = '<li id="settingsWindowButton" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content=\'';
+            var html = '@Html.Raw(@Html.Partial("_HomeSettingsForm", Model.UserConfig).ToHtmlString().Replace(Environment.NewLine, ""))';
+            string += html;
+            string += '\' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></li>'
+            $(".nav.navbar-nav.navbar-right").append(string);
+        </text>
+    }
+    else
+    {
+        <text>$(".nav.navbar-nav.navbar-right").append('<li class="section-btn"><a href="#" data-toggle="modal" data-target="#modal-form">Sign in / Join</a></li>');</text>
+    }
+
+</script>
+}
+
+<!-- MODAL -->

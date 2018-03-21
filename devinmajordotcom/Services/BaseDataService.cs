@@ -137,7 +137,8 @@ namespace devinmajordotcom.Services
                 Password = x.Password,
                 UserName = x.UserName,
                 UserIsAdmin = x.IsAdmin,
-                UserIsActive = x.IsActive
+                UserIsActive = x.IsActive,
+                UserIsLoggedIn = x.EmailAddress != null && x.EmailAddress != ""
             }).FirstOrDefault();
         }
 

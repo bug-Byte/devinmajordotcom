@@ -35,6 +35,8 @@ namespace devinmajordotcom.ViewModels
         [Required]
         public bool UserIsActive { get; set; }
 
+        public bool UserIsLoggedIn { get; set; }
+
         [Required]
         public bool IsSigningUp { get; set; }
 
