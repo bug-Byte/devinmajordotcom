@@ -1,5 +1,9 @@
 ﻿var newWidth = $('.site-wrapper').width() - 74.67;
 
+function removeDisable() {
+    $('body').data('loading-disabled', false);
+}
+
 $(document).ready(function () {
 
     $(document).on("click", ".menu li[data-type='link'] a", function () {
@@ -8,6 +12,14 @@ $(document).ready(function () {
         $(this).parent().addClass('active');
         $('iframe').hide();
         $(id).fadeIn(500);
+    });
+
+    $(document).on('keydown', 'input[data-val-remote]', function () {
+        if ($(this).data('val-remote') != undefined) {
+            $('body').data('loading-disabled', true);
+        } else {
+            $('body').data('loading-disabled', false);
+        } setTimeout(removeDisable, 1000);
     });
 
     $(document).on("click", "#mainLogin", function () {

@@ -90,6 +90,10 @@ function draw() {
     }
 }
 
+function removeDisable() {
+    $('body').data('loading-disabled', false);
+}
+
 $(window).bind("resize", function () {
     var w = $(window).width();
     var h = $(window).height();
@@ -126,9 +130,16 @@ $(document).ready(function () {
         $(this).colorpicker({
             inline: false,
             format: false
-        })
+        });
     });
       
+    $(document).on('keydown', 'input[data-val-remote]', function () {
+        if ($(this).data('val-remote') != undefined) {
+            $('body').data('loading-disabled', true);
+        } else {
+            $('body').data('loading-disabled', false);
+        } setTimeout(removeDisable, 1000);
+    });
 
     $(".portfolioPanelHeading").on("click", function () {
         var toggler = $(this).children("span");

@@ -33,6 +33,7 @@
                                     @using (Ajax.BeginForm("AdminLogin", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "LoginFailure(data)" }))
                                     {
                                         @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.IsSigningUp)
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Email Address or Username: @*@Html.LabelFor(x => x.UserName)*@
@@ -52,6 +53,9 @@
                                         </div>
                                         <br />
                                         <div class="row">
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.UserName)
+                                            </div>
                                             <div class="col-sm-12">
                                                 @Html.ValidationMessageFor(x => x.Password)
                                             </div>

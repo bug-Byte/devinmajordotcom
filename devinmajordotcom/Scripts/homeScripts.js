@@ -1,6 +1,10 @@
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
 
+function removeDisable() {
+    $('body').data('loading-disabled', false);
+}
+
 function SettingsUpdate(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
@@ -20,6 +24,14 @@ function SettingsUpdateFailure() {
 $(document).ready(function () {
 
     "use strict";
+
+    $(document).on('keydown', 'input[data-val-remote]', function () {
+        if ($(this).data('val-remote') != undefined) {
+            $('body').data('loading-disabled', true);
+        } else {
+            $('body').data('loading-disabled', false);
+        } setTimeout(removeDisable, 1000);
+    });
     
     $('.preloader').fadeOut(1000); // set duration in brackets   
     

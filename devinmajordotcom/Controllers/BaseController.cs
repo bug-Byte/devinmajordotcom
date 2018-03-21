@@ -1,6 +1,5 @@
 ﻿using devinmajordotcom.Helpers;
 using devinmajordotcom.Services;
-using devinmajordotcom.Validation;
 using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;

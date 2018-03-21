@@ -260,6 +260,7 @@
     <Compile Include="Controllers\MyHomeController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,7 +289,6 @@
     <Compile Include="Services\LandingPageService.cs" />
     <Compile Include="PerformanceHub.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Validation\LoginErrorHandler.cs" />
     <Compile Include="ViewModels\ContactEmailViewModel.cs" />
     <Compile Include="ViewModels\DropDownViewModel.cs" />
     <Compile Include="ViewModels\MainLandingPageViewModel.cs" />

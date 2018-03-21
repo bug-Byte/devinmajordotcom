@@ -16,6 +16,8 @@ namespace devinmajordotcom.Services
 
         void Logout();
 
+        bool DoesUserExist(string userString);
+
         UserValidationViewModel ValidateCredentials(string userString, string password, string emailAddress = null);
 
         void UpdateCurrentUser(UserViewModel viewModel);

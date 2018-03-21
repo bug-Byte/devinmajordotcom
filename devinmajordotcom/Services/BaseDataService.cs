@@ -71,6 +71,11 @@ namespace devinmajordotcom.Services
             return results;
         }
 
+        public bool DoesUserExist(string userString)
+        {
+            return !string.IsNullOrEmpty(userString) && db.Security_Users.Any(x => x.UserName == userString || x.EmailAddress == userString);
+        }
+
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
             var user = db.Security_Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
@@ -132,7 +137,8 @@ namespace devinmajordotcom.Services
                 Password = x.Password,
                 UserName = x.UserName,
                 UserIsAdmin = x.IsAdmin,
-                UserIsActive = x.IsActive
+                UserIsActive = x.IsActive,
+                IsSigningUp = x.IsAdmin && x.IsActive && x.EmailAddress == ""
             }).FirstOrDefault();
         }
 

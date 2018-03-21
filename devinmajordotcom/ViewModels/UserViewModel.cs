@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace devinmajordotcom.ViewModels
 {
@@ -13,10 +14,12 @@ namespace devinmajordotcom.ViewModels
         public int UserID { get; set; }
 
         [DisplayName("User Name: ")]
+        [Remote("VerifyUserExists", "Validation", AdditionalFields = "IsSigningUp")]
         public string UserName { get; set; }
 
         [Required]
         [DisplayName("Email Address * : ")]
+        [Remote("VerifyEmailDoesNotExist", "Validation")]
         public string EmailAddress { get; set; }
 
         [Required]
@@ -31,6 +34,9 @@ namespace devinmajordotcom.ViewModels
 
         [Required]
         public bool UserIsActive { get; set; }
+
+        [Required]
+        public bool IsSigningUp { get; set; }
 
         public UserViewModel()
         {
