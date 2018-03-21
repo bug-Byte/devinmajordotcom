@@ -33,7 +33,7 @@ namespace devinmajordotcom.Controllers
             {
                 Session.Clear();
                 Session.Abandon();
-                throw new Exception("Unauthorized User", new UnauthorizedAccessException());
+                return new HttpStatusCodeResult(401);
             }
         }
        
