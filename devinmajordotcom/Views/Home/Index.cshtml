@@ -28,7 +28,7 @@
         @if (!Model.CurrentUserViewModel.UserIsAdmin || !Model.CurrentUserViewModel.UserIsActive)
         {
             <script>
-                var loginHtml = '@Html.Raw(@Html.Partial("_LoginModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+                var loginHtml = '@Html.Raw(@Html.Partial("_AdminLoginModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
                 $('body').append(loginHtml);
             </script>
         }
