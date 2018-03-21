@@ -21,9 +21,13 @@ namespace devinmajordotcom.Services
 
         public PortfolioViewModel GetPortfolioViewModel()
         {
+            var guid = HttpContext.Current.Session["MainPageUserAuthID"] ?? AddNewUser().Guid;
+            var user = GetCurrentUser((Guid) guid);
 
             return new PortfolioViewModel()
             {
+
+                CurrentUserViewModel = user,
 
                 AvailableProjectFilters = db.Portfolio_ProjectTypes.Select(x => new DropDownViewModel() {
                     ID = x.Id,

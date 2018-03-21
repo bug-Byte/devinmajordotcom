@@ -12,6 +12,8 @@ namespace devinmajordotcom.ViewModels
     public class PortfolioViewModel
     {
 
+        public UserViewModel CurrentUserViewModel { get; set; }
+
         public SplashScreenViewModel SplashScreenDetails { get; set; }
 
         public List<WorkSkillViewModel> HighlightedWorkSkills { get; set; }

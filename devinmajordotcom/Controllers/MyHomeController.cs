@@ -31,10 +31,11 @@ namespace devinmajordotcom.Controllers
             return RedirectToAction("Index");
         }
 
-        public void UpdateCurrentUser(UserViewModel viewModel)
+        public ActionResult UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
             Login(viewModel);
+            return RedirectToAction("Index");
         }
 
 
