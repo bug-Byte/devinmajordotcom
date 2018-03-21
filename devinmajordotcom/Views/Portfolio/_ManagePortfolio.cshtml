@@ -451,7 +451,7 @@
                     <div class="linkContainer">
                             @foreach (var link in Model.ContactSiteLinks.OrderBy(x => x.Order))
                             {
-                                @Html.HiddenFor(x => x.ContactSiteLinks[contactLinkCount].ID, new { @class = "hiddenID hiddenInput_" + Model.ContactSiteLinks[contactLinkCount].ID })
+                                @Html.HiddenFor(x => x.ContactSiteLinks[contactLinkCount].ID, new { @class = "hiddenContactLinkID hiddenInput_" + Model.ContactSiteLinks[contactLinkCount].ID })
                                 <div class="contactLink" data-hiddeninputid="@Html.IdFor(x => x.ContactSiteLinks[contactLinkCount].Order)" style="padding-top: 10px; margin-bottom: 2vh;">
                                     @Html.HiddenFor(x => x.ContactSiteLinks[contactLinkCount].Order, new { @class = "hiddenOrder hiddenInput_" + Model.ContactSiteLinks[contactLinkCount].ID })
 

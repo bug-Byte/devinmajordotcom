@@ -224,7 +224,11 @@ function HideLoginModal() {
     $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a>Settings</a></li>');
     $('#mainContainer').append(settingsHtml);
     $('#appmanager').fadeIn(500);
-
+    InitializeMediaDashboardEventHandlers();
+    tinymce.init({
+        selector: '.tinymce',
+        theme: 'modern'
+    });
     $(".masthead-nav").find('li[data-activediv="#appmanager"]').each(function () {
         $(this).click(function () {
             $('.masthead-nav li').removeClass('active');
