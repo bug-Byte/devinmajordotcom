@@ -1,6 +1,6 @@
 ﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
 @{ 
-
+    var contactLinkCount = 0;
 }
 
 @using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updatePortfolioForm" }))
@@ -301,7 +301,7 @@
                                             active = "active";
                                         }
                                         <div class="item @active">
-                                                    <div class="work-wrapper" style="margin-bottom:-21px;">
+                                                    <div class="specialWork-wrapper" style="margin-bottom:-21px;">
                                                         @*<i class="@workItem.SkillIcon"></i>*@
                                                         <button data-placement="left"
                                                                 class="btn btn-default iconpicker"
@@ -311,7 +311,7 @@
                                                                 data-icon="@Model.HighlightedWorkSkills[count - 1].SkillIcon"
                                                                 type="button"
                                                                 style="font-size: 50px; margin-bottom: 1vh;"></button>
-                                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle, new { @class = "form-control text-center text-uppercase tm-work-h3", @placeholder = "Skill Title (Ex: Paleontology)" })
+                                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle, new { @class = "form-control text-center text-uppercase tm-work-h3", @style="color:white !important;", @placeholder = "Skill Title (Ex: Paleontology)" })
                                                         <hr>
                                                         @Html.TextAreaFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)" })
                                                     </div>
@@ -448,6 +448,80 @@
             </div>
             <div id="collapse5" class="panel-collapse collapse">
                 <div class="panel-body">
+                    <div class="linkContainer">
+                            @foreach (var link in Model.ContactSiteLinks.OrderBy(x => x.Order))
+                            {
+                                @Html.HiddenFor(x => x.ContactSiteLinks[contactLinkCount].ID, new { @class = "hiddenID hiddenInput_" + Model.ContactSiteLinks[contactLinkCount].ID })
+                                <div class="contactLink" data-hiddeninputid="@Html.IdFor(x => x.ContactSiteLinks[contactLinkCount].Order)" style="padding-top: 10px; margin-bottom: 2vh;">
+                                    @Html.HiddenFor(x => x.ContactSiteLinks[contactLinkCount].Order, new { @class = "hiddenOrder hiddenInput_" + Model.ContactSiteLinks[contactLinkCount].ID })
+
+                                    @{
+                                        var linkText = "<span class='fa fa-trash'></span>";
+                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveContactLink", "Portfolio", new { ID = Model.ContactSiteLinks[contactLinkCount].ID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveContactLink('#deleteLink_" + Model.ContactSiteLinks[contactLinkCount].ID + "')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.ContactSiteLinks[contactLinkCount].ID, @class = "btn btn-danger deleteGroup deleteMediaLink", @style = "float:right;" });
+                                    }
+
+                                    <div class="row">
+                                        
+                                        <div class="col-sm-12 wow rotateInUpLeft" data-wow-delay="0.3s">
+                                            
+                                            <div class="media @Model.ContactSiteLinks[contactLinkCount].DisplayIcon.Replace("fa fa-","")">
+                                                <div class="text-right">
+                                                    @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                                </div> 
+                                                <div class="media-object pull-left">
+                                                    <div class="col-sm-12 text-center">
+                                                        <div style="margin-bottom: 8px" class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button data-placement="left"
+                                                                        class="btn btn-default iconpicker"
+                                                                        name="@Html.NameFor(x => x.ContactSiteLinks[contactLinkCount].DisplayIcon)"
+                                                                        role="iconpicker"
+                                                                        data-iconset="fontawesome"
+                                                                        data-icon="@Model.ContactSiteLinks[contactLinkCount].DisplayIcon"
+                                                                        type="button"></button>
+                                                            </span>
+                                                            @Html.TextBoxFor(x => x.ContactSiteLinks[contactLinkCount].Directive, new { @class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Follow me on" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 text-center">
+                                                        <div class="customColorPicker input-group colorpicker-component" data-color="@Model.ContactSiteLinks[contactLinkCount].Color">
+                                                            @Html.TextBoxFor(x => x.ContactSiteLinks[contactLinkCount].Color, new { @class = "form-control", @placeholder = "Pick a color, any color!" })
+                                                            <span class="input-group-addon"><i></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tcol-sm-12ext-center">
+                                                        @Html.TextBoxFor(x => x.ContactSiteLinks[contactLinkCount].DisplayName, new { @class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Facebook" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 text-center">
+                                            @Html.ValidationMessageFor(x => x.ContactSiteLinks[contactLinkCount].DisplayName)
+                                        </div>
+                                    </div>
+                                </div>
+                                contactLinkCount++;
+                            }
+                        
+                        @*@foreach (var contactLink in Model.ContactSiteLinks.OrderBy(x => x.Order))
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 wow rotateInUpLeft" data-wow-delay="0.3s">
+                                    <div class="media @contactLink.DisplayIcon.Replace("fa fa-","")">
+                                        <a href="@contactLink.URL">
+                                            <div class="media-object pull-left">
+                                                <i class="@contactLink.DisplayIcon"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading tm-social-title">@contactLink.Directive</h4>
+                                                <h3>@contactLink.DisplayName</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }*@
+                    </div>
                 </div>
             </div>
         </div>

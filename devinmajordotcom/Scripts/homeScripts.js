@@ -1,6 +1,22 @@
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
 
+function SettingsUpdate(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your settings were successfully updated!'
+    });
+    $("html").html(data);
+    $('.preloader').fadeOut(1000); // set duration in brackets   
+}
+
+function SettingsUpdateFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your settings were not successfully updated! Please try again.'
+    });
+}
+
 $(document).ready(function () {
 
     "use strict";
@@ -10,6 +26,45 @@ $(document).ready(function () {
     if ($('#currentDateAndTime').length > 0) {
         DisplayDateTime();
     }
+
+    $("#settingsWindowButton").draggable({
+        stop: function () {
+            var icon = $(this).find("i");
+            if ($(icon).hasClass("glyphicon-resize-small")) {
+                $(this).popover('show');
+            }
+        }
+    }).popover({
+        html: 'true',
+        animation: true,
+        trigger: "click",
+        placement: 'auto bottom',
+        container: 'body'
+    }).click(function () {
+        //$("#settingsWindow").toggle(500);
+        var icon = $(this).find("i");
+        if ($(icon).hasClass("glyphicon-cog")) {
+            $(icon).removeClass("glyphicon-cog");
+            $(icon).addClass("glyphicon-resize-small");
+        } else {
+            $(icon).removeClass("glyphicon-resize-small");
+            $(icon).addClass("glyphicon-cog");
+        }
+    });
+
+    $('body').on('click', function (e) {
+        $('[data-toggle=popover]').each(function () {
+            // hide any open popovers when the anywhere else in the body is clicked
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('toggle');
+            }
+        });
+    });
+
+    //$("[data-toggle=popover]").mousedown(function () {
+    //    // toggle popover when link is clicked
+    //    $(this).popover('toggle');
+    //});
 
     // MENU
     $('.navbar-collapse a').on('click',function(){
@@ -104,7 +159,7 @@ $(document).ready(function () {
                 currWeather['windDirection'] = windNames[currWeather['windCompass']];	// convert degrees and find wind direction name
 
 
-                var response = "<h3 style='color:white;'><img src='" + currWeather['icon'] + "'>" + currWeather['currTemp'] + " &deg;C</h3><div class=''><ul><li>" + currWeather['city'] + "</li><li>" + currWeather['description'] + "</li></ul></div>";
+                var response = "<h3 style='color:white;'><img src='" + currWeather['icon'] + "'>" + currWeather['currTemp'] + " &deg;C</h3><div class=''><ul><li>" + currWeather['city'] + "</li><li>" + currWeather['description'] + "</li><li>High: " + currWeather['highTemp'] + " &deg;C, Low: " + currWeather['lowTemp'] + " &deg;C</li></ul></div>";
 
                 //var response = "Current Weather: " + currWeather['currTemp'] + "\xB0 and " + currWeather['description'];
                 //var spokenResponse = "It is currently " + currWeather['currTemp'] + " degrees and " + currWeather['description'];

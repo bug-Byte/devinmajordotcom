@@ -53,6 +53,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                    <li id="settingsWindowButton" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content='@Html.Partial("_HomeSettingsForm", userConfigViewModel)' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></li>
                     <li class="section-btn"><a href="#" data-toggle="modal" data-target="#modal-form">Sign in / Join</a></li>
                 </ul>
             </div>
@@ -62,6 +63,8 @@
 }
 
 @RenderBody()
+
+<div id="ajaxAlertContainer"></div>
 
 <!-- SCRIPTS -->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBsVa2tZBcbxzQDgm8cmfaJ4MoVDB8xySg&sensor=true"></script>

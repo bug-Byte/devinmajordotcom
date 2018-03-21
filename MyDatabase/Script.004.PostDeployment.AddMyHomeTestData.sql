@@ -57,10 +57,10 @@ DECLARE @Links TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL
 
 INSERT INTO @Posts([Title], [Body], [ImgPathName]) 
 VALUES 
-('How To Find Out Beautiful Workspace.', 'Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.', 'home-bg4.jpg'), 
-('Woman Sportwear.', 'Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.', 'blog-image2.jpg'),
-('New Creative Fashion.', 'Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.', 'blog-image3.jpg'), 
-('Minimalist Design Trend In 2018.', 'Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.', 'blog-image4.jpg');
+('Need to start a game, maybe in Unity?', 'Also thinking about DX12 since I''m in possession of a GTX 1080Ti!', 'home-bg4.jpg'), 
+('RAM Prices SUCK right now!', 'I cant believe this! All I want is 16 gigs of DDR4, enough to run my poor server :(', 'blog-image2.jpg'),
+('I need a new hobby lol', 'This is ridiculous. I cant spend all my time coding, lol. Oh well.', 'blog-image3.jpg'), 
+('Tim Hortons Roll-up the Rim is Such a Scam', 'Its true and we all know it. Why even bother? Some people I tell ya.', 'blog-image4.jpg');
 
 WHILE(@Counter2 <= (SELECT MAX(ID) FROM @Posts))
 BEGIN	

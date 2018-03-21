@@ -6,19 +6,27 @@
     var newRowHtml = "</div><br/><div class='row'>";
 }
 
+
+
 <!-- HOME -->
 <section id="home" data-stellar-background-ratio="0.5">
+    
+
     <div class="overlay"></div>
     <div class="container" style="">
+        @if (!Model.UserConfig.ShowBanner)
+        {
+            <button type="button" id="settingsWindowButton" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content='@Html.Partial("_HomeSettingsForm", Model.UserConfig)' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></button>
+        }
         <div class="row">
-            
+
             <div class="col-sm-12 text-center">
                 <h2>@Model.UserConfig.Greeting</h2>
             </div>
             @if (Model.UserConfig.ShowDateAndTime)
             {
                 <div class="col-sm-12 text-center">
-                    <span style="color:white;" id="currentDateAndTime"></span>
+                    <span style="color: white;" id="currentDateAndTime"></span>
                 </div>
             }
 
@@ -34,7 +42,7 @@
                     <div id="weather"></div>
                 </div>
             }
-            
+
         </div>
 
     </div>

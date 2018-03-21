@@ -54,6 +54,26 @@ namespace devinmajordotcom.Services
             };
         }
 
+        public void SetUserConfigViewModel(MyHomeUserConfigViewModel viewModel)
+        {
+            var config = db.MyHome_UserConfigs.FirstOrDefault(x => x.UserId == viewModel.UserID);
+            if(config != null)
+            {
+                config.ShowWeather = viewModel.ShowWeather;
+                config.ShowVisitorsAdminHome = viewModel.ShowVisitorsAdminHome;
+                config.ShowDateAndTime = viewModel.ShowDateAndTime;
+                config.ShowBookmarks = viewModel.ShowBookmarks;
+                config.ShowBanner = viewModel.ShowBanner;
+                config.IsEditable = viewModel.IsEditable;
+                config.ShowBlog = viewModel.ShowBlog;
+                config.BlogTitle = viewModel.BlogTitle;
+                config.BookmarksTitle = viewModel.BookmarksTitle;
+                config.Greeting = viewModel.Greeting;
+                config.BackgroundImage = viewModel.BackgroundImage;
+                db.SaveChanges();
+            }
+        }
+
         public MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId)
         {
             return db.MyHome_UserConfigs.Where(x => x.UserId == userId).Select(x => new MyHomeUserConfigViewModel()

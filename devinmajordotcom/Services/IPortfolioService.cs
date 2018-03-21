@@ -22,6 +22,8 @@ namespace devinmajordotcom.Services
 
         void UpdateContactLinks(PortfolioViewModel viewModel);
 
+        void RemoveContactLink(int IdToRemove);
+
         void RemoveHighlightedSkill(int IdToRemove);
 
         void RemoveTechSkill(int IdToRemove);

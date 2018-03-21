@@ -7,6 +7,7 @@
     [Action]        NVARCHAR (500) NULL,
     [Controller]    NVARCHAR (500) NULL,
     [DisplayIcon]   NVARCHAR (500) NULL,
+	Color NVARCHAR(500) NULL,
     [IsDefault]     BIT            DEFAULT ((0)) NOT NULL,
     [IsEnabled]     BIT            DEFAULT ((1)) NOT NULL,
     [Order]         INT            NULL,

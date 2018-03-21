@@ -915,6 +915,7 @@ namespace devinmajordotcom.Models
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
         public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
+        public string Color { get; set; } // Color (length: 500)
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
         public int? Order { get; set; } // Order
@@ -1601,6 +1602,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+            Property(x => x.Color).HasColumnName(@"Color").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();

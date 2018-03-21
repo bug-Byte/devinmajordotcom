@@ -88,7 +88,7 @@ VALUES
 ),
 (
 	'Plex Media Dashboard', 
-	'Movies, TV, Music, Photos and More! Click here to be entertained.',
+	'Movies, TV, Music, Photos and More! Grab a drink and click here to be entertained.',
 	NULL,
 	NULL,
 	'Index',

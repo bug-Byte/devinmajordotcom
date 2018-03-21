@@ -1,4 +1,5 @@
-﻿using System;
+﻿using devinmajordotcom.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,13 @@ namespace devinmajordotcom.Controllers
         {
             var viewModel = myHomeService.GetBlogPostById(ID);
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult _HomeSettingsForm(MyHomeUserConfigViewModel viewModel)
+        {
+            myHomeService.SetUserConfigViewModel(viewModel);
+            return RedirectToAction("Index");
         }
 
     }
