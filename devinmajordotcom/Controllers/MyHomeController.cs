@@ -13,6 +13,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "D3V!N M@J0R";
+            ViewBag.ControllerName = "MyHome";
             var viewModel = myHomeService.GetMyHomeViewModel();
             return View(viewModel);
         }
@@ -29,6 +30,14 @@ namespace devinmajordotcom.Controllers
             myHomeService.SetUserConfigViewModel(viewModel);
             return RedirectToAction("Index");
         }
+
+        public void UpdateCurrentUser(UserViewModel viewModel)
+        {
+            landingPageService.UpdateCurrentUser(viewModel);
+            Login(viewModel);
+        }
+
+
 
     }
 }

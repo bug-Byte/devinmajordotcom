@@ -7,7 +7,7 @@
     <p class="lead" style="color: #71cef5;">Manage settings for all existing apps.</p>   
 
     @{ 
-        var link = Html.ActionLink("REPLACE", "AdminLogout", null, new { @class="btn btn-primary" }).ToHtmlString();
+        var link = Html.ActionLink("REPLACE", "Logout", null, new { @class="btn btn-primary" }).ToHtmlString();
         var cleanLink = link.Replace("REPLACE", "<span class='glyphicon glyphicon-log-out'></span>&nbsp;Log Out");
     }
 

@@ -50,8 +50,13 @@ $(document).ready(function () {
 
 });
 
+function LoginFailure() {
+    var $validator = $(".loginForm").validate();
+    var errors = { Password: "Could not log in. You are either not an administrator, or you typed your credentials incorrectly. Please try again!" };
+    $validator.showErrors(errors);
+}
+
 function HideLoginModal(data) {
-    debugger;
     $('#LoginModal').modal('hide');
     $("#wrapper").replaceWith(data);
 }

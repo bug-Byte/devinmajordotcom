@@ -7,6 +7,15 @@ http://www.templatemo.com/tm-509-hydro
 */  
   @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600');
 
+
+  #modal-form {
+      color: white;
+  }
+
+  #modal-form input {
+      color: white;
+  }
+
 .popover {
     max-width: 100% !important;
 }
@@ -89,7 +98,7 @@ input[type="checkbox"]:checked + .slider:before {
 
   #weather h2 {
       margin: 0 0 8px;
-      color: ;
+      color: white;
       font-size: 100px;
       font-weight: 300;
       text-align: center;

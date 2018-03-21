@@ -4,6 +4,9 @@
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+body {
+    color: white;
+}
 
 /*MODAL SHIT*/
 
@@ -89,6 +92,7 @@
 
   .modal-dialog form .form-control {
     border-radius: 5px;
+    color: white;
     border: 1px solid #595959;
     background: transparent;
     box-shadow: none;

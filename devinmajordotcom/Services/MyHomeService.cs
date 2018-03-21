@@ -47,6 +47,7 @@ namespace devinmajordotcom.Services
             var user = GetCurrentUser((Guid)guid);
             return new MyHomeViewModel()
             {
+                CurrentUserViewModel = user,
                 UserConfig = GetUserConfigViewModelByUserId(user.UserID),
                 FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(user.UserID),
                 BlogPosts = GetBlogPostsByUserId(user.UserID),

@@ -55,7 +55,7 @@
 
             @if (Model.CurrentUserViewModel.UserIsAdmin)
             {
-                var link = Html.ActionLink("REPLACE", "AdminLogout", "MediaDashboard").ToHtmlString();
+                var link = Html.ActionLink("REPLACE", "Logout", "MediaDashboard").ToHtmlString();
                 var cleanLink = link.Replace("REPLACE", "<i class='glyphicon glyphicon-log-out'></i><span class='displayName'>&nbsp;&nbsp;Log Out</span>");
                 <li data-newtitle="Log Out">
                     @Html.Raw(cleanLink)

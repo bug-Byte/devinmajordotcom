@@ -14,6 +14,7 @@ namespace devinmajordotcom.Controllers
     public class HomeController : BaseController
     {
 
+        [HttpGet]
         public ActionResult Index()
         {
             var viewModel = new MainLandingPageViewModel();
@@ -44,6 +45,7 @@ namespace devinmajordotcom.Controllers
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
+            Login(viewModel);
         }
 
         public ActionResult _ApplicationManager()

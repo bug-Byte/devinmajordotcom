@@ -52,7 +52,7 @@ namespace devinmajordotcom.Services
                 User = new UserViewModel()
             };
 
-            var user = db.Security_Users.Where(x => x.UserName != "Guest" && x.EmailAddress == (email == null ? userString : email) || x.UserName == userString).Select(x => new UserViewModel()
+            var user = db.Security_Users.Where(x => x.UserName != "Guest" && x.EmailAddress == (email ?? userString) || x.UserName == userString).Select(x => new UserViewModel()
             {
                 EmailAddress = x.EmailAddress,
                 GUID = x.Guid,
@@ -107,7 +107,7 @@ namespace devinmajordotcom.Services
             {
                 ClientName = ip,
                 EmailAddress = "",
-                UserName = "Anonymous",
+                UserName = "",
                 Guid = (Guid)userGuid,
                 IsActive = true,
                 IsAdmin = IsUserToAddAnAdmin
@@ -137,8 +137,7 @@ namespace devinmajordotcom.Services
                 Password = x.Password,
                 UserName = x.UserName,
                 UserIsAdmin = x.IsAdmin,
-                UserIsActive = x.IsActive,
-                IsSigningUp = x.IsAdmin && x.IsActive && x.EmailAddress == ""
+                UserIsActive = x.IsActive
             }).FirstOrDefault();
         }
 

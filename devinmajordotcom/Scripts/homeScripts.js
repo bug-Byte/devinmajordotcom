@@ -199,6 +199,12 @@ $(document).ready(function () {
 
 });
 
+function LoginFailure() {
+    var $validator = $(".loginForm").validate();
+    var errors = { Password: "Could not log in. You are either not an administrator, or you typed your credentials incorrectly. Please try again!" };
+    $validator.showErrors(errors);
+}
+
 function DisplayDateTime() {
     var refresh = 1000;
     setTimeout('RefreshDateTime()', refresh);

@@ -253,11 +253,10 @@ function HideLoginModal() {
 
 }
 
-function LoginFailure(data) {
-    $("#ajaxAlertContainer").bootsnack({
-        alertType: 'error',
-        message: data
-    });
+function LoginFailure() {
+    var $validator = $(".loginForm").validate();
+    var errors = { Password: "Could not log in. You are either not an administrator, or you typed your credentials incorrectly. Please try again!" };
+    $validator.showErrors(errors);
 }
 
 function AjaxSuccess(data) {

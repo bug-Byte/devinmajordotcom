@@ -39,8 +39,15 @@ namespace devinmajordotcom.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Login(UserViewModel viewModel)
+        {
+            var validatedUser = landingPageService.Login(viewModel);
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
-        public ActionResult AdminLogout()
+        public ActionResult Logout()
         {
             landingPageService.Logout();
             return RedirectToAction("Index");
