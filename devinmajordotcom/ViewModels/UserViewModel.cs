@@ -12,7 +12,7 @@ namespace devinmajordotcom.ViewModels
         [Required]
         public int UserID { get; set; }
 
-        [DisplayName("User Name (optional): ")]
+        [DisplayName("User Name: ")]
         public string UserName { get; set; }
 
         [Required]

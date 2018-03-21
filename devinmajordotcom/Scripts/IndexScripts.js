@@ -219,9 +219,30 @@ function HideAdminFirstRunModal() {
 }
 
 function HideLoginModal() {
+
     $('#LoginModal').modal('hide');
     $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a>Settings</a></li>');
+    $('#mainContainer').append(settingsHtml);
     $('#appmanager').fadeIn(500);
+
+    $(".masthead-nav").find('li[data-activediv="#appmanager"]').each(function () {
+        $(this).click(function () {
+            $('.masthead-nav li').removeClass('active');
+            var divToShow = $(this).data('activediv');
+            $(this).addClass('active');
+            $(".inner.cover").hide();
+            $(this).show();
+            $(divToShow).fadeIn(500);
+        });
+    });
+
+}
+
+function LoginFailure(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: data
+    });
 }
 
 function AjaxSuccess(data) {

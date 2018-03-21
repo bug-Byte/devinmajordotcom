@@ -288,6 +288,7 @@
     <Compile Include="Services\LandingPageService.cs" />
     <Compile Include="PerformanceHub.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validation\LoginErrorHandler.cs" />
     <Compile Include="ViewModels\ContactEmailViewModel.cs" />
     <Compile Include="ViewModels\DropDownViewModel.cs" />
     <Compile Include="ViewModels\MainLandingPageViewModel.cs" />

@@ -26,12 +26,7 @@ namespace devinmajordotcom.Services
 
         public UserViewModel Login(UserViewModel viewModel, bool isAdmin = false)
         {
-            var results = ValidateCredentials(viewModel.EmailAddress, viewModel.Password, viewModel.UserName);
-
-            if (results.LoginAttemptStatus != "Success" && results.User.UserID != 0 && results.User.UserIsActive && (!isAdmin || results.User.UserIsAdmin))
-            {
-                throw new Exception("Unauthorized User", new UnauthorizedAccessException());
-            }
+            var results = ValidateCredentials(viewModel.UserName, viewModel.Password, viewModel.EmailAddress);
 
             if (HttpContext.Current.Session["MainPageUserAuthID"] == null || (Guid)HttpContext.Current.Session["MainPageUserAuthID"] != results.User.GUID)
             {
@@ -39,6 +34,7 @@ namespace devinmajordotcom.Services
                 HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;
                 HttpContext.Current.Session["MainPageUserName"] = results.User.UserName;
             }
+
             return results.User;
         }
 
@@ -48,7 +44,7 @@ namespace devinmajordotcom.Services
             HttpContext.Current.Session.Abandon();
         }
 
-        public UserValidationViewModel ValidateCredentials(string emailAddress, string password , string userName = null)
+        public UserValidationViewModel ValidateCredentials(string userString, string password , string email = null)
         {
             var results = new UserValidationViewModel()
             {
@@ -56,9 +52,7 @@ namespace devinmajordotcom.Services
                 User = new UserViewModel()
             };
 
-            var user = db.Security_Users.Where(x => string.IsNullOrEmpty(userName)
-                ? x.EmailAddress == emailAddress
-                : x.UserName == userName).Select(x => new UserViewModel()
+            var user = db.Security_Users.Where(x => x.UserName != "Guest" && x.EmailAddress == (email == null ? userString : email) || x.UserName == userString).Select(x => new UserViewModel()
             {
                 EmailAddress = x.EmailAddress,
                 GUID = x.Guid,
@@ -85,7 +79,7 @@ namespace devinmajordotcom.Services
                 user.EmailAddress = viewModel.EmailAddress;
                 user.IsActive = viewModel.UserIsActive;
                 user.IsAdmin = viewModel.UserIsAdmin;
-                user.UserName = viewModel.UserName;
+                user.UserName = string.IsNullOrEmpty(viewModel.UserName) ? viewModel.EmailAddress : viewModel.UserName;
                 user.Password = SecurityHelper.HashSHA1(viewModel.Password + user.Guid.ToString());
                 db.SaveChanges();
             }

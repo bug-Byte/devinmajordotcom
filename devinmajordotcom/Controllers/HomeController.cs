@@ -24,12 +24,14 @@ namespace devinmajordotcom.Controllers
             ViewBag.Title = "D3V!N M@J0R";
             ViewBag.ControllerName = "Home";
 
-            if (viewModel.CurrentUserViewModel.UserIsActive)
+            if (viewModel.CurrentUserViewModel != null && viewModel.CurrentUserViewModel.UserIsActive)
             {
                 return View(viewModel);
             }
             else
             {
+                Session.Clear();
+                Session.Abandon();
                 throw new Exception("Unauthorized User", new UnauthorizedAccessException());
             }
         }
