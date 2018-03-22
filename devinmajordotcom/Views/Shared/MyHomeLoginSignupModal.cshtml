@@ -33,7 +33,7 @@
                             <!-- TAB PANES -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="sign_in">
-                                    @using (Html.BeginForm("Login", controllerName, new { @class = "loginForm" }))
+                                    @using (Html.BeginForm("Login", controllerName, FormMethod.Post, new { @class = "loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.Hidden("IsSigningUp", "False")

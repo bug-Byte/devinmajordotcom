@@ -36,6 +36,10 @@ namespace devinmajordotcom.Controllers
         public ActionResult AdminLogin(UserViewModel viewModel)
         {
             var validatedUser = landingPageService.Login(viewModel, true);
+            if (validatedUser.UserID == 0 || !validatedUser.UserIsAdmin)
+            {
+                return new HttpStatusCodeResult(401);
+            }
             return RedirectToAction("Index");
         }
 
@@ -43,6 +47,10 @@ namespace devinmajordotcom.Controllers
         public ActionResult Login(UserViewModel viewModel)
         {
             var validatedUser = landingPageService.Login(viewModel);
+            if(validatedUser.UserID == 0)
+            {
+                return new HttpStatusCodeResult(401);
+            }
             return RedirectToAction("Index");
         }
 
