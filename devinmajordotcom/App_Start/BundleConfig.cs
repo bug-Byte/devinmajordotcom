@@ -71,6 +71,9 @@ namespace devinmajordotcom.App_Start
                 "~/Content/templatemo-style.css"
             ));
 
+            bundles.Add(new StyleBundle("~/Content/FineUploader").Include(
+                "~/Content/FineUploader/fine-uploader-new.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/customScripts").Include(
                 "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/angular.js",
@@ -117,6 +120,9 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/homeScripts.js"
             ));
+
+            bundles.Add(new ScriptBundle("~/bundles/FineUploader").Include(
+                "~/Scripts/fine-uploader.js"));
 
         }
     }

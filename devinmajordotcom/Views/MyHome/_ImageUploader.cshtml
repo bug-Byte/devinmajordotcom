@@ -1,0 +1,45 @@
+﻿@Html.Raw(File.ReadAllText(Server.MapPath("~/Views/Shared/simple-thumbnails.html")))
+
+<div class="modal-body">
+    <div class="row helpBox">
+        <div class="col-sm-2 fa fa-info-circle" id="infoIcon"></div>
+        <div class="col-sm-9">
+            Please ensure the excel template is filled with the correct values as existing values will be overwritten.
+            If any errors occur they will be displayed after processing. The template must not be modified aside from the data values.
+        </div>
+    </div>
+    <div id="uploader"></div>
+    <div>
+        <p id="resultMessage"></p>
+    </div>
+</div>
+
+<script>
+    var uploader = new qq.FineUploader({
+        element: document.getElementById("uploader"),
+        request: {
+            endpoint: "@Url.Action("UploadImage","MyHome")"
+        },
+        multiple: false,
+        validation: {
+            allowedExtensions: ['jpg', 'gif', 'png', 'jpeg', 'bmp'],
+            itemLimit: 1
+        },
+        callbacks: {
+            onComplete: function (id, name, responseJson) {
+                if (responseJson.success === true) {
+                    $('#resultMessage').css('color', 'green');
+                    $('#resultMessage').text(responseJson.successMessage);
+                }
+            },
+            onError: function (id, name, errorReason) {
+                $('#resultMessage').css('color', 'crimson');
+                $('#resultMessage').text(errorReason);
+            },
+            onSubmit: function (id, name) {
+                $('#resultMessage').css('color', 'green');
+                $('#resultMessage').text('File is currently being processed.');
+            }
+        }
+    })
+</script>

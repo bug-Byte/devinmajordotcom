@@ -1,6 +1,18 @@
 ﻿@model devinmajordotcom.ViewModels.MyHomeUserConfigViewModel
 @{
-
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalUpload', 'Background Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-primary",
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 }
 @using (Html.BeginForm("_HomeSettingsForm", "MyHome"))
 {
@@ -166,7 +178,24 @@
             </div>
         </div>
 
-        <br/>
+        <br />
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.BackgroundImage, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                @Html.Raw(uploadButton)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.ShowBlog)
+            </div>
+        </div>
+
+        <br />
 
         @{
             var link = Html.ActionLink("REPLACE", "Logout", null, new { @class = "btn btn-primary" }).ToHtmlString();

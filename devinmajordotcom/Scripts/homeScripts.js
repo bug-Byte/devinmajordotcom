@@ -21,6 +21,16 @@ function SettingsUpdateFailure() {
     });
 }
 
+function InitializeModal(ID, TITLE) {
+    $('.modal-title').text(TITLE);
+    $(ID).modal(
+        {
+            backdrop: 'static',
+            keyboard: false
+        }
+    );
+}
+
 $(document).ready(function () {
 
     "use strict";
