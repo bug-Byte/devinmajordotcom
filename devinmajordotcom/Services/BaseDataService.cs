@@ -76,6 +76,12 @@ namespace devinmajordotcom.Services
             return !string.IsNullOrEmpty(userString) && db.Security_Users.Any(x => x.UserName == userString || x.EmailAddress == userString);
         }
 
+        public UserViewModel FindUser()
+        {
+            var userGuid = HttpContext.Current.Session["MainPageUserAuthID"] ?? AddNewUser().Guid;
+            return GetCurrentUser((Guid)userGuid);
+        }
+
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
             var user = db.Security_Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
