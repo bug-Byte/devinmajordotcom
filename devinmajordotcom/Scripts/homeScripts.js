@@ -191,6 +191,10 @@ function LoginFailure() {
     $validator.showErrors(errors);
 }
 
+function HideLoginModal(data) {
+    window.location.reload(true);
+}
+
 function DisplayDateTime() {
     var refresh = 1000;
     setTimeout('RefreshDateTime()', refresh);

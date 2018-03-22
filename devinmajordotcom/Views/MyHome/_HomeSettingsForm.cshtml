@@ -168,7 +168,19 @@
 
         <br/>
 
-        <button type="submit" class="btn btns-success"><span class="glyphicon glyphicon-save"></span>&nbsp;Save Settings</button>
+        @{
+            var link = Html.ActionLink("REPLACE", "Logout", null, new { @class = "btn btn-primary" }).ToHtmlString();
+            var cleanLink = link.Replace("REPLACE", "<span class=\"glyphicon glyphicon-log-out\"></span>&nbsp;Log Out");
+        }
+
+        <div class="row">
+            <div class="col-sm-6 text-center" style="margin-bottom:5px;">
+                <button type="submit" class="btn btns-success"><span class="glyphicon glyphicon-save"></span>&nbsp;Save Settings</button>
+            </div>
+            <div class="col-sm-6 text-center" style="margin-bottom:5px;">
+                @Html.Raw(cleanLink)
+            </div>
+        </div>
 
     </div>
 }

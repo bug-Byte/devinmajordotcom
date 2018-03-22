@@ -33,7 +33,7 @@
                             <!-- TAB PANES -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="sign_in">
-                                    @using (Html.BeginForm("Login", controllerName, FormMethod.Post, new { @class = "loginForm" }))
+                                    @using (Ajax.BeginForm("Login", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "LoginFailure()" }, new { @class = "loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.Hidden("IsSigningUp", "False")
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div role="tabpanel" class="tab-pane fade in" id="sign_up">
-                                    @using (Html.BeginForm("UpdateCurrentUser", controllerName, new { @class = "loginForm" }))
+                                    @using (Html.BeginForm("UpdateCurrentUser", controllerName, FormMethod.Post, new { @class = "loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(x => x.UserIsActive)

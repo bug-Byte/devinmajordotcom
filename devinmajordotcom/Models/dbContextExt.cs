@@ -17,7 +17,7 @@ namespace devinmajordotcom.Models
             var dataService = new BaseDataService();
             var userName = "";
             var userGuid = HttpContext.Current.Session["MainPageUserAuthID"];
-            if (userGuid == null)
+            if (userGuid == null || (Guid)userGuid == new Guid())
             {
                 userName = "Default";
             }
