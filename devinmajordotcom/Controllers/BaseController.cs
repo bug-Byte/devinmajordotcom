@@ -38,7 +38,7 @@ namespace devinmajordotcom.Controllers
             var validatedUser = landingPageService.Login(viewModel, true);
             if (validatedUser.UserID == 0 || !validatedUser.UserIsAdmin)
             {
-                return new HttpStatusCodeResult(401);
+                return new HttpStatusCodeResult(500);
             }
             return RedirectToAction("Index");
         }

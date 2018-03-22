@@ -33,9 +33,10 @@ namespace devinmajordotcom.Services
                 HttpContext.Current.Session.Timeout = 86400;
                 HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;
                 HttpContext.Current.Session["MainPageUserName"] = results.User.UserName;
+                return results.User;
             }
 
-            return results.User;
+            return new UserViewModel();
         }
 
         public void Logout()
