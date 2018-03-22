@@ -76,25 +76,17 @@ namespace devinmajordotcom.Services
             var configRecord = db.LandingPage_Configs.FirstOrDefault();
             if(configRecord != null)
             {
-                configRecord.AppsDescription = viewModel.Config.AppsDescription;
-                configRecord.AppsIntro = viewModel.Config.AppsIntro;
                 configRecord.AppsTitle = viewModel.Config.AppsTitle;
-                configRecord.ContactInstructions = viewModel.Config.ContactInstructions;
-                configRecord.ContactTitle = viewModel.Config.ContactTitle;
-                configRecord.ServerStatusDescription = viewModel.Config.ServerStatusDescription;
-                configRecord.ServerStatusTitle = viewModel.Config.ServerStatusTitle;
+                configRecord.BackgroundImage = viewModel.Config.BackgroundImage;
+                configRecord.IsParticleCanvasOn = viewModel.Config.IsParticleCanvasOn;
             }
             else
             {
                 var newRecord = new LandingPage_Config()
                 {
-                    AppsDescription = viewModel.Config.AppsDescription,
-                    AppsIntro = viewModel.Config.AppsIntro,
                     AppsTitle = viewModel.Config.AppsTitle,
-                    ContactInstructions = viewModel.Config.ContactInstructions,
-                    ContactTitle = viewModel.Config.ContactTitle,
-                    ServerStatusDescription = viewModel.Config.ServerStatusDescription,
-                    ServerStatusTitle = viewModel.Config.ServerStatusTitle
+                    IsParticleCanvasOn = viewModel.Config.IsParticleCanvasOn,
+                    BackgroundImage = viewModel.Config.BackgroundImage
                 };
                 db.LandingPage_Configs.Add(newRecord);
                 db.SaveChanges();
@@ -126,14 +118,10 @@ namespace devinmajordotcom.Services
         public LandingPageConfigViewModel GetLandingPageConfig()
         {
             return db.LandingPage_Configs.Select(x => new LandingPageConfigViewModel() {
-                AppsDescription = x.AppsDescription,
-                AppsIntro = x.AppsIntro,
                 AppsTitle = x.AppsTitle,
-                ContactInstructions = x.ContactInstructions,
-                ContactTitle = x.ContactTitle,
-                ID = x.Id,
-                ServerStatusDescription = x.ServerStatusDescription,
-                ServerStatusTitle = x.ServerStatusTitle
+                BackgroundImage = x.BackgroundImage,
+                IsParticleCanvasOn = x.IsParticleCanvasOn,
+                ID = x.Id
             }).FirstOrDefault();
         }
 
@@ -161,6 +149,7 @@ namespace devinmajordotcom.Services
                 ID = x.Id,
                 DisplayName = x.DisplayName,
                 Description = x.Description,
+                Directive = x.Directive,
                 DisplayIcon = x.DisplayIcon,
                 URL = x.Url,
                 Action = x.Action,

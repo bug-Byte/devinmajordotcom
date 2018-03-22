@@ -41,22 +41,14 @@ GO
 INSERT INTO [LandingPage].[Config]
 (
 	AppsTitle,
-	AppsIntro,
-	AppsDescription,
-	ContactTitle,
-	ContactInstructions,
-	ServerStatusTitle,
-	ServerStatusDescription
+	IsParticleCanvasOn,
+	BackgroundImage
 )
 VALUES
 (
 	'Welcome, Fellow Humans!',
-	'You''ve reached the coolest corner of the Internet!',
-	'Feel free to click one of the applications below for more fun... you never know what you''ll find!',
-	'Drop Me a Line',
-	'If you''d like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I''ll take it from there!',
-	'This Website is Brought To You By...',
-	'Watch the live feed of statistics below, and marvel at the beauty of my server.'
+	1,
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\Images\back3.png', SINGLE_BLOB) AS [BackgroundImage])
 );
 GO
 
@@ -127,8 +119,8 @@ INSERT INTO [LandingPage].[BannerLink]
 VALUES
 (
 	'Home & Apps', 
-	NULL,
-	NULL,
+	'You''ve reached the coolest corner of the Internet!',
+	'Feel free to click one of the applications below for more fun... you never know what you''ll find!',
 	'#home',
 	'Index',
 	'MyHome',
@@ -139,8 +131,8 @@ VALUES
 ),
 (
 	'Server Status', 
-	NULL,
-	NULL,
+	'Drop Me a Line',
+	'If you''d like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I''ll take it from there!',
 	'#server',
 	'Index',
 	'MediaDashboard',
@@ -151,8 +143,8 @@ VALUES
 ),
 (
 	'Contact Me', 
-	NULL,
-	NULL,
+	'This Website is Brought To You By...',
+	'Watch the live feed of statistics below, and marvel at the beauty of my server.',
 	'#contact',
 	'Index',
 	'Portfolio',

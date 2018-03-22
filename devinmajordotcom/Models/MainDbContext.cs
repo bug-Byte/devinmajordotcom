@@ -614,7 +614,7 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public string DisplayName { get; set; } // DisplayName (length: 50)
         public string Description { get; set; } // Description (length: 500)
-        public string Directive { get; set; } // Directive (length: 100)
+        public string Directive { get; set; } // Directive (length: 500)
         public string Url { get; set; } // URL (length: 500)
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
@@ -643,12 +643,8 @@ namespace devinmajordotcom.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public string AppsTitle { get; set; } // AppsTitle
-        public string AppsIntro { get; set; } // AppsIntro
-        public string AppsDescription { get; set; } // AppsDescription
-        public string ContactTitle { get; set; } // ContactTitle
-        public string ContactInstructions { get; set; } // ContactInstructions
-        public string ServerStatusTitle { get; set; } // ServerStatusTitle
-        public string ServerStatusDescription { get; set; } // ServerStatusDescription
+        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public bool IsParticleCanvasOn { get; set; } // IsParticleCanvasOn
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -656,6 +652,7 @@ namespace devinmajordotcom.Models
 
         public LandingPage_Config()
         {
+            IsParticleCanvasOn = false;
             InitializePartial();
         }
 
@@ -669,7 +666,7 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public string DisplayName { get; set; } // DisplayName (length: 50)
         public string Description { get; set; } // Description (length: 500)
-        public string Directive { get; set; } // Directive (length: 100)
+        public string Directive { get; set; } // Directive (length: 500)
         public string Url { get; set; } // URL (length: 500)
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
@@ -699,7 +696,7 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public string DisplayName { get; set; } // DisplayName (length: 50)
         public string Description { get; set; } // Description (length: 500)
-        public string Directive { get; set; } // Directive (length: 100)
+        public string Directive { get; set; } // Directive (length: 500)
         public string Url { get; set; } // URL (length: 500)
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
@@ -834,7 +831,7 @@ namespace devinmajordotcom.Models
         public int UserId { get; set; } // UserID
         public string DisplayName { get; set; } // DisplayName (length: 50)
         public string Description { get; set; } // Description (length: 500)
-        public string Directive { get; set; } // Directive (length: 100)
+        public string Directive { get; set; } // Directive (length: 500)
         public string Url { get; set; } // URL (length: 500)
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
@@ -910,7 +907,7 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public string DisplayName { get; set; } // DisplayName (length: 50)
         public string Description { get; set; } // Description (length: 500)
-        public string Directive { get; set; } // Directive (length: 100)
+        public string Directive { get; set; } // Directive (length: 500)
         public string Url { get; set; } // URL (length: 500)
         public string Action { get; set; } // Action (length: 500)
         public string Controller { get; set; } // Controller (length: 500)
@@ -1289,7 +1286,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
@@ -1322,12 +1319,8 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.AppsTitle).HasColumnName(@"AppsTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.AppsIntro).HasColumnName(@"AppsIntro").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.AppsDescription).HasColumnName(@"AppsDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.ContactTitle).HasColumnName(@"ContactTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.ContactInstructions).HasColumnName(@"ContactInstructions").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.ServerStatusTitle).HasColumnName(@"ServerStatusTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.ServerStatusDescription).HasColumnName(@"ServerStatusDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.IsParticleCanvasOn).HasColumnName(@"IsParticleCanvasOn").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
@@ -1354,7 +1347,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
@@ -1388,7 +1381,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
@@ -1520,7 +1513,7 @@ namespace devinmajordotcom.Models
             Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
@@ -1597,7 +1590,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.Directive).HasColumnName(@"Directive").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Url).HasColumnName(@"URL").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Action).HasColumnName(@"Action").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);

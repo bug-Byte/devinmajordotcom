@@ -43,26 +43,12 @@ namespace devinmajordotcom.ViewModels
 
         public int ID { get; set; }
 
-        [DisplayName("Link Title : ")]
+        [DisplayName("Main Title : ")]
         public string AppsTitle { get; set; }
 
-        [DisplayName("Link Introduction : ")]
-        public string AppsIntro { get; set; }
+        public bool IsParticleCanvasOn { get; set; }
 
-        [DisplayName("Link Description : ")]
-        public string AppsDescription { get; set; }
-
-        [DisplayName("Link Title : ")]
-        public string ContactTitle { get; set; }
-
-        [DisplayName("Link Instructions : ")]
-        public string ContactInstructions { get; set; }
-
-        [DisplayName("Link Title : ")]
-        public string ServerStatusTitle { get; set; }
-
-        [DisplayName("Link Description : ")]
-        public string ServerStatusDescription { get; set; }
+        public byte[] BackgroundImage { get; set; }
 
     }
 

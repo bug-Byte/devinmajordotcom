@@ -506,8 +506,6 @@ body {
 }
 
 .site-wrapper:before {
-    background-image: url('Images/back3.png');
-
     z-index: -1;
     content: '';
     position: absolute;

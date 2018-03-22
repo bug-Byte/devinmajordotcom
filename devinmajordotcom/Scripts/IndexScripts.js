@@ -156,7 +156,7 @@ $(document).ready(function () {
         $(this).find('.glyphicon').removeClass('blueGlyphicon', 600);
     });
 
-    $(".masthead-nav").find('li').each(function () {
+    $(document).find('.masthead-nav li').each(function () {
         $(this).click(function () {
             $('.masthead-nav li').removeClass('active');
             var divToShow = $(this).data('activediv');

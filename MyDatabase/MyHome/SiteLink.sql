@@ -3,7 +3,7 @@
 	[UserID]		INT NOT NULL,
     [DisplayName]   NVARCHAR (50)  NOT NULL,
     [Description]   NVARCHAR (500) NULL,
-    [Directive]     NVARCHAR (100) NULL,
+    [Directive]     NVARCHAR (500) NULL,
     [URL]           NVARCHAR (500) NULL,
     [Action]        NVARCHAR (500) NULL,
     [Controller]    NVARCHAR (500) NULL,

@@ -2,11 +2,7 @@
 (
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	AppsTitle VARCHAR(MAX) NULL,
-	AppsIntro VARCHAR(MAX) NULL,
-	AppsDescription VARCHAR(MAX) NULL,
-	ContactTitle VARCHAR(MAX) NULL,
-	ContactInstructions VARCHAR(MAX) NULL,
-	ServerStatusTitle VARCHAR(MAX) NULL,
-	ServerStatusDescription VARCHAR(MAX) NULL
+	BackgroundImage VARBINARY (MAX) NULL,
+	IsParticleCanvasOn BIT NOT NULL DEFAULT 0
 	PRIMARY KEY(Id)
 )

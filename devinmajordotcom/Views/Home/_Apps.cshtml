@@ -1,21 +1,30 @@
 ﻿@using devinmajordotcom.Helpers;
 @model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@{
+    var config = Model.LandingPageBannerLinks.FirstOrDefault(x => x.IsEnabled && x.URL == "#home");
+}
+
 <div class="inner cover" id="home">
 
     <h1 class="cover-heading">@Model.Config.AppsTitle</h1>
-    <hr>
-    <p class="lead" style="color: #71cef5;">@Model.Config.AppsIntro</p>
-    <p>@Model.Config.AppsDescription</p>
-    <hr>
-    <br />
-
-    @if (Model.LandingPageApplicationLinks.Count > 0)
+    
+    @if (config != null)
     {
-        foreach (var link in Model.LandingPageApplicationLinks.Where(x => x.IsEnabled).OrderBy(x => x.Order))
-        {
-            <div class="col-md-4 col-sm-4">
-                @Html.Raw(Html.ActionLink("REPLACE", link.Action, link.Controller, null, new { @class = "appLink" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", link)))
-            </div>
-        }
+        <hr>
+        <p class="lead" style="color: #71cef5;">@config.Description</p>
+        <p>@config.Directive</p>
+        <hr>
+        <br />
+
+        if (Model.LandingPageApplicationLinks.Count > 0)
+         {
+             foreach (var link in Model.LandingPageApplicationLinks.Where(x => x.IsEnabled).OrderBy(x => x.Order))
+             {
+                 <div class="col-md-4 col-sm-4">
+                     @Html.Raw(Html.ActionLink("REPLACE", link.Action, link.Controller, null, new { @class = "appLink" }).ToHtmlString().Replace("REPLACE", PartialHelper.RenderViewToString(this.ViewContext, "_MainApplicationLinkContent", link)))
+                 </div>
+             }
+         }
     }
+    
 </div>

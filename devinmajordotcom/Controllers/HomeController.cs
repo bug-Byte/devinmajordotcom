@@ -22,6 +22,7 @@ namespace devinmajordotcom.Controllers
 
             this.ViewData["CurrentUserViewModel"] = viewModel.CurrentUserViewModel;
             this.ViewData["BannerLinks"] = viewModel.LandingPageBannerLinks;
+            this.ViewData["Config"] = viewModel.Config;
             ViewBag.Title = "D3V!N M@J0R";
             ViewBag.ControllerName = "Home";
 

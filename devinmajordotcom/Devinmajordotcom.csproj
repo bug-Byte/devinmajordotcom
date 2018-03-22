@@ -358,6 +358,7 @@
     <Content Include="Content\HomeImages\work-image4.jpg" />
     <Content Include="Content\HomeImages\youtube.png" />
     <Content Include="Content\Images\back1.png" />
+    <Content Include="Content\Images\back3.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\check2.png" />
     <Content Include="Content\Images\favicon\android-chrome-192x192.png" />

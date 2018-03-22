@@ -28,7 +28,7 @@ namespace devinmajordotcom.Services
         {
             var results = ValidateCredentials(viewModel.UserName, viewModel.Password, viewModel.EmailAddress);
 
-            if (results.User.UserIsAdmin == isAdmin && HttpContext.Current.Session["MainPageUserAuthID"] == null || (Guid)HttpContext.Current.Session["MainPageUserAuthID"] != results.User.GUID)
+            if (results.User.UserID != 0 && ((isAdmin && results.User.UserIsAdmin) || (isAdmin == results.User.UserIsAdmin)) || HttpContext.Current.Session["MainPageUserAuthID"] == null || (Guid)HttpContext.Current.Session["MainPageUserAuthID"] != results.User.GUID)
             {
                 HttpContext.Current.Session.Timeout = 86400;
                 HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;

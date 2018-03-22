@@ -1,30 +1,33 @@
 ﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@{
+    var config = Model.LandingPageBannerLinks.FirstOrDefault(x => x.IsEnabled && x.URL == "#server");
+}
 <div style="display:none;" class="inner cover" id="server">
-
-    @*<h1 class="cover-heading">This is My Server...</h1>
-    <p class="lead" style="color: #71cef5;">Watch the live feed of statistics below, and marvel at the beauty of my server.</p>*@
-
-    <h2 class="title"><strong>@Model.Config.ServerStatusTitle</strong></h2>
-    <hr>
-    <p style="color: #71cef5;">@Model.Config.ServerStatusDescription</p>
-    <hr>
     
-    <div style="background-color: #0B1C1E;">
+    @if (config != null)
+    {
+        <h2 class="title"><strong>@config.Description</strong></h2>
+        <hr>
+        <p style="color: #71cef5;">@config.Directive</p>
+        <hr>
+    
+        <div style="background-color: #0B1C1E;">
         
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="chart"><div id="cpuCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Usage</div></div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="chart"><div id="cpuCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Usage</div></div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="chart"><div id="tempCounter" class="performancePieChart percentage temperature" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Temperature</div></div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="chart"><div id="ramCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">RAM Usage</div></div>
+                </div>
             </div>
-            <div class="col-sm-4">
-                <div class="chart"><div id="tempCounter" class="performancePieChart percentage temperature" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Temperature</div></div>
-            </div>
-            <div class="col-sm-4">
-                <div class="chart"><div id="ramCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">RAM Usage</div></div>
-            </div>
+
+            <div id="driveCounters"></div>
+
         </div>
-
-        <div id="driveCounters"></div>
-
-    </div>
+    }
 
 </div>
