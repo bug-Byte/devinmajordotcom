@@ -23,6 +23,12 @@
 
     @Styles.Render("~/Content/homecss")
     @Styles.Render("~/Content/FineUploader")
+    
+    <style>
+        #home {
+            background-image: url('@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(userConfigViewModel.BackgroundImage))');
+        }
+    </style>
 
 </head>
 <body>

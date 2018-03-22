@@ -186,6 +186,7 @@
                 @Html.LabelFor(x => x.BackgroundImage, new { style = "font-weight:normal;" })
             </div>
             <div class="col-sm-6">
+                @Html.HiddenFor(x => x.BackgroundImage)
                 @Html.Raw(uploadButton)
             </div>
         </div>

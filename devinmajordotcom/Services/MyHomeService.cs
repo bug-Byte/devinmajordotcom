@@ -58,6 +58,12 @@ namespace devinmajordotcom.Services
         public void SetUserConfigViewModel(MyHomeUserConfigViewModel viewModel)
         {
             var config = db.MyHome_UserConfigs.FirstOrDefault(x => x.UserId == viewModel.UserID);
+            var convertedImage = new byte[0];
+            if (viewModel.BackgroundImage != null)
+            {
+                var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
+                convertedImage = Convert.FromBase64String(newString);
+            }
             if(config != null)
             {
                 config.ShowWeather = viewModel.ShowWeather;
@@ -70,7 +76,7 @@ namespace devinmajordotcom.Services
                 config.BlogTitle = viewModel.BlogTitle;
                 config.BookmarksTitle = viewModel.BookmarksTitle;
                 config.Greeting = viewModel.Greeting;
-                config.BackgroundImage = viewModel.BackgroundImage;
+                config.BackgroundImage = convertedImage;
                 db.SaveChanges();
             }
         }

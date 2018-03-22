@@ -424,22 +424,23 @@ input[type="checkbox"]:checked + .slider:before {
   -----------------------------------------*/
 
   #home {
-    background: url('HomeImages/home-bg4.jpg') no-repeat center center;
-    background-size: cover;
-    vertical-align: middle;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    padding-top: 10em;
-    text-align: left;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      vertical-align: middle;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-top: 10em;
+      text-align: left;
   }
 
   #home h1 {

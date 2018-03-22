@@ -1,11 +1,10 @@
 ﻿@Html.Raw(File.ReadAllText(Server.MapPath("~/Views/Shared/simple-thumbnails.html")))
 
-<div class="modal-body">
+<div class="modal-body" style="color: white;">
     <div class="row helpBox">
         <div class="col-sm-2 fa fa-info-circle" id="infoIcon"></div>
         <div class="col-sm-9">
-            Please ensure the excel template is filled with the correct values as existing values will be overwritten.
-            If any errors occur they will be displayed after processing. The template must not be modified aside from the data values.
+            You are only allowed to upload images here, since it's going to be used as your background!
         </div>
     </div>
     <div id="uploader"></div>
@@ -29,7 +28,9 @@
             onComplete: function (id, name, responseJson) {
                 if (responseJson.success === true) {
                     $('#resultMessage').css('color', 'green');
-                    $('#resultMessage').text(responseJson.successMessage);
+                    $('#resultMessage').text(responseJson.message);
+                    var newFile = window.btoa(responseJson.file);
+                    $("#BackgroundImage").val(newFile);
                 }
             },
             onError: function (id, name, errorReason) {

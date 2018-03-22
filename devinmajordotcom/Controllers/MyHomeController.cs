@@ -1,6 +1,7 @@
 ﻿using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,27 +26,27 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
-        public void UploadImage(HttpPostedFileWrapper qqfile)
+        public ActionResult UploadImage(HttpPostedFileWrapper qqfile)
         {
-            var a = 0;
-            //if (qqfile == null || qqfile.ContentLength <= 0)
-            //{
-            //    return Json(new { success = false, error = ScorecardResources.Error_File_Empty });
-            //}
+            if (qqfile == null || qqfile.ContentLength <= 0)
+            {
+                return Json(new { success = false, message = "Could not upload file: File was empty!" });
+            }
 
-            //var responseData = new ResponseViewModel();
-
-            //try
-            //{
-            //    responseData = _service.SalesDataExcelDocumentInsertion(new XLWorkbook(qqfile.InputStream));
-            //}
-            //catch (Exception ex)
-            //{
-            //    responseData.OperationStatus = false;
-            //    responseData.Error = "Could not upload this Image";
-            //}
-
-            //return Json(new { success = responseData.OperationStatus, error = responseData.Error, successMessage = "Image Successfully Uploaded" });
+            try
+            {
+                byte[] fileData = null;
+                using (var binaryReader = new BinaryReader(qqfile.InputStream))
+                {
+                    fileData = binaryReader.ReadBytes(qqfile.ContentLength);
+                }
+                var base64ConvertedFile = Convert.ToBase64String(fileData);
+                return Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = base64ConvertedFile });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Could not upload file: There was a problem with the file!" });
+            }
         }
 
         public ActionResult BlogPost(int ID)
