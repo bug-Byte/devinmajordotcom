@@ -58,27 +58,25 @@ namespace devinmajordotcom.Services
         public void SetUserConfigViewModel(MyHomeUserConfigViewModel viewModel)
         {
             var config = db.MyHome_UserConfigs.FirstOrDefault(x => x.UserId == viewModel.UserID);
-            var convertedImage = new byte[0];
-            if (viewModel.BackgroundImage != null)
+
+            if (config == null) return;
+            if (viewModel.BackgroundImage.Length != config.BackgroundImage.Length)
             {
                 var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                convertedImage = Convert.FromBase64String(newString);
+                config.BackgroundImage = Convert.FromBase64String(newString);
             }
-            if(config != null)
-            {
-                config.ShowWeather = viewModel.ShowWeather;
-                config.ShowVisitorsAdminHome = viewModel.ShowVisitorsAdminHome;
-                config.ShowDateAndTime = viewModel.ShowDateAndTime;
-                config.ShowBookmarks = viewModel.ShowBookmarks;
-                config.ShowBanner = viewModel.ShowBanner;
-                config.IsEditable = viewModel.IsEditable;
-                config.ShowBlog = viewModel.ShowBlog;
-                config.BlogTitle = viewModel.BlogTitle;
-                config.BookmarksTitle = viewModel.BookmarksTitle;
-                config.Greeting = viewModel.Greeting;
-                config.BackgroundImage = convertedImage;
-                db.SaveChanges();
-            }
+
+            config.ShowWeather = viewModel.ShowWeather;
+            config.ShowVisitorsAdminHome = viewModel.ShowVisitorsAdminHome;
+            config.ShowDateAndTime = viewModel.ShowDateAndTime;
+            config.ShowBookmarks = viewModel.ShowBookmarks;
+            config.ShowBanner = viewModel.ShowBanner;
+            config.IsEditable = viewModel.IsEditable;
+            config.ShowBlog = viewModel.ShowBlog;
+            config.BlogTitle = viewModel.BlogTitle;
+            config.BookmarksTitle = viewModel.BookmarksTitle;
+            config.Greeting = viewModel.Greeting;
+            db.SaveChanges();
         }
 
         public MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId)
