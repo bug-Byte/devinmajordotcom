@@ -14,7 +14,7 @@
 
     @Html.Partial("_ContactContent", Model)
 
-    @if (Model.CurrentUserViewModel.UserIsLoggedIn && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
+    @if (Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
     {
         @Html.Partial("_ApplicationManager", Model.CurrentApplicationConfig)
     }

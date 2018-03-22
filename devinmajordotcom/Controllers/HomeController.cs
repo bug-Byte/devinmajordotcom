@@ -45,7 +45,7 @@ namespace devinmajordotcom.Controllers
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
-            Login(viewModel);
+            Login(viewModel, true);
         }
 
         public ActionResult _ApplicationManager()

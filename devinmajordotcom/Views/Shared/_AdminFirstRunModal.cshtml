@@ -30,7 +30,7 @@
                             <!-- TAB PANES -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
-                                    @using (Ajax.BeginForm("UpdateCurrentUser", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideAdminFirstRunModal", OnFailure = "" }, new { @class="loginForm" }))
+                                    @using (Ajax.BeginForm("UpdateCurrentUser", controllerName, null, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideAdminFirstRunModal", OnFailure = "" }, new { @class="loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(x => x.UserIsActive)

@@ -44,9 +44,9 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserViewModel viewModel)
+        public ActionResult Login(UserViewModel viewModel, bool IsAdmin = false)
         {
-            var validatedUser = landingPageService.Login(viewModel);
+            var validatedUser = landingPageService.Login(viewModel, IsAdmin);
             if(validatedUser.UserID == 0)
             {
                 return new HttpStatusCodeResult(500);
