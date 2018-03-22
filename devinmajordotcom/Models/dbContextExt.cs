@@ -14,16 +14,26 @@ namespace devinmajordotcom.Models
 
         public override int SaveChanges()
         {
+
             var dataService = new BaseDataService();
             var userName = "";
             var userGuid = HttpContext.Current.Session["MainPageUserAuthID"];
+
             if (userGuid == null || (Guid)userGuid == new Guid())
             {
                 userName = "Default";
             }
             else
             {
-                userName = dataService.GetCurrentUser((Guid)userGuid).UserName;
+                var methodUser = dataService.GetCurrentUser((Guid)userGuid);
+                if (methodUser != null && methodUser.UserName != null)
+                {
+                    userName = methodUser.UserName;
+                }
+                else
+                {
+                    userName = "Default";
+                }
             }
 
             var addedAuditedEntities = ChangeTracker.Entries().Where(p => p.State == EntityState.Added).Select(p => p.Entity);

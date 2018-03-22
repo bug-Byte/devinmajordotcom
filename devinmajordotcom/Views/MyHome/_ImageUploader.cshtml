@@ -31,6 +31,8 @@
                     $('#resultMessage').text(responseJson.message);
                     var newFile = window.btoa(responseJson.file);
                     $("#BackgroundImage").val(newFile);
+                    $("#previewImage").attr("src", "data:image/jpg;base64," + responseJson.file);
+                    $("#formModalUpload").modal('toggle');
                 }
             },
             onError: function (id, name, errorReason) {

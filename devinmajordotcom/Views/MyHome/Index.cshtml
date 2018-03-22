@@ -7,6 +7,26 @@
     var newRowHtml = "</div><br/><div class='row'>";
 }
 
+<style>
+    .popover-title {
+        color:black !important;
+        text-align:center;
+        font-size:14px;
+        font-weight:bold;
+    }
+    #previewImage {
+        border: 1px solid #ddd; /* Gray border */
+        border-radius: 4px;  /* Rounded border */
+        padding: 5px; /* Some padding */
+        width: 150px; /* Set a small width */
+    }
+
+    #previewImage:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+
+</style>
+
 <!-- HOME -->
 <section id="home" data-stellar-background-ratio="0.5">
     
@@ -15,7 +35,7 @@
     <div class="container" style="">
         @if (!Model.UserConfig.ShowBanner)
         {
-            <div id="settingsWindowButton" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content='@Html.Partial("_HomeSettingsForm", Model.UserConfig)' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></div>
+            <div id="settingsWindowButton" style="float:right;z-index:999;" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content='@Html.Partial("_HomeSettingsForm", Model.UserConfig)' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></div>
         }
         <div class="row">
 
@@ -156,7 +176,6 @@
     @if(Model.CurrentUserViewModel.UserIsLoggedIn)
     {
         <text>
-    debugger;
             var string = '<li id="settingsWindowButton" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content=\'';
             var html = '@Html.Raw(@Html.Partial("_HomeSettingsForm", Model.UserConfig).ToHtmlString().Replace(Environment.NewLine, ""))';
             string += html;

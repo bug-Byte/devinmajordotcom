@@ -118,6 +118,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/smoothscroll.js",
                 "~/Scripts/moment.js",
                 "~/Scripts/jquery.bootsnack.js",
+                "~/Scripts/jquery.ui.touch-punch.min.js",
                 "~/Scripts/homeScripts.js"
             ));
 
