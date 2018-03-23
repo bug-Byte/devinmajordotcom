@@ -1,0 +1,102 @@
+﻿@model devinmajordotcom.ViewModels.SiteLinkViewModel
+@{
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-default",
+            @style = "color:black;"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+}
+<div class="favoritesFormContainer" style="color: white;">
+    <div class="row">
+        <div class="col-sm-12 text-left">
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.DisplayName)
+        </div>
+        <div clas="col-sm-12 text-center">
+            @Html.TextBoxFor(x => x.DisplayName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.DisplayName)
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12 text-left">
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.Description)
+        </div>
+        <div clas="col-sm-12 text-center">
+            @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.Description)
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12 text-left">
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.URL)
+        </div>
+        <div clas="col-sm-12 text-center">
+            @Html.TextBoxFor(x => x.URL, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.URL)
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 text-left">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.IsEnabled)
+        </div>
+        <div clas="col-sm-6 text-center">
+            <div class="form-group">
+                <div class="checkbox-inline">
+                    <label class="switch">
+                        @Html.EditorFor(x => x.IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.IsEnabled)
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+            @Html.LabelFor(x => x.EncodedImage)
+        </div>
+        <div clas="col-sm-12 text-center">
+            @Html.HiddenFor(x => x.EncodedImage)
+            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.EncodedImage))" id="previewImage" class="img-responsive" alt="Background Image">
+            @Html.Raw(uploadButton)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.EncodedImage)
+        </div>
+    </div>
+</div>

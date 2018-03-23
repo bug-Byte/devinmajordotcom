@@ -821,7 +821,9 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\MyHome\_HomeSettingsForm.cshtml" />
-    <Content Include="Views\MyHome\_ImageUploader.cshtml" />
+    <Content Include="Views\Shared\_ImageUploader.cshtml" />
+    <Content Include="Views\MyHome\_EditFavorites.cshtml" />
+    <Content Include="Views\MyHome\_EditFavorite.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

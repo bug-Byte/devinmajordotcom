@@ -3,6 +3,7 @@ using devinmajordotcom.Services;
 using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -30,6 +31,37 @@ namespace devinmajordotcom.Controllers
             portfolioService = DependencyResolver.Current.GetService<IPortfolioService>();
             mediaDashboardService = DependencyResolver.Current.GetService<IMediaDashboardService>();
             myHomeService = DependencyResolver.Current.GetService<IMyHomeService>();
+        }
+
+        [HttpGet]
+        public ActionResult UploadTemplate()
+        {
+            ViewBag.ControllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            return PartialView("_ImageUploader");
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileWrapper qqfile)
+        {
+            if (qqfile == null || qqfile.ContentLength <= 0)
+            {
+                return Json(new { success = false, message = "Could not upload file: File was empty!" });
+            }
+
+            try
+            {
+                byte[] fileData = null;
+                using (var binaryReader = new BinaryReader(qqfile.InputStream))
+                {
+                    fileData = binaryReader.ReadBytes(qqfile.ContentLength);
+                }
+                var base64ConvertedFile = Convert.ToBase64String(fileData);
+                return Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = base64ConvertedFile });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Could not upload file: There was a problem with the file!" });
+            }
         }
 
         [HttpPost]

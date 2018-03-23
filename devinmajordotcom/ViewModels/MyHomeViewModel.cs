@@ -59,6 +59,17 @@ namespace devinmajordotcom.ViewModels
 
     }
 
+    public class EditFavoritesViewModel
+    {
+
+        public int UserID { get; set; }
+
+        public int SelectedFavoriteID { get; set; }
+
+        public List<DropDownViewModel> AvailableFavorites { get; set; }
+
+    }
+
     public class BlogPostViewModel : CommentViewModel
     {
 

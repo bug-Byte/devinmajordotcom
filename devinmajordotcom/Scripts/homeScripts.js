@@ -5,6 +5,11 @@ function removeDisable() {
     $('body').data('loading-disabled', false);
 }
 
+function UpdateFavoritesModal(data) {
+    debugger;
+    $('#favoritesFormContainer').html(data);
+}
+
 function SettingsUpdate(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',

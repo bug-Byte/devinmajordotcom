@@ -98,6 +98,24 @@ namespace devinmajordotcom.Services
             }).FirstOrDefault();
         }
 
+        public EditFavoritesViewModel GetEditFavoritesViewModel(int userID)
+        {
+
+            var favorites = db.MyHome_SiteLinks.Where(x => x.UserId == userID).Select(x => new DropDownViewModel()
+            {
+                ID = x.Id,
+                Name = x.DisplayName
+            }).ToList();
+
+            return new EditFavoritesViewModel()
+            {
+                UserID = userID,
+                AvailableFavorites = favorites,
+                SelectedFavoriteID = favorites.Select(x => x.ID).FirstOrDefault()
+            };
+
+        }
+
         public List<SiteLinkViewModel> GetFavoritesAndBookmarksByUserId(int userId)
         {
             return db.MyHome_SiteLinks.Where(x => x.UserId == userId).Select(x => new SiteLinkViewModel()
@@ -116,6 +134,25 @@ namespace devinmajordotcom.Services
                 EncodedImage = x.Image
             }).ToList();
         }
+
+        public SiteLinkViewModel GetFavoriteByID(int ID)
+        {
+            return db.MyHome_SiteLinks.Where(x => x.Id == ID).Select(x => new SiteLinkViewModel()
+            {
+                Controller = x.Controller,
+                ID = x.Id,
+                IsDefault = x.IsDefault,
+                DisplayName = x.DisplayName,
+                Action = x.Action,
+                IsEnabled = x.IsEnabled,
+                Order = x.Order,
+                Description = x.Description,
+                Directive = x.Directive,
+                DisplayIcon = x.DisplayIcon,
+                URL = x.Url,
+                EncodedImage = x.Image
+            }).FirstOrDefault();
+        } 
 
         public BlogPostViewModel GetBlogPostById(int ID)
         {

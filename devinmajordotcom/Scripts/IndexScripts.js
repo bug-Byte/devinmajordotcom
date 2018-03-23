@@ -253,7 +253,7 @@ function HideLoginModal() {
 
 }
 
-function LoginFailure() {    
+function LoginFailure() {
     var errors = { Password: "Could not log in. You are either not an administrator, or you typed your credentials incorrectly. Please try again!" };
     var $validator = $(".loginForm").validate();
     $validator.showErrors(errors);

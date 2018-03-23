@@ -20,33 +20,17 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpGet]
-        public ActionResult UploadTemplate()
+        public ActionResult _EditFavorites(int userID)
         {
-            return PartialView("_ImageUploader");
+            var viewModel = myHomeService.GetEditFavoritesViewModel(userID);
+            return PartialView(viewModel);
         }
 
         [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileWrapper qqfile)
+        public ActionResult _EditFavorite(EditFavoritesViewModel viewModel)
         {
-            if (qqfile == null || qqfile.ContentLength <= 0)
-            {
-                return Json(new { success = false, message = "Could not upload file: File was empty!" });
-            }
-
-            try
-            {
-                byte[] fileData = null;
-                using (var binaryReader = new BinaryReader(qqfile.InputStream))
-                {
-                    fileData = binaryReader.ReadBytes(qqfile.ContentLength);
-                }
-                var base64ConvertedFile = Convert.ToBase64String(fileData);
-                return Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = base64ConvertedFile });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = "Could not upload file: There was a problem with the file!" });
-            }
+            var newViewModel = myHomeService.GetFavoriteByID(viewModel.SelectedFavoriteID);
+            return PartialView(newViewModel);
         }
 
         public ActionResult BlogPost(int ID)

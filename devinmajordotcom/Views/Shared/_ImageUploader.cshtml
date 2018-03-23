@@ -1,5 +1,7 @@
 ﻿@Html.Raw(File.ReadAllText(Server.MapPath("~/Views/Shared/simple-thumbnails.html")))
-
+@{
+    ViewBag.ControllerName = ViewBag.ControllerName;
+}
 <div class="modal-body" style="color: white;">
     <div class="row helpBox">
         <div class="col-sm-2 fa fa-info-circle" id="infoIcon"></div>
@@ -17,7 +19,7 @@
     var uploader = new qq.FineUploader({
         element: document.getElementById("uploader"),
         request: {
-            endpoint: "@Url.Action("UploadImage","MyHome")"
+            endpoint: "@Url.Action("UploadImage", ViewBag.ControllerName)"
         },
         multiple: false,
         validation: {
@@ -32,7 +34,7 @@
                     var newFile = window.btoa(responseJson.file);
                     $("#BackgroundImage").val(newFile);
                     $("#previewImage").attr("src", "data:image/jpg;base64," + responseJson.file);
-                    $("#formModalUpload").modal('toggle');
+                    $("#formModalImageUploader").modal('toggle');
                 }
             },
             onError: function (id, name, errorReason) {

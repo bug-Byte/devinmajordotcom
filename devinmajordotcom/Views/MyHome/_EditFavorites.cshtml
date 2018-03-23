@@ -1,0 +1,35 @@
+﻿@model devinmajordotcom.ViewModels.EditFavoritesViewModel
+@using (Ajax.BeginForm("_EditFavorite", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateFavoritesModal(data);", UpdateTargetId = "favoritesFormContainer" }, new { @id = "FavoriteSelectionForm" }))
+{
+    @Html.HiddenFor(x => x.UserID)
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            @Html.DropDownListFor(
+                o => o.SelectedFavoriteID,
+                new SelectList(Model.AvailableFavorites, "Id", "Name"),
+                new
+                {
+                    @class = "form-control",
+                }
+                )
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.ValidationMessageFor(x => x.SelectedFavoriteID)
+        </div>
+    </div>
+    <br/>
+
+}
+
+<div id="favoritesFormContainer"></div>
+
+<script>
+    $(document).ready(function() {
+        $("#FavoriteSelectionForm").submit();
+        $("#SelectedFavoriteID").change(function () {
+            $("#FavoriteSelectionForm").submit();
+        });
+    });
+</script>
