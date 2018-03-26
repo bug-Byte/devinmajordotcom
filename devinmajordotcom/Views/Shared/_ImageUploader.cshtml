@@ -21,13 +21,17 @@
         request: {
             endpoint: "@Url.Action("UploadImage", ViewBag.ControllerName)"
         },
+        debug: true,
+        sizeError: "Size error",
         multiple: false,
         validation: {
+            sizeLimit: 524288000,
             allowedExtensions: ['jpg', 'gif', 'png', 'jpeg', 'bmp'],
             itemLimit: 1
         },
         callbacks: {
             onComplete: function (id, name, responseJson) {
+                debugger;
                 if (responseJson.success === true) {
                     $('#resultMessage').css('color', 'green');
                     $('#resultMessage').text(responseJson.message);

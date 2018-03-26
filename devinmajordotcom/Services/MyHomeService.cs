@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using devinmajordotcom.ViewModels;
+using devinmajordotcom.Models;
 
 namespace devinmajordotcom.Services
 {
@@ -129,9 +130,10 @@ namespace devinmajordotcom.Services
                 Directive = x.Directive,
                 DisplayIcon = x.DisplayIcon,
                 DisplayName = x.DisplayName,
+                UserID = x.UserId,
                 Order = x.Order,
                 URL = x.Url,
-                EncodedImage = x.Image
+                BackgroundImage = x.Image
             }).ToList();
         }
 
@@ -150,9 +152,73 @@ namespace devinmajordotcom.Services
                 Directive = x.Directive,
                 DisplayIcon = x.DisplayIcon,
                 URL = x.Url,
-                EncodedImage = x.Image
+                UserID = x.UserId,
+                BackgroundImage = x.Image
             }).FirstOrDefault();
         } 
+
+        public int RemoveFavoriteByID(int ID)
+        {
+            var item = db.MyHome_SiteLinks.FirstOrDefault(x => x.Id == ID);
+            var userId = item.UserId;
+            if(item != null)
+            {
+                db.MyHome_SiteLinks.Remove(item);
+            }
+            db.SaveChanges();
+            return userId;
+        }
+
+        public void AddEditFavorite(SiteLinkViewModel viewModel)
+        {
+            var record = db.MyHome_SiteLinks.FirstOrDefault(x => x.Id == viewModel.ID);
+            
+            if (record != null)
+            {
+                if (viewModel.BackgroundImage.Length != record.Image.Length)
+                {
+                    var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
+                    record.Image = Convert.FromBase64String(newString);
+                }
+                record.UserId = viewModel.UserID;
+                record.Controller = viewModel.Controller;
+                record.Id = viewModel.ID;
+                record.IsDefault = viewModel.IsDefault;
+                record.DisplayName = viewModel.DisplayName;
+                record.Action = viewModel.Action;
+                record.IsEnabled = viewModel.IsEnabled;
+                record.Order = viewModel.Order;
+                record.Description = viewModel.Description;
+                record.Directive = viewModel.Directive;
+                record.DisplayIcon = viewModel.DisplayIcon;
+                record.Url = viewModel.URL;
+            }
+            else
+            {
+                var newRecord = new MyHome_SiteLink()
+                {
+                    UserId = viewModel.UserID,
+                    Controller = viewModel.Controller,
+                    Id = viewModel.ID,
+                    IsDefault = viewModel.IsDefault,
+                    DisplayName = viewModel.DisplayName,
+                    Action = viewModel.Action,
+                    IsEnabled = viewModel.IsEnabled,
+                    Order = viewModel.Order,
+                    Description = viewModel.Description,
+                    Directive = viewModel.Directive,
+                    DisplayIcon = viewModel.DisplayIcon,
+                    Url = viewModel.URL
+                };
+                if (viewModel.BackgroundImage.Length > 0)
+                {
+                    var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
+                    newRecord.Image = Convert.FromBase64String(newString);
+                }
+                db.MyHome_SiteLinks.Add(newRecord);
+            }
+            db.SaveChanges();
+        }
 
         public BlogPostViewModel GetBlogPostById(int ID)
         {

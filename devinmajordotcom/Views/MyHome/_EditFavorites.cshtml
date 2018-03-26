@@ -1,5 +1,5 @@
 ﻿@model devinmajordotcom.ViewModels.EditFavoritesViewModel
-@using (Ajax.BeginForm("_EditFavorite", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateFavoritesModal(data);", UpdateTargetId = "favoritesFormContainer" }, new { @id = "FavoriteSelectionForm" }))
+@using (Ajax.BeginForm("_EditFavoriteForm", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateFavoritesModal(data);", UpdateTargetId = "favoritesFormContainer" }, new { @id = "FavoriteSelectionForm" }))
 {
     @Html.HiddenFor(x => x.UserID)
     <div class="row">
@@ -23,7 +23,7 @@
 
 }
 
-<div id="favoritesFormContainer"></div>
+<div id="favoritesFormContainer" style="color: white !important;"></div>
 
 <script>
     $(document).ready(function() {

@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -823,9 +824,12 @@
     <Content Include="Views\MyHome\_HomeSettingsForm.cshtml" />
     <Content Include="Views\Shared\_ImageUploader.cshtml" />
     <Content Include="Views\MyHome\_EditFavorites.cshtml" />
-    <Content Include="Views\MyHome\_EditFavorite.cshtml" />
+    <Content Include="Views\MyHome\_EditFavoriteForm.cshtml" />
+    <Content Include="Views\MyHome\_Favorites.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

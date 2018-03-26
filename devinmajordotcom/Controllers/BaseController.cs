@@ -56,7 +56,9 @@ namespace devinmajordotcom.Controllers
                     fileData = binaryReader.ReadBytes(qqfile.ContentLength);
                 }
                 var base64ConvertedFile = Convert.ToBase64String(fileData);
-                return Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = base64ConvertedFile });
+                var jsonResult = Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = base64ConvertedFile });
+                jsonResult.MaxJsonLength = int.MaxValue;
+                return jsonResult;
             }
             catch (Exception ex)
             {

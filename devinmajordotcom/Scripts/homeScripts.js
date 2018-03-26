@@ -6,7 +6,6 @@ function removeDisable() {
 }
 
 function UpdateFavoritesModal(data) {
-    debugger;
     $('#favoritesFormContainer').html(data);
 }
 
@@ -17,6 +16,19 @@ function SettingsUpdate(data) {
     });
     $("html").html(data);
     $('.preloader').fadeOut(1000); // set duration in brackets   
+}
+
+function UpdateFavoritesSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your favorites were successfully updated!'
+    });
+}
+
+function UpdateFavorites(data) {
+    $("#formModalEditFavorites").modal('toggle');
+    $("#favoritesListContainer").empty();
+    $("#favoritesListContainer").html(data);
 }
 
 function SettingsUpdateFailure() {

@@ -27,10 +27,26 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
-        public ActionResult _EditFavorite(EditFavoritesViewModel viewModel)
+        public ActionResult _EditFavoriteForm(EditFavoritesViewModel viewModel)
         {
             var newViewModel = myHomeService.GetFavoriteByID(viewModel.SelectedFavoriteID);
             return PartialView(newViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddEditFavorite(SiteLinkViewModel viewModel)
+        {
+            myHomeService.AddEditFavorite(viewModel);
+            var newViewModel = myHomeService.GetFavoritesAndBookmarksByUserId(viewModel.UserID).Where(x => x.IsEnabled).ToList();
+            return PartialView("_Favorites", newViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult RemoveFavoriteByID(int ID)
+        {
+            int userID = myHomeService.RemoveFavoriteByID(ID);
+            var newViewModel = myHomeService.GetFavoritesAndBookmarksByUserId(userID).Where(x => x.IsEnabled).ToList();
+            return PartialView("_Favorites", newViewModel);
         }
 
         public ActionResult BlogPost(int ID)

@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express

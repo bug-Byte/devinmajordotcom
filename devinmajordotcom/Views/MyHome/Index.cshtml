@@ -3,15 +3,13 @@
     ViewBag.CurrentUserConfig = Model.UserConfig;
     ViewBag.ControllerName = ViewBag.ControllerName;
     Layout = "../Shared/_HomeLayout.cshtml";
-    var linkCount = 1;
-    var newRowHtml = "</div><br/><div class='row'>";
 
     var editFavoritesButton = Ajax.ActionLink("REPLACE", "_EditFavorites", "MyHome", new { userID = Model.CurrentUserViewModel.UserID },
         new AjaxOptions
         {
             HttpMethod = "GET",
             InsertionMode = InsertionMode.Replace,
-            OnComplete = "InitializeModal('#formModalEditFavorites', 'Edit Favorites & Bookmarks');",
+            OnComplete = "InitializeModal('#formModalEditFavorites', 'Edit Item');",
             UpdateTargetId = "formModalBodyHolder"
         },
         new
@@ -100,31 +98,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-
-                @foreach (var link in Model.FavoritesAndBookmarks)
-                {
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="work-thumb">
-                            <a href="@link.URL" target="_blank" class="">
-                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(link.EncodedImage))" class="img-responsive" alt="Work">
-                                <div class="work-info">
-                                    <h3>@link.DisplayName</h3>
-                                    <small>@link.Description</small>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    if (linkCount % 4 == 0)
-                    {
-                        @Html.Raw(newRowHtml)
-                    }
-
-                    linkCount++;
-
-                }
+            <div id="favoritesListContainer">
+            
+                @Html.Partial("_Favorites", Model.FavoritesAndBookmarks)
 
             </div>
         </div>

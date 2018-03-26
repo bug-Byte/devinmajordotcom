@@ -20,6 +20,10 @@ namespace devinmajordotcom.Services
 
         List<SiteLinkViewModel> GetFavoritesAndBookmarksByUserId(int userId);
 
+        int RemoveFavoriteByID(int ID);
+
+        void AddEditFavorite(SiteLinkViewModel viewModel);
+
         List<BlogPostViewModel> GetBlogPostsByUserId(int userId);
 
         BlogPostViewModel GetBlogPostById(int ID);
