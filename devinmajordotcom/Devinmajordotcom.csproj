@@ -398,6 +398,7 @@
     <Content Include="Content\PortfolioImages\comp1.png" />
     <Content Include="Content\PortfolioImages\computer-repair-icon.png" />
     <Content Include="Content\PortfolioImages\desktop.png" />
+    <Content Include="Content\PortfolioImages\devinmajordotcom.png" />
     <Content Include="Content\PortfolioImages\energyballs.jpg" />
     <Content Include="Content\PortfolioImages\favicon.ico" />
     <Content Include="Content\PortfolioImages\hangman.jpg" />
@@ -406,6 +407,7 @@
     <Content Include="Content\PortfolioImages\langs.png" />
     <Content Include="Content\PortfolioImages\loading.gif" />
     <Content Include="Content\PortfolioImages\Macbook.png" />
+    <Content Include="Content\PortfolioImages\myhome.png" />
     <Content Include="Content\PortfolioImages\phone.png" />
     <Content Include="Content\PortfolioImages\portfolio-img1.jpg" />
     <Content Include="Content\PortfolioImages\portfolio-img2.jpg" />
@@ -415,8 +417,12 @@
     <Content Include="Content\PortfolioImages\portfolio-img6.jpg" />
     <Content Include="Content\PortfolioImages\portfolio-img7.jpg" />
     <Content Include="Content\PortfolioImages\portfolio-img8.jpg" />
+    <Content Include="Content\PortfolioImages\scorecard.png" />
     <Content Include="Content\PortfolioImages\servers.png" />
     <Content Include="Content\PortfolioImages\spwha.PNG" />
+    <Content Include="Content\PortfolioImages\targetsheets.png" />
+    <Content Include="Content\PortfolioImages\vmsadmin.png" />
+    <Content Include="Content\PortfolioImages\vmsform.png" />
     <Content Include="Content\PortfolioImages\winIOT.jpg" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\style.css" />

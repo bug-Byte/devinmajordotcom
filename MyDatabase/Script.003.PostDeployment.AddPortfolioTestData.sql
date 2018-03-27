@@ -269,14 +269,18 @@ DECLARE @Counter1 INT = 1;
 
 INSERT INTO @Projects([Name], [ImgPathName], [Description]) 
 VALUES 
-('UX Design', 'winIOT.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'boggle.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'spwha.png', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'hangman.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'bugbyte.png', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'bag.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'portfolio-img7.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.'), 
-('UX Design', 'portfolio-img8.jpg', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.');
+('devinmajor.com', 'devinmajordotcom.png', 'Created and hosted full stack, responsive, functional, and totally cool looking website for the world to see! Written in C# .NET.'), 
+('Plex Media Dashboard', 'mediadashboard.png', 'Created and maintain a Plex Media Server, with many other plugins like Ombi for requests, Tautulli for monitoring, etc.'), 
+('MyHome', 'myhome.png', 'Created a user-based custom homepage-style website, featuring a blog, weather, date & time, favorites & more!'), 
+('My Portfolio', 'bugbyte.png', 'You''re here already! This is an excellent example of a project I''ve completed that you can see!'), 
+('MIS - Scorecards', 'scorecard.png', 'Created an employee performance tracking module, featuring CRUD implementation, AJAX, KPI Management and more.'), 
+('MIS - Target Sheets', 'targetsheets.png', 'Created a KPI target & score scale management module, featuring bootstrap layouts and jQuery DataTables.'), 
+('VMS Public Form', 'vmsform.png', 'Created a public facing registration form for buyers of a company, featuring ReCaptcha, AngularJS and Handlebars.'), 
+('VMS Intranet', 'vmsadmin.png', 'Created an interal facing website for managing buyer registrations from the public form.'), 
+('Windows IoT App', 'winIOT.jpg', 'Created a small Windows ARM program that allowed web browsing, displays weather, and other basic functionalities.'), 
+('Boggle', 'boggle.jpg', 'Created a fully featured Boggle game in VB .NET.'), 
+('Soo PeeWee Hockey', 'spwha.png', 'Created a fully responsive PHP based website for the Sault PeeWee Hockey Association.'), 
+('PiBag', 'bag.jpg', 'I''ve created a custom laptop bag that has a Raspberry Pi and LCD touch display build into it! Running Arch Linux.');
 WHILE(@Counter1 <= (SELECT MAX(ID) FROM @Projects))
 BEGIN	
 	DECLARE @ImageName VARCHAR(MAX) = (SELECT [ImgPathName] FROM @Projects WHERE ID = @Counter1);
@@ -310,17 +314,40 @@ VALUES
 (1,4),
 (1,5),
 (2,1),
+(2,2),
 (2,3),
 (2,4),
-(2,5),
-(3,3),
+(3,1),
+(3,2),
+(3,4),
 (4,1),
+(4,2),
 (4,4),
+(5,1),
 (5,3),
+(5,4),
 (6,1),
-(6,2),
-(7,2),
-(8,3);
+(6,3),
+(6,4),
+(7,1),
+(7,3),
+(7,4),
+(8,1),
+(8,3),
+(8,4),
+(9,1),
+(9,3),
+(9,4),
+(9,5),
+(10,2),
+(10,3),
+(11,1),
+(11,2),
+(11,4),
+(12,2),
+(12,3),
+(12,4),
+(12,5);
 GO
 
 COMMIT

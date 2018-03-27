@@ -106,7 +106,7 @@ namespace devinmajordotcom.Services
                     ProjectDescription = x.Description,
                     EncodedImage = x.Image,
                     ProjectFilters = x.Portfolio_ProjectTypeMappings.Select(y => new DropDownViewModel() {
-                        ID = y.Id,
+                        ID = y.ProjectTypeId,
                         Name = y.Portfolio_ProjectType.Type
                     }).ToList()
                 }).ToList()
