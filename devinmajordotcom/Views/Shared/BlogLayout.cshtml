@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Action("../Content/Images/favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Action("../Content/Images/favicon/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Action("../Content/Images/favicon/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Action("../Content/Images/favicon/site.webmanifest")">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    @Styles.Render("~/Content/homecss")
+    @Styles.Render("~/Content/FineUploader")
+
+</head>
+<body style="background-color: gray;">
+
+<!-- PRE LOADER -->
+<section class="preloader">
+    <div class="spinner">
+        <span class="spinner-rotate"></span>
+    </div>
+</section>
+
+@RenderBody()
+
+<div id="ajaxAlertContainer"></div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/homeScripts")
+@Scripts.Render("~/bundles/FineUploader")
+@Scripts.Render("~/bundles/tinymce")
+    
+@RenderSection("scripts", required: false)
+
+</body>
+</html>

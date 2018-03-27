@@ -1,44 +1,95 @@
-﻿@model devinmajordotcom.ViewModels.BlogPostViewModel
+﻿@using devinmajordotcom.ViewModels
+@model BlogPostViewModel
 @{
-    Layout = "../Shared/_HomeLayout.cshtml";
+    Layout = "../Shared/BlogLayout.cshtml";
 }
-<section id="blog-detail" data-stellar-background-ratio="0.5">
-    <div class="container">
-        <div class="row">
 
-            <div class="col-md-offset-1 col-md-10 col-sm-12">
-                <div class="blog-detail-thumb">
+<div class="container">
 
-                    <div class="blog-image">
-                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Image))" class="img-responsive" alt="Blog Post Image">
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-12">
+
+            <!-- Title -->
+            <h1 class="mt-4">@Model.PostTitle</h1>
+
+            <!-- Author -->
+            <p class="lead">
+                Authored by: 
+                <a href="#">Start Bootstrap</a>
+            </p>
+
+            <hr>
+
+            <!-- Date/Time -->
+            <p><i class="fa fa-clock-o"></i>Posted on @Model.CreatedOn</p>
+
+            <hr>
+
+            <!-- Preview Image -->
+            <div class="blog-image">
+                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Image))" class="img-responsive img-fluid rounded" alt="Blog Post Image">
+            </div>
+
+            <hr>
+
+            <!-- Post Content -->
+            @Html.Raw(Model.Body)
+
+            <hr>
+
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Single Comment -->
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">Commenter Name</h5>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+
+            <!-- Comment with nested comments -->
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">Commenter Name</h5>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+                    <div class="media mt-4">
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0">Commenter Name</h5>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
                     </div>
 
-                    <h2>@Model.PostTitle</h2>
-
-                    <small><i class="fa fa-clock-o"></i>@Model.CreatedOn</small>
-
-                    <p>@Model.Body</p>
-
-                    <hr/>
-
-                    <h2>Comments</h2>
-
-                    <blockquote>
-                        Comment Stuff?
-                    </blockquote>
-
-                    <hr/>
-
-                    <div class="blog-social-share">
-                        <h4>Share this article</h4>
-                        <a href="https://www.facebook.com/templatemo" class="btn btn-primary"><i class="fa fa-facebook"></i>facebook</a>
-                        <a href="#" class="btn btn-success"><i class="fa fa-twitter"></i>twitter</a>
-                        <a href="#" class="btn btn-danger"><i class="fa fa-google-plus"></i>google plus</a>
+                    <div class="media mt-4">
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0">Commenter Name</h5>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
                     </div>
 
                 </div>
             </div>
-                    
+
         </div>
+
     </div>
-</section>
+    <!-- /.row -->
+
+</div>
