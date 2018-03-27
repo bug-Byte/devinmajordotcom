@@ -76,6 +76,17 @@ namespace devinmajordotcom.ViewModels
 
     }
 
+    public class EditBlogPostsViewModel
+    {
+
+        public int UserID { get; set; }
+
+        public int SelectedBlogPostID { get; set; }
+
+        public List<DropDownViewModel> AvailableBlogPosts { get; set; }
+
+    }
+
     public class BlogPostViewModel : CommentViewModel
     {
 

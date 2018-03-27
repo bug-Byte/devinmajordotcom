@@ -28,6 +28,13 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpGet]
+        public ActionResult _EditBlogPosts(int userID)
+        {
+            var viewModel = myHomeService.GetEditFavoritesViewModel(userID);
+            return PartialView(viewModel);
+        }
+
+        [HttpGet]
         public ActionResult _AddFavoriteForm(int userID)
         {
             var newViewModel = myHomeService.GetNewFavoriteViewModel(userID);

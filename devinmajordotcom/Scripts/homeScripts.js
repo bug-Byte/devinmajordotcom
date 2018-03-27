@@ -26,9 +26,15 @@ function UpdateFavoritesSuccess() {
 }
 
 function UpdateFavorites(data) {
-    $("#formModalAddEditFavorites").modal('toggle');
+    $("#formModalAddEdit").modal('toggle');
     $("#favoritesListContainer").empty();
     $("#favoritesListContainer").html(data);
+}
+
+function UpdateBlogPosts(data) {
+    $("#formModalAddEdit").modal('toggle');
+    $("#blogPostContainer").empty();
+    $("#blogPostContainer").html(data);
 }
 
 function SettingsUpdateFailure() {

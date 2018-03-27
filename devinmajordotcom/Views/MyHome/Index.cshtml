@@ -9,7 +9,20 @@
         {
             HttpMethod = "GET",
             InsertionMode = InsertionMode.Replace,
-            OnComplete = "InitializeModal('#formModalAddEditFavorites', 'Edit Item');",
+            OnComplete = "InitializeModal('#formModalAddEdit', 'Edit Item');",
+            UpdateTargetId = "formModalBodyHolder"
+        },
+        new
+        {
+            @class = "btn btn-default"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"glyphicon glyphicon-pencil\"></span>");
+
+    var editBlogPostsButton = Ajax.ActionLink("REPLACE", "_EditBlogPosts", "MyHome", new { userID = Model.CurrentUserViewModel.UserID },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalAddEdit', 'Edit Item');",
             UpdateTargetId = "formModalBodyHolder"
         },
         new
@@ -119,29 +132,36 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="section-title">
                         <h2>@Model.UserConfig.BlogTitle</h2>
+                        @if (Model.CurrentUserViewModel.UserIsLoggedIn)
+                        {
+                            <br />
+                            @Html.Raw(editBlogPostsButton)
+                        }
                         <span class="line-bar">...</span>
                     </div>
                 </div>
-
-                @foreach (var post in Model.BlogPosts)
-                {
-                    <div class="col-md-6 col-sm-6">
-                        <!-- BLOG THUMB -->
-                        <div class="media blog-thumb">
-                            <div class="media-object media-left">
-                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.Image))" class="img-responsive image-popup" alt="">
-                            </div>
-                            <div class="media-body blog-info">
-                                <small><i class="fa fa-clock-o"></i>@post.CreatedOn</small>
-                                <h3>
-                                    <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })">@post.PostTitle</a>
-                                </h3>
-                                <p>@post.Body</p>
-                                <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })" class="btn section-btn">Read Full Post</a>
+                
+                <div id="blogPostContainer">
+                    @foreach (var post in Model.BlogPosts)
+                    {
+                        <div class="col-md-6 col-sm-6">
+                            <!-- BLOG THUMB -->
+                            <div class="media blog-thumb">
+                                <div class="media-object media-left">
+                                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.Image))" class="img-responsive image-popup" alt="">
+                                </div>
+                                <div class="media-body blog-info">
+                                    <small><i class="fa fa-clock-o"></i>@post.CreatedOn</small>
+                                    <h3>
+                                        <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })">@post.PostTitle</a>
+                                    </h3>
+                                    <p>@post.Body</p>
+                                    <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })" class="btn section-btn">Read Full Post</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
 
             </div>
         </div>

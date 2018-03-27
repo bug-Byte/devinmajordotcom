@@ -123,6 +123,24 @@ namespace devinmajordotcom.Services
 
         }
 
+        public EditBlogPostsViewModel GetEditBlogPostsViewModel(int userID)
+        {
+
+            var blogPosts = db.MyHome_BlogPosts.Where(x => x.UserId == userID).Select(x => new DropDownViewModel()
+            {
+                ID = x.Id,
+                Name = x.Title
+            }).ToList();
+
+            return new EditBlogPostsViewModel()
+            {
+                UserID = userID,
+                AvailableBlogPosts = blogPosts,
+                SelectedBlogPostID = blogPosts.Select(x => x.ID).FirstOrDefault()
+            };
+
+        }
+
         public List<SiteLinkViewModel> GetFavoritesAndBookmarksByUserId(int userId)
         {
             return db.MyHome_SiteLinks.Where(x => x.UserId == userId).Select(x => new SiteLinkViewModel()
