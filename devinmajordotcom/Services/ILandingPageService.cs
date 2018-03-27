@@ -23,7 +23,7 @@ namespace devinmajordotcom.Services
 
         List<SiteLinkViewModel> GetMainBannerLinks(bool isRetrievingSettings = false);
 
-        string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
+        //string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
 
     }
 }

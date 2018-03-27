@@ -8,6 +8,8 @@ using Ninject;
 using devinmajordotcom.Services;
 using devinmajordotcom.ViewModels;
 using System.Text;
+using System.Net.Mail;
+using devinmajordotcom.Helpers;
 
 namespace devinmajordotcom.Controllers
 {
@@ -62,7 +64,25 @@ namespace devinmajordotcom.Controllers
             var emailSuccessful = "";
             if (ModelState.IsValid)
             {
-                emailSuccessful = landingPageService.SendContactEmailToSiteAdmin(viewModel);
+                var message = new MailMessage();
+                var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/MainContactEmail", viewModel);
+                try
+                {
+                    
+                    message.To.Add(new MailAddress(viewModel.RecipientEmail));
+                    message.Subject = "Attn Site Admin: " + viewModel.Subject;
+                    message.Body = body;
+                    message.IsBodyHtml = true;
+                    using (var smtp = new SmtpClient())
+                    {
+                        smtp.Send(message);
+                        new JsonResult { Data = "Success" };
+                    }
+                }
+                catch (Exception e)
+                {
+                    message.Dispose();
+                }
             }
             return new JsonResult { Data = emailSuccessful };
         }

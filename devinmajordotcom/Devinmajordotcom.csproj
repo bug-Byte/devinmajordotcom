@@ -851,6 +851,7 @@
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\_AdminLoginModal.cshtml" />
     <Content Include="Views\Shared\MyHomeLoginSignupModal.cshtml" />
+    <Content Include="Views\Shared\MainContactEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
