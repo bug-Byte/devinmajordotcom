@@ -165,6 +165,9 @@ namespace devinmajordotcom.Services
                     ShowBookmarks = guestMyHomeConfig.ShowBookmarks,
                     ShowWeather = guestMyHomeConfig.ShowWeather,
                     Greeting = guestMyHomeConfig.Greeting,
+                    DefaultBlogPostImage = guestMyHomeConfig.DefaultBlogPostImage,
+                    DefaultFavoriteImage = guestMyHomeConfig.DefaultFavoriteImage,
+                    AddNewFavoriteImage = guestMyHomeConfig.AddNewFavoriteImage,
                     UserId = newUser.Id,
                     IsEditable = true
                 };
@@ -248,6 +251,9 @@ namespace devinmajordotcom.Services
                         ShowBookmarks = guestMyHomeConfig.ShowBookmarks,
                         ShowWeather = guestMyHomeConfig.ShowWeather,
                         Greeting = guestMyHomeConfig.Greeting,
+                        DefaultBlogPostImage = guestMyHomeConfig.DefaultBlogPostImage,
+                        DefaultFavoriteImage = guestMyHomeConfig.DefaultFavoriteImage,
+                        AddNewFavoriteImage = guestMyHomeConfig.AddNewFavoriteImage,
                         UserId = newUser.Id,
                         IsEditable = true
                     };

@@ -77,6 +77,9 @@ namespace devinmajordotcom.Services
             config.BlogTitle = viewModel.BlogTitle;
             config.BookmarksTitle = viewModel.BookmarksTitle;
             config.Greeting = viewModel.Greeting;
+            config.DefaultFavoriteImage = viewModel.BackgroundImage;
+            config.DefaultBlogPostImage = viewModel.DefaultBlogPostImage;
+            config.AddNewFavoriteImage = viewModel.AddNewFavoriteImage;
             db.SaveChanges();
         }
 
@@ -95,7 +98,10 @@ namespace devinmajordotcom.Services
                 ShowWeather = x.ShowWeather,
                 UserID = x.UserId,
                 IsEditable = x.IsEditable,
-                ShowVisitorsAdminHome = x.ShowVisitorsAdminHome
+                ShowVisitorsAdminHome = x.ShowVisitorsAdminHome,
+                DefaultFavoriteImage = x.DefaultFavoriteImage,
+                DefaultBlogPostImage = x.DefaultBlogPostImage,
+                AddNewFavoriteImage = x.AddNewFavoriteImage
             }).FirstOrDefault();
         }
 
@@ -155,7 +161,24 @@ namespace devinmajordotcom.Services
                 UserID = x.UserId,
                 BackgroundImage = x.Image
             }).FirstOrDefault();
-        } 
+        }
+
+        public SiteLinkViewModel GetNewFavoriteViewModel(int userID)
+        {
+            var newFavorite = new SiteLinkViewModel()
+            {
+                UserID = userID,
+                IsEnabled = true
+            };
+            var siteAdminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            if (siteAdminUser == null) return newFavorite;
+            var adminUserConfig = GetUserConfigViewModelByUserId(siteAdminUser.Id);
+            if (adminUserConfig != null)
+            {
+                newFavorite.BackgroundImage = adminUserConfig.DefaultFavoriteImage;
+            }
+            return newFavorite;
+        }
 
         public int RemoveFavoriteByID(int ID)
         {
@@ -212,8 +235,15 @@ namespace devinmajordotcom.Services
                 };
                 if (viewModel.BackgroundImage.Length > 0)
                 {
-                    var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                    newRecord.Image = Convert.FromBase64String(newString);
+                    try
+                    {
+                        var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
+                        newRecord.Image = Convert.FromBase64String(newString);
+                    }
+                    catch (Exception e)
+                    {
+                        newRecord.Image = viewModel.BackgroundImage;
+                    }
                 }
                 db.MyHome_SiteLinks.Add(newRecord);
             }

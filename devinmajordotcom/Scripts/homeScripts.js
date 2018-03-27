@@ -26,7 +26,7 @@ function UpdateFavoritesSuccess() {
 }
 
 function UpdateFavorites(data) {
-    $("#formModalEditFavorites").modal('toggle');
+    $("#formModalAddEditFavorites").modal('toggle');
     $("#favoritesListContainer").empty();
     $("#favoritesListContainer").html(data);
 }
@@ -199,9 +199,7 @@ $(document).ready(function () {
                 //        response += " miles per hour";
                 //        spokenResponse += " miles per hour";
                 //    }
-                //}
-
-                console.log(data);												// log weather data for reference (json format) 
+                //}										// log weather data for reference (json format) 
                 $("#weather").html(response);									// write current weather to textarea
             });
         } else {

@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -879,6 +879,9 @@ namespace devinmajordotcom.Models
         public byte[] BackgroundImage { get; set; } // BackgroundImage
         public bool IsEditable { get; set; } // IsEditable
         public bool? ShowVisitorsAdminHome { get; set; } // ShowVisitorsAdminHome
+        public byte[] DefaultFavoriteImage { get; set; } // DefaultFavoriteImage
+        public byte[] DefaultBlogPostImage { get; set; } // DefaultBlogPostImage
+        public byte[] AddNewFavoriteImage { get; set; } // AddNewFavoriteImage
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -1561,6 +1564,9 @@ namespace devinmajordotcom.Models
             Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.IsEditable).HasColumnName(@"IsEditable").HasColumnType("bit").IsRequired();
             Property(x => x.ShowVisitorsAdminHome).HasColumnName(@"ShowVisitorsAdminHome").HasColumnType("bit").IsOptional();
+            Property(x => x.DefaultFavoriteImage).HasColumnName(@"DefaultFavoriteImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.DefaultBlogPostImage).HasColumnName(@"DefaultBlogPostImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.AddNewFavoriteImage).HasColumnName(@"AddNewFavoriteImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

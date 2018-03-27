@@ -23,15 +23,14 @@
             color:white !important;
         }
         select option {
-           color: black;
+            color: black;
         }
         select:not(:checked) {
-           color: white;
+            color: white;
         }
     </style>
 
-    @Html.HiddenFor(x => x.ID)
-    @Html.HiddenFor(x => x.UserID, new { @id = "UserID2" })
+    @Html.HiddenFor(x => x.UserID, new { @id = "UserID3" })
 
     <div class="favoritesFormContainer">
         
@@ -109,7 +108,7 @@
             </div>
             <br/>
             <div clas="col-sm-12 text-center">
-                @Html.HiddenFor(x => x.BackgroundImage, new {@class = "favoriteBackgroundImage"})
+                @Html.Hidden("BackgroundImage", Convert.ToBase64String(Model.BackgroundImage), new { @class = "favoriteBackgroundImage" })
                 <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.BackgroundImage))" id="previewImage" style="display: inline-block;" class="img-responsive" alt="Background Image">
                 <br/>
                 @Html.Raw(uploadButton)
@@ -124,17 +123,10 @@
     </div>
 
     <br/>
-    
-    var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Item";
-    var actionLink = Ajax.ActionLink("REPLACE", "RemoveFavoriteByID", "MyHome", new { ID = Model.ID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "UpdateFavorites(data);", OnFailure = "SettingsUpdateFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.ID, @class = "btn btn-danger deleteGroup deleteFavoriteLink", @style = "float:right;" });
-    
 
     <div class="row">
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-12 text-center">
             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;&nbsp;Save Changes</button>
-        </div>
-        <div class="col-sm-6 text-center">
-            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
         </div>
     </div>
 

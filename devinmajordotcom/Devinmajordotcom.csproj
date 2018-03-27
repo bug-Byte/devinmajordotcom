@@ -33,7 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -339,6 +339,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\HomeImages\about-image.jpg" />
+    <Content Include="Content\HomeImages\AddNewFavorite.png" />
     <Content Include="Content\HomeImages\amazon1.jpg" />
     <Content Include="Content\HomeImages\amazon2.png" />
     <Content Include="Content\HomeImages\blog-detail-image.jpg" />
@@ -347,6 +348,7 @@
     <Content Include="Content\HomeImages\blog-image2.jpg" />
     <Content Include="Content\HomeImages\blog-image3.jpg" />
     <Content Include="Content\HomeImages\blog-image4.jpg" />
+    <Content Include="Content\HomeImages\DefaultFavoriteImage.png" />
     <Content Include="Content\HomeImages\facebook.png" />
     <Content Include="Content\HomeImages\github.png" />
     <Content Include="Content\HomeImages\home-bg.jpg" />
@@ -826,6 +828,7 @@
     <Content Include="Views\MyHome\_EditFavorites.cshtml" />
     <Content Include="Views\MyHome\_EditFavoriteForm.cshtml" />
     <Content Include="Views\MyHome\_Favorites.cshtml" />
+    <Content Include="Views\MyHome\_AddFavoriteForm.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

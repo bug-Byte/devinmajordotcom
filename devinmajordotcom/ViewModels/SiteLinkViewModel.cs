@@ -15,18 +15,18 @@ namespace devinmajordotcom.ViewModels
         public int UserID { get; set; }
 
         [Required]
-        [DisplayName("Display Name * : ")]
+        [DisplayName("Display Name *")]
         public string DisplayName { get; set; }
 
         public string Color { get; set; }
 
-        [DisplayName("Description : ")]
+        [DisplayName("Description")]
         public string Description { get; set; }
 
         public string Directive { get; set; }
 
         [Required]
-        [DisplayName("URL :")]
+        [DisplayName("URL")]
         public string URL { get; set; }
 
         public string Action { get; set; }
@@ -48,7 +48,7 @@ namespace devinmajordotcom.ViewModels
 
         public int? Order { get; set; }
 
-        [DisplayName("Background Image * : ")]
+        [DisplayName("Background Image *")]
         public byte[] BackgroundImage { get; set; }
 
         public SiteLinkViewModel()

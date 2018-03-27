@@ -13,6 +13,9 @@
 	BackgroundImage VARBINARY (MAX) NULL,
 	IsEditable BIT NOT NULL DEFAULT 1,
 	ShowVisitorsAdminHome BIT NULL,
+	DefaultFavoriteImage VARBINARY(MAX) NULL,
+	DefaultBlogPostImage VARBINARY(MAX) NULL,
+	AddNewFavoriteImage VARBINARY(MAX) NULL,
 	PRIMARY KEY(Id),
 	CONSTRAINT MyHome_UserHomeConfig_UserId_Security_User_ID
 	FOREIGN KEY(UserID) REFERENCES [Security].[User](ID)

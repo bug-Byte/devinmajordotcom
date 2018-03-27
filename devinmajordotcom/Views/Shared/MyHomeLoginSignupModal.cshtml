@@ -36,13 +36,13 @@
                                     @using (Ajax.BeginForm("Login", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "LoginFailure()" }, new { @class = "loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
-                                        @Html.Hidden("IsSigningUp", "False")
+                                        @Html.Hidden("IsSigningUp", "False", new { @id = "IsSigningUp1" })
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Email Address or Username: @*@Html.LabelFor(x => x.UserName)*@
                                             </div>
                                             <div class="col-sm-12 text-center">
-                                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "someone@domain.com" })
+                                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @id = "UserName1", placeholder = "someone@domain.com" })
                                             </div>
                                         </div>
                                         <br />
@@ -51,7 +51,7 @@
                                                 <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.Password)
                                             </div>
                                             <div class="col-sm-12 text-center">
-                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control passwordField", @Value="", @required = "required", placeholder = "********", type = "password" })
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control passwordField", @id = "Password1", @Value="", @required = "required", placeholder = "********", type = "password" })
                                             </div>
                                         </div>
                                         <br />
@@ -75,9 +75,9 @@
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(x => x.UserIsActive)
                                         @Html.HiddenFor(x => x.UserIsAdmin)
-                                        @Html.HiddenFor(x => x.UserID)
+                                        @Html.HiddenFor(x => x.UserID, new { @id="UserID1" })
                                         @Html.HiddenFor(x => x.GUID)
-                                        @Html.Hidden("IsSigningUp", "True")
+                                        @Html.Hidden("IsSigningUp", "True", new { @id = "IsSigningUp2" })
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.EmailAddress)
@@ -92,7 +92,7 @@
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.UserName)
                                             </div>
                                             <div class="col-sm-12 text-center">
-                                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "user_123" })
+                                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @id = "UserName2", placeholder = "user_123" })
                                             </div>
                                         </div>
                                         <br />
@@ -101,7 +101,7 @@
                                                 <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.Password)
                                             </div>
                                             <div class="col-sm-12 text-center">
-                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @required = "required", @Value = "", placeholder = "********", type = "password" })
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @id = "Password2", @required = "required", @Value = "", placeholder = "********", type = "password" })
                                             </div>
                                         </div>
                                         <br />

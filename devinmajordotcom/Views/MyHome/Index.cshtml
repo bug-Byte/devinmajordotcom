@@ -9,7 +9,7 @@
         {
             HttpMethod = "GET",
             InsertionMode = InsertionMode.Replace,
-            OnComplete = "InitializeModal('#formModalEditFavorites', 'Edit Item');",
+            OnComplete = "InitializeModal('#formModalAddEditFavorites', 'Edit Item');",
             UpdateTargetId = "formModalBodyHolder"
         },
         new
@@ -100,7 +100,7 @@
             </div>
             <div id="favoritesListContainer">
             
-                @Html.Partial("_Favorites", Model.FavoritesAndBookmarks)
+                @Html.Partial("_Favorites", Model)
 
             </div>
         </div>
@@ -149,7 +149,7 @@
 
 }
 
-<div class="dontprint modal fade" id="formModalEditFavorites" style="z-index: 10000;">
+<div class="dontprint modal fade" id="formModalAddEditFavorites" style="z-index: 10000;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -200,5 +200,3 @@
 
 </script>
 }
-
-<!-- MODAL -->

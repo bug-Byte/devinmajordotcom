@@ -28,6 +28,9 @@ INSERT INTO [MyHome].[UserConfig]
 	,[BackgroundImage]
 	,[ShowVisitorsAdminHome]
 	,[IsEditable]
+	,[DefaultFavoriteImage]
+	,[DefaultBlogPostImage]
+	,[AddNewFavoriteImage]
 )
 VALUES
 (
@@ -42,7 +45,10 @@ VALUES
 	'My Blog & Notes',
 	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\HomeImages\home-bg4.jpg', SINGLE_BLOB) AS [BackgroundImage]),
 	0,
-	0
+	0,
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\HomeImages\DefaultFavoriteImage.png', SINGLE_BLOB) AS [DefaultFavoriteImage]),
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\HomeImages\blog-image1.jpg', SINGLE_BLOB) AS [DefaultBlogPostImage]),
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\HomeImages\AddNewFavorite.png', SINGLE_BLOB) AS [AddNewFavoriteImage])
 );
 GO
 

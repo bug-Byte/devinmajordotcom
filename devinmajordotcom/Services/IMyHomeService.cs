@@ -16,6 +16,8 @@ namespace devinmajordotcom.Services
 
         SiteLinkViewModel GetFavoriteByID(int ID);
 
+        SiteLinkViewModel GetNewFavoriteViewModel(int userID);
+
         MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId);
 
         List<SiteLinkViewModel> GetFavoritesAndBookmarksByUserId(int userId);

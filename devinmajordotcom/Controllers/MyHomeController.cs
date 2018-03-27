@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using devinmajordotcom.Models;
 
 namespace devinmajordotcom.Controllers
 {
@@ -26,6 +27,13 @@ namespace devinmajordotcom.Controllers
             return PartialView(viewModel);
         }
 
+        [HttpGet]
+        public ActionResult _AddFavoriteForm(int userID)
+        {
+            var newViewModel = myHomeService.GetNewFavoriteViewModel(userID);
+            return PartialView(newViewModel);
+        }
+
         [HttpPost]
         public ActionResult _EditFavoriteForm(EditFavoritesViewModel viewModel)
         {
@@ -37,7 +45,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult AddEditFavorite(SiteLinkViewModel viewModel)
         {
             myHomeService.AddEditFavorite(viewModel);
-            var newViewModel = myHomeService.GetFavoritesAndBookmarksByUserId(viewModel.UserID).Where(x => x.IsEnabled).ToList();
+            var newViewModel = myHomeService.GetMyHomeViewModel();
             return PartialView("_Favorites", newViewModel);
         }
 
@@ -45,7 +53,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult RemoveFavoriteByID(int ID)
         {
             int userID = myHomeService.RemoveFavoriteByID(ID);
-            var newViewModel = myHomeService.GetFavoritesAndBookmarksByUserId(userID).Where(x => x.IsEnabled).ToList();
+            var newViewModel = myHomeService.GetMyHomeViewModel();
             return PartialView("_Favorites", newViewModel);
         }
 

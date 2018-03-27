@@ -57,6 +57,12 @@ namespace devinmajordotcom.ViewModels
 
         public bool IsEditable { get; set; }
 
+        public byte[] DefaultFavoriteImage { get; set; }
+
+        public byte[] DefaultBlogPostImage { get; set; }
+
+        public byte[] AddNewFavoriteImage { get; set; }
+
     }
 
     public class EditFavoritesViewModel
