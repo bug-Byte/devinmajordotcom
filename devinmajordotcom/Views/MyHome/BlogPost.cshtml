@@ -17,13 +17,18 @@
             <!-- Author -->
             <p class="lead">
                 Authored by: 
-                <a href="#">Start Bootstrap</a>
+                <a href="#">@Model.AuthorUserName</a>
             </p>
 
             <hr>
 
             <!-- Date/Time -->
-            <p><i class="fa fa-clock-o"></i>Posted on @Model.CreatedOn</p>
+            <p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Posted on @Model.CreatedOn</p>
+            
+            @if (Model.ModifiedOn != Model.CreatedOn)
+            {
+                <p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Last edited on @Model.ModifiedOn</p>
+            }
 
             <hr>
 

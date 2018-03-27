@@ -92,6 +92,8 @@ namespace devinmajordotcom.ViewModels
 
         public int AuthorUserID { get; set; }
 
+        public string AuthorUserName { get; set; }
+
         public string Body { get; set; }
 
         public byte[] Image { get; set; }

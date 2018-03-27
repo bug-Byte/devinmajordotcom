@@ -256,6 +256,7 @@ namespace devinmajordotcom.Services
             {
                 BlogPostID = x.Id,
                 AuthorUserID = x.UserId,
+                AuthorUserName = db.Security_Users.Where(t => t.Id == x.UserId).Select(t => t.UserName).FirstOrDefault(),
                 PostTitle = x.Title,
                 Image = x.Image,
                 Body = x.Body,
@@ -266,6 +267,7 @@ namespace devinmajordotcom.Services
                 PostComments = x.MyHome_BlogPostComments.Select(y => new CommentViewModel()
                 {
                     AuthorUserID = y.UserId,
+                    AuthorUserName = db.Security_Users.Where(z => z.Id == y.UserId).Select(z => z.UserName).FirstOrDefault(),
                     Body = y.CommentBody,
                     Image = y.Image,
                     CreatedOn = y.CreatedOn,
@@ -281,6 +283,7 @@ namespace devinmajordotcom.Services
             return db.MyHome_BlogPosts.Where(x => x.UserId == userId).Select(x => new BlogPostViewModel()
             {
                 BlogPostID = x.Id,
+                AuthorUserName = db.Security_Users.Where(y => y.Id == x.UserId).Select(y => y.UserName).FirstOrDefault(),
                 AuthorUserID = x.UserId,
                 PostTitle = x.Title,
                 Image = x.Image,
