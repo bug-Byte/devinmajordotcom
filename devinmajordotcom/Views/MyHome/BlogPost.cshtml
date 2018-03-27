@@ -5,46 +5,41 @@
 }
 
 <div class="container">
-
+    
     <div class="row">
-
-        <!-- Post Content Column -->
+        
         <div class="col-lg-12">
-
-            <!-- Title -->
             <h1 class="mt-4">@Model.PostTitle</h1>
-
-            <!-- Author -->
             <p class="lead">
-                Authored by: 
+                Authored by:
                 <a href="#">@Model.AuthorUserName</a>
             </p>
-
-            <hr>
-
-            <!-- Date/Time -->
+            <hr />
             <p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Posted on @Model.CreatedOn</p>
-            
             @if (Model.ModifiedOn != Model.CreatedOn)
             {
                 <p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Last edited on @Model.ModifiedOn</p>
             }
+            <hr />
+        </div>
 
-            <hr>
-
-            <!-- Preview Image -->
+        <div class="col-lg-12">
             <div class="blog-image">
                 <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Image))" class="img-responsive img-fluid rounded" alt="Blog Post Image">
             </div>
+        </div>
 
-            <hr>
+        <div class="col-lg-12">       
+            <hr />    
+            @Html.Raw(Model.Body)   
+            <hr />         
+        </div>
 
-            <!-- Post Content -->
-            @Html.Raw(Model.Body)
+    </div>
 
-            <hr>
+    <div class="row">
+        <div class="col-lg-12">
 
-            <!-- Comments Form -->
             <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
@@ -57,7 +52,6 @@
                 </div>
             </div>
 
-            <!-- Single Comment -->
             <div class="media mb-4">
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
@@ -66,7 +60,6 @@
                 </div>
             </div>
 
-            <!-- Comment with nested comments -->
             <div class="media mb-4">
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
@@ -93,8 +86,6 @@
             </div>
 
         </div>
-
     </div>
-    <!-- /.row -->
 
 </div>
