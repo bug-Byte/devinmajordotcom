@@ -7,6 +7,38 @@ http://www.templatemo.com/tm-509-hydro
 */  
   @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600');
 
+.comment {
+    border: 1px solid white; 
+    padding: 10px;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+#commentsContainer {
+    max-height: 50vh;
+    overflow-y: auto !important;
+    -ms-overflow-style: none;
+}
+
+.blogHoverItem {
+    color: lightblue;
+    transition: 0.5s;
+}
+
+.blogHoverItem:hover {
+    color: #ce3232 !important;
+}
+
+.blogBody {
+    background: -moz-radial-gradient(center, ellipse cover, rgba(0,128,128,1) 0%, rgba(11,28,30,1) 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,128,128,1)), color-stop(100%, rgba(11,28,30,1)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(0,128,128,1) 0%, rgba(11,28,30,1) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(0,128,128,1) 0%, rgba(11,28,30,1) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(0,128,128,1) 0%, rgba(11,28,30,1) 100%);
+    background: radial-gradient(ellipse at center, rgba(0,128,128,1) 0%, rgba(11,28,30,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#0B1C1E',GradientType=1 );
+    color: white;
+}
 
   #modal-form {
       color: white;

@@ -862,7 +862,7 @@
     <Content Include="Views\Shared\_AdminLoginModal.cshtml" />
     <Content Include="Views\Shared\MyHomeLoginSignupModal.cshtml" />
     <Content Include="Views\Shared\MainContactEmail.cshtml" />
-    <Content Include="Views\Shared\BlogLayout.cshtml" />
+    <Content Include="Views\Shared\_BlogLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
