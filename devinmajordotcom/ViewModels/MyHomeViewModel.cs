@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace devinmajordotcom.ViewModels
 {
@@ -92,6 +94,8 @@ namespace devinmajordotcom.ViewModels
 
         public int BlogPostID { get; set; }
 
+        [Required]
+        [DisplayName("Title *")]
         public string PostTitle { get; set; }
 
         public List<CommentViewModel> PostComments { get; set; }
@@ -105,9 +109,12 @@ namespace devinmajordotcom.ViewModels
 
         public string AuthorUserName { get; set; }
 
+        [AllowHtml]
+        [DisplayName("Body Content")]
         public string Body { get; set; }
 
-        public byte[] Image { get; set; }
+        [DisplayName("Image")]
+        public byte[] BackgroundImage { get; set; }
 
         public string CreatedBy { get; set; }
 

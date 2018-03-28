@@ -30,7 +30,7 @@ namespace devinmajordotcom.Controllers
         [HttpGet]
         public ActionResult _EditBlogPosts(int userID)
         {
-            var viewModel = myHomeService.GetEditFavoritesViewModel(userID);
+            var viewModel = myHomeService.GetEditBlogPostsViewModel(userID);
             return PartialView(viewModel);
         }
 
@@ -40,11 +40,25 @@ namespace devinmajordotcom.Controllers
             var newViewModel = myHomeService.GetNewFavoriteViewModel(userID);
             return PartialView(newViewModel);
         }
+        
+        [HttpGet]
+        public ActionResult _AddBlogPostForm(int userID)
+        {
+            var newViewModel = myHomeService.GetNewBlogPostViewModel(userID);
+            return PartialView(newViewModel);
+        }
 
         [HttpPost]
         public ActionResult _EditFavoriteForm(EditFavoritesViewModel viewModel)
         {
             var newViewModel = myHomeService.GetFavoriteByID(viewModel.SelectedFavoriteID);
+            return PartialView(newViewModel);
+        }
+        
+        [HttpPost]
+        public ActionResult _EditBlogPostForm(EditBlogPostsViewModel viewModel)
+        {
+            var newViewModel = myHomeService.GetBlogPostById(viewModel.SelectedBlogPostID);
             return PartialView(newViewModel);
         }
 
@@ -56,12 +70,29 @@ namespace devinmajordotcom.Controllers
             return PartialView("_Favorites", newViewModel);
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddEditBlogPost(BlogPostViewModel viewModel)
+        {
+            myHomeService.AddEditBlogPost(viewModel);
+            var newViewModel = myHomeService.GetMyHomeViewModel();
+            return PartialView("_BlogPosts", newViewModel);
+        }
+
         [HttpGet]
         public ActionResult RemoveFavoriteByID(int ID)
         {
             int userID = myHomeService.RemoveFavoriteByID(ID);
             var newViewModel = myHomeService.GetMyHomeViewModel();
             return PartialView("_Favorites", newViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult RemoveBlogPostByID(int ID)
+        {
+            int userID = myHomeService.RemoveBlogPostByID(ID);
+            var newViewModel = myHomeService.GetMyHomeViewModel();
+            return PartialView("_BlogPosts", newViewModel);
         }
 
         public ActionResult BlogPost(int ID)

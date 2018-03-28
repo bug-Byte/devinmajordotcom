@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using devinmajordotcom.Models;
 
 namespace devinmajordotcom.Services
 {
@@ -18,13 +19,21 @@ namespace devinmajordotcom.Services
 
         SiteLinkViewModel GetNewFavoriteViewModel(int userID);
 
+        BlogPostViewModel GetNewBlogPostViewModel(int userID);
+
+        EditBlogPostsViewModel GetEditBlogPostsViewModel(int userID);
+
         MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId);
 
         List<SiteLinkViewModel> GetFavoritesAndBookmarksByUserId(int userId);
 
         int RemoveFavoriteByID(int ID);
 
+        int RemoveBlogPostByID(int ID);
+
         void AddEditFavorite(SiteLinkViewModel viewModel);
+
+        void AddEditBlogPost(BlogPostViewModel viewModel);
 
         List<BlogPostViewModel> GetBlogPostsByUserId(int userId);
 

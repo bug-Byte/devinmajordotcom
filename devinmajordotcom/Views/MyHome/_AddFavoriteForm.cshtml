@@ -15,6 +15,9 @@
             @style = ""
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 }
+
+@Scripts.Render("~/bundles/jqueryval")
+
 @using (Ajax.BeginForm("AddEditFavorite", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateFavorites(data);" }, new { @id = "EditFavoriteForm" }))
 {
 

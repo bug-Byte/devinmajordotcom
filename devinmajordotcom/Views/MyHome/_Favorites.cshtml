@@ -45,7 +45,7 @@
                         new
                         {
 
-                        }).ToHtmlString().Replace("REPLACE", "<img src=" + String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.UserConfig.AddNewFavoriteImage)) + " class='img-responsive' alt='Work'><div class=\"work-info\"><h3>+</h3><small>Add New Item</small></div>");
+                        }).ToHtmlString().Replace("REPLACE", "<img src=" + String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.UserConfig.AddNewFavoriteImage)) + " class='img-responsive' alt='Work'><div class=\"work-info\"><h3>+</h3></div>");
                 }
                 @Html.Raw(uploadButton)
             </div>

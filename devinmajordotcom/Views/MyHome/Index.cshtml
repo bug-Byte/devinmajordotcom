@@ -142,25 +142,7 @@
                 </div>
                 
                 <div id="blogPostContainer">
-                    @foreach (var post in Model.BlogPosts)
-                    {
-                        <div class="col-md-6 col-sm-6">
-                            <!-- BLOG THUMB -->
-                            <div class="media blog-thumb">
-                                <div class="media-object media-left">
-                                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.Image))" class="img-responsive image-popup" alt="">
-                                </div>
-                                <div class="media-body blog-info">
-                                    <small><i class="fa fa-clock-o"></i>@post.CreatedOn</small>
-                                    <h3>
-                                        <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })">@post.PostTitle</a>
-                                    </h3>
-                                    <p>@post.Body</p>
-                                    <a href="@Url.Action("BlogPost", "MyHome", new { ID = post.BlogPostID })" class="btn section-btn">Read Full Post</a>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                    @Html.Partial("_BlogPosts", Model)
                 </div>
 
             </div>
@@ -169,7 +151,7 @@
 
 }
 
-<div class="dontprint modal fade" id="formModalAddEditFavorites" style="z-index: 10000;">
+<div class="dontprint modal fade" id="formModalAddEdit" style="z-index: 10000;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

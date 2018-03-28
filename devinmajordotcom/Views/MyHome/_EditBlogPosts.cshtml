@@ -1,5 +1,5 @@
 ﻿@model devinmajordotcom.ViewModels.EditBlogPostsViewModel
-@using (Ajax.BeginForm("_EditFavoriteForm", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateFavoritesModal(data);", UpdateTargetId = "favoritesFormContainer" }, new { @id = "FavoriteSelectionForm" }))
+@using (Ajax.BeginForm("_EditBlogPostForm", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateBlogPostsModal(data);", UpdateTargetId = "blogPostFormContainer" }, new { @id = "BlogPostSelectionForm" }))
 {
     @Html.HiddenFor(x => x.UserID)
     <div class="row">
@@ -23,13 +23,13 @@
 
 }
 
-<div id="favoritesFormContainer" style="color: white !important;"></div>
+<div id="blogPostFormContainer" style="color: white !important;"></div>
 
 <script>
     $(document).ready(function() {
-        $("#FavoriteSelectionForm").submit();
-        $("#SelectedFavoriteID").change(function () {
-            $("#FavoriteSelectionForm").submit();
+        $("#BlogPostSelectionForm").submit();
+        $("#SelectedBlogPostID").change(function () {
+            $("#BlogPostSelectionForm").submit();
         });
     });
 </script>

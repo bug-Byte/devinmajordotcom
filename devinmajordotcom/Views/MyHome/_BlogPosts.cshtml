@@ -1,0 +1,75 @@
+﻿@model devinmajordotcom.ViewModels.MyHomeViewModel
+@{ 
+    var linkCount = 1;
+    var newRowHtml = "</div><br/><div class='row'>";
+}
+<div class="row">
+    
+    @if (Model.CurrentUserViewModel.UserIsLoggedIn)
+    {
+        <div class="col-md-6 col-sm-6 text-center">
+            <div class="media blog-thumb work-thumb" style="border: 1px solid white; background-color: transparent;">
+                <div class="work-info">
+                    @{
+                        var uploadButton = Ajax.ActionLink("REPLACE", "_AddBlogPostForm", "MyHome",
+                            new {userID = Model.CurrentUserViewModel.UserID},
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                OnComplete = "InitializeModal('#formModalAddEdit', 'Add New Item');",
+                                OnFailure = "SettingsUpdateFailure();",
+                                UpdateTargetId = "formModalBodyHolder"
+                            },
+                            new
+                            {
+
+                            }).ToHtmlString().Replace("REPLACE", "<h3>+</h3><small>Add New Item</small>");
+                    }
+                    @Html.Raw(uploadButton)
+                </div>
+            </div>
+        </div>
+
+        if (linkCount % 4 == 0)
+        {
+            @Html.Raw(newRowHtml)
+        }
+    }
+
+    @foreach (var post in Model.BlogPosts.OrderByDescending(x => x.CreatedOn))
+    {
+        <div class="col-md-6 col-sm-6">
+            <!-- BLOG THUMB -->
+            <div class="media blog-thumb">
+                <div class="media-object media-left">
+                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.BackgroundImage))" class="img-responsive image-popup" alt="">
+                </div>
+                <div class="media-body blog-info">
+                    <small><i class="fa fa-clock-o"></i>@post.CreatedOn</small>
+                    <h3>
+                        <a href="@Url.Action("BlogPost", "MyHome", new {ID = post.BlogPostID})">@post.PostTitle</a>
+                    </h3>
+                    <p>
+                        @{
+                            var splitString = post.Body.Split(' ');
+                            var wordCount = splitString.Length;
+                            string partialBody;
+                            if (wordCount <= 25)
+                            {
+                                partialBody = post.Body;
+                            }
+                            else
+                            {
+                                partialBody = post.Body.Substring(0, post.Body.IndexOf(splitString[25])) + "...";
+                            }
+                        }
+                        @Html.Raw(partialBody)
+                    </p>
+                    <a href="@Url.Action("BlogPost", "MyHome", new {ID = post.BlogPostID})" class="btn section-btn">Read Full Post</a>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>

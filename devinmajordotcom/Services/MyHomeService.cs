@@ -198,16 +198,88 @@ namespace devinmajordotcom.Services
             return newFavorite;
         }
 
+        public BlogPostViewModel GetNewBlogPostViewModel(int userID)
+        {
+            var newBlogPost = new BlogPostViewModel()
+            {
+                AuthorUserID = userID
+            };
+            var siteAdminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            if (siteAdminUser == null) return newBlogPost;
+            var adminUserConfig = GetUserConfigViewModelByUserId(siteAdminUser.Id);
+            if (adminUserConfig != null)
+            {
+                newBlogPost.BackgroundImage = adminUserConfig.DefaultBlogPostImage;
+            }
+            return newBlogPost;
+        }
+
         public int RemoveFavoriteByID(int ID)
         {
             var item = db.MyHome_SiteLinks.FirstOrDefault(x => x.Id == ID);
             var userId = item.UserId;
-            if(item != null)
+            if (item != null)
             {
                 db.MyHome_SiteLinks.Remove(item);
             }
             db.SaveChanges();
             return userId;
+        }
+
+        public int RemoveBlogPostByID(int ID)
+        {
+            var item = db.MyHome_BlogPosts.FirstOrDefault(x => x.Id == ID);
+            var userId = item.UserId;
+            if (item != null)
+            {
+                var comments = db.MyHome_BlogPostComments.Where(x => x.BlogPostId == item.Id);
+                foreach (var comment in comments)
+                {
+                    db.MyHome_BlogPostComments.Remove(comment);
+                }
+                db.SaveChanges();
+                db.MyHome_BlogPosts.Remove(item);
+            }
+            db.SaveChanges();
+            return userId;
+        }
+
+        public void AddEditBlogPost(BlogPostViewModel viewModel)
+        {
+            var record = db.MyHome_BlogPosts.FirstOrDefault(x => x.Id == viewModel.BlogPostID);
+            if (record != null)
+            {
+                record.Title = viewModel.PostTitle;
+                record.Body = viewModel.Body;
+                if (viewModel.BackgroundImage.Length != record.Image.Length)
+                {
+                    var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
+                    record.Image = Convert.FromBase64String(newString);
+                }
+            }
+            else
+            {
+                var newRecord = new MyHome_BlogPost()
+                {
+                    UserId = viewModel.AuthorUserID,
+                    Body = viewModel.Body,
+                    Title = viewModel.PostTitle
+                };
+                if (viewModel.BackgroundImage.Length > 0)
+                {
+                    try
+                    {
+                        var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
+                        newRecord.Image = Convert.FromBase64String(newString);
+                    }
+                    catch (Exception e)
+                    {
+                        newRecord.Image = viewModel.BackgroundImage;
+                    }
+                }
+                db.MyHome_BlogPosts.Add(newRecord);
+            }
+            db.SaveChanges();
         }
 
         public void AddEditFavorite(SiteLinkViewModel viewModel)
@@ -276,7 +348,7 @@ namespace devinmajordotcom.Services
                 AuthorUserID = x.UserId,
                 AuthorUserName = db.Security_Users.Where(t => t.Id == x.UserId).Select(t => t.UserName).FirstOrDefault(),
                 PostTitle = x.Title,
-                Image = x.Image,
+                BackgroundImage = x.Image,
                 Body = x.Body,
                 CreatedBy = x.CreatedBy,
                 CreatedOn = x.CreatedOn,
@@ -287,7 +359,7 @@ namespace devinmajordotcom.Services
                     AuthorUserID = y.UserId,
                     AuthorUserName = db.Security_Users.Where(z => z.Id == y.UserId).Select(z => z.UserName).FirstOrDefault(),
                     Body = y.CommentBody,
-                    Image = y.Image,
+                    BackgroundImage = y.Image,
                     CreatedOn = y.CreatedOn,
                     CreatedBy = y.CreatedBy,
                     ModifiedOn = y.ModifiedOn,
@@ -304,7 +376,7 @@ namespace devinmajordotcom.Services
                 AuthorUserName = db.Security_Users.Where(y => y.Id == x.UserId).Select(y => y.UserName).FirstOrDefault(),
                 AuthorUserID = x.UserId,
                 PostTitle = x.Title,
-                Image = x.Image,
+                BackgroundImage = x.Image,
                 Body = x.Body,
                 CreatedBy = x.CreatedBy,
                 CreatedOn = x.CreatedOn,

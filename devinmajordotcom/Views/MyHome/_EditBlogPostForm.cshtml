@@ -1,4 +1,4 @@
-﻿@model devinmajordotcom.ViewModels.SiteLinkViewModel
+﻿@model devinmajordotcom.ViewModels.BlogPostViewModel
 @{
     var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
         new AjaxOptions
@@ -18,7 +18,7 @@
 
 @Scripts.Render("~/bundles/jqueryval")
 
-@using (Ajax.BeginForm("AddEditFavorite", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateFavorites(data);" }, new { @id = "EditFavoriteForm" }))
+@using (Ajax.BeginForm("AddEditBlogPost", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateBlogPosts(data);" }, new { @id = "EditBlogPostForm" }))
 {
 
     <style>
@@ -33,75 +33,38 @@
         }
     </style>
 
-    @Html.HiddenFor(x => x.ID)
-    @Html.HiddenFor(x => x.UserID, new { @id = "UserID2" })
+    @Html.HiddenFor(x => x.BlogPostID)
+    @Html.HiddenFor(x => x.AuthorUserID, new { @id = "UserID2" })
 
-    <div class="favoritesFormContainer">
+    <div class="blogPostFormContainer" style="color: white !important;">
         
         <div class="row">
             <div class="col-sm-12 text-left">
                 <span class="glyphicon glyphicon-comment"></span>&nbsp;
-                @Html.LabelFor(x => x.DisplayName, new { @style="font-weight:normal;" })
+                @Html.LabelFor(x => x.PostTitle, new { @style="font-weight:normal;" })
             </div>
             <div clas="col-sm-12 text-center">
-                @Html.TextBoxFor(x => x.DisplayName, new {@class = "form-control"})
+                @Html.TextBoxFor(x => x.PostTitle, new {@class = "form-control"})
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.DisplayName)
+                @Html.ValidationMessageFor(x => x.PostTitle)
             </div>
         </div>
         <br/>
         <div class="row">
             <div class="col-sm-12 text-left">
                 <span class="glyphicon glyphicon-comment"></span>&nbsp;
-                @Html.LabelFor(x => x.Description, new { @style = "font-weight:normal;" })
+                @Html.LabelFor(x => x.Body, new { @style = "font-weight:normal;" })
             </div>
-            <div clas="col-sm-12 text-center">
-                @Html.TextBoxFor(x => x.Description, new {@class = "form-control"})
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.Description)
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-sm-12 text-left">
-                <span class="glyphicon glyphicon-globe"></span>&nbsp;
-                @Html.LabelFor(x => x.URL, new { @style = "font-weight:normal;" })
-            </div>
-            <div clas="col-sm-12 text-center">
-                @Html.TextBoxFor(x => x.URL, new {@class = "form-control"})
+            <div clas="col-sm-12 text-center" style="margin-top: 25px;">
+                @Html.TextAreaFor(x => x.Body, new { @class = "tinymce", @rows = "4", @placeholder = "This is the body of your blog post, where the majority of your content will go." })
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.URL)
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-sm-6 text-left">
-                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                @Html.LabelFor(x => x.IsEnabled, new { @style = "font-weight:normal;" })
-            </div>
-            <div clas="col-sm-6 text-center">
-                <div class="form-group">
-                    <div class="checkbox-inline">
-                        <label class="switch">
-                            @Html.EditorFor(x => x.IsEnabled, new {htmlAttributes = new {@class = "toggler"}})
-                            <div class="slider round"></div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.ValidationMessageFor(x => x.IsEnabled)
+                @Html.ValidationMessageFor(x => x.Body)
             </div>
         </div>
         <br/>
@@ -129,7 +92,7 @@
     <br/>
     
     var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Item";
-    var actionLink = Ajax.ActionLink("REPLACE", "RemoveFavoriteByID", "MyHome", new { ID = Model.ID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "UpdateFavorites(data);", OnFailure = "SettingsUpdateFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.ID, @class = "btn btn-danger deleteGroup deleteFavoriteLink", @style = "float:right;" });
+    var actionLink = Ajax.ActionLink("REPLACE", "RemoveBlogPostByID", "MyHome", new { ID = Model.BlogPostID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "UpdateBlogPosts(data);", OnFailure = "SettingsUpdateFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.BlogPostID, @class = "btn btn-danger deleteGroup deleteFavoriteLink", @style = "float:right;" });
     
 
     <div class="row">

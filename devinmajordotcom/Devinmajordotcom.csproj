@@ -835,6 +835,10 @@
     <Content Include="Views\MyHome\_EditFavoriteForm.cshtml" />
     <Content Include="Views\MyHome\_Favorites.cshtml" />
     <Content Include="Views\MyHome\_AddFavoriteForm.cshtml" />
+    <Content Include="Views\MyHome\_EditBlogPosts.cshtml" />
+    <Content Include="Views\MyHome\_BlogPosts.cshtml" />
+    <Content Include="Views\MyHome\_EditBlogPostForm.cshtml" />
+    <Content Include="Views\MyHome\_AddBlogPostForm.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

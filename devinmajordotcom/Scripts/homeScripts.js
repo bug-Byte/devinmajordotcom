@@ -9,6 +9,19 @@ function UpdateFavoritesModal(data) {
     $('#favoritesFormContainer').html(data);
 }
 
+function RefreshTinyMce() {
+    tinymce.remove();
+    tinymce.init({
+        selector: '.tinymce',
+        theme: 'modern'
+    });
+}
+
+function UpdateBlogPostsModal(data) {
+    $('#blogPostFormContainer').html(data);
+    RefreshTinyMce();
+}
+
 function SettingsUpdate(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
