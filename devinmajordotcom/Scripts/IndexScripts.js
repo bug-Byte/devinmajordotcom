@@ -90,6 +90,16 @@ function draw() {
     }
 }
 
+function InitializeModal(ID, TITLE) {
+    $('.modal-title').text(TITLE);
+    $(ID).modal(
+        {
+            backdrop: 'static',
+            keyboard: false
+        }
+    );
+}
+
 function removeDisable() {
     $('body').data('loading-disabled', false);
 }

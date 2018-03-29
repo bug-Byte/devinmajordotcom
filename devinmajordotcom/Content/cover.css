@@ -2,6 +2,23 @@
  * Globals
  */
 
+  .section-title {
+      margin-bottom: 60px;
+  }
+
+  .section-title h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      line-height: 0;
+  }
+
+  .section-title .line-bar {
+      color: #d9d9d9;
+      display: block;
+      font-size: 5em;
+      line-height: 0;
+  }
+
 .specialWork-wrapper {
     background-color: black;
   border: 1px solid #666;

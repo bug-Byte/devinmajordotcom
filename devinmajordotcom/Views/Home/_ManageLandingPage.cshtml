@@ -1,6 +1,21 @@
 ﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
 @{
     var count = 0;
+
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "Home",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Background Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-default",
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+
 }
 
 @using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "" }))
@@ -10,24 +25,76 @@
         <hr>
         <div class="settingsContainer">
 
-            @*<div class="card card-2">
+            <div class="card card-2" style="width: 96%;">
                 <h4 class="card-title text-center">Manage Application Links</h4>
                 <div class="card-body">
+                    
                     <div class="row">
-                        <div class="col-sm-6">
-
+                        <div class="col-sm-12">
+                            <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;
+                            @Html.LabelFor(x => x.Config.AppsTitle, new { @style = "font-weight:normal;" })
                         </div>
-                        <div class="col-sm-6">
-
+                        <div class="col-sm-12">
+                            @Html.TextBoxFor(x => x.Config.AppsTitle, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-
+                            @Html.ValidationMessageFor(x => x.Config.AppsTitle)
                         </div>
                     </div>
+
+                    <br />
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="checkbox-inline">
+                                    <label class="switch">
+                                        @Html.EditorFor(o => o.Config.IsParticleCanvasOn, new { htmlAttributes = new { @class = "toggler" } })
+                                        <div class="slider round"></div>
+                                    </label>
+                                    @Html.LabelFor(o => o.Config.IsParticleCanvasOn, "Is Particle Canvas On?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.Config.AppsTitle)
+                        </div>
+                    </div>
+
+                    <br />
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;
+                            @Html.LabelFor(x => x.Config.BackgroundImage, new { @style = "font-weight:normal;" })
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.HiddenFor(x => x.Config.BackgroundImage)
+                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Config.BackgroundImage))" id="previewImage" class="img-responsive" alt="Background Image">
+                            @Html.Raw(uploadButton)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.Config.BackgroundImage)
+                        </div>
+                    </div>
+
                 </div>
-            </div>*@
+            </div>
+            
+            <br /><br /><br />
+            
+            <div class="section-title text-center">
+                <h2>Main Links</h2>
+                <span class="line-bar">...</span>
+            </div>
 
             @foreach(var link in Model.LandingPageBannerLinks)
             {
@@ -64,23 +131,6 @@
 
                         <hr />
 
-                        @if (link.DisplayName == "Home & Apps")
-                        {
-                            
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                    &nbsp;
-                                    @Html.LabelFor(x => x.Config.AppsTitle, new { @style = "font-weight:normal;" })
-                                </div>
-                                <div class="col-sm-12">
-                                    @Html.TextBoxFor(x => x.Config.AppsTitle, new { @class = "form-control" })
-                                </div>
-                            </div>
-
-                            
-                        }
-
                         <div class="row">
                             <div class="col-sm-12">
                                 <span class="glyphicon glyphicon-home"></span>
@@ -100,6 +150,17 @@
                             </div>
                             <div class="col-sm-12">
                                 @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].Directive, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-home"></span>
+                                &nbsp;
+                                @Html.LabelFor(o => o.LandingPageBannerLinks[count].URL, new { @style = "font-weight:normal;" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].URL, new { @class = "form-control" })
                             </div>
                         </div>
 
