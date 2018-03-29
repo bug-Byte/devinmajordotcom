@@ -342,7 +342,7 @@ namespace devinmajordotcom.Services
 
         public BlogPostViewModel GetBlogPostById(int ID)
         {
-            return db.MyHome_BlogPosts.Where(x => x.Id == ID).Select(x => new BlogPostViewModel()
+            var viewModel = db.MyHome_BlogPosts.Where(x => x.Id == ID).Select(x => new BlogPostViewModel()
             {
                 BlogPostID = x.Id,
                 AuthorUserID = x.UserId,
@@ -364,8 +364,22 @@ namespace devinmajordotcom.Services
                     CreatedBy = y.CreatedBy,
                     ModifiedOn = y.ModifiedOn,
                     ModifiedBy = y.ModifiedBy
-                }).OrderBy(y => y.CreatedOn).ToList()
+                }).OrderBy(y => y.CreatedOn).ToList(),
             }).FirstOrDefault();
+
+            var guid = HttpContext.Current.Session["MainPageUserAuthID"] ?? AddNewUser().Guid;
+            var user = GetCurrentUser((Guid) guid);
+
+            if (user != null && viewModel != null)
+            {
+                viewModel.NewComment = new CommentViewModel()
+                {
+                    AuthorUserID = user.UserID,
+                    BlogPostID = viewModel.BlogPostID
+                };
+            }
+
+            return viewModel;
         }
 
         public List<BlogPostViewModel> GetBlogPostsByUserId(int userId)

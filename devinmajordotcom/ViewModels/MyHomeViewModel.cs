@@ -91,19 +91,20 @@ namespace devinmajordotcom.ViewModels
 
     public class BlogPostViewModel : CommentViewModel
     {
-
-        public int BlogPostID { get; set; }
-
         [Required]
         [DisplayName("Title *")]
         public string PostTitle { get; set; }
 
         public List<CommentViewModel> PostComments { get; set; }
 
+        public CommentViewModel NewComment { get; set; }
+
     }
 
     public class CommentViewModel
     {
+
+        public int BlogPostID { get; set; }
 
         public int AuthorUserID { get; set; }
 

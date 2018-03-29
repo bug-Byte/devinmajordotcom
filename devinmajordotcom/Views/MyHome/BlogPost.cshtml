@@ -39,64 +39,29 @@
 
     <div class="row">
         <div class="col-lg-12" id="commentsContainer">
-
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0 blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;@Model.ModifiedOn</h5>
-                    <h5 class="mt-0 blogHoverItem"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+            @foreach (var comment in Model.PostComments)
+            {
+                <div class="media mb-4 comment">
+                    <div class="media-body">
+                        <h5 class="mt-0 blogHoverItem">
+                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;
+                            @comment.CreatedOn
+                        </h5>
+                        <h5 class="mt-0 blogHoverItem">
+                            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                            @if (String.IsNullOrEmpty(comment.AuthorUserName))
+                            {
+                                <text>Anonymous said:</text>
+                            }
+                            else
+                            {
+                                <text>@comment.AuthorUserName said:</text>
+                            }
+                        </h5>
+                        @Html.Raw(comment.Body)
+                    </div>
                 </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            
-            <div class="media mb-4 comment">
-                <div class="media-body">
-                    <h5 class="mt-0"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Commenter Name said:</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-
+            }
         </div>
     </div>
     
@@ -104,10 +69,15 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <h4>Leave a Comment...</h4>
-            <textarea rows="5" class="tinymce"></textarea>
-            <br/>
-            <button style="width:100%" type="submit" class="btn btn-primary">Submit</button>
+            @using (Ajax.BeginForm("AddComment", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateComments(data);" }, new { @id = "EditBlogPostForm" }))
+            {
+                @Html.HiddenFor(x => x.NewComment.BlogPostID)
+                @Html.HiddenFor(x => x.NewComment.AuthorUserID)
+                <h4>Leave a Comment...</h4>
+                @Html.TextAreaFor(x => x.NewComment.Body, new { @class = "tinymce", @rows = "5" })
+                <br/>
+                <button style="width: 100%" type="submit" class="btn btn-primary">Submit your Comment!</button>
+            }
         </div>
     </div>
     
