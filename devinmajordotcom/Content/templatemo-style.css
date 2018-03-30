@@ -311,7 +311,7 @@ hr {
   width: 100%;
   display: block;
   height: auto;
-    min-height: 220px;
+  min-height: 35vh;
 }
 /* END PORTFOLIO */
 
