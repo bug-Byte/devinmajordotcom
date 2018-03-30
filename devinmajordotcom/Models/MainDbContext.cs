@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -621,6 +621,7 @@ namespace devinmajordotcom.Models
         public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
+        public bool IsPublic { get; set; } // IsPublic
         public int? Order { get; set; } // Order
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
@@ -631,6 +632,7 @@ namespace devinmajordotcom.Models
         {
             IsDefault = false;
             IsEnabled = true;
+            IsPublic = false;
             InitializePartial();
         }
 
@@ -645,6 +647,7 @@ namespace devinmajordotcom.Models
         public string AppsTitle { get; set; } // AppsTitle
         public byte[] BackgroundImage { get; set; } // BackgroundImage
         public bool IsParticleCanvasOn { get; set; } // IsParticleCanvasOn
+        public string WebsiteName { get; set; } // WebsiteName
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -673,6 +676,7 @@ namespace devinmajordotcom.Models
         public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
+        public bool IsPublic { get; set; } // IsPublic
         public int? Order { get; set; } // Order
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
@@ -683,6 +687,7 @@ namespace devinmajordotcom.Models
         {
             IsDefault = false;
             IsEnabled = true;
+            IsPublic = false;
             InitializePartial();
         }
 
@@ -1296,6 +1301,7 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.IsPublic).HasColumnName(@"IsPublic").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -1324,6 +1330,7 @@ namespace devinmajordotcom.Models
             Property(x => x.AppsTitle).HasColumnName(@"AppsTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.IsParticleCanvasOn).HasColumnName(@"IsParticleCanvasOn").HasColumnType("bit").IsRequired();
+            Property(x => x.WebsiteName).HasColumnName(@"WebsiteName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
@@ -1357,6 +1364,7 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.IsPublic).HasColumnName(@"IsPublic").HasColumnType("bit").IsRequired();
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);

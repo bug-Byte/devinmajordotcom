@@ -23,6 +23,10 @@ namespace devinmajordotcom.Services
 
         List<SiteLinkViewModel> GetMainBannerLinks(bool isRetrievingSettings = false);
 
+        void RemoveSiteLinkById(int ID);
+
+        void RemoveBannerLinkById(int ID);
+
         //string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel);
 
     }

@@ -28,11 +28,11 @@
                         <h3>@appDataModel.DisplayName</h3>
                         <hr>
                         <div class="settingsContainer">
-                            @if (appDataModel.DisplayName == "Plex Media Dashboard")
+                            @if (appDataModel.Controller == "MediaDashboard" && appDataModel.Action == "Index")
                             {
                                 @Html.Partial("../MediaDashboard/_ManageMediaDashboard", Model.CurrentMediaDashboardData)
                             }
-                            @if (appDataModel.DisplayName == "Professional Portfolio")
+                            @if (appDataModel.Controller == "Portfolio" && appDataModel.Action == "Index")
                             {
                                 @Html.Partial("../Portfolio/_ManagePortfolio", Model.CurrentPortfolioData)
                             }

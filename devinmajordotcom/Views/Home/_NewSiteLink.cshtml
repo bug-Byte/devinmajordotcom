@@ -1,0 +1,86 @@
+﻿<script type="text/x-handlebars-template" id="siteLinkTemplateScript">
+    <input class="hiddenSiteLinkID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="LandingPageApplicationLinks_{{newID}}__ID" name="LandingPageApplicationLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="siteLink handlebarsItem" data-hiddeninputid="LandingPageApplicationLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh;">
+        <input class="hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="LandingPageApplicationLinks_{{newID}}__ParentApplicationId" name="LandingPageApplicationLinks[{{newID}}].ParentApplicationId" type="hidden" value="{{newID}}">                            
+        <input class="hiddenInput_{{newLinkCounter}}" id="LandingPageApplicationLinks_{{newID}}__ParentApplicationName" name="LandingPageApplicationLinks[{{newID}}].ParentApplicationName" type="hidden" value="">                            
+        <input class="hiddenOrder hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field Order must be a number." id="LandingPageApplicationLinks_{{newID}}__Order" name="LandingPageApplicationLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}">
+        <div class="row">
+            <div class="col-sm-2">                                    
+            <span class="btn btn-primary move ui-sortable-handle" type="button"><span class="fa fa-arrows"></span></span>                                
+            </div>
+            <div class="col-sm-8 text-center">
+                <h4>                                        
+                <span class="iconContainer"><span class=""></span></span>                                        
+                &nbsp;&nbsp;                                        
+                <span class="titleContainer"></span>                                   
+                 </h4>
+            </div>
+            <div class="col-sm-2"><a class="btn btn-danger deleteGroup deleteSiteLink" data-ajax="true" data-ajax-failure="ManageSiteLinksAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveSiteLink('#deleteSiteLink_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/Home/RemoveSiteLink/{{newLinkCounter}}" id="deleteSiteLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>                                
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">                                        
+                <span class="input-group-btn">                                            
+                    <button data-placement="left" class="btn btn-default iconpicker" name="LandingPageApplicationLinks[{{newID}}].DisplayIcon" role="iconpicker" data-iconset="glyphicon" data-icon="" type="button">
+                    <i class="glyphicon glyphicon-dashboard"></i>
+                    <input type="hidden" name="LandingPageApplicationLinks[{{newID}}].DisplayIcon" value="">
+                    <span class="caret"></span>
+                    </button>                                        
+                </span>                                        
+                <input class="form-control namer" data-val="true" data-val-required="The Display Name * field is required." id="LandingPageApplicationLinks_{{newID}}__DisplayName" name="LandingPageApplicationLinks[{{newID}}].DisplayName" placeholder="Display Name" style="margin-bottom: 0px" type="text" value="">                                    
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">Description</div>
+                    <input class="form-control" id="LandingPageApplicationLinks_{{newID}}__Description" name="LandingPageApplicationLinks[{{newID}}].Description" placeholder="http://www.google.ca/" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">Controller</div>
+                    <input class="form-control" id="LandingPageApplicationLinks_{{newID}}__Controller" name="LandingPageApplicationLinks[{{newID}}].Controller" placeholder="Home" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">Action</div>
+                    <input class="form-control" id="LandingPageApplicationLinks_{{newID}}__Action" name="LandingPageApplicationLinks[{{newID}}].Action" placeholder="Index" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input checked="checked" class="toggler check-box" data-val="true" data-val-required="The IsPublic field is required." id="LandingPageApplicationLinks_{{newID}}__IsPublic" name="LandingPageApplicationLinks[{{newID}}].IsPublic" type="checkbox" value="true"><input name="LandingPageApplicationLinks[{{newID}}].IsPublic" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="LandingPageApplicationLinks_{{newID}}__IsPublic" style="font-weight: normal; margin-bottom: 0px;">Is Link Public?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input checked="checked" class="toggler check-box" data-val="true" data-val-required="The Is Link Enabled? field is required." id="LandingPageApplicationLinks_{{newID}}__IsEnabled" name="LandingPageApplicationLinks[{{newID}}].IsEnabled" type="checkbox" value="true"><input name="LandingPageApplicationLinks[{{newID}}].IsEnabled" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="LandingPageApplicationLinks_{{newID}}__IsEnabled" style="font-weight: normal; margin-bottom: 0px;">Is Link Enabled?</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">                                    
+                <span class="field-validation-valid" data-valmsg-for="LandingPageApplicationLinks[{{newID}}].DisplayName" data-valmsg-replace="true"></span>                                
+            </div>
+        </div>
+    </li>
+</script>

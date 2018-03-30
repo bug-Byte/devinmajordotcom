@@ -95,7 +95,7 @@
         @foreach (var link in Model.SidebarLinks)
         {
             @Html.HiddenFor(x => x.SidebarLinks[count].ID, new { @class = "hiddenID hiddenInput_" + Model.SidebarLinks[count].ID })
-            <li class="mediaDashboardLink" data-hiddeninputid="@Html.IdFor(x => x.SidebarLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">               
+            <li class="mediaDashboardLink handlebarsItem" data-hiddeninputid="@Html.IdFor(x => x.SidebarLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">               
                 @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
                 @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
                 @Html.HiddenFor(x => x.SidebarLinks[count].Order, new { @class = "hiddenOrder hiddenInput_" + Model.SidebarLinks[count].ID })
@@ -193,6 +193,8 @@
             <button class="form-control btn btn-success" id="addNewMediaDashboardLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Link</button>
         </div>
     </div>
+
+    <br/>
 
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">

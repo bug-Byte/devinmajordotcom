@@ -17,158 +17,369 @@
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 
 }
-
-@using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "" }))
+@using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "ManageMainSettingsAjaxSuccess", OnFailure = "ManageMainSettingsAjaxFailure" }))
 {
+
     <div class="appContainer work-wrapper" style="background:transparent;" id="mainSettingsContainer">
         <h3>Landing Page Settings</h3>
         <hr>
         <div class="settingsContainer">
 
-            <div class="card card-2" style="width: 96%;">
-                <h4 class="card-title text-center">Manage Application Links</h4>
-                <div class="card-body">
-                    
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <span class="glyphicon glyphicon-home"></span>
-                            &nbsp;
-                            @Html.LabelFor(x => x.Config.AppsTitle, new { @style = "font-weight:normal;" })
-                        </div>
-                        <div class="col-sm-12">
-                            @Html.TextBoxFor(x => x.Config.AppsTitle, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.Config.AppsTitle)
-                        </div>
-                    </div>
-
-                    <br />
-                    
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <div class="checkbox-inline">
-                                    <label class="switch">
-                                        @Html.EditorFor(o => o.Config.IsParticleCanvasOn, new { htmlAttributes = new { @class = "toggler" } })
-                                        <div class="slider round"></div>
-                                    </label>
-                                    @Html.LabelFor(o => o.Config.IsParticleCanvasOn, "Is Particle Canvas On?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.Config.AppsTitle)
-                        </div>
-                    </div>
-
-                    <br />
-                    
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <span class="glyphicon glyphicon-home"></span>
-                            &nbsp;
-                            @Html.LabelFor(x => x.Config.BackgroundImage, new { @style = "font-weight:normal;" })
-                        </div>
-                        <div class="col-sm-12">
-                            @Html.HiddenFor(x => x.Config.BackgroundImage)
-                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Config.BackgroundImage))" id="previewImage" class="img-responsive" alt="Background Image">
-                            @Html.Raw(uploadButton)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.Config.BackgroundImage)
-                        </div>
-                    </div>
-
+            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+                <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseMedia">
+                    <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+                    &nbsp;&nbsp;
+                    <h4 class="panel-title" style="display: inline;">
+                        <a>Manage Look and Feel</a>
+                    </h4>
                 </div>
-            </div>
-            
-            <br /><br /><br />
-            
-            <div class="section-title text-center">
-                <h2>Main Links</h2>
-                <span class="line-bar">...</span>
-            </div>
-
-            @foreach(var link in Model.LandingPageBannerLinks)
-            {
-                <div class="card card-2">
-                    @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].DisplayName, new { @class = "form-control card-title text-center", @style= "font-weight:bold;font-size: 16px;" })
-                    <div class="card-body">
-
-                        <hr/>
+                <div id="collapseMedia" class="panel-collapse collapse in">
+                    <div class="panel-body">
 
                         <div class="row">
-                            <div class="col-sm-12 text-left">
+                            <div class="col-sm-12 text-center">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                &nbsp;
+                                @Html.LabelFor(x => x.Config.WebsiteName, new { @style = "font-weight:normal;" })
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                @Html.TextBoxFor(x => x.Config.WebsiteName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                @Html.ValidationMessageFor(x => x.Config.WebsiteName)
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                &nbsp;
+                                @Html.LabelFor(x => x.Config.AppsTitle, new { @style = "font-weight:normal;" })
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                @Html.TextBoxFor(x => x.Config.AppsTitle, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                @Html.ValidationMessageFor(x => x.Config.AppsTitle)
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
                                 <div class="form-group">
                                     <div class="checkbox-inline">
                                         <label class="switch">
-                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsDefault, new { htmlAttributes = new { @class = "toggler" } })
+                                            @Html.EditorFor(o => o.Config.IsParticleCanvasOn, new { htmlAttributes = new { @class = "toggler" } })
                                             <div class="slider round"></div>
                                         </label>
-                                        @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-left">
-                                <div class="form-group">
-                                    <div class="checkbox-inline">
-                                        <label class="switch">
-                                            @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
-                                            <div class="slider round"></div>
-                                        </label>
-                                        @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                        <span class='glyphicon glyphicon-cog'></span>&nbsp;@Html.LabelFor(o => o.Config.IsParticleCanvasOn, "Is Particle Canvas On?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <hr />
-
                         <div class="row">
-                            <div class="col-sm-12">
-                                <span class="glyphicon glyphicon-home"></span>
-                                &nbsp;
-                                @Html.LabelFor(o => o.LandingPageBannerLinks[count].Description, new { @style = "font-weight:normal;" })
-                            </div>
-                            <div class="col-sm-12">
-                                @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].Description, new { @class = "form-control" })
+                            <div class="col-sm-12 text-center">
+                                @Html.ValidationMessageFor(x => x.Config.IsParticleCanvasOn)
                             </div>
                         </div>
 
+                        <br />
+
                         <div class="row">
-                            <div class="col-sm-12">
-                                <span class="glyphicon glyphicon-home"></span>
+                            <div class="col-sm-12 text-center">
+                                <span class="glyphicon glyphicon-picture"></span>
                                 &nbsp;
-                                @Html.LabelFor(o => o.LandingPageBannerLinks[count].Directive, new { @style = "font-weight:normal;" })
+                                @Html.LabelFor(x => x.Config.BackgroundImage, new { @style = "font-weight:normal;" })
                             </div>
-                            <div class="col-sm-12">
-                                @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].Directive, new { @class = "form-control" })
+                            <div class="col-sm-12 text-center">
+                                @Html.HiddenFor(x => x.Config.BackgroundImage, new { @id = "BackgroundImage" })
+                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Config.BackgroundImage))" id="previewImage" style="display:inline-block;" class="img-responsive" alt="Background Image">
+                                <br />
+                                @Html.Raw(uploadButton)
                             </div>
                         </div>
-                        
                         <div class="row">
-                            <div class="col-sm-12">
-                                <span class="glyphicon glyphicon-home"></span>
-                                &nbsp;
-                                @Html.LabelFor(o => o.LandingPageBannerLinks[count].URL, new { @style = "font-weight:normal;" })
-                            </div>
-                            <div class="col-sm-12">
-                                @Html.TextBoxFor(o => o.LandingPageBannerLinks[count].URL, new { @class = "form-control" })
+                            <div class="col-sm-12 text-center">
+                                @Html.ValidationMessageFor(x => x.Config.BackgroundImage)
                             </div>
                         </div>
 
                     </div>
                 </div>
-                count++;
+            </div>
+
+            <br /><br />
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <div class="section-title">
+                        <h2>Main Links</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bannerLinksContainer" style="overflow:auto !important;" class="">
+                <ul id="bannerLinksList" class="mediaSortable">
+                    @foreach (var link in Model.LandingPageBannerLinks)
+                    {
+                        @Html.HiddenFor(x => x.LandingPageBannerLinks[count].ID, new { @class = "hiddenBannerLinkID hiddenInput_" + Model.LandingPageBannerLinks[count].ID })
+                        <li class="bannerLink handlebarsItem" data-hiddeninputid="@Html.IdFor(x => x.LandingPageBannerLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">
+                            @Html.HiddenFor(x => x.LandingPageBannerLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.LandingPageBannerLinks[count].ID })
+                            @Html.HiddenFor(x => x.LandingPageBannerLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.LandingPageBannerLinks[count].ID })
+                            @Html.HiddenFor(x => x.LandingPageBannerLinks[count].Order, new { @class = "hiddenOrder hiddenBannerOrder hiddenInput_" + Model.LandingPageBannerLinks[count].ID })
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+                                </div>
+                                <div class="col-sm-8 text-center">
+                                    <h4>
+                                        <span class="iconContainer"><span class="fa @Model.LandingPageBannerLinks[count].DisplayIcon"></span></span>
+                                        &nbsp;&nbsp;
+                                        <span class="titleContainer">@Model.LandingPageBannerLinks[count].DisplayName</span>
+                                    </h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    @{
+                                        var linkText = "<span class='fa fa-trash'></span>";
+                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveBannerLink", "Home", new { ID = Model.LandingPageBannerLinks[count].ID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveBannerLink('#deleteBannerLink_" + Model.LandingPageBannerLinks[count].ID + "')", OnFailure = "ManageBannerLinksAjaxFailure" }, new { data_content = linkText, @id = "deleteBannerLink_" + Model.LandingPageBannerLinks[count].ID, @class = "btn btn-danger deleteGroup deleteBannerLink", @style = "float:right;" });
+                                        @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <span class="input-group-btn">
+                                            <button data-placement="left"
+                                                    class="btn btn-default iconpicker"
+                                                    name="@Html.NameFor(x => x.LandingPageBannerLinks[count].DisplayIcon)"
+                                                    role="iconpicker"
+                                                    data-iconset="fontawesome"
+                                                    data-icon="@Model.LandingPageBannerLinks[count].DisplayIcon"
+                                                    type="button"></button>
+                                        </span>
+                                        @Html.TextBoxFor(x => x.LandingPageBannerLinks[count].DisplayName, new { @class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Display Name" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">URL</div>
+                                        @Html.TextBoxFor(x => x.LandingPageBannerLinks[count].URL, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">Description</div>
+                                        @Html.TextBoxFor(x => x.LandingPageBannerLinks[count].Description, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "This is a sample description..." })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">Directive</div>
+                                        @Html.TextBoxFor(x => x.LandingPageBannerLinks[count].Directive, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "Go here, do this, click that..." })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                    <div class="form-group">
+                                        <div class="checkbox-inline">
+                                            <label class="switch">
+                                                @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsDefault, new { htmlAttributes = new { @class = "toggler" } })
+                                                <div class="slider round"></div>
+                                            </label>
+                                            @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 text-center">
+                                    <div class="form-group">
+                                        <div class="checkbox-inline">
+                                            <label class="switch">
+                                                @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsPublic, new { htmlAttributes = new { @class = "toggler" } })
+                                                <div class="slider round"></div>
+                                            </label>
+                                            @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsPublic, "Is Link Public?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 text-center">
+                                    <div class="form-group">
+                                        <div class="checkbox-inline">
+                                            <label class="switch">
+                                                @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
+                                                <div class="slider round"></div>
+                                            </label>
+                                            @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.ValidationMessageFor(x => x.LandingPageBannerLinks[count].DisplayName)
+                                </div>
+                            </div>
+                        </li>
+                        count++;
+                    }
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button class="form-control btn btn-success" id="addNewBannerLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Link</button>
+                </div>
+            </div>
+
+            @{ 
+                count = 0;
             }
+
+            <br /><br />
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <div class="section-title">
+                        <h2>Application Links</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="siteLinksContainer" style="overflow:auto !important;" class="">
+                <ul id="siteLinksList" class="mediaSortable">
+                    @foreach (var link in Model.LandingPageApplicationLinks)
+                    {
+                        @Html.HiddenFor(x => x.LandingPageApplicationLinks[count].ID, new { @class = "hiddenSiteLinkID hiddenInput_" + Model.LandingPageApplicationLinks[count].ID })
+                        <li class="siteLink handlebarsItem" data-hiddeninputid="@Html.IdFor(x => x.LandingPageApplicationLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">
+                            @Html.HiddenFor(x => x.LandingPageApplicationLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.LandingPageApplicationLinks[count].ID })
+                            @Html.HiddenFor(x => x.LandingPageApplicationLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.LandingPageApplicationLinks[count].ID })
+                            @Html.HiddenFor(x => x.LandingPageApplicationLinks[count].Order, new { @class = "hiddenOrder hiddenInput_" + Model.LandingPageApplicationLinks[count].ID })
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+                                </div>
+                                <div class="col-sm-8 text-center">
+                                    <h4>
+                                        <span class="iconContainer"><span class="glyphicon @Model.LandingPageApplicationLinks[count].DisplayIcon"></span></span>
+                                        &nbsp;&nbsp;
+                                        <span class="titleContainer">@Model.LandingPageApplicationLinks[count].DisplayName</span>
+                                    </h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    @{
+                                        var linkText = "<span class='fa fa-trash'></span>";
+                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveSiteLink", "Home", new { ID = Model.LandingPageApplicationLinks[count].ID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSiteLink('#deleteSiteLink_" + Model.LandingPageApplicationLinks[count].ID + "')", OnFailure = "ManageSiteLinksAjaxFailure" }, new { data_content = linkText, @id = "deleteSiteLink_" + Model.LandingPageApplicationLinks[count].ID, @class = "btn btn-danger deleteGroup deleteSiteLink", @style = "float:right;" });
+                                        @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <span class="input-group-btn">
+                                            <button data-placement="left"
+                                                    class="btn btn-default iconpicker"
+                                                    name="@Html.NameFor(x => x.LandingPageApplicationLinks[count].DisplayIcon)"
+                                                    role="iconpicker"
+                                                    data-iconset="glyphicon"
+                                                    data-icon="@Model.LandingPageApplicationLinks[count].DisplayIcon"
+                                                    type="button"></button>
+                                        </span>
+                                        @Html.TextBoxFor(x => x.LandingPageApplicationLinks[count].DisplayName, new { @class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Display Name" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">Description</div>
+                                        @Html.TextBoxFor(x => x.LandingPageApplicationLinks[count].Description, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">Controller</div>
+                                        @Html.TextBoxFor(x => x.LandingPageApplicationLinks[count].Controller, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "Home" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">Action</div>
+                                        @Html.TextBoxFor(x => x.LandingPageApplicationLinks[count].Action, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "Index" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <div class="form-group">
+                                        <div class="checkbox-inline">
+                                            <label class="switch">
+                                                @Html.EditorFor(o => o.LandingPageApplicationLinks[count].IsPublic, new { htmlAttributes = new { @class = "toggler" } })
+                                                <div class="slider round"></div>
+                                            </label>
+                                            @Html.LabelFor(o => o.LandingPageApplicationLinks[count].IsPublic, "Is Link Public?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div class="form-group">
+                                        <div class="checkbox-inline">
+                                            <label class="switch">
+                                                @Html.EditorFor(o => o.LandingPageApplicationLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
+                                                <div class="slider round"></div>
+                                            </label>
+                                            @Html.LabelFor(o => o.LandingPageApplicationLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.ValidationMessageFor(x => x.LandingPageApplicationLinks[count].DisplayName)
+                                </div>
+                            </div>
+                        </li>
+                        count++;
+                    }
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button class="form-control btn btn-success" id="addNewSiteLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Application</button>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <input class="form-control btn btn-success" id="updateMainSettings" type="submit" value="Update Landing Page Settings">
+                </div>
+            </div>
 
         </div>
     </div>
-}
+
+   }

@@ -2,6 +2,23 @@
  * Globals
  */
 
+.popover-title {
+        color:black !important;
+        text-align:center;
+        font-size:14px;
+        font-weight:bold;
+    }
+    #previewImage {
+        border: 1px solid #ddd; /* Gray border */
+        border-radius: 4px;  /* Rounded border */
+        padding: 5px; /* Some padding */
+        width: 150px; /* Set a small width */
+    }
+
+    #previewImage:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+
   .section-title {
       margin-bottom: 60px;
   }
@@ -363,7 +380,7 @@ input[type="checkbox"]:checked + .slider:before {
     width: 100%;
 }
 
-.mediaDashboardLink {
+.mediaDashboardLink, .bannerLink, .siteLink {
     border: 1px solid white;
     padding: 5px;
     border-radius: 5px;

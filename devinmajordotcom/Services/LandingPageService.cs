@@ -76,9 +76,21 @@ namespace devinmajordotcom.Services
             var configRecord = db.LandingPage_Configs.FirstOrDefault();
             if(configRecord != null)
             {
+                if (viewModel.Config.BackgroundImage.Length > 0 && viewModel.Config.BackgroundImage.Length != configRecord.BackgroundImage.Length)
+                {
+                    try
+                    {
+                        var newString = System.Text.Encoding.Default.GetString(viewModel.Config.BackgroundImage);
+                        configRecord.BackgroundImage = Convert.FromBase64String(newString);
+                    }
+                    catch (Exception e)
+                    {
+                        configRecord.BackgroundImage = viewModel.Config.BackgroundImage;
+                    }
+                }
                 configRecord.AppsTitle = viewModel.Config.AppsTitle;
-                configRecord.BackgroundImage = viewModel.Config.BackgroundImage;
                 configRecord.IsParticleCanvasOn = viewModel.Config.IsParticleCanvasOn;
+                configRecord.WebsiteName = viewModel.Config.WebsiteName;
             }
             else
             {
@@ -86,38 +98,111 @@ namespace devinmajordotcom.Services
                 {
                     AppsTitle = viewModel.Config.AppsTitle,
                     IsParticleCanvasOn = viewModel.Config.IsParticleCanvasOn,
-                    BackgroundImage = viewModel.Config.BackgroundImage
+                    WebsiteName = viewModel.Config.WebsiteName
                 };
+                if (viewModel.Config.BackgroundImage.Length > 0)
+                {
+                    try
+                    {
+                        var newString = System.Text.Encoding.Default.GetString(viewModel.Config.BackgroundImage);
+                        newRecord.BackgroundImage = Convert.FromBase64String(newString);
+                    }
+                    catch (Exception e)
+                    {
+                        newRecord.BackgroundImage = viewModel.Config.BackgroundImage;
+                    }
+                }
                 db.LandingPage_Configs.Add(newRecord);
-                db.SaveChanges();
             }
+            db.SaveChanges();
             foreach (var link in viewModel.LandingPageBannerLinks)
             {
-                var linkRecord = db.LandingPage_BannerLinks.First();
-                linkRecord.IsDefault = link.IsDefault;
-                linkRecord.IsEnabled = link.IsEnabled;
-                linkRecord.Url = link.URL;
+                if(link.DisplayName != null)
+                {
+                    var linkRecord = db.LandingPage_BannerLinks.FirstOrDefault(x => x.Id == link.ID);
+                    if (linkRecord != null)
+                    {
+                        linkRecord.IsDefault = link.IsDefault;
+                        linkRecord.IsEnabled = link.IsEnabled;
+                        linkRecord.IsPublic = link.IsPublic;
+                        linkRecord.Action = link.Action;
+                        linkRecord.Controller = link.Controller;
+                        linkRecord.Url = link.URL;
+                        linkRecord.Description = link.Description;
+                        linkRecord.Directive = link.Directive;
+                        linkRecord.DisplayIcon = link.DisplayIcon;
+                        linkRecord.Order = link.Order;
+                        linkRecord.DisplayName = link.DisplayName;
+                    }
+                    else
+                    {
+                        var newRecord = new LandingPage_BannerLink()
+                        {
+                            IsDefault = link.IsDefault,
+                            IsEnabled = link.IsEnabled,
+                            Action = link.Action,
+                            Controller = link.Controller,
+                            Url = link.URL,
+                            Description = link.Description,
+                            Directive = link.Directive,
+                            DisplayIcon = link.DisplayIcon,
+                            Order = link.Order,
+                            DisplayName = link.DisplayName,
+                            IsPublic = link.IsPublic
+                        };
+                        db.LandingPage_BannerLinks.Add(newRecord);
+                    }
+                }
+                db.SaveChanges();
             }
             foreach (var link in viewModel.LandingPageApplicationLinks)
             {
-                var linkRecord = db.LandingPage_SiteLinks.First();
-                linkRecord.IsDefault = link.IsDefault;
-                linkRecord.IsEnabled = link.IsEnabled;
-                linkRecord.Action = link.Action;
-                linkRecord.Controller = link.Controller;
-                linkRecord.Url = link.URL;
-                linkRecord.Description = link.Description;
-                linkRecord.Directive = link.Directive;
-                linkRecord.DisplayIcon = link.DisplayIcon;
-                linkRecord.Order = link.Order;
-                linkRecord.DisplayName = link.DisplayName;
+                if (link.DisplayName != null)
+                {
+                    var linkRecord = db.LandingPage_SiteLinks.FirstOrDefault(x => x.Id == link.ID);
+                    if (linkRecord != null)
+                    {
+                        linkRecord.IsDefault = link.IsDefault;
+                        linkRecord.IsEnabled = link.IsEnabled;
+                        linkRecord.IsPublic = link.IsPublic;
+                        linkRecord.Action = link.Action;
+                        linkRecord.Controller = link.Controller;
+                        linkRecord.Url = link.URL;
+                        linkRecord.Description = link.Description;
+                        linkRecord.Directive = link.Directive;
+                        linkRecord.DisplayIcon = link.DisplayIcon;
+                        linkRecord.Order = link.Order;
+                        linkRecord.DisplayName = link.DisplayName;
+                    }
+                    else
+                    {
+                   
+                        var newRecord = new LandingPage_SiteLink()
+                        {
+                            IsDefault = link.IsDefault,
+                            IsEnabled = link.IsEnabled,
+                            Action = link.Action,
+                            Controller = link.Controller,
+                            Url = link.URL,
+                            Description = link.Description,
+                            Directive = link.Directive,
+                            DisplayIcon = link.DisplayIcon,
+                            Order = link.Order,
+                            DisplayName = link.DisplayName,
+                            IsPublic = link.IsPublic
+                        };
+                        db.LandingPage_SiteLinks.Add(newRecord);                    
+                    }
+                }
+                db.SaveChanges();
+                
             }
-            db.SaveChanges();
         }
 
         public LandingPageConfigViewModel GetLandingPageConfig()
         {
             return db.LandingPage_Configs.Select(x => new LandingPageConfigViewModel() {
+                WebsiteName = x.WebsiteName,
                 AppsTitle = x.AppsTitle,
                 BackgroundImage = x.BackgroundImage,
                 IsParticleCanvasOn = x.IsParticleCanvasOn,
@@ -138,6 +223,7 @@ namespace devinmajordotcom.Services
                 Controller = x.Controller,
                 IsDefault = x.IsDefault,
                 IsEnabled = x.IsEnabled,
+                IsPublic = x.IsPublic,
                 Order = x.Order
             }).OrderBy(x => x.Order).ToList();
         }
@@ -156,6 +242,7 @@ namespace devinmajordotcom.Services
                 Controller = x.Controller,
                 IsDefault = x.IsDefault,
                 IsEnabled = x.IsEnabled,
+                IsPublic = x.IsPublic,
                 Order = x.Order
             }).OrderBy(x => x.Order).ToList();
         }
@@ -176,6 +263,26 @@ namespace devinmajordotcom.Services
                 IsPublic = x.IsPublic,
                 Order = x.Order
             }).OrderBy(x => x.Order).ToList();
+        }
+
+        public void RemoveBannerLinkById(int ID)
+        {
+            var link = db.LandingPage_BannerLinks.FirstOrDefault(x => x.Id == ID);
+            if (link != null)
+            {
+                db.LandingPage_BannerLinks.Remove(link);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveSiteLinkById(int ID)
+        {
+            var link = db.LandingPage_SiteLinks.FirstOrDefault(x => x.Id == ID);
+            if (link != null)
+            {
+                db.LandingPage_SiteLinks.Remove(link);
+                db.SaveChanges();
+            }
         }
 
         //public string SendContactEmailToSiteAdmin(ContactEmailViewModel viewModel)

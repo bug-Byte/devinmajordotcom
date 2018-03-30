@@ -2,9 +2,15 @@
 var saveButtonPressed = false;
 
 var canvas = document.querySelector("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-var ctx = canvas.getContext("2d");
+var ctx;
+
+if(canvas != null) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx = canvas.getContext("2d");
+    
+}
+
 var TAU = 2 * Math.PI;
 times = [];
 var balls = [];
@@ -44,8 +50,10 @@ function Ball(startX, startY, startVelX, startVelY) {
     }
 }
 
-for (var i = 0; i < canvas.width * canvas.height / (85 * 85) ; i++) {
-    balls.push(new Ball(Math.random() * canvas.width, Math.random() * canvas.height));
+if(canvas != null) {
+    for (var i = 0; i < canvas.width * canvas.height / (85 * 85) ; i++) {
+        balls.push(new Ball(Math.random() * canvas.width, Math.random() * canvas.height));
+    }
 }
 
 function update() {
@@ -115,7 +123,9 @@ $(window).bind("resize", function () {
 $(document).ready(function () {
 
     // Start
-    loop();
+    if(canvas != null) {
+        loop();
+    }
 
     var ms_ie = false;
     var ua = window.navigator.userAgent;
@@ -177,6 +187,8 @@ $(document).ready(function () {
         });
     });
 
+    $(".landingPageLink.active").click();
+
     $(".date").datetimepicker({
         format: "L",
         allowInputToggle: true,
@@ -194,8 +206,16 @@ $(document).ready(function () {
 
 function InitializeMediaDashboardEventHandlers() {
     $('button[role="iconpicker"]').iconpicker().change(function () {
-        $(this).attr("data-icon", $(this).children("input:first").val());
-        $(this).closest(".mediaDashboardLink").find('.iconContainer').html("<span class='fa " + $(this).children("input:first").val() + "'></span>");
+        var icon = $(this).children("input:first").val();
+        $(this).attr("data-icon", icon);
+        if(icon.indexOf("fa") !== -1) {
+            $(this).closest(".handlebarsItem").find('.iconContainer').html("<span class='fa " + $(this).children("input:first").val() + "'></span>");
+        }
+        else {
+            $(this).closest(".handlebarsItem").find('.iconContainer').html("<span class='glyphicon " + $(this).children("input:first").val() + "'></span>");
+        }
+        //check for fa or glyphicon
+        
     });
     $(".mediaSortable").sortable({
         connectWith: '.viewport',
@@ -212,7 +232,7 @@ function InitializeMediaDashboardEventHandlers() {
     $(".form-control").on("change", function () {
         $(this).attr("value", $(this).val());
         if ($(this).hasClass('namer')) {
-            $(this).closest(".mediaDashboardLink").find('.titleContainer').html($(this).val());
+            $(this).closest(".handlebarsItem").find('.titleContainer').html($(this).val());
         }
     });
     $(".toggler").change(function () {
@@ -242,7 +262,7 @@ function HideAdminFirstRunModal() {
 function HideLoginModal() {
 
     $('#LoginModal').modal('hide');
-    $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a>Settings</a></li>');
+    $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>');
     $('#mainContainer').append(settingsHtml);
     $('#appmanager').fadeIn(500);
     InitializeMediaDashboardEventHandlers();
@@ -283,6 +303,48 @@ function AjaxFailure(data) {
     });
 }
 
+function ManageBannerLinksAjaxFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your main links were not updated! Please try again in about 5 minutes.' + data
+    });
+}
+
+function ManageBannerLinksAjaxSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your main links have been successfully updated! Refresh the page to see any changes take effect.'
+    });
+}
+
+function ManageSiteLinksAjaxFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your application links were not updated! Please try again in about 5 minutes.' + data
+    });
+}
+
+function ManageSiteLinksAjaxSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your application links have been successfully updated! Refresh the page to see any changes take effect.'
+    });
+}
+
+function ManageMainSettingsAjaxSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your main settings have been successfully updated! Refresh the page to see any changes take effect.'
+    });
+}
+
+function ManageMainSettingsAjaxFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your main settings were not updated! Please try again in about 5 minutes.' + data
+    });
+}
+
 function RemoveMediaLink(id) {
     var number = id.split("_")[1];
     if (!$(this).hasClass("newLinkInput")) {
@@ -291,6 +353,26 @@ function RemoveMediaLink(id) {
     $(id).parent().parent().parent().remove();
     //$(".hiddenInput_" + number).remove();
     ManageMediaAjaxSuccess();
+}
+
+function RemoveBannerLink(id) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
+    $(id).parent().parent().parent().remove();
+    //$(".hiddenInput_" + number).remove();
+    ManageBannerLinksAjaxSuccess();
+}
+
+function RemoveSiteLink(id) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
+    $(id).parent().parent().parent().remove();
+    //$(".hiddenInput_" + number).remove();
+    ManageSiteLinksAjaxSuccess();
 }
 
 function RemoveContactLink(id) {
@@ -354,6 +436,24 @@ function RemoveSkill(id, type) {
 
 function setupHandlebarsHelpers() {
 
+    $(document).on('click', '#addNewBannerLink', function () {
+        var bannerLinkTemplateSource = $("#bannerLinkTemplateScript").html();
+        var template = Handlebars.compile(bannerLinkTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenBannerLinkID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderBannerLinkTemplate(template, context);
+    });
+
+    $(document).on('click', '#addNewSiteLink', function () {
+        var siteLinkTemplateSource = $("#siteLinkTemplateScript").html();
+        var template = Handlebars.compile(siteLinkTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenSiteLinkID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderSiteLinkTemplate(template, context);
+    });
+
     $(document).on('click', '#addNewMediaDashboardLink', function () {
         var mediaDashboardLinkTemplateSource = $("#mediaDashboardLinkTemplateScript").html();
         var template = Handlebars.compile(mediaDashboardLinkTemplateSource);
@@ -389,20 +489,28 @@ function renderMediaDashboardLinkTemplate(template, data) {
     InitializeMediaDashboardEventHandlers();
 }
 
+function renderBannerLinkTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("bannerLinksList").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
+}
+
+function renderSiteLinkTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("siteLinksList").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
+}
+
 function renderTechSkillTemplate(template, data) {
     var html = template(data);
     document.getElementById("techSkillContainer").innerHTML += html;
-    $(".form-control, .css-checkbox").on("change", function () {
-        $(this).attr("value", $(this).val());
-    });
+    InitializeMediaDashboardEventHandlers();
 }
 
 function renderLanguageSkillTemplate(template, data) {
     var html = template(data);
     document.getElementById("languageSkillContainer").innerHTML += html;
-    $(".form-control, .css-checkbox").on("change", function () {
-        $(this).attr("value", $(this).val());
-    });
+    InitializeMediaDashboardEventHandlers();
 }
 
 function UpdateCpuCounter(value, baseScale) {

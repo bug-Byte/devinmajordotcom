@@ -1,0 +1,96 @@
+﻿<script type="text/x-handlebars-template" id="bannerLinkTemplateScript">
+    <input class="hiddenBannerLinkID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="LandingPageBannerLinks_{{newID}}__ID" name="LandingPageBannerLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="bannerLink handlebarsItem" data-hiddeninputid="LandingPageBannerLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh;">
+        <input class="hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="LandingPageBannerLinks_{{newID}}__ParentApplicationId" name="LandingPageBannerLinks[{{newID}}].ParentApplicationId" type="hidden" value="{{newID}}">
+        <input class="hiddenInput_{{newLinkCounter}}" id="LandingPageBannerLinks_{{newID}}__ParentApplicationName" name="LandingPageBannerLinks[{{newID}}].ParentApplicationName" type="hidden" value="">
+        <input class="hiddenOrder hiddenBannerOrder hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field Order must be a number." id="LandingPageBannerLinks_{{newID}}__Order" name="LandingPageBannerLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}">
+        <div class="row">
+            <div class="col-sm-2">
+                <span class="btn btn-primary move ui-sortable-handle" type="button"><span class="fa fa-arrows"></span></span>
+            </div>
+            <div class="col-sm-8 text-center">
+                <h4>
+                    <span class="iconContainer"><span class=""></span></span>
+                    &nbsp;&nbsp;
+                    <span class="titleContainer"></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-danger deleteGroup deleteBannerLink" data-ajax="true" data-ajax-failure="ManageBannerLinksAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveBannerLink('#deleteBannerLink_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/Home/RemoveBannerLink/{{newLinkCounter}}" id="deleteBannerLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <span class="input-group-btn">
+                        <button data-placement="left" class="btn btn-default iconpicker" name="LandingPageBannerLinks[{{newID}}].DisplayIcon" role="iconpicker" data-iconset="fontawesome" data-icon="" type="button"><i class="fa fa-cut"></i><input type="hidden" name="LandingPageBannerLinks[{{newID}}].DisplayIcon" value=""><span class="caret"></span></button>
+                    </span>
+                    <input class="form-control namer" data-val="true" data-val-required="The Display Name * field is required." id="LandingPageBannerLinks_{{newID}}__DisplayName" name="LandingPageBannerLinks[{{newID}}].DisplayName" placeholder="Display Name" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">URL</div>
+                    <input class="form-control" data-val="true" data-val-required="The URL field is required." id="LandingPageBannerLinks_{{newID}}__URL" name="LandingPageBannerLinks[{{newID}}].URL" placeholder="http://www.google.ca/" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">Description</div>
+                    <input class="form-control" id="LandingPageBannerLinks_{{newID}}__Description" name="LandingPageBannerLinks[{{newID}}].Description" placeholder="This is a sample description..." style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">Directive</div>
+                    <input class="form-control" id="LandingPageBannerLinks_{{newID}}__Directive" name="LandingPageBannerLinks[{{newID}}].Directive" placeholder="Go here, do this, click that..." style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input class="toggler check-box" data-val="true" data-val-required="The IsDefault field is required." id="LandingPageBannerLinks_{{newID}}__IsDefault" name="LandingPageBannerLinks[{{newID}}].IsDefault" type="checkbox" value="true"><input name="LandingPageBannerLinks[{{newID}}].IsDefault" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="LandingPageBannerLinks_{{newID}}__IsDefault" style="font-weight: normal; margin-bottom: 0px;">Is the Default Link?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input checked="checked" class="toggler check-box" data-val="true" data-val-required="The IsPublic field is required." id="LandingPageBannerLinks_{{newID}}__IsPublic" name="LandingPageBannerLinks[{{newID}}].IsPublic" type="checkbox" value="true"><input name="LandingPageBannerLinks[{{newID}}].IsPublic" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="LandingPageBannerLinks_{{newID}}__IsPublic" style="font-weight: normal; margin-bottom: 0px;">Is Link Public?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input checked="checked" class="toggler check-box" data-val="true" data-val-required="The Is Link Enabled? field is required." id="LandingPageBannerLinks_{{newID}}__IsEnabled" name="LandingPageBannerLinks[{{newID}}].IsEnabled" type="checkbox" value="true"><input name="LandingPageBannerLinks[{{newID}}].IsEnabled" type="hidden" value="false">
+                            <div class="slider round"></div>
+                        </label>
+                        <label for="LandingPageBannerLinks_{{newID}}__IsEnabled" style="font-weight: normal; margin-bottom: 0px;">Is Link Enabled?</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="LandingPageBannerLinks[{{newID}}].DisplayName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </li>
+</script>

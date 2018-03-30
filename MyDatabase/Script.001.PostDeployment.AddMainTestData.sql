@@ -42,13 +42,15 @@ INSERT INTO [LandingPage].[Config]
 (
 	AppsTitle,
 	IsParticleCanvasOn,
-	BackgroundImage
+	BackgroundImage,
+	WebsiteName
 )
 VALUES
 (
 	'Welcome, Fellow Humans!',
 	1,
-	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\Images\back3.png', SINGLE_BLOB) AS [BackgroundImage])
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\Images\back3.png', SINGLE_BLOB) AS [BackgroundImage]),
+	'D3V!N M@J0R'
 );
 GO
 
@@ -63,6 +65,7 @@ INSERT INTO [LandingPage].[SiteLink]
 	DisplayIcon,
 	IsDefault,
 	IsEnabled,
+	IsPublic,
 	[Order]
 )
 VALUES
@@ -73,8 +76,9 @@ VALUES
 	NULL,
 	'Index',
 	'MyHome',
-	'glyphicon glyphicon-dashboard',
+	'glyphicon-dashboard',
 	0,
+	1,
 	1,
 	1
 ),
@@ -85,8 +89,9 @@ VALUES
 	NULL,
 	'Index',
 	'MediaDashboard',
-	'glyphicon glyphicon-film',
+	'glyphicon-film',
 	0,
+	1,
 	1,
 	2
 ),
@@ -97,8 +102,9 @@ VALUES
 	NULL,
 	'Index',
 	'Portfolio',
-	'glyphicon glyphicon-user',
+	'glyphicon-user',
 	0,
+	1,
 	1,
 	3
 );
@@ -114,6 +120,7 @@ INSERT INTO [LandingPage].[BannerLink]
 	DisplayIcon,
 	IsDefault,
 	IsEnabled,
+	IsPublic,
 	[Order]
 )
 VALUES
@@ -124,7 +131,8 @@ VALUES
 	'#home',
 	'Index',
 	'MyHome',
-	NULL,
+	'fa-home',
+	1,
 	1,
 	1,
 	1
@@ -136,8 +144,9 @@ VALUES
 	'#server',
 	'Index',
 	'MediaDashboard',
-	NULL,
+	'fa-heartbeat',
 	0,
+	1,
 	1,
 	2
 ),
@@ -148,8 +157,9 @@ VALUES
 	'#contact',
 	'Index',
 	'Portfolio',
-	NULL,
+	'fa-envelope',
 	0,
+	1,
 	1,
 	3
 );

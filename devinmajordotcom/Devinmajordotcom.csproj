@@ -804,7 +804,6 @@
     <Content Include="Views\Home\_Apps.cshtml" />
     <Content Include="Views\MediaDashboard\_ManageMediaDashboard.cshtml" />
     <Content Include="Views\MediaDashboard\_NewLink.cshtml" />
-    <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\MyHome\BlogPost.cshtml" />
     <Content Include="Views\MyHome\Index.cshtml" />
     <Content Include="Views\Shared\simple-thumbnails.html" />
@@ -841,6 +840,8 @@
     <Content Include="Views\MyHome\_AddBlogPostForm.cshtml" />
     <Content Include="Views\MyHome\_BlogPostComments.cshtml" />
     <Content Include="Views\MyHome\_NewComment.cshtml" />
+    <Content Include="Views\Home\_NewBannerLink.cshtml" />
+    <Content Include="Views\Home\_NewSiteLink.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -57,6 +57,18 @@ namespace devinmajordotcom.Controllers
             return PartialView();
         }
 
+        [HttpGet]
+        public void RemoveBannerLink(int ID)
+        {
+            landingPageService.RemoveBannerLinkById(ID);
+        }
+
+        [HttpGet]
+        public void RemoveSiteLink(int ID)
+        {
+            landingPageService.RemoveSiteLinkById(ID);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult DropMeALine(ContactEmailViewModel viewModel)

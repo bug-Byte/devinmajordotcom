@@ -77,9 +77,9 @@ namespace devinmajordotcom.Services
             config.BlogTitle = viewModel.BlogTitle;
             config.BookmarksTitle = viewModel.BookmarksTitle;
             config.Greeting = viewModel.Greeting;
-            config.DefaultFavoriteImage = viewModel.BackgroundImage;
-            config.DefaultBlogPostImage = viewModel.DefaultBlogPostImage;
-            config.AddNewFavoriteImage = viewModel.AddNewFavoriteImage;
+            //config.DefaultFavoriteImage = viewModel.BackgroundImage;
+            //config.DefaultBlogPostImage = viewModel.DefaultBlogPostImage;
+            //config.AddNewFavoriteImage = viewModel.AddNewFavoriteImage;
             db.SaveChanges();
         }
 
