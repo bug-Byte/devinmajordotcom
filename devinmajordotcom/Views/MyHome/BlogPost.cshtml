@@ -15,10 +15,10 @@
                 <a href="#" class="blogHoverItem">@Model.AuthorUserName</a>
             </p>
             <hr />
-            <p class="blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Posted on @Model.CreatedOn</p>
+            <p class="blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Posted on <span class="datetime">@Model.CreatedOn</span></p>
             @if (Model.ModifiedOn != Model.CreatedOn)
             {
-                <p class="blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Last edited on @Model.ModifiedOn</p>
+                <p class="blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Last edited on <span class="datetime">@Model.ModifiedOn</span></p>
             }
             <hr />
         </div>
@@ -39,29 +39,7 @@
 
     <div class="row">
         <div class="col-lg-12" id="commentsContainer">
-            @foreach (var comment in Model.PostComments)
-            {
-                <div class="media mb-4 comment">
-                    <div class="media-body">
-                        <h5 class="mt-0 blogHoverItem">
-                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;
-                            @comment.CreatedOn
-                        </h5>
-                        <h5 class="mt-0 blogHoverItem">
-                            <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
-                            @if (String.IsNullOrEmpty(comment.AuthorUserName))
-                            {
-                                <text>Anonymous said:</text>
-                            }
-                            else
-                            {
-                                <text>@comment.AuthorUserName said:</text>
-                            }
-                        </h5>
-                        @Html.Raw(comment.Body)
-                    </div>
-                </div>
-            }
+            @Html.Partial("_BlogPostComments",Model.PostComments)
         </div>
     </div>
     
@@ -69,15 +47,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            @using (Ajax.BeginForm("AddComment", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateComments(data);" }, new { @id = "EditBlogPostForm" }))
-            {
-                @Html.HiddenFor(x => x.NewComment.BlogPostID)
-                @Html.HiddenFor(x => x.NewComment.AuthorUserID)
-                <h4>Leave a Comment...</h4>
-                @Html.TextAreaFor(x => x.NewComment.Body, new { @class = "tinymce", @rows = "5" })
-                <br/>
-                <button style="width: 100%" type="submit" class="btn btn-primary">Submit your Comment!</button>
-            }
+            @Html.Partial("_NewComment", Model.NewComment)
         </div>
     </div>
     

@@ -18,6 +18,7 @@ http://www.templatemo.com/tm-509-hydro
     max-height: 50vh;
     overflow-y: auto !important;
     -ms-overflow-style: none;
+    padding:20px;
 }
 
 .blogHoverItem {

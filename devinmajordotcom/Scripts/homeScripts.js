@@ -9,6 +9,18 @@ function UpdateFavoritesModal(data) {
     $('#favoritesFormContainer').html(data);
 }
 
+function UpdateComments(data) {
+    $(".tinymce").val('');
+    tinyMCE.activeEditor.setContent('');
+    $("#commentsContainer").empty();
+    $("#commentsContainer").html(data);
+    MomentAllDateTimes();
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your comment has been added. Thanks for your input!'
+    });
+}
+
 function RefreshTinyMce() {
     tinymce.remove();
     tinymce.init({
@@ -48,6 +60,7 @@ function UpdateBlogPosts(data) {
     $("#formModalAddEdit").modal('toggle');
     $("#blogPostContainer").empty();
     $("#blogPostContainer").html(data);
+    MomentAllDateTimes();
 }
 
 function SettingsUpdateFailure() {
@@ -67,6 +80,19 @@ function InitializeModal(ID, TITLE) {
     );
 }
 
+function MomentAllDateTimes() {
+
+    $(".datetime").each(function () {
+        var date = $(this).html();
+        var timeString = moment(date).format("h:mm:ss a");
+        var dateString = moment(date).format("dddd MMMM Do, Y");
+        $(this).html(dateString + ", at " + timeString);
+    });
+
+    $(".datetime").removeClass('datetime');
+
+}
+
 $(document).ready(function () {
 
     "use strict";
@@ -84,6 +110,8 @@ $(document).ready(function () {
     if ($('#currentDateAndTime').length > 0) {
         DisplayDateTime();
     }
+
+    MomentAllDateTimes();
 
     $("#settingsWindowButton").draggable({
         stop: function () {

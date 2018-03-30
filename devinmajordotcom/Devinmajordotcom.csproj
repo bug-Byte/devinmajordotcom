@@ -839,6 +839,8 @@
     <Content Include="Views\MyHome\_BlogPosts.cshtml" />
     <Content Include="Views\MyHome\_EditBlogPostForm.cshtml" />
     <Content Include="Views\MyHome\_AddBlogPostForm.cshtml" />
+    <Content Include="Views\MyHome\_BlogPostComments.cshtml" />
+    <Content Include="Views\MyHome\_NewComment.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

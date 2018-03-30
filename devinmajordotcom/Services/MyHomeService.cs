@@ -340,6 +340,34 @@ namespace devinmajordotcom.Services
             db.SaveChanges();
         }
 
+        public void AddComment(CommentViewModel viewModel)
+        {
+
+            var newRecord = new MyHome_BlogPostComment()
+            {
+                BlogPostId = viewModel.BlogPostID,
+                UserId = viewModel.AuthorUserID,
+                CommentBody = viewModel.Body
+            };
+            db.MyHome_BlogPostComments.Add(newRecord);
+            db.SaveChanges();
+
+        }
+
+        public List<CommentViewModel> GetCommentsByBlogPostID(int ID)
+        {
+            return db.MyHome_BlogPostComments.Where(x => x.BlogPostId == ID).Select(x => new CommentViewModel() {
+                AuthorUserID = x.UserId,
+                AuthorUserName = db.Security_Users.Where(y => y.Id == x.UserId).Select(y => y.UserName).FirstOrDefault(),
+                Body = x.CommentBody,
+                BlogPostID = x.BlogPostId,
+                CreatedBy = x.CreatedBy,
+                CreatedOn = x.CreatedOn,
+                ModifiedBy = x.ModifiedBy,
+                ModifiedOn = x.ModifiedOn
+            }).ToList();
+        }
+
         public BlogPostViewModel GetBlogPostById(int ID)
         {
             var viewModel = db.MyHome_BlogPosts.Where(x => x.Id == ID).Select(x => new BlogPostViewModel()

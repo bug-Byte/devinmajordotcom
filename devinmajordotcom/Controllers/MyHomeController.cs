@@ -95,6 +95,14 @@ namespace devinmajordotcom.Controllers
             return PartialView("_BlogPosts", newViewModel);
         }
 
+        [HttpPost]
+        public ActionResult AddComment(CommentViewModel viewModel)
+        {
+            myHomeService.AddComment(viewModel);
+            var newViewModel = myHomeService.GetCommentsByBlogPostID(viewModel.BlogPostID);
+            return PartialView("_BlogPostComments", newViewModel);
+        }
+
         public ActionResult BlogPost(int ID)
         {
             var viewModel = myHomeService.GetBlogPostById(ID);

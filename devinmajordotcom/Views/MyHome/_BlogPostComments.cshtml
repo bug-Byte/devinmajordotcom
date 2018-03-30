@@ -1,0 +1,31 @@
+﻿@model List<devinmajordotcom.ViewModels.CommentViewModel>
+@{ 
+    var count = 0;
+}
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var comment in Model.OrderBy(x => x.CreatedOn))
+    {
+        <div class="media mb-4 comment">
+            <div class="media-body">
+                <h5 class="mt-0 blogHoverItem">
+                    <i class="fa fa-clock-o"></i>&nbsp;&nbsp;
+                    <span class="datetime">@Model[count].CreatedOn</span>
+                </h5>
+                <h5 class="mt-0 blogHoverItem">
+                    <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                    @if (String.IsNullOrEmpty(Model[count].AuthorUserName))
+                    {
+                        <text>Anonymous said:</text>
+                    }
+                    else
+                    {
+                        <text>@Model[count].AuthorUserName said:</text>
+                    }
+                </h5>
+                @Html.Raw(Model[count].Body)
+            </div>
+        </div>
+        count++;
+    }
+}

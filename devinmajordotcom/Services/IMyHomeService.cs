@@ -39,6 +39,10 @@ namespace devinmajordotcom.Services
 
         BlogPostViewModel GetBlogPostById(int ID);
 
+        void AddComment(CommentViewModel viewModel);
+
+        List<CommentViewModel> GetCommentsByBlogPostID(int ID);
+
         void SetUserConfigViewModel(MyHomeUserConfigViewModel viewModel);
 
     }
