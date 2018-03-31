@@ -5,11 +5,11 @@
 }
 <div class="row">
     
-    @if (Model.CurrentUserViewModel.UserIsLoggedIn)
+    @if (Model.CurrentUserViewModel.UserIsLoggedIn || Model.UserConfig.IsEditingMasterSettings)
     {
         <div class="col-md-6 col-sm-6 text-center">
             <div class="media blog-thumb work-thumb" style="border: 1px solid white; background-color: transparent;">
-                <div class="work-info" style="height: 275px;">
+                <div class="work-info" id="AddNewBlogPostButton" style="height: 275px;">
                     @{
                         var uploadButton = Ajax.ActionLink("REPLACE", "_AddBlogPostForm", "MyHome",
                             new {userID = Model.CurrentUserViewModel.UserID},
@@ -48,7 +48,12 @@
                 <div class="media-body blog-info">
                     <small><i class="fa fa-clock-o"></i><span class="datetime">@post.CreatedOn</span></small>
                     <h3>
-                        <a href="@Url.Action("BlogPost", "MyHome", new {ID = post.BlogPostID})">@post.PostTitle</a>
+                        @{
+                            var link1 = Html.ActionLink("REPLACE", "BlogPost", "MyHome", new { ID = post.BlogPostID }).ToHtmlString();
+                            var cleanLink1 = link1.Replace("REPLACE", post.PostTitle);
+                        }
+
+                        @Html.Raw(cleanLink1)
                     </h3>
                     <p>
                         @{
@@ -66,7 +71,12 @@
                         }
                         @Html.Raw(partialBody)
                     </p>
-                    <a href="@Url.Action("BlogPost", "MyHome", new {ID = post.BlogPostID})" class="btn section-btn">Read Full Post</a>
+                    @{
+                        var link2 = Html.ActionLink("REPLACE", "BlogPost", "MyHome", new { ID = post.BlogPostID }, new { @class="btn section-btn" }).ToHtmlString();
+                        var cleanLink2 = link2.Replace("REPLACE", "Read Full Post");
+                    }
+
+                    @Html.Raw(cleanLink2)
                 </div>
             </div>
         </div>

@@ -66,7 +66,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult AddEditFavorite(SiteLinkViewModel viewModel)
         {
             myHomeService.AddEditFavorite(viewModel);
-            var newViewModel = myHomeService.GetMyHomeViewModel();
+            var newViewModel = myHomeService.GetMyHomeViewModel(viewModel.UserID);
             return PartialView("_Favorites", newViewModel);
         }
 
@@ -75,7 +75,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult AddEditBlogPost(BlogPostViewModel viewModel)
         {
             myHomeService.AddEditBlogPost(viewModel);
-            var newViewModel = myHomeService.GetMyHomeViewModel();
+            var newViewModel = myHomeService.GetMyHomeViewModel(viewModel.AuthorUserID);
             return PartialView("_BlogPosts", newViewModel);
         }
 
@@ -83,7 +83,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult RemoveFavoriteByID(int ID)
         {
             int userID = myHomeService.RemoveFavoriteByID(ID);
-            var newViewModel = myHomeService.GetMyHomeViewModel();
+            var newViewModel = myHomeService.GetMyHomeViewModel(userID);
             return PartialView("_Favorites", newViewModel);
         }
 
@@ -91,7 +91,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult RemoveBlogPostByID(int ID)
         {
             int userID = myHomeService.RemoveBlogPostByID(ID);
-            var newViewModel = myHomeService.GetMyHomeViewModel();
+            var newViewModel = myHomeService.GetMyHomeViewModel(userID);
             return PartialView("_BlogPosts", newViewModel);
         }
 

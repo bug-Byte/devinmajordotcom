@@ -22,6 +22,7 @@ INSERT INTO [MyHome].[UserConfig]
 	,[ShowBanner]
 	,[ShowBookmarks]
 	,[ShowBlog]
+	,[WebsiteName]
 	,[BookmarksTitle]
 	,[Greeting]
 	,[BlogTitle]
@@ -40,6 +41,7 @@ VALUES
 	1,
 	1,
 	1,
+	'MyHome',
 	'My Favorites & Bookmarks',
 	'Welcome Home, Devin!',
 	'My Blog & Notes',

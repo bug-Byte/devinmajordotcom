@@ -70,6 +70,12 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
+        public void _HomeSettingsForm(MyHomeUserConfigViewModel viewModel)
+        {
+            myHomeService.SetUserConfigViewModel(viewModel);
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult DropMeALine(ContactEmailViewModel viewModel)
         {

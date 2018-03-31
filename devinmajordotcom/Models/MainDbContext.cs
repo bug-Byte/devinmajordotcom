@@ -878,12 +878,13 @@ namespace devinmajordotcom.Models
         public bool ShowBanner { get; set; } // ShowBanner
         public bool ShowBookmarks { get; set; } // ShowBookmarks
         public bool ShowBlog { get; set; } // ShowBlog
+        public string WebsiteName { get; set; } // WebsiteName
         public string BookmarksTitle { get; set; } // BookmarksTitle
         public string Greeting { get; set; } // Greeting
         public string BlogTitle { get; set; } // BlogTitle
         public byte[] BackgroundImage { get; set; } // BackgroundImage
         public bool IsEditable { get; set; } // IsEditable
-        public bool? ShowVisitorsAdminHome { get; set; } // ShowVisitorsAdminHome
+        public bool ShowVisitorsAdminHome { get; set; } // ShowVisitorsAdminHome
         public byte[] DefaultFavoriteImage { get; set; } // DefaultFavoriteImage
         public byte[] DefaultBlogPostImage { get; set; } // DefaultBlogPostImage
         public byte[] AddNewFavoriteImage { get; set; } // AddNewFavoriteImage
@@ -1566,12 +1567,13 @@ namespace devinmajordotcom.Models
             Property(x => x.ShowBanner).HasColumnName(@"ShowBanner").HasColumnType("bit").IsRequired();
             Property(x => x.ShowBookmarks).HasColumnName(@"ShowBookmarks").HasColumnType("bit").IsRequired();
             Property(x => x.ShowBlog).HasColumnName(@"ShowBlog").HasColumnType("bit").IsRequired();
+            Property(x => x.WebsiteName).HasColumnName(@"WebsiteName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.BookmarksTitle).HasColumnName(@"BookmarksTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Greeting).HasColumnName(@"Greeting").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.BlogTitle).HasColumnName(@"BlogTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.IsEditable).HasColumnName(@"IsEditable").HasColumnType("bit").IsRequired();
-            Property(x => x.ShowVisitorsAdminHome).HasColumnName(@"ShowVisitorsAdminHome").HasColumnType("bit").IsOptional();
+            Property(x => x.ShowVisitorsAdminHome).HasColumnName(@"ShowVisitorsAdminHome").HasColumnType("bit").IsRequired();
             Property(x => x.DefaultFavoriteImage).HasColumnName(@"DefaultFavoriteImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.DefaultBlogPostImage).HasColumnName(@"DefaultBlogPostImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.AddNewFavoriteImage).HasColumnName(@"AddNewFavoriteImage").HasColumnType("varbinary(max)").IsOptional();

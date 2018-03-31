@@ -842,6 +842,8 @@
     <Content Include="Views\MyHome\_NewComment.cshtml" />
     <Content Include="Views\Home\_NewBannerLink.cshtml" />
     <Content Include="Views\Home\_NewSiteLink.cshtml" />
+    <Content Include="Views\MyHome\_ManageMyHome.cshtml" />
+    <Content Include="Views\MyHome\_MasterSettingsForm.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

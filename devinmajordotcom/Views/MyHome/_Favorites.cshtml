@@ -27,7 +27,7 @@
         linkCount++;
 
     }
-    @if (Model.CurrentUserViewModel.UserIsLoggedIn)
+    @if (Model.CurrentUserViewModel.UserIsLoggedIn || Model.UserConfig.IsEditingMasterSettings)
     {
         <div class="col-md-3 col-sm-6">
             <div class="work-thumb">

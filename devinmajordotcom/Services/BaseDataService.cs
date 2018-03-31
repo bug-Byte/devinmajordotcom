@@ -168,6 +168,7 @@ namespace devinmajordotcom.Services
                     DefaultBlogPostImage = guestMyHomeConfig.DefaultBlogPostImage,
                     DefaultFavoriteImage = guestMyHomeConfig.DefaultFavoriteImage,
                     AddNewFavoriteImage = guestMyHomeConfig.AddNewFavoriteImage,
+                    WebsiteName = guestMyHomeConfig.WebsiteName,
                     UserId = newUser.Id,
                     IsEditable = true
                 };
@@ -254,6 +255,7 @@ namespace devinmajordotcom.Services
                         DefaultBlogPostImage = guestMyHomeConfig.DefaultBlogPostImage,
                         DefaultFavoriteImage = guestMyHomeConfig.DefaultFavoriteImage,
                         AddNewFavoriteImage = guestMyHomeConfig.AddNewFavoriteImage,
+                        WebsiteName = guestMyHomeConfig.WebsiteName,
                         UserId = newUser.Id,
                         IsEditable = true
                     };
@@ -299,6 +301,29 @@ namespace devinmajordotcom.Services
                     db.SaveChanges();
                 }
             }
+        }
+
+        public MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId)
+        {
+            return db.MyHome_UserConfigs.Where(x => x.UserId == userId).Select(x => new MyHomeUserConfigViewModel()
+            {
+                BackgroundImage = x.BackgroundImage,
+                BlogTitle = x.BlogTitle,
+                BookmarksTitle = x.BookmarksTitle,
+                Greeting = x.Greeting,
+                ShowBanner = x.ShowBanner,
+                ShowBlog = x.ShowBlog,
+                ShowBookmarks = x.ShowBookmarks,
+                ShowDateAndTime = x.ShowDateAndTime,
+                ShowWeather = x.ShowWeather,
+                UserID = x.UserId,
+                IsEditable = x.IsEditable,
+                ShowVisitorsAdminHome = x.ShowVisitorsAdminHome,
+                DefaultFavoriteImage = x.DefaultFavoriteImage,
+                DefaultBlogPostImage = x.DefaultBlogPostImage,
+                AddNewFavoriteImage = x.AddNewFavoriteImage,
+                WebsiteName = x.WebsiteName
+            }).FirstOrDefault();
         }
 
     }

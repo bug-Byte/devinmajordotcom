@@ -14,6 +14,7 @@
         new
         {
             @class = "btn btn-default",
+            @onClick = "ResetActiveImage(this)"
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 
 }
@@ -102,8 +103,8 @@
                                 @Html.LabelFor(x => x.Config.BackgroundImage, new { @style = "font-weight:normal;" })
                             </div>
                             <div class="col-sm-12 text-center">
-                                @Html.HiddenFor(x => x.Config.BackgroundImage, new { @id = "BackgroundImage" })
-                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Config.BackgroundImage))" id="previewImage" style="display:inline-block;" class="img-responsive" alt="Background Image">
+                                @Html.HiddenFor(x => x.Config.BackgroundImage, new { @id = "BackgroundImage", @class="BackgroundImage", activeimage="false" })
+                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Config.BackgroundImage))" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
                                 <br />
                                 @Html.Raw(uploadButton)
                             </div>

@@ -18,10 +18,12 @@ namespace devinmajordotcom.Services
         
         protected IPortfolioService portfolioService;
         protected IMediaDashboardService mediaDashboardService;
-        public LandingPageService(IPortfolioService PortfolioService, IMediaDashboardService MediaDashboardService)
+        protected IMyHomeService myHomeService;
+        public LandingPageService(IPortfolioService PortfolioService, IMediaDashboardService MediaDashboardService, IMyHomeService MyHomeService)
         {
             portfolioService = PortfolioService;
             mediaDashboardService = MediaDashboardService;
+            myHomeService = MyHomeService;
         }
 
         public MainLandingPageViewModel GetLandingPageViewModel()
@@ -62,6 +64,7 @@ namespace devinmajordotcom.Services
                 LandingPageBannerLinks = GetMainBannerLinks(true),
                 CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
                 CurrentMediaDashboardData = mediaDashboardService.GetMediaDashboardViewModel(),
+                CurrentMyHomeData = myHomeService.GetMasterSettingsViewModel(),
                 ContactEmailData = new ContactEmailViewModel()
                 {
                     RecipientEmail = admin == null ? "" : admin.EmailAddress
@@ -70,6 +73,8 @@ namespace devinmajordotcom.Services
             results.CurrentMediaDashboardData.SidebarLinks = GetMediaSiteLinks(true);
             return results;
         }
+
+
 
         public void ManageLandingPage(MainLandingPageViewModel viewModel)
         {

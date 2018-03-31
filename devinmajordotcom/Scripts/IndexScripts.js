@@ -1,6 +1,7 @@
 ﻿var firstRun = true;
 var saveButtonPressed = false;
-
+var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 var canvas = document.querySelector("canvas");
 var ctx;
 
@@ -98,6 +99,13 @@ function draw() {
     }
 }
 
+function ResetActiveImage(el) {
+    $(".BackgroundImage").attr("activeimage", false);
+    $(".previewImage").attr("activepreview", false);
+    $(el).parent().parent().find('.previewImage:first').attr("activepreview", true);
+    $(el).parent().parent().find('.BackgroundImage:first').attr("activeimage", true);
+}
+
 function InitializeModal(ID, TITLE) {
     $('.modal-title').text(TITLE);
     $(ID).modal(
@@ -119,6 +127,67 @@ $(window).bind("resize", function () {
     $("#particles").height(h + "px");
 });
 
+function removeDisable() {
+    $('body').data('loading-disabled', false);
+}
+
+function UpdateFavoritesModal(data) {
+    $('#favoritesFormContainer').html(data);
+}
+
+function UpdateBlogPostsModal(data) {
+    $('#blogPostFormContainer').html(data);
+    RefreshTinyMce();
+}
+
+function SettingsUpdate(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your settings were successfully updated!'
+    });
+    $("html").html(data);
+    $('.preloader').fadeOut(1000); // set duration in brackets   
+}
+
+function UpdateFavoritesSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your favorites were successfully updated!'
+    });
+}
+
+function UpdateFavorites(data) {
+    $("#formModalAddEdit").modal('toggle');
+    $("#favoritesListContainer").empty();
+    $("#favoritesListContainer").html(data);
+}
+
+function UpdateBlogPosts(data) {
+    $("#formModalAddEdit").modal('toggle');
+    $("#blogPostContainer").empty();
+    $("#blogPostContainer").html(data);
+    MomentAllDateTimes();
+}
+
+function SettingsUpdateFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your settings were not successfully updated! Please try again.'
+    });
+}
+
+function MomentAllDateTimes() {
+
+    $(".datetime").each(function () {
+        var date = $(this).html();
+        var timeString = moment(date).format("h:mm:ss a");
+        var dateString = moment(date).format("dddd MMMM Do, Y");
+        $(this).html(dateString + ", at " + timeString);
+    });
+
+    $(".datetime").removeClass('datetime');
+
+}
 
 $(document).ready(function () {
 
@@ -145,6 +214,37 @@ $(document).ready(function () {
     ConnectToSignalRPerformanceHub();
 
     setTimeout(setupHandlebarsHelpers, 50);
+
+    MomentAllDateTimes();
+
+    $(document).find(".settingsWindowButton").each(function () {
+
+        $(this).draggable({
+            stop: function () {
+                var icon = $(this).find("i");
+                if ($(icon).hasClass("glyphicon-resize-small")) {
+                    $(this).popover('show');
+                }
+            }
+        }).popover({
+            html: 'true',
+            animation: true,
+            trigger: "click",
+            placement: 'auto bottom',
+            container: 'body'
+        }).click(function () {
+            //$("#settingsWindow").toggle(500);
+            var icon = $(this).find("i");
+            if ($(icon).hasClass("glyphicon-cog")) {
+                $(icon).removeClass("glyphicon-cog");
+                $(icon).addClass("glyphicon-resize-small");
+            } else {
+                $(icon).removeClass("glyphicon-resize-small");
+                $(icon).addClass("glyphicon-cog");
+            }
+        });
+
+    });
 
     $(document).find(".customColorPicker").each(function () {
         $(this).colorpicker({
@@ -197,10 +297,7 @@ $(document).ready(function () {
 
     InitializeMediaDashboardEventHandlers();
 
-    tinymce.init({
-        selector: '.tinymce',
-        theme: 'modern'
-    });
+    RefreshTinyMce();
 
 });
 
@@ -259,6 +356,14 @@ function HideAdminFirstRunModal() {
     $('#adminFirstRunFormModal').modal('hide');
 }
 
+function RefreshTinyMce() {
+    tinymce.remove();
+    tinymce.init({
+        selector: '.tinymce',
+        theme: 'modern'
+    });
+}
+
 function HideLoginModal() {
 
     $('#LoginModal').modal('hide');
@@ -266,10 +371,7 @@ function HideLoginModal() {
     $('#mainContainer').append(settingsHtml);
     $('#appmanager').fadeIn(500);
     InitializeMediaDashboardEventHandlers();
-    tinymce.init({
-        selector: '.tinymce',
-        theme: 'modern'
-    });
+    RefreshTinyMce();
     $(".masthead-nav").find('li[data-activediv="#appmanager"]').each(function () {
         $(this).click(function () {
             $('.masthead-nav li').removeClass('active');
@@ -300,6 +402,13 @@ function AjaxFailure(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Your email was not sent! Please try again in about 5 minutes.' + data
+    });
+}
+
+function UpdateMyHomeSettingsAjaxSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your settings have been successfully updated! Please go to the page to see any changes you made.'
     });
 }
 

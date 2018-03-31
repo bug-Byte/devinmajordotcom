@@ -32,6 +32,10 @@
                             {
                                 @Html.Partial("../MediaDashboard/_ManageMediaDashboard", Model.CurrentMediaDashboardData)
                             }
+                            @if (appDataModel.Controller == "MyHome" && appDataModel.Action == "Index")
+                            {
+                                @Html.Partial("../MyHome/_ManageMyHome", Model.CurrentMyHomeData)
+                            }
                             @if (appDataModel.Controller == "Portfolio" && appDataModel.Action == "Index")
                             {
                                 @Html.Partial("../Portfolio/_ManagePortfolio", Model.CurrentPortfolioData)

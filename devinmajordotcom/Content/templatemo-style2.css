@@ -239,7 +239,6 @@ input[type="checkbox"]:checked + .slider:before {
   .section-title h2 {
     margin-top: 0;
     margin-bottom: 10px;
-    line-height: 0;
   }
 
   .section-title .line-bar {

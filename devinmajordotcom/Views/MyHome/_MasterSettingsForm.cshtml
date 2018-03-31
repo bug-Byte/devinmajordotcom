@@ -1,6 +1,6 @@
 ﻿@model devinmajordotcom.ViewModels.MyHomeUserConfigViewModel
 @{
-    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "Home",
         new AjaxOptions
         {
             HttpMethod = "GET",
@@ -15,7 +15,7 @@
             @onClick = "ResetActiveImage(this)"
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 }
-@using (Html.BeginForm("_HomeSettingsForm", "MyHome"))
+@using (Ajax.BeginForm("_HomeSettingsForm", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateMyHomeSettingsAjaxSuccess();" }, new { @id = "EditGuestSettingsForm" }))
 {
 
     @Html.HiddenFor(x => x.UserID)
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <br/>
+        <br />
 
         <div class="row">
             <div class="col-sm-6">
@@ -111,7 +111,32 @@
             </div>
         </div>
 
-        <hr/>
+        <hr />
+
+        @if (Model.IsAdmin)
+        {
+            <div class="row">
+                <div class="col-sm-6">
+                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                    @Html.LabelFor(x => x.ShowVisitorsAdminHome, new { style = "font-weight:normal;" })
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="checkbox-inline">
+                            <label class="switch">
+                                @Html.EditorFor(x => x.ShowVisitorsAdminHome, new { htmlAttributes = new { @class = "toggler" } })
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ShowVisitorsAdminHome)
+                </div>
+            </div>
+        }
 
         <div class="row">
             <div class="col-sm-6">
@@ -247,17 +272,9 @@
 
         <br />
 
-        @{
-            var link = Html.ActionLink("REPLACE", "Logout", null, new { @class = "btn btn-primary" }).ToHtmlString();
-            var cleanLink = link.Replace("REPLACE", "<span class=\"glyphicon glyphicon-log-out\"></span>&nbsp;Log Out");
-        }
-
         <div class="row">
-            <div class="col-sm-6 text-center" style="margin-bottom:5px;">
+            <div class="col-sm-12 text-center" style="margin-bottom:5px;">
                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save"></span>&nbsp;Save Settings</button>
-            </div>
-            <div class="col-sm-6 text-center" style="margin-bottom:5px;">
-                @Html.Raw(cleanLink)
             </div>
         </div>
 

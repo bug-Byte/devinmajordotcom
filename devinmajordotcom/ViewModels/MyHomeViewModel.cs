@@ -24,6 +24,15 @@ namespace devinmajordotcom.ViewModels
 
     }
 
+    public class MyHomeMasterSettingsViewModel
+    {
+
+        public MyHomeViewModel GuestData { get; set; }
+
+        public MyHomeViewModel AdminData { get; set; }
+
+    }
+
     public class MyHomeUserConfigViewModel
     {
         public int UserID { get; set; }
@@ -43,6 +52,9 @@ namespace devinmajordotcom.ViewModels
         [DisplayName("Show Blog: ")]
         public bool ShowBlog { get; set; }
 
+        [DisplayName("Website Name: ")]
+        public string WebsiteName { get; set; }
+
         [DisplayName("Bookmarks Title: ")]
         public string BookmarksTitle { get; set; }
 
@@ -55,9 +67,15 @@ namespace devinmajordotcom.ViewModels
         [DisplayName("Background Image: ")]
         public byte[] BackgroundImage { get; set; }
 
-        public bool? ShowVisitorsAdminHome { get; set; }
+        [DisplayName("Use Admin settings for visitors?")]
+        public bool ShowVisitorsAdminHome { get; set; }
 
+        public bool IsEditingMasterSettings { get; set; }
+
+        [DisplayName("Show Editors:")]
         public bool IsEditable { get; set; }
+
+        public bool IsAdmin { get; set; }
 
         public byte[] DefaultFavoriteImage { get; set; }
 

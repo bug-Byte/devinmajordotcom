@@ -11,7 +11,7 @@ namespace devinmajordotcom.Services
     public interface IMyHomeService
     {
 
-        MyHomeViewModel GetMyHomeViewModel();
+        MyHomeViewModel GetMyHomeViewModel(int? userID = null);
 
         EditFavoritesViewModel GetEditFavoritesViewModel(int userID);
 
@@ -22,6 +22,8 @@ namespace devinmajordotcom.Services
         BlogPostViewModel GetNewBlogPostViewModel(int userID);
 
         EditBlogPostsViewModel GetEditBlogPostsViewModel(int userID);
+
+        MyHomeMasterSettingsViewModel GetMasterSettingsViewModel();
 
         MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId);
 

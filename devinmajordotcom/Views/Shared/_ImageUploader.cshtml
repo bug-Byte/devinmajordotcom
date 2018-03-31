@@ -36,8 +36,8 @@
                     $('#resultMessage').css('color', 'green');
                     $('#resultMessage').text(responseJson.message);
                     var newFile = window.btoa(responseJson.file);
-                    $("#BackgroundImage").val(newFile);
-                    $("#previewImage").attr("src", "data:image/jpg;base64," + responseJson.file);
+                    $(".BackgroundImage[activeimage='true']").val(newFile);
+                    $(".previewImage[activepreview='true']").attr("src", "data:image/jpg;base64," + responseJson.file);
                     $("#formModalImageUploader").modal('toggle');
                 }
             },

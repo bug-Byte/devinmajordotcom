@@ -1,5 +1,5 @@
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
 function removeDisable() {
     $('body').data('loading-disabled', false);
@@ -7,6 +7,13 @@ function removeDisable() {
 
 function UpdateFavoritesModal(data) {
     $('#favoritesFormContainer').html(data);
+}
+
+function ResetActiveImage(el) {
+    $(".BackgroundImage").attr("activeimage", false);
+    $(".previewImage").attr("activepreview", false);
+    $(el).parent().parent().find('.previewImage:first').attr("activepreview", true);
+    $(el).parent().parent().find('.BackgroundImage:first').attr("activeimage", true);
 }
 
 function UpdateComments(data) {

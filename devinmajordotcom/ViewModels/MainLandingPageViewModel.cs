@@ -17,6 +17,10 @@ namespace devinmajordotcom.ViewModels
 
         public LandingPageConfigViewModel Config { get; set; }
 
+        public MyHomeUserConfigViewModel AdminMyHomeConfig { get; set; }
+
+        public MyHomeUserConfigViewModel GuestMyHomeConfig { get; set; }
+
         public UserViewModel CurrentUserViewModel { get; set; }
 
         public ContactEmailViewModel ContactEmailData { get; set; }
@@ -24,6 +28,8 @@ namespace devinmajordotcom.ViewModels
         public PortfolioViewModel CurrentPortfolioData { get; set; }
 
         public MediaDashboardViewModel CurrentMediaDashboardData { get; set; }
+
+        public MyHomeMasterSettingsViewModel CurrentMyHomeData { get; set; }
 
         public ApplicationConfigViewModel CurrentApplicationConfig { get; set; }
 

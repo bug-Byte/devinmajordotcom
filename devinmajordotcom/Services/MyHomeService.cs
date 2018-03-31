@@ -10,7 +10,7 @@ namespace devinmajordotcom.Services
     public class MyHomeService : BaseDataService, IMyHomeService
     {
 
-        public MyHomeViewModel GetMyHomeViewModel()
+        public MyHomeViewModel GetMyHomeViewModel(int? userID = null)
         {
             var siteAdminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
             var adminUserConfig = GetUserConfigViewModelByUserId(siteAdminUser.Id);
@@ -21,14 +21,14 @@ namespace devinmajordotcom.Services
             if (guid == null)
             {
                 guid = AddNewUser().Guid;
-                if (adminUserConfig.ShowVisitorsAdminHome.GetValueOrDefault())
+                if (adminUserConfig.ShowVisitorsAdminHome)
                 {
                     return new MyHomeViewModel()
                     {
                         CurrentUserViewModel = GetCurrentUser((Guid)guid),
                         UserConfig = adminUserConfig,
-                        FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(siteAdminUser.Id),
-                        BlogPosts = GetBlogPostsByUserId(siteAdminUser.Id),
+                        FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(siteGuestUser.Id),
+                        BlogPosts = GetBlogPostsByUserId(siteGuestUser.Id),
                         CanEdit = false,
                     };
                 }
@@ -45,6 +45,25 @@ namespace devinmajordotcom.Services
                 }
             }
 
+            if(userID != null)
+            {
+                var dbUser = db.Security_Users.FirstOrDefault(x => x.Id == userID);
+                var userViewModel = GetCurrentUser(dbUser.Guid);
+                var newViewModel = new MyHomeViewModel()
+                {
+                    CurrentUserViewModel = userViewModel,
+                    UserConfig = GetUserConfigViewModelByUserId(dbUser.Id),
+                    FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(dbUser.Id),
+                    BlogPosts = GetBlogPostsByUserId(dbUser.Id),
+                    CanEdit = true
+                };
+                if(dbUser.UserName == "Guest" && dbUser.ClientName == "::1")
+                {
+                    newViewModel.UserConfig.IsEditingMasterSettings = true;
+                }
+                return newViewModel;
+            }
+
             var user = GetCurrentUser((Guid)guid);
             return new MyHomeViewModel()
             {
@@ -54,6 +73,43 @@ namespace devinmajordotcom.Services
                 BlogPosts = GetBlogPostsByUserId(user.UserID),
                 CanEdit = true
             };
+
+        }
+
+        public MyHomeMasterSettingsViewModel GetMasterSettingsViewModel()
+        {
+
+            var admin = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
+            var guest = db.Security_Users.FirstOrDefault(x => x.ClientName == "::1" && x.UserName == "Guest");
+
+            var viewModel = new MyHomeMasterSettingsViewModel();
+
+            if(admin != null)
+            {
+                var user = GetCurrentUser(admin.Guid);
+                viewModel.AdminData = new MyHomeViewModel()
+                {
+                    CurrentUserViewModel = user,
+                    UserConfig = GetUserConfigViewModelByUserId(admin.Id),
+                    FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(admin.Id),
+                    BlogPosts = GetBlogPostsByUserId(admin.Id)
+                };
+                viewModel.AdminData.UserConfig.IsAdmin = true;
+            }
+            if (guest != null)
+            {
+                var user = GetCurrentUser(guest.Guid);
+                viewModel.GuestData = new MyHomeViewModel()
+                {
+                    CurrentUserViewModel = user,
+                    UserConfig = GetUserConfigViewModelByUserId(guest.Id),
+                    FavoritesAndBookmarks = GetFavoritesAndBookmarksByUserId(guest.Id),
+                    BlogPosts = GetBlogPostsByUserId(guest.Id)
+                };
+                viewModel.GuestData.UserConfig.IsEditingMasterSettings = true;
+            }
+
+            return viewModel;
         }
 
         public void SetUserConfigViewModel(MyHomeUserConfigViewModel viewModel)
@@ -77,34 +133,13 @@ namespace devinmajordotcom.Services
             config.BlogTitle = viewModel.BlogTitle;
             config.BookmarksTitle = viewModel.BookmarksTitle;
             config.Greeting = viewModel.Greeting;
+            config.WebsiteName = viewModel.WebsiteName;
             //config.DefaultFavoriteImage = viewModel.BackgroundImage;
             //config.DefaultBlogPostImage = viewModel.DefaultBlogPostImage;
             //config.AddNewFavoriteImage = viewModel.AddNewFavoriteImage;
             db.SaveChanges();
         }
-
-        public MyHomeUserConfigViewModel GetUserConfigViewModelByUserId(int userId)
-        {
-            return db.MyHome_UserConfigs.Where(x => x.UserId == userId).Select(x => new MyHomeUserConfigViewModel()
-            {
-                BackgroundImage = x.BackgroundImage,
-                BlogTitle = x.BlogTitle,
-                BookmarksTitle = x.BookmarksTitle,
-                Greeting = x.Greeting,
-                ShowBanner = x.ShowBanner,
-                ShowBlog = x.ShowBlog,
-                ShowBookmarks = x.ShowBookmarks,
-                ShowDateAndTime = x.ShowDateAndTime,
-                ShowWeather = x.ShowWeather,
-                UserID = x.UserId,
-                IsEditable = x.IsEditable,
-                ShowVisitorsAdminHome = x.ShowVisitorsAdminHome,
-                DefaultFavoriteImage = x.DefaultFavoriteImage,
-                DefaultBlogPostImage = x.DefaultBlogPostImage,
-                AddNewFavoriteImage = x.AddNewFavoriteImage
-            }).FirstOrDefault();
-        }
-
+        
         public EditFavoritesViewModel GetEditFavoritesViewModel(int userID)
         {
 
@@ -370,41 +405,51 @@ namespace devinmajordotcom.Services
 
         public BlogPostViewModel GetBlogPostById(int ID)
         {
-            var viewModel = db.MyHome_BlogPosts.Where(x => x.Id == ID).Select(x => new BlogPostViewModel()
-            {
-                BlogPostID = x.Id,
-                AuthorUserID = x.UserId,
-                AuthorUserName = db.Security_Users.Where(t => t.Id == x.UserId).Select(t => t.UserName).FirstOrDefault(),
-                PostTitle = x.Title,
-                BackgroundImage = x.Image,
-                Body = x.Body,
-                CreatedBy = x.CreatedBy,
-                CreatedOn = x.CreatedOn,
-                ModifiedBy = x.ModifiedBy,
-                ModifiedOn = x.ModifiedOn,
-                PostComments = x.MyHome_BlogPostComments.Select(y => new CommentViewModel()
-                {
-                    AuthorUserID = y.UserId,
-                    AuthorUserName = db.Security_Users.Where(z => z.Id == y.UserId).Select(z => z.UserName).FirstOrDefault(),
-                    Body = y.CommentBody,
-                    BackgroundImage = y.Image,
-                    CreatedOn = y.CreatedOn,
-                    CreatedBy = y.CreatedBy,
-                    ModifiedOn = y.ModifiedOn,
-                    ModifiedBy = y.ModifiedBy
-                }).OrderBy(y => y.CreatedOn).ToList(),
-            }).FirstOrDefault();
+            var viewModel = new BlogPostViewModel();
 
             var guid = HttpContext.Current.Session["MainPageUserAuthID"] ?? AddNewUser().Guid;
             var user = GetCurrentUser((Guid) guid);
 
             if (user != null && viewModel != null)
             {
-                viewModel.NewComment = new CommentViewModel()
+                var blogPost = db.MyHome_BlogPosts.Where(x => x.Id == ID).FirstOrDefault();
+
+                if(blogPost != null)
                 {
-                    AuthorUserID = user.UserID,
-                    BlogPostID = viewModel.BlogPostID
-                };
+                    var poster = db.Security_Users.FirstOrDefault(x => x.Id == blogPost.UserId);
+                    if (user.UserIsAdmin || user.UserID == poster.Id || (poster.ClientName == "::1" && poster.UserName == "Guest"))
+                    {
+                        viewModel = new BlogPostViewModel()
+                        {
+                            BlogPostID = blogPost.Id,
+                            AuthorUserID = blogPost.UserId,
+                            AuthorUserName = db.Security_Users.Where(t => t.Id == blogPost.UserId).Select(t => t.UserName).FirstOrDefault(),
+                            PostTitle = blogPost.Title,
+                            BackgroundImage = blogPost.Image,
+                            Body = blogPost.Body,
+                            CreatedBy = blogPost.CreatedBy,
+                            CreatedOn = blogPost.CreatedOn,
+                            ModifiedBy = blogPost.ModifiedBy,
+                            ModifiedOn = blogPost.ModifiedOn,
+                            PostComments = blogPost.MyHome_BlogPostComments.Select(y => new CommentViewModel()
+                            {
+                                AuthorUserID = y.UserId,
+                                AuthorUserName = db.Security_Users.Where(z => z.Id == y.UserId).Select(z => z.UserName).FirstOrDefault(),
+                                Body = y.CommentBody,
+                                BackgroundImage = y.Image,
+                                CreatedOn = y.CreatedOn,
+                                CreatedBy = y.CreatedBy,
+                                ModifiedOn = y.ModifiedOn,
+                                ModifiedBy = y.ModifiedBy
+                            }).OrderBy(y => y.CreatedOn).ToList(),
+                        };
+                        viewModel.NewComment = new CommentViewModel()
+                        {
+                            AuthorUserID = user.UserID,
+                            BlogPostID = viewModel.BlogPostID
+                        };
+                    }
+                }
             }
 
             return viewModel;
