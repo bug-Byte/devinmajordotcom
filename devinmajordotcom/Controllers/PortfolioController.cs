@@ -13,9 +13,9 @@ namespace devinmajordotcom.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Title = "D3V!N M@J0R";
             var viewModel = new PortfolioViewModel();
             viewModel = portfolioService.GetPortfolioViewModel();
+            ViewBag.Title = viewModel.PortfolioConfig.WebsiteTitle;
             return View(viewModel);
         }
 

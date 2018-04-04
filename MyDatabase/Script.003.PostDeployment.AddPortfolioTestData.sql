@@ -69,6 +69,14 @@ VALUES
 ('Web'),('Desktop'),('Personal'),('Mobile'),('Raspberry Pi');
 GO
 
+INSERT INTO Portfolio.Config(WebsiteTitle,BackgroundImage)
+VALUES
+(
+	'D3V!N M@J0R',
+	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\PortfolioImages\back1.png', SINGLE_BLOB) AS [BackgroundImage])
+);
+GO
+
 INSERT INTO [Portfolio].[Profile]
 (
 	[FirstName]
@@ -86,7 +94,7 @@ VALUES
 (
 	'Devin',
 	'Major',
-	1994-08-31,
+	'19940831 12:00:00 AM',
 	'58 Algoma Ave, Sault Ste. Marie, ON',
 	'+1 (705) 676 - 6783',
 	'devinmajor@hotmail.com',

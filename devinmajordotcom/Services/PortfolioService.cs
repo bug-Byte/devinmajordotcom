@@ -29,6 +29,12 @@ namespace devinmajordotcom.Services
 
                 CurrentUserViewModel = user,
 
+                PortfolioConfig = db.Portfolio_Configs.Select(x => new PortfolioConfigViewModel()
+                {
+                    WebsiteTitle = x.WebsiteTitle,
+                    BackgroundImage = x.BackgroundImage
+                }).FirstOrDefault(),
+
                 AvailableProjectFilters = db.Portfolio_ProjectTypes.Select(x => new DropDownViewModel() {
                     ID = x.Id,
                     Name = x.Type
@@ -118,6 +124,7 @@ namespace devinmajordotcom.Services
         {
             try
             {
+                UpdateConfig(viewModel);
                 UpdateProfileAndPersonalDescription(viewModel);
                 UpdateSkills(viewModel);
                 UpdateProjectsAndFilters(viewModel);
@@ -129,6 +136,43 @@ namespace devinmajordotcom.Services
             {
                 return e.Message;
             }
+        }
+
+        public void UpdateConfig(PortfolioViewModel viewModel)
+        {
+            var config = db.Portfolio_Configs.FirstOrDefault();
+
+            if (config != null)
+            {
+                config.WebsiteTitle = viewModel.PortfolioConfig.WebsiteTitle;
+                if (viewModel.PortfolioConfig.BackgroundImage.Length != config.BackgroundImage.Length)
+                {
+                    var newString = System.Text.Encoding.Default.GetString(viewModel.PortfolioConfig.BackgroundImage);
+                    config.BackgroundImage = Convert.FromBase64String(newString);
+                }
+            }
+            else
+            {
+                var newRecord = new Portfolio_Config()
+                {
+                    WebsiteTitle = viewModel.PortfolioConfig.WebsiteTitle
+                };
+                if (viewModel.PortfolioConfig.BackgroundImage.Length > 0)
+                {
+                    try
+                    {
+                        var newString = System.Text.Encoding.Default.GetString(viewModel.PortfolioConfig.BackgroundImage);
+                        newRecord.BackgroundImage = Convert.FromBase64String(newString);
+                    }
+                    catch (Exception e)
+                    {
+                        newRecord.BackgroundImage = viewModel.PortfolioConfig.BackgroundImage;
+                    }
+                }
+                db.Portfolio_Configs.Add(newRecord);
+            }
+            db.SaveChanges();
+
         }
 
         public void UpdateProfileAndPersonalDescription(PortfolioViewModel viewModel)

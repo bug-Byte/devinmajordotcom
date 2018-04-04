@@ -17,15 +17,24 @@ namespace devinmajordotcom.Models
 
             var dataService = new BaseDataService();
             var userName = "";
-            var userGuid = HttpContext.Current.Session["MainPageUserAuthID"];
+            var userGuid = new Guid();
 
-            if (userGuid == null || (Guid)userGuid == new Guid())
+            try
+            {
+                userGuid = (Guid)HttpContext.Current.Session["MainPageUserAuthID"];
+            }
+            catch (Exception e)
+            {
+                userName = "";
+            }
+
+            if (userGuid == new Guid() && userName == "")
             {
                 userName = "Default";
             }
             else
             {
-                var methodUser = dataService.GetCurrentUser((Guid)userGuid);
+                var methodUser = dataService.GetCurrentUser(userGuid);
                 if (methodUser != null && methodUser.UserName != null)
                 {
                     userName = methodUser.UserName;

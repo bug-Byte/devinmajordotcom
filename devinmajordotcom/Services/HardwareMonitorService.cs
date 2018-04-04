@@ -1,4 +1,5 @@
-﻿using devinmajordotcom.Models;
+﻿using System.Collections.Generic;
+using devinmajordotcom.Models;
 
 namespace devinmajordotcom.Services
 {
@@ -11,38 +12,29 @@ namespace devinmajordotcom.Services
             db = new dbContext();
         }
 
-        public void UpdateCPUUsage(double nextValue)
+        public void SaveHardwareData(double nextCpuValue, double nextRamValue, double nextTempValue)
         {
-            var newHardwareDataRecord = new Security_HardwarePerformance()
+            var itemsToAdd = new List<Security_HardwarePerformance>()
             {
-                HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUUsage,
-                PercentageValue = nextValue
+                new Security_HardwarePerformance()
+                {
+                    HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUUsage,
+                    PercentageValue = nextCpuValue
+                },
+                new Security_HardwarePerformance()
+                {
+                    HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.RAMUsage,
+                    PercentageValue = nextRamValue
+                },
+                new Security_HardwarePerformance()
+                {
+                    HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUTemp,
+                    PercentageValue = nextTempValue
+                }
             };
-            db.Security_HardwarePerformances.Add(newHardwareDataRecord);
+            db.Security_HardwarePerformances.AddRange(itemsToAdd);
             db.SaveChanges();
         }
-
-        public void UpdateRAMUsage(double nextValue)
-        {
-            var newHardwareDataRecord = new Security_HardwarePerformance()
-            {
-                HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.RAMUsage,
-                PercentageValue = nextValue
-            };
-            db.Security_HardwarePerformances.Add(newHardwareDataRecord);
-            db.SaveChanges();
-        }
-
-        public void UpdateCPUTemp(double nextValue)
-        {
-            var newHardwareDataRecord = new Security_HardwarePerformance()
-            {
-                HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUTemp,
-                PercentageValue = nextValue
-            };
-            db.Security_HardwarePerformances.Add(newHardwareDataRecord);
-            db.SaveChanges();
-        }
-
+        
     }
 }

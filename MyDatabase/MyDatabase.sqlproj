@@ -176,6 +176,7 @@
     <Build Include="MediaDashboard\Tables\UserConfig.sql" />
     <Build Include="Security\Tables\HardwarePerformance.sql" />
     <Build Include="Security\Tables\HardwareType.sql" />
+    <Build Include="Portfolio\Tables\Config.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.001.PostDeployment.AddMainTestData.sql" />

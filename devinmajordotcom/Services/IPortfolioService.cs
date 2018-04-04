@@ -14,6 +14,8 @@ namespace devinmajordotcom.Services
 
         string ManagePortfolio(PortfolioViewModel viewModel);
 
+        void UpdateConfig(PortfolioViewModel viewModel);
+
         void UpdateProfileAndPersonalDescription(PortfolioViewModel viewModel);
 
         void UpdateSkills(PortfolioViewModel viewModel);

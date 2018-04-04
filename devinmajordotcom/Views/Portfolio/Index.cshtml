@@ -3,7 +3,27 @@
     Layout = "../Shared/_PortfolioLayout.cshtml";
 }
 
-@if (@Model.SplashScreenDetails != null)
+<style>
+    .templatemo-home {
+        background: url('@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.PortfolioConfig.BackgroundImage))');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+        color: #5f5f5f;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        text-align: center;  
+        height: 100vh;
+    }
+</style>
+
+@if (Model.SplashScreenDetails != null)
 {
     <!-- START HOME -->
     <section id="home" class="templatemo-home">
@@ -29,7 +49,7 @@
     <section id="work" class="tm-padding-top-bottom-100">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-1 col-md-11">
+                <div class="col-md-12 text-center">
                     <h2 class="title">My <strong>Work</strong></h2>
                 </div>
                 @{
@@ -141,7 +161,7 @@
 
                     <h2 class="title">My <strong>Profile</strong></h2>
                     <p><span class="tm-info-label">Name...</span>@Model.SplashScreenDetails.FirstName @Model.SplashScreenDetails.LastName</p>
-                    <p><span class="tm-info-label">Birthday...</span>@Model.ProfileDetails.DateOfBirth</p>
+                    <p><span class="tm-info-label">Birthday...</span><span class="datetime">@Model.ProfileDetails.DateOfBirth</span></p>
                     <p><span class="tm-info-label">Address...</span>@Model.ProfileDetails.Address</p>
                     <p><span class="tm-info-label">Phone...</span>@Model.ProfileDetails.PhoneNumber</p>
                     <p><span class="tm-info-label">Email...</span>@Model.ProfileDetails.Email</p>

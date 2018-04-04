@@ -14,6 +14,8 @@ namespace devinmajordotcom.ViewModels
 
         public UserViewModel CurrentUserViewModel { get; set; }
 
+        public PortfolioConfigViewModel PortfolioConfig { get; set; }
+
         public SplashScreenViewModel SplashScreenDetails { get; set; }
 
         public List<WorkSkillViewModel> HighlightedWorkSkills { get; set; }
@@ -34,6 +36,20 @@ namespace devinmajordotcom.ViewModels
 
     }
 
+    public class PortfolioConfigViewModel
+    {
+        
+        public int ID { get; set; }
+
+        [DisplayName("Website Title: ")]
+        public string WebsiteTitle { get; set; }
+
+        [DisplayName("Background Image: ")]
+        public byte[] BackgroundImage { get; set; }
+
+    }
+
+
     public class ProfileViewModel
     {
 
@@ -46,6 +62,7 @@ namespace devinmajordotcom.ViewModels
 
         [Required]
         [StringLength(100, ErrorMessage = "Address cannot be longer than 100 characters.")]
+        [DisplayName("Address * : ")]
         public string Address { get; set; }
 
         [Required]
@@ -81,7 +98,7 @@ namespace devinmajordotcom.ViewModels
         [StringLength(100, ErrorMessage = "Last Name cannot be longer than 100 characters.")]
         public string LastName { get; set; }
 
-        [DisplayName("Position Title: ")]
+        [DisplayName("Job / Position Title: ")]
         [StringLength(100, ErrorMessage = "First Name cannot be longer than 100 characters.")]
         public string PositionTitle { get; set; }
 
@@ -148,12 +165,14 @@ namespace devinmajordotcom.ViewModels
 
         public int DescriptionID { get; set; }
 
+        [DisplayName("Personality Traits :")]
         public string Adjective1 { get; set; }
 
         public string Adjective2 { get; set; }
 
         public string Adjective3 { get; set; }
 
+        [DisplayName("Portfolio Description :")]
         public string Blurb { get; set; }
 
     }

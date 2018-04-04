@@ -29,7 +29,7 @@ namespace devinmajordotcom.App_Start
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/popper.min.js",
+                "~/Scripts/umd/popper.min.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"
             ));
@@ -79,7 +79,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/angular.js",
                 "~/Scripts/bootstrap-iconpicker-iconset-all.min.js",
                 "~/Scripts/bootstrap-iconpicker.min.js",
-                "~/Scripts/jquery.signalR-2.2.2.min.js",
+                "~/Scripts/jquery.signalR-2.2.3.min.js",
                 "~/Scripts/jquery.easypiechart.min.js",
                 "~/Scripts/handlebars.min.js",
                 "~/Scripts/moment.js",
@@ -91,9 +91,9 @@ namespace devinmajordotcom.App_Start
             bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/tinymce/jquery.tinymce.min.js",
-                "~/Scripts/tinymce/themes/inlite/theme.min.js",
-                "~/Scripts/tinymce/themes/mobile/theme.min.js",
-                "~/Scripts/tinymce/themes/modern/theme.min.js"
+                "~/Scripts/tinymce/themes/inlite/theme.js",
+                "~/Scripts/tinymce/themes/mobile/theme.js",
+                "~/Scripts/tinymce/themes/modern/theme.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/portfolioScripts").Include(
@@ -101,6 +101,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/jquery.nav.js",
                 "~/Scripts/isotope.js",
                 "~/Scripts/imagesloaded.min.js",
+                "~/Scripts/moment.js",
                 "~/Scripts/custom.js",
                 "~/Scripts/index.js"
             ));

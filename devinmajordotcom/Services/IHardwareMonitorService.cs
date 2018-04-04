@@ -9,11 +9,7 @@ namespace devinmajordotcom.Services
     interface IHardwareMonitorService
     {
 
-        void UpdateCPUUsage(double nextValue);
-
-        void UpdateRAMUsage(double nextValue);
-
-        void UpdateCPUTemp(double nextValue);
+        void SaveHardwareData(double nextCpuValue, double nextRamValue, double nextTempValue);
 
     }
 }

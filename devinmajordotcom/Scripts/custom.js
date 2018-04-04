@@ -1,8 +1,22 @@
 
+function MomentAllDateTimes() {
+
+    $(".datetime").each(function () {
+        debugger;
+        var date = $(this).html();
+        var dateString = moment(date).format("dddd MMMM Do, Y");
+        $(this).html(dateString);
+    });
+
+    $(".datetime").removeClass('datetime');
+
+}
 
 // ISOTOPE FILTER
 
-$(document).ready(function(){
+$(document).ready(function() {
+
+    MomentAllDateTimes();
 
 	if ( $('.iso-box-wrapper').length > 0 ) { 
 

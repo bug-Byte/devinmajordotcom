@@ -101,13 +101,11 @@ namespace devinmajordotcom
                 }
                 
                 Clients.All.updatePerformanceCounters(cpuLoad, ramLoad, cpuTemp, diskList);
-                service.UpdateCPUUsage(cpuLoad);
-                service.UpdateRAMUsage(ramLoad);
-                service.UpdateCPUTemp(cpuTemp);
+                service.SaveHardwareData(cpuLoad, ramLoad, cpuTemp);
                 computer.Close();
 
                 i++;
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
 
             }
 
