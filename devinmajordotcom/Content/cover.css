@@ -811,7 +811,7 @@ input[type="checkbox"]:checked + .slider:before {
     width: 100%;
 }
 
-.mediaDashboardLink, .bannerLink, .siteLink {
+.mediaDashboardLink, .bannerLink, .siteLink, .contactLink {
     border: 1px solid white;
     padding: 5px;
     border-radius: 5px;

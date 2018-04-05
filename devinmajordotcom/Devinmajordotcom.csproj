@@ -861,13 +861,14 @@
     <Content Include="Views\Shared\_MediaLayout.cshtml" />
     <Content Include="Views\Shared\_PortfolioLayout.cshtml" />
     <Content Include="Views\Portfolio\_ManagePortfolio.cshtml" />
-    <Content Include="Views\Portfolio\_AddNewTechSkill.cshtml" />
-    <Content Include="Views\Portfolio\_AddNewLanguageSkill.cshtml" />
+    <Content Include="Views\Portfolio\_NewTechSkill.cshtml" />
+    <Content Include="Views\Portfolio\_NewLanguageSkill.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\_AdminLoginModal.cshtml" />
     <Content Include="Views\Shared\MyHomeLoginSignupModal.cshtml" />
     <Content Include="Views\Shared\MainContactEmail.cshtml" />
     <Content Include="Views\Shared\_BlogLayout.cshtml" />
+    <Content Include="Views\Portfolio\_NewContactLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

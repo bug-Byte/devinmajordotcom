@@ -251,13 +251,6 @@ $(document).ready(function () {
         });
 
     });
-
-    $(document).find(".customColorPicker").each(function () {
-        $(this).colorpicker({
-            inline: false,
-            format: false
-        });
-    });
       
     $(document).on('keydown', 'input[data-val-remote]', function () {
         if ($(this).data('val-remote') != undefined) {
@@ -345,6 +338,15 @@ function InitializeMediaDashboardEventHandlers() {
         } else {
             $(this).attr("checked", "true");
         }
+    });
+    $('.customColorPicker').each(function() {
+        $(this).colorpicker({
+            inline: false,
+            format: false
+        })
+        .on('colorpickerUpdate', function (e) {
+            alert();
+        });
     });
 }
 
@@ -545,7 +547,7 @@ function RemoveContactLink(id) {
     }
     $(id).parent().parent().parent().remove();
     //$(".hiddenInput_" + number).remove();
-    ManagePortfolioAjaxSuccess()
+    ManagePortfolioContactLinksAjaxSuccess();
 }
 
 function ManageMediaAjaxSuccess(data) {
@@ -564,6 +566,15 @@ function ManagePortfolioAjaxSuccess(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your portfolio has been updated!'
+    });
+}
+
+function ManagePortfolioContactLinksAjaxSuccess(data) {
+    saveButtonPressed = true;
+    updateLinks();
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your contact links have been updated!'
     });
 }
 
@@ -644,6 +655,15 @@ function setupHandlebarsHelpers() {
         renderLanguageSkillTemplate(template, context);
     });
 
+    $(document).on('click', '#addNewContactLink', function () {
+        var languageSkillTemplateSource = $("#contactLinkTemplateScript").html();
+        var template = Handlebars.compile(languageSkillTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenContactLinkId").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderContactLinkTemplate(template, context);
+    });
+
 }
 
 function renderMediaDashboardLinkTemplate(template, data) {
@@ -673,6 +693,12 @@ function renderTechSkillTemplate(template, data) {
 function renderLanguageSkillTemplate(template, data) {
     var html = template(data);
     document.getElementById("languageSkillContainer").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
+}
+
+function renderContactLinkTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("contactLinksList").innerHTML += html;
     InitializeMediaDashboardEventHandlers();
 }
 
