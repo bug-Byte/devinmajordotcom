@@ -1,6 +1,7 @@
 ﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
 @{ 
     var contactLinkCount = 0;
+    Model.ContactSiteLinks = Model.ContactSiteLinks.OrderBy(x => x.Order).ToList();
     var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "Home",
         new AjaxOptions
         {
@@ -505,7 +506,7 @@
                             @foreach (var link in Model.ContactSiteLinks.OrderBy(x => x.Order))
                             {
                                 @Html.HiddenFor(x => x.ContactSiteLinks[count].ID, new {@class = "hiddenContactLinkId hiddenInput_" + Model.ContactSiteLinks[count].ID})
-                                <li class="contactLink handlebarsItem" data-hiddeninputid="@Html.IdFor(x => x.ContactSiteLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">
+                                <li class="contactLink handlebarsItem" data-hiddeninputid="@Html.IdFor(x => x.ContactSiteLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh; @if(!string.IsNullOrEmpty(Model.ContactSiteLinks[count].Color)) {<text>background-color:@Model.ContactSiteLinks[count].Color;</text>} ">
                                     @Html.HiddenFor(x => x.ContactSiteLinks[count].Order, new {@class = "hiddenOrder hiddenInput_" + Model.ContactSiteLinks[count].ID})
                                     <div class="row">
                                         <div class="col-sm-2">

@@ -105,7 +105,7 @@ namespace devinmajordotcom
                 computer.Close();
 
                 i++;
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
 
             }
 

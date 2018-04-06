@@ -1,2 +1,56 @@
 ﻿<script type="text/x-handlebars-template" id="contactLinkTemplateScript">
+    <input class="hiddenContactLinkId hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="ContactSiteLinks_{{newID}}__ID" name="ContactSiteLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="contactLink handlebarsItem" data-hiddeninputid="ContactSiteLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh; background-color:grey; ">
+        <input class="hiddenOrder hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field Order must be a number." id="ContactSiteLinks_{{newID}}__Order" name="ContactSiteLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}">
+        <div class="row">
+            <div class="col-sm-2">
+                <span class="btn btn-primary move ui-sortable-handle" type="button"><span class="fa fa-arrows"></span></span>
+            </div>
+            <div class="col-sm-8 text-center">
+                <h4>
+                    <span class="iconContainer"></span>
+                    &nbsp;&nbsp;
+                    <span class="titleContainer"></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-danger deleteGroup deleteContactLink" data-ajax="true" data-ajax-failure="ManageMediaAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveContactLink('#deleteContactLink_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/Portfolio/RemoveContactLink/{{newLinkCounter}}" id="deleteContactLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">Directive</div>
+                    <input class="form-control" id="ContactSiteLinks_{{newID}}__Directive" name="ContactSiteLinks[{{newID}}].Directive" placeholder="Follow me on..." style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <span class="input-group-btn">
+                        <button data-placement="left" class="btn btn-default iconpicker" name="ContactSiteLinks[{{newID}}].DisplayIcon" role="iconpicker" data-iconset="fontawesome" data-icon="" type="button"><i class="fa fa-facebook-f"></i><input type="hidden" name="ContactSiteLinks[{{newID}}].DisplayIcon" value=""><span class="caret"></span></button>
+                    </span>
+                    <input class="form-control namer" data-val="true" data-val-required="The Display Name * field is required." id="ContactSiteLinks_{{newID}}__DisplayName" name="ContactSiteLinks[{{newID}}].DisplayName" placeholder="Display Name" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <input class="form-control" data-val="true" data-val-required="The URL field is required." id="ContactSiteLinks_{{newID}}__URL" name="ContactSiteLinks[{{newID}}].URL" placeholder="http://www.google.ca/" style="margin-bottom: 0px" type="text" value="">
+            </div>
+            <div class="col-sm-6 text-center">
+                <div class="customColorPicker contactSiteLink input-group colorpicker-component colorpicker-element" data-color="grey" data-colorpicker-id="3">
+                    <input class="form-control linkColorValue" id="ContactSiteLinks_{{newID}}__Color" name="ContactSiteLinks[{{newID}}].Color" placeholder="Pick a color, any color!" type="text" value="grey">
+                    <span class="input-group-addon"><i style="background-color: grey;"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="ContactSiteLinks[{{newID}}].DisplayName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <br>
+    </li>
 </script>

@@ -68,7 +68,7 @@ namespace devinmajordotcom.Services
                     Blurb = x.Blurb
                 }).FirstOrDefault(),
 
-                ContactSiteLinks = db.Portfolio_ContactLinks.Where(x => x.IsEnabled).Select(x => new SiteLinkViewModel()
+                ContactSiteLinks = db.Portfolio_ContactLinks.Select(x => new SiteLinkViewModel()
                 {
                     DisplayName = x.DisplayName,
                     DisplayIcon = x.DisplayIcon,
@@ -127,7 +127,7 @@ namespace devinmajordotcom.Services
                 UpdateConfig(viewModel);
                 UpdateProfileAndPersonalDescription(viewModel);
                 UpdateSkills(viewModel);
-                UpdateProjectsAndFilters(viewModel);
+                //UpdateProjectsAndFilters(viewModel);
                 UpdateContactLinks(viewModel);
                 db.SaveChanges();
                 return "success";
@@ -364,25 +364,30 @@ namespace devinmajordotcom.Services
                     linkRecord.Url = contactLink.URL;
                     linkRecord.Order = contactLink.Order;
                     linkRecord.Directive = contactLink.Directive;
+                    db.SaveChanges();
                 }
                 else
                 {
-                    var newLinkRecord = new Portfolio_ContactLink()
+                    if (contactLink.DisplayName != null)
                     {
-                        DisplayName = contactLink.DisplayName,
-                        DisplayIcon = contactLink.DisplayIcon,
-                        Action = contactLink.Action,
-                        Controller = contactLink.Controller,
-                        Description = contactLink.Description,
-                        IsDefault = contactLink.IsDefault,
-                        IsEnabled = contactLink.IsEnabled,
-                        Url = contactLink.URL,
-                        Color = contactLink.Color,
-                        Order = contactLink.Order,
-                        Directive = contactLink.Directive
-                    };
-                    db.Portfolio_ContactLinks.Add(newLinkRecord);
-                }
+                        var newLinkRecord = new Portfolio_ContactLink()
+                        {
+                            DisplayName = contactLink.DisplayName,
+                            DisplayIcon = contactLink.DisplayIcon,
+                            Action = contactLink.Action,
+                            Controller = contactLink.Controller,
+                            Description = contactLink.Description,
+                            IsDefault = contactLink.IsDefault,
+                            IsEnabled = contactLink.IsEnabled,
+                            Url = contactLink.URL,
+                            Color = contactLink.Color,
+                            Order = contactLink.Order,
+                            Directive = contactLink.Directive
+                        };
+                        db.Portfolio_ContactLinks.Add(newLinkRecord);
+                        db.SaveChanges();
+                    }
+                }               
             }
         }
 

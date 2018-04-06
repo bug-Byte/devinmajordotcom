@@ -41,7 +41,7 @@ namespace devinmajordotcom.App_Start
                       "~/Content/site.css",
                       "~/Content/bootstrap-iconpicker.min.css",
                       "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/bootstrap-colorpicker/css/bootstrap-colorpicker.css",
+                      "~/Content/bootstrap-colorpicker.css",
                       "~/Content/cover.css"
             ));
 

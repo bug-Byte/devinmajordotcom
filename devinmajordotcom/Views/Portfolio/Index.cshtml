@@ -1,6 +1,7 @@
 ﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
 @{ 
     Layout = "../Shared/_PortfolioLayout.cshtml";
+    var newRowHtml = "</div><br/><div class='row'>";
 }
 
 <style>
@@ -246,22 +247,31 @@
             <div class="row">
 
                 @{
-                    var colClass = "";
-                    var linkCount = Model.ContactSiteLinks.Count;
-                    if (linkCount > 0)
-                    {
-                        var gridSpace = 12 / linkCount;
-                        colClass = "col-md-" + gridSpace.ToString();
-                    }
+                    var colClass = 4;
+                    var count = 0;
                 }
 
                 @foreach (var contactLink in Model.ContactSiteLinks.OrderBy(x => x.Order))
                 {
-                    <div class="col-md-4 col-sm-4 wow rotateInUpLeft" data-wow-delay="0.3s">
-                        <div class="media @contactLink.DisplayIcon.Replace("fa fa-","")">
+
+                    if (count == 0 || count % 3 == 0)
+                    {
+                        if(Model.ContactSiteLinks.Count <= (count + 1))
+                        {
+                            colClass = 12;
+                        }
+                        else if (Model.ContactSiteLinks.Count <= (count + 2))
+                        {
+                            colClass = 6;
+                        }
+                    }
+
+
+                    <div class="col-md-@colClass col-sm-@colClass wow rotateInUpLeft" style="padding-left: 0; padding-right: 0;" data-wow-delay="0.3s">
+                        <div class="media" @if(!string.IsNullOrEmpty(contactLink.Color)) {<text>style="background-color:@contactLink.Color;"</text>} >
                             <a href="@contactLink.URL">
                                 <div class="media-object pull-left">
-                                    <i class="@contactLink.DisplayIcon"></i>
+                                    <i class="fa @contactLink.DisplayIcon"></i>
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading tm-social-title">@contactLink.Directive</h4>
@@ -270,6 +280,7 @@
                             </a>
                         </div>
                     </div>
+                    count++;
                 }
 
             </div>

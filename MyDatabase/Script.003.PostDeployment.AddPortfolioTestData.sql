@@ -23,7 +23,8 @@ INSERT INTO [Portfolio].[ContactLink]
 	DisplayIcon,
 	IsDefault,
 	IsEnabled,
-	[Order]
+	[Order],
+	Color
 )
 VALUES
 (
@@ -33,10 +34,11 @@ VALUES
 	'#',
 	NULL,
 	NULL,
-	'fa fa-facebook',
+	'fa-facebook-f',
 	0,
 	1,
-	1
+	1,
+	'#3b5998'
 ),
 (
 	'Reddit',
@@ -45,10 +47,11 @@ VALUES
 	'#',
 	NULL,
 	NULL,
-	'fa fa-reddit',
+	'fa-reddit-alien',
 	0,
 	1,
-	2
+	2,
+	'#0099CC'
 ),
 (
 	'GitHub',
@@ -57,10 +60,11 @@ VALUES
 	'#',
 	NULL,
 	NULL,
-	'fa fa-github',
+	'fa-github',
 	0,
 	1,
-	3
+	3,
+	'#777777'
 );
 GO
 

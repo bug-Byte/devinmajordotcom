@@ -344,8 +344,15 @@ function InitializeMediaDashboardEventHandlers() {
             inline: false,
             format: false
         })
-        .on('colorpickerUpdate', function (e) {
-            alert();
+        .on('change', function (e) {
+            $(this).attr('data-color', e.value);
+            $(this).find(".form-control").attr("value", e.value);
+            $(this).find(".form-control").val(e.value);
+
+            if ($(this).hasClass('contactSiteLink')) {
+                $(this).parent().parent().parent().css('background-color', e.color.toRgbString() + " !important");
+            }
+
         });
     });
 }
