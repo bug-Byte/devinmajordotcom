@@ -59,8 +59,8 @@ namespace devinmajordotcom
                 computer.Accept(updateVisitor);
 
                 var ramLoad = (float)0.0;
-                var cpuTemp = (float)0.0;
-                var cpuLoad = (float)0.0;
+                var cpuTemp = new List<double>();
+                var cpuLoad = new List<double>();
                 var diskList = new List<string>();
 
                 foreach (DriveInfo drive in drives)
@@ -78,13 +78,13 @@ namespace devinmajordotcom
                     {
                         foreach (ISensor t1 in t2.Sensors)
                         {
-                            if (t1.SensorType == SensorType.Temperature)
+                            if (t1.SensorType == SensorType.Temperature && t1.Name == "CPU Package")
                             {
-                                cpuTemp = t1.Value.GetValueOrDefault();
+                                cpuTemp.Add(t1.Value.GetValueOrDefault());
                             }
-                            if (t1.SensorType == SensorType.Load)
+                            if (t1.SensorType == SensorType.Load && t1.Name == "CPU Total")
                             {
-                                cpuLoad = t1.Value.GetValueOrDefault();
+                                cpuLoad.Add(t1.Value.GetValueOrDefault());
                             }
                         }
                     }

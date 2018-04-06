@@ -731,10 +731,14 @@ function ConnectToSignalRPerformanceHub() {
 
     var performanceHub = $.connection.performanceHub;
 
-    performanceHub.client.updatePerformanceCounters = function (nextCpuValue, nextRamValue, temp, drives) {
+    performanceHub.client.updatePerformanceCounters = function (nextCpuValues, nextRamValue, temps, drives) {
         
         if (firstRun) {
-            var diskCountersHtml = "<div class='row'>";
+
+            var diskCountersHtml = "";
+            var usageCountersHtml = "";
+            var tempCountersHtml = "";
+
             for (var x = 0; x < drives.length; x++) {
                 var drive = drives[x];
                 var driveData = drive.split(",");
@@ -742,8 +746,21 @@ function ConnectToSignalRPerformanceHub() {
                 diskCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="disk_' + x + '" class="diskChart" data-percent="' + percentValue + '"><div class="percent">' + percentValue + '</div></div><br/><div class="chartlabel">' + driveData[1] + ' (' + driveData[0] + ')</div><div class="chartlabel">' + driveData[2] + ', ' + driveData[3] + '</div></div></div>';
                 
             }
-            diskCountersHtml += "</div>";
+
+            for (var x = 0; x < nextCpuValues.length; x++) {
+                var value1 = nextCpuValues[x];
+                usageCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="cpuCounter' + (x + 1) + '" class="performancePieChart cpuCounter percentage" data-percent="' + value1 + '"><div class="percent">' + value1 + '</div></div><div class="chartlabel">CPU ' + (x + 1) + ' Usage</div></div></div>';
+            }
+
+            for (var x = 0; x < temps.length; x++) {
+                var value2 = temps[x];
+                tempCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="tempCounter' + (x + 1) + '" class="performancePieChart tempCounter percentage temperature" data-percent="' + value2 + '"><div class="percent">' + value2 + '</div></div><div class="chartlabel">CPU ' + (x + 1) + ' Temp.</div></div></div>';
+            }
+
             document.getElementById('driveCounters').innerHTML = diskCountersHtml;
+            document.getElementById('usageCounters').innerHTML = usageCountersHtml;
+            document.getElementById('tempCounters').innerHTML = tempCountersHtml;
+
             $('.diskChart').easyPieChart({
                 animate: 1000,
                 size: 150,
@@ -759,6 +776,27 @@ function ConnectToSignalRPerformanceHub() {
                     $(this.el).find('.percent').text(Math.round(percent) + "% Used");
                 }
             });
+
+            $('.performancePieChart').easyPieChart({
+                animate: 1000,
+                size: 150,
+                lineWidth: 25,
+                lineCap: 'butt',
+                scaleColor: false,
+                trackColor: 'rgba(250,250,250,0.65)',
+                barColor: function (percent) {
+                    percent /= 100;
+                    return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
+                },
+                onStep: function (from, to, percent) {
+                    if ($(this.el).hasClass("temperature")) {
+                        $(this.el).find('.percent').text(Math.round(percent) + "°C");
+                    } else {
+                        $(this.el).find('.percent').text(Math.round(percent) + "%");
+                    }
+
+                }
+            });
             
         } else {
             $(".diskChart").each(function () {
@@ -771,9 +809,21 @@ function ConnectToSignalRPerformanceHub() {
             });
         }
 
-        $("#cpuCounter").data('easyPieChart').update(nextCpuValue);
+        var counter1 = 0;
+        var counter2 = 0;
+
+        $(document).each(".cpuCounter", function () {
+            $(this).data('easyPieChart').update(nextCpuValues[counter1]);
+            counter1++;
+        });
+
+        $(document).each(".tempCounter", function () {
+            $(this).data('easyPieChart').update(temps[counter2]);
+            counter2++;
+        });
+
         $("#ramCounter").data('easyPieChart').update(nextRamValue);
-        $("#tempCounter").data('easyPieChart').update(temp);
+        
         firstRun = false;
     };
 

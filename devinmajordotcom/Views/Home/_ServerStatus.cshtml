@@ -11,18 +11,14 @@
         <p style="color: #71cef5;">@config.Directive</p>
         <hr>
     
-        <div style="background-color: #0B1C1E;">
+        <div class="row" style="background-color: #0B1C1E;">
         
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="chart"><div id="cpuCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Usage</div></div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="chart"><div id="tempCounter" class="performancePieChart percentage temperature" data-percent=""><div class="percent"></div></div><div class="chartlabel">CPU Temperature</div></div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="chart"><div id="ramCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">RAM Usage</div></div>
-                </div>
+            <div id="usageCounters"></div>
+            
+            <div id="tempCounters"></div>
+            
+            <div class="col-sm-4">
+                <div class="chart"><div id="ramCounter" class="performancePieChart percentage" data-percent=""><div class="percent"></div></div><div class="chartlabel">RAM Usage</div></div>
             </div>
 
             <div id="driveCounters"></div>
