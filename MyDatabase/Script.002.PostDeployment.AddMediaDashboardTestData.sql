@@ -148,4 +148,27 @@ VALUES
 );
 GO
 
+DECLARE @GuestUserID INT = (SELECT ID FROM [Security].[User] WHERE UserName='Guest' AND ClientName='::1' AND IsActive=0);
+
+INSERT INTO [MediaDashboard].[UserConfig]
+(
+	UserID,
+	SidebarFullTitle,
+	SidebarCollapsedTitle
+	--,BackgroundImage
+	,SidebarColor
+	,SidebarAccentColor
+	,WebsiteTitle
+)
+VALUES
+(
+	@GuestUserID,
+	'My Media Dashboard',
+	'M D',
+	'black',
+	'#28a08c',
+	'D3V!N M@J0R'
+);
+GO
+
 COMMIT

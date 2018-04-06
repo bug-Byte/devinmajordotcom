@@ -37,6 +37,9 @@ namespace devinmajordotcom.ViewModels
         [DisplayName("Background Image: ")]
         public byte[] BackgroundImage { get; set; }
 
+        [DisplayName("Website Title: ")]
+        public string WebsiteTitle { get; set; }
+
     }
 
 }

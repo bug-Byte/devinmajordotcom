@@ -743,6 +743,7 @@ namespace devinmajordotcom.Models
         public byte[] BackgroundImage { get; set; } // BackgroundImage
         public string SidebarColor { get; set; } // SidebarColor
         public string SidebarAccentColor { get; set; } // SidebarAccentColor
+        public string WebsiteTitle { get; set; } // WebsiteTitle
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -1458,6 +1459,7 @@ namespace devinmajordotcom.Models
             Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
             Property(x => x.SidebarColor).HasColumnName(@"SidebarColor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.SidebarAccentColor).HasColumnName(@"SidebarAccentColor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.WebsiteTitle).HasColumnName(@"WebsiteTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

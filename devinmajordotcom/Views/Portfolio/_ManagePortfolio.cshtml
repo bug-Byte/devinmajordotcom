@@ -400,30 +400,35 @@
                         </div>
                     </div>
 
-                    <div id="techSkillContainer">
-                        @if (Model.TechSkills != null && Model.TechSkills.Count > 0)
-                        {
-                            for (var i = 0; i < Model.TechSkills.Count; i++)
+                    @{
+                        count = 0;
+                    }
+
+                    <div id="techSkillContainer" style="overflow:auto !important;" class="">
+                        <ul id="techSkillsList" class="mediaSortable">
+                            @foreach (var link in Model.TechSkills)
                             {
-                                @Html.HiddenFor(x => x.TechSkills[i].TechSkillID, new { @class = "tech hiddenSkillId", data_skillid = Model.TechSkills[i].TechSkillID })
-                                <div class="techSkill techSkill_@i">
+                                @Html.HiddenFor(x => x.TechSkills[count].TechSkillID, new { @class = "hiddenTechSkillID hiddenInput_" + Model.TechSkills[count].TechSkillID })
+                                <li class="techSkill techSkill_@count handlebarsItem" style="padding-top: 10px; margin-bottom: 2vh;">
                                     <div class="row">
-                                        <div class="col-sm-11 text-left">
-                                            @Html.TextAreaFor(x => x.TechSkills[i].SkillDescription, new { @class = "form-control techskill" })
+                                        <div class="col-sm-12 text-left">
+                                            @Html.TextAreaFor(x => x.TechSkills[count].SkillDescription, new { @class = "form-control" })
                                         </div>
-                                        <div class="col-sm-1 text-right">
+                                        <div class="col-sm-12 text-right">
                                             @{
-                                                var linkText = "<span class='fa fa-trash'></span>";
-                                                var actionLink = Ajax.ActionLink("REPLACE", "RemoveTechSkill", "Portfolio", new { ID = Model.TechSkills[i].TechSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.techSkill_" + i + "', 'techSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.TechSkills[i].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
+                                                var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Skill";
+                                                var actionLink = Ajax.ActionLink("REPLACE", "RemoveTechSkill", "Portfolio", new { ID = Model.TechSkills[count].TechSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.techSkill_" + count + "', 'techSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.TechSkills[count].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
                                                 @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
                                             }
                                         </div>
                                     </div>
                                     <hr />
-                                </div>
+                                </li>
+                                count++;
                             }
-                        }
+                        </ul>
                     </div>
+                    
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <button type="button" id="addNewTechSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Technical Skill</button>

@@ -7,6 +7,7 @@
 	BackgroundImage VARBINARY(MAX) NULL,
 	SidebarColor VARCHAR(MAX) NULL,
 	SidebarAccentColor VARCHAR(MAX) NULL,
+	WebsiteTitle VARCHAR(MAX) NULL,
 	PRIMARY KEY(Id),
 	CONSTRAINT MediaDashboard_UserConfig_UserID_Security_User_ID
 	FOREIGN KEY(UserID) REFERENCES [Security].[User](ID)

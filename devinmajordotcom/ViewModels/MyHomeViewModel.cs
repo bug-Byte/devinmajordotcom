@@ -52,7 +52,7 @@ namespace devinmajordotcom.ViewModels
         [DisplayName("Show Blog: ")]
         public bool ShowBlog { get; set; }
 
-        [DisplayName("Website Name: ")]
+        [DisplayName("Website Title: ")]
         public string WebsiteName { get; set; }
 
         [DisplayName("Bookmarks Title: ")]
