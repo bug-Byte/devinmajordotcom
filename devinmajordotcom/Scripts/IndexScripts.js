@@ -330,6 +330,10 @@ function InitializeMediaDashboardEventHandlers() {
         if ($(this).hasClass('namer')) {
             $(this).closest(".handlebarsItem").find('.titleContainer').html($(this).val());
         }
+        if($(this).prop("tagName") == "TEXTAREA") {
+            $(this).html($(this).val());
+        }
+
     });
     $(".toggler").change(function () {
         var id = $(this).attr("id");
@@ -612,6 +616,9 @@ function RemoveSkill(id, type) {
     if (type == "languageSkill") {
         $(id).remove();
     }
+    if (type == "techSkill") {
+        $(id).remove();
+    }
     ManagePortfolioSkillsAjaxSuccess();
 }
 
@@ -648,7 +655,7 @@ function setupHandlebarsHelpers() {
         var techSkillTemplateSource = $("#techSkillTemplateScript").html();
         var template = Handlebars.compile(techSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
-        var linkCount = $(".tech.hiddenSkillId").length + 1;
+        var linkCount = $(".hiddenTechSkillID").length + 1;
         var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
         renderTechSkillTemplate(template, context);
     });
@@ -693,7 +700,7 @@ function renderSiteLinkTemplate(template, data) {
 
 function renderTechSkillTemplate(template, data) {
     var html = template(data);
-    document.getElementById("techSkillContainer").innerHTML += html;
+    document.getElementById("techSkillsList").innerHTML += html;
     InitializeMediaDashboardEventHandlers();
 }
 

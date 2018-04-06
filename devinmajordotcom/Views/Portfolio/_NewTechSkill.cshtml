@@ -1,14 +1,14 @@
 ﻿<script type="text/x-handlebars-template" id="techSkillTemplateScript">
-    <div class="techSkill techSkill_{{newLinkCounter}}">
+    <input class="hiddenTechSkillID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field TechSkillID must be a number." data-val-required="The TechSkillID field is required." id="TechSkills_{{newID}}__TechSkillID" name="TechSkills[{{newID}}].TechSkillID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="techSkill techSkill_{{newID}} handlebarsItem" style="padding-top: 10px; margin-bottom: 2vh;">
         <div class="row">
             <div class="col-sm-12 text-left">
-                <input class="hiddenSkillId" data-skillid="1" data-val="true" data-val-number="The field TechSkillID must be a number." data-val-required="The TechSkillID field is required." id="TechSkills_{{newLinkCounter}}__TechSkillID" name="TechSkills[{{newLinkCounter}}]].TechSkillID" type="hidden" value="{{newID}}">
-                <textarea class="form-control techskill" cols="20" data-val="true" data-val-length="Skill Description cannot be longer than 500 characters." data-val-length-max="500" data-val-required="The Skill Description * :  field is required." id="TechSkills_{{newLinkCounter}}__SkillDescription" name="TechSkills[{{newLinkCounter}}].SkillDescription" rows="2" placeholder="I am a professional networker with many connections..."></textarea>
+                <textarea class="form-control" cols="20" data-val="true" data-val-length="Skill Description cannot be longer than 500 characters." data-val-length-max="500" data-val-required="The Skill Description * :  field is required." id="TechSkills_{{newID}}__SkillDescription" name="TechSkills[{{newID}}].SkillDescription" rows="2"></textarea>
             </div>
             <div class="col-sm-12 text-right">
-                <button type="button" class="btn btn-danger techSkillRemover" data-skillid="{{newLinkCounter}}"><span class="glyphicon glyphicon-remove" style=""></span>&nbsp;Remove Skill</button>
+                <a class="btn btn-danger deleteSkillGroup deleteSkillLink" data-ajax="true" data-ajax-failure="ManagePortfolioSkillsAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveSkill('.techSkill_{{newID}}', 'techSkill')" data-content="<span class='fa fa-trash'></span>&amp;nbsp;Remove Skill" href="/Portfolio/RemoveTechSkill/{{newLinkCounter}}" id="deleteLangugeSkillLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span>&nbsp;Remove Skill</a>
             </div>
         </div>
         <hr>
-    </div>
+    </li>
 </script>

@@ -20,6 +20,19 @@
         <div id="collapseMedia" class="panel-collapse collapse in">
             <div class="panel-body">
                 <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp;
+                        @Html.LabelFor(x => x.UserConfig.WebsiteTitle)
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        @Html.TextBoxFor(x => x.UserConfig.WebsiteTitle, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        @Html.ValidationMessageFor(x => x.UserConfig.WebsiteTitle)
+                    </div>
+                </div>
+                <br />
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-sm-12">

@@ -59,6 +59,7 @@ namespace devinmajordotcom.Services
                 SidebarCollapsedTitle = x.SidebarCollapsedTitle,
                 SidebarColor = x.SidebarColor,
                 SidebarFullTitle = x.SidebarFullTitle,
+                WebsiteTitle = x.WebsiteTitle,
                 SidebarAccentColor = x.SidebarAccentColor
             }).FirstOrDefault();
         }
@@ -76,6 +77,7 @@ namespace devinmajordotcom.Services
                     if (adminUserConfig != null && viewModel.UserConfig != null)
                     {
                         adminUserConfig.BackgroundImage = viewModel.UserConfig.BackgroundImage;
+                        adminUserConfig.WebsiteTitle = viewModel.UserConfig.WebsiteTitle;
                         adminUserConfig.SidebarFullTitle = viewModel.UserConfig.SidebarFullTitle;
                         adminUserConfig.SidebarColor = viewModel.UserConfig.SidebarColor;
                         adminUserConfig.SidebarCollapsedTitle = viewModel.UserConfig.SidebarCollapsedTitle;

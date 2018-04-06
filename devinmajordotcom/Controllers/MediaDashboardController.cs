@@ -13,11 +13,12 @@ namespace devinmajordotcom.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Title = "D3V!N M@J0R";
+            
             ViewBag.ControllerName = "MediaDashboard";
             ViewBag.Layout = "../Shared/_MediaLayout.cshtml";
             var viewModel = new MediaDashboardViewModel();
             viewModel = mediaDashboardService.GetMediaDashboardViewModel();
+            ViewBag.Title = viewModel.UserConfig.WebsiteTitle;
             return View(viewModel);
         }
 

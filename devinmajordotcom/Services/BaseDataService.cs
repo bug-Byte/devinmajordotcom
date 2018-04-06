@@ -232,7 +232,8 @@ namespace devinmajordotcom.Services
                         UserId = newUser.Id,
                         SidebarFullTitle = guestMediaDashboardConfig.SidebarFullTitle,
                         BackgroundImage = guestMediaDashboardConfig.BackgroundImage,
-                        SidebarAccentColor = guestMediaDashboardConfig.SidebarAccentColor
+                        SidebarAccentColor = guestMediaDashboardConfig.SidebarAccentColor,
+                        WebsiteTitle = guestMediaDashboardConfig.WebsiteTitle
                     };
                     db.MediaDashboard_UserConfigs.Add(newMediaDashboardConfigRecord);
                     db.SaveChanges();
