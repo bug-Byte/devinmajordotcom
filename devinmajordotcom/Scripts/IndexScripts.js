@@ -774,7 +774,7 @@ function ConnectToSignalRPerformanceHub() {
                 lineWidth: 25,
                 lineCap: 'butt',
                 scaleColor: false,
-                trackColor: 'rgba(250,250,250,0.65)',
+                trackColor: 'rgba(250,250,250,0.85)',
                 barColor: function (percent) {
                     percent /= 100;
                     return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
@@ -790,7 +790,7 @@ function ConnectToSignalRPerformanceHub() {
                 lineWidth: 25,
                 lineCap: 'butt',
                 scaleColor: false,
-                trackColor: 'rgba(250,250,250,0.65)',
+                trackColor: 'rgba(250,250,250,0.85)',
                 barColor: function (percent) {
                     percent /= 100;
                     return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
@@ -819,12 +819,12 @@ function ConnectToSignalRPerformanceHub() {
         var counter1 = 0;
         var counter2 = 0;
 
-        $(document).each(".cpuCounter", function () {
+        $(".cpuCounter").each(function () {
             $(this).data('easyPieChart').update(nextCpuValues[counter1]);
             counter1++;
         });
 
-        $(document).each(".tempCounter", function () {
+        $(".tempCounter").each(function () {
             $(this).data('easyPieChart').update(temps[counter2]);
             counter2++;
         });
@@ -855,7 +855,7 @@ function InitializePieCharts() {
         lineWidth: 25,
         lineCap: 'butt',
         scaleColor: false,
-        trackColor: 'rgba(250,250,250,0.65)',
+        trackColor: 'rgba(250,250,250,0.85)',
         barColor: function (percent) {
             percent /= 100;
             return "rgb(" + Math.round(255 * percent) + ", " + Math.round(255 * (1 - percent)) + ", " + Math.round(255 * (1 - percent)) + ")";
