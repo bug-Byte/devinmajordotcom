@@ -1,6 +1,6 @@
 ﻿<script type="text/x-handlebars-template" id="contactLinkTemplateScript">
     <input class="hiddenContactLinkId hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="ContactSiteLinks_{{newID}}__ID" name="ContactSiteLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
-    <li class="contactLink handlebarsItem" data-hiddeninputid="ContactSiteLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh; background-color:grey; ">
+    <li class="contactLink handlebarsItem" id="contactLink_{{newID}}" data-hiddeninputid="ContactSiteLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh; background-color:grey; ">
         <input class="hiddenOrder hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field Order must be a number." id="ContactSiteLinks_{{newID}}__Order" name="ContactSiteLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}">
         <div class="row">
             <div class="col-sm-2">

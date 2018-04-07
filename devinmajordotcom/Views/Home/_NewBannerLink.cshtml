@@ -1,6 +1,6 @@
 ﻿<script type="text/x-handlebars-template" id="bannerLinkTemplateScript">
     <input class="hiddenBannerLinkID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="LandingPageBannerLinks_{{newID}}__ID" name="LandingPageBannerLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
-    <li class="bannerLink handlebarsItem" data-hiddeninputid="LandingPageBannerLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh;">
+    <li class="bannerLink handlebarsItem" id="bannerLink_{{newID}}" data-hiddeninputid="LandingPageBannerLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh;">
         <input class="hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="LandingPageBannerLinks_{{newID}}__ParentApplicationId" name="LandingPageBannerLinks[{{newID}}].ParentApplicationId" type="hidden" value="{{newID}}">
         <input class="hiddenInput_{{newLinkCounter}}" id="LandingPageBannerLinks_{{newID}}__ParentApplicationName" name="LandingPageBannerLinks[{{newID}}].ParentApplicationName" type="hidden" value="">
         <input class="hiddenOrder hiddenBannerOrder hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field Order must be a number." id="LandingPageBannerLinks_{{newID}}__Order" name="LandingPageBannerLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}">

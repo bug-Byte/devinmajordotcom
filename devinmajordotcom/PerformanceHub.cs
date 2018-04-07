@@ -50,18 +50,19 @@ namespace devinmajordotcom
                 MainboardEnabled = true,
                 RAMEnabled = true
             };
-            
+
+            var ramLoad = (float)0.0;
+            var ramString = "";
+            var cpuTemp = new List<double>();
+            var cpuLoad = new List<double>();
+            var diskList = new List<string>();
+            var cpuList = new List<string>();
 
             while (i != -1)
             {
 
                 computer.Open();
                 computer.Accept(updateVisitor);
-
-                var ramLoad = (float)0.0;
-                var cpuTemp = new List<double>();
-                var cpuLoad = new List<double>();
-                var diskList = new List<string>();
 
                 foreach (DriveInfo drive in drives)
                 {
@@ -76,6 +77,7 @@ namespace devinmajordotcom
                 {
                     if (t2.HardwareType == HardwareType.CPU)
                     {
+                        cpuList.Add(t2.Name);
                         foreach (ISensor t1 in t2.Sensors)
                         {
                             if (t1.SensorType == SensorType.Temperature && t1.Name == "CPU Package")
@@ -96,15 +98,29 @@ namespace devinmajordotcom
                             {
                                 ramLoad = t1.Value.GetValueOrDefault();
                             }
+                            if (t1.SensorType == SensorType.Data && t1.Name == "Used Memory")
+                            {
+                                var available = t2.Sensors.Where(x => x.SensorType == SensorType.Data && x.Name == "Available Memory").FirstOrDefault();
+                                if(available != null)
+                                {
+                                    var used = t1.Value.GetValueOrDefault();
+                                    ramString = Math.Round(used ,0) + "/" + Math.Round(used + available.Value.GetValueOrDefault(), 0) + " GB In Use";
+                                }
+                            }
                         }
                     }
                 }
                 
-                Clients.All.updatePerformanceCounters(cpuLoad, ramLoad, cpuTemp, diskList);
-                service.SaveHardwareData(cpuLoad, ramLoad, cpuTemp);
+                Clients.All.updatePerformanceCounters(cpuList, ramString, cpuLoad, ramLoad, cpuTemp, diskList);
+                service.SaveHardwareData(cpuList, ramString, cpuLoad, ramLoad, cpuTemp);
                 computer.Close();
-
                 i++;
+
+                cpuTemp.Clear();
+                cpuLoad.Clear();
+                diskList.Clear();
+                cpuList.Clear();
+
                 Thread.Sleep(1000);
 
             }

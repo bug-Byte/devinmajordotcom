@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -1199,6 +1199,8 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public int HardwareTypeId { get; set; } // HardwareTypeID
         public double PercentageValue { get; set; } // PercentageValue
+        public string HardwareName { get; set; } // HardwareName
+        public int? HardwareNumber { get; set; } // HardwareNumber
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -1947,6 +1949,8 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.HardwareTypeId).HasColumnName(@"HardwareTypeID").HasColumnType("int").IsRequired();
             Property(x => x.PercentageValue).HasColumnName(@"PercentageValue").HasColumnType("float").IsRequired();
+            Property(x => x.HardwareName).HasColumnName(@"HardwareName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.HardwareNumber).HasColumnName(@"HardwareNumber").HasColumnType("int").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

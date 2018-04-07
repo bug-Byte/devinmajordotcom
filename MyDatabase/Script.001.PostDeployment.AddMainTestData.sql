@@ -139,8 +139,8 @@ VALUES
 ),
 (
 	'Server Status', 
-	'Drop Me a Line',
-	'If you''d like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I''ll take it from there!',
+	'This Website is Brought To You By...',
+	'Watch the live feed of statistics below, and marvel at the beauty of my server.',
 	'#server',
 	'Index',
 	'MediaDashboard',
@@ -152,8 +152,8 @@ VALUES
 ),
 (
 	'Contact Me', 
-	'This Website is Brought To You By...',
-	'Watch the live feed of statistics below, and marvel at the beauty of my server.',
+	'Drop Me a Line',
+	'If you''d like excusive access to any of the services here (Plex, Custom Home, etc.), then feel free to send me a quick message, and I''ll take it from there!',
 	'#contact',
 	'Index',
 	'Portfolio',

@@ -198,9 +198,7 @@ function MomentAllDateTimes() {
 $(document).ready(function () {
 
     // Start
-    if(canvas != null) {
-        loop();
-    }
+    
 
     var ms_ie = false;
     var ua = window.navigator.userAgent;
@@ -213,6 +211,9 @@ $(document).ready(function () {
 
     if (!ms_ie) {
         $("#particles").show();
+        if (canvas != null) {
+            loop();
+        }
     }
 
     InitializePieCharts();
@@ -526,7 +527,8 @@ function RemoveMediaLink(id) {
     if (!$(this).hasClass("newLinkInput")) {
         var linksToChange = $(".newLinkInput");
     }
-    $(id).parent().parent().parent().remove();
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
     //$(".hiddenInput_" + number).remove();
     ManageMediaAjaxSuccess();
 }
@@ -536,7 +538,8 @@ function RemoveBannerLink(id) {
     if (!$(this).hasClass("newLinkInput")) {
         var linksToChange = $(".newLinkInput");
     }
-    $(id).parent().parent().parent().remove();
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
     //$(".hiddenInput_" + number).remove();
     ManageBannerLinksAjaxSuccess();
 }
@@ -546,7 +549,8 @@ function RemoveSiteLink(id) {
     if (!$(this).hasClass("newLinkInput")) {
         var linksToChange = $(".newLinkInput");
     }
-    $(id).parent().parent().parent().remove();
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
     //$(".hiddenInput_" + number).remove();
     ManageSiteLinksAjaxSuccess();
 }
@@ -556,7 +560,8 @@ function RemoveContactLink(id) {
     if (!$(this).hasClass("newLinkInput")) {
         var linksToChange = $(".newLinkInput");
     }
-    $(id).parent().parent().parent().remove();
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
     //$(".hiddenInput_" + number).remove();
     ManagePortfolioContactLinksAjaxSuccess();
 }
@@ -612,13 +617,9 @@ function ManagePortfolioSkillsAjaxFailure(data) {
     });
 }
 
-function RemoveSkill(id, type) {
-    if (type == "languageSkill") {
-        $(id).remove();
-    }
-    if (type == "techSkill") {
-        $(id).remove();
-    }
+function RemoveSkill(classname, type) {
+    var element = document.getElementsByClassName(classname.replace(".",""))[0];
+    element.parentNode.removeChild(element);
     ManagePortfolioSkillsAjaxSuccess();
 }
 
@@ -738,13 +739,16 @@ function ConnectToSignalRPerformanceHub() {
 
     var performanceHub = $.connection.performanceHub;
 
-    performanceHub.client.updatePerformanceCounters = function (nextCpuValues, nextRamValue, temps, drives) {
+    performanceHub.client.updatePerformanceCounters = function (cpuList, ramString, nextCpuValues, nextRamValue, temps, drives) {
         
         if (firstRun) {
 
             var diskCountersHtml = "";
             var usageCountersHtml = "";
             var tempCountersHtml = "";
+            var ramCountersHtml = "";
+
+            ramCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="ramCounter" class="performancePieChart ramCounter percentage" data-percent="' + nextRamValue + '"><div class="percent">' + nextRamValue + '</div></div><div class="chartlabel">RAM Usage</div><div class="chartlabel ramChartLabel">' + ramString + '</div></div></div>';
 
             for (var x = 0; x < drives.length; x++) {
                 var drive = drives[x];
@@ -754,18 +758,17 @@ function ConnectToSignalRPerformanceHub() {
                 
             }
 
-            for (var x = 0; x < nextCpuValues.length; x++) {
+            for (var x = 0; x < cpuList.length; x++) {
+                var cpu = cpuList[x];
                 var value1 = nextCpuValues[x];
-                usageCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="cpuCounter' + (x + 1) + '" class="performancePieChart cpuCounter percentage" data-percent="' + value1 + '"><div class="percent">' + value1 + '</div></div><div class="chartlabel">CPU ' + (x + 1) + ' Usage</div></div></div>';
-            }
-
-            for (var x = 0; x < temps.length; x++) {
                 var value2 = temps[x];
-                tempCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="tempCounter' + (x + 1) + '" class="performancePieChart tempCounter percentage temperature" data-percent="' + value2 + '"><div class="percent">' + value2 + '</div></div><div class="chartlabel">CPU ' + (x + 1) + ' Temp.</div></div></div>';
+                usageCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="cpuCounter' + (x + 1) + '" class="performancePieChart cpuCounter percentage" data-percent="' + value1 + '"><div class="percent">' + value1 + '</div></div><div class="chartlabel">CPU ' + (x + 1) + ' Usage</div><div class="chartlabel">' + cpu + '</div></div></div>';
+                tempCountersHtml += '<div class="col-sm-4"><div class="chart"><div id="tempCounter' + (x + 1) + '" class="performancePieChart tempCounter percentage temperature" data-percent="' + value2 + '"><div class="percent">' + value2 + '</div></div><div class="chartlabel">CPU ' + (x + 1) + ' Temp.</div><div class="chartlabel">' + cpu + '</div></div></div>';
             }
 
             document.getElementById('driveCounters').innerHTML = diskCountersHtml;
             document.getElementById('usageCounters').innerHTML = usageCountersHtml;
+            document.getElementById('ramCounters').innerHTML = ramCountersHtml;
             document.getElementById('tempCounters').innerHTML = tempCountersHtml;
 
             $('.diskChart').easyPieChart({
@@ -818,6 +821,7 @@ function ConnectToSignalRPerformanceHub() {
 
         var counter1 = 0;
         var counter2 = 0;
+        var counter3 = 0;
 
         $(".cpuCounter").each(function () {
             $(this).data('easyPieChart').update(nextCpuValues[counter1]);
@@ -829,7 +833,11 @@ function ConnectToSignalRPerformanceHub() {
             counter2++;
         });
 
-        $("#ramCounter").data('easyPieChart').update(nextRamValue);
+        $(".ramCounter").each(function () {
+            $(this).data('easyPieChart').update(nextRamValue);
+            $(this).parent().find(".ramChartLabel:first").html(ramString);
+            counter3++;
+        });
         
         firstRun = false;
     };

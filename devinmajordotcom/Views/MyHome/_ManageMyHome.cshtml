@@ -62,32 +62,46 @@
 
 <br/>
 
-<div class="row">
-    <div class="col-md-12 col-sm-12 text-center">
-        <div class="section-title">
-            <h2>@Model.GuestData.UserConfig.BookmarksTitle for Visitors & New Accounts</h2>
-            <br />
-            @Html.Raw(editFavoritesButton)
-            <span class="line-bar">...</span>
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseFavorites">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>@Model.GuestData.UserConfig.BookmarksTitle for Visitors & New Accounts</a>
+        </h4>
+    </div>
+    <div id="collapseFavorites" class="panel-collapse collapse in">
+        <div class="panel-body">
+
+            <div id="favoritesListContainer">
+                @Html.Partial("../MyHome/_Favorites", Model.GuestData)
+            </div>
+
         </div>
     </div>
-</div>
-<div id="favoritesListContainer">
-    @Html.Partial("../MyHome/_Favorites", Model.GuestData)
 </div>
 
 <br/>
 
-<div class="row">
-    <div class="col-md-12 col-sm-12 text-center">
-        <div class="section-title">
-            <h2>@Model.GuestData.UserConfig.BlogTitle for Visitors & New Accounts</h2>
-                <br />
-                @Html.Raw(editBlogPostsButton)
-            <span class="line-bar">...</span>
-        </div>
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseBlog">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>@Model.GuestData.UserConfig.BlogTitle for Visitors & New Accounts</a>
+        </h4>
     </div>
-    <div id="blogPostContainer">
-        @Html.Partial("../MyHome/_BlogPosts", Model.GuestData)
+    <div id="collapseBlog" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <div id="blogPostContainer">
+                @Html.Partial("../MyHome/_BlogPosts", Model.GuestData)
+            </div>
+
+        </div>
     </div>
 </div>
