@@ -88,7 +88,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/IndexScripts.js"
             ));
 
-            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+            bundles.Add(new ScriptBundle("~/scriptBundles/tinymce").Include(
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/tinymce/jquery.tinymce.min.js",
                 "~/Scripts/tinymce/themes/inlite/theme.js",
@@ -123,7 +123,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/homeScripts.js"
             ));
 
-            bundles.Add(new ScriptBundle("~/bundles/FineUploader").Include(
+            bundles.Add(new ScriptBundle("~/scriptBundles/FineUploader").Include(
                 "~/Scripts/fine-uploader.js"));
 
         }
