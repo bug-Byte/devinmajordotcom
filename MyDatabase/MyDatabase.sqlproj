@@ -170,7 +170,7 @@
     <Build Include="MyHome\SiteLink.sql" />
     <Build Include="MyHome\BlogPost.sql" />
     <Build Include="MyHome\BlogPostComment.sql" />
-    <None Include="Script.099.PostDeployment.AddAuditingStuff.sql" />
+    <None Include="Script.099.PostDeployment.AddAuditingAndPermissions.sql" />
     <None Include="Script.002.PostDeployment.AddMediaDashboardTestData.sql" />
     <None Include="Script.004.PostDeployment.AddMyHomeTestData.sql" />
     <Build Include="MediaDashboard\Tables\UserConfig.sql" />
@@ -195,6 +195,10 @@
     <SqlCmdVariable Include="ProjectLocation">
       <DefaultValue>A:\Documents\GitHub\devinmajordotcom</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="UserRole">
+      <DefaultValue>NT AUTHORITY\SYSTEM</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

@@ -14,4 +14,4 @@ Post-Deployment Script Template
 :r .\Script.002.PostDeployment.AddMediaDashboardTestData.sql
 :r .\Script.003.PostDeployment.AddPortfolioTestData.sql
 :r .\Script.004.PostDeployment.AddMyHomeTestData.sql
-:r .\Script.099.PostDeployment.AddAuditingStuff.sql
+:r .\Script.099.PostDeployment.AddAuditingAndPermissions.sql

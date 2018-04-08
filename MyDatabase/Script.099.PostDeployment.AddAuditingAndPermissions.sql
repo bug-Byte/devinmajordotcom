@@ -54,3 +54,26 @@ GO
 
 DROP TABLE #TempTables;
 GO
+
+
+CREATE USER [$(UserRole)] FOR LOGIN [$(UserRole)]
+
+GO
+
+
+
+ALTER ROLE [db_datareader] ADD MEMBER [$(UserRole)]
+
+GO
+
+
+
+ALTER ROLE [db_datawriter] ADD MEMBER [$(UserRole)]
+
+GO
+
+
+
+ALTER ROLE [db_owner] ADD MEMBER [$(UserRole)]
+
+GO
