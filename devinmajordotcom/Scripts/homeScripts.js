@@ -261,7 +261,7 @@ $(document).ready(function () {
     function getWeather(latitude, longitude) {
         if (latitude != '' && longitude != '') {
             $("#weather").html("Retrieving Weather...");										// write temporary response while we get the weather
-            $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric" + '&appid=1e1dfc63a4f20867543bd3d8fbb81a30', function (data) {	// add '&units=imperial' to get U.S. measurements
+            $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric" + '&appid=1e1dfc63a4f20867543bd3d8fbb81a30', function (data) {	// add '&units=imperial' to get U.S. measurements
                 var currWeather = new Array();								// create array to hold our weather response data
                 currWeather['currTemp'] = Math.round(data.main.temp);				// current temperature
                 currWeather['highTemp'] = Math.round(data.main.temp_max);			// today's high temp
@@ -269,7 +269,7 @@ $(document).ready(function () {
                 currWeather['humidity'] = Math.round(data.main.humidity);			// humidity (in percent)
 
                 currWeather['description'] = data.weather[0].description;				// short text description (ie. rain, sunny, etc.)
-                currWeather['icon'] = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";	// 50x50 pixel png icon
+                currWeather['icon'] = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";	// 50x50 pixel png icon
                 currWeather['cloudiness'] = data.clouds.all;							// cloud cover (in percent)
                 currWeather['windSpeed'] = Math.round(data.wind.speed);				// wind speed
 

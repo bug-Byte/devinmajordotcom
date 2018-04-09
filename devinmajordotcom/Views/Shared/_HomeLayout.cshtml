@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#ffffff">
 
     @Styles.Render("~/Content/homecss")
-    @Styles.Render("~/Content/FineUploader")
+    @Styles.Render("~/Content/FineUploader/fineUploaderCSS")
     
     <style>
         #home {
@@ -77,8 +77,8 @@
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/scriptBundles/FineUploader")
-@Scripts.Render("~/scriptBundles/tinymce")
+@Scripts.Render("~/bundles/FineUploader/fineUploaderScripts")
+@Scripts.Render("~/bundles/tinymce/tinymceScripts")
 @Scripts.Render("~/bundles/homeScripts")
     
 @RenderSection("scripts", required: false)

@@ -71,7 +71,7 @@ namespace devinmajordotcom.App_Start
                 "~/Content/templatemo-style.css"
             ));
 
-            bundles.Add(new StyleBundle("~/Content/FineUploader").Include(
+            bundles.Add(new StyleBundle("~/Content/FineUploader/fineUploaderCSS").Include(
                 "~/Content/FineUploader/fine-uploader-new.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/customScripts").Include(
@@ -88,7 +88,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/IndexScripts.js"
             ));
 
-            bundles.Add(new ScriptBundle("~/scriptBundles/tinymce").Include(
+            bundles.Add(new ScriptBundle("~/bundles/tinymce/tinymceScripts").Include(
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/tinymce/jquery.tinymce.min.js",
                 "~/Scripts/tinymce/themes/inlite/theme.js",
@@ -123,7 +123,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/homeScripts.js"
             ));
 
-            bundles.Add(new ScriptBundle("~/scriptBundles/FineUploader").Include(
+            bundles.Add(new ScriptBundle("~/bundles/FineUploader/fineUploaderScripts").Include(
                 "~/Scripts/fine-uploader.js"));
 
         }
