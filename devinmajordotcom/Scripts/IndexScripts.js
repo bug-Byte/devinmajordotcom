@@ -360,6 +360,12 @@ function InitializeMediaDashboardEventHandlers() {
 
         });
     });
+    RefreshTinyMce();
+    $('#skillCarousel').carousel({
+        interval: false,
+        wrap: false
+    });
+    
 }
 
 function updateLinks() {
@@ -661,6 +667,22 @@ function setupHandlebarsHelpers() {
         renderTechSkillTemplate(template, context);
     });
 
+    $(document).on('click', '#addNewWorkSkillLink', function () {
+        $(".item.active").removeClass("active");
+        $(".carousel-indicators li.active").removeClass("active");
+        $(".mce-tinymce").each(function() {
+            var id = $(this).attr("id");
+            var element = document.getElementById(id);
+            element.parentNode.removeChild(element);
+        });
+        var workSkillTemplateSource = $("#workSkillTemplateScript").html();
+        var template = Handlebars.compile(workSkillTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenWorkSkillID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderWorkSkillTemplate(template, context);
+    });
+
     $(document).on('click', '#addNewLanguageSkillLink', function () {
         var languageSkillTemplateSource = $("#languageSkillTemplateScript").html();
         var template = Handlebars.compile(languageSkillTemplateSource);
@@ -702,6 +724,13 @@ function renderSiteLinkTemplate(template, data) {
 function renderTechSkillTemplate(template, data) {
     var html = template(data);
     document.getElementById("techSkillsList").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
+}
+
+function renderWorkSkillTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("workSkillList").innerHTML += html;
+    document.getElementsByClassName("carousel-indicators")[0].innerHTML += '<li data-target="#myCarousel" data-slide-to="' + data.newID + '" class="active"></li>';
     InitializeMediaDashboardEventHandlers();
 }
 

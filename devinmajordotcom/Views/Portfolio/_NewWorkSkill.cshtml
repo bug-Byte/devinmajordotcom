@@ -1,0 +1,29 @@
+﻿<script type="text/x-handlebars-template" id="workSkillTemplateScript">
+    
+    <input data-val="true" class="hiddenWorkSkillID" data-val-number="The field WorkSkillID must be a number." data-val-required="The WorkSkillID field is required." id="HighlightedWorkSkills_{{newID}}__WorkSkillID" name="HighlightedWorkSkills[{{newID}}].WorkSkillID" type="hidden" value="{{newLinkCounter}}">
+
+    <div class="item workSkill_{{newID}} active">
+
+        <div class="specialWork-wrapper" style="margin-bottom: -21px;">
+            <button data-placement="left" class="btn btn-default iconpicker" name="HighlightedWorkSkills[{{newID}}].SkillIcon" role="iconpicker" data-iconset="fontawesome" data-icon="fa-envelope" type="button" style="font-size: 50px; margin-bottom: 1vh;"><i class="fa fa-envelope"></i><input type="hidden" name="HighlightedWorkSkills[{{newID}}].SkillIcon" value=""><span class="caret"></span></button>
+            <input class="form-control text-center text-uppercase tm-work-h3" data-val="true" data-val-length="Skill Name cannot be longer than 100 characters." data-val-length-max="100" data-val-required="The Skill Name * :  field is required." id="HighlightedWorkSkills_{{newID}}__SkillTitle" name="HighlightedWorkSkills[{{newID}}].SkillTitle" placeholder="Skill Title (Ex: Paleontology)" style="color:white !important;" type="text" value="">
+            <hr>
+            <textarea placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)" name="HighlightedWorkSkills[{{newID}}].SkillDetails" class="tinymce" rows="4" id="HighlightedWorkSkills_{{newID}}__SkillDetails"></textarea>       
+            <br/>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <a class="btn btn-danger deleteSkillGroup deleteSkillLink" data-ajax="true" data-ajax-failure="ManagePortfolioSkillsAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveSkill('.workSkill_{{newID}}', 'workSkill')" data-content="<span class='fa fa-trash' style='font-size:14px !important;padding-bottom:0px;'></span>&amp;nbsp;Remove Skill" href="/Portfolio/RemoveHighlightedSkill/{{newLinkCounter}}" id="deleteWorkSkillLink_{{newLinkCounter}}"><span class="fa fa-trash" style="font-size:14px !important;padding-bottom:0px;"></span>&nbsp;Remove Skill</a>
+                </div>
+                <div class="col-md-12">
+                    <span class="field-validation-valid" data-valmsg-for="HighlightedWorkSkills[{{newID}}].SkillIcon" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="HighlightedWorkSkills[{{newID}}].SkillTitle" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="HighlightedWorkSkills[{{newID}}].SkillDetails" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+</script>

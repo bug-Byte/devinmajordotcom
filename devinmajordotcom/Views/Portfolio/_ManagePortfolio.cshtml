@@ -315,7 +315,7 @@
                         </div>
                     </div>
 
-                    <div id="skillCarousel" class="carousel slide">
+                    <div id="skillCarousel" class="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators" style="bottom: -10px;">
                             @{
@@ -337,7 +337,7 @@
                         </ol>
 
                         <!-- Wrapper for slides -->
-                        <div class="carousel-inner" style="width: 80%;left: 10%;">
+                        <div class="carousel-inner" id="workSkillList" style="width: 80%;left: 10%;">
                             @{
 
                                 var count = 1;
@@ -350,29 +350,38 @@
                                         {
                                             active = "active";
                                         }
-                                        <div class="item @active">
-                                                    <div class="specialWork-wrapper" style="margin-bottom:-21px;">
-                                                        @*<i class="@workItem.SkillIcon"></i>*@
-                                                        <button data-placement="left"
-                                                                class="btn btn-default iconpicker"
-                                                                name="@Html.NameFor(x => x.HighlightedWorkSkills[count - 1].SkillIcon)"
-                                                                role="iconpicker"
-                                                                data-iconset="fontawesome"
-                                                                data-icon="@Model.HighlightedWorkSkills[count - 1].SkillIcon"
-                                                                type="button"
-                                                                style="font-size: 50px; margin-bottom: 1vh;"></button>
-                                                        @Html.TextBoxFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle, new { @class = "form-control text-center text-uppercase tm-work-h3", @style="color:white !important;", @placeholder = "Skill Title (Ex: Paleontology)" })
-                                                        <hr>
-                                                        @Html.TextAreaFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)" })
+                                        var realCount = count - 1;
+                                        @Html.HiddenFor(x => x.HighlightedWorkSkills[realCount].WorkSkillID, new { @class = "hiddenWorkSkillID" })
+                                        <div class="item workSkill_@realCount @active">
+                                            <div class="specialWork-wrapper" style="margin-bottom: -21px;">
+                                                @*<i class="@workItem.SkillIcon"></i>*@
+                                                <button data-placement="left"
+                                                        class="btn btn-default iconpicker"
+                                                        name="@Html.NameFor(x => x.HighlightedWorkSkills[realCount].SkillIcon)"
+                                                        role="iconpicker"
+                                                        data-iconset="fontawesome"
+                                                        data-icon="@Model.HighlightedWorkSkills[realCount].SkillIcon"
+                                                        type="button"
+                                                        style="font-size: 50px; margin-bottom: 1vh;"></button>
+                                                @Html.TextBoxFor(x => x.HighlightedWorkSkills[realCount].SkillTitle, new {@class = "form-control text-center text-uppercase tm-work-h3", @style = "color:white !important;", @placeholder = "Skill Title (Ex: Paleontology)"})
+                                                <hr>
+                                                @Html.TextAreaFor(x => x.HighlightedWorkSkills[realCount].SkillDetails, new {@class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)"})
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-sm-12 text-center">
+                                                        @{
+                                                            var linkText = "<span class='fa fa-trash' style='font-size:14px !important;padding-bottom:0px;'></span>&nbsp;Remove Skill";
+                                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveHighlightedSkill", "Portfolio", new { ID = Model.HighlightedWorkSkills[realCount].WorkSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.workSkill_" + realCount + "', 'workSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteWorkSkillLink_" + Model.TechSkills[realCount].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink" });
+                                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                                        }
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <br />
-                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillIcon)
-                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillTitle)
-                                                            @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[count - 1].SkillDetails)
-                                                        </div>
+                                                    <div class="col-md-12">
+                                                        @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillIcon)
+                                                        @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillTitle)
+                                                        @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillDetails)
                                                     </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         count = count + 1;
                                     }
@@ -390,6 +399,14 @@
                             <span class="glyphicon glyphicon-chevron-right"></span>
                             <span class="sr-only">Next</span>
                         </a>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <button type="button" id="addNewWorkSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Highlighted Work Skill</button>
+                        </div>
                     </div>
 
                     <br />
