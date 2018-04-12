@@ -74,7 +74,7 @@ namespace devinmajordotcom
                     }
                 }           
                 
-                foreach (IHardware t2 in computer.Hardware)
+                foreach (var t2 in computer.Hardware)
                 {
                     if (t2.HardwareType == HardwareType.CPU)
                     {
@@ -84,7 +84,7 @@ namespace devinmajordotcom
                             var packageTemp = t2.Sensors.FirstOrDefault(x => x.SensorType == SensorType.Temperature && x.Name == "CPU Package");
                             hasPackageTemp = packageTemp != null;
                         }
-                        foreach (ISensor t1 in t2.Sensors)
+                        foreach (var t1 in t2.Sensors)
                         {
                             if (t1.SensorType == SensorType.Temperature && (hasPackageTemp.Value && t1.Name == "CPU Package") || (!hasPackageTemp.Value && t1.Name == "CPU Core #1"))
                             {
@@ -96,24 +96,20 @@ namespace devinmajordotcom
                             }
                         }
                     }
-                    if (t2.HardwareType == HardwareType.RAM)
+
+                    if (t2.HardwareType != HardwareType.RAM) continue;
+
+                    foreach (var t1 in t2.Sensors)
                     {
-                        foreach (ISensor t1 in t2.Sensors)
+                        if (t1.SensorType == SensorType.Load)
                         {
-                            if (t1.SensorType == SensorType.Load)
-                            {
-                                ramLoad = t1.Value.GetValueOrDefault();
-                            }
-                            if (t1.SensorType == SensorType.Data && t1.Name == "Used Memory")
-                            {
-                                var available = t2.Sensors.FirstOrDefault(x => x.SensorType == SensorType.Data && x.Name == "Available Memory");
-                                if(available != null)
-                                {
-                                    var used = t1.Value.GetValueOrDefault();
-                                    ramString = Math.Round(used ,0) + "/" + Math.Round(used + available.Value.GetValueOrDefault(), 0) + " GB In Use";
-                                }
-                            }
+                            ramLoad = t1.Value.GetValueOrDefault();
                         }
+                        if (t1.SensorType != SensorType.Data || t1.Name != "Used Memory") continue;
+                        var available = t2.Sensors.FirstOrDefault(x => x.SensorType == SensorType.Data && x.Name == "Available Memory");
+                        if (available == null) continue;
+                        var used = t1.Value.GetValueOrDefault();
+                        ramString = Math.Round(used ,0) + "/" + Math.Round(used + available.Value.GetValueOrDefault(), 0) + " GB In Use";
                     }
                 }
                 
