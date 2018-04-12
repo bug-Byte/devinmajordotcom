@@ -577,6 +577,17 @@ function RemoveContactLink(id) {
     ManagePortfolioContactLinksAjaxSuccess();
 }
 
+function RemoveProject(id) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
+    //$(".hiddenInput_" + number).remove();
+    ManagePortfolioAjaxSuccess();
+}
+
 function ManageMediaAjaxSuccess(data) {
     saveButtonPressed = true;
     updateLinks();

@@ -127,7 +127,7 @@ namespace devinmajordotcom.Services
                 UpdateConfig(viewModel);
                 UpdateProfileAndPersonalDescription(viewModel);
                 UpdateSkills(viewModel);
-                //UpdateProjectsAndFilters(viewModel);
+                UpdateProjectsAndFilters(viewModel);
                 UpdateContactLinks(viewModel);
                 db.SaveChanges();
                 return "success";
@@ -297,7 +297,7 @@ namespace devinmajordotcom.Services
 
         public void UpdateProjectsAndFilters(PortfolioViewModel viewModel)
         {
-            foreach(var project in viewModel.PortfolioProjects)
+            foreach(var project in viewModel.PortfolioProjects.Where(x => !string.IsNullOrEmpty(x.ProjectName)))
             {
                 var projectRecord = db.Portfolio_Projects.FirstOrDefault(x => x.Id == project.ProjectID);
                 int projectID = 0;
@@ -306,44 +306,68 @@ namespace devinmajordotcom.Services
                     projectID = projectRecord.Id;
                     projectRecord.Name = project.ProjectName;
                     projectRecord.Description = project.ProjectDescription;
-                    projectRecord.Image = project.EncodedImage;
+                    if (project.EncodedImage.Length != projectRecord.Image.Length)
+                    {
+                        var newString = System.Text.Encoding.Default.GetString(project.EncodedImage);
+                        projectRecord.Image = Convert.FromBase64String(newString);
+                    }
+                    db.SaveChanges();
                 }
                 else
                 {
                     var newProjectRecord = new Portfolio_Project()
                     {
                         Name = project.ProjectName,
-                        Description = project.ProjectDescription,
-                        Image = project.EncodedImage,
+                        Description = project.ProjectDescription
                     };
+                    if (project.EncodedImage.Length > 0)
+                    {
+                        try
+                        {
+                            var newString = System.Text.Encoding.Default.GetString(project.EncodedImage);
+                            newProjectRecord.Image = Convert.FromBase64String(newString);
+                        }
+                        catch (Exception e)
+                        {
+                            newProjectRecord.Image = project.EncodedImage;
+                        }
+                    }
                     db.Portfolio_Projects.Add(newProjectRecord);
+                    db.SaveChanges();
                     projectID = newProjectRecord.Id;
                 }
-                foreach(var filter in project.ProjectFilters)
+                if (project.ProjectFilters != null && project.ProjectFilters.Count > 0)
                 {
-                    var filterRecord = db.Portfolio_ProjectTypes.FirstOrDefault(x => x.Id == filter.ID);
-                    int filterID = 0;
-                    if(filterRecord != null)
+                    foreach (var filter in project.ProjectFilters)
                     {
-                        filterID = filterRecord.Id;
-                    }
-                    else
-                    {
-                        var newFilter = new Portfolio_ProjectType()
+                        var filterRecord = db.Portfolio_ProjectTypes.FirstOrDefault(x => x.Id == filter.ID);
+                        int filterID = 0;
+                        if (filterRecord != null)
                         {
-                            Type = filter.Name
+                            filterID = filterRecord.Id;
+                        }
+                        else
+                        {
+                            var newFilter = new Portfolio_ProjectType()
+                            {
+                                Type = filter.Name
+                            };
+                            db.Portfolio_ProjectTypes.Add(newFilter);
+                            filterID = newFilter.Id;
+                            db.SaveChanges();
+                        }
+                        var newProjectTypeMapping = new Portfolio_ProjectTypeMapping()
+                        {
+                            ProjectId = projectID,
+                            ProjectTypeId = filterID
                         };
-                        db.Portfolio_ProjectTypes.Add(newFilter);
-                        filterID = newFilter.Id;
+                        db.Portfolio_ProjectTypeMappings.Add(newProjectTypeMapping);
+                        db.SaveChanges();
                     }
-                    var newProjectTypeMapping = new Portfolio_ProjectTypeMapping()
-                    {
-                        ProjectId = projectID,
-                        ProjectTypeId = filterID
-                    };
-                    db.Portfolio_ProjectTypeMappings.Add(newProjectTypeMapping);
                 }
+                db.SaveChanges();
             }
+            
         }
 
         public void UpdateContactLinks(PortfolioViewModel viewModel)
@@ -427,6 +451,21 @@ namespace devinmajordotcom.Services
             if (recordToRemove != null)
             {
                 db.Portfolio_ContactLinks.Remove(recordToRemove);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveProject(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_Projects.FirstOrDefault(x => x.Id == IdToRemove);
+            if (recordToRemove != null)
+            {
+                var mappings = db.Portfolio_ProjectTypeMappings.Where(x => x.ProjectId == IdToRemove);
+                foreach (var mapping in mappings)
+                {
+                    db.Portfolio_ProjectTypeMappings.Remove(mapping);
+                }
+                db.Portfolio_Projects.Remove(recordToRemove);
                 db.SaveChanges();
             }
         }

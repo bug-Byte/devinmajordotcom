@@ -21,492 +21,585 @@
 @using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updatePortfolioForm" }))
 {
     <div class="panel-group">
-        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
-            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse1">
-                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
-                &nbsp;&nbsp;
-                <h4 class="panel-title" style="display: inline;">
-                    <a>Splash Screen</a>
-                </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse1">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Splash Screen</a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">
                     
-                    <div class="row">
-                        <div class="col-sm-6 text-left">
-                            @Html.LabelFor(x => x.PortfolioConfig.WebsiteTitle, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6 text-center">
-                            @Html.TextBoxFor(x => x.PortfolioConfig.WebsiteTitle, new { @class = "form-control" })
-                        </div>
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        @Html.LabelFor(x => x.PortfolioConfig.WebsiteTitle, new { @style = "font-weight:normal;position:relative;top:5px;" })
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-left">
-                            @Html.ValidationMessageFor(x => x.PortfolioConfig.WebsiteTitle)
-                        </div>
+                    <div class="col-sm-6 text-center">
+                        @Html.TextBoxFor(x => x.PortfolioConfig.WebsiteTitle, new { @class = "form-control" })
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        @Html.ValidationMessageFor(x => x.PortfolioConfig.WebsiteTitle)
+                    </div>
+                </div>
                     
-                    <br/>
+                <br/>
                     
-                    <div class="row">
-                        <div class="col-sm-6 text-left">
-                            @Html.LabelFor(x => x.PortfolioConfig.BackgroundImage, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6 text-center">
-                            @Html.HiddenFor(x => x.PortfolioConfig.BackgroundImage, new { @id = "BackgroundImage2", @class="BackgroundImage", activeimage="false" })
-                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.PortfolioConfig.BackgroundImage))" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
-                            <br />
-                            @Html.Raw(uploadButton)
-                        </div>
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        @Html.LabelFor(x => x.PortfolioConfig.BackgroundImage, new { @style = "font-weight:normal;position:relative;top:5px;" })
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-left">
-                            @Html.ValidationMessageFor(x => x.PortfolioConfig.BackgroundImage)
-                        </div>
+                    <div class="col-sm-6 text-center">
+                        @Html.HiddenFor(x => x.PortfolioConfig.BackgroundImage, new { @id = "BackgroundImage2", @class="BackgroundImage", activeimage="false" })
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.PortfolioConfig.BackgroundImage))" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                        <br />
+                        @Html.Raw(uploadButton)
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        @Html.ValidationMessageFor(x => x.PortfolioConfig.BackgroundImage)
+                    </div>
+                </div>
                     
-                    <hr/>
+                <hr/>
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    @Html.LabelFor(x => x.SplashScreenDetails.FirstName, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                                </div>
-                                <div class="col-sm-6">
-                                    @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new {@class = "form-control"})
-                                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                @Html.LabelFor(x => x.SplashScreenDetails.FirstName, new { @style = "font-weight:normal;position:relative;top:5px;" })
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
-                                </div>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new {@class = "form-control"})
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    @Html.LabelFor(x => x.SplashScreenDetails.LastName, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                                </div>
-                                <div class="col-sm-6">
-                                    @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new {@class = "form-control"})
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
                             </div>
                         </div>
                     </div>
-
-                    <br/>
-
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            @Html.LabelFor(x => x.SplashScreenDetails.PositionTitle, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                @Html.LabelFor(x => x.SplashScreenDetails.LastName, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                            </div>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new {@class = "form-control"})
+                            </div>
                         </div>
-                        <div class="col-sm-12">
-                            @Html.TextBoxFor(x => x.SplashScreenDetails.PositionTitle, new {@class = "form-control"})
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.PositionTitle)
-                        </div>
-                    </div>
-
-                    <br/>
-
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            @Html.LabelFor(x => x.SplashScreenDetails.PersonalDescription, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-12">
-                            @Html.TextAreaFor(x => x.SplashScreenDetails.PersonalDescription, new {@class = "tinymce", @rows = "4", @placeholder = "I am a professional architect, and have designed many buildings all over Eastern Canada."})
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.PersonalDescription)
-                        </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        @Html.LabelFor(x => x.SplashScreenDetails.PositionTitle, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.TextBoxFor(x => x.SplashScreenDetails.PositionTitle, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.SplashScreenDetails.PositionTitle)
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        @Html.LabelFor(x => x.SplashScreenDetails.PersonalDescription, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.TextAreaFor(x => x.SplashScreenDetails.PersonalDescription, new {@class = "tinymce", @rows = "4", @placeholder = "I am a professional architect, and have designed many buildings all over Eastern Canada."})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.SplashScreenDetails.PersonalDescription)
                     </div>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
-            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse2">
-                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
-                &nbsp;&nbsp;
-                <h4 class="panel-title" style="display: inline;">
-                    <a>Personal Profile</a>
-                </h4>
-            </div>
-            <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
+    </div>
+        
+    <br/>
 
-                    <h5 class="text-center" style="font-weight: bold;">General Details</h5>
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                                                                                                                                                                                                                                                                    -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                                                                                                                                                                                                                                                                    box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse2">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Personal Profile</a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.ProfileDetails.DateOfBirth, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class='input-group date' id='date'>
-                                    @Html.TextBoxFor(x => x.ProfileDetails.DateOfBirth, new { @class = "form-control datetimepicker" })
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                <h5 class="text-center" style="font-weight: bold;">General Details</h5>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(x => x.ProfileDetails.DateOfBirth, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class='input-group date' id='date'>
+                                @Html.TextBoxFor(x => x.ProfileDetails.DateOfBirth, new { @class = "form-control datetimepicker" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
                             </div>
+                        </div>
                             
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.ProfileDetails.DateOfBirth)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.ProfileDetails.Address, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.ProfileDetails.Address, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.ProfileDetails.Address)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.ProfileDetails.PhoneNumber, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.ProfileDetails.PhoneNumber, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.ProfileDetails.PhoneNumber)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.ProfileDetails.Email, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.ProfileDetails.Email, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.ProfileDetails.Email)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.ProfileDetails.WebsiteText, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.ProfileDetails.WebsiteText, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteText)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            @Html.LabelFor(x => x.ProfileDetails.WebsiteURL, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                        </div>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(x => x.ProfileDetails.WebsiteURL, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteURL)
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <h5 class="text-center" style="font-weight: bold;">Describe Yourself</h5>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 text-center">
-                                    @Html.LabelFor(x => x.PersonalDescription.Adjective1, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                                </div>
-                                <div class="col-sm-12">
-                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective1, new { @class = "form-control" })
-                                </div>
-                                <div class="col-sm-12">
-                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective2, new { @class = "form-control" })
-                                </div>
-                                <div class="col-sm-12">
-                                    @Html.TextBoxFor(x => x.PersonalDescription.Adjective3, new { @class = "form-control" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 text-center">
-                                    @Html.LabelFor(x => x.PersonalDescription.Blurb, new { @style = "font-weight:normal;position:relative;top:5px;" })
-                                </div>
-                                <div class="col-sm-12">
-                                    @Html.TextAreaFor(x => x.PersonalDescription.Blurb, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I am also 21 years old, I am into running and bike riding, and love long walks on the beach!)" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    @Html.ValidationMessageFor(x => x.PersonalDescription.Blurb)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br />
-
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.ProfileDetails.DateOfBirth)
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(x => x.ProfileDetails.Address, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.ProfileDetails.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.ProfileDetails.Address)
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(x => x.ProfileDetails.PhoneNumber, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.ProfileDetails.PhoneNumber, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.ProfileDetails.PhoneNumber)
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(x => x.ProfileDetails.Email, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.ProfileDetails.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.ProfileDetails.Email)
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(x => x.ProfileDetails.WebsiteText, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.ProfileDetails.WebsiteText, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteText)
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(x => x.ProfileDetails.WebsiteURL, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.ProfileDetails.WebsiteURL, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteURL)
+                    </div>
+                </div>
+
+                <br />
+
+                <h5 class="text-center" style="font-weight: bold;">Describe Yourself</h5>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                @Html.LabelFor(x => x.PersonalDescription.Adjective1, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.PersonalDescription.Adjective1, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.PersonalDescription.Adjective2, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.PersonalDescription.Adjective3, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                @Html.LabelFor(x => x.PersonalDescription.Blurb, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextAreaFor(x => x.PersonalDescription.Blurb, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I am also 21 years old, I am into running and bike riding, and love long walks on the beach!)" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.PersonalDescription.Blurb)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
             </div>
         </div>
-        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
-            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse3">
-                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
-                &nbsp;&nbsp;
-                <h4 class="panel-title" style="display: inline;">
-                    <a>Skills</a>
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
+    </div>
+        
+    <br/>
 
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h3>Highlighted Skills</h3>
-                        </div>
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                                                                                                                                                                                                                                                                                                          -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                                                                                                                                                                                                                                                                                                          box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse3">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Skills</a>
+            </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h3>Highlighted Skills</h3>
                     </div>
+                </div>
 
-                    <div id="skillCarousel" class="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators" style="bottom: -10px;">
-                            @{
-                                var counter = 0;
-                                if (Model.HighlightedWorkSkills != null)
+                <div id="skillCarousel" class="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators" style="bottom: -10px;">
+                        @{
+                            var counter = 0;
+                            if (Model.HighlightedWorkSkills != null)
+                            {
+                                foreach (var workItem in Model.HighlightedWorkSkills)
                                 {
-                                    foreach (var workItem in Model.HighlightedWorkSkills)
+                                    var className = "";
+                                    if(counter == 0)
                                     {
-                                        var className = "";
-                                        if(counter == 0)
-                                        {
-                                            className = "active";
-                                        }
-                                        <li data-target="#myCarousel" id="indicator_@counter" data-slide-to="@counter" class="@className"></li>
-                                        counter++;
+                                        className = "active";
                                     }
+                                    <li data-target="#myCarousel" id="indicator_@counter" data-slide-to="@counter" class="@className"></li>
+                                    counter++;
                                 }
                             }
-                        </ol>
+                        }
+                    </ol>
 
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" id="workSkillList" style="width: 80%;left: 10%;">
-                            @{
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" id="workSkillList" style="width: 80%;left: 10%;">
+                        @{
 
-                                var count = 1;
-                                if (Model.HighlightedWorkSkills != null)
+                            var count = 1;
+                            if (Model.HighlightedWorkSkills != null)
+                            {
+                                foreach (var workItem in Model.HighlightedWorkSkills)
                                 {
-                                    foreach (var workItem in Model.HighlightedWorkSkills)
+                                    var active = "";
+                                    if (count == 1)
                                     {
-                                        var active = "";
-                                        if (count == 1)
-                                        {
-                                            active = "active";
-                                        }
-                                        var realCount = count - 1;
-                                        @Html.HiddenFor(x => x.HighlightedWorkSkills[realCount].WorkSkillID, new { @class = "hiddenWorkSkillID" })
-                                        <div class="item workSkill_@realCount @active">
-                                            <div class="specialWork-wrapper" style="margin-bottom: -21px;">
-                                                @*<i class="@workItem.SkillIcon"></i>*@
-                                                <button data-placement="left"
-                                                        class="btn btn-default iconpicker"
-                                                        name="@Html.NameFor(x => x.HighlightedWorkSkills[realCount].SkillIcon)"
-                                                        role="iconpicker"
-                                                        data-iconset="fontawesome"
-                                                        data-icon="@Model.HighlightedWorkSkills[realCount].SkillIcon"
-                                                        type="button"
-                                                        style="font-size: 50px; margin-bottom: 1vh;"></button>
-                                                @Html.TextBoxFor(x => x.HighlightedWorkSkills[realCount].SkillTitle, new {@class = "form-control text-center text-uppercase tm-work-h3", @style = "color:white !important;", @placeholder = "Skill Title (Ex: Paleontology)"})
-                                                <hr>
-                                                @Html.TextAreaFor(x => x.HighlightedWorkSkills[realCount].SkillDetails, new {@class = "form-control tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)"})
-                                                <br />
-                                                <div class="row">
-                                                    <div class="col-sm-12 text-center">
-                                                        @{
-                                                            var linkText = "<span class='fa fa-trash' style='font-size:14px !important;padding-bottom:0px;'></span>&nbsp;Remove Skill";
-                                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveHighlightedSkill", "Portfolio", new { ID = Model.HighlightedWorkSkills[realCount].WorkSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.workSkill_" + realCount + "', 'workSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteWorkSkillLink_" + Model.TechSkills[realCount].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink" });
-                                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
-                                                        }
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillIcon)
-                                                        @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillTitle)
-                                                        @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillDetails)
-                                                    </div>
+                                        active = "active";
+                                    }
+                                    var realCount = count - 1;
+                                    @Html.HiddenFor(x => x.HighlightedWorkSkills[realCount].WorkSkillID, new { @class = "hiddenWorkSkillID" })
+                                    <div class="item workSkill_@realCount @active">
+                                        <div class="specialWork-wrapper" style="margin-bottom: -21px;">
+                                            @*<i class="@workItem.SkillIcon"></i>*@
+                                            <button data-placement="left"
+                                                    class="btn btn-default iconpicker"
+                                                    name="@Html.NameFor(x => x.HighlightedWorkSkills[realCount].SkillIcon)"
+                                                    role="iconpicker"
+                                                    data-iconset="fontawesome"
+                                                    data-icon="@Model.HighlightedWorkSkills[realCount].SkillIcon"
+                                                    type="button"
+                                                    style="font-size: 50px; margin-bottom: 1vh;"></button>
+                                            @Html.TextBoxFor(x => x.HighlightedWorkSkills[realCount].SkillTitle, new {@class = "form-control text-center text-uppercase tm-work-h3", @style = "color:white !important;", @placeholder = "Skill Title (Ex: Paleontology)"})
+                                            <hr>
+                                            @Html.TextAreaFor(x => x.HighlightedWorkSkills[realCount].SkillDetails, new {@class = "form-control tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I dig up bones and recreate skeletons of ancient, extinct animal species)"})
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-sm-12 text-center">
+                                                    @{
+                                                        var linkText = "<span class='fa fa-trash' style='font-size:14px !important;padding-bottom:0px;'></span>&nbsp;Remove Skill";
+                                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveHighlightedSkill", "Portfolio", new { ID = Model.HighlightedWorkSkills[realCount].WorkSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.workSkill_" + realCount + "', 'workSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteWorkSkillLink_" + Model.TechSkills[realCount].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink" });
+                                                        @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                                    }
+                                                </div>
+                                                <div class="col-md-12">
+                                                    @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillIcon)
+                                                    @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillTitle)
+                                                    @Html.ValidationMessageFor(x => x.HighlightedWorkSkills[realCount].SkillDetails)
                                                 </div>
                                             </div>
                                         </div>
-                                        count = count + 1;
-                                    }
+                                    </div>
+                                    count = count + 1;
                                 }
-
                             }
-                        </div>
 
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#skillCarousel" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#skillCarousel" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    
-                    <br/>
-
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <button type="button" id="addNewWorkSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Highlighted Work Skill</button>
-                        </div>
-                    </div>
-
-                    <br />
-                
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h3>Technical Skills</h3>
-                        </div>
-                    </div>
-
-                    @{
-                        count = 0;
-                    }
-
-                    <div id="techSkillContainer" style="overflow:auto !important;" class="">
-                        <ul id="techSkillsList" class="mediaSortable">
-                            @foreach (var link in Model.TechSkills)
-                            {
-                                @Html.HiddenFor(x => x.TechSkills[count].TechSkillID, new { @class = "hiddenTechSkillID hiddenInput_" + Model.TechSkills[count].TechSkillID })
-                                <li class="techSkill techSkill_@count handlebarsItem" style="padding-top: 10px; margin-bottom: 2vh;">
-                                    <div class="row">
-                                        <div class="col-sm-12 text-left">
-                                            @Html.TextAreaFor(x => x.TechSkills[count].SkillDescription, new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-sm-12 text-right">
-                                            @{
-                                                var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Skill";
-                                                var actionLink = Ajax.ActionLink("REPLACE", "RemoveTechSkill", "Portfolio", new { ID = Model.TechSkills[count].TechSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.techSkill_" + count + "', 'techSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.TechSkills[count].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
-                                                @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
-                                            }
-                                        </div>
-                                    </div>
-                                </li>
-                                count++;
-                            }
-                        </ul>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <button type="button" id="addNewTechSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Technical Skill</button>
-                        </div>
-                    </div>
-
-                    <br/>
-
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h3>Language Skills</h3>
-                        </div>
-                    </div>
-
-                    <div id="languageSkillContainer">
-                        @if (Model.LanguageSkills != null && Model.LanguageSkills.Count > 0)
-                        {
-                            for (var i = 0; i < Model.LanguageSkills.Count; i++)
-                            {
-                                @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID, new { @class = "language hiddenSkillId", data_skillid = Model.LanguageSkills[i].LanguageSkillID })
-                                <div style="margin-left:0px;margin-bottom:20px;" class="languageSkill languageSkill_@i">
-                                    <div class="well well-sm text-left">
-                                        <h5>Language Name</h5>
-                                        @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
-                                        <h5>Language Specifics (if programming language or applicable)</h5>
-                                        @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
-                                        @{
-                                            var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Language";
-                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveLanguageSkill", "Portfolio", new { ID = Model.LanguageSkills[i].LanguageSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.languageSkill_" + i + "', 'languageSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.LanguageSkills[i].LanguageSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
-                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
-                                        }
-                                        <br/>
-                                    </div>
-                                </div>
-                            }
                         }
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <button type="button" id="addNewLanguageSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Language</button>
-                        </div>
-                    </div>
 
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#skillCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#skillCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
+                    
+                <br/>
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" id="addNewWorkSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Highlighted Work Skill</button>
+                    </div>
+                </div>
+
+                <br />
+                
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h3>Technical Skills</h3>
+                    </div>
+                </div>
+
+                @{
+                    count = 0;
+                }
+
+                <div id="techSkillContainer" style="overflow:auto !important;" class="">
+                    <ul id="techSkillsList" class="mediaSortable">
+                        @foreach (var link in Model.TechSkills)
+                        {
+                            @Html.HiddenFor(x => x.TechSkills[count].TechSkillID, new { @class = "hiddenTechSkillID hiddenInput_" + Model.TechSkills[count].TechSkillID })
+                            <li class="techSkill techSkill_@count handlebarsItem" style="padding-top: 10px; margin-bottom: 2vh;">
+                                <div class="row">
+                                    <div class="col-sm-12 text-left">
+                                        @Html.TextAreaFor(x => x.TechSkills[count].SkillDescription, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-12 text-right">
+                                        @{
+                                            var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Skill";
+                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveTechSkill", "Portfolio", new { ID = Model.TechSkills[count].TechSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.techSkill_" + count + "', 'techSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.TechSkills[count].TechSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
+                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                            count++;
+                        }
+                    </ul>
+                </div>
+                    
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" id="addNewTechSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Technical Skill</button>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h3>Language Skills</h3>
+                    </div>
+                </div>
+
+                <div id="languageSkillContainer">
+                    @if (Model.LanguageSkills != null && Model.LanguageSkills.Count > 0)
+                    {
+                        for (var i = 0; i < Model.LanguageSkills.Count; i++)
+                        {
+                            @Html.HiddenFor(x => x.LanguageSkills[i].LanguageSkillID, new { @class = "language hiddenSkillId", data_skillid = Model.LanguageSkills[i].LanguageSkillID })
+                            <div style="margin-left:0px;margin-bottom:20px;" class="languageSkill languageSkill_@i">
+                                <div class="well well-sm text-left">
+                                    <h5>Language Name</h5>
+                                    @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
+                                    <h5>Language Specifics (if programming language or applicable)</h5>
+                                    @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
+                                    @{
+                                        var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Language";
+                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveLanguageSkill", "Portfolio", new { ID = Model.LanguageSkills[i].LanguageSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.languageSkill_" + i + "', 'languageSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.LanguageSkills[i].LanguageSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });
+                                        @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                    }
+                                    <br/>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" id="addNewLanguageSkillLink" class="btn btn-success" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Language</button>
+                    </div>
+                </div>
+
             </div>
         </div>
-        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
-            <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse4">
-                <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
-                &nbsp;&nbsp;
-                <h4 class="panel-title" style="display: inline;">
-                    <a>Projects</a>
-                </h4>
-            </div>
-            <div id="collapse4" class="panel-collapse collapse">
-                <div class="panel-body">
+    </div>
+        
+    <br />
+
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse4">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Projects</a>
+            </h4>
+        </div>
+        <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+                    
+                <div id="projectsContainer" style="overflow:auto !important;" class="">
+                    <ul id="projectsList" class="mediaSortable">
+                        @{
+                            count = 0;
+                        }
+                        @foreach (var project in Model.PortfolioProjects)
+                        {
+                            @Html.HiddenFor(x => x.PortfolioProjects[count].ProjectID, new {@class = "hiddenProjectID hiddenInput_" + Model.PortfolioProjects[count].ProjectID })
+                            <li class="projectLink handlebarsItem" id="projectLink_@count" style="padding-top: 10px; margin-bottom: 2vh;">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                                        <h4>
+                                            <span class="titleContainer">@Model.PortfolioProjects[count].ProjectName</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @{
+                                            var linkText = "<span class='fa fa-trash'></span>";
+                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveProject", "Portfolio", new {ID = Model.PortfolioProjects[count].ProjectID}, new AjaxOptions() {HttpMethod = "GET", OnSuccess = "RemoveProject('#deleteProject_" + Model.PortfolioProjects[count].ProjectID + "')", OnFailure = "ManagePortfolioSkillsAjaxFailure"}, new {data_content = linkText, @id = "deleteProject_" + Model.PortfolioProjects[count].ProjectID, @class = "btn btn-danger deleteGroup deleteProjectLink", @style = "float:right;"});
+                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                        }
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                                        @Html.LabelFor(x => x.PortfolioProjects[count].ProjectName, new { @style = "font-weight:normal;position:relative;" })
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        @Html.TextBoxFor(x => x.PortfolioProjects[count].ProjectName, new { @class = "form-control namer", style = "margin-bottom: 0px;text-align:center;", placeholder = "Display Name" })
+                                    </div>
+                                </div>
+                                    
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                                        @Html.LabelFor(x => x.PortfolioProjects[count].ProjectDescription, new { @style = "font-weight:normal;position:relative;" })
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        @Html.TextAreaFor(x => x.PortfolioProjects[count].ProjectDescription, new { @class = "form-control tinymce", rows = "4", placeholder = "Project Description" })
+                                    </div>
+                                </div>
+                                    
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;
+                                        @Html.LabelFor(x => x.PortfolioProjects[count].EncodedImage, new { @style = "font-weight:normal;position:relative;" })
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        @Html.HiddenFor(x => x.PortfolioProjects[count].EncodedImage, new { @id = "EncodedImage_" + count, @class="BackgroundImage", activeimage="false" })
+                                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.PortfolioProjects[count].EncodedImage))" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                                        <br />
+                                        @Html.Raw(uploadButton)
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        @Html.ValidationMessageFor(x => x.PortfolioProjects[count].ProjectName)
+                                    </div>
+                                </div>
+                            </li>
+                            count++;
+                        }
+                    </ul>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button class="form-control btn btn-success" id="addNewProjectLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Project</button>
+                    </div>
+                </div>
+
             </div>
         </div>
-        <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+    </div>
+        
+    <br/>
+
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
         -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
         box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
             <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse5">

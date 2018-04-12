@@ -187,8 +187,10 @@ namespace devinmajordotcom.ViewModels
         [Required]
         public string ProjectName { get; set; }
 
+        [DisplayName("Project Image : ")]
         public byte[] EncodedImage { get; set; }
 
+        [DisplayName("Project Description : ")]
         public string ProjectDescription { get; set; }
 
         public List<DropDownViewModel> ProjectFilters { get; set; }

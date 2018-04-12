@@ -47,5 +47,10 @@ namespace devinmajordotcom.Controllers
             portfolioService.RemoveContactLink(ID);
         }
 
+        public void RemoveProject(int ID)
+        {
+            portfolioService.RemoveProject(ID);
+        }
+
     }
 }

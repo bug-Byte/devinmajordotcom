@@ -32,5 +32,7 @@ namespace devinmajordotcom.Services
 
         void RemoveLanguageSkill(int IdToRemove);
 
+        void RemoveProject(int IdToRemove);
+
     }
 }
