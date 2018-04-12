@@ -385,6 +385,11 @@ function HideAdminFirstRunModal() {
 function RefreshTinyMce() {
     tinymce.remove();
     tinymce.init({
+        setup:function(ed) {
+            ed.on('change', function(e) {
+                $("#" + ed.id).closest('textarea').html(ed.getContent());
+            });
+        },
         selector: '.tinymce',
         theme: 'modern',
         branding: false,
@@ -624,9 +629,21 @@ function ManagePortfolioSkillsAjaxFailure(data) {
 }
 
 function RemoveSkill(classname, type) {
+    
     var element = document.getElementsByClassName(classname.replace(".",""))[0];
     element.parentNode.removeChild(element);
     ManagePortfolioSkillsAjaxSuccess();
+
+    if (type == 'workSkill') {
+        var originalNumber = classname.split("_")[1];
+        var newID = $('li[data-slide-to="' + originalNumber + '"]').attr("id");
+        var Lielement = document.getElementById(newID);
+        Lielement.parentNode.removeChild(Lielement);
+        $('li[data-target="#myCarousel"]:first').addClass("active");
+        $(".item:first").addClass("active");
+
+    }
+
 }
 
 function setupHandlebarsHelpers() {
@@ -730,7 +747,7 @@ function renderTechSkillTemplate(template, data) {
 function renderWorkSkillTemplate(template, data) {
     var html = template(data);
     document.getElementById("workSkillList").innerHTML += html;
-    document.getElementsByClassName("carousel-indicators")[0].innerHTML += '<li data-target="#myCarousel" data-slide-to="' + data.newID + '" class="active"></li>';
+    document.getElementsByClassName("carousel-indicators")[0].innerHTML += '<li data-target="#myCarousel" id="indicator_' + data.newID + '" data-slide-to="' + data.newID + '" class="active"></li>';
     InitializeMediaDashboardEventHandlers();
 }
 
