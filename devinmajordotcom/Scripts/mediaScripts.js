@@ -1,5 +1,7 @@
 ﻿var newWidth = $('.site-wrapper').width() - 74.67;
 
+var links;
+
 function removeDisable() {
     $('body').data('loading-disabled', false);
 }
@@ -18,12 +20,16 @@ function createIframe(link) {
     if (link.IsDefault) {
         i.style = "width: 100%; min-height: 100%; z-index: -1; border: none;";
     } else {
-        i.style = "width: 100%; min-height: 100%; z-index: -1; border: none;";
+        i.style = "width: 100%; min-height: 100%; z-index: -1; border: none; display:none;";
     }
     document.getElementById("content").appendChild(i);
 };
 
 $(document).ready(function () {
+
+    for (var i = 0; i < links.length; i++) {
+        createIframe(links[i]);
+    }
 
     $(document).on("click", ".menu li[data-type='link'] a", function () {
         var id = "#" + $(this).data('framename');

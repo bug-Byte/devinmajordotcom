@@ -82,68 +82,21 @@
     </nav>
 
     <div id="content">
-        @if (Model.SidebarLinks.Count > 0)
-        {
-            var count = 0;
-            if (Model.CurrentUserViewModel.UserIsAdmin)
-            {
-
-                @section scripts {
-                    <script type="text/javascript">
-                        @foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled))
-                        {
-                            var serialized = Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks[count], new JsonSerializerSettings()
-                            {
-                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                            }));
-                            if (link.URL != null)
-                            {
-                                <text>
-                                    // Check for browser support of event handling capability
-                                    if (window.addEventListener)
-                                        window.addEventListener("load", createIframe(@serialized), false);
-                                    else if (window.attachEvent)
-                                        window.attachEvent("onload", createIframe(@serialized));
-                                    else window.onload = createIframe(@serialized);
-                                </text>
-                            }
-                            count++;
-                        }
-                    </script>
-                }
-            }
-            else
-            {
-                @section scripts {
-                    <script type="text/javascript">
-                        @foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic))
-                        {
-                            var serialized = Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks[count], new JsonSerializerSettings()
-                            {
-                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                            }));
-                            if (link.URL != null)
-                            {
-                                <text>
-                                    // Check for browser support of event handling capability
-                                    if (window.addEventListener)
-                                        window.addEventListener("load", createIframe(@serialized), false);
-                                    else if (window.attachEvent)
-                                        window.attachEvent("onload", createIframe(@serialized));
-                                    else window.onload = createIframe(@serialized);
-                                </text>
-                            }
-                            count++;
-                        }
-                    </script>
-                }
-            }
-        }
-        else
+        @if (Model.SidebarLinks.Count <= 0)
         {
             @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
         }
-
+        else
+        {
+            @section scripts {
+                <script type="text/javascript">
+                    links = @Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks, new JsonSerializerSettings()
+                    {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    }));
+                </script>
+            }
+        }
     </div>
 </div>
 
