@@ -1,4 +1,5 @@
 ﻿@using devinmajordotcom.Helpers;
+@using Newtonsoft.Json
 @model devinmajordotcom.ViewModels.MediaDashboardViewModel
 @{
     Layout = "../Shared/_MediaLayout.cshtml";
@@ -86,48 +87,55 @@
             var count = 0;
             if (Model.CurrentUserViewModel.UserIsAdmin)
             {
-                foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled))
-                {
-                    if (link.URL != null)
-                    {
-                        <iframe src="@Model.SidebarLinks[count].URL"
-                                style="width: 100%; min-height: 100%; z-index: -1; border: none; @if (!Model.SidebarLinks[count].IsDefault) { <text>display:none;</text> }"
-                                id="@Model.SidebarLinks[count].ID"
-                                scrolling="auto"
-                                sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
-                                allowfullscreen="true"
-                                webkitallowfullscreen="true"
-                                class="z-iframe"
-                                frameborder="0"></iframe>
-                    }
-                    else
-                    {
-                        //TODO: Add something here, preferably make use of Controller/Action variables
-                    }
-                    count++;
+
+                @section scripts {
+                    <script type="text/javascript">
+                        @foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled))
+                        {
+                            var serialized = Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks[count], new JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                            }));
+                            if (link.URL != null)
+                            {
+                                <text>
+                                    // Check for browser support of event handling capability
+                                    if (window.addEventListener)
+                                        window.addEventListener("load", createIframe(@serialized), false);
+                                    else if (window.attachEvent)
+                                        window.attachEvent("onload", createIframe(@serialized));
+                                    else window.onload = createIframe(@serialized);
+                                </text>
+                            }
+                            count++;
+                        }
+                    </script>
                 }
             }
             else
             {
-                foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic))
-                {
-                    if (link.URL != null)
-                    {
-                        <iframe src="@Model.SidebarLinks[count].URL"
-                                style="width: 100%; min-height: 100%; z-index: -1; border: none; @if (!Model.SidebarLinks[count].IsDefault) { <text>display:none;</text> }"
-                                id="@Model.SidebarLinks[count].ID"
-                                scrolling="auto"
-                                sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
-                                allowfullscreen="true"
-                                webkitallowfullscreen="true"
-                                class="z-iframe"
-                                frameborder="0"></iframe>
-                    }
-                    else
-                    {
-                        //TODO: Add something here, preferably make use of Controller/Action variables
-                    }
-                    count++;
+                @section scripts {
+                    <script type="text/javascript">
+                        @foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic))
+                        {
+                            var serialized = Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks[count], new JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                            }));
+                            if (link.URL != null)
+                            {
+                                <text>
+                                    // Check for browser support of event handling capability
+                                    if (window.addEventListener)
+                                        window.addEventListener("load", createIframe(@serialized), false);
+                                    else if (window.attachEvent)
+                                        window.attachEvent("onload", createIframe(@serialized));
+                                    else window.onload = createIframe(@serialized);
+                                </text>
+                            }
+                            count++;
+                        }
+                    </script>
                 }
             }
         }

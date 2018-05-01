@@ -4,6 +4,25 @@ function removeDisable() {
     $('body').data('loading-disabled', false);
 }
 
+function createIframe(link) {
+
+    var i = document.createElement("iframe");
+    i.src = link.URL;
+    i.scrolling = "auto";
+    i.frameborder = "0";
+    i.id = link.ID.toString();
+    i.class = "z-iframe";
+    i.allowfullscreen = "true";
+    i.webkitallowfullscreen = "true";
+    i.sandbox = "allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals";
+    if (link.IsDefault) {
+        i.style = "width: 100%; min-height: 100%; z-index: -1; border: none;";
+    } else {
+        i.style = "width: 100%; min-height: 100%; z-index: -1; border: none;";
+    }
+    document.getElementById("content").appendChild(i);
+};
+
 $(document).ready(function () {
 
     $(document).on("click", ".menu li[data-type='link'] a", function () {
