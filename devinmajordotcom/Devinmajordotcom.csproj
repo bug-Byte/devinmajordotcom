@@ -870,6 +870,7 @@
     <Content Include="Views\Shared\_BlogLayout.cshtml" />
     <Content Include="Views\Portfolio\_NewContactLink.cshtml" />
     <Content Include="Views\Portfolio\_NewWorkSkill.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
