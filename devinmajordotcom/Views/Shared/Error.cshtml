@@ -1,43 +1,64 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
+﻿<!DOCTYPE html>
+<html lang="en">
 @{
-    ViewBag.Title = "Error";
-    ViewBag.Layout = (string)ViewBag.Layout;
+    var model = (HandleErrorInfo) ViewBag.ErrorStuff;
 }
+<head>
 
-@if (Model.ControllerName != "Portfolio")
-{
-    <style>
-        .absolute-center {
-            margin: auto;
-            position: absolute;
-            top: 40vh;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: 2000;
-        }
-    </style>
-}
-@if (Model.ControllerName == "MediaDashboard" || Model.ControllerName == "MyHome")
-{
-    <style>
-        body {
-            color: black !important;
-        }
-        h4 {
-            color: black !important;
-        }
-    </style>
-}
-else
-{
-    <style>
-        body {
-            color: white;
-        }
-    </style>
-}
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Action("../Content/Images/favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Action("../Content/Images/favicon/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Action("../Content/Images/favicon/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Action("../Content/Images/favicon/site.webmanifest")">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    @if (model.ControllerName != "Portfolio")
+    {
+        <style>
+            .absolute-center {
+                margin: auto;
+                position: absolute;
+                top: 40vh;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                z-index: 2000;
+            }
+        </style>
+    }
+    @if (model.ControllerName == "MediaDashboard" || model.ControllerName == "MyHome")
+    {
+        <style>
+            body {
+                color: black !important;
+            }
+            h4 {
+                color: black !important;
+            }
+        </style>
+    }
+    else
+    {
+        <style>
+            body {
+                color: white;
+            }
+        </style>
+    }
+
+    @Styles.Render("~/Content/homecss")
+
+</head>
+
+<body class="blogBody">
 
 <div class="row absolute-center">
     <div class="col-sm-6 col-sm-offset-3 text-center">
@@ -45,7 +66,17 @@ else
         <hr>
         <h4 class="text-center">Sorry, there is nothing available here at this time! Please contact us here, and let us know you saw this message.</h4>
         <h4 class="text-center">Thank you, kind Stranger!</h4>
-        <hr />
-        <h5 class="text-center">Cheers, <br /> Admins at devinmajor.com</h5>
+        <hr/>
+        <h5 class="text-center">Cheers, <br/> Admins at devinmajor.com</h5>
     </div>
 </div>
+
+<div id="ajaxAlertContainer"></div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

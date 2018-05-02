@@ -8,7 +8,7 @@
 
     @if (Model.BlogPostID == 0)
     {
-        @Html.Partial("Error", new HandleErrorInfo(new Exception(), "MyHome", "BlogPost"))
+        @Html.Partial("_Error", new HandleErrorInfo(new Exception(), "MyHome", "BlogPost"))
     }
     else
     {

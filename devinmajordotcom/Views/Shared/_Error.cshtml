@@ -1,0 +1,51 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    ViewBag.Layout = (string)ViewBag.Layout;
+}
+
+@if (Model.ControllerName != "Portfolio")
+{
+    <style>
+        .absolute-center {
+            margin: auto;
+            position: absolute;
+            top: 40vh;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 2000;
+        }
+    </style>
+}
+@if (Model.ControllerName == "MediaDashboard" || Model.ControllerName == "MyHome")
+{
+    <style>
+        body {
+            color: black !important;
+        }
+        h4 {
+            color: black !important;
+        }
+    </style>
+}
+else
+{
+    <style>
+        body {
+            color: white;
+        }
+    </style>
+}
+
+<div class="row absolute-center">
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <span class="text-center glyphicon glyphicon-question-sign" style="font-size: 50px;"></span>
+        <hr>
+        <h4 class="text-center">Sorry, there is nothing available here at this time! Please contact us here, and let us know you saw this message.</h4>
+        <h4 class="text-center">Thank you, kind Stranger!</h4>
+        <hr />
+        <h5 class="text-center">Cheers, <br /> Admins at devinmajor.com</h5>
+    </div>
+</div>

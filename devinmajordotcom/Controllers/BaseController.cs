@@ -95,5 +95,13 @@ namespace devinmajordotcom.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Error()
+        {
+            ViewBag.Title = "3RR0R";
+            ViewBag.ErrorStuff = new HandleErrorInfo(new Exception(), "MediaDashboard", "Index");
+            return PartialView("Error");
+        }
+
     }
 }
