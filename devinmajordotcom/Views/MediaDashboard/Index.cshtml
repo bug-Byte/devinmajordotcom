@@ -1,4 +1,5 @@
 ﻿@using devinmajordotcom.Helpers;
+@using Newtonsoft.Json
 @model devinmajordotcom.ViewModels.MediaDashboardViewModel
 @{
     Layout = "../Shared/_MediaLayout.cshtml";
@@ -32,7 +33,7 @@
                     foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled))
                     {
                         <li data-type="link" data-newtitle="@sidebarLink.DisplayName" @if (sidebarLink.IsDefault) { <text> class="active" </text> }>
-                            <a href="#" data-framename="@sidebarLink.ID">
+                            <a href="#" data-url="@sidebarLink.URL" data-framename="@sidebarLink.ID">
                                 <i class="fa @sidebarLink.DisplayIcon"></i>
                                 <span class="displayName">&nbsp;&nbsp;@sidebarLink.DisplayName</span>
                             </a>
@@ -44,7 +45,7 @@
                     foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic))
                     {
                         <li data-type="link" data-newtitle="@sidebarLink.DisplayName" @if (sidebarLink.IsDefault) { <text> class="active" </text> }>
-                            <a href="#" data-framename="@sidebarLink.ID">
+                            <a href="#" data-url="@sidebarLink.URL" data-framename="@sidebarLink.ID">
                                 <i class="fa @sidebarLink.DisplayIcon"></i>
                                 <span class="displayName">&nbsp;&nbsp;@sidebarLink.DisplayName</span>
                             </a>
@@ -81,61 +82,84 @@
     </nav>
 
     <div id="content">
-        @if (Model.SidebarLinks.Count > 0)
+        
+        <!-- PRE LOADER -->
+        <section class="preloader">
+            <div class="spinner text-center">
+                <span class="spinner-rotate"></span>
+                <span style="color: gray !important; position: relative; top: 75px;">Loading your dashboard application...</span>
+            </div>
+        </section>
+
+        @if (Model.SidebarLinks.Count <= 0)
         {
-            var count = 0;
-            if (Model.CurrentUserViewModel.UserIsAdmin)
-            {
-                foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled))
-                {
-                    if (link.URL != null)
-                    {
-                        <iframe src="@Model.SidebarLinks[count].URL"
-                                style="width: 100%; min-height: 100%; z-index: -1; border: none; @if (!Model.SidebarLinks[count].IsDefault) { <text>display:none;</text> }"
-                                id="@Model.SidebarLinks[count].ID"
-                                scrolling="auto"
-                                sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
-                                allowfullscreen="true"
-                                webkitallowfullscreen="true"
-                                class="z-iframe"
-                                frameborder="0"></iframe>
-                    }
-                    else
-                    {
-                        //TODO: Add something here, preferably make use of Controller/Action variables
-                    }
-                    count++;
-                }
-            }
-            else
-            {
-                foreach (var link in Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic))
-                {
-                    if (link.URL != null)
-                    {
-                        <iframe src="@Model.SidebarLinks[count].URL"
-                                style="width: 100%; min-height: 100%; z-index: -1; border: none; @if (!Model.SidebarLinks[count].IsDefault) { <text>display:none;</text> }"
-                                id="@Model.SidebarLinks[count].ID"
-                                scrolling="auto"
-                                sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
-                                allowfullscreen="true"
-                                webkitallowfullscreen="true"
-                                class="z-iframe"
-                                frameborder="0"></iframe>
-                    }
-                    else
-                    {
-                        //TODO: Add something here, preferably make use of Controller/Action variables
-                    }
-                    count++;
-                }
-            }
+            @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
         }
         else
         {
-            @Html.Partial("../Shared/_Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
-        }
 
+            if (Model.CurrentUserViewModel.UserIsAdmin)
+            {
+
+                var defaultLink = Model.SidebarLinks.FirstOrDefault(x => x.IsEnabled && x.IsDefault);
+                if (defaultLink != null)
+                {
+                    <iframe src="@defaultLink.URL"
+                            style="width: 100%; min-height: 100%; z-index: -1; border: none;"
+                            id="@defaultLink.ID"
+                            data-count="0"
+                            scrolling="auto"
+                            sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+                            allowfullscreen="true"
+                            webkitallowfullscreen="true"
+                            class="z-iframe"
+                            frameborder="0"
+                            onload="$('.preloader').fadeOut(500);"></iframe>
+                }
+
+                @section scripts {
+                    <script type="text/javascript">
+                        links =
+                            @Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks.Where(x => x.IsEnabled), new JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                            }));
+                    </script>
+                }
+
+            }
+            else
+            {
+
+                var defaultLink = Model.SidebarLinks.FirstOrDefault(x => x.IsEnabled && x.IsDefault && x.IsPublic);
+                if (defaultLink != null)
+                {
+                    <iframe src="@defaultLink.URL"
+                            style="width: 100%; min-height: 100%; z-index: -1; border: none;"
+                            id="@defaultLink.ID"
+                            data-count="0"
+                            scrolling="auto"
+                            sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+                            allowfullscreen="true"
+                            webkitallowfullscreen="true"
+                            class="z-iframe"
+                            frameborder="0"
+                            onload="$('.preloader').fadeOut(500);"></iframe>
+                }
+
+                @section scripts {
+                    <script type="text/javascript">
+                        links =
+                            @Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic), new JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                            }));
+                    </script>
+                }
+
+            }
+
+        }
     </div>
 </div>
 
