@@ -266,6 +266,11 @@ $(document).ready(function () {
         toggler.toggleClass("glyphicon-collapse-up");
     });
 
+    $(document).on("click", ".modalSubmit", function () {
+        debugger;
+        $('.spinner').fadeIn(500);
+    });
+
     $(document).on("click", "#mainLogin", function () {
         $("#LoginModal").modal();
     });
@@ -468,6 +473,7 @@ function LoginFailure() {
     var errors = { Password: "Could not log in. You are either not an administrator, or you typed your credentials incorrectly. Please try again!" };
     var $validator = $(".loginForm").validate();
     $validator.showErrors(errors);
+    $('.spinner').fadeOut(500);
 }
 
 function AjaxSuccess(data) {

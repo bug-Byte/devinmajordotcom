@@ -2,6 +2,36 @@
  * Globals
  */
 
+.spinner {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    position: relative;
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 45px;
+    height: 45px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 1px solid #575757;
+    border-top-color: #ffffff;
+    animation: spinner .9s linear infinite;
+}
+
+@-webkit-@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
 
   #modal-form {
       color: white;

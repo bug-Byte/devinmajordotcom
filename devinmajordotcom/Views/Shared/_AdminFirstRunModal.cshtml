@@ -66,7 +66,7 @@
                                             </div>
                                         </div>
                                         <br />
-                                        <div class="row">
+                                        <div class="row text-center">
                                             <div class="col-sm-12">
                                                 @Html.ValidationMessageFor(x => x.EmailAddress)
                                             </div>
@@ -76,9 +76,12 @@
                                             <div class="col-sm-12">
                                                 @Html.ValidationMessageFor(x => x.Password)
                                             </div>
+                                            <div class="spinner" style="display: none;">
+                                                <span class="spinner-rotate"></span>
+                                            </div>
                                         </div>
                                         <br/>
-                                        <button type="submit" class="form-control" style="background: #ce3232;border-radius: 100px;margin-top: 20px;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Get Started!</button>
+                                        <button type="submit" class="form-control modalSubmit" style="background: #ce3232;border-radius: 100px;margin-top: 20px;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Get Started!</button>
                                     }
                                 </div>
                             </div>
