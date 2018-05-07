@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-sm-6 text-center">
                         @Html.HiddenFor(x => x.PortfolioConfig.BackgroundImage, new { @id = "BackgroundImage2", @class="BackgroundImage", activeimage="false" })
-                        <img src="@Url.Content(Model.PortfolioConfig.BackgroundImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                        <img runat="server" src="@Url.Content(Model.PortfolioConfig.BackgroundImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
                         <br />
                         @Html.Raw(uploadButton)
                     </div>
@@ -570,7 +570,7 @@
                                     </div>
                                     <div class="col-sm-12 text-center">
                                         @Html.HiddenFor(x => x.PortfolioProjects[count].EncodedImage, new { @id = "EncodedImage_" + count, @class="BackgroundImage", activeimage="false" })
-                                        <img src="@Url.Content(Model.PortfolioProjects[count].EncodedImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                                        <img runat="server" src="@Url.Content(Model.PortfolioProjects[count].EncodedImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
                                         <br />
                                         @Html.Raw(uploadButton)
                                     </div>

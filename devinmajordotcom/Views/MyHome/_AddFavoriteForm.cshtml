@@ -113,7 +113,7 @@
             <br/>
             <div clas="col-sm-12 text-center">
                 @Html.Hidden("BackgroundImage", Model.BackgroundImage, new { @class = "BackgroundImage favoriteBackgroundImage", activeimage="false" })
-                <img src="@Url.Content(Model.BackgroundImage)" id="previewImage" activepreview="false" style="display: inline-block;" class="img-responsive previewImage" alt="Background Image">
+                <img runat="server" src="@Url.Content(Model.BackgroundImage)" id="previewImage" activepreview="false" style="display: inline-block;" class="img-responsive previewImage" alt="Background Image">
                 <br/>
                 @Html.Raw(uploadButton)
             </div>

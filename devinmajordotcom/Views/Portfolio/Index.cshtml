@@ -130,7 +130,7 @@
                                 {
                                     <div class="iso-box @foreach (var filter in project.ProjectFilters) { <text>@filter.ID</text> } col-md-3 col-sm-3 col-xs-12">
                                         <div class="portfolio-thumb">
-                                            <img src="@Url.Content(project.EncodedImage)" class="fluid-img" alt="portfolio img">
+                                            <img runat="server" src="@Url.Content(project.EncodedImage)" class="fluid-img" alt="portfolio img">
                                             <div class="portfolio-overlay">
                                                 <h3 class="portfolio-item-title">@project.ProjectName</h3>
                                                 <p>@project.ProjectDescription</p>
