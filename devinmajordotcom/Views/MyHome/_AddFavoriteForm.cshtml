@@ -113,7 +113,7 @@
             <br/>
             <div clas="col-sm-12 text-center">
                 @Html.Hidden("BackgroundImage", Convert.ToBase64String(Model.BackgroundImage), new { @class = "BackgroundImage favoriteBackgroundImage", activeimage="false" })
-                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.BackgroundImage))" id="previewImage" activepreview="false" style="display: inline-block;" class="img-responsive previewImage" alt="Background Image">
+                <img src="@Model.BackgroundImage" id="previewImage" activepreview="false" style="display: inline-block;" class="img-responsive previewImage" alt="Background Image">
                 <br/>
                 @Html.Raw(uploadButton)
             </div>

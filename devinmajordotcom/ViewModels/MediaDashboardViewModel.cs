@@ -35,7 +35,7 @@ namespace devinmajordotcom.ViewModels
         public string SidebarCollapsedTitle { get; set; }
 
         [DisplayName("Background Image: ")]
-        public byte[] BackgroundImage { get; set; }
+        public string BackgroundImage { get; set; }
 
         [DisplayName("Website Title: ")]
         public string WebsiteTitle { get; set; }

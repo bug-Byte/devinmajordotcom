@@ -101,7 +101,7 @@
             </div>
             <div class="col-sm-6">
                 @Html.HiddenFor(x => x.BackgroundImage, new { @class = "BackgroundImage", activeimage = "false" })
-                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.BackgroundImage))" activepreview="false" id="previewImage" class="img-responsive previewImage" alt="Background Image">
+                <img src="@Model.BackgroundImage" activepreview="false" id="previewImage" class="img-responsive previewImage" alt="Background Image">
                 @Html.Raw(uploadButton)
             </div>
         </div>

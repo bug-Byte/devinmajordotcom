@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
  This file contains SQL statements that will be appended to the build script.		
@@ -77,7 +77,7 @@ INSERT INTO Portfolio.Config(WebsiteTitle,BackgroundImage)
 VALUES
 (
 	'D3V!N M@J0R',
-	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\PortfolioImages\back1.png', SINGLE_BLOB) AS [BackgroundImage])
+	'Content/PortfolioImages/back1.png'
 );
 GO
 
@@ -277,31 +277,21 @@ VALUES
 GO
 
 DECLARE @Projects TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [Description] VARCHAR(MAX) NOT NULL);
-DECLARE @Counter1 INT = 1;
 
 INSERT INTO @Projects([Name], [ImgPathName], [Description]) 
 VALUES 
-('devinmajor.com', 'devinmajordotcom.png', 'Created and hosted full stack, responsive, functional, and totally cool looking website for the world to see! Written in C# .NET.'), 
-('Plex Media Dashboard', 'mediadashboard.png', 'Created and maintain a Plex Media Server, with many other plugins like Ombi for requests, Tautulli for monitoring, etc.'), 
-('MyHome', 'myhome.png', 'Created a user-based custom homepage-style website, featuring a blog, weather, date & time, favorites & more!'), 
-('My Portfolio', 'bugbyte.png', 'You''re here already! This is an excellent example of a project I''ve completed that you can see!'), 
-('MIS - Scorecards', 'scorecard.png', 'Created an employee performance tracking module, featuring CRUD implementation, AJAX, KPI Management and more.'), 
-('MIS - Target Sheets', 'targetsheets.png', 'Created a KPI target & score scale management module, featuring bootstrap layouts and jQuery DataTables.'), 
-('VMS Public Form', 'vmsform.png', 'Created a public facing registration form for buyers of a company, featuring ReCaptcha, AngularJS and Handlebars.'), 
-('VMS Intranet', 'vmsadmin.png', 'Created an interal facing website for managing buyer registrations from the public form.'), 
-('Windows IoT App', 'winIOT.jpg', 'Created a small Windows ARM program that allowed web browsing, displays weather, and other basic functionalities.'), 
-('Boggle', 'boggle.jpg', 'Created a fully featured Boggle game in VB .NET.'), 
-('Soo PeeWee Hockey', 'spwha.png', 'Created a fully responsive PHP based website for the Sault PeeWee Hockey Association.'), 
-('PiBag', 'bag.jpg', 'I''ve created a custom laptop bag that has a Raspberry Pi and LCD touch display build into it! Running Arch Linux.');
-WHILE(@Counter1 <= (SELECT MAX(ID) FROM @Projects))
-BEGIN	
-	DECLARE @ImageName VARCHAR(MAX) = (SELECT [ImgPathName] FROM @Projects WHERE ID = @Counter1);
-	DECLARE @ImageQuery NVARCHAR(MAX) = 'SELECT @img = (SELECT * FROM OPENROWSET(BULK ''$(ProjectLocation)\devinmajordotcom\Content\PortfolioImages\' + @ImageName + ''', SINGLE_BLOB) AS [Image])';
-	DECLARE @Image VARBINARY(MAX);	
-	EXEC sp_executesql @ImageQuery, N'@img VARBINARY(MAX) OUTPUT', @img=@Image OUTPUT;
-	UPDATE @Projects SET [Img] = @Image WHERE ID = @Counter1;
-	SET @Counter1 = @Counter1 + 1;
-END
+('devinmajor.com', 'Content/PortfolioImages/devinmajordotcom.png', 'Created and hosted full stack, responsive, functional, and totally cool looking website for the world to see! Written in C# .NET.'), 
+('Plex Media Dashboard', 'Content/PortfolioImages/mediadashboard.png', 'Created and maintain a Plex Media Server, with many other plugins like Ombi for requests, Tautulli for monitoring, etc.'), 
+('MyHome', 'Content/PortfolioImages/myhome.png', 'Created a user-based custom homepage-style website, featuring a blog, weather, date & time, favorites & more!'), 
+('My Portfolio', 'Content/PortfolioImages/bugbyte.png', 'You''re here already! This is an excellent example of a project I''ve completed that you can see!'), 
+('MIS - Scorecards', 'Content/PortfolioImages/scorecard.png', 'Created an employee performance tracking module, featuring CRUD implementation, AJAX, KPI Management and more.'), 
+('MIS - Target Sheets', 'Content/PortfolioImages/targetsheets.png', 'Created a KPI target & score scale management module, featuring bootstrap layouts and jQuery DataTables.'), 
+('VMS Public Form', 'Content/PortfolioImages/vmsform.png', 'Created a public facing registration form for buyers of a company, featuring ReCaptcha, AngularJS and Handlebars.'), 
+('VMS Intranet', 'Content/PortfolioImages/vmsadmin.png', 'Created an interal facing website for managing buyer registrations from the public form.'), 
+('Windows IoT App', 'Content/PortfolioImages/winIOT.jpg', 'Created a small Windows ARM program that allowed web browsing, displays weather, and other basic functionalities.'), 
+('Boggle', 'Content/PortfolioImages/boggle.jpg', 'Created a fully featured Boggle game in VB .NET.'), 
+('Soo PeeWee Hockey', 'Content/PortfolioImages/spwha.png', 'Created a fully responsive PHP based website for the Sault PeeWee Hockey Association.'), 
+('PiBag', 'Content/PortfolioImages/bag.jpg', 'I''ve created a custom laptop bag that has a Raspberry Pi and LCD touch display build into it! Running Arch Linux.');
 
 INSERT INTO Portfolio.Project
 (
@@ -313,7 +303,7 @@ INSERT INTO Portfolio.Project
 	SELECT 
 		t.Name,
 		t.[Description],
-		t.[Img]
+		t.[ImgPathName]
 	FROM @Projects t
 );
 GO

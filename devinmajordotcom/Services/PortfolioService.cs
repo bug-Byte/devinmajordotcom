@@ -145,30 +145,15 @@ namespace devinmajordotcom.Services
             if (config != null)
             {
                 config.WebsiteTitle = viewModel.PortfolioConfig.WebsiteTitle;
-                if (viewModel.PortfolioConfig.BackgroundImage.Length != config.BackgroundImage.Length)
-                {
-                    var newString = System.Text.Encoding.Default.GetString(viewModel.PortfolioConfig.BackgroundImage);
-                    config.BackgroundImage = Convert.FromBase64String(newString);
-                }
+                config.BackgroundImage = viewModel.PortfolioConfig.BackgroundImage;
             }
             else
             {
                 var newRecord = new Portfolio_Config()
                 {
-                    WebsiteTitle = viewModel.PortfolioConfig.WebsiteTitle
+                    WebsiteTitle = viewModel.PortfolioConfig.WebsiteTitle,
+                    BackgroundImage = viewModel.PortfolioConfig.BackgroundImage
                 };
-                if (viewModel.PortfolioConfig.BackgroundImage.Length > 0)
-                {
-                    try
-                    {
-                        var newString = System.Text.Encoding.Default.GetString(viewModel.PortfolioConfig.BackgroundImage);
-                        newRecord.BackgroundImage = Convert.FromBase64String(newString);
-                    }
-                    catch (Exception e)
-                    {
-                        newRecord.BackgroundImage = viewModel.PortfolioConfig.BackgroundImage;
-                    }
-                }
                 db.Portfolio_Configs.Add(newRecord);
             }
             db.SaveChanges();
@@ -306,11 +291,7 @@ namespace devinmajordotcom.Services
                     projectID = projectRecord.Id;
                     projectRecord.Name = project.ProjectName;
                     projectRecord.Description = project.ProjectDescription;
-                    if (project.EncodedImage.Length != projectRecord.Image.Length)
-                    {
-                        var newString = System.Text.Encoding.Default.GetString(project.EncodedImage);
-                        projectRecord.Image = Convert.FromBase64String(newString);
-                    }
+                    projectRecord.Image = project.EncodedImage;
                     db.SaveChanges();
                 }
                 else
@@ -318,20 +299,9 @@ namespace devinmajordotcom.Services
                     var newProjectRecord = new Portfolio_Project()
                     {
                         Name = project.ProjectName,
-                        Description = project.ProjectDescription
+                        Description = project.ProjectDescription,
+                        Image = project.EncodedImage
                     };
-                    if (project.EncodedImage.Length > 0)
-                    {
-                        try
-                        {
-                            var newString = System.Text.Encoding.Default.GetString(project.EncodedImage);
-                            newProjectRecord.Image = Convert.FromBase64String(newString);
-                        }
-                        catch (Exception e)
-                        {
-                            newProjectRecord.Image = project.EncodedImage;
-                        }
-                    }
                     db.Portfolio_Projects.Add(newProjectRecord);
                     db.SaveChanges();
                     projectID = newProjectRecord.Id;

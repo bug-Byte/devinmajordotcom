@@ -6,7 +6,7 @@
 
 <style>
     .templatemo-home {
-        background: url('@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.PortfolioConfig.BackgroundImage))');
+        background: url('@Model.PortfolioConfig.BackgroundImage');
         background-size: cover;
         background-attachment: fixed;
         background-position: center center;
@@ -130,7 +130,7 @@
                                 {
                                     <div class="iso-box @foreach (var filter in project.ProjectFilters) { <text>@filter.ID</text> } col-md-3 col-sm-3 col-xs-12">
                                         <div class="portfolio-thumb">
-                                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(project.EncodedImage))" class="fluid-img" alt="portfolio img">
+                                            <img src="@project.EncodedImage" class="fluid-img" alt="portfolio img">
                                             <div class="portfolio-overlay">
                                                 <h3 class="portfolio-item-title">@project.ProjectName</h3>
                                                 <p>@project.ProjectDescription</p>

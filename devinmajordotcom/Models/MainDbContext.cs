@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\SQLExpress;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -651,7 +651,7 @@ namespace devinmajordotcom.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public string AppsTitle { get; set; } // AppsTitle
-        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public string BackgroundImage { get; set; } // BackgroundImage
         public bool IsParticleCanvasOn { get; set; } // IsParticleCanvasOn
         public string WebsiteName { get; set; } // WebsiteName
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
@@ -740,7 +740,7 @@ namespace devinmajordotcom.Models
         public int UserId { get; set; } // UserID
         public string SidebarFullTitle { get; set; } // SidebarFullTitle
         public string SidebarCollapsedTitle { get; set; } // SidebarCollapsedTitle
-        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public string BackgroundImage { get; set; } // BackgroundImage
         public string SidebarColor { get; set; } // SidebarColor
         public string SidebarAccentColor { get; set; } // SidebarAccentColor
         public string WebsiteTitle { get; set; } // WebsiteTitle
@@ -770,7 +770,7 @@ namespace devinmajordotcom.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public int UserId { get; set; } // UserID
-        public byte[] Image { get; set; } // Image
+        public string Image { get; set; } // Image
         public string Title { get; set; } // Title
         public string Body { get; set; } // Body
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
@@ -809,7 +809,7 @@ namespace devinmajordotcom.Models
         public int UserId { get; set; } // UserID
         public int BlogPostId { get; set; } // BlogPostID
         public string CommentBody { get; set; } // CommentBody
-        public byte[] Image { get; set; } // Image
+        public string Image { get; set; } // Image
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -850,7 +850,7 @@ namespace devinmajordotcom.Models
         public string DisplayIcon { get; set; } // DisplayIcon (length: 500)
         public bool IsDefault { get; set; } // IsDefault
         public bool IsEnabled { get; set; } // IsEnabled
-        public byte[] Image { get; set; } // Image
+        public string Image { get; set; } // Image
         public int? Order { get; set; } // Order
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
@@ -889,12 +889,12 @@ namespace devinmajordotcom.Models
         public string BookmarksTitle { get; set; } // BookmarksTitle
         public string Greeting { get; set; } // Greeting
         public string BlogTitle { get; set; } // BlogTitle
-        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public string BackgroundImage { get; set; } // BackgroundImage
         public bool IsEditable { get; set; } // IsEditable
         public bool ShowVisitorsAdminHome { get; set; } // ShowVisitorsAdminHome
-        public byte[] DefaultFavoriteImage { get; set; } // DefaultFavoriteImage
-        public byte[] DefaultBlogPostImage { get; set; } // DefaultBlogPostImage
-        public byte[] AddNewFavoriteImage { get; set; } // AddNewFavoriteImage
+        public string DefaultFavoriteImage { get; set; } // DefaultFavoriteImage
+        public string DefaultBlogPostImage { get; set; } // DefaultBlogPostImage
+        public string AddNewFavoriteImage { get; set; } // AddNewFavoriteImage
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -922,7 +922,7 @@ namespace devinmajordotcom.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public string WebsiteTitle { get; set; } // WebsiteTitle
-        public byte[] BackgroundImage { get; set; } // BackgroundImage
+        public string BackgroundImage { get; set; } // BackgroundImage
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -1068,7 +1068,7 @@ namespace devinmajordotcom.Models
         public int Id { get; set; } // ID (Primary key)
         public string Name { get; set; } // Name (length: 100)
         public string Description { get; set; } // Description (length: 500)
-        public byte[] Image { get; set; } // Image
+        public string Image { get; set; } // Image
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
@@ -1358,7 +1358,7 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.AppsTitle).HasColumnName(@"AppsTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.IsParticleCanvasOn).HasColumnName(@"IsParticleCanvasOn").HasColumnType("bit").IsRequired();
             Property(x => x.WebsiteName).HasColumnName(@"WebsiteName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
@@ -1458,7 +1458,7 @@ namespace devinmajordotcom.Models
             Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
             Property(x => x.SidebarFullTitle).HasColumnName(@"SidebarFullTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.SidebarCollapsedTitle).HasColumnName(@"SidebarCollapsedTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.SidebarColor).HasColumnName(@"SidebarColor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.SidebarAccentColor).HasColumnName(@"SidebarAccentColor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.WebsiteTitle).HasColumnName(@"WebsiteTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -1490,7 +1490,7 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
-            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Title).HasColumnName(@"Title").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Body).HasColumnName(@"Body").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
@@ -1523,7 +1523,7 @@ namespace devinmajordotcom.Models
             Property(x => x.UserId).HasColumnName(@"UserID").HasColumnType("int").IsRequired();
             Property(x => x.BlogPostId).HasColumnName(@"BlogPostID").HasColumnType("int").IsRequired();
             Property(x => x.CommentBody).HasColumnName(@"CommentBody").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
-            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
@@ -1562,7 +1562,7 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.IsDefault).HasColumnName(@"IsDefault").HasColumnType("bit").IsRequired();
             Property(x => x.IsEnabled).HasColumnName(@"IsEnabled").HasColumnType("bit").IsRequired();
-            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Order).HasColumnName(@"Order").HasColumnType("int").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -1601,12 +1601,12 @@ namespace devinmajordotcom.Models
             Property(x => x.BookmarksTitle).HasColumnName(@"BookmarksTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Greeting).HasColumnName(@"Greeting").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.BlogTitle).HasColumnName(@"BlogTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.IsEditable).HasColumnName(@"IsEditable").HasColumnType("bit").IsRequired();
             Property(x => x.ShowVisitorsAdminHome).HasColumnName(@"ShowVisitorsAdminHome").HasColumnType("bit").IsRequired();
-            Property(x => x.DefaultFavoriteImage).HasColumnName(@"DefaultFavoriteImage").HasColumnType("varbinary(max)").IsOptional();
-            Property(x => x.DefaultBlogPostImage).HasColumnName(@"DefaultBlogPostImage").HasColumnType("varbinary(max)").IsOptional();
-            Property(x => x.AddNewFavoriteImage).HasColumnName(@"AddNewFavoriteImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.DefaultFavoriteImage).HasColumnName(@"DefaultFavoriteImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DefaultBlogPostImage).HasColumnName(@"DefaultBlogPostImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.AddNewFavoriteImage).HasColumnName(@"AddNewFavoriteImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
@@ -1635,7 +1635,7 @@ namespace devinmajordotcom.Models
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.WebsiteTitle).HasColumnName(@"WebsiteTitle").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.BackgroundImage).HasColumnName(@"BackgroundImage").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
@@ -1815,7 +1815,7 @@ namespace devinmajordotcom.Models
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Image).HasColumnName(@"Image").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

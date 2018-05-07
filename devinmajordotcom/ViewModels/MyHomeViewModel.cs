@@ -65,7 +65,7 @@ namespace devinmajordotcom.ViewModels
         public string BlogTitle { get; set; }
 
         [DisplayName("Background Image: ")]
-        public byte[] BackgroundImage { get; set; }
+        public string BackgroundImage { get; set; }
 
         [DisplayName("Use Admin settings for visitors?")]
         public bool ShowVisitorsAdminHome { get; set; }
@@ -77,11 +77,11 @@ namespace devinmajordotcom.ViewModels
 
         public bool IsAdmin { get; set; }
 
-        public byte[] DefaultFavoriteImage { get; set; }
+        public string DefaultFavoriteImage { get; set; }
 
-        public byte[] DefaultBlogPostImage { get; set; }
+        public string DefaultBlogPostImage { get; set; }
 
-        public byte[] AddNewFavoriteImage { get; set; }
+        public string AddNewFavoriteImage { get; set; }
 
     }
 
@@ -133,7 +133,7 @@ namespace devinmajordotcom.ViewModels
         public string Body { get; set; }
 
         [DisplayName("Image")]
-        public byte[] BackgroundImage { get; set; }
+        public string BackgroundImage { get; set; }
 
         public string CreatedBy { get; set; }
 

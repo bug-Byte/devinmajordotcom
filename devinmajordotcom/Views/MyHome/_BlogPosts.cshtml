@@ -43,7 +43,7 @@
             <!-- BLOG THUMB -->
             <div class="media blog-thumb">
                 <div class="media-object media-left">
-                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(post.BackgroundImage))" class="img-responsive btn-block image-popup" alt="">
+                    <img src="@post.BackgroundImage" class="img-responsive btn-block image-popup" alt="">
                 </div>
                 <div class="media-body blog-info">
                     <small><i class="fa fa-clock-o"></i><span class="datetime">@post.CreatedOn</span></small>

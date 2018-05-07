@@ -49,7 +49,7 @@ VALUES
 (
 	'Welcome, Fellow Humans!',
 	1,
-	(SELECT * FROM OPENROWSET(BULK '$(ProjectLocation)\devinmajordotcom\Content\Images\back3.png', SINGLE_BLOB) AS [BackgroundImage]),
+	'Content/Images/back3.png',
 	'D3V!N M@J0R'
 );
 GO
