@@ -49,7 +49,7 @@ VALUES
 (
 	'Welcome, Fellow Humans!',
 	1,
-	'Content/Images/back3.png',
+	'~/Content/Images/back3.png',
 	'D3V!N M@J0R'
 );
 GO

@@ -77,7 +77,7 @@ INSERT INTO Portfolio.Config(WebsiteTitle,BackgroundImage)
 VALUES
 (
 	'D3V!N M@J0R',
-	'Content/PortfolioImages/back1.png'
+	'~/Content/PortfolioImages/back1.png'
 );
 GO
 
@@ -280,18 +280,18 @@ DECLARE @Projects TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT N
 
 INSERT INTO @Projects([Name], [ImgPathName], [Description]) 
 VALUES 
-('devinmajor.com', 'Content/PortfolioImages/devinmajordotcom.png', 'Created and hosted full stack, responsive, functional, and totally cool looking website for the world to see! Written in C# .NET.'), 
-('Plex Media Dashboard', 'Content/PortfolioImages/mediadashboard.png', 'Created and maintain a Plex Media Server, with many other plugins like Ombi for requests, Tautulli for monitoring, etc.'), 
-('MyHome', 'Content/PortfolioImages/myhome.png', 'Created a user-based custom homepage-style website, featuring a blog, weather, date & time, favorites & more!'), 
-('My Portfolio', 'Content/PortfolioImages/bugbyte.png', 'You''re here already! This is an excellent example of a project I''ve completed that you can see!'), 
-('MIS - Scorecards', 'Content/PortfolioImages/scorecard.png', 'Created an employee performance tracking module, featuring CRUD implementation, AJAX, KPI Management and more.'), 
-('MIS - Target Sheets', 'Content/PortfolioImages/targetsheets.png', 'Created a KPI target & score scale management module, featuring bootstrap layouts and jQuery DataTables.'), 
-('VMS Public Form', 'Content/PortfolioImages/vmsform.png', 'Created a public facing registration form for buyers of a company, featuring ReCaptcha, AngularJS and Handlebars.'), 
-('VMS Intranet', 'Content/PortfolioImages/vmsadmin.png', 'Created an interal facing website for managing buyer registrations from the public form.'), 
-('Windows IoT App', 'Content/PortfolioImages/winIOT.jpg', 'Created a small Windows ARM program that allowed web browsing, displays weather, and other basic functionalities.'), 
-('Boggle', 'Content/PortfolioImages/boggle.jpg', 'Created a fully featured Boggle game in VB .NET.'), 
-('Soo PeeWee Hockey', 'Content/PortfolioImages/spwha.png', 'Created a fully responsive PHP based website for the Sault PeeWee Hockey Association.'), 
-('PiBag', 'Content/PortfolioImages/bag.jpg', 'I''ve created a custom laptop bag that has a Raspberry Pi and LCD touch display build into it! Running Arch Linux.');
+('devinmajor.com', '~/Content/PortfolioImages/devinmajordotcom.png', 'Created and hosted full stack, responsive, functional, and totally cool looking website for the world to see! Written in C# .NET.'), 
+('Plex Media Dashboard', '~/Content/PortfolioImages/mediadashboard.png', 'Created and maintain a Plex Media Server, with many other plugins like Ombi for requests, Tautulli for monitoring, etc.'), 
+('MyHome', '~/Content/PortfolioImages/myhome.png', 'Created a user-based custom homepage-style website, featuring a blog, weather, date & time, favorites & more!'), 
+('My Portfolio', '~/Content/PortfolioImages/bugbyte.png', 'You''re here already! This is an excellent example of a project I''ve completed that you can see!'), 
+('MIS - Scorecards', '~/Content/PortfolioImages/scorecard.png', 'Created an employee performance tracking module, featuring CRUD implementation, AJAX, KPI Management and more.'), 
+('MIS - Target Sheets', '~/Content/PortfolioImages/targetsheets.png', 'Created a KPI target & score scale management module, featuring bootstrap layouts and jQuery DataTables.'), 
+('VMS Public Form', '~/Content/PortfolioImages/vmsform.png', 'Created a public facing registration form for buyers of a company, featuring ReCaptcha, AngularJS and Handlebars.'), 
+('VMS Intranet', '~/Content/PortfolioImages/vmsadmin.png', 'Created an interal facing website for managing buyer registrations from the public form.'), 
+('Windows IoT App', '~/Content/PortfolioImages/winIOT.jpg', 'Created a small Windows ARM program that allowed web browsing, displays weather, and other basic functionalities.'), 
+('Boggle', '~/Content/PortfolioImages/boggle.jpg', 'Created a fully featured Boggle game in VB .NET.'), 
+('Soo PeeWee Hockey', '~/Content/PortfolioImages/spwha.png', 'Created a fully responsive PHP based website for the Sault PeeWee Hockey Association.'), 
+('PiBag', '~/Content/PortfolioImages/bag.jpg', 'I''ve created a custom laptop bag that has a Raspberry Pi and LCD touch display build into it! Running Arch Linux.');
 
 INSERT INTO Portfolio.Project
 (

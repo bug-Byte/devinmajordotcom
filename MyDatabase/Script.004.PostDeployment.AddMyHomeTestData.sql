@@ -45,12 +45,12 @@ VALUES
 	'My Favorites & Bookmarks',
 	'Welcome Home, Devin!',
 	'My Blog & Notes',
-	'Content/HomeImages/home-bg4.jpg',
+	'~/Content/HomeImages/home-bg4.jpg',
 	0,
 	0,
-	'Content/HomeImages/DefaultFavoriteImage.png',
-	'Content/HomeImages/blog-image1.jpg',
-	'Content/HomeImages/AddNewFavorite.png'
+	'~/Content/HomeImages/DefaultFavoriteImage.png',
+	'~/Content/HomeImages/blog-image1.jpg',
+	'~/Content/HomeImages/AddNewFavorite.png'
 );
 GO
 
@@ -62,10 +62,10 @@ DECLARE @Links TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL
 
 INSERT INTO @Posts([Title], [Body], [ImgPathName]) 
 VALUES 
-('Need to start a game, maybe in Unity?', 'Also thinking about DX12 since I''m in possession of a GTX 1080Ti!', 'Content/HomeImages/home-bg4.jpg'), 
-('RAM Prices SUCK right now!', 'I cant believe this! All I want is 16 gigs of DDR4, enough to run my poor server :(', 'Content/HomeImages/blog-image2.jpg'),
-('I need a new hobby lol', 'This is ridiculous. I cant spend all my time coding, lol. Oh well.', 'Content/HomeImages/blog-image3.jpg'), 
-('Tim Hortons Roll-up the Rim is Such a Scam', 'Its true and we all know it. Why even bother? Some people I tell ya.', 'Content/HomeImages/blog-image4.jpg');
+('Need to start a game, maybe in Unity?', 'Also thinking about DX12 since I''m in possession of a GTX 1080Ti!', '~/Content/HomeImages/home-bg4.jpg'), 
+('RAM Prices SUCK right now!', 'I cant believe this! All I want is 16 gigs of DDR4, enough to run my poor server :(', '~/Content/HomeImages/blog-image2.jpg'),
+('I need a new hobby lol', 'This is ridiculous. I cant spend all my time coding, lol. Oh well.', '~/Content/HomeImages/blog-image3.jpg'), 
+('Tim Hortons Roll-up the Rim is Such a Scam', 'Its true and we all know it. Why even bother? Some people I tell ya.', '~/Content/HomeImages/blog-image4.jpg');
 
 INSERT INTO [MyHome].[BlogPost]
 (
@@ -85,15 +85,15 @@ INSERT INTO [MyHome].[BlogPost]
 
 INSERT INTO @Links([Name], [ImgPathName], [URL]) 
 VALUES 
-('Facebook', 'Content/HomeImages/facebook.png', 'https://www.facebook.com'), 
-('Reddit', 'Content/HomeImages/reddit.jpg', 'https://www.reddit.com/'), 
-('YouTube', 'Content/HomeImages/youtube.png', 'https://www.youtube.com/'), 
-('Plex Media Dashboard', 'Content/HomeImages/plex.jpg', 'http://www.devinmajor.com/MediaDashboard'), 
-('GitHub', 'Content/HomeImages/github.png', 'https://github.com/'), 
-('Slack', 'Content/HomeImages/slack.jpg', 'https://slack.com/'), 
-('Amazon', 'Content/HomeImages/amazon1.jpg', 'https://www.amazon.ca/'),
-('Newegg', 'Content/HomeImages/newegg.jpg', 'https://www.newegg.ca/'), 
-('Outlook', 'Content/HomeImages/outlook.jpg', 'https://outlook.live.com/owa/');
+('Facebook', '~/Content/HomeImages/facebook.png', 'https://www.facebook.com'), 
+('Reddit', '~/Content/HomeImages/reddit.jpg', 'https://www.reddit.com/'), 
+('YouTube', '~/Content/HomeImages/youtube.png', 'https://www.youtube.com/'), 
+('Plex Media Dashboard', '~/Content/HomeImages/plex.jpg', 'http://www.devinmajor.com/MediaDashboard'), 
+('GitHub', '~/Content/HomeImages/github.png', 'https://github.com/'), 
+('Slack', '~/Content/HomeImages/slack.jpg', 'https://slack.com/'), 
+('Amazon', '~/Content/HomeImages/amazon1.jpg', 'https://www.amazon.ca/'),
+('Newegg', '~/Content/HomeImages/newegg.jpg', 'https://www.newegg.ca/'), 
+('Outlook', '~/Content/HomeImages/outlook.jpg', 'https://outlook.live.com/owa/');
 
 INSERT INTO [MyHome].[SiteLink]
 (
