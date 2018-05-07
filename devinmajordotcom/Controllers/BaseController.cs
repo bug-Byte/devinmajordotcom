@@ -36,7 +36,9 @@ namespace devinmajordotcom.Controllers
         [HttpGet]
         public ActionResult UploadTemplate()
         {
-            ViewBag.ControllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            var controller = ControllerContext.RouteData.Values["controller"].ToString();
+            ViewBag.ControllerName = controller;
+            HttpContext.Session["ImageSubfolder"] = controller;
             return PartialView("_ImageUploader");
         }
 
@@ -50,13 +52,29 @@ namespace devinmajordotcom.Controllers
 
             try
             {
-                byte[] fileData = null;
-                using (var binaryReader = new BinaryReader(qqfile.InputStream))
+                var uploadDir = "~/Content/";
+                if (HttpContext.Session["ImageSubfolder"] != null)
                 {
-                    fileData = binaryReader.ReadBytes(qqfile.ContentLength);
+                    switch ((string)HttpContext.Session["ImageSubfolder"])
+                    {
+                        case "Home":
+                            uploadDir = "~/Content/Images/";
+                            break;
+                        case "MyHome":
+                            uploadDir = "~/Content/HomeImages/";
+                            break;
+                        case "Portfolio":
+                            uploadDir = "~/Content/MediaImages/";
+                            break;
+                        case "MediaDashboard":
+                            uploadDir = "~/Content/PortfolioImages/";
+                            break;
+                    }
                 }
-                var base64ConvertedFile = Convert.ToBase64String(fileData);
-                var jsonResult = Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = base64ConvertedFile });
+                var imagePath = Path.Combine(Server.MapPath(uploadDir), qqfile.FileName);
+                var imageUrl = Path.Combine(uploadDir, qqfile.FileName);
+                qqfile.SaveAs(imagePath);
+                var jsonResult = Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = imageUrl.Replace("~/", "") });
                 jsonResult.MaxJsonLength = int.MaxValue;
                 return jsonResult;
             }
