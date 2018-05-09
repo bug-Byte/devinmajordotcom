@@ -443,11 +443,11 @@ function RefreshTinyMce() {
     });
 }
 
-function HideLoginModal() {
+function HideLoginModal(data) {
 
     $('#LoginModal').modal('hide');
     $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>');
-    $('#mainContainer').append(settingsHtml);
+    $('#mainContainer').append(data);
     $('#appmanager').fadeIn(500);
     InitializeMediaDashboardEventHandlers();
     RefreshTinyMce();

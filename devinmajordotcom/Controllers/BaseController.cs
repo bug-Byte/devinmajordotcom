@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using devinmajordotcom.Models;
 
 namespace devinmajordotcom.Controllers
 {
@@ -88,9 +89,24 @@ namespace devinmajordotcom.Controllers
         public ActionResult AdminLogin(UserViewModel viewModel)
         {
             var validatedUser = landingPageService.Login(viewModel, true);
+            var controller = ControllerContext.RouteData.Values["controller"].ToString();
             if (validatedUser.UserID == 0 || !validatedUser.UserIsAdmin)
             {
                 return new HttpStatusCodeResult(500);
+            }
+            if (controller == "Home")
+            {
+                var user = new Security_User()
+                {
+                    Id = validatedUser.UserID,
+                    EmailAddress = validatedUser.EmailAddress,
+                    Guid = validatedUser.GUID,
+                    IsActive = validatedUser.UserIsActive,
+                    IsAdmin = validatedUser.UserIsAdmin,
+                    UserName = validatedUser.UserName
+                };
+                var newViewModel = landingPageService.GetAppConfigData(user);
+                return PartialView("_ApplicationManager", newViewModel);
             }
             return RedirectToAction("Index");
         }
