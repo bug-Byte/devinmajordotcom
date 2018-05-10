@@ -20,10 +20,6 @@
     }
 
     @section scripts {
-        
-        <script>
-            var settingsHtml = '@Html.Raw(@Html.Partial("_ApplicationManager", Model.CurrentApplicationConfig).ToHtmlString().Replace(Environment.NewLine, "").Replace("'","\""))';
-        </script>
 
         @if (!Model.CurrentUserViewModel.UserIsAdmin || !Model.CurrentUserViewModel.UserIsActive)
         {

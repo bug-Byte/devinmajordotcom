@@ -4,7 +4,7 @@
 	UserID INT NOT NULL,
 	BlogPostID INT NOT NULL,
 	CommentBody VARCHAR(MAX) NOT NULL,
-	[Image] VARBINARY(MAX) NULL,
+	[Image] VARCHAR(MAX) NULL,
 	PRIMARY KEY(Id),
 	CONSTRAINT MyHome_BlogPostComment_UserID_Security_User_Id
 	FOREIGN KEY(UserID) REFERENCES [Security].[User](ID),

@@ -45,7 +45,7 @@ namespace devinmajordotcom.ViewModels
         public string WebsiteTitle { get; set; }
 
         [DisplayName("Background Image: ")]
-        public byte[] BackgroundImage { get; set; }
+        public string BackgroundImage { get; set; }
 
     }
 
@@ -188,7 +188,7 @@ namespace devinmajordotcom.ViewModels
         public string ProjectName { get; set; }
 
         [DisplayName("Project Image : ")]
-        public byte[] EncodedImage { get; set; }
+        public string EncodedImage { get; set; }
 
         [DisplayName("Project Description : ")]
         public string ProjectDescription { get; set; }

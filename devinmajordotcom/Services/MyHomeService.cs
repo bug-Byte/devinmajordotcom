@@ -117,12 +117,7 @@ namespace devinmajordotcom.Services
             var config = db.MyHome_UserConfigs.FirstOrDefault(x => x.UserId == viewModel.UserID);
 
             if (config == null) return;
-            if (viewModel.BackgroundImage.Length != config.BackgroundImage.Length)
-            {
-                var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                config.BackgroundImage = Convert.FromBase64String(newString);
-            }
-
+            config.BackgroundImage = viewModel.BackgroundImage;
             config.ShowWeather = viewModel.ShowWeather;
             config.ShowVisitorsAdminHome = viewModel.ShowVisitorsAdminHome;
             config.ShowDateAndTime = viewModel.ShowDateAndTime;
@@ -286,11 +281,7 @@ namespace devinmajordotcom.Services
             {
                 record.Title = viewModel.PostTitle;
                 record.Body = viewModel.Body;
-                if (viewModel.BackgroundImage.Length != record.Image.Length)
-                {
-                    var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                    record.Image = Convert.FromBase64String(newString);
-                }
+                record.Image = viewModel.BackgroundImage;
             }
             else
             {
@@ -298,20 +289,9 @@ namespace devinmajordotcom.Services
                 {
                     UserId = viewModel.AuthorUserID,
                     Body = viewModel.Body,
-                    Title = viewModel.PostTitle
+                    Title = viewModel.PostTitle,
+                    Image = viewModel.BackgroundImage
                 };
-                if (viewModel.BackgroundImage.Length > 0)
-                {
-                    try
-                    {
-                        var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                        newRecord.Image = Convert.FromBase64String(newString);
-                    }
-                    catch (Exception e)
-                    {
-                        newRecord.Image = viewModel.BackgroundImage;
-                    }
-                }
                 db.MyHome_BlogPosts.Add(newRecord);
             }
             db.SaveChanges();
@@ -323,11 +303,7 @@ namespace devinmajordotcom.Services
             
             if (record != null)
             {
-                if (viewModel.BackgroundImage.Length != record.Image.Length)
-                {
-                    var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                    record.Image = Convert.FromBase64String(newString);
-                }
+                record.Image = viewModel.BackgroundImage;
                 record.UserId = viewModel.UserID;
                 record.Controller = viewModel.Controller;
                 record.Id = viewModel.ID;
@@ -356,20 +332,9 @@ namespace devinmajordotcom.Services
                     Description = viewModel.Description,
                     Directive = viewModel.Directive,
                     DisplayIcon = viewModel.DisplayIcon,
-                    Url = viewModel.URL
+                    Url = viewModel.URL,
+                    Image = viewModel.BackgroundImage
                 };
-                if (viewModel.BackgroundImage.Length > 0)
-                {
-                    try
-                    {
-                        var newString = System.Text.Encoding.Default.GetString(viewModel.BackgroundImage);
-                        newRecord.Image = Convert.FromBase64String(newString);
-                    }
-                    catch (Exception e)
-                    {
-                        newRecord.Image = viewModel.BackgroundImage;
-                    }
-                }
                 db.MyHome_SiteLinks.Add(newRecord);
             }
             db.SaveChanges();

@@ -81,18 +81,7 @@ namespace devinmajordotcom.Services
             var configRecord = db.LandingPage_Configs.FirstOrDefault();
             if(configRecord != null)
             {
-                if (viewModel.Config.BackgroundImage.Length > 0 && viewModel.Config.BackgroundImage.Length != configRecord.BackgroundImage.Length)
-                {
-                    try
-                    {
-                        var newString = System.Text.Encoding.Default.GetString(viewModel.Config.BackgroundImage);
-                        configRecord.BackgroundImage = Convert.FromBase64String(newString);
-                    }
-                    catch (Exception e)
-                    {
-                        configRecord.BackgroundImage = viewModel.Config.BackgroundImage;
-                    }
-                }
+                configRecord.BackgroundImage = viewModel.Config.BackgroundImage;
                 configRecord.AppsTitle = viewModel.Config.AppsTitle;
                 configRecord.IsParticleCanvasOn = viewModel.Config.IsParticleCanvasOn;
                 configRecord.WebsiteName = viewModel.Config.WebsiteName;
@@ -103,20 +92,9 @@ namespace devinmajordotcom.Services
                 {
                     AppsTitle = viewModel.Config.AppsTitle,
                     IsParticleCanvasOn = viewModel.Config.IsParticleCanvasOn,
-                    WebsiteName = viewModel.Config.WebsiteName
+                    WebsiteName = viewModel.Config.WebsiteName,
+                    BackgroundImage = viewModel.Config.BackgroundImage
                 };
-                if (viewModel.Config.BackgroundImage.Length > 0)
-                {
-                    try
-                    {
-                        var newString = System.Text.Encoding.Default.GetString(viewModel.Config.BackgroundImage);
-                        newRecord.BackgroundImage = Convert.FromBase64String(newString);
-                    }
-                    catch (Exception e)
-                    {
-                        newRecord.BackgroundImage = viewModel.Config.BackgroundImage;
-                    }
-                }
                 db.LandingPage_Configs.Add(newRecord);
             }
             db.SaveChanges();

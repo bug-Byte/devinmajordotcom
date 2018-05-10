@@ -31,13 +31,11 @@
         },
         callbacks: {
             onComplete: function (id, name, responseJson) {
-                debugger;
                 if (responseJson.success === true) {
                     $('#resultMessage').css('color', 'green');
                     $('#resultMessage').text(responseJson.message);
-                    var newFile = window.btoa(responseJson.file);
-                    $(".BackgroundImage[activeimage='true']").val(newFile);
-                    $(".previewImage[activepreview='true']").attr("src", "data:image/jpg;base64," + responseJson.file);
+                    $(".BackgroundImage[activeimage='true']").val(responseJson.file);
+                    $(".previewImage[activepreview='true']").attr("src", responseJson.file);
                     $("#formModalImageUploader").modal('toggle');
                 }
             },

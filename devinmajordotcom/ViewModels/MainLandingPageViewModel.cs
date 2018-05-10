@@ -60,7 +60,7 @@ namespace devinmajordotcom.ViewModels
         public bool IsParticleCanvasOn { get; set; }
 
         [DisplayName("Background Image")]
-        public byte[] BackgroundImage { get; set; }
+        public string BackgroundImage { get; set; }
 
     }
 

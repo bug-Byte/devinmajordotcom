@@ -10,7 +10,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="work-thumb">
                 <a href="@link.URL" target="_blank" class="">
-                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(link.BackgroundImage))" class="img-responsive" alt="Link">
+                    <img runat="server" src="@Url.Content(link.BackgroundImage)" class="img-responsive" alt="Link">
                     <div class="work-info">
                         <h3>@link.DisplayName</h3>
                         <small>@link.Description</small>
@@ -45,7 +45,7 @@
                         new
                         {
 
-                        }).ToHtmlString().Replace("REPLACE", "<img src=" + String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.UserConfig.AddNewFavoriteImage)) + " class='img-responsive' alt='Work'><div class=\"work-info\"><h3>+</h3></div>");
+                        }).ToHtmlString().Replace("REPLACE", "<img runat='server' src='" + Url.Content(Model.UserConfig.AddNewFavoriteImage) + "' class='img-responsive' alt='Work'><div class=\"work-info\"><h3>+</h3></div>");
                 }
                 @Html.Raw(uploadButton)
             </div>

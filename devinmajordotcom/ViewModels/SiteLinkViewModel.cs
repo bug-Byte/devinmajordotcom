@@ -49,7 +49,7 @@ namespace devinmajordotcom.ViewModels
         public int? Order { get; set; }
 
         [DisplayName("Background Image *")]
-        public byte[] BackgroundImage { get; set; }
+        public string BackgroundImage { get; set; }
 
         public SiteLinkViewModel()
         {
