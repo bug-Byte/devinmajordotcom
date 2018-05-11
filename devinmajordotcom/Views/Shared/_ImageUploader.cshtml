@@ -35,7 +35,7 @@
                     $('#resultMessage').css('color', 'green');
                     $('#resultMessage').text(responseJson.message);
                     $(".BackgroundImage[activeimage='true']").val(responseJson.file);
-                    $(".previewImage[activepreview='true']").attr("src", responseJson.file);
+                    $(".previewImage[activepreview='true']").attr("src", responseJson.file.toString().replace("~/",""));
                     $("#formModalImageUploader").modal('toggle');
                 }
             },
