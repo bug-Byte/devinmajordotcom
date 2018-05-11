@@ -75,7 +75,7 @@ namespace devinmajordotcom.Controllers
                 var imagePath = Path.Combine(Server.MapPath(uploadDir), qqfile.FileName);
                 var imageUrl = Path.Combine(uploadDir, qqfile.FileName);
                 qqfile.SaveAs(imagePath);
-                var jsonResult = Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = imageUrl });
+                var jsonResult = Json(new { success = true, message = "File successfully uploaded. Dont forget to save your changes in the settings menu!", file = imageUrl.Replace("~/","") });
                 jsonResult.MaxJsonLength = int.MaxValue;
                 return jsonResult;
             }

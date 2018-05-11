@@ -267,8 +267,9 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".modalSubmit", function () {
-        debugger;
-        $('.spinner').fadeIn(500);
+        if ($(".loginForm").valid()) {
+            $('.spinner').fadeIn(500);
+        }
     });
 
     $(document).on("click", "#mainLogin", function () {

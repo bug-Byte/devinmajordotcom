@@ -168,6 +168,12 @@ $(document).ready(function () {
 
     MomentAllDateTimes();
 
+    $(document).on("click", ".modalSubmit", function () {
+        if ($(".loginForm").valid()) {
+            $('.spinner').fadeIn(500);
+        }
+    });
+
     $("#settingsWindowButton").draggable({
         stop: function () {
             var icon = $(this).find("i");

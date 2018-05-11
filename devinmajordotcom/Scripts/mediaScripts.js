@@ -28,6 +28,12 @@ function createIframe(url, id) {
 
 $(document).ready(function () {
 
+    $(document).on("click", ".modalSubmit", function () {
+        if ($(".loginForm").valid()) {
+            $('.spinner').fadeIn(500);
+        }
+    });
+
     $(document).on("click", ".menu li[data-type='link'] a", function () {
         $('iframe').hide();
         $(".menu li").removeClass('active');

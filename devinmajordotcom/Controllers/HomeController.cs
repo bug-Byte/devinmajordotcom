@@ -17,6 +17,7 @@ namespace devinmajordotcom.Controllers
     {
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index()
         {
             var viewModel = new MainLandingPageViewModel();

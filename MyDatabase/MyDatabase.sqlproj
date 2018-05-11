@@ -183,19 +183,9 @@
     <PostDeploy Include="Script.PostDeployment.Start.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="MyDatabase.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MyDatabase.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Script.003.PostDeployment.AddPortfolioTestData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <SqlCmdVariable Include="ProjectLocation">
-      <DefaultValue>A:\Documents\GitHub\devinmajordotcom</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
-    </SqlCmdVariable>
     <SqlCmdVariable Include="UserRole">
       <DefaultValue>NT AUTHORITY\SYSTEM</DefaultValue>
       <Value>$(SqlCmdVar__2)</Value>

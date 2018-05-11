@@ -38,7 +38,7 @@
                 <h4>Guest Settings</h4>
             </div>
             <div class="col-sm-12 text-center">
-                <div id="settingsWindowButton1" class="btn btn-default btn-lg settingsWindowButton" data-toggle="popover" rel="popover" data-content='@Html.Partial("../MyHome/_MasterSettingsForm", Model.GuestData.UserConfig).ToHtmlString().Replace(Environment.NewLine, "")' data-placement="bottom" data-original-title="Guest Settings Menu">
+                <div id="settingsWindowButton1" class="btn btn-default btn-lg settingsWindowButton" data-toggle="popover" rel="popover" data-content='@Html.Partial("../MyHome/_MasterSettingsForm", Model.GuestData.UserConfig).ToHtmlString().Replace(Environment.NewLine, "").Replace("\"","'")' data-placement="bottom" data-original-title="Guest Settings Menu">
                     <i class="glyphicon glyphicon-cog"></i>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <h4>Admin Settings</h4>
             </div>
             <div class="col-sm-12 text-center">
-                <div id="settingsWindowButton2" class="btn btn-default btn-lg settingsWindowButton" data-toggle="popover" rel="popover" data-content='@Html.Partial("../MyHome/_MasterSettingsForm", Model.AdminData.UserConfig).ToHtmlString().Replace(Environment.NewLine, "")' data-placement="bottom" data-original-title="Admin Settings Menu">
+                <div id="settingsWindowButton2" class="btn btn-default btn-lg settingsWindowButton" data-toggle="popover" rel="popover" data-content='@Html.Partial("../MyHome/_MasterSettingsForm", Model.AdminData.UserConfig).ToHtmlString().Replace(Environment.NewLine, "").Replace("\"","'")' data-placement="bottom" data-original-title="Admin Settings Menu">
                     <i class="glyphicon glyphicon-cog"></i>
                 </div>
             </div>
