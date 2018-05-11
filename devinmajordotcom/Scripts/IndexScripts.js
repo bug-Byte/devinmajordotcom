@@ -114,6 +114,7 @@ function InitializeModal(ID, TITLE) {
             keyboard: false
         }
     );
+    RefreshTinyMce();
 }
 
 function removeDisable() {

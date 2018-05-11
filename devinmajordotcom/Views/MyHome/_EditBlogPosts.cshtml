@@ -27,13 +27,9 @@
 
 <script>
     $(document).ready(function() {
-        setTimeout(startPost, 1000);
+        $("#BlogPostSelectionForm").submit();
         $("#SelectedBlogPostID").change(function () {
             $("#BlogPostSelectionForm").submit();
         });
     });
-
-    function startPost() {
-        $("#BlogPostSelectionForm").submit();
-    }
 </script>
