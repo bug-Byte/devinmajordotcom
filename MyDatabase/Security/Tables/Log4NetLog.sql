@@ -1,0 +1,15 @@
+﻿CREATE TABLE [Security].[Log4NetLog]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL,
+	[Date] DATETIME NOT NULL,
+	[Thread] VARCHAR(255) NOT NULL,
+	[Level] VARCHAR(50) NOT NULL,
+	[Logger] VARCHAR(255) NOT NULL,
+	[Message] VARCHAR(MAX) NOT NULL,
+	[Exception] VARCHAR(MAX) NULL,
+	[UserId] VARCHAR(100) NULL,
+	[Action] VARCHAR(100) NULL,
+	[Controller] VARCHAR(100) NULL,
+	[Params] VARCHAR(MAX) NULL,
+	PRIMARY KEY (Id)
+)

@@ -1,0 +1,35 @@
+﻿@model devinmajordotcom.ViewModels.UserViewModel
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Important Email</title>
+
+    @Styles.Render("~/Content/mediacss")
+
+</head>
+
+<body style="color:white;">
+
+    <h2 style='color:lightblue;font-weight:bold;'>You've signed up for an account on <a href="https://devinmajor.com">devinmajor.com</a></h2>
+
+    <br />
+    <hr />
+    <br />
+
+    <div style='border-radius:15px;padding:10px;margin:10px;background-color:gray;'>
+
+        <p>Sorry for the formalities, we just needed to make sure the email you signed up for an account with actually goes somewhere, since we'll use it down the line to get in contact with you if necessary.</p>
+        <p>Please submit the following code in the "Confirm Account" text box to complete the sign-up process. Then you may sign in and enjoy!</p> 
+        <br/>    
+        <p style="color: green !important;">Your Code: @Model.GUID</p>   
+        <hr />
+        <p>Cheers, <br /> Admins at devinmajor.com</p>
+
+    </div>
+
+</body>
+</html>

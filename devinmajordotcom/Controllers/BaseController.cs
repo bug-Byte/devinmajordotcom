@@ -6,16 +6,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using devinmajordotcom.Models;
+using Newtonsoft.Json;
 
 namespace devinmajordotcom.Controllers
 {
     public class BaseController : Controller
     {
 
+        protected log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Controller));
         public ILandingPageService landingPageService;
         public IPortfolioService portfolioService;
         public IMediaDashboardService mediaDashboardService;
@@ -32,6 +35,34 @@ namespace devinmajordotcom.Controllers
             portfolioService = DependencyResolver.Current.GetService<IPortfolioService>();
             mediaDashboardService = DependencyResolver.Current.GetService<IMediaDashboardService>();
             myHomeService = DependencyResolver.Current.GetService<IMyHomeService>();
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            var userId = HttpContext.Session["UserId"];
+            log4net.Config.XmlConfigurator.Configure();
+            log4net.LogicalThreadContext.Properties["UserId"] = userId ?? "Anon Visitor";
+            log4net.LogicalThreadContext.Properties["Action"] = filterContext.RouteData.Values["Action"];
+            log4net.LogicalThreadContext.Properties["Controller"] = filterContext.RouteData.Values["Controller"];
+            Log.Error("Exception Has Occurred", filterContext.Exception);
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var userId = HttpContext.Session["UserId"];
+            base.OnActionExecuting(filterContext);
+            log4net.Config.XmlConfigurator.Configure();
+            log4net.LogicalThreadContext.Properties["UserId"] = userId ?? "Anon Visitor";
+            log4net.LogicalThreadContext.Properties["Action"] = filterContext.RouteData.Values["Action"];
+            log4net.LogicalThreadContext.Properties["Controller"] = filterContext.RouteData.Values["Controller"];
+
+            var actionParams = filterContext.ActionParameters;
+            var fullparams = filterContext.RequestContext.HttpContext.Request.Params;
+
+            log4net.LogicalThreadContext.Properties["Params"] =
+                JsonConvert.SerializeObject(new { action = filterContext.ActionParameters, full = fullparams });
+            Log.Info("User Action");
+
         }
 
         [HttpGet]
@@ -100,6 +131,7 @@ namespace devinmajordotcom.Controllers
                 {
                     Id = validatedUser.UserID,
                     EmailAddress = validatedUser.EmailAddress,
+                    IsEmailConfirmed = validatedUser.IsEmailConfirmed,
                     Guid = validatedUser.GUID,
                     IsActive = validatedUser.UserIsActive,
                     IsAdmin = validatedUser.UserIsAdmin,
@@ -135,6 +167,63 @@ namespace devinmajordotcom.Controllers
             ViewBag.Title = "3RR0R";
             ViewBag.ErrorStuff = new HandleErrorInfo(new Exception(), "MediaDashboard", "Index");
             return PartialView("Error");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult DropMeALine(ContactEmailViewModel viewModel)
+        {
+            var emailSuccessful = "";
+            if (ModelState.IsValid)
+            {
+                var message = new MailMessage();
+                var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/MainContactEmail", viewModel);
+                try
+                {
+
+                    message.To.Add(new MailAddress(viewModel.RecipientEmail));
+                    message.Subject = "Attn Site Admin: " + viewModel.Subject;
+                    message.Body = body;
+                    message.IsBodyHtml = true;
+                    using (var smtp = new SmtpClient())
+                    {
+                        smtp.Send(message);
+                        new JsonResult { Data = "Success" };
+                    }
+                }
+                catch (Exception e)
+                {
+                    message.Dispose();
+                }
+            }
+            return new JsonResult { Data = emailSuccessful };
+        }
+
+        [HttpPost]
+        public JsonResult SendConfirmationEmail(UserViewModel viewModel)
+        {
+            var emailSuccessful = "";
+            if (!ModelState.IsValid) return new JsonResult {Data = emailSuccessful};
+            var message = new MailMessage();
+            var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/ConfirmationEmail", viewModel);
+            try
+            {
+
+                message.To.Add(new MailAddress(viewModel.EmailAddress));
+                message.Subject = "Confirm your Email for devinmajor.com";
+                message.Body = body;
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Send(message);
+                    new JsonResult { Data = "Success" };
+                }
+            }
+            catch (Exception e)
+            {
+                message.Dispose();
+            }
+            return new JsonResult { Data = emailSuccessful };
         }
 
     }

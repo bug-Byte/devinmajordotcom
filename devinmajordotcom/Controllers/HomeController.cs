@@ -76,35 +76,5 @@ namespace devinmajordotcom.Controllers
             myHomeService.SetUserConfigViewModel(viewModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult DropMeALine(ContactEmailViewModel viewModel)
-        {
-            var emailSuccessful = "";
-            if (ModelState.IsValid)
-            {
-                var message = new MailMessage();
-                var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/MainContactEmail", viewModel);
-                try
-                {
-                    
-                    message.To.Add(new MailAddress(viewModel.RecipientEmail));
-                    message.Subject = "Attn Site Admin: " + viewModel.Subject;
-                    message.Body = body;
-                    message.IsBodyHtml = true;
-                    using (var smtp = new SmtpClient())
-                    {
-                        smtp.Send(message);
-                        new JsonResult { Data = "Success" };
-                    }
-                }
-                catch (Exception e)
-                {
-                    message.Dispose();
-                }
-            }
-            return new JsonResult { Data = emailSuccessful };
-        }
-
     }
 }

@@ -55,9 +55,9 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
         System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
-        System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
         System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance
         System.Data.Entity.DbSet<Security_HardwareType> Security_HardwareTypes { get; set; } // HardwareType
+        System.Data.Entity.DbSet<Security_Log4NetLog> Security_Log4NetLog { get; set; } // Log4NetLog
         System.Data.Entity.DbSet<Security_User> Security_Users { get; set; } // User
 
         int SaveChanges();
@@ -100,9 +100,9 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
-        public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; } // __RefactorLog
         public System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance
         public System.Data.Entity.DbSet<Security_HardwareType> Security_HardwareTypes { get; set; } // HardwareType
+        public System.Data.Entity.DbSet<Security_Log4NetLog> Security_Log4NetLog { get; set; } // Log4NetLog
         public System.Data.Entity.DbSet<Security_User> Security_Users { get; set; } // User
 
         static dbContext()
@@ -177,9 +177,9 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration());
-            modelBuilder.Configurations.Add(new RefactorLogConfiguration());
             modelBuilder.Configurations.Add(new Security_HardwarePerformanceConfiguration());
             modelBuilder.Configurations.Add(new Security_HardwareTypeConfiguration());
+            modelBuilder.Configurations.Add(new Security_Log4NetLogConfiguration());
             modelBuilder.Configurations.Add(new Security_UserConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
@@ -206,9 +206,9 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration(schema));
-            modelBuilder.Configurations.Add(new RefactorLogConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_HardwarePerformanceConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_HardwareTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new Security_Log4NetLogConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_UserConfiguration(schema));
             return modelBuilder;
         }
@@ -254,9 +254,9 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; }
-        public System.Data.Entity.DbSet<RefactorLog> RefactorLogs { get; set; }
         public System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; }
         public System.Data.Entity.DbSet<Security_HardwareType> Security_HardwareTypes { get; set; }
+        public System.Data.Entity.DbSet<Security_Log4NetLog> Security_Log4NetLog { get; set; }
         public System.Data.Entity.DbSet<Security_User> Security_Users { get; set; }
 
         public FakedbContext()
@@ -280,9 +280,9 @@ namespace devinmajordotcom.Models
             Portfolio_ProjectTypes = new FakeDbSet<Portfolio_ProjectType>("Id");
             Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
             Portfolio_TechSkills = new FakeDbSet<Portfolio_TechSkill>("Id");
-            RefactorLogs = new FakeDbSet<RefactorLog>("OperationKey");
             Security_HardwarePerformances = new FakeDbSet<Security_HardwarePerformance>("Id");
             Security_HardwareTypes = new FakeDbSet<Security_HardwareType>("Id");
+            Security_Log4NetLog = new FakeDbSet<Security_Log4NetLog>("Id");
             Security_Users = new FakeDbSet<Security_User>("Id");
 
             InitializePartial();
@@ -1171,27 +1171,6 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // __RefactorLog
-    ///<summary>
-    /// refactoring log
-    ///</summary>
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class RefactorLog
-    {
-        public System.Guid OperationKey { get; set; } // OperationKey (Primary key)
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy
-        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
-        public string ModifiedBy { get; set; } // ModifiedBy
-
-        public RefactorLog()
-        {
-            InitializePartial();
-        }
-
-        partial void InitializePartial();
-    }
-
     // HardwarePerformance
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Security_HardwarePerformance
@@ -1248,6 +1227,34 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // Log4NetLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_Log4NetLog
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public System.DateTime Date { get; set; } // Date
+        public string Thread { get; set; } // Thread (length: 255)
+        public string Level { get; set; } // Level (length: 50)
+        public string Logger { get; set; } // Logger (length: 255)
+        public string Message { get; set; } // Message
+        public string Exception { get; set; } // Exception
+        public string UserId { get; set; } // UserId (length: 100)
+        public string Action { get; set; } // Action (length: 100)
+        public string Controller { get; set; } // Controller (length: 100)
+        public string Params { get; set; } // Params
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        public Security_Log4NetLog()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // User
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Security_User
@@ -1257,6 +1264,7 @@ namespace devinmajordotcom.Models
         public bool IsActive { get; set; } // IsActive
         public string EmailAddress { get; set; } // EmailAddress (length: 250)
         public bool IsAdmin { get; set; } // IsAdmin
+        public bool IsEmailConfirmed { get; set; } // IsEmailConfirmed
         public string UserName { get; set; } // UserName
         public string Password { get; set; } // Password
         public System.Guid Guid { get; set; } // GUID
@@ -1292,11 +1300,12 @@ namespace devinmajordotcom.Models
         {
             IsActive = true;
             IsAdmin = false;
+            IsEmailConfirmed = false;
             MyHome_BlogPosts = new System.Collections.Generic.List<MyHome_BlogPost>();
             MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
             MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
-            MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
             MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
+            MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
             InitializePartial();
         }
 
@@ -1908,30 +1917,6 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
-    // __RefactorLog
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    public partial class RefactorLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RefactorLog>
-    {
-        public RefactorLogConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public RefactorLogConfiguration(string schema)
-        {
-            ToTable("__RefactorLog", schema);
-            HasKey(x => x.OperationKey);
-
-            Property(x => x.OperationKey).HasColumnName(@"OperationKey").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
-            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
-            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
-            InitializePartial();
-        }
-        partial void InitializePartial();
-    }
-
     // HardwarePerformance
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Security_HardwarePerformanceConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_HardwarePerformance>
@@ -1988,6 +1973,40 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // Log4NetLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_Log4NetLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_Log4NetLog>
+    {
+        public Security_Log4NetLogConfiguration()
+            : this("Security")
+        {
+        }
+
+        public Security_Log4NetLogConfiguration(string schema)
+        {
+            ToTable("Log4NetLog", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Date).HasColumnName(@"Date").HasColumnType("datetime").IsRequired();
+            Property(x => x.Thread).HasColumnName(@"Thread").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(255);
+            Property(x => x.Level).HasColumnName(@"Level").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Logger).HasColumnName(@"Logger").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(255);
+            Property(x => x.Message).HasColumnName(@"Message").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.Exception).HasColumnName(@"Exception").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Action).HasColumnName(@"Action").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Controller).HasColumnName(@"Controller").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Params).HasColumnName(@"Params").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
     // User
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Security_UserConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_User>
@@ -2007,6 +2026,7 @@ namespace devinmajordotcom.Models
             Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
             Property(x => x.EmailAddress).HasColumnName(@"EmailAddress").HasColumnType("nvarchar").IsOptional().HasMaxLength(250);
             Property(x => x.IsAdmin).HasColumnName(@"IsAdmin").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEmailConfirmed).HasColumnName(@"IsEmailConfirmed").HasColumnType("bit").IsRequired();
             Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Password).HasColumnName(@"Password").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Guid).HasColumnName(@"GUID").HasColumnType("uniqueidentifier").IsRequired();

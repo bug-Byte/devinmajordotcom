@@ -23,10 +23,16 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpGet]
-        public ActionResult VerifyEmailDoesNotExist(string EmailAddress)
+        public ActionResult VerifyEmail(string EmailAddress, bool IsSigningUp)
         {
-            var result = landingPageService.DoesUserExist(EmailAddress);
-            return result ? Json($"The email address \"{EmailAddress}\" is already in use!", JsonRequestBehavior.AllowGet) : Json(true, JsonRequestBehavior.AllowGet);
+            var result1 = landingPageService.DoesUserExist(EmailAddress);
+            var result2 = landingPageService.IsEmailConfirmed(EmailAddress, IsSigningUp);
+            if (result2)
+            {
+                return result1 ? Json($"The email address \"{EmailAddress}\" is already in use!", JsonRequestBehavior.AllowGet) : Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json("Your account has not been activated! Please confirm your email address before signing in.", JsonRequestBehavior.AllowGet);
+
         }
 
     }

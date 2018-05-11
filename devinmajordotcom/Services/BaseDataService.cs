@@ -28,11 +28,12 @@ namespace devinmajordotcom.Services
         {
             var results = ValidateCredentials(viewModel.UserName, viewModel.Password, viewModel.EmailAddress);
 
-            if (results.User.UserID != 0 && ((isAdmin && results.User.UserIsAdmin) || (isAdmin == results.User.UserIsAdmin)) || HttpContext.Current.Session["MainPageUserAuthID"] == null || (Guid)HttpContext.Current.Session["MainPageUserAuthID"] != results.User.GUID)
+            if (results.User.UserID != 0 && results.User.IsEmailConfirmed && ((isAdmin && results.User.UserIsAdmin) || (isAdmin == results.User.UserIsAdmin)) || HttpContext.Current.Session["MainPageUserAuthID"] == null || (Guid)HttpContext.Current.Session["MainPageUserAuthID"] != results.User.GUID)
             {
                 HttpContext.Current.Session.Timeout = 86400;
                 HttpContext.Current.Session["MainPageUserAuthID"] = results.User.GUID;
                 HttpContext.Current.Session["MainPageUserName"] = results.User.UserName;
+                HttpContext.Current.Session["UserId"] = results.User.UserID;
                 return results.User;
             }
 
@@ -61,7 +62,8 @@ namespace devinmajordotcom.Services
                 Password = x.Password,
                 UserName = x.UserName,
                 UserIsAdmin = x.IsAdmin,
-                UserIsActive = x.IsActive
+                UserIsActive = x.IsActive,
+                IsEmailConfirmed = x.IsEmailConfirmed
             }).FirstOrDefault();
 
             if (user == null) return results;
@@ -75,6 +77,11 @@ namespace devinmajordotcom.Services
         public bool DoesUserExist(string userString)
         {
             return !string.IsNullOrEmpty(userString) && db.Security_Users.Any(x => x.UserName == userString || x.EmailAddress == userString);
+        }
+
+        public bool IsEmailConfirmed(string emailString, bool IsSigningUp)
+        {
+            return !string.IsNullOrEmpty(emailString) && db.Security_Users.Any(x => IsSigningUp || x.IsAdmin || (x.EmailAddress == emailString && x.IsEmailConfirmed));
         }
 
         public void UpdateCurrentUser(UserViewModel viewModel)
@@ -107,11 +114,12 @@ namespace devinmajordotcom.Services
             var newUser = new Security_User()
             {
                 ClientName = ip,
-                EmailAddress = "",
-                UserName = "",
+                EmailAddress = null,
+                UserName = "Anon Visitor",
                 Guid = (Guid)userGuid,
                 IsActive = true,
-                IsAdmin = IsUserToAddAnAdmin
+                IsAdmin = IsUserToAddAnAdmin,
+                IsEmailConfirmed = IsUserToAddAnAdmin
             };
 
             db.Security_Users.Add(newUser);

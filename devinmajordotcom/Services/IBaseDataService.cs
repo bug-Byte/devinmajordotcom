@@ -18,6 +18,8 @@ namespace devinmajordotcom.Services
 
         bool DoesUserExist(string userString);
 
+        bool IsEmailConfirmed(string emailString, bool IsSigningUp);
+
         UserValidationViewModel ValidateCredentials(string userString, string password, string emailAddress = null);
 
         void UpdateCurrentUser(UserViewModel viewModel);
