@@ -19,7 +19,7 @@ namespace devinmajordotcom.ViewModels
 
         [Required]
         [DisplayName("Email Address * : ")]
-        [Remote("VerifyEmailDoesNotExist", "Validation")]
+        [Remote("VerifyEmail", "Validation", AdditionalFields = "IsSigningUp")]
         public string EmailAddress { get; set; }
 
         [Required]
@@ -31,6 +31,8 @@ namespace devinmajordotcom.ViewModels
 
         [Required]
         public bool UserIsAdmin { get; set; }
+
+        public bool IsEmailConfirmed { get; set; }
 
         [Required]
         public bool UserIsActive { get; set; }
