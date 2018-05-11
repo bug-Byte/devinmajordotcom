@@ -905,6 +905,9 @@ function ConnectToSignalRPerformanceHub() {
         });
         
         firstRun = false;
+		
+		performanceHub.server.SendPerformanceMonitoring();
+		
     };
 
     
