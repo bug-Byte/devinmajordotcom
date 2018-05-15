@@ -81,7 +81,7 @@
                                     <div class="checkbox-inline">
                                         <label class="switch">
                                             @Html.EditorFor(o => o.Config.IsParticleCanvasOn, new { htmlAttributes = new { @class = "toggler" } })
-                                            <div class="slider round"></div>
+                                            <div class="toggleslider round"></div>
                                         </label>
                                         <span class='glyphicon glyphicon-cog'></span>&nbsp;@Html.LabelFor(o => o.Config.IsParticleCanvasOn, "Is Particle Canvas On?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                     </div>
@@ -207,7 +207,7 @@
                                                     <div class="checkbox-inline">
                                                         <label class="switch">
                                                             @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsDefault, new { htmlAttributes = new { @class = "toggler" } })
-                                                            <div class="slider round"></div>
+                                                            <div class="toggleslider round"></div>
                                                         </label>
                                                         @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                                     </div>
@@ -218,7 +218,7 @@
                                                     <div class="checkbox-inline">
                                                         <label class="switch">
                                                             @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsPublic, new { htmlAttributes = new { @class = "toggler" } })
-                                                            <div class="slider round"></div>
+                                                            <div class="toggleslider round"></div>
                                                         </label>
                                                         @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsPublic, "Is Link Public?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                                     </div>
@@ -229,7 +229,7 @@
                                                     <div class="checkbox-inline">
                                                         <label class="switch">
                                                             @Html.EditorFor(o => o.LandingPageBannerLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
-                                                            <div class="slider round"></div>
+                                                            <div class="toggleslider round"></div>
                                                         </label>
                                                         @Html.LabelFor(o => o.LandingPageBannerLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                                     </div>
@@ -349,7 +349,7 @@
                                                     <div class="checkbox-inline">
                                                         <label class="switch">
                                                             @Html.EditorFor(o => o.LandingPageApplicationLinks[count].IsPublic, new { htmlAttributes = new { @class = "toggler" } })
-                                                            <div class="slider round"></div>
+                                                            <div class="toggleslider round"></div>
                                                         </label>
                                                         @Html.LabelFor(o => o.LandingPageApplicationLinks[count].IsPublic, "Is Link Public?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                                     </div>
@@ -360,7 +360,7 @@
                                                     <div class="checkbox-inline">
                                                         <label class="switch">
                                                             @Html.EditorFor(o => o.LandingPageApplicationLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
-                                                            <div class="slider round"></div>
+                                                            <div class="toggleslider round"></div>
                                                         </label>
                                                         @Html.LabelFor(o => o.LandingPageApplicationLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
                                                     </div>

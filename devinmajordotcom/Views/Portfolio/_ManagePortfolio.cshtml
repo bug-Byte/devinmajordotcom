@@ -18,7 +18,7 @@
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 }
 
-@using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "updatePortfolioForm" }))
+@using (Ajax.BeginForm("_ManagePortfolio", "Portfolio", new AjaxOptions { HttpMethod = "Post",  OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }))
 {
     <div class="panel-group">
     <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
@@ -477,6 +477,8 @@
                                     @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageName, new { @class = "form-control" })
                                     <h5>Language Specifics (if programming language or applicable)</h5>
                                     @Html.TextAreaFor(x => x.LanguageSkills[i].LanguageSpecifics, new { @class = "form-control" })
+                                    <h5>Language Capability (if programming language or applicable)</h5>
+                                    @Html.TextBoxFor(x => x.LanguageSkills[i].LanguageCapabilityPercentage, new { @class = "customSlider untouched", @data_slider_min = "0", data_slider_max = "100", data_slider_step = "1", data_slider_value = Model.LanguageSkills[i].LanguageCapabilityPercentage.ToString() })
                                     @{
                                         var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Language";
                                         var actionLink = Ajax.ActionLink("REPLACE", "RemoveLanguageSkill", "Portfolio", new { ID = Model.LanguageSkills[i].LanguageSkillID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveSkill('.languageSkill_" + i + "', 'languageSkill')", OnFailure = "ManagePortfolioSkillsAjaxFailure" }, new { data_content = linkText, @id = "deleteLangugeSkillLink_" + Model.LanguageSkills[i].LanguageSkillID, @class = "btn btn-danger deleteSkillGroup deleteSkillLink", @style = "float:right;" });

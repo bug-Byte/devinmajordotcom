@@ -42,6 +42,7 @@ namespace devinmajordotcom.App_Start
                       "~/Content/bootstrap-iconpicker.min.css",
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/bootstrap-colorpicker.css",
+                      "~/Content/bootstrap-slider.css",
                       "~/Content/cover.css"
             ));
 
@@ -85,6 +86,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/moment.js",
                 "~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/bootstrap-colorpicker.js",
+                "~/Scripts/bootstrap-slider.js",
                 "~/Scripts/IndexScripts.js"
             ));
 

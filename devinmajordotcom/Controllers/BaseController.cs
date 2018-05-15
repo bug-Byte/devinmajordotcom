@@ -3,6 +3,7 @@ using devinmajordotcom.Services;
 using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -37,6 +38,7 @@ namespace devinmajordotcom.Controllers
             myHomeService = DependencyResolver.Current.GetService<IMyHomeService>();
         }
 
+        [ValidateInput(false)]
         protected override void OnException(ExceptionContext filterContext)
         {
             var userId = HttpContext.Session["UserId"];
@@ -47,6 +49,7 @@ namespace devinmajordotcom.Controllers
             Log.Error("Exception Has Occurred", filterContext.Exception);
         }
 
+        [ValidateInput(false)]
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var userId = HttpContext.Session["UserId"];
@@ -56,12 +59,23 @@ namespace devinmajordotcom.Controllers
             log4net.LogicalThreadContext.Properties["Action"] = filterContext.RouteData.Values["Action"];
             log4net.LogicalThreadContext.Properties["Controller"] = filterContext.RouteData.Values["Controller"];
 
-            var actionParams = filterContext.ActionParameters;
-            var fullparams = filterContext.RequestContext.HttpContext.Request.Params;
+            try
+            {
+                var allparams = filterContext.RequestContext.HttpContext.Request.Params;
+                log4net.LogicalThreadContext.Properties["Params"] =
+                    JsonConvert.SerializeObject(new { action = filterContext.ActionParameters, full = allparams });
+                Log.Info("User Action");
+            }
+            catch (Exception e)
+            {
+                var actionparams = filterContext.ActionParameters;
+                log4net.LogicalThreadContext.Properties["Params"] =
+                    JsonConvert.SerializeObject(new { action = filterContext.ActionParameters, full = actionparams });
+                Log.Info("User Action");
+            }
+            
 
-            log4net.LogicalThreadContext.Properties["Params"] =
-                JsonConvert.SerializeObject(new { action = filterContext.ActionParameters, full = fullparams });
-            Log.Info("User Action");
+            
 
         }
 

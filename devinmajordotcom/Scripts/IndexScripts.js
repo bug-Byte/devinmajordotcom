@@ -367,12 +367,28 @@ function InitializeMediaDashboardEventHandlers() {
 
         });
     });
+
+    $('.customSlider.untouched').each(function() {
+        $(this).bootstrapSlider({
+            formatter: function (value) {
+                return 'Current value: ' + value + "%";
+            }
+        }).on('change', function (e) {
+            $(this).closest(".customSlider").data("value", e.value);
+            $(this).closest(".customSlider").val(e.value);
+            $(this).closest(".customSlider").attr("value", e.value);
+        });
+    });
+
     RefreshTinyMce();
+
     $('#skillCarousel').carousel({
         interval: false,
         wrap: false
     });
-    
+
+    $(".untouched").removeClass("untouched");
+
 }
 
 function updateLinks() {

@@ -3943,4 +3943,3 @@ exports.default = Swatches;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=bootstrap-colorpicker.js.map
