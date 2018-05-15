@@ -47,5 +47,7 @@ namespace devinmajordotcom.Services
 
         void SetUserConfigViewModel(MyHomeUserConfigViewModel viewModel);
 
+        void RemoveCommentById(int ID);
+
     }
 }

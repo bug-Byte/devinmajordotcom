@@ -356,11 +356,17 @@ namespace devinmajordotcom.Services
 
         public List<CommentViewModel> GetCommentsByBlogPostID(int ID)
         {
+
+            var guid = HttpContext.Current.Session["MainPageUserAuthID"] ?? AddNewUser().Guid;
+            var user = GetCurrentUser((Guid)guid);
+
             return db.MyHome_BlogPostComments.Where(x => x.BlogPostId == ID).Select(x => new CommentViewModel() {
                 AuthorUserID = x.UserId,
                 AuthorUserName = db.Security_Users.Where(y => y.Id == x.UserId).Select(y => y.UserName).FirstOrDefault(),
                 Body = x.CommentBody,
                 BlogPostID = x.BlogPostId,
+                IsCurrentUserCommenterOrAdmin = user.UserIsAdmin || user.UserID == x.UserId,
+                CommentID = x.Id,
                 CreatedBy = x.CreatedBy,
                 CreatedOn = x.CreatedOn,
                 ModifiedBy = x.ModifiedBy,
@@ -382,38 +388,37 @@ namespace devinmajordotcom.Services
                 if(blogPost != null)
                 {
                     var poster = db.Security_Users.FirstOrDefault(x => x.Id == blogPost.UserId);
-                    if (user.UserIsAdmin || user.UserID == poster.Id || (poster.ClientName == "::1" && poster.UserName == "Guest"))
+                    viewModel = new BlogPostViewModel()
                     {
-                        viewModel = new BlogPostViewModel()
+                        BlogPostID = blogPost.Id,
+                        AuthorUserID = blogPost.UserId,
+                        AuthorUserName = db.Security_Users.Where(t => t.Id == blogPost.UserId).Select(t => t.UserName).FirstOrDefault(),
+                        PostTitle = blogPost.Title,
+                        BackgroundImage = blogPost.Image,
+                        Body = blogPost.Body,
+                        CreatedBy = blogPost.CreatedBy,
+                        CreatedOn = blogPost.CreatedOn,
+                        ModifiedBy = blogPost.ModifiedBy,
+                        ModifiedOn = blogPost.ModifiedOn,
+                        PostComments = blogPost.MyHome_BlogPostComments.Select(y => new CommentViewModel()
                         {
-                            BlogPostID = blogPost.Id,
-                            AuthorUserID = blogPost.UserId,
-                            AuthorUserName = db.Security_Users.Where(t => t.Id == blogPost.UserId).Select(t => t.UserName).FirstOrDefault(),
-                            PostTitle = blogPost.Title,
-                            BackgroundImage = blogPost.Image,
-                            Body = blogPost.Body,
-                            CreatedBy = blogPost.CreatedBy,
-                            CreatedOn = blogPost.CreatedOn,
-                            ModifiedBy = blogPost.ModifiedBy,
-                            ModifiedOn = blogPost.ModifiedOn,
-                            PostComments = blogPost.MyHome_BlogPostComments.Select(y => new CommentViewModel()
-                            {
-                                AuthorUserID = y.UserId,
-                                AuthorUserName = db.Security_Users.Where(z => z.Id == y.UserId).Select(z => z.UserName).FirstOrDefault(),
-                                Body = y.CommentBody,
-                                BackgroundImage = y.Image,
-                                CreatedOn = y.CreatedOn,
-                                CreatedBy = y.CreatedBy,
-                                ModifiedOn = y.ModifiedOn,
-                                ModifiedBy = y.ModifiedBy
-                            }).OrderBy(y => y.CreatedOn).ToList(),
-                        };
-                        viewModel.NewComment = new CommentViewModel()
-                        {
-                            AuthorUserID = user.UserID,
-                            BlogPostID = viewModel.BlogPostID
-                        };
-                    }
+                            CommentID = y.Id,
+                            AuthorUserID = y.UserId,
+                            AuthorUserName = db.Security_Users.Where(z => z.Id == y.UserId).Select(z => z.UserName).FirstOrDefault(),
+                            Body = y.CommentBody,
+                            BackgroundImage = y.Image,
+                            IsCurrentUserCommenterOrAdmin = user.UserIsAdmin || user.UserID == poster.Id,
+                            CreatedOn = y.CreatedOn,
+                            CreatedBy = y.CreatedBy,
+                            ModifiedOn = y.ModifiedOn,
+                            ModifiedBy = y.ModifiedBy
+                        }).OrderBy(y => y.CreatedOn).ToList(),
+                    };
+                    viewModel.NewComment = new CommentViewModel()
+                    {
+                        AuthorUserID = user.UserID,
+                        BlogPostID = viewModel.BlogPostID
+                    };
                 }
             }
 
@@ -435,6 +440,16 @@ namespace devinmajordotcom.Services
                 ModifiedBy = x.ModifiedBy,
                 ModifiedOn = x.ModifiedOn
             }).OrderBy(y => y.CreatedOn).ToList();
+        }
+
+        public void RemoveCommentById(int ID)
+        {
+            var recordToRemove = db.MyHome_BlogPostComments.FirstOrDefault(x => x.Id == ID);
+            if (recordToRemove != null)
+            {
+                db.MyHome_BlogPostComments.Remove(recordToRemove);
+            }
+            db.SaveChanges();
         }
 
     }

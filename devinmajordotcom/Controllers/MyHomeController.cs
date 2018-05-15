@@ -130,7 +130,11 @@ namespace devinmajordotcom.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [HttpGet]
+        public void RemoveCommentById(int ID)
+        {
+            myHomeService.RemoveCommentById(ID);
+        }
 
     }
 }

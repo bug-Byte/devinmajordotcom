@@ -195,6 +195,8 @@ namespace devinmajordotcom.ViewModels
 
         public List<DropDownViewModel> ProjectFilters { get; set; }
 
+        public string CommaDelimitedProjectFilters { get; set; }
+
     }
 
 }

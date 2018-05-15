@@ -122,11 +122,15 @@ namespace devinmajordotcom.ViewModels
     public class CommentViewModel
     {
 
+        public int CommentID { get; set; }
+
         public int BlogPostID { get; set; }
 
         public int AuthorUserID { get; set; }
 
         public string AuthorUserName { get; set; }
+
+        public bool IsCurrentUserCommenterOrAdmin { get; set; }
 
         [AllowHtml]
         [DisplayName("Body Content")]

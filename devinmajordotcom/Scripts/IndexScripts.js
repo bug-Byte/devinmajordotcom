@@ -380,6 +380,17 @@ function InitializeMediaDashboardEventHandlers() {
         });
     });
 
+    $('.tags.untouched').selectize({
+        delimiter: ',',
+        persist: false,
+        create: function (input) {
+            return {
+                value: input,
+                text: input
+            }
+        }
+    });
+
     RefreshTinyMce();
 
     $('#skillCarousel').carousel({

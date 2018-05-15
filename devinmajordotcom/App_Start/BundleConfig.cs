@@ -43,6 +43,7 @@ namespace devinmajordotcom.App_Start
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/bootstrap-colorpicker.css",
                       "~/Content/bootstrap-slider.css",
+                      "~/Content/Selectize/css/selectize.css",
                       "~/Content/cover.css"
             ));
 
@@ -87,6 +88,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/bootstrap-colorpicker.js",
                 "~/Scripts/bootstrap-slider.js",
+                "~/Content/Selectize/js/standalone/selectize.js",
                 "~/Scripts/IndexScripts.js"
             ));
 

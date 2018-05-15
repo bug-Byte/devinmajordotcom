@@ -7,6 +7,10 @@
     foreach (var comment in Model.OrderBy(x => x.CreatedOn))
     {
         <div class="media mb-4 comment">
+            @{
+                var linkText = "<span class='fa fa-trash'></span>";
+                var actionLink = Ajax.ActionLink("REPLACE", "RemoveCommentById", "MyHome", new { ID = comment.CommentID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "UpdateBlogPosts();", OnFailure = "SettingsUpdateFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.BlogPostID, @class = "btn btn-danger deleteGroup deleteFavoriteLink", @style = "float:right;" });
+            }
             <div class="media-body">
                 <h5 class="mt-0 blogHoverItem">
                     <i class="fa fa-clock-o"></i>&nbsp;&nbsp;
@@ -16,7 +20,7 @@
                     <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
                     @if (String.IsNullOrEmpty(Model[count].AuthorUserName))
                     {
-                        <text>Anonymous said:</text>
+                        <text>Anon Visitor said:</text>
                     }
                     else
                     {
