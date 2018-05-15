@@ -28,12 +28,12 @@ var visualchars = (function () {
     };
     return { isEnabled: isEnabled };
   };
-  var $_6rihrrrqjfjm4n6d = { get: get };
+  var $_ghnarqs2jgqkx2vr = { get: get };
 
   var fireVisualChars = function (editor, state) {
     return editor.fire('VisualChars', { state: state });
   };
-  var $_9ihziwrtjfjm4n6g = { fireVisualChars: fireVisualChars };
+  var $_c4uaz3s5jgqkx2vu = { fireVisualChars: fireVisualChars };
 
   var charMap = {
     '\xA0': 'nbsp',
@@ -56,7 +56,7 @@ var visualchars = (function () {
     }
     return selector;
   };
-  var $_9cipdtrvjfjm4n6m = {
+  var $_9ud011s7jgqkx2w8 = {
     charMap: charMap,
     regExp: charMapToRegExp(charMap),
     regExpGlobal: charMapToRegExp(charMap, true),
@@ -142,7 +142,7 @@ var visualchars = (function () {
   };
   var never = constant(false);
   var always = constant(true);
-  var $_5289a7rzjfjm4n72 = {
+  var $_cyw0yfsbjgqkx2wz = {
     noop: noop,
     noarg: noarg,
     compose: compose,
@@ -158,8 +158,8 @@ var visualchars = (function () {
     always: always
   };
 
-  var never$1 = $_5289a7rzjfjm4n72.never;
-  var always$1 = $_5289a7rzjfjm4n72.always;
+  var never$1 = $_cyw0yfsbjgqkx2wz.never;
+  var always$1 = $_cyw0yfsbjgqkx2wz.always;
   var none = function () {
     return NONE;
   };
@@ -202,7 +202,7 @@ var visualchars = (function () {
       toArray: function () {
         return [];
       },
-      toString: $_5289a7rzjfjm4n72.constant('none()')
+      toString: $_cyw0yfsbjgqkx2wz.constant('none()')
     };
     if (Object.freeze)
       Object.freeze(me);
@@ -275,6 +275,32 @@ var visualchars = (function () {
     some: some,
     none: none,
     from: from
+  };
+
+  var typeOf = function (x) {
+    if (x === null)
+      return 'null';
+    var t = typeof x;
+    if (t === 'object' && Array.prototype.isPrototypeOf(x))
+      return 'array';
+    if (t === 'object' && String.prototype.isPrototypeOf(x))
+      return 'string';
+    return t;
+  };
+  var isType = function (type) {
+    return function (value) {
+      return typeOf(value) === type;
+    };
+  };
+  var $_80999dscjgqkx2x4 = {
+    isString: isType('string'),
+    isObject: isType('object'),
+    isArray: isType('array'),
+    isNull: isType('null'),
+    isBoolean: isType('boolean'),
+    isUndefined: isType('undefined'),
+    isFunction: isType('function'),
+    isNumber: isType('number')
   };
 
   var rawIndexOf = function () {
@@ -478,7 +504,10 @@ var visualchars = (function () {
   var last = function (xs) {
     return xs.length === 0 ? Option.none() : Option.some(xs[xs.length - 1]);
   };
-  var $_4burxgrxjfjm4n6s = {
+  var from$1 = $_80999dscjgqkx2x4.isFunction(Array.from) ? Array.from : function (x) {
+    return slice.call(x);
+  };
+  var $_711l1ys9jgqkx2wg = {
     map: map,
     each: each,
     eachr: eachr,
@@ -504,7 +533,8 @@ var visualchars = (function () {
     sort: sort,
     range: range,
     head: head,
-    last: last
+    last: last,
+    from: from$1
   };
 
   var fromHtml = function (html, scope) {
@@ -530,12 +560,12 @@ var visualchars = (function () {
   var fromDom = function (node) {
     if (node === null || node === undefined)
       throw new Error('Node cannot be null or undefined');
-    return { dom: $_5289a7rzjfjm4n72.constant(node) };
+    return { dom: $_cyw0yfsbjgqkx2wz.constant(node) };
   };
   var fromPoint = function (doc, x, y) {
     return Option.from(doc.dom().elementFromPoint(x, y)).map(fromDom);
   };
-  var $_g7swf9s0jfjm4n75 = {
+  var $_ef4ukqsdjgqkx2x5 = {
     fromHtml: fromHtml,
     fromTag: fromTag,
     fromText: fromText,
@@ -543,7 +573,7 @@ var visualchars = (function () {
     fromPoint: fromPoint
   };
 
-  var $_2hx62us2jfjm4n7a = {
+  var $_7f6su7sfjgqkx2xf = {
     ATTRIBUTE: 2,
     CDATA_SECTION: 4,
     COMMENT: 8,
@@ -568,18 +598,18 @@ var visualchars = (function () {
   var value = function (element) {
     return element.dom().nodeValue;
   };
-  var isType = function (t) {
+  var isType$1 = function (t) {
     return function (element) {
       return type(element) === t;
     };
   };
   var isComment = function (element) {
-    return type(element) === $_2hx62us2jfjm4n7a.COMMENT || name(element) === '#comment';
+    return type(element) === $_7f6su7sfjgqkx2xf.COMMENT || name(element) === '#comment';
   };
-  var isElement = isType($_2hx62us2jfjm4n7a.ELEMENT);
-  var isText = isType($_2hx62us2jfjm4n7a.TEXT);
-  var isDocument = isType($_2hx62us2jfjm4n7a.DOCUMENT);
-  var $_ekpq0ls1jfjm4n79 = {
+  var isElement = isType$1($_7f6su7sfjgqkx2xf.ELEMENT);
+  var isText = isType$1($_7f6su7sfjgqkx2xf.TEXT);
+  var isDocument = isType$1($_7f6su7sfjgqkx2xf.DOCUMENT);
+  var $_6g1brtsejgqkx2xe = {
     name: name,
     type: type,
     value: value,
@@ -590,18 +620,18 @@ var visualchars = (function () {
   };
 
   var wrapCharWithSpan = function (value) {
-    return '<span data-mce-bogus="1" class="mce-' + $_9cipdtrvjfjm4n6m.charMap[value] + '">' + value + '</span>';
+    return '<span data-mce-bogus="1" class="mce-' + $_9ud011s7jgqkx2w8.charMap[value] + '">' + value + '</span>';
   };
-  var $_70dk1zs3jfjm4n7b = { wrapCharWithSpan: wrapCharWithSpan };
+  var $_4uid5wsgjgqkx2xg = { wrapCharWithSpan: wrapCharWithSpan };
 
   var isMatch = function (n) {
-    return $_ekpq0ls1jfjm4n79.isText(n) && $_ekpq0ls1jfjm4n79.value(n) !== undefined && $_9cipdtrvjfjm4n6m.regExp.test($_ekpq0ls1jfjm4n79.value(n));
+    return $_6g1brtsejgqkx2xe.isText(n) && $_6g1brtsejgqkx2xe.value(n) !== undefined && $_9ud011s7jgqkx2w8.regExp.test($_6g1brtsejgqkx2xe.value(n));
   };
   var filterDescendants = function (scope, predicate) {
     var result = [];
     var dom = scope.dom();
-    var children = $_4burxgrxjfjm4n6s.map(dom.childNodes, $_g7swf9s0jfjm4n75.fromDom);
-    $_4burxgrxjfjm4n6s.each(children, function (x) {
+    var children = $_711l1ys9jgqkx2wg.map(dom.childNodes, $_ef4ukqsdjgqkx2x5.fromDom);
+    $_711l1ys9jgqkx2wg.each(children, function (x) {
       if (predicate(x)) {
         result = result.concat([x]);
       }
@@ -618,9 +648,9 @@ var visualchars = (function () {
     }
   };
   var replaceWithSpans = function (html) {
-    return html.replace($_9cipdtrvjfjm4n6m.regExpGlobal, $_70dk1zs3jfjm4n7b.wrapCharWithSpan);
+    return html.replace($_9ud011s7jgqkx2w8.regExpGlobal, $_4uid5wsgjgqkx2xg.wrapCharWithSpan);
   };
-  var $_4w8hnbrwjfjm4n6n = {
+  var $_8pio2qs8jgqkx2wa = {
     isMatch: isMatch,
     filterDescendants: filterDescendants,
     findParentElm: findParentElm,
@@ -629,9 +659,9 @@ var visualchars = (function () {
 
   var show = function (editor, rootElm) {
     var node, div;
-    var nodeList = $_4w8hnbrwjfjm4n6n.filterDescendants($_g7swf9s0jfjm4n75.fromDom(rootElm), $_4w8hnbrwjfjm4n6n.isMatch);
-    $_4burxgrxjfjm4n6s.each(nodeList, function (n) {
-      var withSpans = $_4w8hnbrwjfjm4n6n.replaceWithSpans($_ekpq0ls1jfjm4n79.value(n));
+    var nodeList = $_8pio2qs8jgqkx2wa.filterDescendants($_ef4ukqsdjgqkx2x5.fromDom(rootElm), $_8pio2qs8jgqkx2wa.isMatch);
+    $_711l1ys9jgqkx2wg.each(nodeList, function (n) {
+      var withSpans = $_8pio2qs8jgqkx2wa.replaceWithSpans($_6g1brtsejgqkx2xe.value(n));
       div = editor.dom.create('div', null, withSpans);
       while (node = div.lastChild) {
         editor.dom.insertAfter(node, n.dom());
@@ -640,21 +670,21 @@ var visualchars = (function () {
     });
   };
   var hide = function (editor, body) {
-    var nodeList = editor.dom.select($_9cipdtrvjfjm4n6m.selector, body);
-    $_4burxgrxjfjm4n6s.each(nodeList, function (node) {
+    var nodeList = editor.dom.select($_9ud011s7jgqkx2w8.selector, body);
+    $_711l1ys9jgqkx2wg.each(nodeList, function (node) {
       editor.dom.remove(node, 1);
     });
   };
   var toggle = function (editor) {
     var body = editor.getBody();
     var bookmark = editor.selection.getBookmark();
-    var parentNode = $_4w8hnbrwjfjm4n6n.findParentElm(editor.selection.getNode(), body);
+    var parentNode = $_8pio2qs8jgqkx2wa.findParentElm(editor.selection.getNode(), body);
     parentNode = parentNode !== undefined ? parentNode : body;
     hide(editor, parentNode);
     show(editor, parentNode);
     editor.selection.moveToBookmark(bookmark);
   };
-  var $_be3wg5rujfjm4n6h = {
+  var $_1us25ds6jgqkx2vv = {
     show: show,
     hide: hide,
     toggle: toggle
@@ -665,39 +695,39 @@ var visualchars = (function () {
     var selection = editor.selection;
     var bookmark;
     toggleState.set(!toggleState.get());
-    $_9ihziwrtjfjm4n6g.fireVisualChars(editor, toggleState.get());
+    $_c4uaz3s5jgqkx2vu.fireVisualChars(editor, toggleState.get());
     bookmark = selection.getBookmark();
     if (toggleState.get() === true) {
-      $_be3wg5rujfjm4n6h.show(editor, body);
+      $_1us25ds6jgqkx2vv.show(editor, body);
     } else {
-      $_be3wg5rujfjm4n6h.hide(editor, body);
+      $_1us25ds6jgqkx2vv.hide(editor, body);
     }
     selection.moveToBookmark(bookmark);
   };
-  var $_blgawsrsjfjm4n6f = { toggleVisualChars: toggleVisualChars };
+  var $_68ybm1s4jgqkx2vt = { toggleVisualChars: toggleVisualChars };
 
   var register = function (editor, toggleState) {
     editor.addCommand('mceVisualChars', function () {
-      $_blgawsrsjfjm4n6f.toggleVisualChars(editor, toggleState);
+      $_68ybm1s4jgqkx2vt.toggleVisualChars(editor, toggleState);
     });
   };
-  var $_9j5gjbrrjfjm4n6e = { register: register };
+  var $_d90wpfs3jgqkx2vs = { register: register };
 
   var global$1 = tinymce.util.Tools.resolve('tinymce.util.Delay');
 
   var setup = function (editor, toggleState) {
     var debouncedToggle = global$1.debounce(function () {
-      $_be3wg5rujfjm4n6h.toggle(editor);
+      $_1us25ds6jgqkx2vv.toggle(editor);
     }, 300);
     if (editor.settings.forced_root_block !== false) {
       editor.on('keydown', function (e) {
         if (toggleState.get() === true) {
-          e.keyCode === 13 ? $_be3wg5rujfjm4n6h.toggle(editor) : debouncedToggle();
+          e.keyCode === 13 ? $_1us25ds6jgqkx2vv.toggle(editor) : debouncedToggle();
         }
       });
     }
   };
-  var $_8ua4jzs4jfjm4n7c = { setup: setup };
+  var $_amvqykshjgqkx2y1 = { setup: setup };
 
   var toggleActiveState = function (editor) {
     return function (e) {
@@ -726,10 +756,10 @@ var visualchars = (function () {
 
   global.add('visualchars', function (editor) {
     var toggleState = Cell(false);
-    $_9j5gjbrrjfjm4n6e.register(editor, toggleState);
+    $_d90wpfs3jgqkx2vs.register(editor, toggleState);
     register$1(editor);
-    $_8ua4jzs4jfjm4n7c.setup(editor, toggleState);
-    return $_6rihrrrqjfjm4n6d.get(toggleState);
+    $_amvqykshjgqkx2y1.setup(editor, toggleState);
+    return $_ghnarqs2jgqkx2vr.get(toggleState);
   });
   function Plugin () {
   }

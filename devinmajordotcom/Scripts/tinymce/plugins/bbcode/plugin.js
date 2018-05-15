@@ -70,7 +70,7 @@ var bbcode = (function () {
     rep(/\[quote.*?\](.*?)\[\/quote\]/gi, '<span class="quoteStyle">$1</span>&nbsp;');
     return s;
   };
-  var $_9vk0og8wjfjm4jy9 = {
+  var $_36akuw96jgqkwz4e = {
     html2bbcode: html2bbcode,
     bbcode2html: bbcode2html
   };
@@ -79,14 +79,14 @@ var bbcode = (function () {
     return {
       init: function (editor) {
         editor.on('beforeSetContent', function (e) {
-          e.content = $_9vk0og8wjfjm4jy9.bbcode2html(e.content);
+          e.content = $_36akuw96jgqkwz4e.bbcode2html(e.content);
         });
         editor.on('postProcess', function (e) {
           if (e.set) {
-            e.content = $_9vk0og8wjfjm4jy9.bbcode2html(e.content);
+            e.content = $_36akuw96jgqkwz4e.bbcode2html(e.content);
           }
           if (e.get) {
-            e.content = $_9vk0og8wjfjm4jy9.html2bbcode(e.content);
+            e.content = $_36akuw96jgqkwz4e.html2bbcode(e.content);
           }
         });
       }

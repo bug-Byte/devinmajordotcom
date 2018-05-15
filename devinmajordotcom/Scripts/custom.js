@@ -2,7 +2,6 @@
 function MomentAllDateTimes() {
 
     $(".datetime").each(function () {
-        debugger;
         var date = $(this).html();
         var dateString = moment(date).format("dddd MMMM Do, Y");
         $(this).html(dateString);

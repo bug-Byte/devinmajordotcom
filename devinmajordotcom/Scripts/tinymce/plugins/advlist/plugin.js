@@ -10,17 +10,17 @@ var advlist = (function () {
     var cmd = listName === 'UL' ? 'InsertUnorderedList' : 'InsertOrderedList';
     editor.execCommand(cmd, false, styleValue === false ? null : { 'list-style-type': styleValue });
   };
-  var $_68oevg7sjfjm4jus = { applyListFormat: applyListFormat };
+  var $_1v2scj82jgqkwz02 = { applyListFormat: applyListFormat };
 
   var register = function (editor) {
     editor.addCommand('ApplyUnorderedListStyle', function (ui, value) {
-      $_68oevg7sjfjm4jus.applyListFormat(editor, 'UL', value['list-style-type']);
+      $_1v2scj82jgqkwz02.applyListFormat(editor, 'UL', value['list-style-type']);
     });
     editor.addCommand('ApplyOrderedListStyle', function (ui, value) {
-      $_68oevg7sjfjm4jus.applyListFormat(editor, 'OL', value['list-style-type']);
+      $_1v2scj82jgqkwz02.applyListFormat(editor, 'OL', value['list-style-type']);
     });
   };
-  var $_5l6m217rjfjm4jur = { register: register };
+  var $_5pnu5681jgqkwz00 = { register: register };
 
   var getNumberStyles = function (editor) {
     var styles = editor.getParam('advlist_number_styles', 'default,lower-alpha,lower-greek,lower-roman,upper-alpha,upper-roman');
@@ -30,7 +30,7 @@ var advlist = (function () {
     var styles = editor.getParam('advlist_bullet_styles', 'default,circle,disc,square');
     return styles ? styles.split(/[ ,]/) : [];
   };
-  var $_awyzrc7ujfjm4jux = {
+  var $_fhcb9h84jgqkwz0g = {
     getNumberStyles: getNumberStyles,
     getBulletStyles: getBulletStyles
   };
@@ -50,7 +50,7 @@ var advlist = (function () {
     var listElm = editor.dom.getParent(editor.selection.getNode(), 'ol,ul');
     return editor.dom.getStyle(listElm, 'listStyleType') || '';
   };
-  var $_bj1knq7vjfjm4juy = {
+  var $_1naauq85jgqkwz0h = {
     isTableCellNode: isTableCellNode,
     isListNode: isListNode,
     getSelectedStyleType: getSelectedStyleType
@@ -71,7 +71,7 @@ var advlist = (function () {
       };
     });
   };
-  var $_c237lp7wjfjm4juz = { toMenuItems: toMenuItems };
+  var $_aeca1z86jgqkwz0i = { toMenuItems: toMenuItems };
 
   var findIndex = function (list, predicate) {
     for (var index = 0; index < list.length; index++) {
@@ -86,16 +86,16 @@ var advlist = (function () {
     return function (e) {
       var ctrl = e.control;
       editor.on('NodeChange', function (e) {
-        var tableCellIndex = findIndex(e.parents, $_bj1knq7vjfjm4juy.isTableCellNode);
+        var tableCellIndex = findIndex(e.parents, $_1naauq85jgqkwz0h.isTableCellNode);
         var parents = tableCellIndex !== -1 ? e.parents.slice(0, tableCellIndex) : e.parents;
-        var lists = global$1.grep(parents, $_bj1knq7vjfjm4juy.isListNode(editor));
+        var lists = global$1.grep(parents, $_1naauq85jgqkwz0h.isListNode(editor));
         ctrl.active(lists.length > 0 && lists[0].nodeName === listName);
       });
     };
   };
   var updateSelection = function (editor) {
     return function (e) {
-      var listStyleType = $_bj1knq7vjfjm4juy.getSelectedStyleType(editor);
+      var listStyleType = $_1naauq85jgqkwz0h.getSelectedStyleType(editor);
       e.control.items().each(function (ctrl) {
         ctrl.active(ctrl.settings.data === listStyleType);
       });
@@ -106,11 +106,11 @@ var advlist = (function () {
       active: false,
       type: 'splitbutton',
       tooltip: tooltip,
-      menu: $_c237lp7wjfjm4juz.toMenuItems(styles),
+      menu: $_aeca1z86jgqkwz0i.toMenuItems(styles),
       onPostRender: listState(editor, nodeName),
       onshow: updateSelection(editor),
       onselect: function (e) {
-        $_68oevg7sjfjm4jus.applyListFormat(editor, nodeName, e.control.settings.data);
+        $_1v2scj82jgqkwz02.applyListFormat(editor, nodeName, e.control.settings.data);
       },
       onclick: function () {
         editor.execCommand(cmd);
@@ -136,10 +136,10 @@ var advlist = (function () {
     }
   };
   var register$1 = function (editor) {
-    addControl(editor, 'numlist', 'Numbered list', 'InsertOrderedList', 'OL', $_awyzrc7ujfjm4jux.getNumberStyles(editor));
-    addControl(editor, 'bullist', 'Bullet list', 'InsertUnorderedList', 'UL', $_awyzrc7ujfjm4jux.getBulletStyles(editor));
+    addControl(editor, 'numlist', 'Numbered list', 'InsertOrderedList', 'OL', $_fhcb9h84jgqkwz0g.getNumberStyles(editor));
+    addControl(editor, 'bullist', 'Bullet list', 'InsertUnorderedList', 'UL', $_fhcb9h84jgqkwz0g.getBulletStyles(editor));
   };
-  var $_e8iv577tjfjm4juu = { register: register$1 };
+  var $_1qdmeg83jgqkwz0d = { register: register$1 };
 
   global.add('advlist', function (editor) {
     var hasPlugin = function (editor, plugin) {
@@ -147,8 +147,8 @@ var advlist = (function () {
       return global$1.inArray(plugins.split(/[ ,]/), plugin) !== -1;
     };
     if (hasPlugin(editor, 'lists')) {
-      $_e8iv577tjfjm4juu.register(editor);
-      $_5l6m217rjfjm4jur.register(editor);
+      $_1qdmeg83jgqkwz0d.register(editor);
+      $_5pnu5681jgqkwz00.register(editor);
     }
   });
   function Plugin () {
