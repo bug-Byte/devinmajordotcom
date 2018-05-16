@@ -195,7 +195,21 @@ namespace devinmajordotcom.ViewModels
 
         public List<DropDownViewModel> ProjectFilters { get; set; }
 
-        public string CommaDelimitedProjectFilters { get; set; }
+        public string _CommaDelimitedProjectFilters;
+
+        [DisplayName("Project Tags : ")]
+        public string CommaDelimitedProjectFilters
+        {
+            get
+            {
+                var filters = ProjectFilters?.Select(x => x.Name + ",").ToList();
+                return filters?.Count > 0 ? filters.Aggregate("", (current, filter) => current + (filter + ",")) : "";
+            }
+            set
+            {
+                _CommaDelimitedProjectFilters = value;
+            }
+        }
 
     }
 

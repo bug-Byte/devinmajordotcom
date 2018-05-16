@@ -288,6 +288,12 @@ namespace devinmajordotcom.Services
                 int projectID = 0;
                 if(projectRecord != null)
                 {
+
+                    var existingFilters = db.Portfolio_ProjectTypeMappings.Where(x => x.ProjectId == projectRecord.Id).ToList();
+                    if (existingFilters.Count > 0)
+                    {
+                        db.Portfolio_ProjectTypeMappings.RemoveRange(existingFilters);
+                    }
                     projectID = projectRecord.Id;
                     projectRecord.Name = project.ProjectName;
                     projectRecord.Description = project.ProjectDescription;
@@ -306,11 +312,14 @@ namespace devinmajordotcom.Services
                     db.SaveChanges();
                     projectID = newProjectRecord.Id;
                 }
-                if (project.ProjectFilters != null && project.ProjectFilters.Count > 0)
+                if (!string.IsNullOrEmpty(project._CommaDelimitedProjectFilters))
                 {
-                    foreach (var filter in project.ProjectFilters)
+
+                    var filters = project._CommaDelimitedProjectFilters.Split(',');
+
+                    foreach (var filter in filters)
                     {
-                        var filterRecord = db.Portfolio_ProjectTypes.FirstOrDefault(x => x.Id == filter.ID);
+                        var filterRecord = db.Portfolio_ProjectTypes.FirstOrDefault(x => x.Type == filter);
                         int filterID = 0;
                         if (filterRecord != null)
                         {
@@ -320,11 +329,11 @@ namespace devinmajordotcom.Services
                         {
                             var newFilter = new Portfolio_ProjectType()
                             {
-                                Type = filter.Name
+                                Type = filter
                             };
                             db.Portfolio_ProjectTypes.Add(newFilter);
-                            filterID = newFilter.Id;
                             db.SaveChanges();
+                            filterID = newFilter.Id;
                         }
                         var newProjectTypeMapping = new Portfolio_ProjectTypeMapping()
                         {

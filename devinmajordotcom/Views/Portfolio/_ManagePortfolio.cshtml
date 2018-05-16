@@ -564,6 +564,18 @@
                                 </div>
                                     
                                 <br />
+                                
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
+                                        @Html.LabelFor(x => x.PortfolioProjects[count].CommaDelimitedProjectFilters, new { @style = "font-weight:normal;position:relative;" })
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        @Html.TextBoxFor(x => x.PortfolioProjects[count].CommaDelimitedProjectFilters, new { @class = "tags untouched" })
+                                    </div>
+                                </div>
+
+                                <br />
 
                                 <div class="row">
                                     <div class="col-sm-12 text-center">

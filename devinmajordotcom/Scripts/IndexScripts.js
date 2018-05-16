@@ -381,13 +381,22 @@ function InitializeMediaDashboardEventHandlers() {
     });
 
     $('.tags.untouched').selectize({
+        plugins: ['remove_button', 'drag_drop'],
         delimiter: ',',
         persist: false,
+        openOnFocus: false,
+        maxItems: null,
+        closeAfterSelect: true,
+        placeholder: 'Add tags here...',
         create: function (input) {
             return {
                 value: input,
                 text: input
             }
+        },
+        onChange: function(value) {
+            $(this).closest(".tags").val(value);
+            $(this).closest(".tags").attr("value", value);
         }
     });
 
