@@ -6,10 +6,10 @@
 {
     foreach (var comment in Model.OrderBy(x => x.CreatedOn))
     {
-        <div class="media mb-4 comment">
+        <div class="media mb-4 comment comment_@count" id="comment_@count">
             @{
                 var linkText = "<span class='fa fa-trash'></span>";
-                var actionLink = Ajax.ActionLink("REPLACE", "RemoveBannerLink", "Home", new { ID = Model[count].CommentID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveComment('#deleteBannerLink_" + Model[count].CommentID + "')", OnFailure = "ManageCommentsAjaxFailure" }, new { data_content = linkText, @id = "deleteBannerLink_" + Model[count].CommentID, @class = "btn btn-danger deleteGroup deleteBannerLink", @style = "float:right;" });
+                var actionLink = Ajax.ActionLink("REPLACE", "RemoveCommentById", "MyHome", new { ID = Model[count].CommentID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveComment('#deleteComment_" + Model[count].CommentID + "')", OnFailure = "ManageCommentsAjaxFailure" }, new { data_content = linkText, @id = "deleteComment_" + Model[count].CommentID, @class = "btn btn-danger deleteGroup deleteComment", @style = "float:right;" });
                 @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
             }
             <div class="media-body">

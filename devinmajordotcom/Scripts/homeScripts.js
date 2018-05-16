@@ -28,6 +28,22 @@ function UpdateComments(data) {
     });
 }
 
+function ManageCommentsAjaxFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Something went wrong! Your comment has not been removed, please try again.'
+    });
+}
+
+function RemoveComment(id) {
+    var element = document.getElementById($(id).parent().attr('id'));
+    element.parentNode.removeChild(element);
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your comment has been removed from the blog post!'
+    });
+}
+
 function RefreshTinyMce() {
     tinymce.remove();
     tinymce.init({
