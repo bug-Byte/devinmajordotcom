@@ -68,9 +68,6 @@ namespace devinmajordotcom.Controllers
             }
             catch (Exception e)
             {
-                var actionparams = filterContext.ActionParameters;
-                log4net.LogicalThreadContext.Properties["Params"] =
-                    JsonConvert.SerializeObject(new { action = filterContext.ActionParameters, full = actionparams });
                 Log.Info("User Action");
             }
             

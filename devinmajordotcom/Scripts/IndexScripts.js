@@ -426,6 +426,7 @@ function HideAdminFirstRunModal() {
 }
 
 function RefreshTinyMce() {
+    debugger;
     tinymce.remove();
     tinymce.init({
         setup:function(ed) {
@@ -773,6 +774,21 @@ function setupHandlebarsHelpers() {
         renderContactLinkTemplate(template, context);
     });
 
+    $(document).on('click', '#addNewProjectLink', function () {
+        var projectTemplateSource = $("#ProjectTemplateScript").html();
+        var template = Handlebars.compile(projectTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenProjectID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderProjectTemplate(template, context);
+    });
+
+}
+
+function renderProjectTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("projectsList").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
 }
 
 function renderMediaDashboardLinkTemplate(template, data) {

@@ -894,6 +894,7 @@
     <Content Include="Views\Portfolio\_NewWorkSkill.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\ConfirmationEmail.cshtml" />
+    <Content Include="Views\Portfolio\_NewProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

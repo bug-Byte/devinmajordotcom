@@ -43,7 +43,7 @@ namespace devinmajordotcom.App_Start
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/bootstrap-colorpicker.css",
                       "~/Content/bootstrap-slider.css",
-                      "~/Content/Selectize/css/selectize.css",
+                      "~/Content/Selectize/css/selectize.bootstrap3.css",
                       "~/Content/cover.css"
             ));
 
