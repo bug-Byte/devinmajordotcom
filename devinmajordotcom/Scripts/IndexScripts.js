@@ -196,26 +196,28 @@ function MomentAllDateTimes() {
 
 }
 
+var ms_ie = false;
+var ua = window.navigator.userAgent;
+var old_ie = ua.indexOf('MSIE ');
+var new_ie = ua.indexOf('Trident/');
+
+if ((old_ie > -1) || (new_ie > -1)) {
+    ms_ie = true;
+}
+
+if (!ms_ie) {
+    $("#particles").show();
+    if (canvas != null) {
+        loop();
+    }
+}
+
 $(document).ready(function () {
 
     // Start
     
 
-    var ms_ie = false;
-    var ua = window.navigator.userAgent;
-    var old_ie = ua.indexOf('MSIE ');
-    var new_ie = ua.indexOf('Trident/');
-
-    if ((old_ie > -1) || (new_ie > -1)) {
-        ms_ie = true;
-    }
-
-    if (!ms_ie) {
-        $("#particles").show();
-        if (canvas != null) {
-            loop();
-        }
-    }
+    
 
     InitializePieCharts();
     
@@ -380,7 +382,7 @@ function InitializeMediaDashboardEventHandlers() {
         });
     });
 
-    $('.tags.untouched').selectize({
+    $('.tags').selectize({
         plugins: ['remove_button', 'drag_drop'],
         delimiter: ',',
         persist: false,
