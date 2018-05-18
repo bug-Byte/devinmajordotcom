@@ -70,9 +70,6 @@ namespace devinmajordotcom.Controllers
             {
                 Log.Info("User Action");
             }
-            
-
-            
 
         }
 
@@ -180,7 +177,16 @@ namespace devinmajordotcom.Controllers
             return PartialView("Error");
         }
 
-        
+        [HttpGet]
+        public ActionResult ConfirmAccount(Guid GUID)
+        {
+            landingPageService.ConfirmAccount(GUID);
+            var user = landingPageService.GetCurrentUser(GUID);
+            var config = landingPageService.GetAppConfigData();
+            ViewBag.bannerLinks = config.LandingPageBannerLinks;
+            ViewBag.config = config.Config;
+            return PartialView(user);
+        }
 
         [HttpPost]
         public JsonResult SendConfirmationEmail(UserViewModel viewModel)

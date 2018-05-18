@@ -14,12 +14,17 @@ namespace devinmajordotcom.Controllers
         [HttpGet]
         public ActionResult VerifyUserExists(string UserName, bool IsSigningUp)
         {
-            var result = landingPageService.DoesUserExist(UserName);
+            var result1 = landingPageService.DoesUserExist(UserName);
+            var result2 = landingPageService.IsEmailConfirmed(UserName, IsSigningUp);
             if (IsSigningUp)
             {
-                return result ? Json($"The user \"{UserName}\" already exists in the system.", JsonRequestBehavior.AllowGet) : Json(true, JsonRequestBehavior.AllowGet);
+                return result1 ? Json($"The user \"{UserName}\" already exists in the system.", JsonRequestBehavior.AllowGet) : Json(true, JsonRequestBehavior.AllowGet);
             }
-            return result ? Json(true, JsonRequestBehavior.AllowGet) : Json($"The user \"{UserName}\" does not exist in the system.", JsonRequestBehavior.AllowGet);
+            if (!result2 && result1)
+            {
+                return Json($"The email address for this account has not been confirmed yet. Check your inbox!", JsonRequestBehavior.AllowGet);
+            }
+            return result1 ? Json(true, JsonRequestBehavior.AllowGet) : Json($"The user \"{UserName}\" does not exist in the system.", JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

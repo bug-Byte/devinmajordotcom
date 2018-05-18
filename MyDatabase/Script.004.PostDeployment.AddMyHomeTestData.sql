@@ -43,7 +43,7 @@ VALUES
 	1,
 	'MyHome',
 	'My Favorites & Bookmarks',
-	'Welcome Home, Devin!',
+	'Welcome to Devin''s Homepage!',
 	'My Blog & Notes',
 	'~/Content/HomeImages/home-bg4.jpg',
 	0,

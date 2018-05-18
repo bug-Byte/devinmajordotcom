@@ -30,5 +30,7 @@ namespace devinmajordotcom.Services
 
         void GiveAdminTestData(Security_User newUser);
 
+        void ConfirmAccount(Guid GUID);
+
     }
 }

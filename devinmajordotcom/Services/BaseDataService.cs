@@ -81,7 +81,11 @@ namespace devinmajordotcom.Services
 
         public bool IsEmailConfirmed(string emailString, bool IsSigningUp)
         {
-            return !string.IsNullOrEmpty(emailString) && db.Security_Users.Any(x => IsSigningUp || x.IsAdmin || (x.EmailAddress == emailString && x.IsEmailConfirmed));
+            if (string.IsNullOrEmpty(emailString))
+            {
+                return false;
+            }
+            return IsSigningUp || db.Security_Users.Any(x => (x.EmailAddress == emailString || x.UserName == emailString) && (x.IsEmailConfirmed || x.IsAdmin));
         }
 
         public void UpdateCurrentUser(UserViewModel viewModel)
@@ -333,6 +337,14 @@ namespace devinmajordotcom.Services
                 AddNewFavoriteImage = x.AddNewFavoriteImage,
                 WebsiteName = x.WebsiteName
             }).FirstOrDefault();
+        }
+
+        public void ConfirmAccount(Guid GUID)
+        {
+            var user = db.Security_Users.FirstOrDefault(x => x.Guid == GUID);
+            if (user == null) return;
+            user.IsEmailConfirmed = true;
+            db.SaveChanges();
         }
 
     }
