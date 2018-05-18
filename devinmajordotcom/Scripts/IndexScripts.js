@@ -382,24 +382,37 @@ function InitializeMediaDashboardEventHandlers() {
         });
     });
 
-    $('.tags').selectize({
-        plugins: ['remove_button', 'drag_drop'],
-        delimiter: ',',
-        persist: false,
-        openOnFocus: false,
-        maxItems: null,
-        closeAfterSelect: true,
-        placeholder: 'Add tags here...',
-        create: function (input) {
-            return {
-                value: input,
-                text: input
-            }
-        },
-        onChange: function(value) {
-            $(this).closest(".tags").val(value);
-            $(this).closest(".tags").attr("value", value);
+    var items = document.getElementsByClassName('selectize-control');
+    while (items.length > 0) {
+        items[0].parentNode.removeChild(items[0]);
+    }
+
+    $('input.tags').each(function () {
+        if (!$(this).hasClass('untouched')) {
+            var element = $(this).parent().find('input.tags');
+            var selectized = element.selectize();
+            var control = selectized[0].selectize;
+            control.destroy();
         }
+        $(this).selectize({
+            plugins: ['remove_button', 'drag_drop'],
+            delimiter: ',',
+            persist: false,
+            openOnFocus: false,
+            maxItems: null,
+            closeAfterSelect: true,
+            placeholder: 'Add tags here...',
+            create: function(input) {
+                return {
+                    value: input,
+                    text: input
+                }
+            },
+            onChange: function(value) {
+                $(this).closest(".tags").val(value);
+                $(this).closest(".tags").attr("value", value);
+            }
+        });
     });
 
     RefreshTinyMce();
