@@ -46,24 +46,26 @@
                 <div class="inner" style="padding:0px;">
                     <h3 class="masthead-brand text-center" style="float:none;">@config.WebsiteName</h3>
                     <ul class="nav masthead-nav" style="float:none;">
-                        
-                        @if (userViewModel.UserIsAdmin)
+                        @if (bannerLinks != null && bannerLinks.Count > 0)
                         {
-                            foreach (var link in bannerLinks.Where(x => x.IsEnabled).OrderBy(x => x.Order))
+                            if (userViewModel.UserIsAdmin)
                             {
-                                <li class="landingPageLink @if (link.IsDefault)
+                                foreach (var link in bannerLinks.Where(x => x.IsEnabled).OrderBy(x => x.Order))
+                                {
+                                    <li class="landingPageLink @if (link.IsDefault)
                                                        {<text>active</text>}" data-activediv="@link.URL"><a><span class="fa @link.DisplayIcon"></span>&nbsp;@link.DisplayName</a></li>
+                                }
+                                <li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>
                             }
-                            <li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>
-                        }
-                        else
-                        {
-                            foreach (var link in bannerLinks.Where(x => x.IsEnabled && x.IsPublic).OrderBy(x => x.Order))
+                            else
                             {
-                                <li class="landingPageLink @if (link.IsDefault)
+                                foreach (var link in bannerLinks.Where(x => x.IsEnabled && x.IsPublic).OrderBy(x => x.Order))
+                                {
+                                    <li class="landingPageLink @if (link.IsDefault)
                                                        {<text>active</text>}" data-activediv="@link.URL"><a><span class="fa @link.DisplayIcon"></span>&nbsp;@link.DisplayName</a></li>
+                                }
+                                <li class="landingPageLink" id="mainLogin"><a><span class="fa fa-sign-in"></span>&nbsp;Login</a></li>
                             }
-                            <li class="landingPageLink" id="mainLogin"><a><span class="fa fa-sign-in"></span>&nbsp;Login</a></li>
                         }
                     </ul>
                 </div>
@@ -110,6 +112,8 @@
         </div>
     </div>
 </div>
+
+@Html.Partial("_AdminLoginModal", userViewModel)
 
 <div id="ajaxAlertContainer"></div>
 

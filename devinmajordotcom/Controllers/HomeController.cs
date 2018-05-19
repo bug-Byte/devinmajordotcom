@@ -40,41 +40,6 @@ namespace devinmajordotcom.Controllers
                 return new HttpStatusCodeResult(401);
             }
         }
-       
-        public void ManageLandingPage(MainLandingPageViewModel viewModel)
-        {
-            landingPageService.ManageLandingPage(viewModel);
-        }
-
-        public void UpdateCurrentUser(UserViewModel viewModel)
-        {
-            landingPageService.UpdateCurrentUser(viewModel);
-            Login(viewModel, true);
-        }
-
-        public ActionResult _ApplicationManager()
-        {
-            ViewBag.Title = "D3V!N M@J0R";
-            return PartialView();
-        }
-
-        [HttpGet]
-        public void RemoveBannerLink(int ID)
-        {
-            landingPageService.RemoveBannerLinkById(ID);
-        }
-
-        [HttpGet]
-        public void RemoveSiteLink(int ID)
-        {
-            landingPageService.RemoveSiteLinkById(ID);
-        }
-
-        [HttpPost]
-        public void _HomeSettingsForm(MyHomeUserConfigViewModel viewModel)
-        {
-            myHomeService.SetUserConfigViewModel(viewModel);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -105,6 +70,43 @@ namespace devinmajordotcom.Controllers
             }
             return new JsonResult { Data = emailSuccessful };
         }
+
+        [HttpPost]
+        public void _HomeSettingsForm(MyHomeUserConfigViewModel viewModel)
+        {
+            myHomeService.SetUserConfigViewModel(viewModel);
+        }
+
+        public ActionResult _ApplicationManager()
+        {
+            ViewBag.Title = "D3V!N M@J0R";
+            return PartialView();
+        }
+
+        public void ManageLandingPage(MainLandingPageViewModel viewModel)
+        {
+            landingPageService.ManageLandingPage(viewModel);
+        }
+
+        public void UpdateCurrentUser(UserViewModel viewModel)
+        {
+            landingPageService.UpdateCurrentUser(viewModel);
+            Login(viewModel, true);
+        }
+
+        [HttpGet]
+        public void RemoveBannerLink(int ID)
+        {
+            landingPageService.RemoveBannerLinkById(ID);
+        }
+
+        [HttpGet]
+        public void RemoveSiteLink(int ID)
+        {
+            landingPageService.RemoveSiteLinkById(ID);
+        }
+
+        
 
     }
 }

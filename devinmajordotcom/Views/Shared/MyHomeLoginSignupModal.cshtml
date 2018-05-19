@@ -36,13 +36,14 @@
                                     @using (Ajax.BeginForm("Login", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "LoginFailure()" }, new { @class = "loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.GUID)
                                         @Html.Hidden("IsSigningUp", "False", new { @id = "IsSigningUp1" })
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Email Address or Username: @*@Html.LabelFor(x => x.UserName)*@
                                             </div>
                                             <div class="col-sm-12 text-center">
-                                                @Html.TextBox("UserName", "", new { @class = "form-control", @id = "UserName1", placeholder = "someone@domain.com" })
+                                                @Html.TextBox("UserName", "", new { @class = "form-control signInUserName", @id = "UserName1", placeholder = "someone@domain.com" })
                                             </div>
                                         </div>
                                         <br />
@@ -52,6 +53,12 @@
                                             </div>
                                             <div class="col-sm-12 text-center">
                                                 @Html.TextBoxFor(x => x.Password, new { @class = "form-control passwordField", @id = "Password1", @Value="", @required = "required", placeholder = "********", type = "password" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button type="button" onclick="$('#passwordResetForm').trigger('submit'); $('.spinner').fadeIn(500);" class="btn btn-link" style="text-decoration:none;"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Forgot your password?</button>
                                             </div>
                                         </div>
                                         <br />
@@ -69,6 +76,11 @@
                                         <br />
                                         <button type="submit" class="form-control formSubmit" style="background: #ce3232; color: white;border-radius: 100px;margin-top: 20px;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Log In!</button>
 
+                                    }
+                                    @using (Ajax.BeginForm("SendPasswordResetEmail", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "PasswordResetSuccess(data);", OnFailure = "PasswordResetFailure(data);" }, new { @id = "passwordResetForm" }))
+                                    {
+                                        @Html.Hidden("UserName", null, new { @id = "notUserName", @class = "hiddenSignInUserName", required = "required" })
+                                        @Html.ValidationMessageFor(x => x.UserName)
                                     }
                                 </div>
 

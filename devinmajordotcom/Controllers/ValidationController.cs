@@ -40,6 +40,19 @@ namespace devinmajordotcom.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult VerifyPassword(string ConfirmedPassword, string Password)
+        {
+/*            var result1 = landingPageService.DoesPasswordMatchOldPassword(ConfirmedPassword)*/;
+            var result2 = landingPageService.IsPasswordConfirmed(ConfirmedPassword, Password);
+            //if(result1)
+            //{
+            //    return Json("The password you have typed matches an older password. Please try again!", JsonRequestBehavior.AllowGet);
+            //}
+            return result2 ? Json(true, JsonRequestBehavior.AllowGet) : Json("The passwords you have typed do not match. Please type carefully!", JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 
 }

@@ -896,6 +896,9 @@
     <Content Include="Views\Shared\ConfirmationEmail.cshtml" />
     <Content Include="Views\Portfolio\_NewProject.cshtml" />
     <Content Include="Views\Shared\ConfirmAccount.cshtml" />
+    <Content Include="Views\Shared\ResetPasswordSuccess.cshtml" />
+    <Content Include="Views\Shared\PasswordResetEmail.cshtml" />
+    <Content Include="Views\Shared\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,6 +30,11 @@ namespace devinmajordotcom.ViewModels
         public string Password { get; set; }
 
         [Required]
+        [DisplayName("Confirm Password * : ")]
+        [Remote("VerifyPassword", "Validation", AdditionalFields = "Password")]
+        public string ConfirmedPassword { get; set; }
+
+        [Required]
         public bool UserIsAdmin { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -41,6 +46,8 @@ namespace devinmajordotcom.ViewModels
 
         [Required]
         public bool IsSigningUp { get; set; }
+
+        public bool IsConfirmationEmailSent { get; set; }
 
         public UserViewModel()
         {

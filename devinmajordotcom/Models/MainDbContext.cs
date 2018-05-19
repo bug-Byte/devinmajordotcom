@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLExpress;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLExpress;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -1265,6 +1265,7 @@ namespace devinmajordotcom.Models
         public string EmailAddress { get; set; } // EmailAddress (length: 250)
         public bool IsAdmin { get; set; } // IsAdmin
         public bool IsEmailConfirmed { get; set; } // IsEmailConfirmed
+        public bool IsEmailConfirmationSent { get; set; } // IsEmailConfirmationSent
         public string UserName { get; set; } // UserName
         public string Password { get; set; } // Password
         public System.Guid Guid { get; set; } // GUID
@@ -1301,11 +1302,12 @@ namespace devinmajordotcom.Models
             IsActive = true;
             IsAdmin = false;
             IsEmailConfirmed = false;
+            IsEmailConfirmationSent = false;
             MyHome_BlogPosts = new System.Collections.Generic.List<MyHome_BlogPost>();
             MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
             MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
-            MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
             MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
+            MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
             InitializePartial();
         }
 
@@ -2027,6 +2029,7 @@ namespace devinmajordotcom.Models
             Property(x => x.EmailAddress).HasColumnName(@"EmailAddress").HasColumnType("nvarchar").IsOptional().HasMaxLength(250);
             Property(x => x.IsAdmin).HasColumnName(@"IsAdmin").HasColumnType("bit").IsRequired();
             Property(x => x.IsEmailConfirmed).HasColumnName(@"IsEmailConfirmed").HasColumnType("bit").IsRequired();
+            Property(x => x.IsEmailConfirmationSent).HasColumnName(@"IsEmailConfirmationSent").HasColumnType("bit").IsRequired();
             Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Password).HasColumnName(@"Password").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Guid).HasColumnName(@"GUID").HasColumnType("uniqueidentifier").IsRequired();

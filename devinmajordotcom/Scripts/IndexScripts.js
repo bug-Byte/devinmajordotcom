@@ -177,6 +177,34 @@ function SettingsUpdateFailure() {
     });
 }
 
+function ShowSpinner() {
+    $('.spinner').fadeIn(500);
+}
+
+function PasswordResetSuccess(data) {
+    debugger;
+    if (data == "fail") {
+        $('.spinner').fadeOut(500);
+        $("#ajaxAlertContainer").bootsnack({
+            alertType: 'error',
+            message: 'Failed to reset your password. Please try again!'
+        });
+    }
+    $("#LoginModal").modal('toggle');
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'An email has been sent! Check your inbox to reset your password.'
+    });
+}
+
+function PasswordResetFailure(data) {
+    $('.spinner').fadeOut(500);
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Failed to reset your password. Please try again!'
+    });
+}
+
 function MomentAllDateTimes() {
 
     $(".datetime").each(function () {
@@ -215,9 +243,6 @@ if (!ms_ie) {
 $(document).ready(function () {
 
     // Start
-    
-
-    
 
     InitializePieCharts();
     
@@ -226,6 +251,12 @@ $(document).ready(function () {
     setTimeout(setupHandlebarsHelpers, 50);
 
     MomentAllDateTimes();
+
+    $(document).on("change", ".signInUserName", function () {
+        var val = $(this).val();
+        $(".hiddenSignInUserName").val(val);
+        $(".hiddenSignInUserName").attr("value", val);
+    });
 
     $(document).find(".settingsWindowButton").each(function () {
 

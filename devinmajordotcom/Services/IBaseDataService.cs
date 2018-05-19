@@ -20,6 +20,10 @@ namespace devinmajordotcom.Services
 
         bool IsEmailConfirmed(string emailString, bool IsSigningUp);
 
+        UserViewModel LookupUser(string userString);
+
+        void SetConfirmationEmailSent(UserViewModel viewModel);
+
         UserValidationViewModel ValidateCredentials(string userString, string password, string emailAddress = null);
 
         void UpdateCurrentUser(UserViewModel viewModel);
@@ -31,6 +35,8 @@ namespace devinmajordotcom.Services
         void GiveAdminTestData(Security_User newUser);
 
         void ConfirmAccount(Guid GUID);
+
+        bool IsPasswordConfirmed(string pass1, string pass2);
 
     }
 }

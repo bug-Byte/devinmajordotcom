@@ -177,27 +177,71 @@ namespace devinmajordotcom.Controllers
             return PartialView("Error");
         }
 
-        [HttpGet]
-        public ActionResult ConfirmAccount(Guid GUID)
+        [HttpPost]
+        public JsonResult SendPasswordResetEmail(UserViewModel viewModel)
         {
-            landingPageService.ConfirmAccount(GUID);
+            var emailSuccessful = "";
+            var userExists = landingPageService.DoesUserExist(viewModel.UserName);
+            if (string.IsNullOrEmpty(viewModel.UserName) || !userExists)
+            {
+                emailSuccessful = "fail";
+                return new JsonResult { Data = emailSuccessful };
+            }
+            var user = landingPageService.LookupUser(viewModel.UserName);
+            var message = new MailMessage();
+            var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/PasswordResetEmail", user);
+            try
+            {
+
+                message.To.Add(new MailAddress(user.EmailAddress));
+                message.Subject = "Password Reset from devinmajor.com";
+                message.Body = body;
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Send(message);
+                }
+                return new JsonResult { Data = "Success" };
+            }
+            catch (Exception e)
+            {
+                message.Dispose();
+                emailSuccessful = "fail";
+                return new JsonResult { Data = emailSuccessful };
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(Guid GUID)
+        {
             var user = landingPageService.GetCurrentUser(GUID);
+            user.Password = "";
             var config = landingPageService.GetAppConfigData();
-            ViewBag.bannerLinks = config.LandingPageBannerLinks;
+            ViewBag.bannerLinks = new List<SiteLinkViewModel>();
             ViewBag.config = config.Config;
-            return PartialView(user);
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(UserViewModel viewModel)
+        {
+            landingPageService.UpdateCurrentUser(viewModel);
+            var user = landingPageService.GetCurrentUser(viewModel.GUID);
+            var config = landingPageService.GetAppConfigData();
+            ViewBag.bannerLinks = new List<SiteLinkViewModel>();
+            ViewBag.config = config.Config;
+            return View("ResetPasswordSuccess", viewModel);
         }
 
         [HttpPost]
         public JsonResult SendConfirmationEmail(UserViewModel viewModel)
         {
             var emailSuccessful = "";
-            if (!ModelState.IsValid) return new JsonResult {Data = emailSuccessful};
             var message = new MailMessage();
             var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/ConfirmationEmail", viewModel);
             try
             {
-
                 message.To.Add(new MailAddress(viewModel.EmailAddress));
                 message.Subject = "Confirm your Email for devinmajor.com";
                 message.Body = body;
@@ -205,14 +249,27 @@ namespace devinmajordotcom.Controllers
                 using (var smtp = new SmtpClient())
                 {
                     smtp.Send(message);
-                    new JsonResult { Data = "Success" };
                 }
+                landingPageService.SetConfirmationEmailSent(viewModel);
+                Session["MainPageUserAuthID"] = viewModel.GUID;
+                return new JsonResult { Data = "Success" };
             }
             catch (Exception e)
             {
                 message.Dispose();
             }
             return new JsonResult { Data = emailSuccessful };
+        }
+
+        [HttpGet]
+        public ActionResult ConfirmAccount(Guid GUID)
+        {
+            landingPageService.ConfirmAccount(GUID);
+            var user = landingPageService.GetCurrentUser(GUID);
+            var config = landingPageService.GetAppConfigData();
+            ViewBag.bannerLinks = new List<SiteLinkViewModel>();
+            ViewBag.config = config.Config;
+            return PartialView(user);
         }
 
     }

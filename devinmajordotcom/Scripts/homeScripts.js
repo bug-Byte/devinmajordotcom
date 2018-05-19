@@ -35,6 +35,33 @@ function ManageCommentsAjaxFailure() {
     });
 }
 
+function PasswordResetSuccess(data) {
+    if (data == "fail") {
+        $('.spinner').fadeOut(500);
+        $("#ajaxAlertContainer").bootsnack({
+            alertType: 'error',
+            message: 'Failed to reset your password. Please try again!'
+        });
+    }
+    $("#modal-form").modal('toggle');
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'An email has been sent! Check your inbox to reset your password.'
+    });
+}
+
+function ShowSpinner() {
+    $('.spinner').fadeIn(500);
+}
+
+function PasswordResetFailure(data) {
+    $('.spinner').fadeOut(500);
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Failed to reset your password. Please try again!'
+    });
+}
+
 function RemoveComment(id) {
     var element = document.getElementById($(id).parent().attr('id'));
     element.parentNode.removeChild(element);
@@ -168,6 +195,12 @@ function MomentAllDateTimes() {
 $(document).ready(function () {
 
     "use strict";
+
+    $(document).on("change", ".signInUserName", function () {
+        var val = $(this).val();
+        $(".hiddenSignInUserName").val(val);
+        $(".hiddenSignInUserName").attr("value", val);
+    });
 
     $(document).on('keydown', 'input[data-val-remote]', function () {
         if ($(this).data('val-remote') != undefined) {

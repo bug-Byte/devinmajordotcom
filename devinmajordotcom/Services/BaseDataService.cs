@@ -46,6 +46,28 @@ namespace devinmajordotcom.Services
             HttpContext.Current.Session.Abandon();
         }
 
+        public void SetConfirmationEmailSent(UserViewModel viewModel)
+        {
+            var user = db.Security_Users.FirstOrDefault(x => x.Guid == viewModel.GUID);
+            if(user != null)
+            {
+                user.IsEmailConfirmationSent = true;
+                db.SaveChanges();
+            }
+        }
+
+        public UserViewModel LookupUser(string userString)
+        {
+            return db.Security_Users.Select(x => new UserViewModel() {
+                EmailAddress = x.EmailAddress,
+                GUID = x.Guid,
+                UserID = x.Id,
+                UserIsAdmin = x.IsAdmin,
+                IsEmailConfirmed = x.IsEmailConfirmed,
+                UserName = x.UserName,
+                UserIsActive = x.IsActive
+            }).FirstOrDefault(x => x.UserName == userString || x.EmailAddress == userString);
+        }
         public UserValidationViewModel ValidateCredentials(string userString, string password , string email = null)
         {
             var results = new UserValidationViewModel()
@@ -151,7 +173,9 @@ namespace devinmajordotcom.Services
                 UserName = x.UserName,
                 UserIsAdmin = x.IsAdmin,
                 UserIsActive = x.IsActive,
-                UserIsLoggedIn = x.EmailAddress != null && x.EmailAddress != ""
+                IsConfirmationEmailSent = x.IsEmailConfirmationSent,
+                UserIsLoggedIn = !x.IsEmailConfirmationSent && x.EmailAddress != null && x.EmailAddress != "",
+                
             }).FirstOrDefault();
         }
 
@@ -344,7 +368,13 @@ namespace devinmajordotcom.Services
             var user = db.Security_Users.FirstOrDefault(x => x.Guid == GUID);
             if (user == null) return;
             user.IsEmailConfirmed = true;
+            user.IsEmailConfirmationSent = false;
             db.SaveChanges();
+        }
+
+        public bool IsPasswordConfirmed(string pass1, string pass2)
+        {
+            return pass1 == pass2;
         }
 
     }

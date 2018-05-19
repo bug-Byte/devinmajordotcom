@@ -21,14 +21,6 @@
 
     @section scripts {
 
-        @if (!Model.CurrentUserViewModel.UserIsAdmin || !Model.CurrentUserViewModel.UserIsActive)
-        {
-            <script>
-                var loginHtml = '@Html.Raw(@Html.Partial("_AdminLoginModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
-                $('body').append(loginHtml);
-            </script>
-        }
-
         @if (String.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
         {
             <script>
