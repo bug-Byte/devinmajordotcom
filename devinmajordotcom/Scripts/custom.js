@@ -11,6 +11,20 @@ function MomentAllDateTimes() {
 
 }
 
+function AjaxSuccess(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your email was successfully sent to the Administrator of this site!'
+    });
+}
+
+function AjaxFailure(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your email was not sent! Please try again in about 5 minutes.' + data
+    });
+}
+
 // ISOTOPE FILTER
 
 $(document).ready(function() {

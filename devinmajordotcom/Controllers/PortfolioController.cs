@@ -27,6 +27,13 @@ namespace devinmajordotcom.Controllers
             return new JsonResult { Data = data };
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult ShootMeAnEmail(PortfolioViewModel viewModel)
+        {
+            return DropMeALine(viewModel.ContactEmail);
+        }
+
         public void RemoveHighlightedSkill(int ID)
         {
             portfolioService.RemoveHighlightedSkill(ID);

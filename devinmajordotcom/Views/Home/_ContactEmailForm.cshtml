@@ -1,5 +1,5 @@
 ﻿@model devinmajordotcom.ViewModels.ContactEmailViewModel
-@using (Ajax.BeginForm("DropMeALine", "Home", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
+@using (Ajax.BeginForm("DropMeALine", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
 {
 
     @Html.AntiForgeryToken()

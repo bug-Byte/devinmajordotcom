@@ -287,6 +287,61 @@
         </div>
     </section>
     <!-- END SOCIAL -->
+
+    using (Ajax.BeginForm("ShootMeAnEmail", "Portfolio", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
+    {
+
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(x => x.ContactEmail.RecipientEmail)
+        @Html.HiddenFor(x => x.ContactEmail.RecipientName)
+
+            <section id="contact" class="tm-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2 class="title" style="padding-bottom:0px;">Interested in <strong>Hiring Me?</strong></h2>
+                    </div>
+                    <p style="color: #71cef5;">You can get in touch with me using the form below. Fill it out, and I'll get back to you ASAP!</p>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(x => x.ContactEmail.SenderName, new { @class = "form-control", @placeholder = "Your Name" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(x => x.ContactEmail.SenderEmailAddress, new { @class = "form-control", @placeholder = "Your Email" })
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(x => x.ContactEmail.Subject, new { @class = "form-control", @placeholder = "Your Subject" })
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(x => x.ContactEmail.Content, new { @class = "form-control", @placeholder = "Your Very Important Message", @rows = "6" })
+                        </div>
+                    </div>
+                    <br />
+
+
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+                            <input class="form-control" id="sendEmail" type="submit" value="SHOOT ME AN EMAIL">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+
+
 }
 
 @if(

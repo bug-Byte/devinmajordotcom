@@ -49,6 +49,7 @@ namespace devinmajordotcom.App_Start
 
             bundles.Add(new StyleBundle("~/Content/mediacss").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/bootsnack.css",
                 "~/Content/bootstrap-theme.css",
                 "~/Content/cover2.css",
                 "~/Content/font-awesome.css"
@@ -70,6 +71,7 @@ namespace devinmajordotcom.App_Start
                 "~/Content/font-awesome.css",
                 "~/Content/reset.css",
                 "~/Content/style.css",
+                "~/Content/bootsnack.css",
                 "~/Content/templatemo-style.css"
             ));
 
@@ -106,6 +108,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/isotope.js",
                 "~/Scripts/imagesloaded.min.js",
                 "~/Scripts/moment.js",
+                "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/custom.js",
                 "~/Scripts/index.js"
             ));
@@ -114,6 +117,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/smoothscroll.js",
                 "~/Scripts/jquery.nav.js",
                 "~/Scripts/isotope.js",
+                "~/Scripts/jquery.bootsnack.js",
                 "~/Scripts/mediaScripts.js"
             ));
 

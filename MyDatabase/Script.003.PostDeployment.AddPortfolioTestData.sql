@@ -31,7 +31,7 @@ VALUES
 	'Facebook',
 	NULL,
 	'Follow me on',
-	'#',
+	'https://www.facebook.com/iWillHackIntoYourSoul/',
 	NULL,
 	NULL,
 	'fa-facebook-f',
@@ -41,13 +41,13 @@ VALUES
 	'#3b5998'
 ),
 (
-	'Reddit',
+	'LinkedIn',
 	NULL,
 	'Find me on',
-	'#',
+	'https://www.linkedin.com/in/devin-major-782ba08b/',
 	NULL,
 	NULL,
-	'fa-reddit-alien',
+	'fa-linkedin',
 	0,
 	1,
 	2,
@@ -57,7 +57,7 @@ VALUES
 	'GitHub',
 	NULL,
 	'Fork me on',
-	'#',
+	'https://github.com/bug-Byte/',
 	NULL,
 	NULL,
 	'fa-github',
@@ -103,7 +103,7 @@ VALUES
 	'+1 (705) 676 - 6783',
 	'devinmajor@hotmail.com',
 	'Software Developer',
-	'I am a professional Programmer and Front-End Developer, capable of creating modern and responsive applications for Desktop, the Web and Mobile. Let''s work together and make something awesome!',
+	'I am a professional Programmer and Full-Stack Developer, capable of creating modern and responsive applications for Desktop, the Web and Mobile. Let''s work together and make something awesome!',
 	'YOU''RE HERE ALREADY!',
 	'#home'
 );
@@ -121,8 +121,8 @@ VALUES
 	'Creative',
 	'Fun',
 	'Awesome',
-	'<p>And just so you know, I am also 21 years old, I have blonde hair and blue eyes, and I''m just over 6 feet tall. I am also a highly motivated and hardworking individual, and I live in Sault Ste. Marie, Ontario, where I''ve recently completed my 3 year degree at Sault College of Applied Arts &amp; Technology, and achieved excellent grades. </p>
-	<p>Right now, I am looking for some work, ANY work, in the software industry, and am trying to start a career as a software programmer. Coding is what I love doing in my spare time (what little I have of it), and I love to learn! </p>'
+	'<p>And just so you know, I am also 24 years old, I have blonde hair and blue eyes, and I''m just over 6 feet tall. I am also a highly motivated and hardworking individual, and I live in Sault Ste. Marie, Ontario, where I''ve recently completed my 3 year degree at Sault College of Applied Arts &amp; Technology, and achieved excellent grades. </p>
+	<p>Right now, I am looking for some work, ANY work, in the software industry, and am trying to start a career as a software developer. Coding is what I love doing in my spare time (what little I have of it), and I love to learn! </p>'
 );
 GO
 

@@ -22,6 +22,8 @@ namespace devinmajordotcom.ViewModels
 
         public ProfileViewModel ProfileDetails { get; set; }
 
+        public ContactEmailViewModel ContactEmail { get; set; }
+
         public List<LanguageSkillViewModel> LanguageSkills { get; set; }
 
         public List<TechSkillViewModel> TechSkills { get; set; }

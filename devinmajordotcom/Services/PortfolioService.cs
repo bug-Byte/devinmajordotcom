@@ -23,6 +23,7 @@ namespace devinmajordotcom.Services
         {
             var guid = HttpContext.Current.Session["MainPageUserAuthID"] ?? AddNewUser().Guid;
             var user = GetCurrentUser((Guid) guid);
+            var siteAdminUser = db.Security_Users.FirstOrDefault(x => x.IsActive && x.IsAdmin);
 
             return new PortfolioViewModel()
             {
@@ -115,7 +116,12 @@ namespace devinmajordotcom.Services
                         ID = y.ProjectTypeId,
                         Name = y.Portfolio_ProjectType.Type
                     }).ToList()
-                }).ToList()
+                }).ToList(),
+
+                ContactEmail = new ContactEmailViewModel()
+                {
+                    RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress,
+                }
 
             };
         }
