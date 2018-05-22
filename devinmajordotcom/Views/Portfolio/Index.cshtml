@@ -194,6 +194,48 @@
                             </div>
                         }
                     }
+                    
+                    @if (Model.Academics.Count > 0)
+                    {
+                        <br/>
+                        <h2 class="title"><strong>Academics</strong></h2>
+
+                        foreach (var academic in Model.Academics)
+                        {
+                            <h3 class="tm-work-h3"><span class="glyphicon glyphicon-education"></span>&nbsp;@academic.CertificateName</h3>
+                            <ul>
+                                @if (!string.IsNullOrEmpty(academic.ProgramName))
+                                {
+                                    <li>
+                                        <p>@academic.ProgramName</p>
+                                    </li>
+                                }
+                                @if (!string.IsNullOrEmpty(academic.SchoolName))
+                                {
+                                    <li>
+                                        <p>@academic.SchoolName</p>
+                                    </li>
+                                }
+                                @{
+                                    var timeString = "";
+                                    if (academic.StartDate != null)
+                                    {
+                                        timeString += "<li><p><span class='datetime'>" + academic.StartDate + "</span> - ";
+                                        if (academic.EndDate == null)
+                                        {
+                                            timeString += "Present";
+                                        }
+                                        else
+                                        {
+                                            timeString += "<span class='datetime'>" + academic.EndDate + "</span>";
+                                        }
+                                        timeString += " (x Years)</p></li>";
+                                        @Html.Raw(timeString)
+                                    }
+                                }
+                            </ul>
+                        }
+                    }
 
                 </div>
 
@@ -211,6 +253,48 @@
                             }
 
                         </ul>
+                    }
+                    
+                    @if (Model.Jobs.Count > 0)
+                    {
+                        <br />
+                        <h2 class="title"><strong>Career</strong> History</h2>
+                    
+                        <div class="text-center">
+                            
+                            @foreach (var job in Model.Jobs)
+                            {
+                                var titleString = job.JobTitle + (string.IsNullOrEmpty(job.CompanyName) ? "" : " @ " + job.CompanyName);
+
+                                <h3 class="tm-work-h3"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;@titleString</h3>
+                                <ul>
+                                    @{
+                                        var timeString = "";
+                                        if (job.StartDate != null)
+                                        {
+                                            timeString += "<li><p><span class='datetime'>" + job.StartDate + "</span> - ";
+                                            if (job.EndDate == null)
+                                            {
+                                                timeString += "Present";
+                                            }
+                                            else
+                                            {
+                                                timeString += "<span class='datetime'>" + job.EndDate + "</span>";
+                                            }
+                                            timeString += " (x Years)</p></li>";
+                                            @Html.Raw(timeString)
+                                        }
+                                    }
+                                    @if (!string.IsNullOrEmpty(job.Description))
+                                    {
+                                        <li>
+                                            <p>@job.Description</p>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            
+                        </div>
                     }
 
                 </div>
@@ -328,7 +412,16 @@
                         </div>
                     </div>
                     <br />
-
+        
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="spinner mailSpinner" style="display: none;position:relative;top:-10px;">
+                                <span class="spinner-rotate"></span>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
 
                     <div class="row">
                         <div class="col-md-offset-2 col-md-8">

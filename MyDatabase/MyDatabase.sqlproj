@@ -178,6 +178,8 @@
     <Build Include="Security\Tables\HardwareType.sql" />
     <Build Include="Portfolio\Tables\Config.sql" />
     <Build Include="Security\Tables\Log4NetLog.sql" />
+    <Build Include="Portfolio\Tables\Academic.sql" />
+    <Build Include="Portfolio\Tables\Job.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.001.PostDeployment.AddMainTestData.sql" />

@@ -276,6 +276,32 @@ VALUES
 );
 GO
 
+INSERT INTO [Portfolio].[Academic]
+(
+	[CertificateName],
+	[ProgramName],
+	[SchoolName],
+	[BeginDate],
+	[EndDate]
+)
+VALUES
+('Ontario College Advanced Diploma', 'Computer Programmer Analyst', 'Sault College of Applied Arts & Technology', '20130907 12:00:00 AM', '20160425 12:00:00 AM'),
+('Ontario College Diploma', 'Computer Programmer', 'Sault College of Applied Arts & Technology', '20130907 12:00:00 AM', '20150425 12:00:00 AM');
+
+INSERT INTO [Portfolio].[Job]
+(
+	[JobTitle],
+	[CompanyName],
+	[Description],
+	[BeginDate],
+	[EndDate]
+)
+VALUES
+('Junior Developer', 'Sault Ste. Marie Innovation Center', 'Developing industrial web applications for employee, asset, and vendor management', '20160620 12:00:00 AM', NULL),
+('Freelance Programmer, PC Technician', NULL, 'Few odd hardware & softweare jobs a year from friends, family, and online', '20150301 12:00:00 AM', NULL),
+('Software Developer', 'Digital Grounds', 'Mainly developed advanced PHP web applications related to health care', '20160101 12:00:00 AM', '20180425 12:00:00 AM'),
+('Web Development Assistant', 'Design & Logic', 'First development job, was introduced to the fast-paced culture of the programming industry.', '20160701 12:00:00 AM', '20110930 12:00:00 AM');
+
 DECLARE @Projects TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [Description] VARCHAR(MAX) NOT NULL);
 
 INSERT INTO @Projects([Name], [ImgPathName], [Description]) 

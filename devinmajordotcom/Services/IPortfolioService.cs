@@ -34,5 +34,11 @@ namespace devinmajordotcom.Services
 
         void RemoveProject(int IdToRemove);
 
+        void RemoveJob(int IdToRemove);
+
+        void RemoveAcademic(int IdToRemove);
+
+        void UpdateAcademicsAndJobs(PortfolioViewModel viewModel);
+
     }
 }

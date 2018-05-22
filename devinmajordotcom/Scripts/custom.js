@@ -12,6 +12,8 @@ function MomentAllDateTimes() {
 }
 
 function AjaxSuccess(data) {
+    $("#sendEmail").prop('disabled', false);
+    $(".mailSpinner").fadeOut(500);
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your email was successfully sent to the Administrator of this site!'
@@ -30,6 +32,11 @@ function AjaxFailure(data) {
 $(document).ready(function() {
 
     MomentAllDateTimes();
+
+    $(document).on("submit", "#dropMeALineEmailForm", function () {
+        $("#sendEmail").prop('disabled', true);
+        $(".mailSpinner").fadeIn(500);
+    });
 
 	if ( $('.iso-box-wrapper').length > 0 ) { 
 

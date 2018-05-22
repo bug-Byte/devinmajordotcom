@@ -28,6 +28,10 @@ namespace devinmajordotcom.ViewModels
 
         public List<TechSkillViewModel> TechSkills { get; set; }
 
+        public List<AcademicViewModel> Academics { get; set; }
+
+        public List<JobViewModel> Jobs { get; set; }
+
         public PersonalDescriptionViewModel PersonalDescription { get; set; }
 
         public List<SiteLinkViewModel> ContactSiteLinks { get; set; }
@@ -35,6 +39,40 @@ namespace devinmajordotcom.ViewModels
         public List<ProjectViewModel> PortfolioProjects { get; set; }
 
         public List<DropDownViewModel> AvailableProjectFilters { get; set; }
+
+    }
+
+    public class JobViewModel
+    {
+        
+        public int ID { get; set; }
+
+        public string JobTitle { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string Description { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+    }
+
+    public class AcademicViewModel
+    {
+
+        public int ID { get; set; }
+
+        public string CertificateName { get; set; }
+
+        public string SchoolName { get; set; }
+
+        public string ProgramName { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
 
     }
 

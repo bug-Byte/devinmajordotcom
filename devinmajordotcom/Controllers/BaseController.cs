@@ -4,10 +4,12 @@ using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -73,32 +75,51 @@ namespace devinmajordotcom.Controllers
 
         }
 
+        static bool mailSent = false;
+        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            // Get the unique identifier for this asynchronous operation.
+            String token = (string)e.UserState;
+
+            if (e.Cancelled)
+            {
+                Console.WriteLine("[{0}] Send canceled.", token);
+            }
+            if (e.Error != null)
+            {
+                Console.WriteLine("[{0}] {1}", token, e.Error.ToString());
+            }
+            else
+            {
+                Console.WriteLine("Message sent.");
+            }
+            mailSent = true;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult DropMeALine(ContactEmailViewModel viewModel)
+        public async Task<JsonResult> DropMeALine(ContactEmailViewModel viewModel)
         {
             var emailSuccessful = "";
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return new JsonResult {Data = emailSuccessful};
+            var message = new MailMessage();
+            var body = PartialHelper.RenderViewToString(ControllerContext, "MainContactEmail", viewModel);
+            try
             {
-                var message = new MailMessage();
-                var body = PartialHelper.RenderViewToString(ControllerContext, "MainContactEmail", viewModel);
-                try
-                {
 
-                    message.To.Add(new MailAddress(viewModel.RecipientEmail));
-                    message.Subject = "Attn Site Admin: " + viewModel.Subject;
-                    message.Body = body;
-                    message.IsBodyHtml = true;
-                    using (var smtp = new SmtpClient())
-                    {
-                        smtp.Send(message);
-                        new JsonResult { Data = "Success" };
-                    }
-                }
-                catch (Exception e)
+                message.To.Add(new MailAddress(viewModel.RecipientEmail));
+                message.Subject = "Attn Site Admin: " + viewModel.Subject;
+                message.Body = body;
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
                 {
-                    message.Dispose();
+                    await smtp.SendMailAsync(message);
                 }
+                return new JsonResult { Data = "Success" };
+            }
+            catch (Exception e)
+            {
+                message.Dispose();
             }
             return new JsonResult { Data = emailSuccessful };
         }
@@ -125,7 +146,7 @@ namespace devinmajordotcom.Controllers
                 var uploadDir = "~/Content/";
                 if (HttpContext.Session["ImageSubfolder"] != null)
                 {
-                    switch ((string)HttpContext.Session["ImageSubfolder"])
+                    switch ((string) HttpContext.Session["ImageSubfolder"])
                     {
                         case "Home":
                             uploadDir = "~/Content/Images/";
@@ -208,7 +229,7 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendPasswordResetEmail(UserViewModel viewModel)
+        public async Task<JsonResult> SendPasswordResetEmail(UserViewModel viewModel)
         {
             var emailSuccessful = "";
             var userExists = landingPageService.DoesUserExist(viewModel.UserName);
@@ -219,7 +240,7 @@ namespace devinmajordotcom.Controllers
             }
             var user = landingPageService.LookupUser(viewModel.UserName);
             var message = new MailMessage();
-            var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/PasswordResetEmail", user);
+            var body = PartialHelper.RenderViewToString(ControllerContext, "PasswordResetEmail", viewModel);
             try
             {
 
@@ -229,16 +250,15 @@ namespace devinmajordotcom.Controllers
                 message.IsBodyHtml = true;
                 using (var smtp = new SmtpClient())
                 {
-                    smtp.Send(message);
+                    await smtp.SendMailAsync(message);
                 }
                 return new JsonResult { Data = "Success" };
             }
             catch (Exception e)
             {
                 message.Dispose();
-                emailSuccessful = "fail";
-                return new JsonResult { Data = emailSuccessful };
             }
+            return new JsonResult { Data = emailSuccessful };
         }
 
         [HttpGet]
@@ -269,7 +289,7 @@ namespace devinmajordotcom.Controllers
         {
             var emailSuccessful = "";
             var message = new MailMessage();
-            var body = PartialHelper.RenderViewToString(ControllerContext, "../Shared/ConfirmationEmail", viewModel);
+            var body = PartialHelper.RenderViewToString(ControllerContext, "ConfirmationEmail", viewModel);
             try
             {
                 message.To.Add(new MailAddress(viewModel.EmailAddress));

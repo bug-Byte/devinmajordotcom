@@ -118,6 +118,26 @@ namespace devinmajordotcom.Services
                     }).ToList()
                 }).ToList(),
 
+                Academics = db.Portfolio_Academics.Select(x => new AcademicViewModel()
+                {
+                    ID = x.Id,
+                    CertificateName = x.CertificateName,
+                    SchoolName = x.SchoolName,
+                    ProgramName = x.ProgramName,
+                    StartDate = x.BeginDate,
+                    EndDate = x.EndDate
+                }).ToList(),
+
+                Jobs = db.Portfolio_Jobs.Select(x => new JobViewModel()
+                {
+                    ID = x.Id,
+                    Description = x.Description,
+                    StartDate = x.BeginDate,
+                    EndDate = x.EndDate,
+                    CompanyName = x.CompanyName,
+                    JobTitle = x.JobTitle
+                }).ToList(),
+
                 ContactEmail = new ContactEmailViewModel()
                 {
                     RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress,
@@ -133,6 +153,7 @@ namespace devinmajordotcom.Services
                 UpdateConfig(viewModel);
                 UpdateProfileAndPersonalDescription(viewModel);
                 UpdateSkills(viewModel);
+                UpdateAcademicsAndJobs(viewModel);
                 UpdateProjectsAndFilters(viewModel);
                 UpdateContactLinks(viewModel);
                 db.SaveChanges();
@@ -164,6 +185,62 @@ namespace devinmajordotcom.Services
             }
             db.SaveChanges();
 
+        }
+
+        public void UpdateAcademicsAndJobs(PortfolioViewModel viewModel)
+        {
+            foreach (var job in viewModel.Jobs.Where(x => x.JobTitle != null))
+            {
+                var item = db.Portfolio_Jobs.FirstOrDefault(x => x.Id == job.ID);
+                if (item != null)
+                {
+                    item.JobTitle = job.JobTitle;
+                    item.BeginDate = job.StartDate;
+                    item.EndDate = job.EndDate;
+                    item.CompanyName = job.CompanyName;
+                    item.Description = job.Description;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var newRecord = new Portfolio_Job()
+                    {
+                        JobTitle = job.JobTitle,
+                        BeginDate = job.StartDate,
+                        EndDate = job.EndDate,
+                        CompanyName = job.CompanyName,
+                        Description = job.Description
+                    };
+                    db.Portfolio_Jobs.Add(newRecord);
+                    db.SaveChanges();
+                }
+            }
+            foreach (var academic in viewModel.Academics.Where(x => x.CertificateName != null))
+            {
+                var item = db.Portfolio_Academics.FirstOrDefault(x => x.Id == academic.ID);
+                if (item != null)
+                {
+                    item.CertificateName = academic.CertificateName;
+                    item.BeginDate = academic.StartDate;
+                    item.EndDate = academic.EndDate;
+                    item.SchoolName = academic.SchoolName;
+                    item.ProgramName = academic.ProgramName;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var newRecord = new Portfolio_Academic()
+                    {
+                        CertificateName = academic.CertificateName,
+                        BeginDate = academic.StartDate,
+                        EndDate = academic.EndDate,
+                        SchoolName = academic.SchoolName,
+                        ProgramName = academic.ProgramName
+                    };
+                    db.Portfolio_Academics.Add(newRecord);
+                    db.SaveChanges();
+                }
+            }
         }
 
         public void UpdateProfileAndPersonalDescription(PortfolioViewModel viewModel)
@@ -451,6 +528,26 @@ namespace devinmajordotcom.Services
                     db.Portfolio_ProjectTypeMappings.Remove(mapping);
                 }
                 db.Portfolio_Projects.Remove(recordToRemove);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveJob(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_Jobs.FirstOrDefault(x => x.Id == IdToRemove);
+            if (recordToRemove != null)
+            {
+                db.Portfolio_Jobs.Remove(recordToRemove);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveAcademic(int IdToRemove)
+        {
+            var recordToRemove = db.Portfolio_Academics.FirstOrDefault(x => x.Id == IdToRemove);
+            if (recordToRemove != null)
+            {
+                db.Portfolio_Academics.Remove(recordToRemove);
                 db.SaveChanges();
             }
         }

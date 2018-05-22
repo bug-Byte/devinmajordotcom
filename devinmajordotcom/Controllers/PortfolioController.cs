@@ -3,6 +3,7 @@ using devinmajordotcom.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,9 +30,9 @@ namespace devinmajordotcom.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult ShootMeAnEmail(PortfolioViewModel viewModel)
+        public async Task<JsonResult> ShootMeAnEmail(PortfolioViewModel viewModel)
         {
-            return DropMeALine(viewModel.ContactEmail);
+            return await DropMeALine(viewModel.ContactEmail);
         }
 
         public void RemoveHighlightedSkill(int ID)

@@ -182,7 +182,6 @@ function ShowSpinner() {
 }
 
 function PasswordResetSuccess(data) {
-    debugger;
     if (data == "fail") {
         $('.spinner').fadeOut(500);
         $("#ajaxAlertContainer").bootsnack({
@@ -256,6 +255,11 @@ $(document).ready(function () {
         var val = $(this).val();
         $(".hiddenSignInUserName").val(val);
         $(".hiddenSignInUserName").attr("value", val);
+    });
+
+    $(document).on("submit", "#dropMeALineEmailForm", function () {
+        $("#sendEmail").prop('disabled', true);
+        $(".mailSpinner").fadeIn(500);
     });
 
     $(document).find(".settingsWindowButton").each(function () {
@@ -472,7 +476,6 @@ function HideAdminFirstRunModal() {
 }
 
 function RefreshTinyMce() {
-    debugger;
     tinymce.remove();
     tinymce.init({
         setup:function(ed) {
@@ -562,6 +565,8 @@ function LoginFailure() {
 }
 
 function AjaxSuccess(data) {
+    $("#sendEmail").prop('disabled', false);
+    $(".mailSpinner").fadeOut(500);
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your email was successfully sent to the Administrator of this site!'

@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\DEVINSSQLExpress;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\SQLExpress;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -45,9 +45,11 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment
         System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink
         System.Data.Entity.DbSet<MyHome_UserConfig> MyHome_UserConfigs { get; set; } // UserConfig
+        System.Data.Entity.DbSet<Portfolio_Academic> Portfolio_Academics { get; set; } // Academic
         System.Data.Entity.DbSet<Portfolio_Config> Portfolio_Configs { get; set; } // Config
         System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; } // ContactLink
         System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
+        System.Data.Entity.DbSet<Portfolio_Job> Portfolio_Jobs { get; set; } // Job
         System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
         System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
@@ -90,9 +92,11 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; } // BlogPostComment
         public System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; } // SiteLink
         public System.Data.Entity.DbSet<MyHome_UserConfig> MyHome_UserConfigs { get; set; } // UserConfig
+        public System.Data.Entity.DbSet<Portfolio_Academic> Portfolio_Academics { get; set; } // Academic
         public System.Data.Entity.DbSet<Portfolio_Config> Portfolio_Configs { get; set; } // Config
         public System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; } // ContactLink
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; } // HighlightedSkill
+        public System.Data.Entity.DbSet<Portfolio_Job> Portfolio_Jobs { get; set; } // Job
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; } // LanguageSkill
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; } // PersonalDescription
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; } // Profile
@@ -167,9 +171,11 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new MyHome_BlogPostCommentConfiguration());
             modelBuilder.Configurations.Add(new MyHome_SiteLinkConfiguration());
             modelBuilder.Configurations.Add(new MyHome_UserConfigConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_AcademicConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ConfigConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ContactLinkConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration());
+            modelBuilder.Configurations.Add(new Portfolio_JobConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration());
@@ -196,9 +202,11 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new MyHome_BlogPostCommentConfiguration(schema));
             modelBuilder.Configurations.Add(new MyHome_SiteLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new MyHome_UserConfigConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_AcademicConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ConfigConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ContactLinkConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_HighlightedSkillConfiguration(schema));
+            modelBuilder.Configurations.Add(new Portfolio_JobConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_LanguageSkillConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_PersonalDescriptionConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProfileConfiguration(schema));
@@ -244,9 +252,11 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<MyHome_BlogPostComment> MyHome_BlogPostComments { get; set; }
         public System.Data.Entity.DbSet<MyHome_SiteLink> MyHome_SiteLinks { get; set; }
         public System.Data.Entity.DbSet<MyHome_UserConfig> MyHome_UserConfigs { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_Academic> Portfolio_Academics { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Config> Portfolio_Configs { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ContactLink> Portfolio_ContactLinks { get; set; }
         public System.Data.Entity.DbSet<Portfolio_HighlightedSkill> Portfolio_HighlightedSkills { get; set; }
+        public System.Data.Entity.DbSet<Portfolio_Job> Portfolio_Jobs { get; set; }
         public System.Data.Entity.DbSet<Portfolio_LanguageSkill> Portfolio_LanguageSkills { get; set; }
         public System.Data.Entity.DbSet<Portfolio_PersonalDescription> Portfolio_PersonalDescriptions { get; set; }
         public System.Data.Entity.DbSet<Portfolio_Profile> Portfolio_Profiles { get; set; }
@@ -270,9 +280,11 @@ namespace devinmajordotcom.Models
             MyHome_BlogPostComments = new FakeDbSet<MyHome_BlogPostComment>("Id");
             MyHome_SiteLinks = new FakeDbSet<MyHome_SiteLink>("Id");
             MyHome_UserConfigs = new FakeDbSet<MyHome_UserConfig>("Id");
+            Portfolio_Academics = new FakeDbSet<Portfolio_Academic>("Id");
             Portfolio_Configs = new FakeDbSet<Portfolio_Config>("Id");
             Portfolio_ContactLinks = new FakeDbSet<Portfolio_ContactLink>("Id");
             Portfolio_HighlightedSkills = new FakeDbSet<Portfolio_HighlightedSkill>("Id");
+            Portfolio_Jobs = new FakeDbSet<Portfolio_Job>("Id");
             Portfolio_LanguageSkills = new FakeDbSet<Portfolio_LanguageSkill>("Id");
             Portfolio_PersonalDescriptions = new FakeDbSet<Portfolio_PersonalDescription>("Id");
             Portfolio_Profiles = new FakeDbSet<Portfolio_Profile>("Id");
@@ -916,6 +928,29 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // Academic
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_Academic
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string CertificateName { get; set; } // CertificateName
+        public string ProgramName { get; set; } // ProgramName
+        public string SchoolName { get; set; } // SchoolName
+        public System.DateTime? BeginDate { get; set; } // BeginDate
+        public System.DateTime? EndDate { get; set; } // EndDate
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        public Portfolio_Academic()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // Config
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Portfolio_Config
@@ -982,6 +1017,29 @@ namespace devinmajordotcom.Models
         public string ModifiedBy { get; set; } // ModifiedBy
 
         public Portfolio_HighlightedSkill()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // Job
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_Job
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string JobTitle { get; set; } // JobTitle
+        public string CompanyName { get; set; } // CompanyName
+        public string Description { get; set; } // Description
+        public System.DateTime? BeginDate { get; set; } // BeginDate
+        public System.DateTime? EndDate { get; set; } // EndDate
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        public Portfolio_Job()
         {
             InitializePartial();
         }
@@ -1306,8 +1364,8 @@ namespace devinmajordotcom.Models
             MyHome_BlogPosts = new System.Collections.Generic.List<MyHome_BlogPost>();
             MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
             MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
-            MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
             MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
+            MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
             InitializePartial();
         }
 
@@ -1630,6 +1688,35 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // Academic
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_AcademicConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Academic>
+    {
+        public Portfolio_AcademicConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_AcademicConfiguration(string schema)
+        {
+            ToTable("Academic", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.CertificateName).HasColumnName(@"CertificateName").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.SchoolName).HasColumnName(@"SchoolName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
     // Config
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Portfolio_ConfigConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Config>
@@ -1710,6 +1797,35 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // Job
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Portfolio_JobConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Portfolio_Job>
+    {
+        public Portfolio_JobConfiguration()
+            : this("Portfolio")
+        {
+        }
+
+        public Portfolio_JobConfiguration(string schema)
+        {
+            ToTable("Job", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.JobTitle).HasColumnName(@"JobTitle").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.CompanyName).HasColumnName(@"CompanyName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
