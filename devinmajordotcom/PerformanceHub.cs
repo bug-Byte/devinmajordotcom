@@ -79,10 +79,7 @@ namespace devinmajordotcom
                     if (t2.HardwareType == HardwareType.CPU)
                     {
                         cpuList.Add(t2.Name);
-                        if (i == 0)
-                        {
-                            hasPackageTemp = t2.Sensors.Any(x => x.SensorType == SensorType.Temperature && x.Name == "CPU Package");
-                        }
+                        hasPackageTemp = t2.Sensors.Any(x => x.SensorType == SensorType.Temperature && x.Name == "CPU Package");
                         foreach (var t1 in t2.Sensors)
                         {
                             if (t1.SensorType == SensorType.Temperature && ((hasPackageTemp && t1.Name.Contains("Package")) || t1.Name == "CPU Core #1"))
