@@ -5,6 +5,15 @@ var months = new Array('January', 'February', 'March', 'April', 'May', 'June', '
 var canvas = document.querySelector("canvas");
 var ctx;
 
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
 if(canvas != null) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -22,7 +31,7 @@ function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     update();
     draw();
-    requestAnimationFrame(loop);
+    requestAnimFrame(loop);
 }
 
 function Ball(startX, startY, startVelX, startVelY) {
@@ -59,7 +68,7 @@ if(canvas != null) {
 
 function update() {
     var diff = Date.now() - lastTime;
-    for (var frame = 0; frame * 10.6667 < diff; frame++) {
+    for (var frame = 0; frame * 14 < diff; frame++) {
         for (var index = 0; index < balls.length; index++) {
             balls[index].update(canvas);
         }

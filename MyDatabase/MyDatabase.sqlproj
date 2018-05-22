@@ -180,6 +180,8 @@
     <Build Include="Security\Tables\Log4NetLog.sql" />
     <Build Include="Portfolio\Tables\Academic.sql" />
     <Build Include="Portfolio\Tables\Job.sql" />
+    <Build Include="Security\Tables\EmailType.sql" />
+    <Build Include="Security\Tables\Email.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.001.PostDeployment.AddMainTestData.sql" />

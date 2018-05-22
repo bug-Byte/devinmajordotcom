@@ -285,6 +285,9 @@ a, a:hover, a:focus {
     min-width: 80px;
     max-width: 80px;
     text-align: center;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #sidebar ul.components {

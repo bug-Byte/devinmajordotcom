@@ -109,6 +109,12 @@ VALUES
 	3
 );
 
+INSERT INTO [Security].[EmailType]
+(
+	[TypeName]
+)
+VALUES ('Email Confirmation'), ('Password Reset'), ('Other');
+
 INSERT INTO [LandingPage].[BannerLink]
 (
 	DisplayName,
