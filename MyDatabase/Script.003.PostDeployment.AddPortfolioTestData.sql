@@ -299,7 +299,7 @@ INSERT INTO [Portfolio].[Job]
 VALUES
 ('Junior Developer', 'Sault Ste. Marie Innovation Center', 'Developing industrial web applications for employee, asset, and vendor management', '20160620 12:00:00 AM', NULL),
 ('Freelance Programmer, PC Technician', NULL, 'Few odd hardware & softweare jobs a year from friends, family, and online', '20150301 12:00:00 AM', NULL),
-('Software Developer', 'Digital Grounds', 'Mainly developed advanced PHP web applications related to health care', '20160101 12:00:00 AM', '20180425 12:00:00 AM'),
+('Software Developer', 'Digital Grounds', 'Mainly developed advanced PHP web applications related to health care', '20160101 12:00:00 AM', '20160425 12:00:00 AM'),
 ('Web Development Assistant', 'Design & Logic', 'First development job, was introduced to the fast-paced culture of the programming industry.', '20160701 12:00:00 AM', '20110930 12:00:00 AM');
 
 DECLARE @Projects TABLE(ID INT IDENTITY(1,1) NOT NULL, [Name] VARCHAR(MAX) NOT NULL, [ImgPathName] VARCHAR(MAX) NOT NULL, [Img] VARBINARY(MAX) NULL, [Description] VARCHAR(MAX) NOT NULL);
