@@ -51,7 +51,7 @@ namespace devinmajordotcom
                 RAMEnabled = true
             };
 
-            bool? hasPackageTemp = null;
+            bool hasPackageTemp = false;
             var ramLoad = (float)0.0;
             var ramString = "";
             var cpuTemp = new List<double>();
@@ -79,14 +79,13 @@ namespace devinmajordotcom
                     if (t2.HardwareType == HardwareType.CPU)
                     {
                         cpuList.Add(t2.Name);
-                        if (hasPackageTemp == null)
+                        if (i == 0)
                         {
-                            var packageTemp = t2.Sensors.FirstOrDefault(x => x.SensorType == SensorType.Temperature && x.Name == "CPU Package");
-                            hasPackageTemp = packageTemp != null;
+                            hasPackageTemp = t2.Sensors.Any(x => x.SensorType == SensorType.Temperature && x.Name == "CPU Package");
                         }
                         foreach (var t1 in t2.Sensors)
                         {
-                            if (t1.SensorType == SensorType.Temperature && (hasPackageTemp.Value && t1.Name == "CPU Package") || (!hasPackageTemp.Value && t1.Name == "CPU Core #1"))
+                            if (t1.SensorType == SensorType.Temperature && ((hasPackageTemp && t1.Name.Contains("Package")) || t1.Name == "CPU Core #1"))
                             {
                                 cpuTemp.Add(t1.Value.GetValueOrDefault());
                             }

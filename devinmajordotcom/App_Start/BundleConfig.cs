@@ -91,6 +91,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/bootstrap-colorpicker.js",
                 "~/Scripts/bootstrap-slider.js",
                 "~/Content/Selectize/js/standalone/selectize.js",
+                "~/Scripts/Chart.js",
                 "~/Scripts/IndexScripts.js"
             ));
 
