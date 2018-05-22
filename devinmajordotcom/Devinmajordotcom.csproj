@@ -891,6 +891,12 @@
     <Content Include="Views\Shared\PasswordResetEmail.cshtml" />
     <Content Include="Views\Shared\ResetPassword.cshtml" />
     <Content Include="Views\Shared\ExpiredEmail.cshtml" />
+    <Content Include="Views\Portfolio\_ManageSplashScreen.cshtml" />
+    <Content Include="Views\Portfolio\_ManageProjects.cshtml" />
+    <Content Include="Views\Portfolio\_ManageProfile.cshtml" />
+    <Content Include="Views\Portfolio\_ManageSkills.cshtml" />
+    <Content Include="Views\Portfolio\_ManageLinks.cshtml" />
+    <Content Include="Views\Portfolio\_ManageCareerAndAcademics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

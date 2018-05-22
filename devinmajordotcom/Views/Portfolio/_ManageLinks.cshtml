@@ -1,0 +1,99 @@
+﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
+@{
+    var count = 0;
+}
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse5">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>Contact Links</a>
+        </h4>
+    </div>
+    <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div id="contactLinksContainer" style="overflow:auto !important;" class="">
+                <ul id="contactLinksList" class="mediaSortable">
+                    
+                    @foreach (var link in Model.ContactSiteLinks.OrderBy(x => x.Order))
+                    {
+                        @Html.HiddenFor(x => x.ContactSiteLinks[count].ID, new {@class = "hiddenContactLinkId hiddenInput_" + Model.ContactSiteLinks[count].ID})
+                        <li class="contactLink handlebarsItem" id="contactLink_@count" data-hiddeninputid="@Html.IdFor(x => x.ContactSiteLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh; @if (!string.IsNullOrEmpty(Model.ContactSiteLinks[count].Color))
+                                                                                                                                                                                                            {<text>background-color: @Model.ContactSiteLinks[count].Color; </text>}">
+                            @Html.HiddenFor(x => x.ContactSiteLinks[count].Order, new {@class = "hiddenOrder hiddenInput_" + Model.ContactSiteLinks[count].ID})
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+                                </div>
+                                <div class="col-sm-8 text-center">
+                                    <h4>
+                                        <span class="iconContainer"><span class="fa @Model.ContactSiteLinks[count].DisplayIcon"></span></span>
+                                        &nbsp;&nbsp;
+                                        <span class="titleContainer">@Model.ContactSiteLinks[count].DisplayName</span>
+                                    </h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    @{
+                                        var linkText = "<span class='fa fa-trash'></span>";
+                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveContactLink", "Portfolio", new {ID = Model.ContactSiteLinks[count].ID}, new AjaxOptions() {HttpMethod = "GET", OnSuccess = "RemoveContactLink('#deleteContactLink_" + Model.ContactSiteLinks[count].ID + "')", OnFailure = "ManageMediaAjaxFailure"}, new {data_content = linkText, @id = "deleteContactLink_" + Model.ContactSiteLinks[count].ID, @class = "btn btn-danger deleteGroup deleteContactLink", @style = "float:right;"});
+                                        @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                    }
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <div class="input-group-addon">Directive</div>
+                                        @Html.TextBoxFor(x => x.ContactSiteLinks[count].Directive, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "Follow me on..."})
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div style="margin-bottom: 8px" class="input-group">
+                                        <span class="input-group-btn">
+                                            <button data-placement="left"
+                                                    class="btn btn-default iconpicker"
+                                                    name="@Html.NameFor(x => x.ContactSiteLinks[count].DisplayIcon)"
+                                                    role="iconpicker"
+                                                    data-iconset="fontawesome"
+                                                    data-icon="@Model.ContactSiteLinks[count].DisplayIcon"
+                                                    type="button"></button>
+                                        </span>
+                                        @Html.TextBoxFor(x => x.ContactSiteLinks[count].DisplayName, new {@class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Display Name"})
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    @Html.TextBoxFor(x => x.ContactSiteLinks[count].URL, new {@class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/"})
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <div class="customColorPicker contactSiteLink input-group colorpicker-component" data-color="@Model.ContactSiteLinks[count].Color">
+                                        @Html.TextBoxFor(x => x.ContactSiteLinks[count].Color, new {@class = "form-control linkColorValue", @placeholder = "Pick a color, any color!"})
+                                        <span class="input-group-addon"><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.ValidationMessageFor(x => x.ContactSiteLinks[count].DisplayName)
+                                </div>
+                            </div>
+                            <br/>
+                        </li>
+                        count++;
+                    }
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button class="form-control btn btn-success" id="addNewContactLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
