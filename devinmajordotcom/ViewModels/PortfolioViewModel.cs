@@ -47,14 +47,20 @@ namespace devinmajordotcom.ViewModels
         
         public int ID { get; set; }
 
+        [Required]
+        [DisplayName("Job/Position Title * : ")]
         public string JobTitle { get; set; }
 
+        [DisplayName("Company Name : ")]
         public string CompanyName { get; set; }
 
+        [DisplayName("Job Description : ")]
         public string Description { get; set; }
 
+        [DisplayName("Start Date : ")]
         public DateTime? StartDate { get; set; }
 
+        [DisplayName("End Date : ")]
         public DateTime? EndDate { get; set; }
 
     }
@@ -64,14 +70,19 @@ namespace devinmajordotcom.ViewModels
 
         public int ID { get; set; }
 
+        [DisplayName("Certificate Name * : ")]
         public string CertificateName { get; set; }
 
+        [DisplayName("School/Institution Name : ")]
         public string SchoolName { get; set; }
 
+        [DisplayName("Program Name : ")]
         public string ProgramName { get; set; }
 
+        [DisplayName("Start Date : ")]
         public DateTime? StartDate { get; set; }
 
+        [DisplayName("End Date : ")]
         public DateTime? EndDate { get; set; }
 
     }

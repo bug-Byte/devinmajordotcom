@@ -842,7 +842,7 @@ input[type="checkbox"]:checked + .toggleslider:before {
     width: 100%;
 }
 
-.mediaDashboardLink, .bannerLink, .siteLink, .languageSkill, .techSkill, .projectLink {
+.academicLink, .jobLink, .mediaDashboardLink, .bannerLink, .siteLink, .languageSkill, .techSkill, .projectLink {
     border: 1px solid white;
     padding: 5px;
     border-radius: 5px;

@@ -60,5 +60,15 @@ namespace devinmajordotcom.Controllers
             portfolioService.RemoveProject(ID);
         }
 
+        public void RemoveJob(int ID)
+        {
+            portfolioService.RemoveJob(ID);
+        }
+
+        public void RemoveAcademic(int ID)
+        {
+            portfolioService.RemoveAcademic(ID);
+        }
+
     }
 }
