@@ -10,5 +10,4 @@
 	[Subject] VARCHAR(MAX) NULL,
 	Content VARCHAR(MAX) NULL,
 	PRIMARY KEY (Id),
-	CONSTRAINT [Security_Email_EmailTypeID_Security_EmailType_ID] FOREIGN KEY (EmailTypeID) REFERENCES [Security].[EmailType] ([ID])
-)
+	CONSTRAINT [Security_Email_EmailTypeID_Security_EmailType_ID] FOREIGN KEY (EmailTypeID) REFERENCES [Security].[EmailType] ([Id]))
