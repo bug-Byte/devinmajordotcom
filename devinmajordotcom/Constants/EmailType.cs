@@ -12,24 +12,22 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Devinmajordotcom
+namespace devinmajordotcom
 {
     /// <summary>
     /// We need the ability to check for new Applications
     /// </summary>
-	public static class ApplicationMaster
+	public static class EmailType
 	{
 
-		public enum ApplicationMasters
+		public enum EmailTypes
 		{
-			[Display(Name="Main Landing Page")]
-			MainLandingPage = 1,
-			[Display(Name="My Custom Homepage")]
-			MyCustomHomepage = 2,
-			[Display(Name="Plex Media Dashboard")]
-			PlexMediaDashboard = 3,
-			[Display(Name="Professional Portfolio")]
-			ProfessionalPortfolio = 4,
+			[Display(Name="Email Confirmation")]
+			EmailConfirmation = 1,
+			[Display(Name="Password Reset")]
+			PasswordReset = 2,
+			[Display(Name="Other")]
+			Other = 3,
 		}
 	}
 }

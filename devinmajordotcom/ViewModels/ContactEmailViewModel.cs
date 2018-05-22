@@ -19,6 +19,10 @@ namespace devinmajordotcom.ViewModels
 
         public string Subject { get; set; }
 
+        public Guid UserGUID { get; set; }
+
+        public int EmailTypeID { get; set; }
+
         [AllowHtml]
         public string Content { get; set; }
 

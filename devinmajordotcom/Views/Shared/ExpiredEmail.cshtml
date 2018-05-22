@@ -1,0 +1,17 @@
+﻿@model devinmajordotcom.ViewModels.UserViewModel
+@{
+    Layout = "_Layout.cshtml";
+    ViewBag.CurrentUserViewModel = Model;
+    ViewBag.bannerLinks = ViewBag.bannerLinks;
+    ViewBag.config = ViewBag.config;
+}
+
+<div class="row absolute-center">
+    <div class="col-sm-12 text-center">
+        <h2 class="text-center" style="font-size: 50px;"><span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Email Expired!</h2>     
+        <hr>
+        <h4 class="text-center">Sorry, you have waited too long to click that link! All emails from this website expire after 24 hours if they require user action.</h4>
+        <hr/>
+        <h5 class="text-center">Cheers, <br/> Admins at devinmajor.com</h5>
+    </div>
+</div>

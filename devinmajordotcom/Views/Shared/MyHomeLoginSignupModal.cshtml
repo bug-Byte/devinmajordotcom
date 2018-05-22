@@ -37,6 +37,7 @@
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(x => x.GUID)
+                                        @Html.HiddenFor(x => x.UserID)
                                         @Html.Hidden("IsSigningUp", "False", new { @id = "IsSigningUp1" })
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
@@ -79,6 +80,7 @@
                                     }
                                     @using (Ajax.BeginForm("SendPasswordResetEmail", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "PasswordResetSuccess(data);", OnFailure = "PasswordResetFailure(data);" }, new { @id = "passwordResetForm" }))
                                     {
+                                        @Html.HiddenFor(x => x.GUID)
                                         @Html.Hidden("UserName", null, new { @id = "notUserName", @class = "hiddenSignInUserName", required = "required" })
                                         @Html.ValidationMessageFor(x => x.UserName)
                                     }

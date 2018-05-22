@@ -1246,7 +1246,8 @@ namespace devinmajordotcom.Models
     public partial class Security_Email
     {
         public int Id { get; set; } // Id (Primary key)
-        public int SenderUserId { get; set; } // SenderUserID
+        public int EmailTypeId { get; set; } // EmailTypeID
+        public System.Guid SenderUserGuid { get; set; } // SenderUserGUID
         public string SenderEmailAddress { get; set; } // SenderEmailAddress
         public string RecipientEmail { get; set; } // RecipientEmail
         public string RecipientName { get; set; } // RecipientName
@@ -1261,9 +1262,9 @@ namespace devinmajordotcom.Models
         // Foreign keys
 
         /// <summary>
-        /// Parent Security_User pointed by [Email].([SenderUserId]) (Security_Email_SenderUserID_Security_User_ID)
+        /// Parent Security_EmailType pointed by [Email].([EmailTypeId]) (Security_Email_EmailTypeID_Security_EmailType_ID)
         /// </summary>
-        public virtual Security_User Security_User { get; set; } // Security_Email_SenderUserID_Security_User_ID
+        public virtual Security_EmailType Security_EmailType { get; set; } // Security_Email_EmailTypeID_Security_EmailType_ID
 
         public Security_Email()
         {
@@ -1284,8 +1285,16 @@ namespace devinmajordotcom.Models
         public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
         public string ModifiedBy { get; set; } // ModifiedBy
 
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Security_Emails where [Email].[EmailTypeID] point to this entity (Security_Email_EmailTypeID_Security_EmailType_ID)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Security_Email> Security_Emails { get; set; } // Email.Security_Email_EmailTypeID_Security_EmailType_ID
+
         public Security_EmailType()
         {
+            Security_Emails = new System.Collections.Generic.List<Security_Email>();
             InitializePartial();
         }
 
@@ -1417,10 +1426,6 @@ namespace devinmajordotcom.Models
         /// Child MyHome_UserConfigs where [UserConfig].[UserID] point to this entity (MyHome_UserHomeConfig_UserId_Security_User_ID)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<MyHome_UserConfig> MyHome_UserConfigs { get; set; } // UserConfig.MyHome_UserHomeConfig_UserId_Security_User_ID
-        /// <summary>
-        /// Child Security_Emails where [Email].[SenderUserID] point to this entity (Security_Email_SenderUserID_Security_User_ID)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<Security_Email> Security_Emails { get; set; } // Email.Security_Email_SenderUserID_Security_User_ID
 
         public Security_User()
         {
@@ -1430,7 +1435,6 @@ namespace devinmajordotcom.Models
             IsEmailConfirmationSent = false;
             MyHome_BlogPosts = new System.Collections.Generic.List<MyHome_BlogPost>();
             MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
-            Security_Emails = new System.Collections.Generic.List<Security_Email>();
             MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
             MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
             MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
@@ -2118,7 +2122,8 @@ namespace devinmajordotcom.Models
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.SenderUserId).HasColumnName(@"SenderUserID").HasColumnType("int").IsRequired();
+            Property(x => x.EmailTypeId).HasColumnName(@"EmailTypeID").HasColumnType("int").IsRequired();
+            Property(x => x.SenderUserGuid).HasColumnName(@"SenderUserGUID").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.SenderEmailAddress).HasColumnName(@"SenderEmailAddress").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.RecipientEmail).HasColumnName(@"RecipientEmail").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.RecipientName).HasColumnName(@"RecipientName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -2131,7 +2136,7 @@ namespace devinmajordotcom.Models
             Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
 
             // Foreign keys
-            HasRequired(a => a.Security_User).WithMany(b => b.Security_Emails).HasForeignKey(c => c.SenderUserId).WillCascadeOnDelete(false); // Security_Email_SenderUserID_Security_User_ID
+            HasRequired(a => a.Security_EmailType).WithMany(b => b.Security_Emails).HasForeignKey(c => c.EmailTypeId).WillCascadeOnDelete(false); // Security_Email_EmailTypeID_Security_EmailType_ID
             InitializePartial();
         }
         partial void InitializePartial();

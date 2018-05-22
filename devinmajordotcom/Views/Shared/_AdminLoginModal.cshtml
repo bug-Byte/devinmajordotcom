@@ -33,6 +33,7 @@
                                     @using (Ajax.BeginForm("AdminLogin", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "LoginFailure()" }, new { @class = "loginForm" }))
                                     {
                                         @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.UserID)
                                         @Html.HiddenFor(x => x.GUID)
                                         @Html.Hidden("IsSigningUp", "False")
                                         <div class="row">
@@ -78,6 +79,7 @@
                                     }
                                     @using (Ajax.BeginForm("SendPasswordResetEmail", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "PasswordResetSuccess(data);", OnFailure = "PasswordResetFailure(data);" }, new { @id = "passwordResetForm" }))
                                     {
+                                        @Html.HiddenFor(x => x.GUID)
                                         @Html.Hidden("UserName", null, new { @id = "notUserName", @class = "hiddenSignInUserName", required = "required" })
                                         @Html.ValidationMessageFor(x => x.UserName)
                                     }

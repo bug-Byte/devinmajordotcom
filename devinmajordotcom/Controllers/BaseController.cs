@@ -106,15 +106,24 @@ namespace devinmajordotcom.Controllers
             var body = PartialHelper.RenderViewToString(ControllerContext, "MainContactEmail", viewModel);
             try
             {
-
                 message.To.Add(new MailAddress(viewModel.RecipientEmail));
                 message.Subject = "Attn Site Admin: " + viewModel.Subject;
                 message.Body = body;
                 message.IsBodyHtml = true;
+                var emailModel = new ContactEmailViewModel()
+                {
+                    UserGUID = viewModel.UserGUID,
+                    Content = body,
+                    SenderEmailAddress = viewModel.SenderEmailAddress,
+                    SenderName = viewModel.SenderName,
+                    EmailTypeID = (int)EmailType.EmailTypes.Other,
+                    Subject = "Attn Site Admin: " + viewModel.Subject
+                };
                 using (var smtp = new SmtpClient())
                 {
                     await smtp.SendMailAsync(message);
                 }
+                landingPageService.EmailSent(emailModel);
                 return new JsonResult { Data = "Success" };
             }
             catch (Exception e)
@@ -248,10 +257,20 @@ namespace devinmajordotcom.Controllers
                 message.Subject = "Password Reset from devinmajor.com";
                 message.Body = body;
                 message.IsBodyHtml = true;
+                var emailModel = new ContactEmailViewModel()
+                {
+                    UserGUID = viewModel.GUID,
+                    Content = body,
+                    RecipientEmail = viewModel.EmailAddress,
+                    RecipientName = viewModel.UserName,
+                    EmailTypeID = (int)EmailType.EmailTypes.PasswordReset,
+                    Subject = "Password Reset from devinmajor.com"
+                };
                 using (var smtp = new SmtpClient())
                 {
                     await smtp.SendMailAsync(message);
                 }
+                landingPageService.EmailSent(emailModel);
                 return new JsonResult { Data = "Success" };
             }
             catch (Exception e)
@@ -269,6 +288,11 @@ namespace devinmajordotcom.Controllers
             var config = landingPageService.GetAppConfigData();
             ViewBag.bannerLinks = new List<SiteLinkViewModel>();
             ViewBag.config = config.Config;
+            var isExpired = landingPageService.CheckIfEmailExpired(user.GUID, (int)EmailType.EmailTypes.PasswordReset);
+            if (isExpired)
+            {
+                return PartialView("ExpiredEmail", user);
+            }
             return View(user);
         }
 
@@ -296,11 +320,21 @@ namespace devinmajordotcom.Controllers
                 message.Subject = "Confirm your Email for devinmajor.com";
                 message.Body = body;
                 message.IsBodyHtml = true;
+                var emailModel = new ContactEmailViewModel()
+                {
+                    UserGUID = viewModel.GUID,
+                    Content = body,
+                    RecipientEmail = viewModel.EmailAddress,
+                    RecipientName = viewModel.UserName,
+                    EmailTypeID = (int)EmailType.EmailTypes.EmailConfirmation,
+                    Subject = "Confirm your Email for devinmajor.com"
+                };
                 using (var smtp = new SmtpClient())
                 {
                     smtp.Send(message);
                 }
                 landingPageService.SetConfirmationEmailSent(viewModel);
+                landingPageService.EmailSent(emailModel);
                 Session["MainPageUserAuthID"] = viewModel.GUID;
                 return new JsonResult { Data = "Success" };
             }
@@ -319,6 +353,11 @@ namespace devinmajordotcom.Controllers
             var config = landingPageService.GetAppConfigData();
             ViewBag.bannerLinks = new List<SiteLinkViewModel>();
             ViewBag.config = config.Config;
+            var isExpired = landingPageService.CheckIfEmailExpired(user.GUID, (int)EmailType.EmailTypes.EmailConfirmation);
+            if (isExpired)
+            {
+                return PartialView("ExpiredEmail", user);
+            }
             return PartialView(user);
         }
 

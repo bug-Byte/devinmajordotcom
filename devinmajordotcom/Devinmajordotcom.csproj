@@ -242,20 +242,15 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Constants\EmailType.cs">
+      <DependentUpon>EmailType.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Constants\HardwareType1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HardwareType.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Constants\SkillTypeMaster.cs">
-      <DependentUpon>SkillTypeMaster.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Constants\ApplicationMaster.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ApplicationMaster.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MediaDashboardController.cs" />
@@ -301,17 +296,13 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Constants\EmailType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EmailType.cs</LastGenOutput>
+    </Content>
     <Content Include="Constants\HardwareType.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>HardwareType1.cs</LastGenOutput>
-    </Content>
-    <Content Include="Constants\SkillTypeMaster.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SkillTypeMaster.cs</LastGenOutput>
-    </Content>
-    <Content Include="Constants\ApplicationMaster.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ApplicationMaster.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootsnack.css" />
     <Content Include="Content\bootstrap-colorpicker.css" />
@@ -899,6 +890,7 @@
     <Content Include="Views\Shared\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\Shared\PasswordResetEmail.cshtml" />
     <Content Include="Views\Shared\ResetPassword.cshtml" />
+    <Content Include="Views\Shared\ExpiredEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

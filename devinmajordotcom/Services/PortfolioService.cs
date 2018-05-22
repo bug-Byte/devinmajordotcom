@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Devinmajordotcom;
 using System.Security.Principal;
 
 namespace devinmajordotcom.Services
@@ -141,6 +140,7 @@ namespace devinmajordotcom.Services
                 ContactEmail = new ContactEmailViewModel()
                 {
                     RecipientEmail = siteAdminUser == null ? "" : siteAdminUser.EmailAddress,
+                    UserGUID = user.GUID
                 }
 
             };

@@ -24,6 +24,10 @@ namespace devinmajordotcom.Services
 
         void SetConfirmationEmailSent(UserViewModel viewModel);
 
+        void EmailSent(ContactEmailViewModel viewModel);
+
+        bool CheckIfEmailExpired(Guid UserGUID, int EmailTypeID);
+
         UserValidationViewModel ValidateCredentials(string userString, string password, string emailAddress = null);
 
         void UpdateCurrentUser(UserViewModel viewModel);

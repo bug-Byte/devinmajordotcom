@@ -56,6 +56,35 @@ namespace devinmajordotcom.Services
             }
         }
 
+        public void EmailSent(ContactEmailViewModel viewModel)
+        {
+            var record = new Security_Email()
+            {
+                SenderName = viewModel.SenderName,
+                SenderEmailAddress = viewModel.SenderEmailAddress,
+                RecipientEmail = viewModel.RecipientEmail,
+                RecipientName = viewModel.RecipientName,
+                Subject = viewModel.Subject,
+                SenderUserGuid = viewModel.UserGUID,
+                Content = viewModel.Content,
+                EmailTypeId = viewModel.EmailTypeID
+            };
+            db.Security_Emails.Add(record);
+            db.SaveChanges();
+        }
+
+        public bool CheckIfEmailExpired(Guid UserGUID, int EmailTypeID)
+        {
+            var record = db.Security_Emails.Where(x => x.SenderUserGuid == UserGUID && x.EmailTypeId == EmailTypeID).OrderByDescending(x => x.CreatedOn).FirstOrDefault();
+            if (record == null) return true;
+            var difference = DateTime.Now - record.CreatedOn;
+            if (difference != null)
+            {
+                return difference.Value.Days >= 1;
+            }
+            return true;
+        }
+
         public UserViewModel LookupUser(string userString)
         {
             return db.Security_Users.Select(x => new UserViewModel() {

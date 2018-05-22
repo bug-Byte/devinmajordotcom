@@ -11,7 +11,7 @@
 
 <#
 	string ConnectionStringName = "MainDbConnection";
-	string Query = "SELECT ID, TypeName FROM [Portfolio].[SkillTypeMaster] ORDER BY ID;";
+	string Query = "SELECT ID, TypeName FROM [Security].[EmailType] ORDER BY ID;";
 
     var map = new ExeConfigurationFileMap();
     map.ExeConfigFilename = this.Host.ResolvePath(@"..\Web.config");
@@ -33,12 +33,12 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Devinmajordotcom
+namespace devinmajordotcom
 {
     /// <summary>
-    /// We need the ability to check for new SkillTypes
+    /// We need the ability to check for new Applications
     /// </summary>
-	public static class SkillTypeMaster
+	public static class EmailType
 	{
 <#
 using(SqlConnection conn = new SqlConnection())
@@ -53,7 +53,7 @@ using(SqlConnection conn = new SqlConnection())
 	{
 #>
 
-		public enum SkillTypeMasters
+		public enum EmailTypes
 		{
 <#
 
