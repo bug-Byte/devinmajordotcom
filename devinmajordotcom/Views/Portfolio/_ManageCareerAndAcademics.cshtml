@@ -106,7 +106,14 @@
                                             @Html.LabelFor(x => x.Academics[count].StartDate, new {@style = "font-weight:normal;position:relative;"})
                                         </div>
                                         <div class="col-sm-12 text-center">
-                                            @Html.TextBoxFor(x => x.Academics[count].StartDate, new {@class = "form-control"})
+                                            <div class="form-group">
+                                                <div class='input-group date' id='date1'>
+                                                    @Html.TextBoxFor(x => x.Academics[count].StartDate, new { @class = "form-control datetimepicker" })
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +124,14 @@
                                             @Html.LabelFor(x => x.Academics[count].EndDate, new {@style = "font-weight:normal;position:relative;"})
                                         </div>
                                         <div class="col-sm-12 text-center">
-                                            @Html.TextBoxFor(x => x.Academics[count].EndDate, new {@class = "form-control"})
+                                            <div class="form-group">
+                                                <div class='input-group date' id='date2'>
+                                                    @Html.TextBoxFor(x => x.Academics[count].EndDate, new { @class = "form-control datetimepicker" })
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +237,14 @@
                                             @Html.LabelFor(x => x.Jobs[count].StartDate, new { @style = "font-weight:normal;position:relative;" })
                                         </div>
                                         <div class="col-sm-12 text-center">
-                                            @Html.TextBoxFor(x => x.Jobs[count].StartDate, new { @class = "form-control" })
+                                            <div class="form-group">
+                                                <div class='input-group date' id='date3'>
+                                                    @Html.TextBoxFor(x => x.Jobs[count].StartDate, new { @class = "form-control datetimepicker" })
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +255,14 @@
                                             @Html.LabelFor(x => x.Jobs[count].EndDate, new { @style = "font-weight:normal;position:relative;" })
                                         </div>
                                         <div class="col-sm-12 text-center">
-                                            @Html.TextBoxFor(x => x.Jobs[count].EndDate, new { @class = "form-control" })
+                                            <div class="form-group">
+                                                <div class='input-group date' id='date4'>
+                                                    @Html.TextBoxFor(x => x.Jobs[count].EndDate, new { @class = "form-control datetimepicker" })
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

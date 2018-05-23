@@ -24,7 +24,7 @@
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
-	<Use64BitIISExpress />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -904,6 +904,8 @@
     <Content Include="Views\Portfolio\_ManageSkills.cshtml" />
     <Content Include="Views\Portfolio\_ManageLinks.cshtml" />
     <Content Include="Views\Portfolio\_ManageCareerAndAcademics.cshtml" />
+    <Content Include="Views\Portfolio\_NewAcademic.cshtml" />
+    <Content Include="Views\Portfolio\_NewJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -258,8 +258,6 @@ $(document).ready(function () {
 
     setTimeout(setupHandlebarsHelpers, 50);
 
-    MomentAllDateTimes();
-
     $(document).on("change", ".signInUserName", function () {
         var val = $(this).val();
         $(".hiddenSignInUserName").val(val);
@@ -323,11 +321,11 @@ $(document).ready(function () {
         $("#LoginModal").modal();
     });
 
-    $(".work-wrapper").hover(function () {
-        $(this).find('.glyphicon').addClass('blueGlyphicon', 600);
-    }, function () {
-        $(this).find('.glyphicon').removeClass('blueGlyphicon', 600);
-    });
+    //$(".work-wrapper").hover(function () {
+    //    $(this).find('.glyphicon').addClass('blueGlyphicon', 600);
+    //}, function () {
+    //    $(this).find('.glyphicon').removeClass('blueGlyphicon', 600);
+    //});
 
     $(document).find('.masthead-nav li').each(function () {
         $(this).click(function () {
@@ -459,14 +457,16 @@ function InitializeMediaDashboardEventHandlers() {
         });
     });
 
-    RefreshTinyMce();
-
     $('#skillCarousel').carousel({
         interval: false,
         wrap: false
     });
 
     $(".untouched").removeClass("untouched");
+
+    MomentAllDateTimes();
+
+    RefreshTinyMce();
 
 }
 
@@ -693,6 +693,28 @@ function RemoveProject(id) {
     ManagePortfolioAjaxSuccess();
 }
 
+function RemoveJob(id) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
+    //$(".hiddenInput_" + number).remove();
+    ManagePortfolioAjaxSuccess();
+}
+
+function RemoveAcademic(id) {
+    var number = id.split("_")[1];
+    if (!$(this).hasClass("newLinkInput")) {
+        var linksToChange = $(".newLinkInput");
+    }
+    var element = document.getElementById($(id).parent().parent().parent().attr('id'));
+    element.parentNode.removeChild(element);
+    //$(".hiddenInput_" + number).remove();
+    ManagePortfolioAjaxSuccess();
+}
+
 function ManageMediaAjaxSuccess(data) {
     saveButtonPressed = true;
     updateLinks();
@@ -741,6 +763,13 @@ function ManagePortfolioSkillsAjaxFailure(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Something went wrong! Your portfolio has not been updated.'
+    });
+}
+
+function ManagePortfolioCareerAjaxFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Something went wrong! Your career & academics has not been updated.'
     });
 }
 
@@ -843,6 +872,36 @@ function setupHandlebarsHelpers() {
         renderProjectTemplate(template, context);
     });
 
+    $(document).on('click', '#addNewAcademicLink', function () {
+        var academicTemplateSource = $("#academicTemplateScript").html();
+        var template = Handlebars.compile(academicTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenAcademicID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderAcademicTemplate(template, context);
+    });
+
+    $(document).on('click', '#addNewJobLink', function () {
+        var jobTemplateSource = $("#jobTemplateScript").html();
+        var template = Handlebars.compile(jobTemplateSource);
+        //renderTemplate(template, $(this).data('viewmodel'));
+        var linkCount = $(".hiddenJobID").length + 1;
+        var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
+        renderJobTemplate(template, context);
+    });
+
+}
+
+function renderAcademicTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("academicsList").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
+}
+
+function renderJobTemplate(template, data) {
+    var html = template(data);
+    document.getElementById("jobsList").innerHTML += html;
+    InitializeMediaDashboardEventHandlers();
 }
 
 function renderProjectTemplate(template, data) {
