@@ -79,7 +79,7 @@
                                     }
                                     @using (Ajax.BeginForm("SendPasswordResetEmail", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "PasswordResetSuccess(data);", OnFailure = "PasswordResetFailure(data);" }, new { @id = "passwordResetForm" }))
                                     {
-                                        @Html.HiddenFor(x => x.GUID)
+                                        @Html.HiddenFor(x => x.GUID, new { @id = "hiddenGUID" })
                                         @Html.Hidden("UserName", null, new { @id = "notUserName", @class = "hiddenSignInUserName", required = "required" })
                                         @Html.ValidationMessageFor(x => x.UserName)
                                     }
