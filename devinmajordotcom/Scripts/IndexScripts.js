@@ -238,12 +238,6 @@ $(document).ready(function () {
 
     $(".landingPageLink.active").click();
 
-    $(".date").datetimepicker({
-        format: "L",
-        allowInputToggle: true
-        //locale: moment.locale("en-us")
-    });
-
     InitializeEventHandlers();
 
     RefreshTinyMce();
@@ -366,27 +360,12 @@ function InitializeEventHandlers() {
         });
     });
 
-    var items = document.getElementsByClassName('slider-horizontal');
-    while (items.length > 0) {
-        items[0].parentNode.removeChild(items[0]);
-    }
-
-    $('.customSlider').bootstrapSlider({
-        formatter: function (value) {
-            return 'Current value: ' + value + "%";
-        }
-    });
-
     var items = document.getElementsByClassName('selectize-control');
     while (items.length > 0) {
         items[0].parentNode.removeChild(items[0]);
     }
 
     $('input.tags').each(function () {
-        var element = $(this).parent().find('input.tags');
-        var selectized = element.selectize();
-        var control = selectized[0].selectize;
-        control.destroy();
         $(this).selectize({
             plugins: ['remove_button', 'drag_drop'],
             delimiter: ',',
@@ -438,11 +417,25 @@ function InitializeEventHandlers() {
         }
     });
 
+    $('.customSlider.untouched').bootstrapSlider({
+        formatter: function (value) {
+            return 'Current value: ' + value + "%";
+        }
+    });
+
     $(".date").datetimepicker({
         format: "L",
         allowInputToggle: true
         //locale: moment.locale("en-us")
     });
+
+    $(document).on('dp.change', '.date', function (e) {
+        var formatedValue = e.date.format("L");
+        $(this).find(".datetimepicker").val(formatedValue);
+        $(this).find(".datetimepicker").attr("value", formatedValue);
+    });
+
+    $(".untouched").removeClass("untouched");
 
 }
 
@@ -451,6 +444,11 @@ function HideAdminFirstRunModal() {
 }
 
 function RefreshTinyMce() {
+    $(".mce-tinymce").each(function () {
+        var id = $(this).attr("id");
+        var element = document.getElementById(id);
+        element.parentNode.removeChild(element);
+    });
     tinymce.remove();
     tinymce.init({
         setup:function(ed) {
@@ -762,17 +760,13 @@ function setupHandlebarsHelpers() {
     $(document).on('click', '#addNewWorkSkillLink', function () {
         $(".item.active").removeClass("active");
         $(".carousel-indicators li.active").removeClass("active");
-        $(".mce-tinymce").each(function() {
-            var id = $(this).attr("id");
-            var element = document.getElementById(id);
-            element.parentNode.removeChild(element);
-        });
         var workSkillTemplateSource = $("#workSkillTemplateScript").html();
         var template = Handlebars.compile(workSkillTemplateSource);
         //renderTemplate(template, $(this).data('viewmodel'));
         var linkCount = $(".hiddenWorkSkillID").length + 1;
         var context = { newLinkCounter: linkCount, newID: (linkCount - 1) };
         renderWorkSkillTemplate(template, context);
+        RefreshTinyMce();
     });
 
     $(document).on('click', '#addNewLanguageSkillLink', function () {
