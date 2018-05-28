@@ -64,4 +64,22 @@ namespace devinmajordotcom.ViewModels
 
     }
 
+    public class ServerDataViewModel
+    {
+
+        public List<SiteLinkViewModel> LandingPageBannerLinks { get; set; }
+
+        public List<GraphViewModel> GraphList { get; set; }
+
+    }
+
+    public class GraphViewModel
+    {
+
+        public List<string> Labels { get; set; }
+
+        public List<double> Values { get; set; }
+
+    }
+
 }

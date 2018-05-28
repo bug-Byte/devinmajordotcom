@@ -2,8 +2,8 @@
 var saveButtonPressed = false;
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-var canvas = document.querySelector("canvas");
-var ctx;
+var canvas = document.getElementById('particles');
+var ctx1;
 
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -17,7 +17,7 @@ window.requestAnimFrame = (function () {
 if(canvas != null) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx = canvas.getContext("2d");
+    ctx1 = canvas.getContext("2d");
     
 }
 
@@ -28,7 +28,7 @@ var lastTime = Date.now();
 var mouseX = -1e9, mouseY = -1e9;
 
 function loop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx1.clearRect(0, 0, canvas.width, canvas.height);
     update();
     draw();
     requestAnimFrame(loop);
@@ -51,12 +51,12 @@ function Ball(startX, startY, startVelX, startVelY) {
         this.x += this.vel.x;
         this.y += this.vel.y;
     };
-    this.draw = function (ctx, can) {
-        ctx.beginPath();
-        ctx.globalAlpha = .4;
-        ctx.fillStyle = '#448fda';
-        ctx.arc((0.5 + this.x) | 0, (0.5 + this.y) | 0, 3, 0, TAU, false);
-        ctx.fill();
+    this.draw = function (ctx1, can) {
+        ctx1.beginPath();
+        ctx1.globalAlpha = .4;
+        ctx1.fillStyle = '#448fda';
+        ctx1.arc((0.5 + this.x) | 0, (0.5 + this.y) | 0, 3, 0, TAU, false);
+        ctx1.fill();
     }
 }
 
@@ -86,25 +86,25 @@ function distMouse(ball) {
 }
 
 function draw() {
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = '#0B1C1E';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx1.globalAlpha = 1;
+    ctx1.fillStyle = '#0B1C1E';
+    ctx1.fillRect(0, 0, canvas.width, canvas.height);
     for (var index = 0; index < balls.length; index++) {
         var ball = balls[index];
-        ball.draw(ctx, canvas);
-        ctx.beginPath();
+        ball.draw(ctx1, canvas);
+        ctx1.beginPath();
         for (var index2 = balls.length - 1; index2 > index; index2 += -1) {
             var ball2 = balls[index2];
             var dist = Math.hypot(ball.x - ball2.x, ball.y - ball2.y);
             if (dist < 100) {
-                ctx.strokeStyle = "#448fda";
-                ctx.globalAlpha = 1 - (dist > 100 ? .8 : dist / 150);
-                ctx.lineWidth = "2px";
-                ctx.moveTo((0.5 + ball.x) | 0, (0.5 + ball.y) | 0);
-                ctx.lineTo((0.5 + ball2.x) | 0, (0.5 + ball2.y) | 0);
+                ctx1.strokeStyle = "#448fda";
+                ctx1.globalAlpha = 1 - (dist > 100 ? .8 : dist / 150);
+                ctx1.lineWidth = "2px";
+                ctx1.moveTo((0.5 + ball.x) | 0, (0.5 + ball.y) | 0);
+                ctx1.lineTo((0.5 + ball2.x) | 0, (0.5 + ball2.y) | 0);
             }
         }
-        ctx.stroke();
+        ctx1.stroke();
     }
 }
 
@@ -215,6 +215,10 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on("click", "#goBackToServer", function () {
+        hideServerGraphs();
+    });
+
     $(document).on("click", "#mainLogin", function () {
         $("#LoginModal").modal();
     });
@@ -243,6 +247,24 @@ $(document).ready(function () {
     RefreshTinyMce();
 
 });
+
+function showServerGraphs(data) {
+    $("#server").hide();
+    $("#mainContainer").append(data);
+}
+
+function hideServerGraphs() {
+    var el = document.getElementById("serverGraphs");
+    el.parentNode.removeChild(el);
+    $("#server").fadeIn(500);
+}
+
+function hideShowGraphFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'View could not be changed at this time. Please try again!'
+    });
+}
 
 function ResetActiveImage(el) {
     $(".BackgroundImage").attr("activeimage", false);

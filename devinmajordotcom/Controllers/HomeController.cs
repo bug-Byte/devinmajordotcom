@@ -47,6 +47,13 @@ namespace devinmajordotcom.Controllers
             myHomeService.SetUserConfigViewModel(viewModel);
         }
 
+        [HttpGet]
+        public ActionResult _ServerStatusGraphs()
+        {
+            var serverData = landingPageService.GetServerData();
+            return PartialView(serverData);
+        }
+
         public ActionResult _ApplicationManager()
         {
             ViewBag.Title = "D3V!N M@J0R";

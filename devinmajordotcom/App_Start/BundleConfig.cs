@@ -91,8 +91,11 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/bootstrap-colorpicker.js",
                 "~/Scripts/bootstrap-slider.js",
                 "~/Content/Selectize/js/standalone/selectize.js",
-                "~/Scripts/Chart.js",
                 "~/Scripts/IndexScripts.js"
+            ));            
+
+            bundles.Add(new ScriptBundle("~/bundles/chartScripts").Include(
+                "~/Scripts/Chart.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/tinymce/tinymceScripts").Include(

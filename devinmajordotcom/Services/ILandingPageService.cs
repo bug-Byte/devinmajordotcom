@@ -15,6 +15,8 @@ namespace devinmajordotcom.Services
 
         ApplicationConfigViewModel GetAppConfigData(Security_User admin = null);
 
+        ServerDataViewModel GetServerData(string type = null, string range = null);
+
         void ManageLandingPage(MainLandingPageViewModel viewModel);
 
         List<SiteLinkViewModel> GetMainSiteLinks(bool isRetrievingSettings = false);

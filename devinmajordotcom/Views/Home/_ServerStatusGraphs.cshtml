@@ -1,0 +1,64 @@
+﻿@model devinmajordotcom.ViewModels.ServerDataViewModel
+@{
+    var config = Model.LandingPageBannerLinks.FirstOrDefault(x => x.IsEnabled && x.URL == "#server");
+    var lineCharts = new List<LineChart>();
+
+    foreach(var graph in Model.GraphList)
+    {
+        var chart = new LineChart();
+        chart.ComplexData.Labels.AddRange(graph.Labels);
+        var data = new ComplexDataset {
+            Data = graph.Values,
+            Label = "My First dataset",
+            FillColor = "rgba(220,220,220,0.2)",
+            StrokeColor = "rgba(220,220,220,1)",
+            PointColor = "rgba(220,220,220,1)",
+            PointStrokeColor = "#fff",
+            PointHighlightFill = "#fff",
+            PointHighlightStroke = "rgba(220,220,220,1)",
+        };
+        chart.ComplexData.Datasets.Add(data);
+        lineCharts.Add(chart);
+    }
+    var count = 0;
+}
+
+<div class="inner cover" id="serverGraphs">
+
+    @if (config != null)
+    {
+        <h2 class="title"><strong>@config.Description</strong></h2>
+        <hr>
+        <p style="color: #71cef5;">@config.Directive</p>
+        <hr>
+    }
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <button class="btn btn-primary" id="goBackToServer"><span class="glyphicon glyphicon-stats"></span>&nbsp;Hide Graphs</button>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            @foreach (var chart in lineCharts)
+            {
+                <canvas id="myCanvas_@count" style="width:100% !important; height:100% !important;" width="400" height="400"></canvas>
+                count++;
+            }
+        </div>
+    </div>
+
+    @{ 
+        count = 0;
+    }
+
+    @foreach (var chart in lineCharts)
+    {
+        @Html.CreateChart("myCanvas_" + count, chart)
+        count++;
+    }
+
+</div>

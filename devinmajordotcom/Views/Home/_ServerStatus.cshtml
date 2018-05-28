@@ -10,7 +10,16 @@
         <hr>
         <p style="color: #71cef5;">@config.Directive</p>
         <hr>
-    
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                @{
+                    var linkText = "<span class='glyphicon glyphicon-stats'></span>&nbsp;Show Graphs";
+                    var actionLink = Ajax.ActionLink("REPLACE", "_ServerStatusGraphs", "Home", null, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "showServerGraphs(data)", OnFailure = "hideShowGraphFailure" }, new { data_content = linkText, @id = "showServerGraphs", @class = "btn btn-primary", @style = "" });
+                    @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                }
+            </div>
+        </div>
+        <br/>
         <div class="row">
         
             <div id="usageCounters"></div>
@@ -22,6 +31,7 @@
             <div id="driveCounters"></div>
 
         </div>
+
     }
 
 </div>
