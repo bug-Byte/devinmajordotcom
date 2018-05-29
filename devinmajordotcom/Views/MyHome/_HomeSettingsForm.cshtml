@@ -14,6 +14,21 @@
             @class = "btn btn-default",
             @onClick = "ResetActiveImage(this)"
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+
+    var updateCredentialsButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Background Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-default",
+            @onClick = "ResetActiveImage(this)"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 }
 @using (Html.BeginForm("_HomeSettingsForm", "MyHome"))
 {
@@ -253,10 +268,13 @@
         }
 
         <div class="row">
-            <div class="col-sm-6 text-center" style="margin-bottom:5px;">
+            <div class="col-sm-4 text-center" style="margin-bottom:5px;">
                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save"></span>&nbsp;Save Settings</button>
             </div>
-            <div class="col-sm-6 text-center" style="margin-bottom:5px;">
+            <div class="col-sm-4 text-center" style="margin-bottom:5px;">
+                <button type="button" onclick="UpdateAccountModal();" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update Account</button>
+            </div>
+            <div class="col-sm-4 text-center" style="margin-bottom:5px;">
                 @Html.Raw(cleanLink)
             </div>
         </div>

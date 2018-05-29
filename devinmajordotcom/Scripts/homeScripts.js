@@ -15,6 +15,10 @@ function UpdateCredentialsFailure() {
     });
 }
 
+function UpdateAccountModal() {
+    InitializeModal('#formModalUpdateCredentials', 'Update Account Credentials');
+}
+
 function removeDisable() {
     $('body').data('loading-disabled', false);
 }
