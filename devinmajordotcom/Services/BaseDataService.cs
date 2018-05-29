@@ -125,18 +125,23 @@ namespace devinmajordotcom.Services
             return results;
         }
 
+        public bool DoesEmailAccountMatchUserName(string emailString, string userString)
+        {
+            return db.Security_Users.Any(x => x.EmailAddress == emailString && x.UserName == userString);
+        }
+
         public bool DoesUserExist(string userString)
         {
             return !string.IsNullOrEmpty(userString) && db.Security_Users.Any(x => x.UserName == userString || x.EmailAddress == userString);
         }
 
-        public bool IsEmailConfirmed(string emailString, bool IsSigningUp)
+        public bool IsEmailConfirmed(string emailString)
         {
             if (string.IsNullOrEmpty(emailString))
             {
                 return false;
             }
-            return IsSigningUp || db.Security_Users.Any(x => (x.EmailAddress == emailString || x.UserName == emailString) && (x.IsEmailConfirmed || x.IsAdmin));
+            return db.Security_Users.Any(x => (x.EmailAddress == emailString || x.UserName == emailString) && (x.IsEmailConfirmed || x.IsAdmin));
         }
 
         public void UpdateCurrentUser(UserViewModel viewModel)
@@ -147,6 +152,7 @@ namespace devinmajordotcom.Services
                 user.EmailAddress = viewModel.EmailAddress;
                 user.IsActive = viewModel.UserIsActive;
                 user.IsAdmin = viewModel.UserIsAdmin;
+                user.IsEmailConfirmed = false;
                 user.UserName = string.IsNullOrEmpty(viewModel.UserName) ? viewModel.EmailAddress : viewModel.UserName;
                 user.Password = SecurityHelper.HashSHA1(viewModel.Password + user.Guid.ToString());
                 db.SaveChanges();
@@ -174,7 +180,7 @@ namespace devinmajordotcom.Services
                 Guid = (Guid)userGuid,
                 IsActive = true,
                 IsAdmin = IsUserToAddAnAdmin,
-                IsEmailConfirmed = IsUserToAddAnAdmin
+                IsEmailConfirmed = false
             };
 
             db.Security_Users.Add(newUser);
@@ -399,11 +405,6 @@ namespace devinmajordotcom.Services
             user.IsEmailConfirmed = true;
             user.IsEmailConfirmationSent = false;
             db.SaveChanges();
-        }
-
-        public bool IsPasswordConfirmed(string pass1, string pass2)
-        {
-            return pass1 == pass2;
         }
 
     }

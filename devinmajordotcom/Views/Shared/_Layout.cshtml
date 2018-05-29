@@ -48,7 +48,7 @@
                     <ul class="nav masthead-nav" style="float:none;">
                         @if (bannerLinks != null && bannerLinks.Count > 0)
                         {
-                            if (userViewModel.UserIsAdmin)
+                            if (userViewModel.UserIsAdmin && !string.IsNullOrEmpty(userViewModel.EmailAddress) && userViewModel.IsEmailConfirmed) 
                             {
                                 foreach (var link in bannerLinks.Where(x => x.IsEnabled).OrderBy(x => x.Order))
                                 {

@@ -119,14 +119,8 @@ namespace devinmajordotcom.Controllers
         public ActionResult UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
-            if (viewModel.IsSigningUp || !viewModel.UserIsAdmin)
-            {
-                SendConfirmationEmail(viewModel);
-            }
-            else
-            {
-                Login(viewModel);
-            }
+            SendConfirmationEmail(viewModel);
+            Logout();
             return RedirectToAction("Index");
         }
 

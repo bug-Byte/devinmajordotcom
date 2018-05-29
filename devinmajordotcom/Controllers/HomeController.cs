@@ -61,7 +61,7 @@ namespace devinmajordotcom.Controllers
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
-            Login(viewModel, true);
+            SendConfirmationEmail(viewModel);
         }
 
         [HttpGet]
@@ -75,8 +75,6 @@ namespace devinmajordotcom.Controllers
         {
             landingPageService.RemoveSiteLinkById(ID);
         }
-
-        
 
     }
 }

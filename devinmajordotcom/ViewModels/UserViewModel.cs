@@ -14,7 +14,7 @@ namespace devinmajordotcom.ViewModels
         public int UserID { get; set; }
 
         [DisplayName("User Name: ")]
-        [Remote("VerifyUserExists", "Validation", AdditionalFields = "IsSigningUp,IsUpdatingCredentials")]
+        [Remote("VerifyUserExists", "Validation", AdditionalFields = "IsSigningUp,IsUpdatingCredentials,EmailAddress")]
         public string UserName { get; set; }
 
         [Required]

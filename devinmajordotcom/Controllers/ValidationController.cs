@@ -12,45 +12,59 @@ namespace devinmajordotcom.Controllers
     {
 
         [HttpGet]
-        public ActionResult VerifyUserExists(string UserName, bool IsSigningUp, bool IsUpdatingCredentials)
+        public ActionResult VerifyUserExists(string UserName, bool IsSigningUp, bool IsUpdatingCredentials, string EmailAddress)
         {
             var result1 = landingPageService.DoesUserExist(UserName);
-            var result2 = landingPageService.IsEmailConfirmed(UserName, IsSigningUp);
-            if (IsSigningUp)
+            var result2 = landingPageService.IsEmailConfirmed(UserName);
+            if (IsSigningUp || IsUpdatingCredentials)
             {
-                return result1 ? Json($"The user \"{UserName}\" already exists in the system.", JsonRequestBehavior.AllowGet) : Json(true, JsonRequestBehavior.AllowGet);
+                if (result1)
+                {
+                    if (IsUpdatingCredentials)
+                    {
+                        var result3 = landingPageService.DoesEmailAccountMatchUserName(EmailAddress, UserName);
+                        if(!result3)
+                        {
+                            return Json($"The user \"{UserName}\" already exists in the system.", JsonRequestBehavior.AllowGet);
+                        }
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                    return Json($"The user \"{UserName}\" already exists in the system.", JsonRequestBehavior.AllowGet);
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            if (!result2 && result1)
+            if (result1)
             {
-                return Json($"The email address for this account has not been confirmed yet. Check your inbox!", JsonRequestBehavior.AllowGet);
+                if(result1 && !result2)
+                {
+                    return Json($"The email address for this account has not been confirmed yet. Check your inbox!", JsonRequestBehavior.AllowGet);
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            return result1 ? Json(true, JsonRequestBehavior.AllowGet) : Json($"The user \"{UserName}\" does not exist in the system.", JsonRequestBehavior.AllowGet);
+            return Json($"The user \"{UserName}\" does not exist in the system.", JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult VerifyEmail(string EmailAddress, bool IsSigningUp, bool IsUpdatingCredentials)
         {
             var result1 = landingPageService.DoesUserExist(EmailAddress);
-            var result2 = landingPageService.IsEmailConfirmed(EmailAddress, IsSigningUp);
-            if (result2)
+            var result2 = landingPageService.IsEmailConfirmed(EmailAddress);
+            if(result1 && IsSigningUp)
             {
-                return result1 ? Json($"The email address \"{EmailAddress}\" is already in use!", JsonRequestBehavior.AllowGet) : Json(true, JsonRequestBehavior.AllowGet);
+                return Json($"The email address \"{EmailAddress}\" is already in use!", JsonRequestBehavior.AllowGet);
             }
-            return Json("Your account has not been activated! Please confirm your email address before signing in.", JsonRequestBehavior.AllowGet);
-
+            if (!result2 && !IsUpdatingCredentials && !IsSigningUp)
+            {
+                return Json("Your account has not been activated! Please confirm your email address before signing in.", JsonRequestBehavior.AllowGet);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult VerifyPassword(string ConfirmedPassword, string Password)
         {
-/*            var result1 = landingPageService.DoesPasswordMatchOldPassword(ConfirmedPassword)*/;
-            var result2 = landingPageService.IsPasswordConfirmed(ConfirmedPassword, Password);
-            //if(result1)
-            //{
-            //    return Json("The password you have typed matches an older password. Please try again!", JsonRequestBehavior.AllowGet);
-            //}
-            return result2 ? Json(true, JsonRequestBehavior.AllowGet) : Json("The passwords you have typed do not match. Please type carefully!", JsonRequestBehavior.AllowGet);
-
+            var result = ConfirmedPassword == Password;
+            return result ? Json(true, JsonRequestBehavior.AllowGet) : Json("The passwords you have typed do not match. Please type carefully!", JsonRequestBehavior.AllowGet);
         }
 
     }
