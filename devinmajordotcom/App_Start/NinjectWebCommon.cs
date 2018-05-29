@@ -69,6 +69,7 @@ namespace devinmajordotcom.App_Start
             kernel.Bind<IPortfolioService>().To<PortfolioService>();
             kernel.Bind<IMediaDashboardService>().To<MediaDashboardService>();
             kernel.Bind<IMyHomeService>().To<MyHomeService>();
+            kernel.Bind<IHardwareMonitorService>().To<HardwareMonitorService>();
         }        
     }
 }

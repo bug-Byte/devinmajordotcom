@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using devinmajordotcom.Models;
+using devinmajordotcom.ViewModels;
+using System;
 
 namespace devinmajordotcom.Services
 {
@@ -46,6 +48,53 @@ namespace devinmajordotcom.Services
             db.Security_HardwarePerformances.AddRange(itemsToAdd);
             db.SaveChanges();
         }
-        
+
+        public ServerDataViewModel GetServerData(string type = null, string range = null)
+        {
+            var types = db.Security_HardwareTypes.ToList();
+            var viewModel = new ServerDataViewModel()
+            {
+                GraphList = new List<GraphViewModel>()
+            };
+
+            if (type == null && range == null)
+            {
+                foreach (var hardwareType in types)
+                {
+                    var newGraph = new GraphViewModel()
+                    {
+                        Labels = new List<string>(),
+                        Values = new List<double>()
+                    };
+                    for (var i = 60; i > 0; i--)
+                    {
+                        newGraph.Labels.Add(i.ToString());
+                    }
+                    var timeSpan = DateTime.Now.AddMinutes(-1);
+                    var values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == hardwareType.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList();
+                    newGraph.Values.AddRange(values);
+                    viewModel.GraphList.Add(newGraph);
+                }
+            }
+
+
+            return viewModel;
+        }
+
+        public List<double> GetHardwareHistory(string type)
+        {
+            var values = new List<double>();
+            var types = db.Security_HardwareTypes.ToList();
+
+            var typeToReturn = types.FirstOrDefault(x => x.Name.Contains(type));
+            
+            if(typeToReturn != null)
+            {
+                values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList();
+            }
+
+            return values;
+        }
+
     }
 }

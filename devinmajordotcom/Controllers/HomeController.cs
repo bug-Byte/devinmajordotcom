@@ -51,6 +51,7 @@ namespace devinmajordotcom.Controllers
         public ActionResult _ServerStatusGraphs()
         {
             var serverData = landingPageService.GetServerData();
+            serverData.LandingPageBannerLinks = landingPageService.GetMainBannerLinks();
             return PartialView(serverData);
         }
 

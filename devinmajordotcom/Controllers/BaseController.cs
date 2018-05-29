@@ -26,6 +26,7 @@ namespace devinmajordotcom.Controllers
         public IPortfolioService portfolioService;
         public IMediaDashboardService mediaDashboardService;
         public IMyHomeService myHomeService;
+        public IHardwareMonitorService hardwareService;
 
         protected RedirectResult RedirectToAction<T>(Expression<Action<T>> action, RouteValueDictionary values = null) where T : Controller
         {
@@ -38,6 +39,7 @@ namespace devinmajordotcom.Controllers
             portfolioService = DependencyResolver.Current.GetService<IPortfolioService>();
             mediaDashboardService = DependencyResolver.Current.GetService<IMediaDashboardService>();
             myHomeService = DependencyResolver.Current.GetService<IMyHomeService>();
+            hardwareService = DependencyResolver.Current.GetService<IHardwareMonitorService>();
         }
 
         [ValidateInput(false)]

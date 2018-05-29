@@ -62,3 +62,62 @@
     }
 
 </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $.connection.hub.stop();
+        ConnectToSignalRPerformanceHistoryHub();
+
+    });
+
+    function ConnectToSignalRPerformanceHistoryHub() {
+
+        debugger;
+
+        var performanceHistoryHub = $.connection.performanceHistoryHub;
+
+        performanceHistoryHub.client.updatePerformanceHistory = function (cpuList, nextCpuValues, nextRamValues, temps) {
+
+            debugger;
+
+            myCanvas_0_chart.clear();
+            myCanvas_1_chart.clear();
+            myCanvas_2_chart.clear();
+
+            myCanvas_0_chart.addData(nextCpuValues);
+
+            myCanvas_1_chart.addData(nextRamValues);
+
+            myCanvas_2_chart.addData(temps);
+
+            //if (firstRun) {
+
+
+
+            //} else {
+
+
+
+            //}
+
+            var counter1 = 0;
+
+            firstRun = false;
+
+        };
+
+        $.connection.hub.start().done(function () {
+            debugger;
+            performanceHistoryHub.server.SendPerformanceHistory();
+        }).fail(function (reason) {
+            $("#ajaxAlertContainer").bootsnack({
+                alertType: 'error',
+                message: 'SignalR is not running.'
+            });
+        });
+
+    }
+
+</script>

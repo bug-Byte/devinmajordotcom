@@ -18,11 +18,14 @@ namespace devinmajordotcom.Services
         protected IPortfolioService portfolioService;
         protected IMediaDashboardService mediaDashboardService;
         protected IMyHomeService myHomeService;
-        public LandingPageService(IPortfolioService PortfolioService, IMediaDashboardService MediaDashboardService, IMyHomeService MyHomeService)
+        protected IHardwareMonitorService hardwareService;
+
+        public LandingPageService(IPortfolioService PortfolioService, IMediaDashboardService MediaDashboardService, IMyHomeService MyHomeService, IHardwareMonitorService HardwareService)
         {
             portfolioService = PortfolioService;
             mediaDashboardService = MediaDashboardService;
             myHomeService = MyHomeService;
+            hardwareService = HardwareService;
         }
 
         public MainLandingPageViewModel GetLandingPageViewModel()
@@ -55,6 +58,11 @@ namespace devinmajordotcom.Services
             };
         }
 
+        public ServerDataViewModel GetServerData(string type = null, string range = null)
+        {
+            return hardwareService.GetServerData(type, range);
+        }
+
         public ApplicationConfigViewModel GetAppConfigData(Security_User admin = null)
         {
             var results = new ApplicationConfigViewModel()
@@ -72,39 +80,6 @@ namespace devinmajordotcom.Services
             };
             results.CurrentMediaDashboardData.SidebarLinks = GetMediaSiteLinks(true);
             return results;
-        }
-
-        public ServerDataViewModel GetServerData(string type = null, string range = null)
-        {
-            var types = db.Security_HardwareTypes.ToList();
-            var viewModel = new ServerDataViewModel()
-            {
-                LandingPageBannerLinks = GetMainBannerLinks(),
-                GraphList = new List<GraphViewModel>()
-            };
-
-            if (type == null && range == null)
-            {
-                foreach(var hardwareType in types)
-                {
-                    var newGraph = new GraphViewModel()
-                    {
-                        Labels = new List<string>(),
-                        Values = new List<double>()
-                    };
-                    for(var i = 60; i > 0; i--)
-                    {
-                        newGraph.Labels.Add(i.ToString());
-                    }
-                    var timeSpan = DateTime.Now.AddMinutes(-1);
-                    var values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == hardwareType.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList();
-                    newGraph.Values.AddRange(values);
-                    viewModel.GraphList.Add(newGraph);
-                }
-            }
-
-
-            return viewModel;
         }
 
         public void ManageLandingPage(MainLandingPageViewModel viewModel)

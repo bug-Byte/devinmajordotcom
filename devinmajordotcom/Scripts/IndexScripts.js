@@ -257,6 +257,8 @@ function hideServerGraphs() {
     var el = document.getElementById("serverGraphs");
     el.parentNode.removeChild(el);
     $("#server").fadeIn(500);
+    $.connection.hub.stop();
+    ConnectToSignalRPerformanceHub();
 }
 
 function hideShowGraphFailure() {
