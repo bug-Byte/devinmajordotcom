@@ -12,7 +12,7 @@ namespace devinmajordotcom.Controllers
     {
 
         [HttpGet]
-        public ActionResult VerifyUserExists(string UserName, bool IsSigningUp)
+        public ActionResult VerifyUserExists(string UserName, bool IsSigningUp, bool IsUpdatingCredentials)
         {
             var result1 = landingPageService.DoesUserExist(UserName);
             var result2 = landingPageService.IsEmailConfirmed(UserName, IsSigningUp);
@@ -28,7 +28,7 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpGet]
-        public ActionResult VerifyEmail(string EmailAddress, bool IsSigningUp)
+        public ActionResult VerifyEmail(string EmailAddress, bool IsSigningUp, bool IsUpdatingCredentials)
         {
             var result1 = landingPageService.DoesUserExist(EmailAddress);
             var result2 = landingPageService.IsEmailConfirmed(EmailAddress, IsSigningUp);

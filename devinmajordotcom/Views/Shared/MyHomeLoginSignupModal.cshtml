@@ -39,6 +39,7 @@
                                         @Html.HiddenFor(x => x.GUID, new { @id = "hiddenGUID1" })
                                         @Html.HiddenFor(x => x.UserID)
                                         @Html.Hidden("IsSigningUp", "False", new { @id = "IsSigningUp1" })
+                                        @Html.Hidden("IsUpdatingCredentials", "False", new { @id = "IsUpdatingCredentials1" })
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Email Address or Username: @*@Html.LabelFor(x => x.UserName)*@
@@ -95,6 +96,7 @@
                                         @Html.HiddenFor(x => x.UserID, new { @id="UserID1" })
                                         @Html.HiddenFor(x => x.GUID, new { @id = "hiddenGUID3" })
                                         @Html.Hidden("IsSigningUp", "True", new { @id = "IsSigningUp2" })
+                                        @Html.Hidden("IsUpdatingCredentials", "False", new { @id = "IsUpdatingCredentials2" })
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.EmailAddress)

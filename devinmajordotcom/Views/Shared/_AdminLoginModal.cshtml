@@ -36,6 +36,7 @@
                                         @Html.HiddenFor(x => x.UserID)
                                         @Html.HiddenFor(x => x.GUID)
                                         @Html.Hidden("IsSigningUp", "False")
+                                        @Html.Hidden("IsUpdatingCredentials", "False")
                                         <div class="row">
                                             <div class="col-sm-12 text-left">
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Email Address or Username: @*@Html.LabelFor(x => x.UserName)*@

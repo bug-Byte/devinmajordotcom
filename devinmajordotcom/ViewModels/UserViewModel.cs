@@ -14,12 +14,12 @@ namespace devinmajordotcom.ViewModels
         public int UserID { get; set; }
 
         [DisplayName("User Name: ")]
-        [Remote("VerifyUserExists", "Validation", AdditionalFields = "IsSigningUp")]
+        [Remote("VerifyUserExists", "Validation", AdditionalFields = "IsSigningUp,IsUpdatingCredentials")]
         public string UserName { get; set; }
 
         [Required]
         [DisplayName("Email Address * : ")]
-        [Remote("VerifyEmail", "Validation", AdditionalFields = "IsSigningUp")]
+        [Remote("VerifyEmail", "Validation", AdditionalFields = "IsSigningUp,IsUpdatingCredentials")]
         public string EmailAddress { get; set; }
 
         [Required]
@@ -46,6 +46,9 @@ namespace devinmajordotcom.ViewModels
 
         [Required]
         public bool IsSigningUp { get; set; }
+
+        [Required]
+        public bool IsUpdatingCredentials { get; set; }
 
         public bool IsConfirmationEmailSent { get; set; }
 
