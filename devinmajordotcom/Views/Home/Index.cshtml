@@ -16,6 +16,7 @@
 
     @if (Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
     {
+        Model.CurrentApplicationConfig.CurrentUserViewModel = Model.CurrentUserViewModel;
         @Html.Partial("_ApplicationManager", Model.CurrentApplicationConfig)
     }
 

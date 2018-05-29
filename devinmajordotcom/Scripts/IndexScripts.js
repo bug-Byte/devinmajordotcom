@@ -288,6 +288,20 @@ function SettingsUpdate(data) {
     $('.preloader').fadeOut(1000); // set duration in brackets   
 }
 
+function UpdateCredentialsSuccess() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your account was successfully updated!'
+    });
+}
+
+function UpdateCredentialsFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your account was not updated! Please try again.'
+    });
+}
+
 function UpdateFavoritesSuccess() {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
