@@ -119,8 +119,11 @@ namespace devinmajordotcom.Controllers
         public ActionResult UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
-            SendConfirmationEmail(viewModel);
             Logout();
+            if (viewModel.IsUpdatingCredentials)
+            {
+                return new EmptyResult();
+            }
             return RedirectToAction("Index");
         }
 

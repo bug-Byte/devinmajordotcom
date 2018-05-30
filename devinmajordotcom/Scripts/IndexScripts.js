@@ -131,6 +131,22 @@ if (!ms_ie) {
     }
 }
 
+$(document).on({
+
+    ajaxStart: function () {
+        $('.spinner').fadeIn(500);
+    },
+
+    ajaxStop: function () {
+        $('.spinner').fadeOut(500);
+    },
+
+    ajaxComplete: function () {
+        $('.spinner').fadeOut(500);
+    }
+
+});
+
 $(document).ready(function () {
 
     ConnectToSignalRPerformanceHub();
@@ -207,12 +223,6 @@ $(document).ready(function () {
     $(document).on("click", ".portfolioPanelHeading", function () {
         var toggler = $(this).children("span");
         toggler.toggleClass("glyphicon-collapse-up");
-    });
-
-    $(document).on("click", ".modalSubmit", function () {
-        if ($(".loginForm").valid()) {
-            $('.spinner').fadeIn(500);
-        }
     });
 
     $(document).on("click", "#mainLogin", function () {
@@ -328,13 +338,8 @@ function SettingsUpdateFailure() {
     });
 }
 
-function ShowSpinner() {
-    $('.spinner').fadeIn(500);
-}
-
 function PasswordResetSuccess(data) {
     if (data == "fail") {
-        $('.spinner').fadeOut(500);
         $("#ajaxAlertContainer").bootsnack({
             alertType: 'error',
             message: 'Failed to reset your password. Please try again!'
@@ -348,7 +353,6 @@ function PasswordResetSuccess(data) {
 }
 
 function PasswordResetFailure(data) {
-    $('.spinner').fadeOut(500);
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Failed to reset your password. Please try again!'
@@ -547,7 +551,6 @@ function LoginFailure() {
     var errors = { Password: "Could not log in. You are either not an administrator, or you typed your credentials incorrectly. Please try again!" };
     var $validator = $(".loginForm").validate();
     $validator.showErrors(errors);
-    $('.spinner').fadeOut(500);
 }
 
 function AjaxSuccess(data) {

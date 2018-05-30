@@ -55,7 +55,6 @@ function ManageCommentsAjaxFailure() {
 
 function PasswordResetSuccess(data) {
     if (data == "fail") {
-        $('.spinner').fadeOut(500);
         $("#ajaxAlertContainer").bootsnack({
             alertType: 'error',
             message: 'Failed to reset your password. Please try again!'
@@ -68,12 +67,7 @@ function PasswordResetSuccess(data) {
     });
 }
 
-function ShowSpinner() {
-    $('.spinner').fadeIn(500);
-}
-
 function PasswordResetFailure(data) {
-    $('.spinner').fadeOut(500);
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Failed to reset your password. Please try again!'
@@ -210,6 +204,22 @@ function MomentAllDateTimes() {
 
 }
 
+$(document).on({
+
+    ajaxStart: function () {
+        $('.spinner').fadeIn(500);
+    },
+
+    ajaxStop: function () {
+        $('.spinner').fadeOut(500);
+    },
+
+    ajaxComplete: function () {
+        $('.spinner').fadeOut(500);
+    }
+
+});
+
 $(document).ready(function () {
 
     "use strict";
@@ -238,7 +248,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".modalSubmit", function () {
         if ($(".loginForm").valid()) {
-            $('.spinner').fadeIn(500);
         }
     });
 
