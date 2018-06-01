@@ -122,7 +122,12 @@ namespace devinmajordotcom.Controllers
             Logout();
             if (viewModel.IsUpdatingCredentials)
             {
+                SendUpdateCredentialsEmail(viewModel);
                 return new EmptyResult();
+            }
+            if (viewModel.IsSigningUp)
+            {
+                SendConfirmationEmail(viewModel);
             }
             return RedirectToAction("Index");
         }

@@ -907,6 +907,7 @@
     <Content Include="Views\Portfolio\_NewAcademic.cshtml" />
     <Content Include="Views\Portfolio\_NewJob.cshtml" />
     <Content Include="Views\Shared\_UpdateCredentials.cshtml" />
+    <Content Include="Views\Shared\UpdateCredentialsEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -26,8 +26,10 @@ namespace devinmajordotcom
 			EmailConfirmation = 1,
 			[Display(Name="Password Reset")]
 			PasswordReset = 2,
+			[Display(Name="Update Credentials")]
+			UpdateCredentials = 3,
 			[Display(Name="Other")]
-			Other = 3,
+			Other = 4,
 		}
 	}
 }

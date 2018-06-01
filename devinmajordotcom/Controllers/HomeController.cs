@@ -61,7 +61,14 @@ namespace devinmajordotcom.Controllers
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
             landingPageService.UpdateCurrentUser(viewModel);
-            SendConfirmationEmail(viewModel);
+            if (viewModel.IsSigningUp)
+            {
+                SendConfirmationEmail(viewModel);
+            }
+            else if (viewModel.IsUpdatingCredentials)
+            {
+                SendUpdateCredentialsEmail(viewModel);
+            }
         }
 
         [HttpGet]
