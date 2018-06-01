@@ -20,6 +20,8 @@ namespace devinmajordotcom.Services
 
         bool DoesEmailAccountMatchUserName(string emailString, string userString);
 
+        bool DoesFormEmailMatchRecordEmail(UserViewModel viewModel);
+
         bool IsEmailConfirmed(string emailString);
 
         UserViewModel LookupUser(string userString);

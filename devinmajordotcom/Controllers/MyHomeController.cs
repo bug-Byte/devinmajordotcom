@@ -118,11 +118,20 @@ namespace devinmajordotcom.Controllers
 
         public ActionResult UpdateCurrentUser(UserViewModel viewModel)
         {
+            var doesEmailMatchAccount = landingPageService.DoesFormEmailMatchRecordEmail(viewModel);
             landingPageService.UpdateCurrentUser(viewModel);
-            Logout();
+            
             if (viewModel.IsUpdatingCredentials)
             {
-                SendUpdateCredentialsEmail(viewModel);
+                if(!doesEmailMatchAccount)
+                {
+                    SendConfirmationEmail(viewModel);
+                    Logout();
+                }
+                else
+                {
+                    SendUpdateCredentialsEmail(viewModel);
+                }
                 return new EmptyResult();
             }
             if (viewModel.IsSigningUp)

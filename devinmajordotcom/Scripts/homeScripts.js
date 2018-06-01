@@ -2,6 +2,7 @@ var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fr
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
 function UpdateCredentialsSuccess() {
+    $("#formModalUpdateCredentials").modal('toggle');
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your account was successfully updated!'

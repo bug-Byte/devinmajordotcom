@@ -56,6 +56,11 @@ namespace devinmajordotcom.Services
             }
         }
 
+        public bool DoesFormEmailMatchRecordEmail(UserViewModel viewModel)
+        {
+            return db.Security_Users.Any(x => x.Id == viewModel.UserID && x.EmailAddress == viewModel.EmailAddress);
+        }
+
         public void EmailSent(ContactEmailViewModel viewModel)
         {
             var record = new Security_Email()
@@ -152,7 +157,7 @@ namespace devinmajordotcom.Services
                 user.EmailAddress = viewModel.EmailAddress;
                 user.IsActive = viewModel.UserIsActive;
                 user.IsAdmin = viewModel.UserIsAdmin;
-                user.IsEmailConfirmed = false;
+                user.IsEmailConfirmed = viewModel.UserIsAdmin;
                 user.UserName = string.IsNullOrEmpty(viewModel.UserName) ? viewModel.EmailAddress : viewModel.UserName;
                 user.Password = SecurityHelper.HashSHA1(viewModel.Password + user.Guid.ToString());
                 db.SaveChanges();

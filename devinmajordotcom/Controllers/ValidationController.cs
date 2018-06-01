@@ -25,7 +25,7 @@ namespace devinmajordotcom.Controllers
                         var result3 = landingPageService.DoesEmailAccountMatchUserName(EmailAddress, UserName);
                         if(!result3)
                         {
-                            return Json($"The user \"{UserName}\" already exists in the system.", JsonRequestBehavior.AllowGet);
+                            return Json($"Sorry, if you change your email, you must change your username. That way if something happens, we can recover your old account!", JsonRequestBehavior.AllowGet);
                         }
                         return Json(true, JsonRequestBehavior.AllowGet);
                     }
