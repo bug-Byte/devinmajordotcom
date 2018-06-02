@@ -60,14 +60,31 @@ namespace devinmajordotcom.Controllers
 
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
+            var doesEmailMatchAccount = landingPageService.DoesFormEmailMatchRecordEmail(viewModel);
             landingPageService.UpdateCurrentUser(viewModel);
-            if (viewModel.IsUpdatingCredentials || viewModel.UserIsAdmin)
+            
+            if (viewModel.IsSigningUp)
             {
-                SendUpdateCredentialsEmail(viewModel);
+                if(viewModel.UserIsAdmin)
+                {
+                    SendUpdateCredentialsEmail(viewModel);
+                }
+                else
+                {
+                    SendConfirmationEmail(viewModel);
+                }
             }
-            else if (viewModel.IsSigningUp)
+            else if (viewModel.IsUpdatingCredentials)
             {
-                SendConfirmationEmail(viewModel);
+                if (!doesEmailMatchAccount)
+                {
+                    SendConfirmationEmail(viewModel);
+                    Logout();
+                }
+                else
+                {
+                    SendUpdateCredentialsEmail(viewModel);
+                }
             }
         }
 

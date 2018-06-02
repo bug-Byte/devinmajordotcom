@@ -289,6 +289,10 @@ function UpdateBlogPostsModal(data) {
     RefreshTinyMce();
 }
 
+function UpdateAccountModal() {
+    InitializeModal('#formModalUpdateCredentials', 'Update Account Credentials');
+}
+
 function SettingsUpdate(data) {
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
@@ -299,6 +303,7 @@ function SettingsUpdate(data) {
 }
 
 function UpdateCredentialsSuccess() {
+    $("#formModalUpdateCredentials").modal('toggle');
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your account was successfully updated!'

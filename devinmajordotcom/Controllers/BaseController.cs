@@ -186,6 +186,7 @@ namespace devinmajordotcom.Controllers
                 };
                 var newViewModel = landingPageService.GetAppConfigData(user);
                 newViewModel.CurrentUserViewModel = landingPageService.GetCurrentUser(validatedUser.GUID);
+                ViewBag.ControllerName = controller;
                 return PartialView("_ApplicationManager", newViewModel);
             }
             return RedirectToAction("Index");

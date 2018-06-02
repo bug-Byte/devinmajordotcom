@@ -14,27 +14,12 @@
             @class = "btn btn-default",
             @onClick = "ResetActiveImage(this)"
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
-
-    var updateCredentialsButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
-        new AjaxOptions
-        {
-            HttpMethod = "GET",
-            InsertionMode = InsertionMode.Replace,
-            OnComplete = "InitializeModal('#formModalImageUploader', 'Background Image Uploader');",
-            OnFailure = "SettingsUpdateFailure();",
-            UpdateTargetId = "formModalBodyHolderUpload"
-        },
-        new
-        {
-            @class = "btn btn-default",
-            @onClick = "ResetActiveImage(this)"
-        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
 }
 @using (Html.BeginForm("_HomeSettingsForm", "MyHome"))
 {
 
     @Html.HiddenFor(x => x.UserID)
-    @Html.HiddenFor(x => x.ShowVisitorsAdminHome)
+    @Html.HiddenFor(x => x.ShowVisitorsAdminHome, new { @id="hiddenOption1" })
     @*@Html.HiddenFor(x => x.AddNewFavoriteImage)
     @Html.HiddenFor(x => x.DefaultFavoriteImage)
     @Html.HiddenFor(x => x.DefaultBlogPostImage)*@

@@ -146,7 +146,7 @@ namespace devinmajordotcom.Services
             {
                 return false;
             }
-            return db.Security_Users.Any(x => (x.EmailAddress == emailString || x.UserName == emailString) && (x.IsEmailConfirmed || x.IsAdmin));
+            return db.Security_Users.Any(x => (x.EmailAddress == emailString || x.UserName == emailString) && x.IsEmailConfirmed);
         }
 
         public void UpdateCurrentUser(UserViewModel viewModel)
@@ -157,7 +157,7 @@ namespace devinmajordotcom.Services
                 user.EmailAddress = viewModel.EmailAddress;
                 user.IsActive = viewModel.UserIsActive;
                 user.IsAdmin = viewModel.UserIsAdmin;
-                user.IsEmailConfirmed = viewModel.UserIsAdmin;
+                user.IsEmailConfirmed = viewModel.UserIsAdmin && !viewModel.IsUpdatingCredentials;
                 user.UserName = string.IsNullOrEmpty(viewModel.UserName) ? viewModel.EmailAddress : viewModel.UserName;
                 user.Password = SecurityHelper.HashSHA1(viewModel.Password + user.Guid.ToString());
                 db.SaveChanges();
@@ -185,7 +185,7 @@ namespace devinmajordotcom.Services
                 Guid = (Guid)userGuid,
                 IsActive = true,
                 IsAdmin = IsUserToAddAnAdmin,
-                IsEmailConfirmed = false
+                IsEmailConfirmed = IsUserToAddAnAdmin
             };
 
             db.Security_Users.Add(newUser);
@@ -215,7 +215,7 @@ namespace devinmajordotcom.Services
                 UserIsActive = x.IsActive,
                 IsConfirmationEmailSent = x.IsEmailConfirmationSent,
                 UserIsLoggedIn = !x.IsEmailConfirmationSent && x.EmailAddress != null && x.EmailAddress != "",
-                
+                IsEmailConfirmed = x.IsEmailConfirmed
             }).FirstOrDefault();
         }
 
