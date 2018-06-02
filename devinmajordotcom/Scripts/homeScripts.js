@@ -1,6 +1,25 @@
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
+function UpdateCredentialsSuccess() {
+    $("#formModalUpdateCredentials").modal('toggle');
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Your account was successfully updated!'
+    });
+}
+
+function UpdateCredentialsFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'Your account was not updated! Please try again.'
+    });
+}
+
+function UpdateAccountModal() {
+    InitializeModal('#formModalUpdateCredentials', 'Update Account Credentials');
+}
+
 function removeDisable() {
     $('body').data('loading-disabled', false);
 }
@@ -37,7 +56,6 @@ function ManageCommentsAjaxFailure() {
 
 function PasswordResetSuccess(data) {
     if (data == "fail") {
-        $('.spinner').fadeOut(500);
         $("#ajaxAlertContainer").bootsnack({
             alertType: 'error',
             message: 'Failed to reset your password. Please try again!'
@@ -50,12 +68,7 @@ function PasswordResetSuccess(data) {
     });
 }
 
-function ShowSpinner() {
-    $('.spinner').fadeIn(500);
-}
-
 function PasswordResetFailure(data) {
-    $('.spinner').fadeOut(500);
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'error',
         message: 'Failed to reset your password. Please try again!'
@@ -192,6 +205,22 @@ function MomentAllDateTimes() {
 
 }
 
+$(document).on({
+
+    ajaxStart: function () {
+        $('.spinner').fadeIn(500);
+    },
+
+    ajaxStop: function () {
+        $('.spinner').fadeOut(500);
+    },
+
+    ajaxComplete: function () {
+        $('.spinner').fadeOut(500);
+    }
+
+});
+
 $(document).ready(function () {
 
     "use strict";
@@ -220,7 +249,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".modalSubmit", function () {
         if ($(".loginForm").valid()) {
-            $('.spinner').fadeIn(500);
         }
     });
 

@@ -18,7 +18,11 @@ namespace devinmajordotcom.Services
 
         bool DoesUserExist(string userString);
 
-        bool IsEmailConfirmed(string emailString, bool IsSigningUp);
+        bool DoesEmailAccountMatchUserName(string emailString, string userString);
+
+        bool DoesFormEmailMatchRecordEmail(UserViewModel viewModel);
+
+        bool IsEmailConfirmed(string emailString);
 
         UserViewModel LookupUser(string userString);
 
@@ -39,8 +43,6 @@ namespace devinmajordotcom.Services
         void GiveAdminTestData(Security_User newUser);
 
         void ConfirmAccount(Guid GUID);
-
-        bool IsPasswordConfirmed(string pass1, string pass2);
 
     }
 }

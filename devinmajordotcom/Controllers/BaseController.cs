@@ -187,6 +187,8 @@ namespace devinmajordotcom.Controllers
                     UserName = validatedUser.UserName
                 };
                 var newViewModel = landingPageService.GetAppConfigData(user);
+                newViewModel.CurrentUserViewModel = landingPageService.GetCurrentUser(validatedUser.GUID);
+                ViewBag.ControllerName = controller;
                 return PartialView("_ApplicationManager", newViewModel);
             }
             return RedirectToAction("Index");
@@ -340,6 +342,42 @@ namespace devinmajordotcom.Controllers
                 return PartialView("ExpiredEmail", user);
             }
             return PartialView(user);
+        }
+
+        [HttpPost]
+        public JsonResult SendUpdateCredentialsEmail(UserViewModel viewModel)
+        {
+            var emailSuccessful = "";
+            var message = new MailMessage();
+            var body = PartialHelper.RenderViewToString(ControllerContext, "UpdateCredentialsEmail", viewModel);
+            try
+            {
+                message.To.Add(new MailAddress(viewModel.EmailAddress));
+                message.Subject = "Your New Account Info for devinmajor.com";
+                message.Body = body;
+                message.IsBodyHtml = true;
+                var emailModel = new ContactEmailViewModel()
+                {
+                    UserGUID = viewModel.GUID,
+                    Content = body,
+                    RecipientEmail = viewModel.EmailAddress,
+                    RecipientName = viewModel.UserName,
+                    EmailTypeID = (int)EmailType.EmailTypes.UpdateCredentials,
+                    Subject = "Your New Account Info for devinmajor.com"
+                };
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Send(message);
+                }
+                landingPageService.EmailSent(emailModel);
+                Session["MainPageUserAuthID"] = viewModel.GUID;
+                return new JsonResult { Data = "Success" };
+            }
+            catch (Exception e)
+            {
+                message.Dispose();
+            }
+            return new JsonResult { Data = emailSuccessful };
         }
 
     }

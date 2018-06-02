@@ -68,8 +68,32 @@ namespace devinmajordotcom.Controllers
 
         public void UpdateCurrentUser(UserViewModel viewModel)
         {
+            var doesEmailMatchAccount = landingPageService.DoesFormEmailMatchRecordEmail(viewModel);
             landingPageService.UpdateCurrentUser(viewModel);
-            Login(viewModel, true);
+            
+            if (viewModel.IsSigningUp)
+            {
+                if(viewModel.UserIsAdmin)
+                {
+                    SendUpdateCredentialsEmail(viewModel);
+                }
+                else
+                {
+                    SendConfirmationEmail(viewModel);
+                }
+            }
+            else if (viewModel.IsUpdatingCredentials)
+            {
+                if (!doesEmailMatchAccount)
+                {
+                    SendConfirmationEmail(viewModel);
+                    Logout();
+                }
+                else
+                {
+                    SendUpdateCredentialsEmail(viewModel);
+                }
+            }
         }
 
         [HttpGet]
@@ -83,8 +107,6 @@ namespace devinmajordotcom.Controllers
         {
             landingPageService.RemoveSiteLinkById(ID);
         }
-
-        
 
     }
 }

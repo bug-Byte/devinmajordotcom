@@ -113,7 +113,7 @@ INSERT INTO [Security].[EmailType]
 (
 	[TypeName]
 )
-VALUES ('Email Confirmation'), ('Password Reset'), ('Other');
+VALUES ('Email Confirmation'), ('Password Reset'), ('Update Credentials'), ('Other');
 
 INSERT INTO [LandingPage].[BannerLink]
 (

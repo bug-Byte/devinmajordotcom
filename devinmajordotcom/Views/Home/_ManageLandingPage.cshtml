@@ -16,19 +16,18 @@
             @class = "btn btn-default",
             @onClick = "ResetActiveImage(this)"
         }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
-
+    ViewBag.ControllerName = "Home";
 }
-@using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "ManageMainSettingsAjaxSuccess", OnFailure = "ManageMainSettingsAjaxFailure" }))
-{
 
-    <div class="appContainer work-wrapper" style="background:transparent;" id="mainSettingsContainer">
-        <h3>Landing Page Settings</h3>
-        <hr>
-        <div class="settingsContainer">
+<div class="appContainer work-wrapper" style="background:transparent;" id="mainSettingsContainer">
+    <h3>Landing Page Settings</h3>
+    <hr>
+    <div class="settingsContainer">
 
-            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    @using (Ajax.BeginForm("ManageLandingPage", "Home", new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "ManageMainSettingsAjaxSuccess", OnFailure = "ManageMainSettingsAjaxFailure" }))
+        {
+
+            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1); -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1); box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1);">
                 <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseMain">
                     <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
                     &nbsp;&nbsp;
@@ -103,8 +102,8 @@
                                 @Html.LabelFor(x => x.Config.BackgroundImage, new { @style = "font-weight:normal;" })
                             </div>
                             <div class="col-sm-12 text-center">
-                                @Html.HiddenFor(x => x.Config.BackgroundImage, new { @id = "BackgroundImage", @class="BackgroundImage", activeimage="false" })
-                                <img runat="server" src="@Url.Content(Model.Config.BackgroundImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                                @Html.HiddenFor(x => x.Config.BackgroundImage, new { @id = "BackgroundImage", @class = "BackgroundImage", activeimage = "false" })
+                                <img runat="server" src="@Url.Content(Model.Config.BackgroundImage)" activepreview="false" id="previewImage" style="display: inline-block;" class="img-responsive previewImage" alt="Background Image">
                                 <br />
                                 @Html.Raw(uploadButton)
                             </div>
@@ -121,9 +120,7 @@
 
             <br />
 
-            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1); -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1); box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1);">
                 <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseMainLinks">
                     <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
                     &nbsp;&nbsp;
@@ -134,7 +131,7 @@
                 <div id="collapseMainLinks" class="panel-collapse collapse">
                     <div class="panel-body">
 
-                        <div id="bannerLinksContainer" style="overflow:auto !important;" class="">
+                        <div id="bannerLinksContainer" style="overflow: auto !important;" class="">
                             <ul id="bannerLinksList" class="mediaSortable">
                                 @foreach (var link in Model.LandingPageBannerLinks)
                                 {
@@ -242,8 +239,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    count++;
-                                }
+                                                        count++;
+                                                    }
                             </ul>
                         </div>
 
@@ -263,9 +260,7 @@
 
             <br />
 
-            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
-        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+            <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1); -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1); box-shadow: 2.5px 2.5px 5px 2.5px rgba(245, 245, 245, 1);">
                 <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseApps">
                     <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
                     &nbsp;&nbsp;
@@ -276,7 +271,7 @@
                 <div id="collapseApps" class="panel-collapse collapse">
                     <div class="panel-body">
 
-                        <div id="siteLinksContainer" style="overflow:auto !important;" class="">
+                        <div id="siteLinksContainer" style="overflow: auto !important;" class="">
                             <ul id="siteLinksList" class="mediaSortable">
                                 @foreach (var link in Model.LandingPageApplicationLinks)
                                 {
@@ -373,8 +368,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    count++;
-                                }
+                                                        count++;
+                                                    }
                             </ul>
                         </div>
 
@@ -389,7 +384,7 @@
             </div>
 
 
-            <br/>
+            <br />
 
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-8">
@@ -397,7 +392,7 @@
                 </div>
             </div>
 
-        </div>
-    </div>
+                                                    }
 
-   }
+    </div>
+</div>
