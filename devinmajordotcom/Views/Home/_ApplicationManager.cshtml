@@ -51,10 +51,12 @@
         </div>
     }
 </div>
-<script>
-    var updateCredsHtml = '@Html.Raw(@Html.Partial("_UpdateCredentials", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
-    $('#formModalUpdateCreds').html(updateCredsHtml);
-    $.validator.unobtrusive.parse('#updateCredsForm');
-    $("#IsUpdatingCredentials9").val(true);
-    $("#IsUpdatingCredentials9").attr("value", "True");
-</script>
+@section scripts {
+    <script>
+        var updateCredsHtml = '@Html.Raw(@Html.Partial("_UpdateCredentials", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+        $('#formModalUpdateCreds').html(updateCredsHtml);
+        $.validator.unobtrusive.parse('#updateCredsForm');
+        $("#IsUpdatingCredentials9").val(true);
+        $("#IsUpdatingCredentials9").attr("value", "True");
+    </script>
+}
