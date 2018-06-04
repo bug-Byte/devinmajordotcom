@@ -476,6 +476,12 @@ function InitializeEventHandlers() {
         }
     });
 
+    $(".datetimepicker").each(function () {
+        var date = $(this).val();
+        var dateString = moment(date).format("MM/DD/YYYY");
+        $(this).val(dateString);
+    });
+
     $(".date").datetimepicker({
         format: "L",
         allowInputToggle: true
@@ -563,12 +569,11 @@ function RefreshTinyMce() {
 }
 
 function HideLoginModal(data) {
-
+    debugger;
     $('#LoginModal').modal('hide');
     $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>');
     $('#mainContainer').append(data);
     $('#appmanager').fadeIn(500);
-    InitializeEventHandlers();
     $(".masthead-nav").find('li[data-activediv="#appmanager"]').each(function () {
         $(this).click(function () {
             $('.masthead-nav li').removeClass('active');
@@ -579,7 +584,8 @@ function HideLoginModal(data) {
             $(divToShow).fadeIn(500);
         });
     });
-
+    InitializeEventHandlers();
+    RefreshTinyMce();
 }
 
 function LoginFailure() {
@@ -696,8 +702,6 @@ function RemoveAcademic(id) {
 }
 
 function ManageMediaAjaxSuccess(data) {
-    saveButtonPressed = true;
-    updateLinks();
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your media dashboard links have been updated!'
@@ -706,8 +710,6 @@ function ManageMediaAjaxSuccess(data) {
 
 
 function ManagePortfolioAjaxSuccess(data) {
-    saveButtonPressed = true;
-    updateLinks();
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your portfolio has been updated!'
@@ -715,8 +717,6 @@ function ManagePortfolioAjaxSuccess(data) {
 }
 
 function ManagePortfolioContactLinksAjaxSuccess(data) {
-    saveButtonPressed = true;
-    updateLinks();
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your contact links have been updated!'
@@ -731,8 +731,6 @@ function ManageMediaAjaxFailure(data) {
 }
 
 function ManagePortfolioSkillsAjaxSuccess(data) {
-    saveButtonPressed = true;
-    updateLinks();
     $("#ajaxAlertContainer").bootsnack({
         alertType: 'success',
         message: 'Your portfolio skills have been updated!'
