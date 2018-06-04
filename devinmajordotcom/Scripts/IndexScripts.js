@@ -446,6 +446,12 @@ function InitializeEventHandlers() {
         }
     });
 
+    $(".datetimepicker").each(function () {
+        var date = $(this).val();
+        var dateString = moment(date).format("MM/DD/YYYY");
+        $(this).val(dateString);
+    });
+
     $(".date").datetimepicker({
         format: "L",
         allowInputToggle: true
