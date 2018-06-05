@@ -110,7 +110,9 @@ function draw() {
 
 $(window).bind("resize", function () {
     var w = $(window).width();
-    var h = $(window).height();
+    var h = $(document).height();
+    canvas.width = w;
+    canvas.height = h;
     $("#particles").width(w + "px");
     $("#particles").height(h + "px");
 });

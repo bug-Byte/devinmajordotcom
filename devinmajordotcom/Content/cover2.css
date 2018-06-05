@@ -285,9 +285,9 @@ a, a:hover, a:focus {
     min-width: 80px;
     max-width: 80px;
     text-align: center;
-    min-height: 100vh;
+    height: auto;
+    overflow: visible !important;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 #sidebar ul.components {
@@ -326,6 +326,7 @@ ul ul a {
     }
     #sidebar.active {
         margin-left: 0;
+        overflow-y: auto !important;
     }
 }
 

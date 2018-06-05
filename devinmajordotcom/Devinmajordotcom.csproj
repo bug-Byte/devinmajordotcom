@@ -369,6 +369,7 @@
     <Content Include="Content\Images\favicon\android-chrome-512x512.png" />
     <Content Include="Content\Images\favicon\apple-touch-icon.png" />
     <Content Include="Content\Images\favicon\browserconfig.xml" />
+    <Content Include="Content\Images\favicon\email.png" />
     <Content Include="Content\Images\favicon\favicon-16x16.png" />
     <Content Include="Content\Images\favicon\favicon-32x32.png" />
     <Content Include="Content\Images\favicon\favicon.ico" />
