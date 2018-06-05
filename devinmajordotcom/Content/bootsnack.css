@@ -5,17 +5,16 @@
 */
 
 .bootsnack {
-    max-width: 25vw;
+    max-width: 50%;
     background-image: none;
 }
 
 #ajaxAlert {
     visibility: hidden; /* Hidden by default. Visible on click */
-    min-width: 25vw; /* Set a default minimum width */
-    margin-left: -125px; /* Divide value of min-width by 2 */
+    min-width: 50%; /* Set a default minimum width */
     position: fixed; 
     z-index: 5000;
-    left: 44vw; 
+    left: 25%; 
     bottom: 30px;
 }
 
@@ -24,7 +23,7 @@
     visibility: visible; /* Show the snackbar */
 
     -webkit-animation: fadein 0.5s, fadeout 0.5s 8.5s;
-    animation: fadein 0.5s, fadeout 0.5s 8.5s;
+    animation: fadein 0.5s;
 }
 
 /* Animations to fade the snackbar in and out */
