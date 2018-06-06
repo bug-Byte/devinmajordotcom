@@ -95,7 +95,7 @@ namespace devinmajordotcom.App_Start
             ));            
 
             bundles.Add(new ScriptBundle("~/bundles/chartScripts").Include(
-                "~/Scripts/Chart.js"
+                "~/Scripts/Chart.bundle.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/tinymce/tinymceScripts").Include(
