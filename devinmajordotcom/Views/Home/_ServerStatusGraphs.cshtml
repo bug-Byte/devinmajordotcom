@@ -24,9 +24,15 @@
     <div class="row">
         <div class="col-sm-12 text-center">
             <div id="chartContainer">
-                <canvas id="cpuLoadChart" width="400" height="400"></canvas>
-                <canvas id="ramLoadChart" width="400" height="400"></canvas>
-                <canvas id="cpuTempChart" width="400" height="400"></canvas>
+                <div style="height: 300px;width: 325px;display: inline-block;float: left;">
+                    <canvas id="cpuLoadChart"></canvas>
+                </div>
+                <div style="height: 300px;width: 325px;display: inline-block;float: left;">
+                    <canvas id="ramLoadChart"></canvas>
+                </div>
+                <div style="height: 300px;width: 325px;display: inline-block;float: left;">
+                    <canvas id="cpuTempChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -42,6 +48,22 @@
     for (var i = 1; i <= 60; i++) {
         labels.push(i.toString());
     }
+
+    var options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100,
+                    min: 0,
+                    stepSize: 10,
+
+                }
+            }]
+        }
+    };
 
     $(document).ready(function () {
 
@@ -66,9 +88,21 @@
 
             if (firstRun1) {
 
-                var ctx1 = document.getElementById("cpuLoadChart");
-                var ctx2 = document.getElementById("ramLoadChart");
-                var ctx3 = document.getElementById("cpuTempChart");
+                var ctx1 = document.getElementById("cpuLoadChart").getContext("2d");
+                var ctx2 = document.getElementById("ramLoadChart").getContext("2d");
+                var ctx3 = document.getElementById("cpuTempChart").getContext("2d");
+
+                var green_red_gradient1 = ctx1.createLinearGradient(0, 0, 0, 400);
+                green_red_gradient1.addColorStop(0, 'rgb(113, 206, 245, 0.5)');
+                green_red_gradient1.addColorStop(1, 'rgb(255, 255, 255, 0.5)');
+
+                var green_red_gradient2 = ctx2.createLinearGradient(0, 0, 0, 400);
+                green_red_gradient2.addColorStop(0, 'rgb(113, 206, 245, 0.5)');
+                green_red_gradient2.addColorStop(1, 'rgb(255, 255, 255, 0.5)');
+
+                var green_red_gradient3 = ctx3.createLinearGradient(0, 0, 0, 400);
+                green_red_gradient3.addColorStop(0, 'rgb(113, 206, 245, 0.5)');
+                green_red_gradient3.addColorStop(1, 'rgb(255, 255, 255, 0.5)');
 
                 cpuLoadLineGraph = new Chart(ctx1, {
                     type: 'line',
@@ -77,34 +111,13 @@
                         datasets: [{
                             label: 'CPU Usage',
                             data: nextCpuValues,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            backgroundColor: green_red_gradient1,
+                            hoverBackgroundColor: green_red_gradient1,
+                            borderColor: green_red_gradient1,
                             borderWidth: 1
                         }]
                     },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
+                    options: options
                 });
 
                 ramLoadLineGraph = new Chart(ctx2, {
@@ -114,34 +127,13 @@
                         datasets: [{
                             label: 'RAM Usage',
                             data: nextRamValues,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            backgroundColor: green_red_gradient2,
+                            hoverBackgroundColor: green_red_gradient2,
+                            borderColor: green_red_gradient2,
                             borderWidth: 1
                         }]
                     },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
+                    options: options
                 });
 
                 cpuTempLineGraph = new Chart(ctx3, {
@@ -151,34 +143,13 @@
                         datasets: [{
                             label: 'CPU Temperature',
                             data: temps,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            backgroundColor: green_red_gradient3,
+                            hoverBackgroundColor: green_red_gradient3,
+                            borderColor: green_red_gradient3,
                             borderWidth: 1
                         }]
                     },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
+                    options: options
                 });
 
                 firstRun1 = false;
