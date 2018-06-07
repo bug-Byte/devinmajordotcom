@@ -86,7 +86,7 @@ namespace devinmajordotcom.Services
             var typeToReturn = types.FirstOrDefault(x => x.Name.Contains(type));
             if (typeToReturn != null)
             {
-                values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList();
+                values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
             }
             return values;
         }
@@ -99,7 +99,7 @@ namespace devinmajordotcom.Services
             if (typeToReturn != null)
             {
                 var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();
-                cpuLoads.AddRange(cpus.Select(cpu => db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id && x.HardwareNumber == cpu).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList()));
+                cpuLoads.AddRange(cpus.Select(cpu => db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id && x.HardwareNumber == cpu).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList()));
             }
             return cpuLoads;
         }
@@ -112,7 +112,7 @@ namespace devinmajordotcom.Services
             if (typeToReturn != null)
             {
                 var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();
-                cpuTemps.AddRange(cpus.Select(cpu => db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id && x.HardwareNumber == cpu).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList()));
+                cpuTemps.AddRange(cpus.Select(cpu => db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id && x.HardwareNumber == cpu).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList()));
             }
             return cpuTemps;
         }

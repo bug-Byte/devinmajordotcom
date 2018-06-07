@@ -37,6 +37,7 @@ namespace devinmajordotcom
         {
 
             HardwareMonitorService service = new HardwareMonitorService();
+            UpdateVisitor updateVisitor1 = new UpdateVisitor();
             var drives = DriveInfo.GetDrives();
             int i = 0;
 
@@ -64,6 +65,7 @@ namespace devinmajordotcom
             {
 
                 computer1.Open();
+                computer1.Accept(updateVisitor1);
 
                 foreach (DriveInfo drive in drives)
                 {
@@ -117,7 +119,7 @@ namespace devinmajordotcom
                 ramLoad = service.GetRAMHistory();
                 cpuTempHistory = service.GetCPUTempHistory();
 
-                Clients.All.updatePerformanceHistory(cpuList, cpuLoadHistory, ramLoad, cpuTempHistory);
+                Clients.All.updatePerformanceHistory(cpuList, cpuLoadHistory, ramLoad, cpuTempHistory, ramString);
 
                 cpuLoadHistory.Clear();
                 cpuTempHistory.Clear();
@@ -138,7 +140,7 @@ namespace devinmajordotcom
         {
 
             HardwareMonitorService service = new HardwareMonitorService();
-            UpdateVisitor updateVisitor = new UpdateVisitor();
+            UpdateVisitor updateVisitor2 = new UpdateVisitor();
             var drives = DriveInfo.GetDrives();
             int i = 0;
 
@@ -164,7 +166,7 @@ namespace devinmajordotcom
             {
 
                 computer2.Open();
-                computer2.Accept(updateVisitor);
+                computer2.Accept(updateVisitor2);
 
                 foreach (DriveInfo drive in drives)
                 {

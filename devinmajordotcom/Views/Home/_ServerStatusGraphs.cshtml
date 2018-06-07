@@ -48,6 +48,20 @@
     }
 
     var options = {
+        tooltips: {
+            callbacks: {
+                title: function(tooltipItem, data) {
+                    return data.datasets[tooltipItem[0].datasetIndex].label;
+                },
+                label: function (tooltipItem, data) {
+                    var graphLabel = data.datasets[tooltipItem.datasetIndex].label;
+                    if(graphLabel.indexOf("Temp") != -1) {
+                        return tooltipItem.yLabel + "°C";
+                    }
+                    return tooltipItem.yLabel + "%";
+                }
+            }
+        },
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -72,7 +86,7 @@
 
         var performanceHub = $.connection.performanceHub;
 
-        performanceHub.client.updatePerformanceHistory = function (cpuList, nextCpuValues, nextRamValues, temps) {
+        performanceHub.client.updatePerformanceHistory = function (cpuList, nextCpuValues, nextRamValues, temps, ramString) {
 
             var counter = 0;
 
@@ -80,32 +94,34 @@
                 debugger;
                 for (var e = 0; e < cpuList.length; e++) {
 
-                    var loadhtml = '<div style="height: 300px;width: 325px;display: inline-block;float: left;"><canvas id="cpuLoadChart_' + e + '"></canvas></div>';
-                    var temphtml = '<div style="height: 300px;width: 325px;display: inline-block;float: left;"><canvas id="cpuTempChart_' + e + '"></canvas></div>';
+                    var loadhtml = '<div style="height: 300px;width: 50%;display: inline-block;float: left;"><canvas id="cpuLoadChart_' + e + '"></canvas></div>';
+                    var temphtml = '<div style="height: 300px;width: 50%;display: inline-block;float: left;"><canvas id="cpuTempChart_' + e + '"></canvas></div>';
                     $("#chartContainer").append(loadhtml);
                     $("#chartContainer").append(temphtml);
                     var ctxLoad = document.getElementById("cpuLoadChart_" + e.toString()).getContext("2d");
                     var ctxTemp = document.getElementById("cpuTempChart_" + e.toString()).getContext("2d");
 
-                    var loadGradient = ctxLoad.createLinearGradient(0, 0, 0, 400);
-                    var tempGradient = ctxTemp.createLinearGradient(0, 0, 0, 400);
+                    var loadGradient = ctxLoad.createLinearGradient(0, 0, 0, 300);
+                    var tempGradient = ctxTemp.createLinearGradient(0, 0, 0, 300);
 
-                    loadGradient.addColorStop(0, 'rgb(113, 206, 245, 0.5)');
-                    loadGradient.addColorStop(1, 'rgb(255, 255, 255, 0.5)');
-                    tempGradient.addColorStop(0, 'rgb(113, 206, 245, 0.5)');
-                    tempGradient.addColorStop(1, 'rgb(255, 255, 255, 0.5)');
+                    loadGradient.addColorStop(0, 'red');
+                    loadGradient.addColorStop(0.5, 'darkgray');
+                    loadGradient.addColorStop(1, '#71cef5');
+                    tempGradient.addColorStop(0, 'red');
+                    tempGradient.addColorStop(0.5, 'darkgray');
+                    tempGradient.addColorStop(1, '#71cef5');
 
                     var loadgraph = new Chart(ctxLoad, {
                         type: 'line',
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'CPU Usage: ' + cpuList[e],
+                                label: 'CPU ' + (e + 1) + ' Usage: ' + cpuList[e],
                                 data: nextCpuValues[e],
                                 backgroundColor: loadGradient,
                                 hoverBackgroundColor: loadGradient,
-                                borderColor: loadGradient,
-                                borderWidth: 1
+                                borderColor: 'rgb(0, 0, 0)',
+                                borderWidth: 2
                             }]
                         },
                         options: options
@@ -116,12 +132,12 @@
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'CPU Temp: ' + cpuList[e],
+                                label: 'CPU ' + (e + 1) + ' Temp: ' + cpuList[e],
                                 data: temps[e],
                                 backgroundColor: tempGradient,
                                 hoverBackgroundColor: tempGradient,
-                                borderColor: tempGradient,
-                                borderWidth: 1
+                                borderColor: 'rgb(0, 0, 0)',
+                                borderWidth: 2
                             }]
                         },
                         options: options
@@ -134,23 +150,25 @@
 
                 if (nextRamValues != null && nextRamValues.length > 0) {
 
-                    var html = '<div style="height: 300px;width: 325px;display: inline-block;float: left;"><canvas id="ramLoadChart"></canvas></div>';
+                    var html = '<div style="height: 300px;width: 50%;display: inline-block;float: left;"><canvas id="ramLoadChart"></canvas></div>';
                     $("#chartContainer").append(html);
                     var ctxRam = document.getElementById("ramLoadChart").getContext("2d");
-                    var myRamGradient = ctxRam.createLinearGradient(0, 0, 0, 400);
-                    myRamGradient.addColorStop(0, 'rgb(113, 206, 245, 0.5)');
-                    myRamGradient.addColorStop(1, 'rgb(255, 255, 255, 0.5)');
+                    var myRamGradient = ctxRam.createLinearGradient(0, 0, 0, 300);
+                    myRamGradient.addColorStop(0, 'red');
+                    myRamGradient.addColorStop(0.5, 'darkgray');
+                    myRamGradient.addColorStop(1, '#71cef5');
                     ramChart = new Chart(ctxRam, {
                         type: 'line',
+                        label: '# of Votes',
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'RAM Usage: ',
+                                label: 'RAM Usage: ' + ramString,
                                 data: nextRamValues,
                                 backgroundColor: myRamGradient,
                                 hoverBackgroundColor: myRamGradient,
-                                borderColor: myRamGradient,
-                                borderWidth: 1
+                                borderColor: 'rgb(0, 0, 0)',
+                                borderWidth: 2
                             }]
                         },
                         options: options
