@@ -14,7 +14,11 @@ namespace devinmajordotcom.Services
 
         ServerDataViewModel GetServerData(string type = null, string range = null);
 
-        List<double> GetHardwareHistory(string type);
+        List<double> GetRAMHistory(string type = "RAM Usage");
+
+        List<object> GetCPULoadHistory(string type = "CPU Usage");
+
+        List<object> GetCPUTempHistory(string type = "CPU Temp");
 
     }
 }

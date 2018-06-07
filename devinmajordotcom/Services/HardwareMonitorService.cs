@@ -10,6 +10,7 @@ namespace devinmajordotcom.Services
     {
 
         protected dbContext db;
+
         public HardwareMonitorService()
         {
             db = new dbContext();
@@ -26,7 +27,7 @@ namespace devinmajordotcom.Services
                     PercentageValue = nextRamValue
                 }
             };
-            for(var x = 0; x < cpuList.Count; x++)
+            for (var x = 0; x < cpuList.Count; x++)
             {
                 var newUsageItem = new Security_HardwarePerformance()
                 {
@@ -56,7 +57,6 @@ namespace devinmajordotcom.Services
             {
                 GraphList = new List<GraphViewModel>()
             };
-
             if (type == null && range == null)
             {
                 foreach (var hardwareType in types)
@@ -76,24 +76,45 @@ namespace devinmajordotcom.Services
                     viewModel.GraphList.Add(newGraph);
                 }
             }
-
-
             return viewModel;
         }
 
-        public List<double> GetHardwareHistory(string type)
+        public List<double> GetRAMHistory(string type = "RAM Usage")
         {
             var values = new List<double>();
             var types = db.Security_HardwareTypes.ToList();
-
             var typeToReturn = types.FirstOrDefault(x => x.Name.Contains(type));
-            
-            if(typeToReturn != null)
+            if (typeToReturn != null)
             {
                 values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList();
             }
-
             return values;
+        }
+
+        public List<object> GetCPULoadHistory(string type = "CPU Usage")
+        {
+            var cpuLoads = new List<object>();
+            var types = db.Security_HardwareTypes.ToList();
+            var typeToReturn = types.FirstOrDefault(x => x.Name.Contains(type));
+            if (typeToReturn != null)
+            {
+                var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();
+                cpuLoads.AddRange(cpus.Select(cpu => db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id && x.HardwareNumber == cpu).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList()));
+            }
+            return cpuLoads;
+        }
+
+        public List<object> GetCPUTempHistory(string type = "CPU Temp")
+        {
+            var cpuTemps = new List<object>();
+            var types = db.Security_HardwareTypes.ToList();
+            var typeToReturn = types.FirstOrDefault(x => x.Name.Contains(type));
+            if (typeToReturn != null)
+            {
+                var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();
+                cpuTemps.AddRange(cpus.Select(cpu => db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == typeToReturn.Id && x.HardwareNumber == cpu).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList()));
+            }
+            return cpuTemps;
         }
 
     }
