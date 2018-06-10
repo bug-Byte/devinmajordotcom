@@ -230,6 +230,10 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on("change", ".graphDataSelector", function () {
+        $("#customChartForm").submit();
+    });
+
     $(document).on("change", ".signInUserName", function () {
         var val = $(this).val();
         $(".hiddenSignInUserName").val(val);
@@ -380,6 +384,20 @@ function UpdateBlogPostsModal(data) {
 
 function UpdateAccountModal() {
     InitializeModal('#formModalUpdateCredentials', 'Update Account Credentials');
+}
+
+function UpdateCustomChart(data) {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Graph has been updated with the data you requested!'
+    });
+}
+
+function CustomChartAjaxFailure() {
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'error',
+        message: 'There was a problem getting the data you requested. Please try again!'
+    });
 }
 
 function SettingsUpdate(data) {
@@ -1028,6 +1046,7 @@ function InitializeCustomLineGraph() {
         },
         options: options
     });
+    $("#customChartForm").submit();
 }
 
 function ConnectToSignalRPerformanceHistoryHub() {

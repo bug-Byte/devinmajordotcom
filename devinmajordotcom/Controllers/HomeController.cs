@@ -53,6 +53,12 @@ namespace devinmajordotcom.Controllers
             return PartialView();
         }
 
+        [HttpPost]
+        public ActionResult GetServerData(MainLandingPageViewModel viewModel)
+        {
+            return new EmptyResult();
+        }
+
         public void ManageLandingPage(MainLandingPageViewModel viewModel)
         {
             landingPageService.ManageLandingPage(viewModel);
