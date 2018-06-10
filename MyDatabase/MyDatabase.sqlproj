@@ -182,6 +182,7 @@
     <Build Include="Portfolio\Tables\Job.sql" />
     <Build Include="Security\Tables\EmailType.sql" />
     <Build Include="Security\Tables\Email.sql" />
+    <Build Include="Security\Tables\DateRange.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.001.PostDeployment.AddMainTestData.sql" />

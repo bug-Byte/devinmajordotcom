@@ -23,6 +23,18 @@ namespace devinmajordotcom.ViewModels
 
         public UserViewModel CurrentUserViewModel { get; set; }
 
+        public List<DropDownViewModel> AvailableHardwareTypes { get; set; }
+
+        [Required]
+        [DisplayName("Select a Metric * :")]
+        public int SelectedHardwareTypeID { get; set; }
+
+        public List<DropDownViewModel> AvailableDateRanges { get; set; }
+
+        [Required]
+        [DisplayName("Select a Date/Time Range * :")]
+        public int SelectedDateRangeID { get; set; }
+
         public ContactEmailViewModel ContactEmailData { get; set; }
 
         public PortfolioViewModel CurrentPortfolioData { get; set; }

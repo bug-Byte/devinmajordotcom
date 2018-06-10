@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "devinmajordotcom\Web.config"
 //     Connection String Name: "MainDbConnection"
-//     Connection String:      "Data Source=.\SQLExpress;Initial Catalog=devinmajordotcom;Integrated Security=True"
+//     Connection String:      "Data Source=.\DEVINSSQLEXPRESS;Initial Catalog=devinmajordotcom;Integrated Security=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -57,6 +57,7 @@ namespace devinmajordotcom.Models
         System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
         System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
+        System.Data.Entity.DbSet<Security_DateRange> Security_DateRanges { get; set; } // DateRange
         System.Data.Entity.DbSet<Security_Email> Security_Emails { get; set; } // Email
         System.Data.Entity.DbSet<Security_EmailType> Security_EmailTypes { get; set; } // EmailType
         System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance
@@ -106,6 +107,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; } // ProjectType
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; } // ProjectTypeMapping
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; } // TechSkill
+        public System.Data.Entity.DbSet<Security_DateRange> Security_DateRanges { get; set; } // DateRange
         public System.Data.Entity.DbSet<Security_Email> Security_Emails { get; set; } // Email
         public System.Data.Entity.DbSet<Security_EmailType> Security_EmailTypes { get; set; } // EmailType
         public System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; } // HardwarePerformance
@@ -187,6 +189,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration());
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration());
+            modelBuilder.Configurations.Add(new Security_DateRangeConfiguration());
             modelBuilder.Configurations.Add(new Security_EmailConfiguration());
             modelBuilder.Configurations.Add(new Security_EmailTypeConfiguration());
             modelBuilder.Configurations.Add(new Security_HardwarePerformanceConfiguration());
@@ -220,6 +223,7 @@ namespace devinmajordotcom.Models
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_ProjectTypeMappingConfiguration(schema));
             modelBuilder.Configurations.Add(new Portfolio_TechSkillConfiguration(schema));
+            modelBuilder.Configurations.Add(new Security_DateRangeConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_EmailConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_EmailTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Security_HardwarePerformanceConfiguration(schema));
@@ -272,6 +276,7 @@ namespace devinmajordotcom.Models
         public System.Data.Entity.DbSet<Portfolio_ProjectType> Portfolio_ProjectTypes { get; set; }
         public System.Data.Entity.DbSet<Portfolio_ProjectTypeMapping> Portfolio_ProjectTypeMappings { get; set; }
         public System.Data.Entity.DbSet<Portfolio_TechSkill> Portfolio_TechSkills { get; set; }
+        public System.Data.Entity.DbSet<Security_DateRange> Security_DateRanges { get; set; }
         public System.Data.Entity.DbSet<Security_Email> Security_Emails { get; set; }
         public System.Data.Entity.DbSet<Security_EmailType> Security_EmailTypes { get; set; }
         public System.Data.Entity.DbSet<Security_HardwarePerformance> Security_HardwarePerformances { get; set; }
@@ -302,6 +307,7 @@ namespace devinmajordotcom.Models
             Portfolio_ProjectTypes = new FakeDbSet<Portfolio_ProjectType>("Id");
             Portfolio_ProjectTypeMappings = new FakeDbSet<Portfolio_ProjectTypeMapping>("Id");
             Portfolio_TechSkills = new FakeDbSet<Portfolio_TechSkill>("Id");
+            Security_DateRanges = new FakeDbSet<Security_DateRange>("Id");
             Security_Emails = new FakeDbSet<Security_Email>("Id");
             Security_EmailTypes = new FakeDbSet<Security_EmailType>("Id");
             Security_HardwarePerformances = new FakeDbSet<Security_HardwarePerformance>("Id");
@@ -1241,6 +1247,25 @@ namespace devinmajordotcom.Models
         partial void InitializePartial();
     }
 
+    // DateRange
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_DateRange
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy
+        public System.DateTime? ModifiedOn { get; set; } // ModifiedOn
+        public string ModifiedBy { get; set; } // ModifiedBy
+
+        public Security_DateRange()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // Email
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
     public partial class Security_Email
@@ -1436,8 +1461,8 @@ namespace devinmajordotcom.Models
             MyHome_BlogPosts = new System.Collections.Generic.List<MyHome_BlogPost>();
             MyHome_BlogPostComments = new System.Collections.Generic.List<MyHome_BlogPostComment>();
             MyHome_SiteLinks = new System.Collections.Generic.List<MyHome_SiteLink>();
-            MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
             MyHome_UserConfigs = new System.Collections.Generic.List<MyHome_UserConfig>();
+            MediaDashboard_UserConfigs = new System.Collections.Generic.List<MediaDashboard_UserConfig>();
             InitializePartial();
         }
 
@@ -2098,6 +2123,31 @@ namespace devinmajordotcom.Models
             Property(x => x.DisplayName).HasColumnName(@"DisplayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.ProficiencyPercentage).HasColumnName(@"ProficiencyPercentage").HasColumnType("int").IsOptional();
             Property(x => x.DisplayIcon).HasColumnName(@"DisplayIcon").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();
+            Property(x => x.ModifiedBy).HasColumnName(@"ModifiedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            InitializePartial();
+        }
+        partial void InitializePartial();
+    }
+
+    // DateRange
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
+    public partial class Security_DateRangeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Security_DateRange>
+    {
+        public Security_DateRangeConfiguration()
+            : this("Security")
+        {
+        }
+
+        public Security_DateRangeConfiguration(string schema)
+        {
+            ToTable("DateRange", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.ModifiedOn).HasColumnName(@"ModifiedOn").HasColumnType("datetime").IsOptional();

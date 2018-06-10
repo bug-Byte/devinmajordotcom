@@ -248,6 +248,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Constants\DateRange.cs">
+      <DependentUpon>DateRange.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Constants\HardwareType1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -300,6 +305,10 @@
     <Content Include="Constants\EmailType.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EmailType.cs</LastGenOutput>
+    </Content>
+    <Content Include="Constants\DateRange.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DateRange.cs</LastGenOutput>
     </Content>
     <Content Include="Constants\HardwareType.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -860,7 +869,6 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Home\_ServerStatusGraphs.cshtml" />
     <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -1,9 +1,65 @@
 ﻿var firstRun = true;
+var firstRun1 = true;
+var labels = [];
+var cpuLoadCharts = [];
+var cpuTempCharts = [];
+var ramChart;
+var customChart;
 var saveButtonPressed = false;
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 var canvas = document.getElementById('particles');
 var ctx1;
+for (var i = 1; i <= 60; i++) {
+    labels.push(i.toString());
+}
+
+function addData(chart, data) {
+    chart.data.datasets[0].data.pop();
+    chart.data.datasets[0].data = data;
+    chart.update(0);
+}
+
+var options = {
+    legend: {
+        labels: {
+            boxWidth: 0,
+        }
+    },
+    tooltips: {
+        callbacks: {
+            title: function (tooltipItem, data) {
+                return data.datasets[tooltipItem[0].datasetIndex].label;
+            },
+            label: function (tooltipItem, data) {
+                var graphLabel = data.datasets[tooltipItem.datasetIndex].label;
+                if (graphLabel.indexOf("Temp") != -1) {
+                    return tooltipItem.yLabel + "°C";
+                }
+                return tooltipItem.yLabel + "%";
+            }
+        }
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                max: 100,
+                min: 0,
+                stepSize: 10,
+
+            }
+        }],
+        xAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: 'Last 60 Seconds'
+            }
+        }]
+    }
+};
 
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -233,8 +289,22 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", "#goBackToServer", function () {
-        hideServerGraphs();
+    $(document).on("click", ".screenSwitcher", function () {
+        $.connection.hub.stop();
+        $(".screenSwitcher").show();
+        $(this).hide();
+        $(".hardwareDataContainer").hide();
+        var id = $(this).data("containerid");
+        $(id).show();
+        if (id == "#pieChartsContainer") {
+            ConnectToSignalRPerformanceHub();
+        }
+        if (id == "#lineChartsContainer") {
+            ConnectToSignalRPerformanceHistoryHub();
+        }
+        if (id == "#customChartsContainer") {
+            InitializeCustomLineGraph();
+        }
     });
 
     $(document).on("click", "#mainLogin", function () {
@@ -265,19 +335,6 @@ $(document).ready(function () {
     RefreshTinyMce();
 
 });
-
-function showServerGraphs(data) {
-    $("#server").hide();
-    $("#mainContainer").append(data);
-}
-
-function hideServerGraphs() {
-    var el = document.getElementById("serverGraphs");
-    el.parentNode.removeChild(el);
-    $("#server").fadeIn(500);
-    $.connection.hub.stop();
-    ConnectToSignalRPerformanceHub();
-}
 
 function hideShowGraphFailure() {
     $("#ajaxAlertContainer").bootsnack({
@@ -945,6 +1002,152 @@ function UpdateRamCounter(value, baseScale) {
 function updateDriveCounterUsedSpace(value, baseScale) {
 
     return ((baseScale - value) / baseScale) * 100;
+
+}
+
+function InitializeCustomLineGraph() {
+    var customhtml = '<div style="width:100%;display: inline-block;"><canvas id="customChart"></canvas></div>';
+    $("#customChartContainer").append(customhtml);
+    var ctxCustom = document.getElementById("customChart").getContext("2d");
+    var customGradient = ctxCustom.createLinearGradient(0, 0, 0, 300);
+    customGradient.addColorStop(0, 'red');
+    customGradient.addColorStop(0.5, 'darkgray');
+    customGradient.addColorStop(1, '#71cef5');
+    customChart = new Chart(ctxCustom, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Custom Data',
+                data: [],
+                backgroundColor: customGradient,
+                hoverBackgroundColor: customGradient,
+                borderColor: 'rgb(0, 0, 0)',
+                borderWidth: 2
+            }]
+        },
+        options: options
+    });
+}
+
+function ConnectToSignalRPerformanceHistoryHub() {
+
+    var performanceHub = $.connection.performanceHub;
+
+    performanceHub.client.updatePerformanceHistory = function (cpuList, nextCpuValues, nextRamValues, temps, ramString) {
+
+        var counter = 0;
+
+        if (firstRun1) {
+
+            for (var e = 0; e < cpuList.length; e++) {
+
+                var loadhtml = '<div style="height: 300px;width: 325px;display: inline-block;"><canvas id="cpuLoadChart_' + e + '"></canvas></div>';
+                var temphtml = '<div style="height: 300px;width: 325px;display: inline-block;"><canvas id="cpuTempChart_' + e + '"></canvas></div>';
+                $("#chartContainer").append(loadhtml);
+                $("#chartContainer").append(temphtml);
+                var ctxLoad = document.getElementById("cpuLoadChart_" + e.toString()).getContext("2d");
+                var ctxTemp = document.getElementById("cpuTempChart_" + e.toString()).getContext("2d");
+
+                var loadGradient = ctxLoad.createLinearGradient(0, 0, 0, 300);
+                var tempGradient = ctxTemp.createLinearGradient(0, 0, 0, 300);
+
+                loadGradient.addColorStop(0, 'red');
+                loadGradient.addColorStop(0.5, 'darkgray');
+                loadGradient.addColorStop(1, '#71cef5');
+                tempGradient.addColorStop(0, 'red');
+                tempGradient.addColorStop(0.5, 'darkgray');
+                tempGradient.addColorStop(1, '#71cef5');
+
+                var loadgraph = new Chart(ctxLoad, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'CPU ' + (e + 1) + ' Usage: ' + cpuList[e],
+                            data: nextCpuValues[e],
+                            backgroundColor: loadGradient,
+                            hoverBackgroundColor: loadGradient,
+                            borderColor: 'rgb(0, 0, 0)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: options
+                });
+
+                var tempgraph = new Chart(ctxTemp, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'CPU ' + (e + 1) + ' Temp: ' + cpuList[e],
+                            data: temps[e],
+                            backgroundColor: tempGradient,
+                            hoverBackgroundColor: tempGradient,
+                            borderColor: 'rgb(0, 0, 0)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: options
+                });
+
+                cpuLoadCharts.push(loadgraph);
+                cpuTempCharts.push(tempgraph);
+
+            }
+
+            if (nextRamValues != null && nextRamValues.length > 0) {
+
+                var html = '<div style="height: 300px;width:325px;display: inline-block;"><canvas id="ramLoadChart"></canvas></div>';
+                $("#chartContainer").append(html);
+                var ctxRam = document.getElementById("ramLoadChart").getContext("2d");
+                var myRamGradient = ctxRam.createLinearGradient(0, 0, 0, 300);
+                myRamGradient.addColorStop(0, 'red');
+                myRamGradient.addColorStop(0.5, 'darkgray');
+                myRamGradient.addColorStop(1, '#71cef5');
+                ramChart = new Chart(ctxRam, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'RAM Usage: ' + ramString,
+                            data: nextRamValues,
+                            backgroundColor: myRamGradient,
+                            hoverBackgroundColor: myRamGradient,
+                            borderColor: 'rgb(0, 0, 0)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: options
+                });
+
+            }
+
+            firstRun1 = false;
+
+        }
+        else {
+
+            if (ramChart != null) {
+                addData(ramChart, nextRamValues);
+            }
+
+            for (var x = 0; x < cpuList.length; x++) {
+                addData(cpuLoadCharts[x], nextCpuValues[x]);
+                addData(cpuTempCharts[x], temps[x]);
+            }
+
+        }
+    };
+
+    $.connection.hub.start().done(function () {
+        performanceHub.server.SendPerformanceHistory();
+    }).fail(function (reason) {
+        $("#ajaxAlertContainer").bootsnack({
+            alertType: 'error',
+            message: 'SignalR is not running.'
+        });
+    });
 
 }
 

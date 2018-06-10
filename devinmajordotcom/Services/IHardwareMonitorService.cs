@@ -12,8 +12,6 @@ namespace devinmajordotcom.Services
 
         void SaveHardwareData(List<string> cpuList, string ramString, List<double> nextCpuValues, double nextRamValue, List<double> nextTempValues);
 
-        ServerDataViewModel GetServerData(string type = null, string range = null);
-
         List<double> GetRAMHistory(string type = "RAM Usage");
 
         List<object> GetCPULoadHistory(string type = "CPU Usage");

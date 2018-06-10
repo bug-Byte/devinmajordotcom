@@ -41,10 +41,16 @@ namespace devinmajordotcom.Services
                 guid = AddNewUser().Guid;
             }
             var user = GetCurrentUser((Guid)guid);
+            var dateRanges = GetAvailableDateRanges();
+            var hardwareTypes = GetAvailableHardwareTypes();
             return new MainLandingPageViewModel()
             {
                 Config = GetLandingPageConfig(),
                 CurrentUserViewModel = user,
+                AvailableHardwareTypes = hardwareTypes,
+                SelectedHardwareTypeID = hardwareTypes.Select(x => x.ID).FirstOrDefault(),
+                AvailableDateRanges = dateRanges,
+                SelectedDateRangeID = dateRanges.Select(x => x.ID).FirstOrDefault(),
                 LandingPageApplicationLinks = GetMainSiteLinks(),
                 LandingPageBannerLinks = GetMainBannerLinks(),
                 CurrentPortfolioData = portfolioService.GetPortfolioViewModel(),
@@ -58,9 +64,32 @@ namespace devinmajordotcom.Services
             };
         }
 
-        public ServerDataViewModel GetServerData(string type = null, string range = null)
+        public List<DropDownViewModel> GetAvailableHardwareTypes()
         {
-            return hardwareService.GetServerData(type, range);
+            var results = new List<DropDownViewModel>();
+            var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();           
+            for(var i = 0; i < cpus.Count; i++)
+            {
+                var cpuTypes = db.Security_HardwareTypes.Where(x => x.Name.Contains("CPU")).Select(y => new DropDownViewModel() {
+                    ID = y.Id,
+                    Name = y.Name + " (#" + (i + 1) + ")"
+                }).ToList();
+                results.AddRange(cpuTypes);
+            }
+            var ramType = db.Security_HardwareTypes.Where(x => x.Name.Contains("RAM")).Select(x => new DropDownViewModel() { ID = x.Id, Name = x.Name }).FirstOrDefault();
+            if (ramType != null)
+            {
+                results.Add(ramType);
+            }
+            return results;
+        }
+
+        public List<DropDownViewModel> GetAvailableDateRanges()
+        {
+            return db.Security_DateRanges.Select(x => new DropDownViewModel() {
+                ID = x.Id,
+                Name = x.Name
+            }).ToList();
         }
 
         public ApplicationConfigViewModel GetAppConfigData(Security_User admin = null)

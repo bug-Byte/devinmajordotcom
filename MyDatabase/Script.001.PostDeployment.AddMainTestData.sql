@@ -15,6 +15,8 @@ BEGIN TRANSACTION
 INSERT INTO [Security].[HardwareType](Name)
 VALUES('CPU Usage'),('RAM Usage'),('CPU Temp');
 
+INSERT INTO [Security].[DateRange](Name)
+VALUES('Last 60 Seconds'),('Last 60 Minutes'),('Last 24 Hours'), ('Last 7 Days'), ('Last 30 Days');
 
 INSERT INTO [Security].[User]
 (

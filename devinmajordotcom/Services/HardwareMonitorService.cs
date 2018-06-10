@@ -50,35 +50,6 @@ namespace devinmajordotcom.Services
             db.SaveChanges();
         }
 
-        public ServerDataViewModel GetServerData(string type = null, string range = null)
-        {
-            var types = db.Security_HardwareTypes.ToList();
-            var viewModel = new ServerDataViewModel()
-            {
-                GraphList = new List<GraphViewModel>()
-            };
-            if (type == null && range == null)
-            {
-                foreach (var hardwareType in types)
-                {
-                    var newGraph = new GraphViewModel()
-                    {
-                        Labels = new List<string>(),
-                        Values = new List<double>()
-                    };
-                    for (var i = 60; i > 0; i--)
-                    {
-                        newGraph.Labels.Add(i.ToString());
-                    }
-                    var timeSpan = DateTime.Now.AddMinutes(-1);
-                    var values = db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == hardwareType.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => x.PercentageValue).ToList();
-                    newGraph.Values.AddRange(values);
-                    viewModel.GraphList.Add(newGraph);
-                }
-            }
-            return viewModel;
-        }
-
         public List<double> GetRAMHistory(string type = "RAM Usage")
         {
             var values = new List<double>();
