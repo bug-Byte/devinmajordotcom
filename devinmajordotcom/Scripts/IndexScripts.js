@@ -1,33 +1,15 @@
-﻿var firstRun = true;
-var firstRun1 = true;
-var labels = [];
-var cpuLoadCharts = [];
-var cpuTempCharts = [];
-var ramChart;
-var customChart;
-var saveButtonPressed = false;
+﻿var times = [], balls = [], labels = [], cpuTempCharts = [], cpuLoadCharts = [];
+var firstRun = true, firstRun1 = true, saveButtonPressed = false;
 var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 var canvas = document.getElementById('particles');
-var ctx1;
+var TAU = 2 * Math.PI;
+var lastTime = Date.now();
+var mouseX = -1e9, mouseY = -1e9;
+var ctx1, ramChart, customChart;
+
 for (var i = 1; i <= 60; i++) {
     labels.push(i.toString());
-}
-
-function addData(chart, data) {
-    chart.data.datasets[0].data.pop();
-    chart.data.datasets[0].data = data;
-    chart.update(0);
-}
-
-function addDataAndLabels(data) {
-    var dateRangeLabel = $("#SelectedDateRangeID option:selected").text();
-    customChart.data.labels.pop();
-    customChart.data.datasets[0].data.pop();
-    customChart.data.labels = data.Labels;
-    customChart.data.datasets[0].data = data.Values;
-    customChart.options.scales.xAxes[0].scaleLabel.labelString = dateRangeLabel;
-    customChart.update();
 }
 
 var options = {
@@ -86,12 +68,6 @@ if(canvas != null) {
     ctx1 = canvas.getContext("2d");
     
 }
-
-var TAU = 2 * Math.PI;
-times = [];
-var balls = [];
-var lastTime = Date.now();
-var mouseX = -1e9, mouseY = -1e9;
 
 function loop() {
     ctx1.clearRect(0, 0, canvas.width, canvas.height);
@@ -649,7 +625,6 @@ function RefreshTinyMce() {
 }
 
 function HideLoginModal(data) {
-    debugger;
     $('#LoginModal').modal('hide');
     $('#mainLogin').replaceWith('<li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>');
     $('#mainContainer').append(data);
@@ -832,11 +807,9 @@ function ManagePortfolioCareerAjaxFailure() {
 }
 
 function RemoveSkill(classname, type) {
-    
     var element = document.getElementsByClassName(classname.replace(".",""))[0];
     element.parentNode.removeChild(element);
     ManagePortfolioSkillsAjaxSuccess();
-
     if (type == 'workSkill') {
         var originalNumber = classname.split("_")[1];
         var newID = $('li[data-slide-to="' + originalNumber + '"]').attr("id");
@@ -844,9 +817,7 @@ function RemoveSkill(classname, type) {
         Lielement.parentNode.removeChild(Lielement);
         $('li[data-target="#myCarousel"]:first').addClass("active");
         $(".item:first").addClass("active");
-
     }
-
 }
 
 function setupHandlebarsHelpers() {
@@ -1024,6 +995,22 @@ function updateDriveCounterUsedSpace(value, baseScale) {
 
     return ((baseScale - value) / baseScale) * 100;
 
+}
+
+function addData(chart, data) {
+    chart.data.datasets[0].data.pop();
+    chart.data.datasets[0].data = data;
+    chart.update(0);
+}
+
+function addDataAndLabels(data) {
+    var dateRangeLabel = $("#SelectedDateRangeID option:selected").text();
+    customChart.data.labels.pop();
+    customChart.data.datasets[0].data.pop();
+    customChart.data.labels = data.Labels;
+    customChart.data.datasets[0].data = data.Values;
+    customChart.options.scales.xAxes[0].scaleLabel.labelString = dateRangeLabel;
+    customChart.update();
 }
 
 function InitializeCustomLineGraph() {
