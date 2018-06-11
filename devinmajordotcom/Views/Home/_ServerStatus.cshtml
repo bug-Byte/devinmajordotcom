@@ -10,8 +10,26 @@
         <h2 class="title"><strong>@config.Description</strong></h2>
         <hr>
         <p style="color: #71cef5;">@config.Directive</p>
+
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <button data-containerid="#pieChartsContainer" style="display:none;" class="btn btn-primary screenSwitcher"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;Live Stats</button>
+                <button data-containerid="#lineChartsContainer" class="btn btn-primary screenSwitcher"><span class="glyphicon glyphicon-stats"></span>&nbsp;Live Charts</button>
+                <button data-containerid="#customChartsContainer" class="btn btn-primary screenSwitcher"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Custom Graph</button>
+            </div>
+        </div>
+
         <hr>
+
         <div id="pieChartsContainer" class="hardwareDataContainer">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="spinner">
+                        <span class="spinner-rotate"></span>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div id="usageCounters"></div>
                 <div id="tempCounters"></div>
@@ -20,6 +38,13 @@
             </div>
         </div>
         <div id="lineChartsContainer" class="hardwareDataContainer" style="display:none;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="spinner">
+                        <span class="spinner-rotate"></span>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <div id="chartContainer"></div>
@@ -65,17 +90,20 @@
                         </div>
                     </div>
                     <br />
-                    <div id="customChartContainer"></div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="spinner" style="margin:25px !important;">
+                                <span class="spinner-rotate"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <div id="customChartContainer"></div>
+                        </div>
+                    </div>
                 </div>
             }
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <button data-containerid="#pieChartsContainer" style="display:none;" class="btn btn-primary screenSwitcher"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;Live Stats</button>
-                <button data-containerid="#lineChartsContainer" class="btn btn-primary screenSwitcher"><span class="glyphicon glyphicon-stats"></span>&nbsp;Live Charts</button>
-                <button data-containerid="#customChartsContainer" class="btn btn-primary screenSwitcher"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Custom Graph</button>
-            </div>
         </div>
     }
 

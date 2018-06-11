@@ -217,6 +217,7 @@ $(document).ready(function () {
     });
 
     $(document).on("change", ".graphDataSelector", function () {
+        $('.spinner').fadeIn(500);
         $("#customChartForm").submit();
     });
 
@@ -283,6 +284,7 @@ $(document).ready(function () {
         $.connection.hub.stop();
         $(".screenSwitcher").show();
         $(this).hide();
+        $('.spinner').fadeIn(500);
         $(".hardwareDataContainer").hide();
         var id = $(this).data("containerid");
         $(id).show();
@@ -1010,14 +1012,15 @@ function addDataAndLabels(data) {
     customChart.data.labels = data.Labels;
     customChart.data.datasets[0].data = data.Values;
     customChart.options.scales.xAxes[0].scaleLabel.labelString = dateRangeLabel;
+    $('.spinner').fadeOut(500);
     customChart.update();
 }
 
 function InitializeCustomLineGraph() {
-    var customhtml = '<div style="width:100%;min-height:650px;display: inline-block;"><canvas id="customChart"></canvas></div>';
+    var customhtml = '<div style="width:100%;position:relative;min-height:650px;"><canvas id="customChart"></canvas></div>';
     $("#customChartContainer").append(customhtml);
     var ctxCustom = document.getElementById("customChart").getContext("2d");
-    var customGradient = ctxCustom.createLinearGradient(0, 0, 0, 300);
+    var customGradient = ctxCustom.createLinearGradient(0, 0, 0, 500);
     customGradient.addColorStop(0, 'red');
     customGradient.addColorStop(0.5, 'darkgray');
     customGradient.addColorStop(1, '#71cef5');
@@ -1132,6 +1135,7 @@ function ConnectToSignalRPerformanceHistoryHub() {
 
             }
 
+            $('.spinner').fadeOut(500);
             firstRun1 = false;
 
         }
@@ -1264,11 +1268,10 @@ function ConnectToSignalRPerformanceHub() {
             counter3++;
         });
         
+        $('.spinner').fadeOut(500);
         firstRun = false;
 		
     };
-
-    
 
     $.connection.hub.start().done(function () {
         performanceHub.server.SendPerformanceMonitoring();
