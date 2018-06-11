@@ -20,6 +20,19 @@ function addData(chart, data) {
     chart.update(0);
 }
 
+function addDataAndLabels(data) {
+    debugger;
+    customChart.data.labels.pop();
+    customChart.data.datasets[0].data.pop();
+    customChart.data.labels = data.Labels;
+    customChart.data.datasets[0].data = data.Values;
+    customChart.update();
+    $("#ajaxAlertContainer").bootsnack({
+        alertType: 'success',
+        message: 'Graph has been updated with the data you requested!'
+    });
+}
+
 var options = {
     legend: {
         labels: {
@@ -384,13 +397,6 @@ function UpdateBlogPostsModal(data) {
 
 function UpdateAccountModal() {
     InitializeModal('#formModalUpdateCredentials', 'Update Account Credentials');
-}
-
-function UpdateCustomChart(data) {
-    $("#ajaxAlertContainer").bootsnack({
-        alertType: 'success',
-        message: 'Graph has been updated with the data you requested!'
-    });
 }
 
 function CustomChartAjaxFailure() {
@@ -1024,7 +1030,7 @@ function updateDriveCounterUsedSpace(value, baseScale) {
 }
 
 function InitializeCustomLineGraph() {
-    var customhtml = '<div style="width:100%;display: inline-block;"><canvas id="customChart"></canvas></div>';
+    var customhtml = '<div style="width:100%;min-height:650px;display: inline-block;"><canvas id="customChart"></canvas></div>';
     $("#customChartContainer").append(customhtml);
     var ctxCustom = document.getElementById("customChart").getContext("2d");
     var customGradient = ctxCustom.createLinearGradient(0, 0, 0, 300);

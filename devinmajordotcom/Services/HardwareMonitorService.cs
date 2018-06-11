@@ -50,6 +50,115 @@ namespace devinmajordotcom.Services
             db.SaveChanges();
         }
 
+        public GraphDataViewModel GetServerData(int typeID, int dateRangeID)
+        {
+            var dateRange = db.Security_DateRanges.FirstOrDefault(x => x.Id == dateRangeID);
+            var type = db.Security_HardwareTypes.FirstOrDefault(x => x.Id == typeID);
+            var results = new GraphDataViewModel()
+            {
+                Labels = new List<string>(),
+                Values = new List<double>()
+            };
+            var today = DateTime.Now;
+
+            if (dateRange == null)
+            {
+                return results;
+            }
+
+            if (dateRange.Name.Contains("Seconds"))
+            {
+                for (var i = 1; i <= 60; i++)
+                {
+                    results.Labels.Add(i.ToString());
+                }
+                results.Values.AddRange(db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == type.Id && (x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null))).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList());
+            }
+            else if (dateRange.Name.Contains("Minutes"))
+            {
+                for (var i = 0; i > -60; i--)
+                {
+                    var max = today.AddMinutes(i);
+                    var iMinus1 = i - 1;
+                    var min = today.AddMinutes(iMinus1);
+                    results.Labels.Add(iMinus1.ToString().Replace("-",""));
+                    var thisMinutesData = db.Security_HardwarePerformances.Where(x => 
+                        x.CreatedOn <= max && x.CreatedOn >= min
+                        && x.HardwareTypeId == type.Id 
+                        && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                    ).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
+                    if (thisMinutesData.Count > 0)
+                    {
+                        var thisMinutesAverage = thisMinutesData.Average();
+                        results.Values.Add(Math.Round(thisMinutesAverage,2));
+                    }
+                }
+            }
+            else if (dateRange.Name.Contains("Hours"))
+            {
+                for (var i = 0; i > -24; i--)
+                {
+                    var max = today.AddHours(i);
+                    var min = today.AddHours(i - 1);
+                    results.Labels.Add(max.ToString("H:mm tt"));
+                    var thisHoursData = db.Security_HardwarePerformances.Where(x =>
+                        x.CreatedOn <= max && x.CreatedOn >= min
+                        && x.HardwareTypeId == type.Id
+                        && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                    ).OrderByDescending(x => x.CreatedOn).Take(3600).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
+                    if (thisHoursData.Count > 0)
+                    {
+                        var thisHoursAverage = thisHoursData.Average();
+                        results.Values.Add(Math.Round(thisHoursAverage, 2));
+                    }
+                }
+            }
+            else if (dateRange.Name.Contains("Days"))
+            {
+                if (dateRange.Name.Contains("7"))
+                {
+                    for (var i = 0; i > -7; i--)
+                    {
+                        var max = today.AddDays(i);
+                        var min = today.AddDays(i - 1);
+                        results.Labels.Add(max.ToString("dddd"));
+                        var thisDaysData = db.Security_HardwarePerformances.Where(x =>
+                            x.CreatedOn <= max && x.CreatedOn >= min
+                            && x.HardwareTypeId == type.Id
+                            && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                        ).OrderByDescending(x => x.CreatedOn).Take(86400).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
+                        if (thisDaysData.Count > 0)
+                        {
+                            var thisDaysAverage = thisDaysData.Average();
+                            results.Values.Add(Math.Round(thisDaysAverage, 2));
+                        }
+                    }
+                }
+                else if (dateRange.Name.Contains("30"))
+                {
+                    for (var i = 0; i > -30; i--)
+                    {
+                        var max = today.AddDays(i);
+                        var min = today.AddDays(i - 1);
+                        results.Labels.Add(max.ToString("MMMM dd"));
+                        var thisDaysData = db.Security_HardwarePerformances.Where(x =>
+                            x.CreatedOn <= max && x.CreatedOn >= min
+                            && x.HardwareTypeId == type.Id
+                            && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                        ).OrderByDescending(x => x.CreatedOn).Take(86400).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
+                        if (thisDaysData.Count > 0)
+                        {
+                            var thisDaysAverage = thisDaysData.Average();
+                            results.Values.Add(Math.Round(thisDaysAverage, 2));
+                        }
+                    }
+                }
+            }
+
+            return results;
+
+        }
+
         public List<double> GetRAMHistory(string type = "RAM Usage")
         {
             var values = new List<double>();

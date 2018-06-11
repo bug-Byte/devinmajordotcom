@@ -18,5 +18,7 @@ namespace devinmajordotcom.Services
 
         List<object> GetCPUTempHistory(string type = "CPU Temp");
 
+        GraphDataViewModel GetServerData(int typeID, int dateRangeID);
+
     }
 }

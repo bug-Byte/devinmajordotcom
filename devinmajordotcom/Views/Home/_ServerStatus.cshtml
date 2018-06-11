@@ -27,7 +27,7 @@
             </div>
         </div>
         <div id="customChartsContainer" class="hardwareDataContainer" style="display:none;">
-            @using (Ajax.BeginForm("GetServerData", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateCustomChart(data);", OnFailure = "CustomChartAjaxFailure();" }, new { @id = "customChartForm" }))
+            @using (Ajax.BeginForm("GetServerData", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "addDataAndLabels(data);", OnFailure = "CustomChartAjaxFailure();" }, new { @id = "customChartForm" }))
             {
                 <div class="row">
                     <div class="col-sm-12 text-center">

@@ -54,9 +54,10 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetServerData(MainLandingPageViewModel viewModel)
+        public JsonResult GetServerData(MainLandingPageViewModel viewModel)
         {
-            return new EmptyResult();
+            var result = hardwareService.GetServerData(viewModel.SelectedHardwareTypeID, viewModel.SelectedDateRangeID);
+            return new JsonResult { Data = result };
         }
 
         public void ManageLandingPage(MainLandingPageViewModel viewModel)
