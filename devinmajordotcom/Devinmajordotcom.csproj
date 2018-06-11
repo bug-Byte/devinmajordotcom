@@ -158,7 +158,7 @@
     </Reference>
     <Reference Include="OpenHardwareMonitorLib, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\OpenHardwareMonitorLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\inetpub\wwwroot\bin\OpenHardwareMonitorLib.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>

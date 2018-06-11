@@ -1047,7 +1047,7 @@ function ConnectToSignalRPerformanceHistoryHub() {
     var performanceHub = $.connection.performanceHub;
 
     performanceHub.client.updatePerformanceHistory = function (cpuList, nextCpuValues, nextRamValues, temps, ramString) {
-
+        debugger;
         var counter = 0;
 
         if (firstRun1) {
