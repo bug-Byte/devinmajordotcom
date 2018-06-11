@@ -21,16 +21,13 @@ function addData(chart, data) {
 }
 
 function addDataAndLabels(data) {
-    debugger;
+    var dateRangeLabel = $("#SelectedDateRangeID option:selected").text();
     customChart.data.labels.pop();
     customChart.data.datasets[0].data.pop();
     customChart.data.labels = data.Labels;
     customChart.data.datasets[0].data = data.Values;
+    customChart.options.scales.xAxes[0].scaleLabel.labelString = dateRangeLabel;
     customChart.update();
-    $("#ajaxAlertContainer").bootsnack({
-        alertType: 'success',
-        message: 'Graph has been updated with the data you requested!'
-    });
 }
 
 var options = {

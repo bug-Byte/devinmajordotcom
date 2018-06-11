@@ -14,9 +14,9 @@ namespace devinmajordotcom.Services
 
         List<double> GetRAMHistory(string type = "RAM Usage");
 
-        List<object> GetCPULoadHistory(string type = "CPU Usage");
+        List<object> GetCPULoadHistory(string type = "CPU 1 Usage");
 
-        List<object> GetCPUTempHistory(string type = "CPU Temp");
+        List<object> GetCPUTempHistory(string type = "CPU 1 Temp");
 
         GraphDataViewModel GetServerData(int typeID, int dateRangeID);
 

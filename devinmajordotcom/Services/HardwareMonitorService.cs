@@ -29,19 +29,42 @@ namespace devinmajordotcom.Services
             };
             for (var x = 0; x < cpuList.Count; x++)
             {
+                var xPlusOne = (x + 1);
+                var tempTypeId = db.Security_HardwareTypes.Where(o => o.Name.Contains(xPlusOne.ToString() + " Temp")).Select(o => o.Id).FirstOrDefault();
+                var loadTypeId = db.Security_HardwareTypes.Where(o => o.Name.Contains(xPlusOne.ToString() + " Usage")).Select(o => o.Id).FirstOrDefault();
+
+                if (tempTypeId == 0)
+                {
+                    var item = new Security_HardwareType()
+                    {
+                        Name = "CPU " + xPlusOne + " Temp"
+                    };
+                    db.Security_HardwareTypes.Add(item);
+                    db.SaveChanges();
+                }
+                if (tempTypeId == 0)
+                {
+                    var item = new Security_HardwareType()
+                    {
+                        Name = "CPU " + xPlusOne + " Usage"
+                    };
+                    db.Security_HardwareTypes.Add(item);
+                    db.SaveChanges();
+                }
+
                 var newUsageItem = new Security_HardwarePerformance()
                 {
                     HardwareName = cpuList[x],
                     HardwareNumber = x,
                     PercentageValue = nextCpuValues[x],
-                    HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUUsage
+                    HardwareTypeId = loadTypeId
                 };
                 var newTempItem = new Security_HardwarePerformance()
                 {
                     HardwareName = cpuList[x],
                     HardwareNumber = x,
                     PercentageValue = nextTempValues[x],
-                    HardwareTypeId = (int)HardwareTypeEnum.HardwareTypes.CPUTemp
+                    HardwareTypeId = tempTypeId
                 };
                 itemsToAdd.Add(newUsageItem);
                 itemsToAdd.Add(newTempItem);
@@ -72,7 +95,7 @@ namespace devinmajordotcom.Services
                 {
                     results.Labels.Add(i.ToString());
                 }
-                results.Values.AddRange(db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == type.Id && (x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null))).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList());
+                results.Values.AddRange(db.Security_HardwarePerformances.Where(x => x.HardwareTypeId == type.Id).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList());
             }
             else if (dateRange.Name.Contains("Minutes"))
             {
@@ -83,9 +106,7 @@ namespace devinmajordotcom.Services
                     var min = today.AddMinutes(iMinus1);
                     results.Labels.Add(iMinus1.ToString().Replace("-",""));
                     var thisMinutesData = db.Security_HardwarePerformances.Where(x => 
-                        x.CreatedOn <= max && x.CreatedOn >= min
-                        && x.HardwareTypeId == type.Id 
-                        && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                        x.CreatedOn <= max && x.CreatedOn >= min && x.HardwareTypeId == type.Id
                     ).OrderByDescending(x => x.CreatedOn).Take(60).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
                     if (thisMinutesData.Count > 0)
                     {
@@ -102,9 +123,7 @@ namespace devinmajordotcom.Services
                     var min = today.AddHours(i - 1);
                     results.Labels.Add(max.ToString("H:mm tt"));
                     var thisHoursData = db.Security_HardwarePerformances.Where(x =>
-                        x.CreatedOn <= max && x.CreatedOn >= min
-                        && x.HardwareTypeId == type.Id
-                        && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                        x.CreatedOn <= max && x.CreatedOn >= min && x.HardwareTypeId == type.Id
                     ).OrderByDescending(x => x.CreatedOn).Take(3600).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
                     if (thisHoursData.Count > 0)
                     {
@@ -123,9 +142,7 @@ namespace devinmajordotcom.Services
                         var min = today.AddDays(i - 1);
                         results.Labels.Add(max.ToString("dddd"));
                         var thisDaysData = db.Security_HardwarePerformances.Where(x =>
-                            x.CreatedOn <= max && x.CreatedOn >= min
-                            && x.HardwareTypeId == type.Id
-                            && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                            x.CreatedOn <= max && x.CreatedOn >= min && x.HardwareTypeId == type.Id
                         ).OrderByDescending(x => x.CreatedOn).Take(86400).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
                         if (thisDaysData.Count > 0)
                         {
@@ -142,9 +159,7 @@ namespace devinmajordotcom.Services
                         var min = today.AddDays(i - 1);
                         results.Labels.Add(max.ToString("MMMM dd"));
                         var thisDaysData = db.Security_HardwarePerformances.Where(x =>
-                            x.CreatedOn <= max && x.CreatedOn >= min
-                            && x.HardwareTypeId == type.Id
-                            && x.HardwareNumber == 0 || (type.Id == 2 && x.HardwareNumber == null)
+                            x.CreatedOn <= max && x.CreatedOn >= min && x.HardwareTypeId == type.Id
                         ).OrderByDescending(x => x.CreatedOn).Take(86400).Select(x => Math.Round(x.PercentageValue, 2)).ToList();
                         if (thisDaysData.Count > 0)
                         {
@@ -171,7 +186,7 @@ namespace devinmajordotcom.Services
             return values;
         }
 
-        public List<object> GetCPULoadHistory(string type = "CPU Usage")
+        public List<object> GetCPULoadHistory(string type = "CPU 1 Usage")
         {
             var cpuLoads = new List<object>();
             var types = db.Security_HardwareTypes.ToList();
@@ -184,7 +199,7 @@ namespace devinmajordotcom.Services
             return cpuLoads;
         }
 
-        public List<object> GetCPUTempHistory(string type = "CPU Temp")
+        public List<object> GetCPUTempHistory(string type = "CPU 1 Temp")
         {
             var cpuTemps = new List<object>();
             var types = db.Security_HardwareTypes.ToList();

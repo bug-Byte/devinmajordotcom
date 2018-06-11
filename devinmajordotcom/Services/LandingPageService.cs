@@ -67,15 +67,38 @@ namespace devinmajordotcom.Services
         public List<DropDownViewModel> GetAvailableHardwareTypes()
         {
             var results = new List<DropDownViewModel>();
-            var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();           
-            for(var i = 0; i < cpus.Count; i++)
+            var cpus = db.Security_HardwarePerformances.Where(x => x.HardwareNumber != null).Select(x => x.HardwareNumber).Distinct().ToList();
+            var currentCpuTypes = db.Security_HardwareTypes.Where(x => x.Name.Contains("CPU")).ToList();
+            if (cpus.Count == 0 || currentCpuTypes.Count != (cpus.Count * 2))
             {
-                var cpuTypes = db.Security_HardwareTypes.Where(x => x.Name.Contains("CPU")).Select(y => new DropDownViewModel() {
-                    ID = y.Id,
-                    Name = y.Name + " (#" + (i + 1) + ")"
-                }).ToList();
-                results.AddRange(cpuTypes);
+                for (var i = 0; i < cpus.Count; i++)
+                {
+                    var iPlusOne = (i + 1);
+                    var metrics = db.Security_HardwareTypes.Where(x => x.Name.Contains("CPU " + iPlusOne.ToString())).ToList();
+                    if (metrics.Count == 0)
+                    {
+                        var items = new List<Security_HardwareType>()
+                        {
+                            new Security_HardwareType()
+                            {
+                                Name = "CPU " + iPlusOne + " Temp"
+                            },
+                            new Security_HardwareType()
+                            {
+                                Name = "CPU " + iPlusOne + " Usage"
+                            },
+                        };
+                        db.Security_HardwareTypes.AddRange(items);
+                        db.SaveChanges();
+                    }
+                }
             }
+            var cpuTypes = db.Security_HardwareTypes.Where(x => x.Name.Contains("CPU")).Select(y => new DropDownViewModel()
+            {
+                ID = y.Id,
+                Name = y.Name
+            }).ToList();
+            results.AddRange(cpuTypes);
             var ramType = db.Security_HardwareTypes.Where(x => x.Name.Contains("RAM")).Select(x => new DropDownViewModel() { ID = x.Id, Name = x.Name }).FirstOrDefault();
             if (ramType != null)
             {

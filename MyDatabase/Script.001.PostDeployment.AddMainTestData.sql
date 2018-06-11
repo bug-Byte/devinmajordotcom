@@ -13,7 +13,7 @@ Post-Deployment Script Template
 BEGIN TRANSACTION
 
 INSERT INTO [Security].[HardwareType](Name)
-VALUES('CPU Usage'),('RAM Usage'),('CPU Temp');
+VALUES('CPU 1 Usage'),('RAM Usage'),('CPU 1 Temp');
 
 INSERT INTO [Security].[DateRange](Name)
 VALUES('Last 60 Seconds'),('Last 60 Minutes'),('Last 24 Hours'), ('Last 7 Days'), ('Last 30 Days');
