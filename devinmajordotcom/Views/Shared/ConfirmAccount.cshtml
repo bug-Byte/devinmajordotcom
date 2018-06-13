@@ -1,0 +1,31 @@
+﻿@model devinmajordotcom.ViewModels.UserViewModel
+@{
+    Layout = "_Layout.cshtml";
+    ViewBag.CurrentUserViewModel = Model;
+    ViewBag.bannerLinks = ViewBag.bannerLinks;
+    ViewBag.config = ViewBag.config;
+}
+
+<div class="row absolute-center">
+    <div class="col-sm-12 text-center">
+        <h2 class="text-center" style="font-size: 50px;"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;Email Confirmed!</h2>     
+        <hr>
+        <h4 class="text-center">You may now access your MyHome account. Click the button below to go to there, and try signing in for the first time! You may have some default test data, feel free to keep it or delete it as you please.</h4>
+        @{
+            var link = Html.ActionLink(
+                linkText: "REPLACE",
+                actionName: "Index",
+                controllerName: "MyHome",
+                routeValues: null,
+                htmlAttributes: new
+                {
+                    @class = "btn btn-success"
+                }
+            ).ToHtmlString();
+            var cleanLink = link.Replace("REPLACE", "<span class=\"glyphicon glyphicon-log-in\"></span>&nbsp;Go To MyHome");            
+        }
+        @Html.Raw(cleanLink)
+        <hr/>
+        <h5 class="text-center">Cheers, <br/> Admins at devinmajor.com</h5>
+    </div>
+</div>

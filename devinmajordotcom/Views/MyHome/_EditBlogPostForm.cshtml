@@ -1,0 +1,108 @@
+﻿@model devinmajordotcom.ViewModels.BlogPostViewModel
+@{
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "MyHome",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-primary",
+            @style = "",
+            @onClick = "ResetActiveImage(this)"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+@using (Ajax.BeginForm("AddEditBlogPost", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateBlogPosts(data);" }, new { @id = "EditBlogPostForm" }))
+{
+
+    <style>
+        input[type='text'].form-control {
+            color:white !important;
+        }
+        select option {
+           color: black;
+        }
+        select:not(:checked) {
+           color: white;
+        }
+    </style>
+
+    @Html.HiddenFor(x => x.BlogPostID)
+    @Html.HiddenFor(x => x.AuthorUserID, new { @id = "UserID2" })
+
+    <div class="blogPostFormContainer" style="color: white !important;">
+        
+        <div class="row">
+            <div class="col-sm-12 text-left">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                @Html.LabelFor(x => x.PostTitle, new { @style="font-weight:normal;" })
+            </div>
+            <div clas="col-sm-12 text-center">
+                @Html.TextBoxFor(x => x.PostTitle, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.PostTitle)
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-12 text-left">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                @Html.LabelFor(x => x.Body, new { @style = "font-weight:normal;" })
+            </div>
+            <div clas="col-sm-12 text-center" style="margin-top: 25px;">
+                @Html.TextAreaFor(x => x.Body, new { @class = "tinymce", @rows = "4", @placeholder = "This is the body of your blog post, where the majority of your content will go." })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.Body)
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-picture"></span>&nbsp;
+                @Html.LabelFor(x => x.BackgroundImage, new { @style = "font-weight:normal;" })
+            </div>
+            <br/>
+            <div clas="col-sm-12 text-center">
+                @Html.HiddenFor(x => x.BackgroundImage, new {@class = "favoriteBackgroundImage BackgroundImage", activeimage = "false" })
+                <img runat="server" src="@Url.Content(Model.BackgroundImage)" activepreview="false" id="previewImage" style="display: inline-block;" class="img-responsive previewImage" alt="Background Image">
+                <br/>
+                @Html.Raw(uploadButton)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.BackgroundImage)
+            </div>
+        </div>
+
+    </div>
+
+    <br/>
+    
+    var linkText = "<span class='fa fa-trash'></span>&nbsp;Remove Item";
+    var actionLink = Ajax.ActionLink("REPLACE", "RemoveBlogPostByID", "MyHome", new { ID = Model.BlogPostID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "UpdateBlogPosts(data);", OnFailure = "SettingsUpdateFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.BlogPostID, @class = "btn btn-danger deleteGroup deleteFavoriteLink", @style = "float:right;" });
+    
+
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;&nbsp;Save Changes</button>
+        </div>
+        <div class="col-sm-6 text-center">
+            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+        </div>
+    </div>
+
+}

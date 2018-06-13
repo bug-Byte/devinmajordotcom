@@ -1,0 +1,154 @@
+﻿@model devinmajordotcom.ViewModels.UserViewModel
+@{
+    var controllerName = (string)ViewBag.ControllerName;
+}
+<style>
+    
+</style>
+<section class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-popup">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="modal-title">
+                                <h2>devinmajor.com</h2>
+                            </div>
+
+                            <!-- NAV TABS -->
+                            <ul class="nav nav-tabs" role="tablist">                                
+                                <li class="active"><a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Sign In</a></li>
+                                <li><a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an Account</a></li>
+                            </ul>
+
+                            <!-- TAB PANES -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="sign_in">
+                                    @using (Ajax.BeginForm("Login", controllerName, new AjaxOptions { AllowCache = false, HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "HideLoginModal(data)", OnFailure = "LoginFailure()" }, new { @class = "loginForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.GUID, new { @id = "hiddenGUID1" })
+                                        @Html.HiddenFor(x => x.UserID)
+                                        @Html.Hidden("IsSigningUp", "False", new { @id = "IsSigningUp1" })
+                                        @Html.Hidden("IsUpdatingCredentials", "False", new { @id = "IsUpdatingCredentials1" })
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Email Address or Username: @*@Html.LabelFor(x => x.UserName)*@
+                                            </div>
+                                            <div class="col-sm-12 text-center">
+                                                @Html.TextBox("UserName", "", new { @class = "form-control signInUserName", @id = "UserName1", placeholder = "someone@domain.com" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.Password)
+                                            </div>
+                                            <div class="col-sm-12 text-center">
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control passwordField", @id = "Password1", @Value="", @required = "required", placeholder = "********", type = "password" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button type="button" onclick="$('#passwordResetForm').trigger('submit'); $('.spinner').fadeIn(500);" class="btn btn-link" style="text-decoration:none;"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Forgot your password?</button>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.UserName)
+                                            </div>
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.Password)
+                                            </div>
+                                            <div class="spinner" style="display: none;">
+                                                <span class="spinner-rotate"></span>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <button type="submit" class="form-control formSubmit" style="background: #ce3232; color: white;border-radius: 100px;margin-top: 20px;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Log In!</button>
+
+                                    }
+                                    @using (Ajax.BeginForm("SendPasswordResetEmail", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "PasswordResetSuccess(data);", OnFailure = "PasswordResetFailure(data);" }, new { @id = "passwordResetForm" }))
+                                    {
+                                        @Html.HiddenFor(x => x.GUID, new { @id = "hiddenGUID2" })
+                                        @Html.Hidden("UserName", null, new { @id = "notUserName", @class = "hiddenSignInUserName", required = "required" })
+                                        @Html.ValidationMessageFor(x => x.UserName)
+                                    }
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane fade in" id="sign_up">
+                                    @using (Html.BeginForm("UpdateCurrentUser", controllerName, FormMethod.Post, new { @class = "loginForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.UserIsActive)
+                                        @Html.HiddenFor(x => x.UserIsAdmin)
+                                        @Html.HiddenFor(x => x.UserID, new { @id="UserID1" })
+                                        @Html.HiddenFor(x => x.GUID, new { @id = "hiddenGUID3" })
+                                        @Html.Hidden("IsSigningUp", "True", new { @id = "IsSigningUp2" })
+                                        @Html.Hidden("IsUpdatingCredentials", "False", new { @id = "IsUpdatingCredentials2" })
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.EmailAddress)
+                                            </div>
+                                            <div class="col-sm-12 text-center">
+                                                @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control", @required = "required", @type = "email", placeholder = "someone@domain.com" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.UserName)
+                                            </div>
+                                            <div class="col-sm-12 text-center">
+                                                @Html.TextBox("UserName", "", new { @class = "form-control", @id = "UserName2", placeholder = "user_123" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;@Html.LabelFor(x => x.Password)
+                                            </div>
+                                            <div class="col-sm-12 text-center">
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @id = "Password2", @required = "required", @Value = "", placeholder = "********", type = "password" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.EmailAddress)
+                                            </div>
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.UserName)
+                                            </div>
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(x => x.Password)
+                                            </div>
+                                            <div class="spinner" style="display: none;">
+                                                <span class="spinner-rotate"></span>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <button type="submit" class="form-control modalSubmit" style="background: #ce3232; color: white;border-radius: 100px;margin-top: 20px;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Get Started!</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

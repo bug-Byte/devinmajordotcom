@@ -1,0 +1,236 @@
+﻿@model devinmajordotcom.ViewModels.MediaDashboardViewModel
+@{
+    Model.SidebarLinks = Model.SidebarLinks.OrderBy(x => x.Order).ToList();
+}
+
+@using (Ajax.BeginForm("_ManageMediaDashboard", "MediaDashboard", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "ManageMediaAjaxSuccess(data);", OnFailure = "AjaxFailure(data)" }, new { @id = "updateMediaDashboardForm" }))
+{
+    var count = 0;
+
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseMedia">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Main Settings</a>
+            </h4>
+        </div>
+        <div id="collapseMedia" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp;
+                        @Html.LabelFor(x => x.UserConfig.WebsiteTitle)
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        @Html.TextBoxFor(x => x.UserConfig.WebsiteTitle, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        @Html.ValidationMessageFor(x => x.UserConfig.WebsiteTitle)
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarFullTitle)
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.UserConfig.SidebarFullTitle, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarFullTitle)
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarColor)
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="customColorPicker input-group colorpicker-component" data-color="@Model.UserConfig.SidebarColor">
+                                    @Html.TextBoxFor(x => x.UserConfig.SidebarColor, new { @class = "form-control", @placeholder = "Pick a color, any color!" })
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarColor)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarCollapsedTitle)
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.UserConfig.SidebarCollapsedTitle, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarCollapsedTitle)
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                @Html.LabelFor(x => x.UserConfig.SidebarAccentColor)
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="customColorPicker input-group colorpicker-component" data-color="@Model.UserConfig.SidebarAccentColor">
+                                    @Html.TextBoxFor(x => x.UserConfig.SidebarAccentColor, new { @class = "form-control", @placeholder = "Pick a color, any color!" })
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.ValidationMessageFor(x => x.UserConfig.SidebarAccentColor)
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+        <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseMediaLinks">
+            <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+            &nbsp;&nbsp;
+            <h4 class="panel-title" style="display: inline;">
+                <a>Links</a>
+            </h4>
+        </div>
+        <div id="collapseMediaLinks" class="panel-collapse collapse">
+            <div class="panel-body">
+
+                <div id="mediaDashboardLinksContainer" style="overflow:auto !important;" class="">
+                    <ul id="mediaDashboardLinksList" class="mediaSortable">
+                        @foreach (var link in Model.SidebarLinks)
+                        {
+                            @Html.HiddenFor(x => x.SidebarLinks[count].ID, new { @class = "hiddenID hiddenInput_" + Model.SidebarLinks[count].ID })
+                            <li class="mediaDashboardLink handlebarsItem" id="mediaDashboardLink_@count" data-hiddeninputid="@Html.IdFor(x => x.SidebarLinks[count].Order)" style="padding-top: 10px; margin-bottom: 2vh;">
+                                @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationId, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
+                                @Html.HiddenFor(x => x.SidebarLinks[count].ParentApplicationName, new { @class = "hiddenInput_" + Model.SidebarLinks[count].ID })
+                                @Html.HiddenFor(x => x.SidebarLinks[count].Order, new { @class = "hiddenOrder hiddenInput_" + Model.SidebarLinks[count].ID })
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+                                    </div>
+                                    <div class="col-sm-8 text-center">
+                                        <h4>
+                                            <span class="iconContainer"><span class="fa @Model.SidebarLinks[count].DisplayIcon"></span></span>
+                                            &nbsp;&nbsp;
+                                            <span class="titleContainer">@Model.SidebarLinks[count].DisplayName</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @{
+                                            var linkText = "<span class='fa fa-trash'></span>";
+                                            var actionLink = Ajax.ActionLink("REPLACE", "RemoveMediaDashboardLink", "MediaDashboard", new { ID = Model.SidebarLinks[count].ID }, new AjaxOptions() { HttpMethod = "GET", OnSuccess = "RemoveMediaLink('#deleteLink_" + Model.SidebarLinks[count].ID + "')", OnFailure = "ManageMediaAjaxFailure" }, new { data_content = linkText, @id = "deleteLink_" + Model.SidebarLinks[count].ID, @class = "btn btn-danger deleteGroup deleteMediaLink", @style = "float:right;" });
+                                            @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                        }
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-6 text-center">
+                                        <div style="margin-bottom: 8px" class="input-group">
+                                            <span class="input-group-btn">
+                                                <button data-placement="left"
+                                                        class="btn btn-default iconpicker"
+                                                        name="@Html.NameFor(x => x.SidebarLinks[count].DisplayIcon)"
+                                                        role="iconpicker"
+                                                        data-iconset="fontawesome"
+                                                        data-icon="@Model.SidebarLinks[count].DisplayIcon"
+                                                        type="button"></button>
+                                            </span>
+                                            @Html.TextBoxFor(x => x.SidebarLinks[count].DisplayName, new { @class = "form-control namer", style = "margin-bottom: 0px", placeholder = "Display Name" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 text-center">
+                                        <div style="margin-bottom: 8px" class="input-group">
+                                            <div class="input-group-addon">URL</div>
+                                            @Html.TextBoxFor(x => x.SidebarLinks[count].URL, new { @class = "form-control", style = "margin-bottom: 0px", placeholder = "http://www.google.ca/" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4 text-center">
+                                        <div class="form-group">
+                                            <div class="checkbox-inline">
+                                                <label class="switch">
+                                                    @Html.EditorFor(o => o.SidebarLinks[count].IsDefault, new { htmlAttributes = new { @class = "toggler" } })
+                                                    <div class="toggleslider round"></div>
+                                                </label>
+                                                @Html.LabelFor(o => o.SidebarLinks[count].IsDefault, "Is the Default Link?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <div class="form-group">
+                                            <div class="checkbox-inline">
+                                                <label class="switch">
+                                                    @Html.EditorFor(o => o.SidebarLinks[count].IsPublic, new { htmlAttributes = new { @class = "toggler" } })
+                                                    <div class="toggleslider round"></div>
+                                                </label>
+                                                @Html.LabelFor(o => o.SidebarLinks[count].IsPublic, "Is Link Public?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <div class="form-group">
+                                            <div class="checkbox-inline">
+                                                <label class="switch">
+                                                    @Html.EditorFor(o => o.SidebarLinks[count].IsEnabled, new { htmlAttributes = new { @class = "toggler" } })
+                                                    <div class="toggleslider round"></div>
+                                                </label>
+                                                @Html.LabelFor(o => o.SidebarLinks[count].IsEnabled, "Is Link Enabled?", new { @style = "font-weight: normal; margin-bottom: 0px;" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        @Html.ValidationMessageFor(x => x.SidebarLinks[count].DisplayName)
+                                    </div>
+                                </div>
+                            </li>
+                            count++;
+                        }
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button class="form-control btn btn-success" id="addNewMediaDashboardLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Link</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+            <input class="form-control btn btn-success" id="updateMediaDashboard" type="submit" value="Update Media Dashboard">
+        </div>
+    </div>
+
+}
+

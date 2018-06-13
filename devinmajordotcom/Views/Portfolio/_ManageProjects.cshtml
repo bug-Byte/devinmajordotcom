@@ -1,0 +1,126 @@
+﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
+@{
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "Home",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Background Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-default",
+            @onClick = "ResetActiveImage(this)"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+    var count = 0;
+}
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse4">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>Projects</a>
+        </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+                    
+            <div id="projectsContainer" style="overflow:auto !important;" class="">
+                <ul id="projectsList" class="mediaSortable">
+                    @{
+                        count = 0;
+                    }
+                    @foreach (var project in Model.PortfolioProjects)
+                    {
+                        @Html.HiddenFor(x => x.PortfolioProjects[count].ProjectID, new {@class = "hiddenProjectID hiddenInput_" + Model.PortfolioProjects[count].ProjectID })
+                        <li class="projectLink handlebarsItem" id="projectLink_@count" style="padding-top: 10px; margin-bottom: 2vh;">
+                            <div class="row">
+                                <div class="col-sm-8 col-sm-offset-2 text-center">
+                                    <h4>
+                                        <span class="titleContainer">@Model.PortfolioProjects[count].ProjectName</span>
+                                    </h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    @{
+                                        var linkText = "<span class='fa fa-trash'></span>";
+                                        var actionLink = Ajax.ActionLink("REPLACE", "RemoveProject", "Portfolio", new {ID = Model.PortfolioProjects[count].ProjectID}, new AjaxOptions() {HttpMethod = "GET", OnSuccess = "RemoveProject('#deleteProject_" + Model.PortfolioProjects[count].ProjectID + "')", OnFailure = "ManagePortfolioSkillsAjaxFailure"}, new {data_content = linkText, @id = "deleteProject_" + Model.PortfolioProjects[count].ProjectID, @class = "btn btn-danger deleteGroup deleteProjectLink", @style = "float:right;"});
+                                        @Html.Raw(actionLink.ToHtmlString().Replace("REPLACE", linkText))
+                                    }
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                                    @Html.LabelFor(x => x.PortfolioProjects[count].ProjectName, new { @style = "font-weight:normal;position:relative;" })
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    @Html.TextBoxFor(x => x.PortfolioProjects[count].ProjectName, new { @class = "form-control namer", style = "margin-bottom: 0px;text-align:center;", placeholder = "Display Name" })
+                                </div>
+                            </div>
+                                    
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                                    @Html.LabelFor(x => x.PortfolioProjects[count].ProjectDescription, new { @style = "font-weight:normal;position:relative;" })
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    @Html.TextAreaFor(x => x.PortfolioProjects[count].ProjectDescription, new { @class = "form-control", rows = "4", placeholder = "Project Description (EX: This project took 6 months and involved several people...)" })
+                                </div>
+                            </div>
+                                    
+                            <br />
+                                
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
+                                    @Html.LabelFor(x => x.PortfolioProjects[count].CommaDelimitedProjectFilters, new { @style = "font-weight:normal;position:relative;" })
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    @Html.TextBoxFor(x => x.PortfolioProjects[count].CommaDelimitedProjectFilters, new { @class = "tags untouched" })
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;
+                                    @Html.LabelFor(x => x.PortfolioProjects[count].EncodedImage, new { @style = "font-weight:normal;position:relative;" })
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    @Html.HiddenFor(x => x.PortfolioProjects[count].EncodedImage, new { @id = "EncodedImage_" + count, @class="BackgroundImage", activeimage="false" })
+                                    <img runat="server" src="@Url.Content(Model.PortfolioProjects[count].EncodedImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                                    <br />
+                                    @Html.Raw(uploadButton)
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    @Html.ValidationMessageFor(x => x.PortfolioProjects[count].ProjectName)
+                                </div>
+                            </div>
+                        </li>
+                        count++;
+                    }
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button class="form-control btn btn-success" id="addNewProjectLink" type="button" style="border-color: #00bc8c !important; background-color: #00bc8c !important;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Project</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

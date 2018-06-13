@@ -1,0 +1,101 @@
+﻿<script type="text/x-handlebars-template" id="jobTemplateScript">
+    <input class="hiddenJobID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="Jobs_{{newID}}__ID" name="Jobs[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="jobLink handlebarsItem" id="jobLink_{{newID}}" style="padding-top: 10px; margin-bottom: 2vh;">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <h4>
+                    <span class="titleContainer"></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-danger deleteGroup deleteJobLink" data-ajax="true" data-ajax-failure="ManagePortfolioCareerAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveJob('#deleteJob_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/Portfolio/RemoveJob/{{newLinkCounter}}" id="deleteJob_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-certificate" style=""></span>&nbsp;&nbsp;
+                        <label for="Jobs_{{newID}}__JobTitle" style="font-weight:normal;position:relative;">Job/Position Title * : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <input class="form-control namer" data-val="true" data-val-required="The Job/Position Title * :  field is required." id="Jobs_{{newID}}__JobTitle" name="Jobs[{{newID}}].JobTitle" placeholder="Display Name" style="margin-bottom: 0px;text-align:center;" type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-pencil" style=""></span>&nbsp;&nbsp;
+                        <label for="Jobs_{{newID}}__CompanyName" style="font-weight:normal;position:relative;">Company Name : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <input class="form-control" id="Jobs_{{newID}}__CompanyName" name="Jobs[{{newID}}].CompanyName" type="text" value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-education" style=""></span>&nbsp;&nbsp;
+                <label for="Jobs_{{newID}}__Description" style="font-weight:normal;position:relative;">Job Description : </label>
+            </div>
+            <div class="col-sm-12 text-center">
+                <textarea class="form-control" cols="20" id="Jobs_{{newID}}__Description" name="Jobs[{{newID}}].Description" placeholder="Your job description goes here. Explain your daily duties, etc..." rows="4"></textarea>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-calendar" style=""></span>&nbsp;&nbsp;
+                        <label for="Jobs_{{newID}}__StartDate" style="font-weight:normal;position:relative;">Start Date : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input class="form-control datetimepicker" data-val="true" data-val-date="The field Start Date :  must be a date." id="Jobs_{{newID}}__StartDate" name="Jobs[{{newID}}].StartDate" type="text" value="">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar" style=""></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-calendar" style=""></span>&nbsp;&nbsp;
+                        <label for="Jobs_{{newID}}__EndDate" style="font-weight:normal;position:relative;">End Date : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input class="form-control datetimepicker" data-val="true" data-val-date="The field End Date :  must be a date." id="Jobs_{{newID}}__EndDate" name="Jobs[{{newID}}].EndDate" type="text" value="">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar" style=""></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="Jobs[{{newID}}].JobTitle" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </li>
+</script>

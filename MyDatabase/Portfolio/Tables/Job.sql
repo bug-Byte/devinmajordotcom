@@ -1,0 +1,10 @@
+﻿CREATE TABLE [Portfolio].[Job]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL,
+	JobTitle VARCHAR(MAX) NOT NULL,
+	CompanyName VARCHAR(MAX) NULL,
+	[Description] VARCHAR(MAX) NULL,
+	BeginDate DATETIME NULL,
+	EndDate DATETIME NULL,
+	PRIMARY KEY(Id)
+)

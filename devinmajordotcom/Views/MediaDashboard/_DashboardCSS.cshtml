@@ -1,0 +1,68 @@
+﻿@model devinmajordotcom.ViewModels.MediaDashboardUserConfigViewModel
+<style>
+    .active .menu li:after {
+        background: @Model.SidebarAccentColor;
+    }
+
+    #sidebar {
+        background: @Model.SidebarColor;
+        color: #fff;
+        transition: all 0.3s;
+        min-width: 250px;
+        max-width: 250px;
+        min-height: auto;
+    }
+
+    #sidebar ul li a:hover {
+        color: @Model.SidebarAccentColor;
+        background: #fff;
+    }
+
+    #sidebar ul li.active > a, a[aria-expanded="true"] {
+        color: #fff;
+        background: @Model.SidebarAccentColor;
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: @Model.SidebarAccentColor;
+    }
+
+    .menu li a:hover {
+        color: @Model.SidebarColor;
+        -webkit-transition: all 0.3s ease-in;
+        transition: all 0.3s ease-in;
+    }
+
+    .menu li.current a {
+        color: #fff;
+    }
+
+    .menu li a.active {
+        background: @Model.SidebarColor;
+        color: white;
+        opacity: 0.8;
+    }
+
+    .menu li a.active:after {
+        position: absolute;
+        left: 5.7em;
+        top: 0;
+        content: "";
+        border: 2.5em solid transparent;
+        border-left-color: @Model.SidebarColor;
+        border-width: 2.5em 1em;
+        z-index: 1006;
+    }
+
+    .active .menu li a:hover:after {
+        position: absolute;
+        left: 6.7em;
+        top: .2em;
+        content: "";
+        border: 2.5em solid transparent;
+        border-left-color: @Model.SidebarColor;
+        border-width: 2.5em 1em;
+        z-index: 1006;
+    }
+</style>

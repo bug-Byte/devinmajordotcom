@@ -1,0 +1,282 @@
+﻿@model devinmajordotcom.ViewModels.MyHomeUserConfigViewModel
+@{
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "Home",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Background Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-default",
+            @onClick = "ResetActiveImage(this)"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+}
+@using (Ajax.BeginForm("_HomeSettingsForm", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateMyHomeSettingsAjaxSuccess();" }, new { @id = "EditGuestSettingsForm" }))
+{
+
+    @Html.HiddenFor(x => x.UserID)
+    @Html.HiddenFor(x => x.ShowVisitorsAdminHome, new { @id = "hiddenOption2" })
+    @*@Html.HiddenFor(x => x.AddNewFavoriteImage)
+    @Html.HiddenFor(x => x.DefaultFavoriteImage)
+    @Html.HiddenFor(x => x.DefaultBlogPostImage)*@
+
+    <div id="formContainer">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.WebsiteName, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.WebsiteName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.WebsiteName)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.Greeting, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.Greeting, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.Greeting)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.BookmarksTitle, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.BookmarksTitle, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.BookmarksTitle)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.BlogTitle, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.BlogTitle)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.BackgroundImage, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                @Html.HiddenFor(x => x.BackgroundImage, new { @class = "BackgroundImage", activeimage = "false" })
+                <img runat="server" src="@Url.Content(Model.BackgroundImage)" activepreview="false" id="previewImage" class="img-responsive previewImage" alt="Background Image">
+                @Html.Raw(uploadButton)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.BackgroundImage)
+            </div>
+        </div>
+
+        <hr />
+
+        @if (Model.IsAdmin)
+        {
+            <div class="row">
+                <div class="col-sm-6">
+                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                    @Html.LabelFor(x => x.ShowVisitorsAdminHome, new { style = "font-weight:normal;" })
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="checkbox-inline">
+                            <label class="switch">
+                                @Html.EditorFor(x => x.ShowVisitorsAdminHome, new { htmlAttributes = new { @class = "toggler" } })
+                                <div class="toggleslider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ShowVisitorsAdminHome)
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.IsEditable, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            @Html.EditorFor(x => x.IsEditable, new { htmlAttributes = new { @class = "toggler" } })
+                            <div class="toggleslider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.IsEditable)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.ShowBanner, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            @Html.EditorFor(x => x.ShowBanner, new { htmlAttributes = new { @class = "toggler" } })
+                            <div class="toggleslider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.ShowBanner)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.ShowDateAndTime, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            @Html.EditorFor(x => x.ShowDateAndTime, new { htmlAttributes = new { @class = "toggler" } })
+                            <div class="toggleslider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.ShowDateAndTime)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.ShowWeather, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            @Html.EditorFor(x => x.ShowWeather, new { htmlAttributes = new { @class = "toggler" } })
+                            <div class="toggleslider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.ShowWeather)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.ShowBookmarks, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            @Html.EditorFor(x => x.ShowBookmarks, new { htmlAttributes = new { @class = "toggler" } })
+                            <div class="toggleslider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.ShowBookmarks)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;
+                @Html.LabelFor(x => x.ShowBlog, new { style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            @Html.EditorFor(x => x.ShowBlog, new { htmlAttributes = new { @class = "toggler" } })
+                            <div class="toggleslider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.ShowBlog)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12 text-center" style="margin-bottom:5px;">
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save"></span>&nbsp;Save Settings</button>
+            </div>
+        </div>
+
+    </div>
+}

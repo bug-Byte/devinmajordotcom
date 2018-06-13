@@ -1,0 +1,87 @@
+﻿@using devinmajordotcom.ViewModels;
+@{
+    var userConfigViewModel = (MyHomeUserConfigViewModel)ViewBag.CurrentUserConfig;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>@userConfigViewModel.WebsiteName</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Action("../Content/Images/favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Action("../Content/Images/favicon/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Action("../Content/Images/favicon/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Action("../Content/Images/favicon/site.webmanifest")">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    @Styles.Render("~/Content/homecss")
+    @Styles.Render("~/Content/FineUploader/fineUploaderCSS")
+    
+    <style>
+        #home {
+            background-image: url('@Url.Content(userConfigViewModel.BackgroundImage)');
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- PRE LOADER -->
+<section class="preloader">
+    <div class="spinner">
+        <span class="spinner-rotate"></span>
+    </div>
+</section>
+
+@if (userConfigViewModel != null && userConfigViewModel.ShowBanner)
+{
+    <!-- MENU -->
+    <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <!-- lOGO TEXT HERE -->
+                <a href="#" data-toggle="collapse" data-target="#mainLinks" class="navbar-brand">@userConfigViewModel.WebsiteName</a>
+            </div>
+
+            <!-- MENU LINKS -->
+            <div id="mainLinks" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-nav-first">
+                    <li><a href="#home" class="smoothScroll">Home</a></li>
+                    <li><a href="#work" class="smoothScroll">@userConfigViewModel.BookmarksTitle</a></li>
+                    <li><a href="#blog" class="smoothScroll">@userConfigViewModel.BlogTitle</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
+
+        </div>
+    </section>
+}
+
+@RenderBody()
+
+<div id="ajaxAlertContainer"></div>
+
+<!-- SCRIPTS -->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBsVa2tZBcbxzQDgm8cmfaJ4MoVDB8xySg&sensor=true"></script>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/FineUploader/fineUploaderScripts")
+@Scripts.Render("~/bundles/tinymce/tinymceScripts")
+@Scripts.Render("~/bundles/homeScripts")
+    
+@RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿@using Newtonsoft.Json
+@using devinmajordotcom.ViewModels
+@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ControllerName = ViewBag.ControllerName;
+}
+
+<div id="mainContainer">
+
+    @Html.Partial("_Apps", Model)
+
+    @Html.Partial("_ServerStatus", Model)
+
+    @Html.Partial("_ContactContent", Model)
+
+    @if (Model.CurrentUserViewModel.UserIsAdmin && !string.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.IsEmailConfirmed && Model.CurrentUserViewModel.UserIsActive)
+    {
+        Model.CurrentApplicationConfig.CurrentUserViewModel = Model.CurrentUserViewModel;
+        @Html.Partial("_ApplicationManager", Model.CurrentApplicationConfig)
+    }
+
+    @section scripts {
+
+        @if (String.IsNullOrEmpty(Model.CurrentUserViewModel.EmailAddress) && Model.CurrentUserViewModel.UserIsAdmin && Model.CurrentUserViewModel.UserIsActive)
+        {
+            <script>
+                var adminHtml = '@Html.Raw(@Html.Partial("_AdminFirstRunModal", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+                $('body').append(adminHtml);
+                $("#adminFirstRunFormModal").modal();
+            </script>
+        }
+
+    }
+
+</div>
+
+@Html.Partial("../MediaDashboard/_NewLink")
+@Html.Partial("_NewBannerLink")
+@Html.Partial("_NewSiteLink")
+@Html.Partial("../Portfolio/_NewTechSkill")
+@Html.Partial("../Portfolio/_NewLanguageSkill")
+@Html.Partial("../Portfolio/_NewContactLink")
+@Html.Partial("../Portfolio/_NewWorkSkill")
+@Html.Partial("../Portfolio/_NewProject")
+@Html.Partial("../Portfolio/_NewAcademic")
+@Html.Partial("../Portfolio/_NewJob")

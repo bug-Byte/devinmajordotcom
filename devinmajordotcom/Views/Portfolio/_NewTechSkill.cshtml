@@ -1,0 +1,13 @@
+﻿<script type="text/x-handlebars-template" id="techSkillTemplateScript">
+    <input class="hiddenTechSkillID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field TechSkillID must be a number." data-val-required="The TechSkillID field is required." id="TechSkills_{{newID}}__TechSkillID" name="TechSkills[{{newID}}].TechSkillID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="techSkill techSkill_{{newID}} handlebarsItem" style="padding-top: 10px; margin-bottom: 2vh;">
+        <div class="row">
+            <div class="col-sm-12 text-left">
+                <textarea class="form-control" cols="20" data-val="true" data-val-length="Skill Description cannot be longer than 500 characters." data-val-length-max="500" data-val-required="The Skill Description * :  field is required." id="TechSkills_{{newID}}__SkillDescription" name="TechSkills[{{newID}}].SkillDescription" rows="2"></textarea>
+            </div>
+            <div class="col-sm-12 text-right">
+                <a class="btn btn-danger deleteSkillGroup deleteSkillLink" data-ajax="true" data-ajax-failure="ManagePortfolioSkillsAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveSkill('.techSkill_{{newID}}', 'techSkill')" data-content="<span class='fa fa-trash'></span>&amp;nbsp;Remove Skill" href="/Portfolio/RemoveTechSkill/{{newLinkCounter}}" id="deleteLangugeSkillLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span>&nbsp;Remove Skill</a>
+            </div>
+        </div>
+    </li>
+</script>

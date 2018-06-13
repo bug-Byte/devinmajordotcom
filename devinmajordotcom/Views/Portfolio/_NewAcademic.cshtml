@@ -1,0 +1,101 @@
+﻿<script type="text/x-handlebars-template" id="academicTemplateScript">
+    <input class="hiddenAcademicID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="Academics_{{newID}}__ID" name="Academics[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="academicLink handlebarsItem" id="academicLink_{{newID}}" style="padding-top: 10px; margin-bottom: 2vh;">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <h4>
+                    <span class="titleContainer"></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-danger deleteGroup deleteAcademicLink" data-ajax="true" data-ajax-failure="ManagePortfolioCareerAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveAcademic('#deleteAcademic_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/Portfolio/RemoveAcademic/{{newLinkCounter}}" id="deleteAcademic_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-certificate" style=""></span>&nbsp;&nbsp;
+                <label for="Academics_{{newID}}__CertificateName" style="font-weight:normal;position:relative;">Certificate Name * : </label>
+            </div>
+            <div class="col-sm-12 text-center">
+                <input class="form-control namer" id="Academics_{{newID}}__CertificateName" name="Academics[{{newID}}].CertificateName" placeholder="Display Name" style="margin-bottom: 0px;text-align:center;" type="text" value="">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-pencil" style=""></span>&nbsp;&nbsp;
+                        <label for="Academics_{{newID}}__ProgramName" style="font-weight:normal;position:relative;">Program Name : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <input class="form-control" id="Academics_{{newID}}__ProgramName" name="Academics[{{newID}}].ProgramName" type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-education" style=""></span>&nbsp;&nbsp;
+                        <label for="Academics_{{newID}}__SchoolName" style="font-weight:normal;position:relative;">School/Institution Name : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <input class="form-control" id="Academics_{{newID}}__SchoolName" name="Academics[{{newID}}].SchoolName" type="text" value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-calendar" style=""></span>&nbsp;&nbsp;
+                        <label for="Academics_{{newID}}__StartDate" style="font-weight:normal;position:relative;">Start Date : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input class="form-control datetimepicker" data-val="true" data-val-date="The field Start Date :  must be a date." id="Academics_{{newID}}__StartDate" name="Academics[{{newID}}].StartDate" type="text" value="">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar" style=""></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <span class="glyphicon glyphicon-calendar" style=""></span>&nbsp;&nbsp;
+                        <label for="Academics_{{newID}}__EndDate" style="font-weight:normal;position:relative;">End Date : </label>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input class="form-control datetimepicker" data-val="true" data-val-date="The field End Date :  must be a date." id="Academics_{{newID}}__EndDate" name="Academics[{{newID}}].EndDate" type="text" value="">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar" style=""></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="Academics[{{newID}}].CertificateName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </li>
+</script>

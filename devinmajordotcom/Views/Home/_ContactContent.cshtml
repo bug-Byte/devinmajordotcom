@@ -1,0 +1,17 @@
+﻿@model devinmajordotcom.ViewModels.MainLandingPageViewModel
+@{
+    var config = Model.LandingPageBannerLinks.FirstOrDefault(x => x.IsEnabled && x.URL == "#contact");
+}
+<div style="display:none;" class="inner cover" id="contact">
+    
+    @if (config != null)
+    {
+        <h2 class="title"><strong>@config.Description</strong></h2>
+        <hr>
+        <p style="color: #71cef5;">@config.Directive</p>
+        <hr>
+    
+        @Html.Partial("_ContactEmailForm", Model.ContactEmailData) 
+    }
+
+</div>

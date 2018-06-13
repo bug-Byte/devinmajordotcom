@@ -1,0 +1,52 @@
+﻿@Html.Raw(File.ReadAllText(Server.MapPath("~/Views/Shared/simple-thumbnails.html")))
+@{
+    ViewBag.ControllerName = ViewBag.ControllerName;
+}
+<div class="modal-body" style="color: white;">
+    <div class="row helpBox">
+        <div class="col-sm-2 fa fa-info-circle" id="infoIcon"></div>
+        <div class="col-sm-9">
+            You are only allowed to upload images here, since it's going to be used as your background!
+        </div>
+    </div>
+    <div id="uploader"></div>
+    <div>
+        <p id="resultMessage"></p>
+    </div>
+</div>
+
+<script>
+    var uploader = new qq.FineUploader({
+        element: document.getElementById("uploader"),
+        request: {
+            endpoint: "@Url.Action("UploadImage", ViewBag.ControllerName)"
+        },
+        debug: true,
+        sizeError: "Size error",
+        multiple: false,
+        validation: {
+            sizeLimit: 524288000,
+            allowedExtensions: ['jpg', 'gif', 'png', 'jpeg', 'bmp'],
+            itemLimit: 1
+        },
+        callbacks: {
+            onComplete: function (id, name, responseJson) {
+                if (responseJson.success === true) {
+                    $('#resultMessage').css('color', 'green');
+                    $('#resultMessage').text(responseJson.message);
+                    $(".BackgroundImage[activeimage='true']").val(responseJson.file);
+                    $(".previewImage[activepreview='true']").attr("src", responseJson.file.toString().replace("~/",""));
+                    $("#formModalImageUploader").modal('toggle');
+                }
+            },
+            onError: function (id, name, errorReason) {
+                $('#resultMessage').css('color', 'crimson');
+                $('#resultMessage').text(errorReason);
+            },
+            onSubmit: function (id, name) {
+                $('#resultMessage').css('color', 'green');
+                $('#resultMessage').text('File is currently being processed.');
+            }
+        }
+    })
+</script>

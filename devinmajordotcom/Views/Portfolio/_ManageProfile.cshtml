@@ -1,0 +1,162 @@
+﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
+
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse2">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>Personal Profile</a>
+        </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <h5 class="text-center" style="font-weight: bold;">General Details</h5>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.ProfileDetails.DateOfBirth, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class='input-group date' id='date'>
+                            @Html.TextBoxFor(x => x.ProfileDetails.DateOfBirth, new { @class = "form-control datetimepicker" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                            
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ProfileDetails.DateOfBirth)
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.ProfileDetails.Address, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.ProfileDetails.Address, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ProfileDetails.Address)
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.ProfileDetails.PhoneNumber, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.ProfileDetails.PhoneNumber, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ProfileDetails.PhoneNumber)
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.ProfileDetails.Email, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.ProfileDetails.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ProfileDetails.Email)
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.ProfileDetails.WebsiteText, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.ProfileDetails.WebsiteText, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteText)
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.ProfileDetails.WebsiteURL, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.ProfileDetails.WebsiteURL, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.ProfileDetails.WebsiteURL)
+                </div>
+            </div>
+
+            <br />
+
+            <h5 class="text-center" style="font-weight: bold;">Describe Yourself</h5>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            @Html.LabelFor(x => x.PersonalDescription.Adjective1, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.TextBoxFor(x => x.PersonalDescription.Adjective1, new { @class = "form-control" })
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.TextBoxFor(x => x.PersonalDescription.Adjective2, new { @class = "form-control" })
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.TextBoxFor(x => x.PersonalDescription.Adjective3, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            @Html.LabelFor(x => x.PersonalDescription.Blurb, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.TextAreaFor(x => x.PersonalDescription.Blurb, new { @class = "tinymce", @rows = "4", @placeholder = "Skill Description (Ex: I am also 21 years old, I am into running and bike riding, and love long walks on the beach!)" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.PersonalDescription.Blurb)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@using devinmajordotcom.ViewModels
+@model BlogPostViewModel
+@{
+    Layout = "../Shared/_BlogLayout.cshtml";
+}
+
+<div class="container">
+
+    @if (Model.BlogPostID == 0)
+    {
+        @Html.Partial("_Error", new HandleErrorInfo(new Exception(), "MyHome", "BlogPost"))
+    }
+    else
+    {
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="mt-4 blogHoverItem">@Model.PostTitle</h1>
+                <p class="lead">
+                    Authored by:
+                    <a href="#" class="blogHoverItem">@Model.AuthorUserName</a>
+                </p>
+                <hr />
+                <p class="blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Posted on <span class="datetime">@Model.CreatedOn</span></p>
+                @if (Model.ModifiedOn != Model.CreatedOn)
+                {
+                    <p class="blogHoverItem"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Last edited on <span class="datetime">@Model.ModifiedOn</span></p>
+                }
+                <hr />
+            </div>
+
+            <div class="col-lg-12">
+                <div class="blog-image">
+                    <img runat="server" src="@Url.Content(Model.BackgroundImage)" class="img-responsive img-fluid rounded" alt="Blog Post Image">
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <hr />
+                @Html.Raw(Model.Body)
+                <hr />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" id="commentsContainer">
+                @Html.Partial("_BlogPostComments", Model.PostComments)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.Partial("_NewComment", Model.NewComment)
+            </div>
+        </div>
+
+        <br />
+
+        @section scripts {
+            <script>
+                RefreshTinyMce();
+            </script>
+        }
+    }
+
+</div>

@@ -1,0 +1,62 @@
+﻿@model devinmajordotcom.ViewModels.ApplicationConfigViewModel
+@{ 
+    ViewBag.ControllerName = "Home";
+}
+<div style="display:none;" class="inner cover" id="appmanager">
+    <h1 class="cover-heading">Application Manager</h1>
+    <p class="lead" style="color: #71cef5;">Manage settings for all existing apps.</p>   
+
+    <button type="button" onclick="UpdateAccountModal();" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update Account</button>
+
+    @{
+        var link2 = Html.ActionLink("REPLACE", "Logout", null, new { @class = "btn btn-primary" }).ToHtmlString();
+        var cleanLink2 = link2.Replace("REPLACE", "<span class='glyphicon glyphicon-log-out'></span>&nbsp;Log Out");
+    }
+
+    @Html.Raw(cleanLink2)
+
+    @if (Model.LandingPageApplicationLinks != null && Model.LandingPageApplicationLinks.Count > 0)
+    {
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+
+                @Html.Partial("_ManageLandingPage", Model)
+
+                @foreach (var appDataModel in Model.LandingPageApplicationLinks)
+                {
+
+                    <div class="appContainer work-wrapper" style="background:transparent;" id="@appDataModel.DisplayName">
+                        <h3>@appDataModel.DisplayName</h3>
+                        <hr>
+                        <div class="settingsContainer">
+                            @if (appDataModel.Controller == "MediaDashboard" && appDataModel.Action == "Index")
+                            {
+                                @Html.Partial("../MediaDashboard/_ManageMediaDashboard", Model.CurrentMediaDashboardData)
+                            }
+                            @if (appDataModel.Controller == "MyHome" && appDataModel.Action == "Index")
+                            {
+                                @Html.Partial("../MyHome/_ManageMyHome", Model.CurrentMyHomeData)
+                            }
+                            @if (appDataModel.Controller == "Portfolio" && appDataModel.Action == "Index")
+                            {
+                                @Html.Partial("../Portfolio/_ManagePortfolio", Model.CurrentPortfolioData)
+                            }
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    }
+</div>
+@section scripts {
+    <script>
+        var updateCredsHtml = '@Html.Raw(@Html.Partial("_UpdateCredentials", Model.CurrentUserViewModel).ToHtmlString().Replace(Environment.NewLine, ""))';
+        $('#formModalUpdateCreds').html(updateCredsHtml);
+        $.validator.unobtrusive.parse('#updateCredsForm');
+        $("#IsUpdatingCredentials9").val(true);
+        $("#IsUpdatingCredentials9").attr("value", "True");
+    </script>
+}

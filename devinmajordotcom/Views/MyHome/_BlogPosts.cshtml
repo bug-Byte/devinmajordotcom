@@ -1,0 +1,85 @@
+﻿@model devinmajordotcom.ViewModels.MyHomeViewModel
+@{ 
+    var linkCount = 1;
+    var newRowHtml = "</div><br/><div class='row'>";
+}
+<div class="row">
+    
+    @if (Model.CurrentUserViewModel.UserIsLoggedIn || Model.UserConfig.IsEditingMasterSettings)
+    {
+        <div class="col-md-6 col-sm-6 text-center">
+            <div class="media blog-thumb work-thumb" style="border: 1px solid white; background-color: transparent;">
+                <div class="work-info" id="AddNewBlogPostButton" style="height: 275px;">
+                    @{
+                        var uploadButton = Ajax.ActionLink("REPLACE", "_AddBlogPostForm", "MyHome",
+                            new {userID = Model.CurrentUserViewModel.UserID},
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                OnComplete = "InitializeModal('#formModalAddEdit', 'Add New Item');",
+                                OnFailure = "SettingsUpdateFailure();",
+                                UpdateTargetId = "formModalBodyHolder"
+                            },
+                            new
+                            {
+
+                            }).ToHtmlString().Replace("REPLACE", "<h3>+</h3><small>Add New Item</small>");
+                    }
+                    @Html.Raw(uploadButton)
+                </div>
+            </div>
+        </div>
+
+        if (linkCount % 4 == 0)
+        {
+            @Html.Raw(newRowHtml)
+        }
+    }
+
+    @foreach (var post in Model.BlogPosts.OrderByDescending(x => x.CreatedOn))
+    {
+        <div class="col-md-6 col-sm-6">
+            <!-- BLOG THUMB -->
+            <div class="media blog-thumb">
+                <div class="media-object media-left">
+                    <img runat="server" src="@Url.Content(post.BackgroundImage)" class="img-responsive btn-block image-popup" alt="">
+                </div>
+                <div class="media-body blog-info">
+                    <small><i class="fa fa-clock-o"></i><span class="datetime">@post.CreatedOn</span></small>
+                    <h3>
+                        @{
+                            var link1 = Html.ActionLink("REPLACE", "BlogPost", new { ID = post.BlogPostID }).ToHtmlString();
+                            var cleanLink1 = link1.Replace("REPLACE", post.PostTitle);
+                        }
+
+                        @Html.Raw(cleanLink1)
+                    </h3>
+                    <p>
+                        @{
+                            var splitString = post.Body.Split(' ');
+                            var wordCount = splitString.Length;
+                            string partialBody;
+                            if (wordCount <= 25)
+                            {
+                                partialBody = post.Body;
+                            }
+                            else
+                            {
+                                partialBody = post.Body.Substring(0, post.Body.IndexOf(splitString[25])) + "...";
+                            }
+                        }
+                        @Html.Raw(partialBody)
+                    </p>
+                    @{
+                        var link2 = Html.ActionLink("REPLACE", "BlogPost", "MyHome", new { ID = post.BlogPostID }, new { @class="btn section-btn" }).ToHtmlString();
+                        var cleanLink2 = link2.Replace("REPLACE", "Read Full Post");
+                    }
+
+                    @Html.Raw(cleanLink2)
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>

@@ -1,0 +1,84 @@
+﻿<script type="text/x-handlebars-template" id="mediaDashboardLinkTemplateScript">
+
+    <input class="newLinkInput hiddenID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ID must be a number." data-val-required="The ID field is required." id="SidebarLinks_{{newID}}__ID" name="SidebarLinks[{{newID}}].ID" type="hidden" value="{{newLinkCounter}}" style="">
+
+    <li class="mediaDashboardLink" id="mediaDashboardLink_{{newID}}" data-hiddeninputid="SidebarLinks_{{newID}}__Order" style="padding-top: 10px; margin-bottom: 2vh;">
+        <input class="newLinkInput hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ParentApplicationId must be a number." data-val-required="The ParentApplicationId field is required." id="SidebarLinks_{{newID}}__ParentApplicationId" name="SidebarLinks[{{newID}}].ParentApplicationId" type="hidden" value="3" style="">
+        <input class="newLinkInput hiddenInput_{{newLinkCounter}}" id="SidebarLinks_{{newID}}__ParentApplicationName" name="SidebarLinks[{{newID}}].ParentApplicationName" type="hidden" value="Plex Media Dashboard" style="">
+        <input class="newLinkInput hiddenOrder hiddenInput_{{newLinkCounter}}" id="SidebarLinks_{{newID}}__Order" name="SidebarLinks[{{newID}}].Order" type="hidden" value="{{newLinkCounter}}" style="">
+        <div class="row">
+            <div class="col-sm-2">
+                <span class="btn btn-primary move" type="button"><span class="fa fa-arrows"></span></span>
+            </div>
+            <div class="col-sm-8 text-center">
+                <h4>
+                    <span class="iconContainer"></span>
+                    &nbsp;&nbsp;
+                    <span class="titleContainer"></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <a class="newLinkInput btn btn-danger deleteGroup deleteMediaLink" data-ajax="true" data-ajax-failure="ManageMediaAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveMediaLink('#deleteLink_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/MediaDashboard/RemoveMediaDashboardLink/{{newLinkCounter}}" id="deleteLink_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <span class="input-group-btn">
+                        <button data-placement="left" class="newLinkInput btn btn-default iconpicker" name="SidebarLinks[{{newID}}].DisplayIcon" role="iconpicker" data-iconset="fontawesome" data-icon="" type="button" data-original-title="" title=""><i class="fa fa-cut"></i><input type="hidden" class="newLinkInput" name="SidebarLinks[{{newID}}].DisplayIcon" value=""><span class="caret"></span></button>
+                    </span>
+                    <input class="newLinkInput form-control namer valid" id="SidebarLinks_{{newID}}__DisplayName" name="SidebarLinks[{{newID}}].DisplayName" placeholder="Display Name" style="margin-bottom: 0px" type="text" value="" aria-invalid="false">
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div style="margin-bottom: 8px" class="input-group">
+                    <div class="input-group-addon">URL</div>
+                    <input class="newLinkInput form-control" id="SidebarLinks_{{newID}}__URL" name="SidebarLinks[{{newID}}].URL" placeholder="http://www.google.ca/" style="margin-bottom: 0px" type="text" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input class="newLinkInput toggler check-box" data-val="true" data-val-required="The IsDefault field is required." id="SidebarLinks_{{newID}}__IsDefault" name="SidebarLinks[{{newID}}].IsDefault" type="checkbox" value="true"><input class="newLinkInput" name="SidebarLinks[{{newID}}].IsDefault" type="hidden" value="false">
+                            <div class="toggleslider round"></div>
+                        </label>
+                        <label class="newLinkInput" for="SidebarLinks_{{newID}}__IsDefault" style="font-weight: normal; margin-bottom: 0px;">Is the Default Link?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input class="newLinkInput toggler check-box" data-val="true" data-val-required="The IsPublic field is required." id="SidebarLinks_{{newID}}__IsPublic" name="SidebarLinks[{{newID}}].IsPublic" type="checkbox" value="true"><input class="newLinkInput" name="SidebarLinks[{{newID}}].IsPublic" type="hidden" value="false">
+                            <div class="toggleslider round"></div>
+                        </label>
+                        <label class="newLinkInput" for="SidebarLinks_{{newID}}__IsPublic" style="font-weight: normal; margin-bottom: 0px;">Is Link Public?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <label class="switch">
+                            <input checked="checked" class="newLinkInput toggler check-box" data-val="true" data-val-required="The IsEnabled field is required." id="SidebarLinks_{{newID}}__IsEnabled" name="SidebarLinks[{{newID}}].IsEnabled" type="checkbox" value="true"><input class="newLinkInput" name="SidebarLinks[{{newID}}].IsEnabled" type="hidden" value="false">
+                            <div class="toggleslider round"></div>
+                        </label>
+                        <label class="newLinkInput" for="SidebarLinks_{{newID}}__IsEnabled" style="font-weight: normal; margin-bottom: 0px;">Is Link Enabled?</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="SidebarLinks[{{newID}}].DisplayName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </li>
+
+</script>

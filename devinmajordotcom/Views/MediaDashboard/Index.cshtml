@@ -1,0 +1,166 @@
+﻿@using devinmajordotcom.Helpers;
+@using Newtonsoft.Json
+@model devinmajordotcom.ViewModels.MediaDashboardViewModel
+@{
+    Layout = "../Shared/_MediaLayout.cshtml";
+    ViewBag.ControllerName = ViewBag.ControllerName;
+}
+
+    
+@Html.Partial("_DashboardCSS", Model.UserConfig)
+
+<div id="wrapper" class="wrapper">
+
+    <nav id="sidebar" class="active text-center">
+
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+            <h3>
+                @Model.UserConfig.SidebarFullTitle
+            </h3>
+            <strong>
+                @Model.UserConfig.SidebarCollapsedTitle
+            </strong>
+        </div>
+
+        <!-- Sidebar Links -->
+        <ul class="list-unstyled components menu">
+
+            @if (Model.SidebarLinks.Count > 0)
+            {
+                if (Model.CurrentUserViewModel.UserIsAdmin)
+                {
+                    foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled))
+                    {
+                        <li data-type="link" data-newtitle="@sidebarLink.DisplayName" @if (sidebarLink.IsDefault) { <text> class="active" </text> }>
+                            <a href="#" data-url="@sidebarLink.URL" data-framename="@sidebarLink.ID">
+                                <i class="fa @sidebarLink.DisplayIcon"></i>
+                                <span class="displayName">&nbsp;&nbsp;@sidebarLink.DisplayName</span>
+                            </a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    foreach (var sidebarLink in Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic))
+                    {
+                        <li data-type="link" data-newtitle="@sidebarLink.DisplayName" @if (sidebarLink.IsDefault) { <text> class="active" </text> }>
+                            <a href="#" data-url="@sidebarLink.URL" data-framename="@sidebarLink.ID">
+                                <i class="fa @sidebarLink.DisplayIcon"></i>
+                                <span class="displayName">&nbsp;&nbsp;@sidebarLink.DisplayName</span>
+                            </a>
+                        </li>
+                    }
+                }
+            }
+
+            @if (Model.CurrentUserViewModel.UserIsAdmin)
+            {
+                var link = Html.ActionLink("REPLACE", "Logout", "MediaDashboard").ToHtmlString();
+                var cleanLink = link.Replace("REPLACE", "<i class='glyphicon glyphicon-log-out'></i><span class='displayName'>&nbsp;&nbsp;Log Out</span>");
+                <li data-newtitle="Log Out">
+                    @Html.Raw(cleanLink)
+                </li>
+            }
+            else
+            {
+                
+                <li id="mainLogin" data-newtitle="Log In">                  
+                    <a>
+                        <i class="glyphicon glyphicon-log-in"></i>
+                        <span class="displayName">&nbsp;&nbsp;Log In</span>
+                    </a>
+                </li>
+            }
+
+        </ul>
+
+        <button type="button" class="btn btn-info navbar-btn sidebarCollapse">
+            <span class="glyphicon glyphicon-resize-full"></span>
+        </button>
+
+    </nav>
+
+    <div id="content">
+        
+        <!-- PRE LOADER -->
+        <section class="preloader">
+            <div class="spinner text-center">
+                <span class="spinner-rotate"></span>
+                <span style="color: gray !important; position: relative; top: 75px;">Loading your dashboard application...</span>
+            </div>
+        </section>
+
+        @if (Model.SidebarLinks.Count <= 0)
+        {
+            @Html.Partial("../Shared/Error", new HandleErrorInfo(new Exception(), "MediaDashboard", "Index"))
+        }
+        else
+        {
+
+            if (Model.CurrentUserViewModel.UserIsAdmin)
+            {
+
+                var defaultLink = Model.SidebarLinks.FirstOrDefault(x => x.IsEnabled && x.IsDefault);
+                if (defaultLink != null)
+                {
+                    <iframe src="@defaultLink.URL"
+                            style="width: 100%; min-height: 100%; z-index: -1; border: none;"
+                            id="@defaultLink.ID"
+                            data-count="0"
+                            scrolling="auto"
+                            sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+                            allowfullscreen="true"
+                            webkitallowfullscreen="true"
+                            class="z-iframe"
+                            frameborder="0"
+                            onload="$('.preloader').fadeOut(500);"></iframe>
+                }
+
+                @section scripts {
+                    <script type="text/javascript">
+                        links =
+                            @Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks.Where(x => x.IsEnabled), new JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                            }));
+                    </script>
+                }
+
+            }
+            else
+            {
+
+                var defaultLink = Model.SidebarLinks.FirstOrDefault(x => x.IsEnabled && x.IsDefault && x.IsPublic);
+                if (defaultLink != null)
+                {
+                    <iframe src="@defaultLink.URL"
+                            style="width: 100%; min-height: 100%; z-index: -1; border: none;"
+                            id="@defaultLink.ID"
+                            data-count="0"
+                            scrolling="auto"
+                            sandbox="allow-forms allow-same-origin allow-pointer-lock allow-scripts allow-popups allow-modals"
+                            allowfullscreen="true"
+                            webkitallowfullscreen="true"
+                            class="z-iframe"
+                            frameborder="0"
+                            onload="$('.preloader').fadeOut(500);"></iframe>
+                }
+
+                @section scripts {
+                    <script type="text/javascript">
+                        links =
+                            @Html.Raw(JsonConvert.SerializeObject(Model.SidebarLinks.Where(x => x.IsEnabled && x.IsPublic), new JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                            }));
+                    </script>
+                }
+
+            }
+
+        }
+    </div>
+</div>
+
+@Html.Partial("_AdminLoginModal", Model.CurrentUserViewModel)

@@ -1,0 +1,10 @@
+﻿CREATE TABLE [Portfolio].[Academic]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL,
+	CertificateName VARCHAR(MAX) NOT NULL,
+	ProgramName VARCHAR(MAX) NULL,
+	SchoolName VARCHAR(MAX) NULL,
+	BeginDate DATETIME NULL,
+	EndDate DATETIME NULL,
+	PRIMARY KEY(Id)
+)

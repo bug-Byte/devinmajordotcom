@@ -1,0 +1,107 @@
+﻿@model devinmajordotcom.ViewModels.MyHomeMasterSettingsViewModel
+@{
+    ViewBag.ControllerName = ViewBag.ControllerName;
+
+    var editFavoritesButton = Ajax.ActionLink("REPLACE", "_EditFavorites", "MyHome", new { userID = Model.GuestData.CurrentUserViewModel.UserID },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalAddEdit', 'Edit Item');",
+            UpdateTargetId = "formModalBodyHolder"
+        },
+        new
+        {
+            @class = "btn btn-default"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"glyphicon glyphicon-pencil\"></span>");
+
+    var editBlogPostsButton = Ajax.ActionLink("REPLACE", "_EditBlogPosts", "MyHome", new { userID = Model.GuestData.CurrentUserViewModel.UserID },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalAddEdit', 'Edit Item');",
+            UpdateTargetId = "formModalBodyHolder"
+        },
+        new
+        {
+            @class = "btn btn-default"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"glyphicon glyphicon-pencil\"></span>");
+
+}
+
+<div class="row">
+
+    <div class="col-sm-6 text-center">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h4>Guest Settings</h4>
+            </div>
+            <div class="col-sm-12 text-center">
+                <div id="settingsWindowButton1" class="btn btn-default btn-lg settingsWindowButton" data-toggle="popover" rel="popover" data-content='@Html.Partial("../MyHome/_MasterSettingsForm", Model.GuestData.UserConfig).ToHtmlString().Replace(Environment.NewLine, "").Replace("\"","'")' data-placement="bottom" data-original-title="Guest Settings Menu">
+                    <i class="glyphicon glyphicon-cog"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 text-center">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h4>Admin Settings</h4>
+            </div>
+            <div class="col-sm-12 text-center">
+                <div id="settingsWindowButton2" class="btn btn-default btn-lg settingsWindowButton" data-toggle="popover" rel="popover" data-content='@Html.Partial("../MyHome/_MasterSettingsForm", Model.AdminData.UserConfig).ToHtmlString().Replace(Environment.NewLine, "").Replace("\"","'")' data-placement="bottom" data-original-title="Admin Settings Menu">
+                    <i class="glyphicon glyphicon-cog"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br/>
+
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseFavorites">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>@Model.GuestData.UserConfig.BookmarksTitle for Visitors & New Accounts</a>
+        </h4>
+    </div>
+    <div id="collapseFavorites" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <div id="favoritesListContainer">
+                @Html.Partial("../MyHome/_Favorites", Model.GuestData)
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+        box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapseBlog">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>@Model.GuestData.UserConfig.BlogTitle for Visitors & New Accounts</a>
+        </h4>
+    </div>
+    <div id="collapseBlog" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <div id="blogPostContainer">
+                @Html.Partial("../MyHome/_BlogPosts", Model.GuestData)
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,230 @@
+﻿@model devinmajordotcom.ViewModels.MyHomeViewModel
+@{
+    ViewBag.CurrentUserConfig = Model.UserConfig;
+    ViewBag.ControllerName = ViewBag.ControllerName;
+    Layout = "../Shared/_HomeLayout.cshtml";
+
+    var editFavoritesButton = Ajax.ActionLink("REPLACE", "_EditFavorites", "MyHome", new { userID = Model.CurrentUserViewModel.UserID },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalAddEdit', 'Edit Item');",
+            UpdateTargetId = "formModalBodyHolder"
+        },
+        new
+        {
+            @class = "btn btn-default"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"glyphicon glyphicon-pencil\"></span>");
+
+    var editBlogPostsButton = Ajax.ActionLink("REPLACE", "_EditBlogPosts", "MyHome", new { userID = Model.CurrentUserViewModel.UserID },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalAddEdit', 'Edit Item');",
+            UpdateTargetId = "formModalBodyHolder"
+        },
+        new
+        {
+            @class = "btn btn-default"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"glyphicon glyphicon-pencil\"></span>");
+
+}
+
+<style>
+    .popover-title {
+        color:black !important;
+        text-align:center;
+        font-size:14px;
+        font-weight:bold;
+    }
+    #previewImage {
+        border: 1px solid #ddd; /* Gray border */
+        border-radius: 4px;  /* Rounded border */
+        padding: 5px; /* Some padding */
+        width: 150px; /* Set a small width */
+    }
+
+    #previewImage:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+
+</style>
+
+<!-- HOME -->
+<section id="home" data-stellar-background-ratio="0.5">
+    
+
+    <div class="overlay"></div>
+    <div class="container" style="">
+        @if (!Model.UserConfig.ShowBanner)
+        {
+            <div id="settingsWindowButton" style="float:right;z-index:999;" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content='@Html.Partial("_HomeSettingsForm", Model.UserConfig)' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></div>
+        }
+        <div class="row">
+
+            <div class="col-sm-12 text-center">
+                <h2>@Model.UserConfig.Greeting</h2>
+            </div>
+            @if (Model.UserConfig.ShowDateAndTime)
+            {
+                <div class="col-sm-12 text-center">
+                    <span style="color: white;" id="currentDateAndTime"></span>
+                </div>
+            }
+
+        </div>
+
+        <div id="spacerDiv" style="min-height: 55vh;"></div>
+
+        <div class="row" style="">
+            @if (Model.UserConfig.ShowWeather)
+            {
+                <div class="col-sm-12 text-center">
+                    @*<textarea id="weather" class="form-control"></textarea>*@
+                    <div id="weather"></div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</section>
+
+@if (Model.UserConfig.ShowBookmarks)
+{
+
+    <!-- FAVORITES -->
+    <section id="work" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="section-title">
+                        <h2>@Model.UserConfig.BookmarksTitle</h2>
+                        @if (Model.CurrentUserViewModel.UserIsLoggedIn && Model.UserConfig.IsEditable)
+                        {
+                            <br/>
+                            @Html.Raw(editFavoritesButton)
+                        }
+                        <span class="line-bar">...</span>
+                    </div>
+                </div>
+            </div>
+            <div id="favoritesListContainer">
+            
+                @Html.Partial("_Favorites", Model)
+
+            </div>
+        </div>
+    </section>
+
+}
+
+@if (Model.UserConfig.ShowBlog)
+{
+
+    <!-- BLOG -->
+    <section id="blog" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="section-title">
+                        <h2>@Model.UserConfig.BlogTitle</h2>
+                        @if (Model.CurrentUserViewModel.UserIsLoggedIn && Model.UserConfig.IsEditable)
+                        {
+                            <br />
+                            @Html.Raw(editBlogPostsButton)
+                        }
+                        <span class="line-bar">...</span>
+                    </div>
+                </div>
+                
+                <div id="blogPostContainer">
+                    @Html.Partial("_BlogPosts", Model)
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+}
+
+<div class="dontprint modal fade" id="formModalUpdateCredentials" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body" id="formModalBodyHolder" style="color:white !important;">
+                @Html.Partial("_UpdateCredentials", Model.CurrentUserViewModel)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dontprint modal fade" id="formModalAddEdit" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body" id="formModalBodyHolder">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dontprint modal fade" id="formModalImageUploader" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body" id="formModalBodyHolderUpload">
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("MyHomeLoginSignupModal", Model.CurrentUserViewModel)
+
+@section scripts {
+<script>
+    @if(Model.CurrentUserViewModel.UserIsLoggedIn)
+    {
+        <text>
+            var string = '<li id="settingsWindowButton" class="btn btn-default btn-lg" data-toggle="popover" rel="popover" data-content=\'';
+            var html = '@Html.Raw(@Html.Partial("_HomeSettingsForm", Model.UserConfig).ToHtmlString().Replace(Environment.NewLine, ""))';
+            string += html;
+            string += '\' data-placement="bottom" data-original-title="Settings Menu"><i class="glyphicon glyphicon-cog"></i></li>';
+            $(".nav.navbar-nav.navbar-right").append(string);
+        </text>
+    }
+    else if(Model.CurrentUserViewModel.IsConfirmationEmailSent)
+    {
+        <text>
+            $("#ajaxAlertContainer").bootsnack({
+                alertType: 'success',
+                message: 'You have signed up for an account! Check your inbox for the confirmation email.'
+            });
+            $(".nav.navbar-nav.navbar-right").append('<li class="section-btn"><a href="#" data-toggle="modal" data-target="#modal-form">Sign in / Join</a></li>');
+        </text>
+    }
+    else
+    {
+        <text>$(".nav.navbar-nav.navbar-right").append('<li class="section-btn"><a href="#" data-toggle="modal" data-target="#modal-form">Sign in / Join</a></li>');</text>
+    }
+
+</script>
+}

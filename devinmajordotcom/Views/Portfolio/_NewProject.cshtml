@@ -1,0 +1,72 @@
+﻿<script type="text/x-handlebars-template" id="ProjectTemplateScript">
+    <input class="hiddenProjectID hiddenInput_{{newLinkCounter}}" data-val="true" data-val-number="The field ProjectID must be a number." data-val-required="The ProjectID field is required." id="PortfolioProjects_{{newID}}__ProjectID" name="PortfolioProjects[{{newID}}].ProjectID" type="hidden" value="{{newLinkCounter}}" style="">
+    <li class="projectLink handlebarsItem" id="projectLink_{{newID}}" style="padding-top: 10px; margin-bottom: 2vh;">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <h4>
+                    <span class="titleContainer"></span>
+                </h4>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-danger deleteGroup deleteProjectLink" data-ajax="true" data-ajax-failure="ManagePortfolioSkillsAjaxFailure" data-ajax-method="GET" data-ajax-success="RemoveProject('#deleteProject_{{newLinkCounter}}')" data-content="<span class='fa fa-trash'></span>" href="/Portfolio/RemoveProject/{{newLinkCounter}}" id="deleteProject_{{newLinkCounter}}" style="float:right;"><span class="fa fa-trash"></span></a>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                <label for="PortfolioProjects_{{newID}}__ProjectName" style="font-weight:normal;position:relative;">Project Name * : </label>
+            </div>
+            <div class="col-sm-12 text-center">
+                <input class="form-control namer" data-val="true" data-val-length="Project Name cannot be longer than 100 characters." data-val-length-max="100" data-val-required="The Project Name * :  field is required." id="PortfolioProjects_{{newID}}__ProjectName" name="PortfolioProjects[{{newID}}].ProjectName" placeholder="Display Name" style="margin-bottom: 0px;text-align:center;" type="text" value="">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+                <label for="PortfolioProjects_{{newID}}__ProjectDescription" style="font-weight:normal;position:relative;">Project Description : </label>
+            </div>
+            <div class="col-sm-12 text-center">
+                <textarea id="PortfolioProjects_{{newID}}__ProjectDescription" name="PortfolioProjects[{{newID}}].ProjectDescription" class="form-control" rows="4" placeholder="Project Description (EX: This project took 6 months and involved several people...)"></textarea>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
+                <label for="PortfolioProjects_{{newID}}__CommaDelimitedProjectFilters" style="font-weight:normal;position:relative;">Project Tags : </label>
+            </div>
+            <div class="col-sm-12 text-center">
+                <input class="tags untouched" id="PortfolioProjects_{{newID}}__CommaDelimitedProjectFilters" name="PortfolioProjects[{{newID}}].CommaDelimitedProjectFilters" type="text" value="" />
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;
+                <label for="PortfolioProjects_{{newID}}__EncodedImage" style="font-weight:normal;position:relative;">Project Image : </label>
+            </div>
+            <div class="col-sm-12 text-center">
+                <input activeimage="false" class="BackgroundImage" id="EncodedImage_{{newID}}" name="PortfolioProjects[{{newID}}].EncodedImage" type="hidden" value="">
+                <img runat="server" src="" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                <br>
+                <a class="btn btn-default" data-ajax="true" data-ajax-complete="InitializeModal('#formModalImageUploader', 'Background Image Uploader');" data-ajax-failure="SettingsUpdateFailure();" data-ajax-method="GET" data-ajax-mode="replace" data-ajax-update="#formModalBodyHolderUpload" href="/Home/UploadTemplate?Length=4" onclick="ResetActiveImage(this)"><span class="fa fa-upload"></span>&nbsp;&nbsp;Change Image...</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class="field-validation-valid" data-valmsg-for="PortfolioProjects[{{newID}}].ProjectName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </li>
+</script>

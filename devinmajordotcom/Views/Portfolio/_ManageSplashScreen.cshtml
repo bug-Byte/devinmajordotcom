@@ -1,0 +1,132 @@
+﻿@model devinmajordotcom.ViewModels.PortfolioViewModel
+@{
+    var uploadButton = Ajax.ActionLink("REPLACE", "UploadTemplate", "Home",
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            OnComplete = "InitializeModal('#formModalImageUploader', 'Background Image Uploader');",
+            OnFailure = "SettingsUpdateFailure();",
+            UpdateTargetId = "formModalBodyHolderUpload"
+        },
+        new
+        {
+            @class = "btn btn-default",
+            @onClick = "ResetActiveImage(this)"
+        }).ToHtmlString().Replace("REPLACE", "<span class=\"fa fa-upload\"></span>&nbsp;&nbsp;Change Image...");
+}
+<div class="panel panel-default" style="margin-bottom: 1vh; -webkit-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      -moz-box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);
+                                      box-shadow: 2.5px 2.5px 5px 2.5px rgba(245,245,245,1);">
+    <div class="panel-heading portfolioPanelHeading" data-toggle="collapse" href="#collapse1">
+        <span class="glyphicon glyphicon-collapse-up glyphicon-collapse-down"></span>
+        &nbsp;&nbsp;
+        <h4 class="panel-title" style="display: inline;">
+            <a>Splash Screen</a>
+        </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+                    
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    @Html.LabelFor(x => x.PortfolioConfig.WebsiteTitle, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6 text-center">
+                    @Html.TextBoxFor(x => x.PortfolioConfig.WebsiteTitle, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-left">
+                    @Html.ValidationMessageFor(x => x.PortfolioConfig.WebsiteTitle)
+                </div>
+            </div>
+                    
+            <br/>
+                    
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    @Html.LabelFor(x => x.PortfolioConfig.BackgroundImage, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-6 text-center">
+                    @Html.HiddenFor(x => x.PortfolioConfig.BackgroundImage, new { @id = "BackgroundImage2", @class="BackgroundImage", activeimage="false" })
+                    <img runat="server" src="@Url.Content(Model.PortfolioConfig.BackgroundImage)" activepreview="false" id="previewImage" style="display:inline-block;" class="img-responsive previewImage" alt="Background Image">
+                    <br />
+                    @Html.Raw(uploadButton)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-left">
+                    @Html.ValidationMessageFor(x => x.PortfolioConfig.BackgroundImage)
+                </div>
+            </div>
+                    
+            <hr/>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.SplashScreenDetails.FirstName, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.SplashScreenDetails.FirstName, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.FirstName)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(x => x.SplashScreenDetails.LastName, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.SplashScreenDetails.LastName, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.SplashScreenDetails.LastName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    @Html.LabelFor(x => x.SplashScreenDetails.PositionTitle, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-12">
+                    @Html.TextBoxFor(x => x.SplashScreenDetails.PositionTitle, new {@class = "form-control"})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.PositionTitle)
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    @Html.LabelFor(x => x.SplashScreenDetails.PersonalDescription, new { @style = "font-weight:normal;position:relative;top:5px;" })
+                </div>
+                <div class="col-sm-12">
+                    @Html.TextAreaFor(x => x.SplashScreenDetails.PersonalDescription, new {@class = "tinymce", @rows = "4", @placeholder = "I am a professional architect, and have designed many buildings all over Eastern Canada."})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(x => x.SplashScreenDetails.PersonalDescription)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

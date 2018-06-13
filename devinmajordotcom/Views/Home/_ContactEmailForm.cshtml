@@ -1,0 +1,83 @@
+﻿@model devinmajordotcom.ViewModels.ContactEmailViewModel
+@using (Ajax.BeginForm("DropMeALine", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess(data)", OnFailure = "AjaxFailure(data)" }, new { @id = "dropMeALineEmailForm" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.RecipientEmail)
+    @Html.HiddenFor(x => x.RecipientName)
+
+    <div id="container">
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;
+                        @Html.LabelFor(x => x.SenderName, new { @style = "font-weight:normal;" })
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.TextBoxFor(x => x.SenderName, new { @class = "form-control text-center", @placeholder = "John Doe" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="glyphicon glyphicon-envelope"></span>&nbsp;
+                        @Html.LabelFor(x => x.SenderEmailAddress, new { @style = "font-weight:normal;" })
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.TextBoxFor(x => x.SenderEmailAddress, new { @class = "form-control text-center", type = "email", @placeholder = "example@domain.com" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                @Html.LabelFor(x => x.Subject, new { @style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-12">
+                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control text-center", @placeholder = "Let's Get In Touch" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;
+                @Html.LabelFor(x => x.Content, new { @style = "font-weight:normal;" })
+            </div>
+            <div class="col-sm-12">
+                @Html.TextAreaFor(x => x.Content, new { @class = "tinymce", @placeholder = "My very important message...", @rows = "6" })
+            </div>
+        </div>
+        <br />
+        
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.ValidationMessageFor(x => x.SenderName)
+                @Html.ValidationMessageFor(x => x.SenderEmailAddress)
+                @Html.ValidationMessageFor(x => x.Subject)
+                @Html.ValidationMessageFor(x => x.Content)
+                <div class="spinner mailSpinner" style="display: none;position:relative;top:-10px;">
+                    <span class="spinner-rotate"></span>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <input class="form-control" id="sendEmail" type="submit" value="SHOOT ME AN EMAIL">
+            </div>
+        </div>
+        <br />
+
+    </div>
+
+}

@@ -1,0 +1,149 @@
+﻿@using devinmajordotcom.ViewModels;
+@{
+    var userViewModel = (UserViewModel)ViewBag.CurrentUserViewModel;
+    var bannerLinks = (List<SiteLinkViewModel>)ViewBag.BannerLinks;
+    var config = (LandingPageConfigViewModel)ViewBag.Config;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Action("../Content/Images/favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Action("../Content/Images/favicon/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Action("../Content/Images/favicon/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Action("../Content/Images/favicon/site.webmanifest")">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>@config.WebsiteName</title>
+
+    @Scripts.Render("~/bundles/chartScripts")
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/FineUploader/fineUploaderCSS")
+    
+    <style>
+        .site-wrapper:before {
+            background-image: url('@Url.Content(config.BackgroundImage)');            
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+<div class="site-wrapper">
+    
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+
+            <div class="masthead clearfix" style="background-color: #0B1C1E; z-index: 2000; min-height: 85px; padding: 2px;">
+                <div class="inner" style="padding:0px;">
+                    <h3 class="masthead-brand text-center" style="float:none;">@config.WebsiteName</h3>
+                    <ul class="nav masthead-nav" style="float:none;">
+                        @if (bannerLinks != null && bannerLinks.Count > 0)
+                        {
+                            if (userViewModel.UserIsAdmin && !string.IsNullOrEmpty(userViewModel.EmailAddress) && userViewModel.IsEmailConfirmed) 
+                            {
+                                foreach (var link in bannerLinks.Where(x => x.IsEnabled).OrderBy(x => x.Order))
+                                {
+                                    <li class="landingPageLink @if (link.IsDefault)
+                                                       {<text>active</text>}" data-activediv="@link.URL"><a><span class="fa @link.DisplayIcon"></span>&nbsp;@link.DisplayName</a></li>
+                                }
+                                <li class="landingPageLink" data-activediv="#appmanager"><a><span class="fa fa-cog"></span>&nbsp;Settings</a></li>
+                            }
+                            else
+                            {
+                                foreach (var link in bannerLinks.Where(x => x.IsEnabled && x.IsPublic).OrderBy(x => x.Order))
+                                {
+                                    <li class="landingPageLink @if (link.IsDefault)
+                                                       {<text>active</text>}" data-activediv="@link.URL"><a><span class="fa @link.DisplayIcon"></span>&nbsp;@link.DisplayName</a></li>
+                                }
+                                <li class="landingPageLink" id="mainLogin"><a><span class="fa fa-sign-in"></span>&nbsp;Login</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            @RenderBody()
+
+        </div>
+    </div>
+    
+    @if (config.IsParticleCanvasOn)
+    {
+        <canvas id="particles" style="display:none;z-index:1;position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>
+    }
+    
+</div>
+
+<div class="dontprint modal fade" id="formModalAddEdit" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body" id="formModalBodyHolder">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dontprint modal fade" id="formModalImageUploader" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body" id="formModalBodyHolderUpload">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dontprint modal fade" id="formModalUpdateCredentials" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body" id="formModalUpdateCreds">
+                @Html.Partial("_UpdateCredentials", userViewModel)
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_AdminLoginModal", userViewModel)
+
+<div id="ajaxAlertContainer"></div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/customScripts")
+@Scripts.Render("~/bundles/FineUploader/fineUploaderScripts")
+@Scripts.Render("~/bundles/tinymce/tinymceScripts")
+<script runat="server" src="@Url.Content("~/signalr/hubs")"></script>
+@RenderSection("scripts", required: false)
+
+</body>
+</html>

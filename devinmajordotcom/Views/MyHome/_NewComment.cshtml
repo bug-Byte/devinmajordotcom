@@ -1,0 +1,10 @@
+﻿@model devinmajordotcom.ViewModels.CommentViewModel
+@using (Ajax.BeginForm("AddComment", "MyHome", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "UpdateComments(data);" }, new { @id = "EditBlogPostForm" }))
+{
+    @Html.HiddenFor(x => x.BlogPostID)
+    @Html.HiddenFor(x => x.AuthorUserID)
+    <h4>Leave a Comment...</h4>
+    @Html.TextAreaFor(x => x.Body, new { @class = "tinymce", @rows = "5" })
+    <br />
+    <button style="width: 100%" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Submit your Comment!</button>
+}
