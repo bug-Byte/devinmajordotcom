@@ -144,11 +144,11 @@ namespace devinmajordotcom.Services
             }
             else if (dateRange.Name.Contains("Hours"))
             {
-                for (var i = 0; i > -24; i--)
+                for (var i = 24; i > 0; i--)
                 {
-                    var max = today.AddHours(i);
-                    var min = today.AddHours(i - 1);
-                    results.Labels.Add(max.ToString("H:mm tt"));
+                    var max = today.AddDays(-1).AddHours(i);
+                    var min = today.AddDays(-1).AddHours(i - 1);
+                    results.Labels.Add(max.ToString("HH:mm tt"));
                     var thisHoursData = db.Security_HardwarePerformances.Where(x =>
                         x.CreatedOn <= max && x.CreatedOn >= min && x.HardwareTypeId == type.Id
                     ).OrderByDescending(x => x.CreatedOn).Take(3600).Select(x => Math.Round(x.PercentageValue, 2)).ToList();

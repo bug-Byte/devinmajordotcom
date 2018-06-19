@@ -52,58 +52,53 @@
             </div>
         </div>
         <div id="customChartsContainer" class="hardwareDataContainer" style="display:none;">
-            @using (Ajax.BeginForm("GetServerData", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "addDataAndLabels(data);", OnFailure = "CustomChartAjaxFailure();" }, new { @id = "customChartForm" }))
-            {
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <span class="glyphicon glyphicon-hdd"></span>&nbsp;
-                                @Html.LabelFor(x => x.SelectedHardwareTypeID, new { @style = "font-weight:normal;" })
-                            </div>
-                            <div class="col-sm-6">
-                                @Html.DropDownListFor(o => o.SelectedHardwareTypeID,
-                                new SelectList(Model.AvailableHardwareTypes, "Id", "Name"),
-                                new
-                                {
-                                    @class = "form-control graphDataSelector",
-                                    @id = "SelectedHardwareTypeID"
-                                }
-                            )
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;
-                                @Html.LabelFor(x => x.SelectedDateRangeID, new { @style = "font-weight:normal;" })
-                            </div>
-                            <div class="col-sm-6">
-                                @Html.DropDownListFor(o => o.SelectedDateRangeID,
-                                new SelectList(Model.AvailableDateRanges, "Id", "Name"),
-                                new
-                                {
-                                    @class = "form-control graphDataSelector",
-                                    @id = "SelectedDateRangeID"
-                                }
-                            )
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <div class="spinner" style="margin:25px !important;">
-                                <span class="spinner-rotate"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <div id="customChartContainer"></div>
-                        </div>
+        @using (Ajax.BeginForm("GetServerData", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "addDataAndLabels(data);", OnFailure = "CustomChartAjaxFailure();" }, new { @id = "customChartForm" }))
+        {
+            <div class="row">
+                <div class="col-sm-6">
+                    <span class="glyphicon glyphicon-hdd"></span>&nbsp;
+                    @Html.LabelFor(x => x.SelectedHardwareTypeID, new { @style = "font-weight:normal;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(o => o.SelectedHardwareTypeID,
+                         new SelectList(Model.AvailableHardwareTypes, "Id", "Name"),
+                         new
+                         {
+                             @class = "form-control graphDataSelector",
+                             @id = "SelectedHardwareTypeID"
+                         }
+                     )
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <span class="glyphicon glyphicon-time"></span>&nbsp;
+                    @Html.LabelFor(x => x.SelectedDateRangeID, new { @style = "font-weight:normal;" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(o => o.SelectedDateRangeID,
+                        new SelectList(Model.AvailableDateRanges, "Id", "Name"),
+                        new
+                        {
+                            @class = "form-control graphDataSelector",
+                            @id = "SelectedDateRangeID"
+                        }
+                    )
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="spinner">
+                        <span class="spinner-rotate"></span>
                     </div>
                 </div>
-            }
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="customChartContainer"></div>
+                </div>
+            </div>
+        }
         </div>
     }
 

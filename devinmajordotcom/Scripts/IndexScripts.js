@@ -1017,7 +1017,7 @@ function addDataAndLabels(data) {
 }
 
 function InitializeCustomLineGraph() {
-    var customhtml = '<div style="width:100%;position:relative;min-height:650px;"><canvas id="customChart"></canvas></div>';
+    var customhtml = '<div style="width:100%;position:relative;min-height:550px;"><canvas id="customChart"></canvas></div>';
     $("#customChartContainer").append(customhtml);
     var ctxCustom = document.getElementById("customChart").getContext("2d");
     var customGradient = ctxCustom.createLinearGradient(0, 0, 0, 500);
@@ -1054,8 +1054,8 @@ function ConnectToSignalRPerformanceHistoryHub() {
 
             for (var e = 0; e < cpuList.length; e++) {
 
-                var loadhtml = '<div style="height: 300px;width: 325px;display: inline-block;"><canvas id="cpuLoadChart_' + e + '"></canvas></div>';
-                var temphtml = '<div style="height: 300px;width: 325px;display: inline-block;"><canvas id="cpuTempChart_' + e + '"></canvas></div>';
+                var loadhtml = '<div style="height: 300px;width: 300px;display: inline-block;"><canvas id="cpuLoadChart_' + e + '"></canvas></div>';
+                var temphtml = '<div style="height: 300px;width: 300px;display: inline-block;"><canvas id="cpuTempChart_' + e + '"></canvas></div>';
                 $("#chartContainer").append(loadhtml);
                 $("#chartContainer").append(temphtml);
                 var ctxLoad = document.getElementById("cpuLoadChart_" + e.toString()).getContext("2d");
