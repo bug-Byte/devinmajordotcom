@@ -10,12 +10,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them. If you're a developer you probably have all these things already... just make sure!
 
-```
-A decent PC / server with a Windows OS installed
-Visual Studio (2012 or Higher)
-An SQL Server / Express instance, as well as [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017)
-[OpenHardwareMonitor](http://openhardwaremonitor.org/) (A third-party program, required to make hardware stats/charts function!)
-```
+
+* A decent PC / server with a Windows OS installed
+* Visual Studio (2012 or Higher)
+* An SQL Server / Express instance, as well as [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017)
+* [OpenHardwareMonitor](http://openhardwaremonitor.org/) (A third-party program, required to make hardware stats/charts function!)
+
 
 ### Installing
 
