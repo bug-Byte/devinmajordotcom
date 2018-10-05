@@ -14,6 +14,8 @@ namespace devinmajordotcom.Services
 
         UserViewModel Login(UserViewModel viewModel, bool IsAdmin = false);
 
+        UserViewModel GetAdmin();
+
         void Logout();
 
         bool DoesUserExist(string userString);

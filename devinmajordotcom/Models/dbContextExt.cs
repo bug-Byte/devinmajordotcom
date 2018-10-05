@@ -18,6 +18,7 @@ namespace devinmajordotcom.Models
             var dataService = new BaseDataService();
             var userName = "";
             var userGuid = new Guid();
+            var userID = 0;
 
             try
             {
@@ -38,12 +39,15 @@ namespace devinmajordotcom.Models
                 if (methodUser != null && methodUser.UserName != null)
                 {
                     userName = methodUser.UserName;
+                    userID = methodUser.UserID;
                 }
                 else
                 {
                     userName = "Default";
                 }
             }
+
+            userName = userID.ToString();
 
             var addedAuditedEntities = ChangeTracker.Entries().Where(p => p.State == EntityState.Added).Select(p => p.Entity);
             var modifiedAuditedEntities = ChangeTracker.Entries().Where(p => p.State == EntityState.Modified).Select(p => p.Entity);

@@ -166,6 +166,7 @@ namespace devinmajordotcom.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AdminLogin(UserViewModel viewModel)
         {
             var validatedUser = landingPageService.Login(viewModel, true);

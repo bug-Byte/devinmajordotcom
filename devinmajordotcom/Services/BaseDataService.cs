@@ -412,5 +412,21 @@ namespace devinmajordotcom.Services
             db.SaveChanges();
         }
 
+        public UserViewModel GetAdmin()
+        {
+            return db.Security_Users.Where(x => x.IsAdmin).Select(x => new UserViewModel() {
+                EmailAddress = x.EmailAddress,
+                GUID = x.Guid,
+                UserID = x.Id,
+                Password = x.Password,
+                UserName = x.UserName,
+                UserIsAdmin = x.IsAdmin,
+                UserIsActive = x.IsActive,
+                IsConfirmationEmailSent = x.IsEmailConfirmationSent,
+                UserIsLoggedIn = !x.IsEmailConfirmationSent && x.EmailAddress != null && x.EmailAddress != "",
+                IsEmailConfirmed = x.IsEmailConfirmed
+            }).FirstOrDefault();
+        }
+
     }
 }

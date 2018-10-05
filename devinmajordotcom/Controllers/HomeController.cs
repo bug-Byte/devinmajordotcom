@@ -60,6 +60,8 @@ namespace devinmajordotcom.Controllers
             return new JsonResult { Data = result };
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public void ManageLandingPage(MainLandingPageViewModel viewModel)
         {
             landingPageService.ManageLandingPage(viewModel);
@@ -98,13 +100,23 @@ namespace devinmajordotcom.Controllers
         [HttpGet]
         public void RemoveBannerLink(int ID)
         {
-            landingPageService.RemoveBannerLinkById(ID);
+            var userguid = Session["MainPageUserAuthID"];
+            var admin = landingPageService.GetAdmin();
+            if(userguid != null && (Guid)userguid == admin.GUID)
+            {
+                landingPageService.RemoveBannerLinkById(ID);
+            }
         }
 
         [HttpGet]
         public void RemoveSiteLink(int ID)
         {
-            landingPageService.RemoveSiteLinkById(ID);
+            var userguid = Session["MainPageUserAuthID"];
+            var admin = landingPageService.GetAdmin();
+            if (userguid != null && (Guid)userguid == admin.GUID)
+            {
+                landingPageService.RemoveSiteLinkById(ID);
+            }
         }
 
     }
