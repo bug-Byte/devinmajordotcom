@@ -17,6 +17,7 @@
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <UseGlobalApplicationHostFile />
+    <ToolsVersionPromptShown>2.1</ToolsVersionPromptShown>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

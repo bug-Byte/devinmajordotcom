@@ -83,7 +83,7 @@ namespace devinmajordotcom.App_Start
                 "~/Scripts/angular.js",
                 "~/Scripts/bootstrap-iconpicker-iconset-all.min.js",
                 "~/Scripts/bootstrap-iconpicker.min.js",
-                "~/Scripts/jquery.signalR-2.3.0.min.js",
+                "~/Scripts/jquery.signalR-2.4.0.min.js",
                 "~/Scripts/jquery.easypiechart.min.js",
                 "~/Scripts/handlebars.min.js",
                 "~/Scripts/moment.js",
